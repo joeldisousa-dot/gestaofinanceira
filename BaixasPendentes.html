@@ -7,16 +7,18 @@
 
 <meta
   name="viewport"
-  content="width=device-width, initial-scale=1"
+  content="width=device-width, initial-scale=1.0"
 >
 
 <title>Baixas Pendentes</title>
+
 
 <style>
 
 *{
   box-sizing:border-box;
 }
+
 
 body{
 
@@ -30,9 +32,16 @@ body{
 
   margin:0;
 
+  color:#333;
+
 }
 
+
 .container{
+
+  max-width:1200px;
+
+  margin:auto;
 
   background:white;
 
@@ -41,9 +50,34 @@ body{
   border-radius:15px;
 
   box-shadow:
-    0 5px 20px rgba(0,0,0,.08);
+    0 5px 20px rgba(0,0,0,.10);
 
 }
+
+
+.topo{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:15px;
+
+  margin-bottom:20px;
+
+}
+
+
+h2{
+
+  margin:0;
+
+  color:#c62828;
+
+}
+
 
 .btn-voltar{
 
@@ -59,11 +93,12 @@ body{
 
   cursor:pointer;
 
-  margin-bottom:15px;
-
   font-size:14px;
 
+  font-weight:bold;
+
 }
+
 
 .btn-voltar:hover{
 
@@ -71,17 +106,15 @@ body{
 
 }
 
-h2{
 
-  color:#c62828;
+.area-tabela{
 
-}
-
-.tabela-container{
+  width:100%;
 
   overflow-x:auto;
 
 }
+
 
 table{
 
@@ -89,9 +122,10 @@ table{
 
   border-collapse:collapse;
 
-  min-width:800px;
+  min-width:850px;
 
 }
+
 
 th{
 
@@ -99,9 +133,12 @@ th{
 
   color:white;
 
-  padding:10px;
+  padding:12px;
+
+  text-align:center;
 
 }
+
 
 td{
 
@@ -114,6 +151,14 @@ td{
 
 }
 
+
+tbody tr:hover{
+
+  background:#f8f9fa;
+
+}
+
+
 .valor{
 
   text-align:right;
@@ -122,15 +167,34 @@ td{
 
 }
 
+
+.loading{
+
+  text-align:center;
+
+  padding:30px;
+
+  color:#64748b;
+
+  font-weight:bold;
+
+}
+
+
 .mensagem{
 
   padding:15px;
 
-  text-align:center;
+  border-radius:8px;
+
+  margin-bottom:20px;
 
 }
 
+
 .erro{
+
+  background:#ffebee;
 
   color:#c62828;
 
@@ -138,97 +202,184 @@ td{
 
 }
 
-</style>
 
-</head>
+.sucesso{
 
-<body>
+  background:#e8f5e9;
 
-<div class="container">
-
-<button
-  onclick="voltarIndex()"
-  class="btn-voltar"
->
-← Voltar
-</button>
-
-<h2>
-⚠️ Baixas Pendentes
-</h2>
-
-<div class="tabela-container">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>ID</th>
-
-<th>Competência</th>
-
-<th>Tipo</th>
-
-<th>Descrição</th>
-
-<th>Valor</th>
-
-<th>Vencimento</th>
-
-<th>Baixado</th>
-
-</tr>
-
-</thead>
-
-<tbody id="lista">
-
-<tr>
-
-<td
-  colspan="7"
->
-Carregando...
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-
-<script>
-
-/* =========================================================
-   API
-========================================================= */
-
-const URL_API =
-  "https://script.google.com/macros/s/AKfycbxJzdCPkPxk2N4FhnoUflb-iWTyiLLn1XmSJDcUwkKsapI0qv-6DBpKWWBLuoHBqn8Y/exec";
-
-
-/* =========================================================
-   VOLTAR
-========================================================= */
-
-function voltar(){
-
-  window.location.href =
-    "./index.html";
+  color:#2e7d32;
 
 }
 
 
-/* =========================================================
-   API REQUEST
-========================================================= */
+.vazio{
+
+  text-align:center;
+
+  padding:30px;
+
+  color:#64748b;
+
+}
+
+
+.badge{
+
+  display:inline-block;
+
+  padding:5px 10px;
+
+  border-radius:20px;
+
+  font-size:12px;
+
+  font-weight:bold;
+
+}
+
+
+.badge-pendente{
+
+  background:#fff3e0;
+
+  color:#e65100;
+
+}
+
+
+@media(max-width:600px){
+
+  body{
+
+    padding:10px;
+
+  }
+
+  .container{
+
+    padding:15px;
+
+  }
+
+  .topo{
+
+    align-items:flex-start;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+  <div class="topo">
+
+    <h2>
+      ⚠️ Baixas Pendentes
+    </h2>
+
+
+    <button
+      onclick="voltarIndex()"
+      class="btn-voltar"
+    >
+
+      ← Voltar
+
+    </button>
+
+  </div>
+
+
+  <div
+    id="mensagem"
+    style="display:none"
+  ></div>
+
+
+  <div class="area-tabela">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>ID</th>
+
+          <th>Competência</th>
+
+          <th>Tipo</th>
+
+          <th>Descrição</th>
+
+          <th>Valor</th>
+
+          <th>Vencimento</th>
+
+          <th>Baixado</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody id="lista">
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   CONFIGURAÇÃO
+===================================================== */
+
+const URL_API =
+"https://script.google.com/macros/s/AKfycbxJzdCPkPxk2N4FhnoUflb-iWTyiLLn1XmSJDcUwkKsapI0qv-6DBpKWWBLuoHBqn8Y/exec";
+
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  carregar
+);
+
+
+/* =====================================================
+   VOLTAR PARA GITHUB
+===================================================== */
+
+function voltarIndex(){
+
+  window.location.href =
+    "index.html";
+
+}
+
+
+/* =====================================================
+   API
+===================================================== */
 
 async function apiRequest(
   action,
@@ -259,7 +410,9 @@ async function apiRequest(
 
         url.searchParams.set(
           chave,
-          valor
+          typeof valor === "object"
+            ? JSON.stringify(valor)
+            : valor
         );
 
       }
@@ -267,15 +420,29 @@ async function apiRequest(
     });
 
 
-  const resposta =
-    await fetch(
-      url.toString(),
-      {
-        method:"GET",
-        redirect:"follow",
-        cache:"no-store"
-      }
+  let resposta;
+
+
+  try{
+
+    resposta =
+      await fetch(
+        url.toString(),
+        {
+          method:"GET",
+          redirect:"follow",
+          cache:"no-store"
+        }
+      );
+
+  }
+  catch(e){
+
+    throw new Error(
+      "Não foi possível conectar ao Google Apps Script."
     );
+
+  }
 
 
   if(!resposta.ok){
@@ -292,6 +459,12 @@ async function apiRequest(
     await resposta.text();
 
 
+  console.log(
+    "Resposta da API:",
+    texto
+  );
+
+
   let dados;
 
 
@@ -303,10 +476,13 @@ async function apiRequest(
   }
   catch(e){
 
-    console.error(texto);
+    console.error(
+      "Resposta inválida:",
+      texto
+    );
 
     throw new Error(
-      "Resposta inválida da API."
+      "O servidor não retornou JSON válido."
     );
 
   }
@@ -320,7 +496,7 @@ async function apiRequest(
     throw new Error(
       dados.erro ||
       dados.mensagem ||
-      "Erro na API."
+      "Erro retornado pelo servidor."
     );
 
   }
@@ -331,9 +507,87 @@ async function apiRequest(
 }
 
 
-/* =========================================================
+/* =====================================================
+   NORMALIZAR LISTA
+===================================================== */
+
+function obterLista(
+  resposta
+){
+
+  /*
+    Aceita diferentes formatos
+    retornados pelo Apps Script.
+  */
+
+
+  if(
+    Array.isArray(resposta)
+  ){
+
+    return resposta;
+
+  }
+
+
+  if(
+    resposta &&
+    Array.isArray(resposta.dados)
+  ){
+
+    return resposta.dados;
+
+  }
+
+
+  if(
+    resposta &&
+    Array.isArray(resposta.lista)
+  ){
+
+    return resposta.lista;
+
+  }
+
+
+  if(
+    resposta &&
+    Array.isArray(resposta.resultado)
+  ){
+
+    return resposta.resultado;
+
+  }
+
+
+  if(
+    resposta &&
+    Array.isArray(resposta.baixas)
+  ){
+
+    return resposta.baixas;
+
+  }
+
+
+  if(
+    resposta &&
+    Array.isArray(resposta.baixasPendentes)
+  ){
+
+    return resposta.baixasPendentes;
+
+  }
+
+
+  return [];
+
+}
+
+
+/* =====================================================
    CARREGAR
-========================================================= */
+===================================================== */
 
 async function carregar(){
 
@@ -343,89 +597,57 @@ async function carregar(){
     );
 
 
+  corpo.innerHTML =
+    `
+    <tr>
+      <td
+        colspan="7"
+        class="loading"
+      >
+        ⏳ Carregando baixas pendentes...
+      </td>
+    </tr>
+    `;
+
+
   try{
 
-    const lista =
+    const resposta =
       await apiRequest(
         "listarBaixasPendentes"
       );
 
 
-    corpo.innerHTML =
-      "";
+    console.log(
+      "Resposta baixas pendentes:",
+      resposta
+    );
 
 
-    if(
-      !lista ||
-      lista.length === 0
-    ){
-
-      corpo.innerHTML = `
-
-        <tr>
-
-          <td colspan="7">
-
-            Nenhum lançamento pendente.
-
-          </td>
-
-        </tr>
-
-      `;
-
-      return;
-
-    }
+    const lista =
+      obterLista(
+        resposta
+      );
 
 
-    lista.forEach(function(item){
+    console.log(
+      "Lista normalizada:",
+      lista
+    );
 
-      corpo.innerHTML += `
 
-        <tr>
-
-          <td>
-            ${escapar(item.id)}
-          </td>
-
-          <td>
-            ${escapar(item.competencia)}
-          </td>
-
-          <td>
-            ${escapar(item.tipo)}
-          </td>
-
-          <td>
-            ${escapar(item.descricao)}
-          </td>
-
-          <td class="valor">
-
-            ${formatarMoeda(item.valor)}
-
-          </td>
-
-          <td>
-            ${escapar(item.vencimento)}
-          </td>
-
-          <td>
-            ${escapar(item.baixado)}
-          </td>
-
-        </tr>
-
-      `;
-
-    });
+    mostrarLista(
+      lista
+    );
 
   }
   catch(e){
 
-    corpo.innerHTML = `
+    console.error(e);
 
+
+    corpo.innerHTML =
+      `
       <tr>
 
         <td
@@ -433,64 +655,189 @@ async function carregar(){
           class="erro"
         >
 
-          Erro:
-          ${escapar(e.message)}
+          Erro: ${escapeHtml(
+            e.message
+          )}
 
         </td>
 
       </tr>
-
-    `;
+      `;
 
   }
 
 }
 
 
-/* =========================================================
-   MOEDA
-========================================================= */
+/* =====================================================
+   MOSTRAR LISTA
+===================================================== */
 
-function formatarMoeda(valor){
+function mostrarLista(
+  lista
+){
 
-  return Number(
-    valor || 0
-  ).toLocaleString(
-    "pt-BR",
-    {
-      style:"currency",
-      currency:"BRL"
+  const corpo =
+    document.getElementById(
+      "lista"
+    );
+
+
+  corpo.innerHTML =
+    "";
+
+
+  if(
+    !Array.isArray(lista) ||
+    lista.length === 0
+  ){
+
+    corpo.innerHTML =
+      `
+      <tr>
+
+        <td
+          colspan="7"
+          class="vazio"
+        >
+
+          ✅ Nenhum lançamento pendente.
+
+        </td>
+
+      </tr>
+      `;
+
+    return;
+
+  }
+
+
+  lista.forEach(
+    function(item){
+
+      const valor =
+        Number(
+          item.valor || 0
+        );
+
+
+      const linha =
+        document.createElement(
+          "tr"
+        );
+
+
+      linha.innerHTML =
+        `
+
+        <td>
+          ${escapeHtml(
+            item.id ?? ""
+          )}
+        </td>
+
+
+        <td>
+          ${escapeHtml(
+            item.competencia ?? ""
+          )}
+        </td>
+
+
+        <td>
+          ${escapeHtml(
+            item.tipo ?? ""
+          )}
+        </td>
+
+
+        <td>
+          ${escapeHtml(
+            item.descricao ?? ""
+          )}
+        </td>
+
+
+        <td class="valor">
+
+          ${valor.toLocaleString(
+            "pt-BR",
+            {
+              style:"currency",
+              currency:"BRL"
+            }
+          )}
+
+        </td>
+
+
+        <td>
+          ${escapeHtml(
+            item.vencimento ?? ""
+          )}
+        </td>
+
+
+        <td>
+
+          <span
+            class="badge badge-pendente"
+          >
+
+            ${escapeHtml(
+              item.baixado ?? "Não"
+            )}
+
+          </span>
+
+        </td>
+
+        `;
+
+
+      corpo.appendChild(
+        linha
+      );
+
     }
   );
 
 }
 
 
-/* =========================================================
-   SEGURANÇA HTML
-========================================================= */
+/* =====================================================
+   SEGURANÇA
+===================================================== */
 
-function escapar(valor){
+function escapeHtml(
+  valor
+){
 
   return String(
-    valor ?? ""
+    valor
   )
+
   .replace(
     /&/g,
     "&amp;"
   )
+
   .replace(
     /</g,
     "&lt;"
   )
+
   .replace(
     />/g,
     "&gt;"
   )
+
   .replace(
     /"/g,
     "&quot;"
   )
+
   .replace(
     /'/g,
     "&#039;"
@@ -498,17 +845,8 @@ function escapar(valor){
 
 }
 
-
-/* =========================================================
-   INICIAR
-========================================================= */
-
-window.addEventListener(
-  "DOMContentLoaded",
-  carregar
-);
-
 </script>
+
 
 </body>
 
