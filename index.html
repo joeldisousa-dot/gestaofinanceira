@@ -5,25 +5,61 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-<meta name="theme-color"
-      content="#0f4c81">
-
-<meta name="description"
-      content="Controle Financeiro">
+<meta
+  name="theme-color"
+  content="#0f172a"
+>
 
 <title>Controle Financeiro</title>
 
 <style>
 
-/* =====================================================
+/* =========================================================
    RESET
-===================================================== */
+========================================================= */
 
 *{
   box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+
+  --primary:#2563eb;
+  --primary-dark:#1d4ed8;
+
+  --success:#059669;
+  --success-dark:#047857;
+
+  --danger:#dc2626;
+  --danger-dark:#b91c1c;
+
+  --warning:#ea580c;
+  --warning-dark:#c2410c;
+
+  --purple:#7c3aed;
+
+  --dark:#0f172a;
+  --dark-2:#1e293b;
+
+  --text:#1e293b;
+  --muted:#64748b;
+
+  --border:#e2e8f0;
+  --background:#f1f5f9;
+  --white:#ffffff;
+
+  --shadow:
+    0 10px 30px rgba(15,23,42,.08);
+
+  --radius:18px;
+
 }
 
 html{
@@ -31,592 +67,61 @@ html{
 }
 
 body{
-  margin:0;
+
   min-height:100vh;
 
   font-family:
     Inter,
     "Segoe UI",
+    Roboto,
     Arial,
     sans-serif;
 
-  color:#1e293b;
+  color:var(--text);
 
   background:
     linear-gradient(
       135deg,
-      #eef4f9 0%,
+      #eef4ff 0%,
       #f8fafc 45%,
-      #e9f0f7 100%
-    );
-}
-
-
-/* =====================================================
-   VARIÁVEIS
-===================================================== */
-
-:root{
-
-  --azul:#0f4c81;
-  --azul-2:#1976d2;
-  --azul-claro:#e8f1fb;
-
-  --verde:#087f5b;
-  --verde-2:#12b886;
-
-  --roxo:#6d28d9;
-  --roxo-2:#9333ea;
-
-  --laranja:#e65100;
-  --laranja-2:#ff9800;
-
-  --vermelho:#c62828;
-
-  --texto:#1e293b;
-  --texto-fraco:#64748b;
-
-  --borda:#e2e8f0;
-
-  --branco:#ffffff;
-
-  --sombra:
-    0 20px 50px rgba(15,23,42,.10);
-
-}
-
-
-/* =====================================================
-   CONTAINER
-===================================================== */
-
-.container{
-
-  width:
-    min(
-      calc(100% - 30px),
-      1180px
+      #eef2ff 100%
     );
 
-  margin:30px auto;
-
-  background:#fff;
-
-  border-radius:24px;
-
-  overflow:hidden;
-
-  box-shadow:
-    var(--sombra);
-
 }
 
 
-/* =====================================================
-   CABEÇALHO
-===================================================== */
+/* =========================================================
+   HEADER
+========================================================= */
 
-.header{
+.topbar{
 
-  position:relative;
+  position:sticky;
 
-  padding:32px 36px;
+  top:0;
+
+  z-index:1000;
+
+  background:
+    rgba(15,23,42,.96);
+
+  backdrop-filter:
+    blur(15px);
 
   color:white;
 
-  background:
-    linear-gradient(
-      135deg,
-      #082f49 0%,
-      #0f4c81 45%,
-      #1976d2 100%
-    );
-
-  overflow:hidden;
-
-}
-
-.header::after{
-
-  content:"";
-
-  position:absolute;
-
-  width:300px;
-  height:300px;
-
-  right:-100px;
-  top:-130px;
-
-  border-radius:50%;
-
-  background:
-    rgba(255,255,255,.08);
-
-}
-
-.header-content{
-
-  position:relative;
-
-  z-index:2;
-
-}
-
-.header h1{
-
-  margin:0;
-
-  font-size:
-    clamp(
-      25px,
-      4vw,
-      34px
-    );
-
-  font-weight:800;
-
-  letter-spacing:-.6px;
-
-}
-
-.header p{
-
-  margin:8px 0 0;
-
-  color:
-    rgba(255,255,255,.82);
-
-  font-size:15px;
-
-}
-
-
-/* =====================================================
-   CONTEÚDO
-===================================================== */
-
-.conteudo{
-
-  padding:
-    30px 36px 40px;
-
-}
-
-
-/* =====================================================
-   TÍTULOS
-===================================================== */
-
-.titulo-secao{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:15px;
-
-  margin:
-    28px 0 20px;
-
-}
-
-.titulo-secao:first-child{
-  margin-top:0;
-}
-
-.titulo-secao h2{
-
-  margin:0;
-
-  font-size:20px;
-
-  color:#0f172a;
-
-  white-space:nowrap;
-
-}
-
-.linha{
-
-  flex:1;
-
-  height:2px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #1976d2,
-      #dbeafe,
-      transparent
-    );
-
-}
-
-
-/* =====================================================
-   RESUMO
-===================================================== */
-
-.resumo{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(
-      6,
-      minmax(140px,1fr)
-    );
-
-  gap:15px;
-
-}
-
-
-.campo-resumo{
-
-  position:relative;
-
-  padding:18px;
-
-  min-height:120px;
-
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:center;
-
-  border:
-    1px solid var(--borda);
-
-  border-radius:16px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #ffffff,
-      #f8fafc
-    );
-
   box-shadow:
-    0 5px 18px rgba(15,23,42,.05);
-
-  transition:
-    transform .2s ease,
-    box-shadow .2s ease;
+    0 4px 20px rgba(0,0,0,.12);
 
 }
 
-.campo-resumo:hover{
+.topbar-inner{
 
-  transform:
-    translateY(-3px);
-
-  box-shadow:
-    0 10px 25px rgba(15,23,42,.09);
-
-}
-
-.campo-resumo label{
-
-  display:block;
-
-  margin-bottom:9px;
-
-  color:
-    var(--texto-fraco);
-
-  font-size:13px;
-
-  font-weight:700;
-
-}
-
-.campo-resumo input{
-
-  width:100%;
-
-  border:none;
-
-  outline:none;
-
-  background:transparent;
-
-  color:#0f172a;
-
-  font-size:18px;
-
-  font-weight:800;
-
-}
-
-
-/* =====================================================
-   FORMULÁRIOS
-===================================================== */
-
-.formulario{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,minmax(250px,1fr));
-
-  gap:20px 28px;
-
-  max-width:760px;
+  max-width:1250px;
 
   margin:auto;
 
-}
-
-.campo{
-
-  display:flex;
-
-  flex-direction:column;
-
-  gap:7px;
-
-}
-
-.campo label{
-
-  color:#334155;
-
-  font-size:14px;
-
-  font-weight:700;
-
-}
-
-.campo input,
-.campo select{
-
-  width:100%;
-
-  height:44px;
-
-  padding:
-    0 13px;
-
-  border:
-    1px solid #cbd5e1;
-
-  border-radius:10px;
-
-  background:#fff;
-
-  color:#1e293b;
-
-  font-size:15px;
-
-  outline:none;
-
-  transition:
-    border-color .2s,
-    box-shadow .2s;
-
-}
-
-.campo input:focus,
-.campo select:focus{
-
-  border-color:
-    #1976d2;
-
-  box-shadow:
-    0 0 0 3px
-    rgba(25,118,210,.12);
-
-}
-
-.full{
-
-  grid-column:
-    1 / -1;
-
-}
-
-
-/* =====================================================
-   BOTÕES
-===================================================== */
-
-button{
-
-  font-family:inherit;
-
-}
-
-.btn{
-
-  border:none;
-
-  min-height:52px;
-
-  padding:
-    0 22px;
-
-  border-radius:13px;
-
-  cursor:pointer;
-
-  color:white;
-
-  font-size:15px;
-
-  font-weight:800;
-
-  letter-spacing:.15px;
-
-  display:inline-flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:8px;
-
-  box-shadow:
-    0 6px 15px rgba(15,23,42,.16);
-
-  transition:
-    transform .18s ease,
-    box-shadow .18s ease,
-    filter .18s ease;
-
-}
-
-.btn:hover{
-
-  transform:
-    translateY(-2px);
-
-  box-shadow:
-    0 10px 22px rgba(15,23,42,.22);
-
-  filter:
-    brightness(1.05);
-
-}
-
-.btn:active{
-
-  transform:
-    translateY(0);
-
-}
-
-.btn:disabled{
-
-  opacity:.6;
-
-  cursor:not-allowed;
-
-  transform:none;
-
-}
-
-.btnSaldo{
-
-  width:100%;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--verde),
-      var(--verde-2)
-    );
-
-}
-
-.btnFechar{
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--roxo),
-      var(--roxo-2)
-    );
-
-}
-
-.btnRelatorio{
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--laranja),
-      var(--laranja-2)
-    );
-
-}
-
-.btnGravar{
-
-  width:100%;
-
-  background:
-    linear-gradient(
-      135deg,
-      #0d47a1,
-      #2196f3
-    );
-
-}
-
-
-/* =====================================================
-   AÇÕES
-===================================================== */
-
-.acoes{
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(190px,1fr)
-    );
-
-  gap:13px;
-
-  padding:5px 0;
-
-}
-
-.acoes .btn{
-
-  width:100%;
-
-}
-
-
-/* =====================================================
-   DIVISÓRIA
-===================================================== */
-
-hr{
-
-  border:none;
-
-  border-top:
-    1px solid #e2e8f0;
-
-  margin:
-    32px 0;
-
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-.status-bar{
+  padding:15px 24px;
 
   display:flex;
 
@@ -624,34 +129,74 @@ hr{
 
   justify-content:space-between;
 
-  gap:15px;
-
-  margin-top:25px;
-
-  padding:
-    12px 16px;
-
-  border-radius:12px;
-
-  background:#f8fafc;
-
-  border:
-    1px solid var(--borda);
-
-  color:
-    var(--texto-fraco);
-
-  font-size:13px;
+  gap:20px;
 
 }
 
-.status-indicator{
+.logo{
 
-  display:inline-flex;
+  display:flex;
 
   align-items:center;
 
-  gap:7px;
+  gap:12px;
+
+}
+
+.logo-icon{
+
+  width:45px;
+  height:45px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #7c3aed
+    );
+
+  font-size:22px;
+
+}
+
+.logo-text h1{
+
+  font-size:18px;
+
+  font-weight:800;
+
+}
+
+.logo-text span{
+
+  display:block;
+
+  margin-top:2px;
+
+  color:#94a3b8;
+
+  font-size:12px;
+
+}
+
+.status{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  color:#cbd5e1;
+
+  font-size:13px;
 
 }
 
@@ -665,134 +210,885 @@ hr{
   background:#22c55e;
 
   box-shadow:
-    0 0 0 4px
-    rgba(34,197,94,.12);
+    0 0 0 4px rgba(34,197,94,.15);
 
 }
 
 
-/* =====================================================
-   MODAL
-===================================================== */
+/* =========================================================
+   CONTAINER
+========================================================= */
 
-.modal{
-
-  display:none;
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:3000;
-
-  padding:20px;
-
-  align-items:center;
-
-  justify-content:center;
-
-  background:
-    rgba(15,23,42,.58);
-
-  backdrop-filter:
-    blur(4px);
-
-}
-
-.modal.aberto{
-
-  display:flex;
-
-}
-
-.modal-card{
+.container{
 
   width:
     min(
-      100%,
-      420px
+      calc(100% - 32px),
+      1250px
     );
+
+  margin:28px auto 50px;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+  position:relative;
+
+  overflow:hidden;
+
+  padding:34px;
+
+  border-radius:24px;
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #1e3a8a 55%,
+      #2563eb
+    );
+
+  box-shadow:
+    0 18px 40px rgba(15,23,42,.18);
+
+}
+
+.hero::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:280px;
+  height:280px;
+
+  right:-100px;
+  top:-130px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.08);
+
+}
+
+.hero h2{
+
+  position:relative;
+
+  z-index:1;
+
+  font-size:30px;
+
+  margin-bottom:8px;
+
+}
+
+.hero p{
+
+  position:relative;
+
+  z-index:1;
+
+  color:#cbd5e1;
+
+  max-width:700px;
+
+  line-height:1.6;
+
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section{
+
+  margin-top:24px;
 
   background:white;
 
-  border-radius:20px;
+  border:
+    1px solid var(--border);
 
-  padding:26px;
+  border-radius:var(--radius);
+
+  box-shadow:var(--shadow);
+
+  overflow:hidden;
+
+}
+
+.section-header{
+
+  padding:20px 24px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  border-bottom:
+    1px solid var(--border);
+
+}
+
+.section-title{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:11px;
+
+}
+
+.section-icon{
+
+  width:40px;
+  height:40px;
+
+  border-radius:11px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  background:#eff6ff;
+
+  color:var(--primary);
+
+  font-size:19px;
+
+}
+
+.section-title h3{
+
+  font-size:18px;
+
+}
+
+.section-title p{
+
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:12px;
+
+}
+
+.section-body{
+
+  padding:24px;
+
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.cards{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      6,
+      minmax(0,1fr)
+    );
+
+  gap:15px;
+
+}
+
+.card{
+
+  position:relative;
+
+  overflow:hidden;
+
+  padding:18px;
+
+  border-radius:15px;
+
+  border:
+    1px solid var(--border);
+
+  background:#fff;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+
+}
+
+.card:hover{
+
+  transform:
+    translateY(-3px);
 
   box-shadow:
-    0 25px 70px rgba(0,0,0,.28);
+    0 12px 25px rgba(15,23,42,.08);
 
 }
 
-.modal-card h3{
+.card::after{
 
-  margin:
-    0 0 20px;
+  content:"";
 
-  color:#0f172a;
+  position:absolute;
 
-  font-size:20px;
+  right:-20px;
+  bottom:-35px;
+
+  width:90px;
+  height:90px;
+
+  border-radius:50%;
+
+  background:
+    rgba(37,99,235,.05);
 
 }
 
-.modal-card label{
+.card-top{
 
-  display:block;
+  display:flex;
 
-  margin-bottom:7px;
+  align-items:center;
 
-  font-size:14px;
+  justify-content:space-between;
+
+  gap:8px;
+
+}
+
+.card-label{
+
+  color:var(--muted);
+
+  font-size:12px;
 
   font-weight:700;
 
 }
 
-.modal-card input{
+.card-icon{
+
+  width:34px;
+  height:34px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  border-radius:10px;
+
+  background:#f1f5f9;
+
+}
+
+.card-value{
+
+  margin-top:12px;
+
+  font-size:20px;
+
+  font-weight:800;
+
+  color:var(--dark);
+
+  white-space:nowrap;
+
+}
+
+.card.blue .card-icon{
+  background:#eff6ff;
+}
+
+.card.green .card-icon{
+  background:#ecfdf5;
+}
+
+.card.red .card-icon{
+  background:#fef2f2;
+}
+
+.card.orange .card-icon{
+  background:#fff7ed;
+}
+
+.card.purple .card-icon{
+  background:#f5f3ff;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:20px;
+
+}
+
+.field{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:7px;
+
+}
+
+.field.full{
+
+  grid-column:
+    1 / -1;
+
+}
+
+.field label{
+
+  font-size:13px;
+
+  font-weight:700;
+
+  color:#334155;
+
+}
+
+.field input,
+.field select{
 
   width:100%;
 
   height:45px;
-
-  padding:10px;
 
   border:
     1px solid #cbd5e1;
 
   border-radius:10px;
 
-  font-size:16px;
+  background:#fff;
+
+  padding:
+    0 13px;
+
+  font-size:14px;
+
+  color:var(--text);
 
   outline:none;
 
-}
-
-.modal-acoes{
-
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:10px;
-
-  margin-top:18px;
+  transition:
+    border .2s,
+    box-shadow .2s;
 
 }
 
+.field input:focus,
+.field select:focus{
 
-/* =====================================================
-   LOADING
-===================================================== */
+  border-color:
+    var(--primary);
 
-#loading{
+  box-shadow:
+    0 0 0 4px
+    rgba(37,99,235,.10);
 
-  display:none;
+}
+
+.field input[readonly]{
+
+  background:#f8fafc;
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.actions{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:12px;
+
+}
+
+button{
+
+  border:none;
+
+  cursor:pointer;
+
+  font-family:inherit;
+
+}
+
+.btn{
+
+  min-height:45px;
+
+  padding:
+    0 17px;
+
+  border-radius:10px;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:8px;
+
+  font-size:13px;
+
+  font-weight:800;
+
+  transition:
+    transform .18s,
+    box-shadow .18s,
+    filter .18s;
+
+}
+
+.btn:hover{
+
+  transform:
+    translateY(-2px);
+
+  filter:brightness(1.04);
+
+}
+
+.btn:active{
+
+  transform:
+    translateY(0);
+
+}
+
+.btn-primary{
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      #3b82f6
+    );
+
+  box-shadow:
+    0 6px 15px
+    rgba(37,99,235,.22);
+
+}
+
+.btn-success{
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--success-dark),
+      #10b981
+    );
+
+  box-shadow:
+    0 6px 15px
+    rgba(5,150,105,.20);
+
+}
+
+.btn-purple{
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6d28d9,
+      #8b5cf6
+    );
+
+}
+
+.btn-orange{
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #c2410c,
+      #f97316
+    );
+
+}
+
+.btn-dark{
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #334155
+    );
+
+}
+
+.btn-danger{
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #b91c1c,
+      #ef4444
+    );
+
+}
+
+.btn-secondary{
+
+  color:#334155;
+
+  background:#f1f5f9;
+
+  border:
+    1px solid #e2e8f0;
+
+}
+
+
+/* =========================================================
+   COMPETÊNCIA
+========================================================= */
+
+.competencia-box{
+
+  display:flex;
+
+  align-items:flex-end;
+
+  gap:15px;
+
+  flex-wrap:wrap;
+
+}
+
+.competencia-box .field{
+
+  width:230px;
+
+}
+
+
+/* =========================================================
+   DIVISOR
+========================================================= */
+
+.divider{
+
+  height:1px;
+
+  background:
+    var(--border);
+
+  margin:
+    25px 0;
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
 
   position:fixed;
 
   inset:0;
 
-  z-index:9999;
+  z-index:5000;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  background:
+    rgba(15,23,42,.58);
+
+  backdrop-filter:
+    blur(5px);
+
+}
+
+.modal.show{
+
+  display:flex;
+
+}
+
+.modal-box{
+
+  width:
+    min(
+      100%,
+      430px
+    );
+
+  background:white;
+
+  border-radius:20px;
+
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.25);
+
+  overflow:hidden;
+
+  animation:
+    modalIn .2s ease;
+
+}
+
+@keyframes modalIn{
+
+  from{
+
+    opacity:0;
+
+    transform:
+      translateY(15px)
+      scale(.98);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+  }
+
+}
+
+.modal-header{
+
+  padding:20px 22px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  border-bottom:
+    1px solid var(--border);
+
+}
+
+.modal-header h3{
+
+  font-size:18px;
+
+}
+
+.close{
+
+  width:35px;
+  height:35px;
+
+  border-radius:9px;
+
+  background:#f1f5f9;
+
+  color:#475569;
+
+  font-size:20px;
+
+}
+
+.modal-body{
+
+  padding:22px;
+
+}
+
+.modal-footer{
+
+  padding:16px 22px;
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:10px;
+
+  border-top:
+    1px solid var(--border);
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+
+  position:fixed;
+
+  right:20px;
+
+  top:85px;
+
+  z-index:9000;
+
+  width:
+    min(
+      calc(100% - 40px),
+      380px
+    );
+
+  padding:15px 18px;
+
+  border-radius:12px;
+
+  color:white;
+
+  font-size:13px;
+
+  font-weight:700;
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.18);
+
+  display:none;
+
+  animation:
+    toastIn .2s ease;
+
+}
+
+.toast.show{
+
+  display:block;
+
+}
+
+.toast.success{
+
+  background:
+    linear-gradient(
+      135deg,
+      #047857,
+      #10b981
+    );
+
+}
+
+.toast.error{
+
+  background:
+    linear-gradient(
+      135deg,
+      #b91c1c,
+      #ef4444
+    );
+
+}
+
+.toast.warning{
+
+  background:
+    linear-gradient(
+      135deg,
+      #c2410c,
+      #f97316
+    );
+
+}
+
+@keyframes toastIn{
+
+  from{
+
+    opacity:0;
+
+    transform:
+      translateX(20px);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:
+      translateX(0);
+
+  }
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:10000;
+
+  display:none;
 
   align-items:center;
 
@@ -806,16 +1102,25 @@ hr{
 
 }
 
-.loading-card{
+.loading.show{
 
-  padding:25px 30px;
+  display:flex;
+
+}
+
+.loading-box{
+
+  min-width:190px;
+
+  padding:25px;
 
   background:white;
 
   border-radius:18px;
 
   box-shadow:
-    0 20px 50px rgba(0,0,0,.18);
+    0 20px 60px
+    rgba(0,0,0,.15);
 
   text-align:center;
 
@@ -826,34 +1131,23 @@ hr{
   width:42px;
   height:42px;
 
-  margin:auto;
+  margin:
+    0 auto 14px;
 
   border:
     4px solid #e2e8f0;
 
   border-top-color:
-    #1976d2;
+    var(--primary);
 
   border-radius:50%;
 
   animation:
-    girar .8s linear infinite;
+    spin .8s linear infinite;
 
 }
 
-.loading-text{
-
-  margin-top:12px;
-
-  color:#475569;
-
-  font-size:14px;
-
-  font-weight:700;
-
-}
-
-@keyframes girar{
+@keyframes spin{
 
   to{
     transform:rotate(360deg);
@@ -861,88 +1155,44 @@ hr{
 
 }
 
+.loading-box span{
 
-/* =====================================================
-   MENSAGEM
-===================================================== */
+  color:var(--muted);
 
-.mensagem{
-
-  display:none;
-
-  position:fixed;
-
-  right:22px;
-
-  top:22px;
-
-  z-index:10000;
-
-  max-width:
-    min(
-      400px,
-      calc(100% - 44px)
-    );
-
-  padding:
-    14px 18px;
-
-  border-radius:12px;
-
-  background:
-    #15803d;
-
-  color:white;
-
-  font-size:14px;
+  font-size:13px;
 
   font-weight:700;
 
-  box-shadow:
-    0 12px 30px rgba(0,0,0,.2);
-
-}
-
-.mensagem.erro{
-
-  background:
-    #b91c1c;
-
 }
 
 
-/* =====================================================
-   RODAPÉ
-===================================================== */
+/* =========================================================
+   FOOTER
+========================================================= */
 
 .footer{
 
-  margin-top:30px;
-
-  padding-top:20px;
-
-  border-top:
-    1px solid #e2e8f0;
-
   text-align:center;
 
-  color:#94a3b8;
+  color:#64748b;
 
   font-size:12px;
+
+  padding:25px;
 
 }
 
 
-/* =====================================================
+/* =========================================================
    RESPONSIVO
-===================================================== */
+========================================================= */
 
-@media(max-width:1000px){
+@media(max-width:1100px){
 
-  .resumo{
+  .cards{
 
     grid-template-columns:
-      repeat(3,1fr);
+      repeat(3,minmax(0,1fr));
 
   }
 
@@ -950,60 +1200,80 @@ hr{
 
 @media(max-width:700px){
 
-  .container{
+  .topbar-inner{
 
-    width:
-      calc(100% - 16px);
-
-    margin:8px auto;
-
-    border-radius:18px;
+    padding:
+      12px 16px;
 
   }
 
-  .header{
+  .status{
+
+    display:none;
+
+  }
+
+  .container{
+
+    width:
+      calc(100% - 20px);
+
+    margin-top:15px;
+
+  }
+
+  .hero{
 
     padding:25px 20px;
 
   }
 
-  .conteudo{
+  .hero h2{
 
-    padding:
-      22px 18px 30px;
+    font-size:24px;
 
   }
 
-  .resumo{
+  .section-body{
+
+    padding:18px;
+
+  }
+
+  .cards{
 
     grid-template-columns:
-      repeat(2,1fr);
+      repeat(2,minmax(0,1fr));
 
   }
 
-  .formulario{
+  .form-grid{
 
     grid-template-columns:1fr;
 
   }
 
-  .full{
+  .field.full{
 
     grid-column:1;
 
   }
 
-  .titulo-secao h2{
+  .competencia-box .field{
 
-    font-size:18px;
+    width:100%;
 
   }
 
-  .status-bar{
+  .actions{
 
     flex-direction:column;
 
-    align-items:flex-start;
+  }
+
+  .actions .btn{
+
+    width:100%;
 
   }
 
@@ -1011,30 +1281,24 @@ hr{
 
 @media(max-width:430px){
 
-  .resumo{
+  .cards{
 
     grid-template-columns:1fr;
 
   }
 
-  .campo-resumo{
+  .card-value{
 
-    min-height:100px;
-
-  }
-
-  .modal-acoes{
-
-    grid-template-columns:1fr;
+    font-size:19px;
 
   }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    ACESSIBILIDADE
-===================================================== */
+========================================================= */
 
 button:focus-visible,
 input:focus-visible,
@@ -1042,7 +1306,7 @@ select:focus-visible{
 
   outline:
     3px solid
-    rgba(25,118,210,.28);
+    rgba(37,99,235,.25);
 
   outline-offset:2px;
 
@@ -1056,832 +1320,953 @@ select:focus-visible{
 <body>
 
 
-<div class="container">
+<!-- =====================================================
+     TOPO
+===================================================== -->
 
+<header class="topbar">
 
-  <!-- =================================================
-       CABEÇALHO
-  ================================================== -->
+  <div class="topbar-inner">
 
-  <header class="header">
+    <div class="logo">
 
-    <div class="header-content">
+      <div class="logo-icon">
+        💰
+      </div>
 
-      <h1>
-        💰 Controle Financeiro
-      </h1>
+      <div class="logo-text">
 
-      <p>
-        Gestão pessoal de contas, fluxo de caixa e resultados
-      </p>
+        <h1>Controle Financeiro</h1>
 
-    </div>
+        <span>Gestão financeira inteligente</span>
 
-  </header>
-
-
-  <main class="conteudo">
-
-
-    <!-- =================================================
-         RESUMO
-    ================================================== -->
-
-    <div class="titulo-secao">
-
-      <h2>
-        📊 Resumo Financeiro
-      </h2>
-
-      <div class="linha"></div>
+      </div>
 
     </div>
 
 
-    <section class="resumo">
+    <div class="status">
 
+      <span class="status-dot"></span>
 
-      <div class="campo-resumo">
-
-        <label>
-          💰 Saldo Inicial
-        </label>
-
-        <input
-          id="saldoInicialCard"
-          readonly
-          value="R$ 0,00">
-
-      </div>
-
-
-      <div class="campo-resumo">
-
-        <label>
-          📥 Contas a Receber
-        </label>
-
-        <input
-          id="totalReceber"
-          readonly
-          value="R$ 0,00">
-
-      </div>
-
-
-      <div class="campo-resumo">
-
-        <label>
-          📤 Contas a Pagar
-        </label>
-
-        <input
-          id="totalPagar"
-          readonly
-          value="R$ 0,00">
-
-      </div>
-
-
-      <div class="campo-resumo">
-
-        <label>
-          💵 Valor Pago
-        </label>
-
-        <input
-          id="valorPago"
-          readonly
-          value="R$ 0,00">
-
-      </div>
-
-
-      <div class="campo-resumo">
-
-        <label>
-          💵 Valor Recebido
-        </label>
-
-        <input
-          id="valorRecebido"
-          readonly
-          value="R$ 0,00">
-
-      </div>
-
-
-      <div class="campo-resumo">
-
-        <label>
-          🏦 Saldo Banco
-        </label>
-
-        <input
-          id="saldoBanco"
-          readonly
-          value="R$ 0,00">
-
-      </div>
-
-
-    </section>
-
-
-    <hr>
-
-
-    <!-- =================================================
-         CONTROLE MENSAL
-    ================================================== -->
-
-    <div class="titulo-secao">
-
-      <h2>
-        ⚙️ Controle Mensal
-      </h2>
-
-      <div class="linha"></div>
+      Sistema conectado
 
     </div>
 
+  </div>
 
-    <section class="formulario">
-
-
-      <div class="campo">
-
-        <label for="competencia">
-          📅 Competência
-        </label>
-
-        <input
-          id="competencia"
-          type="month">
-
-      </div>
+</header>
 
 
-      <div class="campo">
 
-        <label>
-          💰 Saldo inicial
-        </label>
+<!-- =====================================================
+     CONTEÚDO
+===================================================== -->
 
-        <button
-          type="button"
-          class="btn btnSaldo"
-          onclick="abrirSaldo()">
-
-          💰 Informar Saldo Inicial
-
-        </button>
-
-      </div>
+<main class="container">
 
 
-      <div class="campo full">
+  <!-- HERO -->
 
-        <div class="acoes">
+  <section class="hero">
 
+    <h2>
+      Painel Financeiro
+    </h2>
 
-          <button
-            type="button"
-            class="btn btnFechar"
-            onclick="fecharMes()">
+    <p>
+      Acompanhe seu saldo, contas a receber,
+      contas a pagar e movimentações financeiras
+      em um único lugar.
+    </p>
 
-            🔒 Fechar Competência
-
-          </button>
-
-
-          <button
-            type="button"
-            class="btn btnRelatorio"
-            onclick="gerarRelatorio()">
-
-            📄 Relatório
-
-          </button>
+  </section>
 
 
-          <button
-            type="button"
-            class="btn btnRelatorio"
-            onclick="abrirLancamentos()">
 
-            📋 Lançamentos
+  <!-- ===================================================
+       RESUMO
+  ==================================================== -->
 
-          </button>
+  <section class="section">
 
+    <div class="section-header">
 
-          <button
-            type="button"
-            class="btn btnRelatorio"
-            onclick="abrirGraficos()">
+      <div class="section-title">
 
-            📊 Gráficos
+        <div class="section-icon">
+          📊
+        </div>
 
-          </button>
+        <div>
 
+          <h3>Resumo financeiro</h3>
 
-          <button
-            type="button"
-            class="btn btnRelatorio"
-            onclick="abrirAtendimento()">
-
-            📖 Atendimento
-
-          </button>
-
-
-          <button
-            type="button"
-            class="btn btnRelatorio"
-            onclick="abrirBaixasPendentes()">
-
-            ⚠️ Baixas Pendentes
-
-          </button>
-
+          <p>
+            Visão geral da competência selecionada
+          </p>
 
         </div>
 
       </div>
 
-
-    </section>
-
-
-    <hr>
+    </div>
 
 
-    <!-- =================================================
-         NOVO LANÇAMENTO
-    ================================================== -->
+    <div class="section-body">
 
-    <div class="titulo-secao">
+      <div class="cards">
 
-      <h2>
-        ➕ Fazer novo lançamento
-      </h2>
 
-      <div class="linha"></div>
+        <div class="card blue">
+
+          <div class="card-top">
+
+            <span class="card-label">
+              SALDO INICIAL
+            </span>
+
+            <span class="card-icon">
+              💰
+            </span>
+
+          </div>
+
+          <div
+            class="card-value"
+            id="saldoInicialCard"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+
+
+        <div class="card green">
+
+          <div class="card-top">
+
+            <span class="card-label">
+              A RECEBER
+            </span>
+
+            <span class="card-icon">
+              📥
+            </span>
+
+          </div>
+
+          <div
+            class="card-value"
+            id="totalReceber"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+
+
+        <div class="card red">
+
+          <div class="card-top">
+
+            <span class="card-label">
+              A PAGAR
+            </span>
+
+            <span class="card-icon">
+              📤
+            </span>
+
+          </div>
+
+          <div
+            class="card-value"
+            id="totalPagar"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+
+
+        <div class="card orange">
+
+          <div class="card-top">
+
+            <span class="card-label">
+              VALOR PAGO
+            </span>
+
+            <span class="card-icon">
+              💸
+            </span>
+
+          </div>
+
+          <div
+            class="card-value"
+            id="valorPago"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+
+
+        <div class="card green">
+
+          <div class="card-top">
+
+            <span class="card-label">
+              VALOR RECEBIDO
+            </span>
+
+            <span class="card-icon">
+              💵
+            </span>
+
+          </div>
+
+          <div
+            class="card-value"
+            id="valorRecebido"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+
+
+        <div class="card purple">
+
+          <div class="card-top">
+
+            <span class="card-label">
+              SALDO BANCO
+            </span>
+
+            <span class="card-icon">
+              🏦
+            </span>
+
+          </div>
+
+          <div
+            class="card-value"
+            id="saldoBanco"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ===================================================
+       CONTROLE MENSAL
+  ==================================================== -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <div class="section-title">
+
+        <div class="section-icon">
+          ⚙️
+        </div>
+
+        <div>
+
+          <h3>Controle mensal</h3>
+
+          <p>
+            Selecione a competência e acesse as ferramentas
+          </p>
+
+        </div>
+
+      </div>
 
     </div>
 
 
-    <section class="formulario">
+    <div class="section-body">
 
 
-      <div class="campo">
-
-        <label for="tipo">
-          📂 Tipo
-        </label>
-
-        <select id="tipo">
-
-          <option value="Contas a Receber">
-            Contas a Receber
-          </option>
-
-          <option value="Contas a Pagar">
-            Contas a Pagar
-          </option>
-
-        </select>
-
-      </div>
+      <div class="competencia-box">
 
 
-      <div class="campo">
+        <div class="field">
 
-        <label for="descricao">
-          📝 Descrição
-        </label>
+          <label for="competencia">
+            📅 Competência
+          </label>
 
-        <select id="descricao">
+          <input
+            id="competencia"
+            type="month"
+          >
 
-          <option value="">
-            Carregando...
-          </option>
+        </div>
 
-        </select>
-
-      </div>
-
-
-      <div class="campo">
-
-        <label for="valor">
-          💵 Valor
-        </label>
-
-        <input
-          id="valor"
-          type="number"
-          min="0"
-          step="0.01"
-          inputmode="decimal"
-          placeholder="0,00">
-
-      </div>
-
-
-      <div class="campo">
-
-        <label for="vencimento">
-          📆 Vencimento
-        </label>
-
-        <input
-          id="vencimento"
-          type="date">
-
-      </div>
-
-
-      <div class="campo full">
 
         <button
-          type="button"
-          class="btn btnGravar"
-          onclick="gravar()">
-
-          💾 Gravar Lançamento
-
+          class="btn btn-success"
+          onclick="abrirSaldo()"
+        >
+          💰 Informar Saldo Inicial
         </button>
+
 
       </div>
 
 
-    </section>
+      <div class="divider"></div>
 
 
-    <!-- =================================================
-         STATUS
-    ================================================== -->
+      <div class="actions">
 
-    <div class="status-bar">
 
-      <span class="status-indicator">
+        <button
+          class="btn btn-purple"
+          onclick="fecharMes()"
+        >
+          🔒 Fechar Competência
+        </button>
 
-        <span class="status-dot"></span>
 
-        <span id="statusTexto">
-          Sistema conectado
-        </span>
+        <button
+          class="btn btn-orange"
+          onclick="gerarRelatorio()"
+        >
+          📄 Relatório
+        </button>
 
-      </span>
 
-      <span id="ultimaAtualizacao">
-        Aguardando atualização...
-      </span>
+        <button
+          class="btn btn-orange"
+          onclick="abrirLancamentos()"
+        >
+          📋 Lançamentos
+        </button>
+
+
+        <button
+          class="btn btn-orange"
+          onclick="abrirGraficos()"
+        >
+          📊 Gráficos
+        </button>
+
+
+        <button
+          class="btn btn-orange"
+          onclick="abrirAtendimento()"
+        >
+          📖 Atendimento
+        </button>
+
+
+        <button
+          class="btn btn-danger"
+          onclick="abrirBaixasPendentes()"
+        >
+          ⚠️ Baixas Pendentes
+        </button>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ===================================================
+       NOVO LANÇAMENTO
+  ==================================================== -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <div class="section-title">
+
+        <div class="section-icon">
+          ➕
+        </div>
+
+        <div>
+
+          <h3>Novo lançamento</h3>
+
+          <p>
+            Registre uma nova conta a receber ou pagar
+          </p>
+
+        </div>
+
+      </div>
 
     </div>
 
 
-    <footer class="footer">
-
-      Controle Financeiro • GitHub + Google Sheets
-
-    </footer>
+    <div class="section-body">
 
 
-  </main>
+      <div class="form-grid">
 
-</div>
+
+        <div class="field">
+
+          <label for="tipo">
+            📂 Tipo
+          </label>
+
+          <select id="tipo">
+
+            <option value="Contas a Receber">
+              Contas a Receber
+            </option>
+
+            <option value="Contas a Pagar">
+              Contas a Pagar
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+        <div class="field">
+
+          <label for="descricao">
+            📝 Descrição
+          </label>
+
+          <select id="descricao">
+
+            <option value="">
+              Carregando...
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+        <div class="field">
+
+          <label for="valor">
+            💵 Valor
+          </label>
+
+          <input
+            id="valor"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="0,00"
+          >
+
+        </div>
+
+
+
+        <div class="field">
+
+          <label for="vencimento">
+            📆 Vencimento
+          </label>
+
+          <input
+            id="vencimento"
+            type="date"
+          >
+
+        </div>
+
+
+
+        <div class="field full">
+
+          <button
+            class="btn btn-primary"
+            onclick="gravar()"
+          >
+            💾 Gravar Lançamento
+          </button>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <div class="footer">
+
+    Controle Financeiro • Sistema integrado ao Google Sheets
+
+  </div>
+
+
+</main>
+
 
 
 <!-- =====================================================
      MODAL SALDO
-====================================================== -->
+===================================================== -->
 
 <div
-  id="janelaSaldo"
   class="modal"
-  onclick="fecharModalFora(event)">
+  id="janelaSaldo"
+  onclick="fecharModalFora(event)"
+>
+
 
   <div
-    class="modal-card"
-    onclick="event.stopPropagation()">
+    class="modal-box"
+    onclick="event.stopPropagation()"
+  >
 
-    <h3>
-      💰 Saldo Inicial
-    </h3>
 
-    <label for="novoSaldo">
-      Valor inicial
-    </label>
+    <div class="modal-header">
 
-    <input
-      id="novoSaldo"
-      type="number"
-      min="0"
-      step="0.01"
-      inputmode="decimal"
-      placeholder="0,00">
-
-    <div class="modal-acoes">
+      <h3>
+        💰 Saldo Inicial
+      </h3>
 
       <button
-        type="button"
-        class="btn btnSaldo"
-        onclick="salvarNovoSaldo()">
-
-        💾 Salvar
-
-      </button>
-
-      <button
-        type="button"
-        class="btn btnFechar"
-        onclick="fecharSaldo()">
-
-        Cancelar
-
+        class="close"
+        onclick="fecharSaldo()"
+      >
+        ×
       </button>
 
     </div>
 
+
+    <div class="modal-body">
+
+
+      <div class="field">
+
+        <label for="novoSaldo">
+          Valor inicial
+        </label>
+
+        <input
+          id="novoSaldo"
+          type="number"
+          step="0.01"
+          placeholder="0,00"
+        >
+
+      </div>
+
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-secondary"
+        onclick="fecharSaldo()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        class="btn btn-success"
+        onclick="salvarNovoSaldo()"
+      >
+        Salvar
+      </button>
+
+    </div>
+
+
   </div>
 
 </div>
+
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+  id="mensagemSistema"
+  class="toast"
+></div>
+
 
 
 <!-- =====================================================
      LOADING
-====================================================== -->
+===================================================== -->
 
-<div id="loading">
+<div
+  id="loading"
+  class="loading"
+>
 
-  <div class="loading-card">
+  <div class="loading-box">
 
     <div class="spinner"></div>
 
-    <div class="loading-text">
+    <span id="loadingText">
       Processando...
-    </div>
+    </span>
 
   </div>
 
 </div>
 
 
-<!-- =====================================================
-     MENSAGEM
-====================================================== -->
-
-<div
-  id="mensagemSistema"
-  class="mensagem"
-  role="alert">
-</div>
-
 
 <script>
 
-/* =====================================================
+/* =========================================================
    CONFIGURAÇÃO
-===================================================== */
+========================================================= */
 
 /*
- * URL DA WEB APP DO GOOGLE APPS SCRIPT
- *
- * IMPORTANTE:
- * Use a URL /exec da implantação publicada.
- */
+   COLOQUE AQUI A URL DA SUA IMPLANTAÇÃO DO GOOGLE APPS SCRIPT.
 
-const URL_SISTEMA =
-  "https://script.google.com/macros/s/AKfycbznCQSjjaaeWC61dwAN3D210YDyQalYnITD1ubK_Y7-TSox6kZZMGW_1fhoe0t3DVgL/exec";
+   Exemplo:
 
+   https://script.google.com/macros/s/SEU_ID/exec
 
-/*
- * O GitHub Pages não possui google.script.run.
- *
- * A comunicação é feita através de JSONP.
- */
+*/
 
-let contadorJSONP = 0;
+const URL_API =
+  "https://script.google.com/macros/s/AKfycbwT12x2vBm0PQZ9Cfn1btBZT3y5LplAY7ysMAAlPuAdJ7psZlJhTOwqKcWf7B6g82cI/exec";
 
 
-/* =====================================================
+/* =========================================================
+   ELEMENTOS
+========================================================= */
+
+const $ = id =>
+  document.getElementById(id);
+
+
+/* =========================================================
+   ESTADO
+========================================================= */
+
+let carregando = false;
+
+
+/* =========================================================
    INICIALIZAÇÃO
-===================================================== */
+========================================================= */
 
-window.addEventListener(
-  "load",
-  inicializar
+document.addEventListener(
+  "DOMContentLoaded",
+  iniciar
 );
 
 
-function inicializar(){
+async function iniciar(){
 
   const hoje =
     new Date();
 
   const competencia =
-    hoje.getFullYear() +
-    "-" +
+    hoje.getFullYear()
+    +
+    "-"
+    +
     String(
-      hoje.getMonth() + 1
+      hoje.getMonth()+1
     ).padStart(2,"0");
 
 
-  document
-    .getElementById("competencia")
-    .value =
+  $("competencia").value =
     competencia;
 
 
-  document
-    .getElementById("competencia")
-    .addEventListener(
-      "change",
-      carregar
+  try{
+
+    mostrarLoading(
+      true,
+      "Conectando ao sistema..."
     );
 
 
-  carregarDescricoes();
+    await carregarDescricoes();
 
-  carregar();
+    await carregar();
+
+  }
+  catch(e){
+
+    mostrarMensagem(
+      e.message ||
+      "Não foi possível conectar ao servidor.",
+      "error"
+    );
+
+  }
+  finally{
+
+    mostrarLoading(false);
+
+  }
 
 }
 
 
-/* =====================================================
-   JSONP
-===================================================== */
+/* =========================================================
+   REQUISIÇÃO PARA O GOOGLE APPS SCRIPT
+========================================================= */
 
-function chamarAPI(
-  acao,
-  parametros = {},
-  timeout = 15000
+async function apiRequest(
+  action,
+  params={}
 ){
 
-  return new Promise(
-    function(resolve,reject){
-
-      const callback =
-        "jsonpCallback_" +
-        Date.now() +
-        "_" +
-        (++contadorJSONP);
+  const url =
+    new URL(URL_API);
 
 
-      const script =
-        document.createElement("script");
+  url.searchParams.set(
+    "action",
+    action
+  );
 
 
-      let finalizado = false;
+  Object.keys(params)
+    .forEach(function(chave){
+
+      const valor =
+        params[chave];
 
 
-      const timer =
-        setTimeout(
-          function(){
+      if(
+        valor !== undefined &&
+        valor !== null
+      ){
 
-            finalizar();
-
-            reject(
-              new Error(
-                "Tempo limite excedido ao acessar o Google Apps Script."
-              )
-            );
-
-          },
-          timeout
+        url.searchParams.set(
+          chave,
+          typeof valor === "object"
+            ? JSON.stringify(valor)
+            : valor
         );
-
-
-      function finalizar(){
-
-        if(finalizado){
-          return;
-        }
-
-        finalizado = true;
-
-        clearTimeout(timer);
-
-        try{
-          delete window[callback];
-        }catch(e){
-          window[callback] =
-            undefined;
-        }
-
-        if(script.parentNode){
-          script.parentNode.removeChild(
-            script
-          );
-        }
 
       }
 
-
-      window[callback] =
-        function(resposta){
-
-          finalizar();
-
-          if(
-            resposta &&
-            resposta.sucesso === false &&
-            resposta.erro
-          ){
-
-            reject(
-              new Error(
-                resposta.erro
-              )
-            );
-
-            return;
-
-          }
-
-          resolve(
-            resposta
-          );
-
-        };
+    });
 
 
-      script.onerror =
-        function(){
-
-          finalizar();
-
-          reject(
-            new Error(
-              "Falha ao conectar ao Google Apps Script."
-            )
-          );
-
-        };
+  let resposta;
 
 
-      const query =
-        new URLSearchParams();
+  try{
+
+    resposta =
+      await fetch(
+        url.toString(),
+        {
+          method:"GET",
+          redirect:"follow",
+          cache:"no-store"
+        }
+      );
+
+  }
+  catch(e){
+
+    throw new Error(
+      "Falha ao conectar ao Google Apps Script. " +
+      "Verifique se a implantação está publicada como Web App, " +
+      "se a URL /exec está correta e se o acesso está permitido."
+    );
+
+  }
 
 
-      query.set(
-        "action",
-        acao
+  if(!resposta.ok){
+
+    throw new Error(
+      "Servidor retornou HTTP " +
+      resposta.status
+    );
+
+  }
+
+
+  const texto =
+    await resposta.text();
+
+
+  let dados;
+
+
+  try{
+
+    dados =
+      JSON.parse(texto);
+
+  }
+  catch(e){
+
+    console.error(
+      "Resposta recebida:",
+      texto
+    );
+
+    throw new Error(
+      "O Google Apps Script não retornou um JSON válido."
+    );
+
+  }
+
+
+  if(
+    dados &&
+    dados.sucesso === false
+  ){
+
+    throw new Error(
+      dados.erro ||
+      dados.mensagem ||
+      "Erro retornado pelo servidor."
+    );
+
+  }
+
+
+  return dados;
+
+}
+
+
+/* =========================================================
+   CARREGAR RESUMO
+========================================================= */
+
+async function carregar(){
+
+  const competencia =
+    $("competencia").value;
+
+
+  if(!competencia){
+
+    return;
+
+  }
+
+
+  validarCompetenciaLocal(
+    competencia
+  );
+
+
+  mostrarLoading(
+    true,
+    "Carregando resumo..."
+  );
+
+
+  try{
+
+    const r =
+      await apiRequest(
+        "obterResumo",
+        {
+          competencia:
+            competencia
+        }
       );
 
 
-      query.set(
-        "callback",
-        callback
+    $("saldoInicialCard").textContent =
+      formatar(r.saldoInicial);
+
+
+    $("totalReceber").textContent =
+      formatar(r.receber);
+
+
+    $("totalPagar").textContent =
+      formatar(r.pagar);
+
+
+    $("valorPago").textContent =
+      formatar(r.valorPago);
+
+
+    $("valorRecebido").textContent =
+      formatar(
+        r.valorRecebido
       );
 
 
-      Object.keys(parametros)
-        .forEach(
-          function(chave){
+    $("saldoBanco").textContent =
+      formatar(r.saldoBanco);
 
-            const valor =
-              parametros[chave];
+  }
+  catch(e){
 
-            if(
-              valor !== undefined &&
-              valor !== null
-            ){
+    mostrarMensagem(
+      "Erro ao carregar o resumo: " +
+      e.message,
+      "error"
+    );
 
-              query.set(
-                chave,
-                String(valor)
-              );
+  }
+  finally{
 
-            }
+    mostrarLoading(false);
 
-          }
-        );
-
-
-      script.src =
-        URL_SISTEMA +
-        "?" +
-        query.toString();
-
-
-      document
-        .head
-        .appendChild(script);
-
-    }
-  );
+  }
 
 }
 
 
-/* =====================================================
-   LOADING
-===================================================== */
+/* =========================================================
+   MUDANÇA DE COMPETÊNCIA
+========================================================= */
 
-function mostrarLoading(
-  valor,
-  texto = "Processando..."
-){
-
-  const loading =
-    document.getElementById(
-      "loading"
-    );
-
-  const textoEl =
-    document.querySelector(
-      ".loading-text"
-    );
+$("competencia").addEventListener(
+  "change",
+  carregar
+);
 
 
-  textoEl.textContent =
-    texto;
-
-
-  loading.style.display =
-    valor
-      ? "flex"
-      : "none";
-
-}
-
-
-/* =====================================================
-   MENSAGEM
-===================================================== */
-
-function mostrarMensagem(
-  texto,
-  tipo = ""
-){
-
-  const elemento =
-    document.getElementById(
-      "mensagemSistema"
-    );
-
-
-  elemento.textContent =
-    texto;
-
-
-  elemento.className =
-    "mensagem " +
-    tipo;
-
-
-  elemento.style.display =
-    "block";
-
-
-  setTimeout(
-    function(){
-
-      elemento.style.display =
-        "none";
-
-    },
-    4000
-  );
-
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-function atualizarStatus(
-  texto
-){
-
-  document
-    .getElementById(
-      "statusTexto"
-    )
-    .textContent =
-    texto;
-
-
-  document
-    .getElementById(
-      "ultimaAtualizacao"
-    )
-    .textContent =
-    "Atualizado em " +
-    new Date().toLocaleTimeString(
-      "pt-BR"
-    );
-
-}
-
-
-/* =====================================================
+/* =========================================================
    FORMATAR MOEDA
-===================================================== */
+========================================================= */
 
 function formatar(valor){
 
@@ -1898,149 +2283,24 @@ function formatar(valor){
 }
 
 
-/* =====================================================
-   CARREGAR RESUMO
-===================================================== */
-
-async function carregar(){
-
-  const competencia =
-    document
-      .getElementById(
-        "competencia"
-      )
-      .value;
-
-
-  if(!competencia){
-    return;
-  }
-
-
-  mostrarLoading(
-    true,
-    "Carregando resumo..."
-  );
-
-
-  try{
-
-    const r =
-      await chamarAPI(
-        "obterResumo",
-        {
-          competencia:
-            competencia
-        }
-      );
-
-
-    document
-      .getElementById(
-        "saldoInicialCard"
-      )
-      .value =
-      formatar(
-        r.saldoInicial
-      );
-
-
-    document
-      .getElementById(
-        "totalReceber"
-      )
-      .value =
-      formatar(
-        r.receber
-      );
-
-
-    document
-      .getElementById(
-        "totalPagar"
-      )
-      .value =
-      formatar(
-        r.pagar
-      );
-
-
-    document
-      .getElementById(
-        "valorPago"
-      )
-      .value =
-      formatar(
-        r.valorPago
-      );
-
-
-    document
-      .getElementById(
-        "valorRecebido"
-      )
-      .value =
-      formatar(
-        r.valorRecebido
-      );
-
-
-    document
-      .getElementById(
-        "saldoBanco"
-      )
-      .value =
-      formatar(
-        r.saldoBanco
-      );
-
-
-    atualizarStatus(
-      "Sistema conectado"
-    );
-
-  }
-  catch(e){
-
-    atualizarStatus(
-      "Erro de conexão"
-    );
-
-
-    mostrarMensagem(
-      "Erro ao carregar o resumo: " +
-      e.message,
-      "erro"
-    );
-
-    console.error(e);
-
-  }
-  finally{
-
-    mostrarLoading(false);
-
-  }
-
-}
-
-
-/* =====================================================
-   DESCRIÇÕES
-===================================================== */
+/* =========================================================
+   CARREGAR DESCRIÇÕES
+========================================================= */
 
 async function carregarDescricoes(){
 
   const campo =
-    document.getElementById(
-      "descricao"
-    );
+    $("descricao");
+
+
+  campo.innerHTML =
+    "<option value=''>Carregando...</option>";
 
 
   try{
 
     const lista =
-      await chamarAPI(
+      await apiRequest(
         "listarDescricoes"
       );
 
@@ -2049,121 +2309,97 @@ async function carregarDescricoes(){
       "";
 
 
+    if(
+      !Array.isArray(lista) ||
+      lista.length === 0
+    ){
+
+      campo.innerHTML =
+        "<option value=''>Selecione</option>";
+
+      return;
+
+    }
+
+
     const primeira =
       document.createElement(
         "option"
       );
 
-
-    primeira.value =
-      "";
+    primeira.value = "";
 
     primeira.textContent =
       "Selecione";
-
 
     campo.appendChild(
       primeira
     );
 
 
-    if(
-      Array.isArray(lista)
-    ){
+    lista.forEach(function(item){
 
-      lista.forEach(
-        function(item){
+      const option =
+        document.createElement(
+          "option"
+        );
 
-          const option =
-            document.createElement(
-              "option"
-            );
+      option.value =
+        item;
 
+      option.textContent =
+        item;
 
-          option.value =
-            item;
-
-
-          option.textContent =
-            item;
-
-
-          campo.appendChild(
-            option
-          );
-
-        }
+      campo.appendChild(
+        option
       );
 
-    }
+    });
 
   }
   catch(e){
 
     campo.innerHTML =
-      '<option value="">Erro ao carregar</option>';
+      "<option value=''>Erro ao carregar</option>";
 
-
-    console.error(
-      e
-    );
+    throw e;
 
   }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    GRAVAR LANÇAMENTO
-===================================================== */
+========================================================= */
 
 async function gravar(){
 
-  const competencia =
-    document
-      .getElementById(
-        "competencia"
-      )
-      .value;
+  const dados = {
+
+    competencia:
+      $("competencia").value,
+
+    tipo:
+      $("tipo").value,
+
+    descricao:
+      $("descricao").value,
+
+    valor:
+      $("valor").value,
+
+    vencimento:
+      $("vencimento").value
+
+  };
 
 
-  const tipo =
-    document
-      .getElementById(
-        "tipo"
-      )
-      .value;
-
-
-  const descricao =
-    document
-      .getElementById(
-        "descricao"
-      )
-      .value;
-
-
-  const valor =
-    document
-      .getElementById(
-        "valor"
-      )
-      .value;
-
-
-  const vencimento =
-    document
-      .getElementById(
-        "vencimento"
-      )
-      .value;
-
-
-  if(!competencia){
+  if(!dados.competencia){
 
     mostrarMensagem(
       "Selecione uma competência.",
-      "erro"
+      "error"
     );
 
     return;
@@ -2171,11 +2407,11 @@ async function gravar(){
   }
 
 
-  if(!descricao){
+  if(!dados.descricao){
 
     mostrarMensagem(
       "Informe a descrição.",
-      "erro"
+      "error"
     );
 
     return;
@@ -2184,13 +2420,13 @@ async function gravar(){
 
 
   if(
-    !valor ||
-    Number(valor) < 0
+    dados.valor === "" ||
+    Number(dados.valor) < 0
   ){
 
     mostrarMensagem(
       "Informe um valor válido.",
-      "erro"
+      "error"
     );
 
     return;
@@ -2200,53 +2436,33 @@ async function gravar(){
 
   mostrarLoading(
     true,
-    "Gravando lançamento..."
+    "Salvando lançamento..."
   );
 
 
   try{
 
-    const res =
-      await chamarAPI(
+    const resposta =
+      await apiRequest(
         "salvarLancamento",
         {
-          competencia:
-            competencia,
-
-          tipo:
-            tipo,
-
-          descricao:
-            descricao,
-
-          valor:
-            valor,
-
-          vencimento:
-            vencimento
+          dados:
+            dados
         }
       );
 
 
     mostrarMensagem(
-      res.mensagem ||
-      "Lançamento salvo com sucesso."
+      resposta.mensagem ||
+      "Lançamento salvo com sucesso.",
+      "success"
     );
 
 
-    document
-      .getElementById(
-        "valor"
-      )
-      .value =
+    $("valor").value =
       "";
 
-
-    document
-      .getElementById(
-        "vencimento"
-      )
-      .value =
+    $("vencimento").value =
       "";
 
 
@@ -2257,7 +2473,7 @@ async function gravar(){
 
     mostrarMensagem(
       e.message,
-      "erro"
+      "error"
     );
 
   }
@@ -2270,50 +2486,37 @@ async function gravar(){
 }
 
 
-/* =====================================================
+/* =========================================================
    SALDO INICIAL
-===================================================== */
+========================================================= */
 
 function abrirSaldo(){
 
-  document
-    .getElementById(
-      "janelaSaldo"
-    )
+  $("janelaSaldo")
     .classList.add(
-      "aberto"
+      "show"
     );
 
-
-  document
-    .getElementById(
-      "novoSaldo"
-    )
-    .focus();
+  $("novoSaldo").focus();
 
 }
 
 
 function fecharSaldo(){
 
-  document
-    .getElementById(
-      "janelaSaldo"
-    )
+  $("janelaSaldo")
     .classList.remove(
-      "aberto"
+      "show"
     );
 
 }
 
 
-function fecharModalFora(
-  event
-){
+function fecharModalFora(event){
 
   if(
-    event.target.id ===
-    "janelaSaldo"
+    event.target ===
+    $("janelaSaldo")
   ){
 
     fecharSaldo();
@@ -2326,26 +2529,18 @@ function fecharModalFora(
 async function salvarNovoSaldo(){
 
   const competencia =
-    document
-      .getElementById(
-        "competencia"
-      )
-      .value;
+    $("competencia").value;
 
 
   const valor =
-    document
-      .getElementById(
-        "novoSaldo"
-      )
-      .value;
+    $("novoSaldo").value;
 
 
   if(!competencia){
 
     mostrarMensagem(
       "Selecione uma competência.",
-      "erro"
+      "error"
     );
 
     return;
@@ -2359,8 +2554,8 @@ async function salvarNovoSaldo(){
   ){
 
     mostrarMensagem(
-      "Informe um saldo válido.",
-      "erro"
+      "Informe um valor válido.",
+      "error"
     );
 
     return;
@@ -2370,38 +2565,37 @@ async function salvarNovoSaldo(){
 
   mostrarLoading(
     true,
-    "Salvando saldo inicial..."
+    "Salvando saldo..."
   );
 
 
   try{
 
-    await chamarAPI(
-      "salvarSaldoInicial",
-      {
-        competencia:
-          competencia,
+    const resposta =
+      await apiRequest(
+        "salvarSaldoInicial",
+        {
+          competencia:
+            competencia,
 
-        valor:
-          valor
-      }
-    );
-
-
-    fecharSaldo();
-
-
-    document
-      .getElementById(
-        "novoSaldo"
-      )
-      .value =
-      "";
+          valor:
+            valor
+        }
+      );
 
 
     mostrarMensagem(
-      "Saldo inicial salvo com sucesso."
+      resposta.mensagem ||
+      "Saldo inicial salvo com sucesso.",
+      "success"
     );
+
+
+    $("novoSaldo").value =
+      "";
+
+
+    fecharSaldo();
 
 
     await carregar();
@@ -2411,7 +2605,7 @@ async function salvarNovoSaldo(){
 
     mostrarMensagem(
       e.message,
-      "erro"
+      "error"
     );
 
   }
@@ -2424,25 +2618,21 @@ async function salvarNovoSaldo(){
 }
 
 
-/* =====================================================
+/* =========================================================
    FECHAR COMPETÊNCIA
-===================================================== */
+========================================================= */
 
 async function fecharMes(){
 
-  const comp =
-    document
-      .getElementById(
-        "competencia"
-      )
-      .value;
+  const competencia =
+    $("competencia").value;
 
 
-  if(!comp){
+  if(!competencia){
 
     mostrarMensagem(
       "Selecione uma competência.",
-      "erro"
+      "error"
     );
 
     return;
@@ -2450,16 +2640,19 @@ async function fecharMes(){
   }
 
 
-  const confirmado =
+  const confirmar =
     confirm(
       "Confirma o fechamento da competência " +
-      comp +
-      "?"
+      competencia +
+      "?\n\n" +
+      "O saldo final será utilizado como saldo inicial da próxima competência."
     );
 
 
-  if(!confirmado){
+  if(!confirmar){
+
     return;
+
   }
 
 
@@ -2471,18 +2664,20 @@ async function fecharMes(){
 
   try{
 
-    const res =
-      await chamarAPI(
+    const resposta =
+      await apiRequest(
         "fecharMes",
         {
           competencia:
-            comp
+            competencia
         }
       );
 
 
     mostrarMensagem(
-      res
+      resposta.mensagem ||
+      resposta,
+      "success"
     );
 
 
@@ -2493,7 +2688,7 @@ async function fecharMes(){
 
     mostrarMensagem(
       e.message,
-      "erro"
+      "error"
     );
 
   }
@@ -2506,67 +2701,21 @@ async function fecharMes(){
 }
 
 
-/* =====================================================
-   ABRIR PÁGINAS DO APPS SCRIPT
-===================================================== */
-
-function abrirPagina(
-  pagina,
-  parametros = {}
-){
-
-  const url =
-    new URL(
-      URL_SISTEMA
-    );
-
-
-  url.searchParams.set(
-    "page",
-    pagina
-  );
-
-
-  Object.keys(parametros)
-    .forEach(
-      function(chave){
-
-        url.searchParams.set(
-          chave,
-          parametros[chave]
-        );
-
-      }
-    );
-
-
-  window.open(
-    url.toString(),
-    "_blank"
-  );
-
-}
-
-
-/* =====================================================
-   LANÇAMENTOS
-===================================================== */
+/* =========================================================
+   ABRIR LANÇAMENTOS
+========================================================= */
 
 function abrirLancamentos(){
 
   const competencia =
-    document
-      .getElementById(
-        "competencia"
-      )
-      .value;
+    $("competencia").value;
 
 
   if(!competencia){
 
     mostrarMensagem(
       "Selecione uma competência.",
-      "erro"
+      "error"
     );
 
     return;
@@ -2585,9 +2734,9 @@ function abrirLancamentos(){
 }
 
 
-/* =====================================================
+/* =========================================================
    BAIXAS PENDENTES
-===================================================== */
+========================================================= */
 
 function abrirBaixasPendentes(){
 
@@ -2598,25 +2747,21 @@ function abrirBaixasPendentes(){
 }
 
 
-/* =====================================================
+/* =========================================================
    RELATÓRIO
-===================================================== */
+========================================================= */
 
 function gerarRelatorio(){
 
   const competencia =
-    document
-      .getElementById(
-        "competencia"
-      )
-      .value;
+    $("competencia").value;
 
 
   if(!competencia){
 
     mostrarMensagem(
       "Selecione uma competência.",
-      "erro"
+      "error"
     );
 
     return;
@@ -2635,25 +2780,21 @@ function gerarRelatorio(){
 }
 
 
-/* =====================================================
+/* =========================================================
    GRÁFICOS
-===================================================== */
+========================================================= */
 
 function abrirGraficos(){
 
   const competencia =
-    document
-      .getElementById(
-        "competencia"
-      )
-      .value;
+    $("competencia").value;
 
 
   if(!competencia){
 
     mostrarMensagem(
       "Selecione uma competência.",
-      "erro"
+      "error"
     );
 
     return;
@@ -2679,9 +2820,9 @@ function abrirGraficos(){
 }
 
 
-/* =====================================================
+/* =========================================================
    ATENDIMENTO
-===================================================== */
+========================================================= */
 
 function abrirAtendimento(){
 
@@ -2692,17 +2833,191 @@ function abrirAtendimento(){
 }
 
 
-/* =====================================================
-   TECLADO
-===================================================== */
+/* =========================================================
+   ABRIR PÁGINA DO APPS SCRIPT
+========================================================= */
+
+function abrirPagina(
+  page,
+  params={}
+){
+
+  const url =
+    new URL(
+      URL_API
+    );
+
+
+  url.searchParams.set(
+    "page",
+    page
+  );
+
+
+  Object.keys(params)
+    .forEach(function(chave){
+
+      url.searchParams.set(
+        chave,
+        params[chave]
+      );
+
+    });
+
+
+  window.open(
+    url.toString(),
+    "_blank"
+  );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+
+function mostrarMensagem(
+  texto,
+  tipo="success"
+){
+
+  const elemento =
+    $("mensagemSistema");
+
+
+  elemento.textContent =
+    texto;
+
+
+  elemento.className =
+    "toast show " +
+    tipo;
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      function(){
+
+        elemento.classList.remove(
+          "show"
+        );
+
+      },
+      4500
+    );
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+function mostrarLoading(
+  mostrar,
+  texto="Processando..."
+){
+
+  const elemento =
+    $("loading");
+
+
+  if(mostrar){
+
+    $("loadingText")
+      .textContent =
+      texto;
+
+    elemento.classList.add(
+      "show"
+    );
+
+  }
+  else{
+
+    elemento.classList.remove(
+      "show"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   VALIDAÇÃO LOCAL
+========================================================= */
+
+function validarCompetenciaLocal(
+  competencia
+){
+
+  if(
+    !/^\d{4}-\d{2}$/.test(
+      competencia
+    )
+  ){
+
+    throw new Error(
+      "Competência inválida."
+    );
+
+  }
+
+
+  const ano =
+    Number(
+      competencia.substring(
+        0,
+        4
+      )
+    );
+
+
+  const mes =
+    Number(
+      competencia.substring(
+        5,
+        7
+      )
+    );
+
+
+  if(
+    ano < 1900 ||
+    ano > 3000 ||
+    mes < 1 ||
+    mes > 12
+  ){
+
+    throw new Error(
+      "Competência inválida."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   TECLA ESC FECHA MODAL
+========================================================= */
 
 document.addEventListener(
   "keydown",
   function(event){
 
     if(
-      event.key ===
-      "Escape"
+      event.key === "Escape"
     ){
 
       fecharSaldo();
@@ -2712,7 +3027,30 @@ document.addEventListener(
   }
 );
 
+
+/* =========================================================
+   ENTER NO SALDO
+========================================================= */
+
+$("novoSaldo")
+  .addEventListener(
+    "keydown",
+    function(event){
+
+      if(
+        event.key === "Enter"
+      ){
+
+        salvarNovoSaldo();
+
+      }
+
+    }
+  );
+
+
 </script>
+
 
 </body>
 
