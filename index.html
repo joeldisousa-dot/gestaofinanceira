@@ -17,7 +17,6 @@
 
 <title>Controle Financeiro</title>
 
-
 <style>
 
 /* =========================================================
@@ -29,7 +28,6 @@
   margin:0;
   padding:0;
 }
-
 
 :root{
 
@@ -43,6 +41,7 @@
   --danger-dark:#b91c1c;
 
   --warning:#ea580c;
+  --warning-dark:#c2410c;
 
   --purple:#7c3aed;
 
@@ -53,9 +52,7 @@
   --muted:#64748b;
 
   --border:#e2e8f0;
-
   --background:#f1f5f9;
-
   --white:#ffffff;
 
   --shadow:
@@ -65,11 +62,9 @@
 
 }
 
-
 html{
   scroll-behavior:smooth;
 }
-
 
 body{
 
@@ -120,7 +115,6 @@ body{
 
 }
 
-
 .topbar-inner{
 
   max-width:1250px;
@@ -139,7 +133,6 @@ body{
 
 }
 
-
 .logo{
 
   display:flex;
@@ -149,7 +142,6 @@ body{
   gap:12px;
 
 }
-
 
 .logo-icon{
 
@@ -174,7 +166,6 @@ body{
 
 }
 
-
 .logo-text h1{
 
   font-size:18px;
@@ -182,7 +173,6 @@ body{
   font-weight:800;
 
 }
-
 
 .logo-text span{
 
@@ -195,7 +185,6 @@ body{
   font-size:12px;
 
 }
-
 
 .status{
 
@@ -210,7 +199,6 @@ body{
   font-size:13px;
 
 }
-
 
 .status-dot{
 
@@ -273,7 +261,6 @@ body{
 
 }
 
-
 .hero::after{
 
   content:"";
@@ -293,7 +280,6 @@ body{
 
 }
 
-
 .hero h2{
 
   position:relative;
@@ -305,7 +291,6 @@ body{
   margin-bottom:8px;
 
 }
-
 
 .hero p{
 
@@ -343,7 +328,6 @@ body{
 
 }
 
-
 .section-header{
 
   padding:20px 24px;
@@ -361,7 +345,6 @@ body{
 
 }
 
-
 .section-title{
 
   display:flex;
@@ -371,7 +354,6 @@ body{
   gap:11px;
 
 }
-
 
 .section-icon{
 
@@ -393,13 +375,11 @@ body{
 
 }
 
-
 .section-title h3{
 
   font-size:18px;
 
 }
-
 
 .section-title p{
 
@@ -410,7 +390,6 @@ body{
   font-size:12px;
 
 }
-
 
 .section-body{
 
@@ -437,7 +416,6 @@ body{
 
 }
 
-
 .card{
 
   position:relative;
@@ -459,7 +437,6 @@ body{
 
 }
 
-
 .card:hover{
 
   transform:
@@ -469,7 +446,6 @@ body{
     0 12px 25px rgba(15,23,42,.08);
 
 }
-
 
 .card::after{
 
@@ -490,7 +466,6 @@ body{
 
 }
 
-
 .card-top{
 
   display:flex;
@@ -503,7 +478,6 @@ body{
 
 }
 
-
 .card-label{
 
   color:var(--muted);
@@ -513,7 +487,6 @@ body{
   font-weight:700;
 
 }
-
 
 .card-icon{
 
@@ -531,7 +504,6 @@ body{
 
 }
 
-
 .card-value{
 
   margin-top:12px;
@@ -544,6 +516,26 @@ body{
 
   white-space:nowrap;
 
+}
+
+.card.blue .card-icon{
+  background:#eff6ff;
+}
+
+.card.green .card-icon{
+  background:#ecfdf5;
+}
+
+.card.red .card-icon{
+  background:#fef2f2;
+}
+
+.card.orange .card-icon{
+  background:#fff7ed;
+}
+
+.card.purple .card-icon{
+  background:#f5f3ff;
 }
 
 
@@ -562,7 +554,6 @@ body{
 
 }
 
-
 .field{
 
   display:flex;
@@ -573,14 +564,12 @@ body{
 
 }
 
-
 .field.full{
 
   grid-column:
     1 / -1;
 
 }
-
 
 .field label{
 
@@ -591,7 +580,6 @@ body{
   color:#334155;
 
 }
-
 
 .field input,
 .field select{
@@ -616,8 +604,11 @@ body{
 
   outline:none;
 
-}
+  transition:
+    border .2s,
+    box-shadow .2s;
 
+}
 
 .field input:focus,
 .field select:focus{
@@ -628,6 +619,12 @@ body{
   box-shadow:
     0 0 0 4px
     rgba(37,99,235,.10);
+
+}
+
+.field input[readonly]{
+
+  background:#f8fafc;
 
 }
 
@@ -646,7 +643,6 @@ body{
 
 }
 
-
 button{
 
   border:none;
@@ -656,7 +652,6 @@ button{
   font-family:inherit;
 
 }
-
 
 .btn{
 
@@ -681,18 +676,26 @@ button{
 
   transition:
     transform .18s,
-    box-shadow .18s;
+    box-shadow .18s,
+    filter .18s;
 
 }
-
 
 .btn:hover{
 
   transform:
     translateY(-2px);
 
+  filter:brightness(1.04);
+
 }
 
+.btn:active{
+
+  transform:
+    translateY(0);
+
+}
 
 .btn-primary{
 
@@ -701,12 +704,15 @@ button{
   background:
     linear-gradient(
       135deg,
-      #2563eb,
+      var(--primary),
       #3b82f6
     );
 
-}
+  box-shadow:
+    0 6px 15px
+    rgba(37,99,235,.22);
 
+}
 
 .btn-success{
 
@@ -715,12 +721,15 @@ button{
   background:
     linear-gradient(
       135deg,
-      #047857,
+      var(--success-dark),
       #10b981
     );
 
-}
+  box-shadow:
+    0 6px 15px
+    rgba(5,150,105,.20);
 
+}
 
 .btn-purple{
 
@@ -735,7 +744,6 @@ button{
 
 }
 
-
 .btn-orange{
 
   color:white;
@@ -749,6 +757,18 @@ button{
 
 }
 
+.btn-dark{
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #334155
+    );
+
+}
 
 .btn-danger{
 
@@ -760,6 +780,17 @@ button{
       #b91c1c,
       #ef4444
     );
+
+}
+
+.btn-secondary{
+
+  color:#334155;
+
+  background:#f1f5f9;
+
+  border:
+    1px solid #e2e8f0;
 
 }
 
@@ -779,7 +810,6 @@ button{
   flex-wrap:wrap;
 
 }
-
 
 .competencia-box .field{
 
@@ -806,6 +836,312 @@ button{
 
 
 /* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:5000;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  background:
+    rgba(15,23,42,.58);
+
+  backdrop-filter:
+    blur(5px);
+
+}
+
+.modal.show{
+
+  display:flex;
+
+}
+
+.modal-box{
+
+  width:
+    min(
+      100%,
+      430px
+    );
+
+  background:white;
+
+  border-radius:20px;
+
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.25);
+
+  overflow:hidden;
+
+  animation:
+    modalIn .2s ease;
+
+}
+
+@keyframes modalIn{
+
+  from{
+
+    opacity:0;
+
+    transform:
+      translateY(15px)
+      scale(.98);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+  }
+
+}
+
+.modal-header{
+
+  padding:20px 22px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  border-bottom:
+    1px solid var(--border);
+
+}
+
+.modal-header h3{
+
+  font-size:18px;
+
+}
+
+.close{
+
+  width:35px;
+  height:35px;
+
+  border-radius:9px;
+
+  background:#f1f5f9;
+
+  color:#475569;
+
+  font-size:20px;
+
+}
+
+.modal-body{
+
+  padding:22px;
+
+}
+
+.modal-footer{
+
+  padding:16px 22px;
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:10px;
+
+  border-top:
+    1px solid var(--border);
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+
+  position:fixed;
+
+  right:20px;
+
+  top:85px;
+
+  z-index:9000;
+
+  width:
+    min(
+      calc(100% - 40px),
+      380px
+    );
+
+  padding:15px 18px;
+
+  border-radius:12px;
+
+  color:white;
+
+  font-size:13px;
+
+  font-weight:700;
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.18);
+
+  display:none;
+
+}
+
+.toast.show{
+
+  display:block;
+
+}
+
+.toast.success{
+
+  background:
+    linear-gradient(
+      135deg,
+      #047857,
+      #10b981
+    );
+
+}
+
+.toast.error{
+
+  background:
+    linear-gradient(
+      135deg,
+      #b91c1c,
+      #ef4444
+    );
+
+}
+
+.toast.warning{
+
+  background:
+    linear-gradient(
+      135deg,
+      #c2410c,
+      #f97316
+    );
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:10000;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+    rgba(255,255,255,.72);
+
+  backdrop-filter:
+    blur(3px);
+
+}
+
+.loading.show{
+
+  display:flex;
+
+}
+
+.loading-box{
+
+  min-width:190px;
+
+  padding:25px;
+
+  background:white;
+
+  border-radius:18px;
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.15);
+
+  text-align:center;
+
+}
+
+.spinner{
+
+  width:42px;
+  height:42px;
+
+  margin:
+    0 auto 14px;
+
+  border:
+    4px solid #e2e8f0;
+
+  border-top-color:
+    var(--primary);
+
+  border-radius:50%;
+
+  animation:
+    spin .8s linear infinite;
+
+}
+
+@keyframes spin{
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
+.loading-box span{
+
+  color:var(--muted);
+
+  font-size:13px;
+
+  font-weight:700;
+
+}
+
+
+/* =========================================================
    FOOTER
 ========================================================= */
 
@@ -818,50 +1154,6 @@ button{
   font-size:12px;
 
   padding:25px;
-
-}
-
-
-/* =========================================================
-   MENSAGEM
-========================================================= */
-
-.mensagem{
-
-  display:none;
-
-  margin-top:20px;
-
-  padding:15px;
-
-  border-radius:10px;
-
-  font-weight:bold;
-
-}
-
-
-.mensagem.show{
-
-  display:block;
-
-}
-
-
-.mensagem.error{
-
-  color:#991b1b;
-
-  background:#fee2e2;
-
-}
-
-
-.mensagem.success{
-
-  color:#065f46;
-
-  background:#d1fae5;
 
 }
 
@@ -880,7 +1172,6 @@ button{
   }
 
 }
-
 
 @media(max-width:700px){
 
@@ -963,12 +1254,17 @@ button{
 
 }
 
-
 @media(max-width:430px){
 
   .cards{
 
     grid-template-columns:1fr;
+
+  }
+
+  .card-value{
+
+    font-size:19px;
 
   }
 
@@ -1015,13 +1311,9 @@ select:focus-visible{
 
       <div class="logo-text">
 
-        <h1>
-          Controle Financeiro
-        </h1>
+        <h1>Controle Financeiro</h1>
 
-        <span>
-          Gestão financeira inteligente
-        </span>
+        <span>Gestão financeira inteligente</span>
 
       </div>
 
@@ -1049,413 +1341,519 @@ select:focus-visible{
 <main class="container">
 
 
-<section class="hero">
+  <section class="hero">
 
-  <h2>
-    Painel Financeiro
-  </h2>
+    <h2>
+      Painel Financeiro
+    </h2>
 
-  <p>
-    Acompanhe seu saldo, contas a receber,
-    contas a pagar e movimentações financeiras
-    em um único lugar.
-  </p>
+    <p>
+      Acompanhe seu saldo, contas a receber,
+      contas a pagar e movimentações financeiras
+      em um único lugar.
+    </p>
 
-</section>
+  </section>
 
 
 
-<!-- =====================================================
-     RESUMO
-===================================================== -->
+  <!-- ===================================================
+       RESUMO
+  ==================================================== -->
 
-<section class="section">
+  <section class="section">
 
-  <div class="section-header">
+    <div class="section-header">
 
-    <div class="section-title">
+      <div class="section-title">
 
-      <div class="section-icon">
-        📊
-      </div>
+        <div class="section-icon">
+          📊
+        </div>
 
-      <div>
+        <div>
 
-        <h3>
-          Resumo financeiro
-        </h3>
+          <h3>Resumo financeiro</h3>
 
-        <p>
-          Visão geral da competência selecionada
-        </p>
+          <p id="textoCompetencia">
+            Visão geral da competência selecionada
+          </p>
+
+        </div>
 
       </div>
 
     </div>
 
-  </div>
+
+    <div class="section-body">
+
+      <div class="cards">
 
 
-  <div class="section-body">
+        <div class="card blue">
 
-    <div class="cards">
+          <div class="card-top">
 
+            <span class="card-label">
+              SALDO INICIAL
+            </span>
 
-      <div class="card">
+            <span class="card-icon">
+              💰
+            </span>
 
-        <div class="card-top">
+          </div>
 
-          <span class="card-label">
-            SALDO INICIAL
-          </span>
-
-          <span class="card-icon">
-            💰
-          </span>
-
-        </div>
-
-        <div class="card-value">
-          R$ 0,00
-        </div>
-
-      </div>
-
-
-
-      <div class="card">
-
-        <div class="card-top">
-
-          <span class="card-label">
-            A RECEBER
-          </span>
-
-          <span class="card-icon">
-            📥
-          </span>
+          <div
+            class="card-value"
+            id="saldoInicialCard"
+          >
+            R$ 0,00
+          </div>
 
         </div>
 
-        <div class="card-value">
-          R$ 0,00
-        </div>
-
-      </div>
 
 
+        <div class="card green">
 
-      <div class="card">
+          <div class="card-top">
 
-        <div class="card-top">
+            <span class="card-label">
+              A RECEBER
+            </span>
 
-          <span class="card-label">
-            A PAGAR
-          </span>
+            <span class="card-icon">
+              📥
+            </span>
 
-          <span class="card-icon">
-            📤
-          </span>
+          </div>
 
-        </div>
-
-        <div class="card-value">
-          R$ 0,00
-        </div>
-
-      </div>
-
-
-
-      <div class="card">
-
-        <div class="card-top">
-
-          <span class="card-label">
-            VALOR PAGO
-          </span>
-
-          <span class="card-icon">
-            💸
-          </span>
+          <div
+            class="card-value"
+            id="totalReceber"
+          >
+            R$ 0,00
+          </div>
 
         </div>
 
-        <div class="card-value">
-          R$ 0,00
-        </div>
-
-      </div>
 
 
+        <div class="card red">
 
-      <div class="card">
+          <div class="card-top">
 
-        <div class="card-top">
+            <span class="card-label">
+              A PAGAR
+            </span>
 
-          <span class="card-label">
-            VALOR RECEBIDO
-          </span>
+            <span class="card-icon">
+              📤
+            </span>
 
-          <span class="card-icon">
-            💵
-          </span>
+          </div>
 
-        </div>
-
-        <div class="card-value">
-          R$ 0,00
-        </div>
-
-      </div>
-
-
-
-      <div class="card">
-
-        <div class="card-top">
-
-          <span class="card-label">
-            SALDO BANCO
-          </span>
-
-          <span class="card-icon">
-            🏦
-          </span>
+          <div
+            class="card-value"
+            id="totalPagar"
+          >
+            R$ 0,00
+          </div>
 
         </div>
 
-        <div class="card-value">
-          R$ 0,00
+
+
+        <div class="card orange">
+
+          <div class="card-top">
+
+            <span class="card-label">
+              VALOR PAGO
+            </span>
+
+            <span class="card-icon">
+              💸
+            </span>
+
+          </div>
+
+          <div
+            class="card-value"
+            id="valorPago"
+          >
+            R$ 0,00
+          </div>
+
         </div>
 
-      </div>
 
 
-    </div>
+        <div class="card green">
 
-  </div>
+          <div class="card-top">
 
-</section>
+            <span class="card-label">
+              VALOR RECEBIDO
+            </span>
+
+            <span class="card-icon">
+              💵
+            </span>
+
+          </div>
+
+          <div
+            class="card-value"
+            id="valorRecebido"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
 
 
 
-<!-- =====================================================
-     CONTROLE MENSAL
-===================================================== -->
+        <div class="card purple">
 
-<section class="section">
+          <div class="card-top">
 
-  <div class="section-header">
+            <span class="card-label">
+              SALDO BANCO
+            </span>
 
-    <div class="section-title">
+            <span class="card-icon">
+              🏦
+            </span>
 
-      <div class="section-icon">
-        ⚙️
-      </div>
+          </div>
 
-      <div>
+          <div
+            class="card-value"
+            id="saldoBanco"
+          >
+            R$ 0,00
+          </div>
 
-        <h3>
-          Controle mensal
-        </h3>
+        </div>
 
-        <p>
-          Selecione a competência e acesse as ferramentas
-        </p>
 
       </div>
 
     </div>
 
-  </div>
+  </section>
 
 
-  <div class="section-body">
+
+  <!-- ===================================================
+       CONTROLE MENSAL
+  ==================================================== -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <div class="section-title">
+
+        <div class="section-icon">
+          ⚙️
+        </div>
+
+        <div>
+
+          <h3>Controle mensal</h3>
+
+          <p>
+            Selecione a competência e acesse as ferramentas
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
 
 
-    <div class="competencia-box">
+    <div class="section-body">
 
 
-      <div class="field">
+      <div class="competencia-box">
 
-        <label for="competencia">
-          📅 Competência
-        </label>
 
-        <input
-          id="competencia"
-          type="month"
+        <div class="field">
+
+          <label for="competencia">
+            📅 Competência
+          </label>
+
+          <input
+            id="competencia"
+            type="month"
+          >
+
+        </div>
+
+
+        <button
+          class="btn btn-success"
+          onclick="abrirSaldo()"
         >
+          💰 Informar Saldo Inicial
+        </button>
+
 
       </div>
 
 
-    </div>
+      <div class="divider"></div>
 
 
-    <div class="divider"></div>
+      <div class="actions">
 
 
-    <div class="actions">
+        <button
+          class="btn btn-purple"
+          onclick="fecharMes()"
+        >
+          🔒 Fechar Competência
+        </button>
 
 
-      <button
-        class="btn btn-success"
-        onclick="abrirSaldo()"
-      >
-        💰 Informar Saldo Inicial
-      </button>
+        <button
+          class="btn btn-orange"
+          onclick="gerarRelatorio()"
+        >
+          📄 Relatório
+        </button>
 
 
-      <button
-        class="btn btn-purple"
-        onclick="fecharMes()"
-      >
-        🔒 Fechar Competência
-      </button>
+        <button
+          class="btn btn-orange"
+          onclick="abrirLancamentos()"
+        >
+          📋 Lançamentos
+        </button>
 
 
-      <button
-        class="btn btn-orange"
-        onclick="abrirRelatorio()"
-      >
-        📄 Relatório
-      </button>
+        <button
+          class="btn btn-orange"
+          onclick="abrirGraficos()"
+        >
+          📊 Gráficos
+        </button>
 
 
-      <button
-        class="btn btn-orange"
-        onclick="abrirLancamentos()"
-      >
-        📋 Lançamentos
-      </button>
+        <button
+          class="btn btn-orange"
+          onclick="abrirAtendimento()"
+        >
+          📖 Atendimento
+        </button>
 
 
-      <button
-        class="btn btn-orange"
-        onclick="abrirGraficos()"
-      >
-        📊 Gráficos
-      </button>
+        <button
+          class="btn btn-danger"
+          onclick="abrirBaixasPendentes()"
+        >
+          ⚠️ Baixas Pendentes
+        </button>
 
 
-      <button
-        class="btn btn-orange"
-        onclick="abrirAtendimento()"
-      >
-        📖 Atendimento
-      </button>
-
-
-      <button
-        class="btn btn-danger"
-        onclick="abrirBaixasPendentes()"
-      >
-        ⚠️ Baixas Pendentes
-      </button>
-
+      </div>
 
     </div>
 
+  </section>
 
-    <div
-      id="mensagem"
-      class="mensagem"
-    ></div>
 
+
+  <!-- ===================================================
+       NOVO LANÇAMENTO
+  ==================================================== -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <div class="section-title">
+
+        <div class="section-icon">
+          ➕
+        </div>
+
+        <div>
+
+          <h3>Novo lançamento</h3>
+
+          <p>
+            Registre uma nova conta a receber ou pagar
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="section-body">
+
+
+      <div class="form-grid">
+
+
+        <div class="field">
+
+          <label for="tipo">
+            📂 Tipo
+          </label>
+
+          <select id="tipo">
+
+            <option value="Contas a Receber">
+              Contas a Receber
+            </option>
+
+            <option value="Contas a Pagar">
+              Contas a Pagar
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+        <div class="field">
+
+          <label for="descricao">
+            📝 Descrição
+          </label>
+
+          <select id="descricao">
+
+            <option value="">
+              Carregando...
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+        <div class="field">
+
+          <label for="valor">
+            💵 Valor
+          </label>
+
+          <input
+            id="valor"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="0,00"
+          >
+
+        </div>
+
+
+
+        <div class="field">
+
+          <label for="vencimento">
+            📆 Vencimento
+          </label>
+
+          <input
+            id="vencimento"
+            type="date"
+          >
+
+        </div>
+
+
+
+        <div class="field full">
+
+          <button
+            class="btn btn-primary"
+            onclick="gravar()"
+          >
+            💾 Gravar Lançamento
+          </button>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <div class="footer">
+
+    Controle Financeiro • Sistema integrado ao Google Sheets
 
   </div>
 
-</section>
+
+</main>
 
 
 
 <!-- =====================================================
-     NOVO LANÇAMENTO
+     MODAL SALDO
 ===================================================== -->
 
-<section class="section">
+<div
+  class="modal"
+  id="janelaSaldo"
+  onclick="fecharModalFora(event)"
+>
 
-  <div class="section-header">
 
-    <div class="section-title">
+  <div
+    class="modal-box"
+    onclick="event.stopPropagation()"
+  >
 
-      <div class="section-icon">
-        ➕
-      </div>
 
-      <div>
+    <div class="modal-header">
 
-        <h3>
-          Novo lançamento
-        </h3>
+      <h3>
+        💰 Saldo Inicial
+      </h3>
 
-        <p>
-          Registre uma nova conta a receber ou pagar
-        </p>
-
-      </div>
+      <button
+        class="close"
+        onclick="fecharSaldo()"
+      >
+        ×
+      </button>
 
     </div>
 
-  </div>
 
-
-  <div class="section-body">
-
-
-    <div class="form-grid">
+    <div class="modal-body">
 
 
       <div class="field">
 
-        <label for="tipo">
-          📂 Tipo
-        </label>
-
-        <select id="tipo">
-
-          <option>
-            Contas a Receber
-          </option>
-
-          <option>
-            Contas a Pagar
-          </option>
-
-        </select>
-
-      </div>
-
-
-
-      <div class="field">
-
-        <label for="descricao">
-          📝 Descrição
+        <label for="novoSaldo">
+          Valor inicial
         </label>
 
         <input
-          id="descricao"
-          type="text"
-          placeholder="Descrição do lançamento"
-        >
-
-      </div>
-
-
-
-      <div class="field">
-
-        <label for="valor">
-          💵 Valor
-        </label>
-
-        <input
-          id="valor"
+          id="novoSaldo"
           type="number"
-          min="0"
           step="0.01"
           placeholder="0,00"
         >
@@ -1463,60 +1861,84 @@ select:focus-visible{
       </div>
 
 
-
-      <div class="field">
-
-        <label for="vencimento">
-          📆 Vencimento
-        </label>
-
-        <input
-          id="vencimento"
-          type="date"
-        >
-
-      </div>
+    </div>
 
 
+    <div class="modal-footer">
 
-      <div class="field full">
+      <button
+        class="btn btn-secondary"
+        onclick="fecharSaldo()"
+      >
+        Cancelar
+      </button>
 
-        <button
-          class="btn btn-primary"
-          onclick="gravar()"
-        >
-          💾 Gravar Lançamento
-        </button>
-
-      </div>
-
+      <button
+        class="btn btn-success"
+        onclick="salvarNovoSaldo()"
+      >
+        Salvar
+      </button>
 
     </div>
 
+
   </div>
-
-</section>
-
-
-
-<div class="footer">
-
-  Controle Financeiro • GitHub Pages
 
 </div>
 
 
-</main>
+
+<div
+  id="mensagemSistema"
+  class="toast"
+></div>
+
+
+
+<div
+  id="loading"
+  class="loading"
+>
+
+  <div class="loading-box">
+
+    <div class="spinner"></div>
+
+    <span id="loadingText">
+      Processando...
+    </span>
+
+  </div>
+
+</div>
 
 
 
 <script>
 
 /* =========================================================
-   CAMINHO BASE
+   CONFIGURAÇÃO
 ========================================================= */
 
-const BASE_URL = "./";
+const URL_API =
+  "https://script.google.com/macros/s/AKfycbxJzdCPkPxk2N4FhnoUflb-iWTyiLLn1XmSJDcUwkKsapI0qv-6DBpKWWBLuoHBqn8Y/exec";
+
+
+/*
+   URL DO GITHUB PAGES
+*/
+
+const URL_GITHUB =
+  "https://joeldisousa-dot.github.io/gestaofinanceira/";
+
+
+/* =========================================================
+   ATALHO
+========================================================= */
+
+const $ = id =>
+  document.getElementById(id);
 
 
 /* =========================================================
@@ -1525,88 +1947,856 @@ const BASE_URL = "./";
 
 document.addEventListener(
   "DOMContentLoaded",
-  function(){
+  iniciar
+);
+
+
+async function iniciar(){
+
+  const parametros =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  let competencia =
+    parametros.get(
+      "competencia"
+    );
+
+
+  /*
+     Se a URL não possuir competência,
+     usa o mês atual.
+  */
+
+  if(
+    !competencia ||
+    !/^\d{4}-\d{2}$/.test(
+      competencia
+    )
+  ){
 
     const hoje =
       new Date();
 
-    const competencia =
+    competencia =
       hoje.getFullYear()
-      + "-"
+      +
+      "-"
       +
       String(
-        hoje.getMonth() + 1
-      ).padStart(2,"0");
-
-    document
-      .getElementById("competencia")
-      .value =
-      competencia;
+        hoje.getMonth()+1
+      ).padStart(
+        2,
+        "0"
+      );
 
   }
-);
+
+
+  $("competencia").value =
+    competencia;
+
+
+  atualizarTextoCompetencia();
+
+
+  try{
+
+    mostrarLoading(
+      true,
+      "Conectando ao sistema..."
+    );
+
+
+    await carregarDescricoes();
+
+    await carregar();
+
+  }
+  catch(e){
+
+    console.error(e);
+
+    mostrarMensagem(
+      e.message ||
+      "Não foi possível conectar ao servidor.",
+      "error"
+    );
+
+  }
+  finally{
+
+    mostrarLoading(false);
+
+  }
+
+}
+
+
+/* =========================================================
+   ATUALIZAR TEXTO DA COMPETÊNCIA
+========================================================= */
+
+function atualizarTextoCompetencia(){
+
+  const competencia =
+    $("competencia").value;
+
+
+  if(!competencia){
+
+    return;
+
+  }
+
+
+  const partes =
+    competencia.split("-");
+
+
+  const ano =
+    Number(partes[0]);
+
+
+  const mes =
+    Number(partes[1]);
+
+
+  const nomes = [
+
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro"
+
+  ];
+
+
+  if(
+    mes >= 1 &&
+    mes <= 12
+  ){
+
+    $("textoCompetencia").textContent =
+      "Resumo financeiro de " +
+      nomes[mes-1] +
+      " de " +
+      ano;
+
+  }
+
+}
+
+
+/* =========================================================
+   API
+========================================================= */
+
+async function apiRequest(
+  action,
+  params={}
+){
+
+  const url =
+    new URL(URL_API);
+
+
+  url.searchParams.set(
+    "action",
+    action
+  );
+
+
+  Object.keys(params)
+    .forEach(function(chave){
+
+      const valor =
+        params[chave];
+
+
+      if(
+        valor !== undefined &&
+        valor !== null
+      ){
+
+        /*
+          IMPORTANTE:
+          objetos são enviados como JSON.
+        */
+
+        url.searchParams.set(
+
+          chave,
+
+          typeof valor === "object"
+            ? JSON.stringify(valor)
+            : String(valor)
+
+        );
+
+      }
+
+    });
+
+
+  console.log(
+    "API:",
+    url.toString()
+  );
+
+
+  let resposta;
+
+
+  try{
+
+    resposta =
+      await fetch(
+        url.toString(),
+        {
+          method:"GET",
+          redirect:"follow",
+          cache:"no-store"
+        }
+      );
+
+  }
+  catch(e){
+
+    console.error(e);
+
+    throw new Error(
+      "Falha ao conectar ao Google Apps Script."
+    );
+
+  }
+
+
+  if(!resposta.ok){
+
+    throw new Error(
+      "Servidor retornou HTTP " +
+      resposta.status
+    );
+
+  }
+
+
+  const texto =
+    await resposta.text();
+
+
+  console.log(
+    "Resposta:",
+    texto
+  );
+
+
+  let dados;
+
+
+  try{
+
+    dados =
+      JSON.parse(texto);
+
+  }
+  catch(e){
+
+    throw new Error(
+      "O Google Apps Script não retornou JSON válido."
+    );
+
+  }
+
+
+  /*
+     Tratamento de erros.
+  */
+
+  if(
+    dados &&
+    (
+      dados.sucesso === false ||
+      dados.success === false ||
+      dados.erro
+    )
+  ){
+
+    throw new Error(
+
+      dados.erro ||
+      dados.mensagem ||
+      dados.message ||
+      "Erro retornado pelo servidor."
+
+    );
+
+  }
+
+
+  return dados;
+
+}
+
+
+/* =========================================================
+   EXTRAIR VALOR DE RESPOSTA
+========================================================= */
+
+function obterCampo(
+  objeto,
+  nomes,
+  padrao=0
+){
+
+  if(
+    objeto === null ||
+    objeto === undefined
+  ){
+
+    return padrao;
+
+  }
+
+
+  for(
+    let i=0;
+    i<nomes.length;
+    i++
+  ){
+
+    const nome =
+      nomes[i];
+
+
+    if(
+      objeto[nome] !== undefined &&
+      objeto[nome] !== null
+    ){
+
+      return objeto[nome];
+
+    }
+
+  }
+
+
+  return padrao;
+
+}
+
+
+/* =========================================================
+   CARREGAR RESUMO
+========================================================= */
+
+async function carregar(){
+
+  const competencia =
+    $("competencia").value;
+
+
+  if(!competencia){
+
+    return;
+
+  }
+
+
+  validarCompetenciaLocal(
+    competencia
+  );
+
+
+  atualizarTextoCompetencia();
+
+
+  mostrarLoading(
+    true,
+    "Carregando resumo..."
+  );
+
+
+  try{
+
+    const resposta =
+      await apiRequest(
+        "obterResumo",
+        {
+          competencia:
+            competencia
+        }
+      );
+
+
+    console.log(
+      "Resumo recebido:",
+      resposta
+    );
+
+
+    /*
+       Alguns Apps Script retornam:
+
+       {
+         saldoInicial: 1000,
+         receber: 2000,
+         pagar: 500
+       }
+
+       Outros retornam:
+
+       {
+         sucesso:true,
+         dados:{
+           saldoInicial:1000
+         }
+       }
+
+       Aqui tratamos os dois formatos.
+    */
+
+    let r =
+      resposta;
+
+
+    if(
+      resposta &&
+      resposta.dados &&
+      typeof resposta.dados === "object"
+    ){
+
+      r =
+        resposta.dados;
+
+    }
+    else if(
+      resposta &&
+      resposta.resultado &&
+      typeof resposta.resultado === "object"
+    ){
+
+      r =
+        resposta.resultado;
+
+    }
+
+
+    const saldoInicial =
+      obterCampo(
+        r,
+        [
+          "saldoInicial",
+          "saldo_inicial",
+          "saldoInicialCard",
+          "saldo"
+        ],
+        0
+      );
+
+
+    const receber =
+      obterCampo(
+        r,
+        [
+          "receber",
+          "totalReceber",
+          "aReceber",
+          "contasReceber"
+        ],
+        0
+      );
+
+
+    const pagar =
+      obterCampo(
+        r,
+        [
+          "pagar",
+          "totalPagar",
+          "aPagar",
+          "contasPagar"
+        ],
+        0
+      );
+
+
+    const valorPago =
+      obterCampo(
+        r,
+        [
+          "valorPago",
+          "pago",
+          "totalPago"
+        ],
+        0
+      );
+
+
+    const valorRecebido =
+      obterCampo(
+        r,
+        [
+          "valorRecebido",
+          "recebido",
+          "totalRecebido"
+        ],
+        0
+      );
+
+
+    let saldoBanco =
+      obterCampo(
+        r,
+        [
+          "saldoBanco",
+          "saldoFinal",
+          "saldo"
+        ],
+        null
+      );
+
+
+    /*
+       Se o Apps Script não enviar
+       saldoBanco, calcula:
+
+       saldo inicial
+       + recebido
+       - pago
+    */
+
+    if(
+      saldoBanco === null ||
+      saldoBanco === ""
+    ){
+
+      saldoBanco =
+        Number(saldoInicial || 0)
+        +
+        Number(valorRecebido || 0)
+        -
+        Number(valorPago || 0);
+
+    }
+
+
+    $("saldoInicialCard").textContent =
+      formatar(saldoInicial);
+
+
+    $("totalReceber").textContent =
+      formatar(receber);
+
+
+    $("totalPagar").textContent =
+      formatar(pagar);
+
+
+    $("valorPago").textContent =
+      formatar(valorPago);
+
+
+    $("valorRecebido").textContent =
+      formatar(valorRecebido);
+
+
+    $("saldoBanco").textContent =
+      formatar(saldoBanco);
+
+
+  }
+  catch(e){
+
+    console.error(
+      "Erro resumo:",
+      e
+    );
+
+
+    mostrarMensagem(
+      "Erro ao carregar o resumo: " +
+      e.message,
+      "error"
+    );
+
+  }
+  finally{
+
+    mostrarLoading(false);
+
+  }
+
+}
 
 
 /* =========================================================
    COMPETÊNCIA
 ========================================================= */
 
-function obterCompetencia(){
+$("competencia").addEventListener(
+  "change",
+  function(){
 
-  return document
-    .getElementById("competencia")
-    .value;
+    atualizarTextoCompetencia();
 
-}
+    carregar();
 
-
-function abrirPagina(arquivo, parametros = {}){
-
-  const url =
-    new URL(
-      arquivo,
-      window.location.href
-    );
+  }
+);
 
 
-  Object.keys(parametros).forEach(function(chave){
+/* =========================================================
+   MOEDA
+========================================================= */
 
-    if(
-      parametros[chave] !== undefined &&
-      parametros[chave] !== null &&
-      parametros[chave] !== ""
-    ){
+function formatar(valor){
 
-      url.searchParams.set(
-        chave,
-        parametros[chave]
-      );
+  let numero =
+    Number(valor);
 
+
+  if(
+    isNaN(numero)
+  ){
+
+    numero = 0;
+
+  }
+
+
+  return numero.toLocaleString(
+    "pt-BR",
+    {
+      style:"currency",
+      currency:"BRL"
     }
-
-  });
-
-
-  window.location.href =
-    url.href;
+  );
 
 }
 
 
 /* =========================================================
-   RELATÓRIO
+   DESCRIÇÕES
 ========================================================= */
 
-function abrirRelatorio(){
+async function carregarDescricoes(){
 
-  const competencia =
-    obterCompetencia();
+  const campo =
+    $("descricao");
 
 
-  if(!competencia){
+  campo.innerHTML =
+    "<option value=''>Carregando...</option>";
+
+
+  try{
+
+    const resposta =
+      await apiRequest(
+        "listarDescricoes"
+      );
+
+
+    console.log(
+      "Descrições:",
+      resposta
+    );
+
+
+    /*
+       Aceita:
+
+       ["Água","Luz"]
+
+       ou
+
+       {
+         dados:["Água","Luz"]
+       }
+
+       ou
+
+       {
+         resultado:["Água","Luz"]
+       }
+    */
+
+    let lista =
+      resposta;
+
+
+    if(
+      resposta &&
+      Array.isArray(
+        resposta.dados
+      )
+    ){
+
+      lista =
+        resposta.dados;
+
+    }
+    else if(
+      resposta &&
+      Array.isArray(
+        resposta.resultado
+      )
+    ){
+
+      lista =
+        resposta.resultado;
+
+    }
+
+
+    campo.innerHTML = "";
+
+
+    const primeira =
+      document.createElement(
+        "option"
+      );
+
+
+    primeira.value =
+      "";
+
+
+    primeira.textContent =
+      "Selecione";
+
+
+    campo.appendChild(
+      primeira
+    );
+
+
+    if(
+      !Array.isArray(lista) ||
+      lista.length === 0
+    ){
+
+      return;
+
+    }
+
+
+    lista.forEach(
+      function(item){
+
+        const option =
+          document.createElement(
+            "option"
+          );
+
+
+        /*
+           Caso a API retorne
+           objetos.
+        */
+
+        if(
+          typeof item === "object"
+        ){
+
+          const valor =
+            item.descricao ||
+            item.nome ||
+            item.valor ||
+            "";
+
+
+          option.value =
+            valor;
+
+
+          option.textContent =
+            valor;
+
+        }
+        else{
+
+          option.value =
+            item;
+
+
+          option.textContent =
+            item;
+
+        }
+
+
+        campo.appendChild(
+          option
+        );
+
+      }
+    );
+
+
+  }
+  catch(e){
+
+    console.error(e);
+
+
+    campo.innerHTML =
+      "<option value=''>Erro ao carregar</option>";
+
+
+    /*
+       Não interrompe a abertura
+       do sistema por causa das
+       descrições.
+    */
+
+  }
+
+}
+
+
+/* =========================================================
+   GRAVAR LANÇAMENTO
+========================================================= */
+
+async function gravar(){
+
+  const dados = {
+
+    competencia:
+      $("competencia").value,
+
+    tipo:
+      $("tipo").value,
+
+    descricao:
+      $("descricao").value,
+
+    valor:
+      $("valor").value,
+
+    vencimento:
+      $("vencimento").value
+
+  };
+
+
+  if(!dados.competencia){
 
     mostrarMensagem(
-      "Selecione a competência.",
+      "Selecione uma competência.",
       "error"
     );
 
@@ -1615,13 +2805,358 @@ function abrirRelatorio(){
   }
 
 
-  abrirPagina(
-    "Relatorio.html",
-    {
-      competencia:
-        competencia
-    }
+  if(!dados.descricao){
+
+    mostrarMensagem(
+      "Informe a descrição.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    dados.valor === "" ||
+    isNaN(Number(dados.valor)) ||
+    Number(dados.valor) < 0
+  ){
+
+    mostrarMensagem(
+      "Informe um valor válido.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  mostrarLoading(
+    true,
+    "Salvando lançamento..."
   );
+
+
+  try{
+
+    const resposta =
+      await apiRequest(
+        "salvarLancamento",
+        {
+          dados:
+            dados
+        }
+      );
+
+
+    mostrarMensagem(
+      resposta.mensagem ||
+      resposta.message ||
+      "Lançamento salvo com sucesso.",
+      "success"
+    );
+
+
+    $("valor").value =
+      "";
+
+
+    $("vencimento").value =
+      "";
+
+
+    await carregar();
+
+  }
+  catch(e){
+
+    mostrarMensagem(
+      e.message,
+      "error"
+    );
+
+  }
+  finally{
+
+    mostrarLoading(false);
+
+  }
+
+}
+
+
+/* =========================================================
+   SALDO
+========================================================= */
+
+function abrirSaldo(){
+
+  $("janelaSaldo")
+    .classList.add(
+      "show"
+    );
+
+
+  $("novoSaldo").focus();
+
+}
+
+
+function fecharSaldo(){
+
+  $("janelaSaldo")
+    .classList.remove(
+      "show"
+    );
+
+}
+
+
+function fecharModalFora(event){
+
+  if(
+    event.target ===
+    $("janelaSaldo")
+  ){
+
+    fecharSaldo();
+
+  }
+
+}
+
+
+async function salvarNovoSaldo(){
+
+  const competencia =
+    $("competencia").value;
+
+
+  const valor =
+    $("novoSaldo").value;
+
+
+  if(!competencia){
+
+    mostrarMensagem(
+      "Selecione uma competência.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    valor === "" ||
+    isNaN(Number(valor))
+  ){
+
+    mostrarMensagem(
+      "Informe um valor válido.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  mostrarLoading(
+    true,
+    "Salvando saldo..."
+  );
+
+
+  try{
+
+    const resposta =
+      await apiRequest(
+        "salvarSaldoInicial",
+        {
+          competencia:
+            competencia,
+
+          valor:
+            valor
+        }
+      );
+
+
+    mostrarMensagem(
+      resposta.mensagem ||
+      resposta.message ||
+      "Saldo inicial salvo com sucesso.",
+      "success"
+    );
+
+
+    $("novoSaldo").value =
+      "";
+
+
+    fecharSaldo();
+
+
+    await carregar();
+
+  }
+  catch(e){
+
+    mostrarMensagem(
+      e.message,
+      "error"
+    );
+
+  }
+  finally{
+
+    mostrarLoading(false);
+
+  }
+
+}
+
+
+/* =========================================================
+   FECHAR COMPETÊNCIA
+========================================================= */
+
+async function fecharMes(){
+
+  const competencia =
+    $("competencia").value;
+
+
+  if(!competencia){
+
+    mostrarMensagem(
+      "Selecione uma competência.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const confirmar =
+    confirm(
+      "Confirma o fechamento da competência " +
+      competencia +
+      "?\n\n" +
+      "O saldo final será utilizado como saldo inicial da próxima competência."
+    );
+
+
+  if(!confirmar){
+
+    return;
+
+  }
+
+
+  mostrarLoading(
+    true,
+    "Fechando competência..."
+  );
+
+
+  try{
+
+    const resposta =
+      await apiRequest(
+        "fecharMes",
+        {
+          competencia:
+            competencia
+        }
+      );
+
+
+    mostrarMensagem(
+      resposta.mensagem ||
+      resposta.message ||
+      "Competência fechada com sucesso.",
+      "success"
+    );
+
+
+    await carregar();
+
+  }
+  catch(e){
+
+    mostrarMensagem(
+      e.message,
+      "error"
+    );
+
+  }
+  finally{
+
+    mostrarLoading(false);
+
+  }
+
+}
+
+
+/* =========================================================
+   ABRIR PÁGINAS DO GITHUB
+========================================================= */
+
+function abrirPagina(
+  arquivo,
+  params={}
+){
+
+  /*
+     Garante que o caminho funcione
+     mesmo se o GitHub Pages mudar
+     de domínio.
+  */
+
+  const url =
+    new URL(
+      arquivo,
+      URL_GITHUB
+    );
+
+
+  Object.keys(params)
+    .forEach(
+      function(chave){
+
+        if(
+          params[chave] !==
+          undefined &&
+          params[chave] !== null &&
+          params[chave] !== ""
+        ){
+
+          url.searchParams.set(
+            chave,
+            params[chave]
+          );
+
+        }
+
+      }
+    );
+
+
+  console.log(
+    "Abrindo:",
+    url.toString()
+  );
+
+
+  window.location.href =
+    url.toString();
 
 }
 
@@ -1633,13 +3168,13 @@ function abrirRelatorio(){
 function abrirLancamentos(){
 
   const competencia =
-    obterCompetencia();
+    $("competencia").value;
 
 
   if(!competencia){
 
     mostrarMensagem(
-      "Selecione a competência.",
+      "Selecione uma competência.",
       "error"
     );
 
@@ -1666,13 +3201,13 @@ function abrirLancamentos(){
 function abrirGraficos(){
 
   const competencia =
-    obterCompetencia();
+    $("competencia").value;
 
 
   if(!competencia){
 
     mostrarMensagem(
-      "Selecione a competência.",
+      "Selecione uma competência.",
       "error"
     );
 
@@ -1681,11 +3216,21 @@ function abrirGraficos(){
   }
 
 
+  const ano =
+    competencia.substring(
+      0,
+      4
+    );
+
+
   abrirPagina(
     "Graficos.html",
     {
       competencia:
-        competencia
+        competencia,
+
+      ano:
+        ano
     }
   );
 
@@ -1711,12 +3256,37 @@ function abrirAtendimento(){
 
 function abrirBaixasPendentes(){
 
+  abrirPagina(
+    "BaixasPendentes.html"
+  );
+
+}
+
+
+/* =========================================================
+   RELATÓRIO
+========================================================= */
+
+function gerarRelatorio(){
+
   const competencia =
-    obterCompetencia();
+    $("competencia").value;
+
+
+  if(!competencia){
+
+    mostrarMensagem(
+      "Selecione uma competência.",
+      "error"
+    );
+
+    return;
+
+  }
 
 
   abrirPagina(
-    "BaixasPendentes.html",
+    "Relatorio.html",
     {
       competencia:
         competencia
@@ -1726,82 +3296,20 @@ function abrirBaixasPendentes(){
 }
 
 
-
 /* =========================================================
-   NOVO LANÇAMENTO
+   TOAST
 ========================================================= */
 
-function gravar(){
+let toastTimer;
 
-  const tipo =
-    document
-      .getElementById("tipo")
-      .value;
-
-  const descricao =
-    document
-      .getElementById("descricao")
-      .value
-      .trim();
-
-  const valor =
-    document
-      .getElementById("valor")
-      .value;
-
-  const vencimento =
-    document
-      .getElementById("vencimento")
-      .value;
-
-
-  if(!descricao){
-
-    mostrarMensagem(
-      "Informe a descrição.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(
-    valor === "" ||
-    Number(valor) < 0
-  ){
-
-    mostrarMensagem(
-      "Informe um valor válido.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  mostrarMensagem(
-    "O lançamento foi preenchido, mas a gravação precisa estar conectada ao Google Apps Script.",
-    "error"
-  );
-
-}
-
-
-/* =========================================================
-   MENSAGEM
-========================================================= */
 
 function mostrarMensagem(
   texto,
-  tipo
+  tipo="success"
 ){
 
   const elemento =
-    document
-      .getElementById("mensagem");
+    $("mensagemSistema");
 
 
   elemento.textContent =
@@ -1809,25 +3317,163 @@ function mostrarMensagem(
 
 
   elemento.className =
-    "mensagem show " +
+    "toast show " +
     tipo;
 
 
-  setTimeout(
-    function(){
-
-      elemento.classList.remove(
-        "show"
-      );
-
-    },
-    5000
+  clearTimeout(
+    toastTimer
   );
+
+
+  toastTimer =
+    setTimeout(
+      function(){
+
+        elemento.classList.remove(
+          "show"
+        );
+
+      },
+      5000
+    );
 
 }
 
-</script>
 
+/* =========================================================
+   LOADING
+========================================================= */
+
+function mostrarLoading(
+  mostrar,
+  texto="Processando..."
+){
+
+  const elemento =
+    $("loading");
+
+
+  if(mostrar){
+
+    $("loadingText")
+      .textContent =
+      texto;
+
+
+    elemento.classList.add(
+      "show"
+    );
+
+  }
+  else{
+
+    elemento.classList.remove(
+      "show"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   VALIDAR COMPETÊNCIA
+========================================================= */
+
+function validarCompetenciaLocal(
+  competencia
+){
+
+  if(
+    !/^\d{4}-\d{2}$/.test(
+      competencia
+    )
+  ){
+
+    throw new Error(
+      "Competência inválida."
+    );
+
+  }
+
+
+  const ano =
+    Number(
+      competencia.substring(
+        0,
+        4
+      )
+    );
+
+
+  const mes =
+    Number(
+      competencia.substring(
+        5,
+        7
+      )
+    );
+
+
+  if(
+    ano < 1900 ||
+    ano > 3000 ||
+    mes < 1 ||
+    mes > 12
+  ){
+
+    throw new Error(
+      "Competência inválida."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   ESC
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(
+      event.key === "Escape"
+    ){
+
+      fecharSaldo();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   ENTER SALDO
+========================================================= */
+
+$("novoSaldo")
+  .addEventListener(
+    "keydown",
+    function(event){
+
+      if(
+        event.key === "Enter"
+      ){
+
+        salvarNovoSaldo();
+
+      }
+
+    }
+  );
+
+
+</script>
 
 </body>
 
