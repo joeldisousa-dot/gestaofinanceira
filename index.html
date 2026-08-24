@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Controle Financeiro</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 15px;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #e8eef5, #ffffff);
+      color: #333;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,.15);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #0d47a1, #1976d2);
+      color: white;
+      padding: 25px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    .header p {
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+
+    .conteudo {
+      padding: 25px;
+    }
+
+    .titulo-secao {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 25px 0 20px;
+    }
+
+    .titulo-secao h2 {
+      margin: 0;
+      font-size: 21px;
+      white-space: nowrap;
+    }
+
+    .linha {
+      height: 3px;
+      background: #1976d2;
+      flex: 1;
+    }
+
+    /* ==========================
+       RESUMO
+    ========================== */
+
+    .resumo {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .campo-resumo {
+      width: 160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .campo-resumo label {
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .campo-resumo input {
+      width: 160px;
+      height: 42px;
+      margin-top: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background: #fafafa;
+      padding: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: right;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 25px 0;
+    }
+
+    /* ==========================
+       FORMULÁRIOS
+    ========================== */
+
+    .formulario {
+      display: grid;
+      grid-template-columns: 250px 250px;
+      gap: 20px 30px;
+      justify-content: center;
+    }
+
+    .campo {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .campo label {
+      font-weight: 600;
+    }
+
+    .campo input,
+    .campo select {
+      width: 250px;
+      height: 38px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 8px;
+      font-size: 15px;
+      background: white;
+    }
+
+    .campo input:focus,
+    .campo select:focus {
+      outline: none;
+      border-color: #1976d2;
+      box-shadow: 0 0 0 3px rgba(25,118,210,.12);
+    }
+
+    .full {
+      grid-column: 1 / 3;
+    }
+
+    /* ==========================
+       BOTÕES
+    ========================== */
+
+    .btnSaldo,
+    .btnFechar,
+    .btnRelatorio,
+    .btnGravar {
+
+      border: none;
+      min-height: 65px;
+      min-width: 230px;
+      padding: 0 35px;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 19px;
+      font-weight: 800;
+      color: #ffffff !important;
+      text-shadow: 0 1px 2px rgba(0,0,0,.35);
+      letter-spacing: .4px;
+      box-shadow: 0 6px 15px rgba(0,0,0,.25);
+      transition: .25s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btnSaldo {
+      background: linear-gradient(135deg, #00796b, #00bfa5);
+    }
+
+    .btnFechar {
+      background: linear-gradient(135deg, #512da8, #9c27b0);
+    }
+
+    .btnRelatorio {
+      background: linear-gradient(135deg, #e65100, #ff9800);
+    }
+
+    .btnGravar {
+      background: linear-gradient(135deg, #0d47a1, #2196f3);
+    }
+
+    .btnSaldo:hover,
+    .btnFechar:hover,
+    .btnRelatorio:hover,
+    .btnGravar:hover {
+
+      transform: translateY(-4px);
+      box-shadow: 0 10px 22px rgba(0,0,0,.35);
+      filter: brightness(1.08);
+    }
+
+    .btnSaldo:active,
+    .btnFechar:active,
+    .btnRelatorio:active,
+    .btnGravar:active {
+      transform: translateY(0);
+    }
+
+    .acoes {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    /* ==========================
+       LOADING
+    ========================== */
+
+    #loading {
+
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,.75);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loading-box {
+      background: white;
+      padding: 25px 35px;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .spinner {
+
+      width: 45px;
+      height: 45px;
+      border: 5px solid #ddd;
+      border-top-color: #1976d2;
+      border-radius: 50%;
+      animation: girar 1s linear infinite;
+    }
+
+    @keyframes girar {
+
+      to {
+        transform: rotate(360deg);
+      }
+
+    }
+
+    /* ==========================
+       MENSAGEM
+    ========================== */
+
+    .mensagem {
+
+      display: none;
+      position: fixed;
+      right: 20px;
+      top: 20px;
+      max-width: 400px;
+      padding: 15px 25px;
+      border-radius: 10px;
+      background: #2e7d32;
+      color: white;
+      font-weight: bold;
+      z-index: 10000;
+      box-shadow: 0 5px 20px rgba(0,0,0,.25);
+    }
+
+    .mensagem.erro {
+      background: #c62828;
+    }
+
+    .mensagem.aviso {
+      background: #ef6c00;
+    }
+
+    /* ==========================
+       MODAL SALDO
+    ========================== */
+
+    #janelaSaldo {
+
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,.4);
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+
+    .modal {
+
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 350px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.3);
+    }
+
+    .modal h3 {
+      margin-top: 0;
+    }
+
+    .modal label {
+      font-weight: 600;
+    }
+
+    .modal input {
+
+      width: 100%;
+      height: 42px;
+      margin: 10px 0 20px;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .modal-acoes {
+      display: flex;
+      gap: 10px;
+    }
+
+    .modal-acoes button {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ==========================
+       STATUS
+    ========================== */
+
+    .status-api {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #777;
+    }
+
+    .status-api.online {
+      color: #2e7d32;
+    }
+
+    .status-api.offline {
+      color: #c62828;
+    }
+
+    /* ==========================
+       RESPONSIVO
+    ========================== */
+
+    @media (max-width: 700px) {
+
+      body {
+        padding: 0;
+      }
+
+      .container {
+        border-radius: 0;
+        min-height: 100vh;
+      }
+
+      .header {
+        padding: 22px 18px;
+      }
+
+      .header h1 {
+        font-size: 25px;
+      }
+
+      .conteudo {
+        padding: 18px;
+      }
+
+      .titulo-secao {
+        gap: 10px;
+      }
+
+      .titulo-secao h2 {
+        font-size: 18px;
+      }
+
+      .formulario {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .full {
+        grid-column: 1;
+      }
+
+      .campo input,
+      .campo select {
+        width: 100%;
+      }
+
+      .campo-resumo,
+      .campo-resumo input {
+        width: 145px;
+      }
+
+      .acoes {
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .btnSaldo,
+      .btnFechar,
+      .btnRelatorio,
+      .btnGravar {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .modal-acoes {
+        flex-direction: column;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+  <!-- ==========================
+       CABEÇALHO
+  ========================== -->
+
+  <div class="header">
+
+    <h1>
+      💰 Controle Financeiro
+    </h1>
+
+    <p>
+      Gestão pessoal de contas, fluxo de caixa e resultados
+    </p>
+
+  </div>
+
+
+  <div class="conteudo">
+
+
+    <!-- ==========================
+         RESUMO
+    ========================== -->
+
+    <div class="titulo-secao">
+
+      <h2>
+        📊 Resumo Financeiro
+      </h2>
+
+      <div class="linha"></div>
+
+    </div>
+
+
+    <div class="resumo">
+
+      <div class="campo-resumo">
+
+        <label>
+          💰 Saldo Inicial
+        </label>
+
+        <input
+          id="saldoInicialCard"
+          readonly
+          value="R$ 0,00">
+
+      </div>
+
+
+      <div class="campo-resumo">
+
+        <label>
+          📥 Contas a Receber
+        </label>
+
+        <input
+          id="totalReceber"
+          readonly
+          value="R$ 0,00">
+
+      </div>
+
+
+      <div class="campo-resumo">
+
+        <label>
+          📤 Contas a Pagar
+        </label>
+
+        <input
+          id="totalPagar"
+          readonly
+          value="R$ 0,00">
+
+      </div>
+
+
+      <div class="campo-resumo">
+
+        <label>
+          💵 Valor Pago
+        </label>
+
+        <input
+          id="valorPago"
+          readonly
+          value="R$ 0,00">
+
+      </div>
+
+
+      <div class="campo-resumo">
+
+        <label>
+          💵 Valor Recebido
+        </label>
+
+        <input
+          id="valorRecebido"
+          readonly
+          value="R$ 0,00">
+
+      </div>
+
+
+      <div class="campo-resumo">
+
+        <label>
+          🏦 Saldo Banco
+        </label>
+
+        <input
+          id="saldoBanco"
+          readonly
+          value="R$ 0,00">
+
+      </div>
+
+    </div>
+
+
+    <hr>
+
+
+    <!-- ==========================
+         CONTROLE MENSAL
+    ========================== -->
+
+    <div class="titulo-secao">
+
+      <h2>
+        ⚙️ Controle Mensal
+      </h2>
+
+      <div class="linha"></div>
+
+    </div>
+
+
+    <div class="formulario">
+
+
+      <div class="campo">
+
+        <label>
+          📅 Competência
+        </label>
+
+        <input
+          id="competencia"
+          type="month">
+
+      </div>
+
+
+      <div class="campo">
+
+        <label>
+          &nbsp;
+        </label>
+
+        <button
+          type="button"
+          class="btnSaldo"
+          onclick="abrirSaldo()">
+
+          💰 Informar Saldo Inicial
+
+        </button>
+
+      </div>
+
+
+      <div class="campo full">
+
+        <div class="acoes">
+
+
+          <button
+            type="button"
+            class="btnFechar"
+            onclick="fecharMes()">
+
+            🔒 Fechar Competência
+
+          </button>
+
+
+          <button
+            type="button"
+            class="btnRelatorio"
+            onclick="gerarRelatorio()">
+
+            📄 Relatório
+
+          </button>
+
+
+          <button
+            type="button"
+            class="btnRelatorio"
+            onclick="abrirLancamentos()">
+
+            📋 Lançamentos
+
+          </button>
+
+
+          <button
+            type="button"
+            class="btnRelatorio"
+            onclick="abrirGraficos()">
+
+            📊 Gráficos
+
+          </button>
+
+
+          <button
+            type="button"
+            class="btnRelatorio"
+            onclick="abrirAtendimento()">
+
+            📖 Atendimento
+
+          </button>
+
+
+          <button
+            type="button"
+            class="btnRelatorio"
+            onclick="abrirBaixasPendentes()">
+
+            ⚠️ Baixas Pendentes
+
+          </button>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <hr>
+
+
+    <!-- ==========================
+         NOVO LANÇAMENTO
+    ========================== -->
+
+    <div class="titulo-secao">
+
+      <h2>
+        ➕ Fazer novo lançamento
+      </h2>
+
+      <div class="linha"></div>
+
+    </div>
+
+
+    <div class="formulario">
+
+
+      <div class="campo">
+
+        <label>
+          📂 Tipo
+        </label>
+
+        <select id="tipo">
+
+          <option value="Contas a Receber">
+            Contas a Receber
+          </option>
+
+          <option value="Contas a Pagar">
+            Contas a Pagar
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="campo">
+
+        <label>
+          📝 Descrição
+        </label>
+
+        <select id="descricao">
+
+          <option value="">
+            Carregando...
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="campo">
+
+        <label>
+          💵 Valor
+        </label>
+
+        <input
+          id="valor"
+          type="number"
+          step="0.01"
+          min="0"
+          placeholder="0,00">
+
+      </div>
+
+
+      <div class="campo">
+
+        <label>
+          📆 Vencimento
+        </label>
+
+        <input
+          id="vencimento"
+          type="date">
+
+      </div>
+
+
+      <div class="campo full">
+
+        <button
+          type="button"
+          class="btnGravar"
+          onclick="gravar()">
+
+          💾 Gravar Lançamento
+
+        </button>
+
+      </div>
+
+
+    </div>
+
+
+    <div
+      id="statusApi"
+      class="status-api">
+
+      Conectando ao sistema...
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+<!-- ==========================
+     MODAL SALDO
+========================== -->
+
+<div id="janelaSaldo">
+
+  <div class="modal">
+
+    <h3>
+      💰 Saldo Inicial
+    </h3>
+
+    <label for="novoSaldo">
+      Valor inicial:
+    </label>
+
+    <input
+      id="novoSaldo"
+      type="number"
+      step="0.01"
+      min="0"
+      placeholder="0,00">
+
+
+    <div class="modal-acoes">
+
+      <button
+        type="button"
+        class="btnSaldo"
+        onclick="salvarNovoSaldo()">
+
+        Salvar
+
+      </button>
+
+
+      <button
+        type="button"
+        class="btnFechar"
+        onclick="fecharSaldo()">
+
+        Cancelar
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ==========================
+     LOADING
+========================== -->
+
+<div id="loading">
+
+  <div class="loading-box">
+
+    <div class="spinner"></div>
+
+    <strong>
+      Aguarde...
+    </strong>
+
+  </div>
+
+</div>
+
+
+<!-- ==========================
+     MENSAGEM
+========================== -->
+
+<div
+  id="mensagemSistema"
+  class="mensagem">
+</div>
+
+
+<script>
+
+/* =========================================================
+   CONFIGURAÇÃO
+========================================================= */
+
+/*
+   URL DO SEU GOOGLE APPS SCRIPT
+
+   Mantenha a URL /exec.
+*/
+
+const URL_SISTEMA =
+  "https://script.google.com/macros/s/AKfycbwT12x2vBm0PQZ9Cfn1btBZT3y5LplAY7ysMAAlPuAdJ7psZlJhTOwqKcWf7B6g82cI/exec";
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function() {
+
+  definirCompetenciaAtual();
+
+  carregarDescricoes();
+
+  carregar();
+
+  testarConexao();
+
+});
+
+
+/* =========================================================
+   COMPETÊNCIA ATUAL
+========================================================= */
+
+function definirCompetenciaAtual() {
+
+  const hoje = new Date();
+
+  const ano =
+    hoje.getFullYear();
+
+  const mes =
+    String(hoje.getMonth() + 1)
+      .padStart(2, "0");
+
+  document.getElementById("competencia").value =
+    ano + "-" + mes;
+
+}
+
+
+/* =========================================================
+   ALTERAÇÃO DA COMPETÊNCIA
+========================================================= */
+
+document
+  .getElementById("competencia")
+  .addEventListener("change", function() {
+
+    carregar();
+
+  });
+
+
+/* =========================================================
+   TESTAR CONEXÃO
+========================================================= */
+
+async function testarConexao() {
+
+  const status =
+    document.getElementById("statusApi");
+
+  try {
+
+    const resposta =
+      await fetch(
+        URL_SISTEMA +
+        "?acao=ping",
+        {
+          method: "GET",
+          redirect: "follow"
+        }
+      );
+
+    if (!resposta.ok) {
+      throw new Error("Servidor indisponível.");
+    }
+
+    status.textContent =
+      "● Sistema conectado";
+
+    status.className =
+      "status-api online";
+
+  }
+  catch (erro) {
+
+    console.warn(
+      "Falha na conexão:",
+      erro
+    );
+
+    status.textContent =
+      "● Verifique a conexão com o Google Apps Script";
+
+    status.className =
+      "status-api offline";
+
+  }
+
+}
+
+
+/* =========================================================
+   FUNÇÃO GET
+========================================================= */
+
+async function apiGet(acao, parametros = {}) {
+
+  const url =
+    new URL(URL_SISTEMA);
+
+  url.searchParams.set(
+    "acao",
+    acao
+  );
+
+  Object.keys(parametros).forEach(function(chave) {
+
+    if (
+      parametros[chave] !== undefined &&
+      parametros[chave] !== null
+    ) {
+
+      url.searchParams.set(
+        chave,
+        parametros[chave]
+      );
+
+    }
+
+  });
+
+
+  const resposta =
+    await fetch(
+      url.toString(),
+      {
+        method: "GET",
+        redirect: "follow"
+      }
+    );
+
+
+  if (!resposta.ok) {
+
+    throw new Error(
+      "Erro HTTP " +
+      resposta.status
+    );
+
+  }
+
+
+  return await resposta.json();
+
+}
+
+
+/* =========================================================
+   FUNÇÃO POST
+========================================================= */
+
+async function apiPost(acao, dados = {}) {
+
+  const corpo = {
+
+    acao: acao,
+
+    ...dados
+
+  };
+
+
+  const resposta =
+    await fetch(
+      URL_SISTEMA,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "text/plain;charset=utf-8"
+        },
+
+        body: JSON.stringify(corpo),
+
+        redirect: "follow"
+      }
+    );
+
+
+  if (!resposta.ok) {
+
+    throw new Error(
+      "Erro HTTP " +
+      resposta.status
+    );
+
+  }
+
+
+  return await resposta.json();
+
+}
+
+
+/* =========================================================
+   ABRIR LANÇAMENTOS
+========================================================= */
+
+function abrirLancamentos() {
+
+  const competencia =
+    document.getElementById(
+      "competencia"
+    ).value;
+
+
+  if (!competencia) {
+
+    mostrarMensagem(
+      "Selecione uma competência.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  window.open(
+
+    URL_SISTEMA +
+    "?page=Lancamentos" +
+    "&competencia=" +
+    encodeURIComponent(
+      competencia
+    ),
+
+    "_blank"
+
+  );
+
+}
+
+
+/* =========================================================
+   BAIXAS PENDENTES
+========================================================= */
+
+function abrirBaixasPendentes() {
+
+  window.open(
+
+    URL_SISTEMA +
+    "?page=BaixasPendentes",
+
+    "_blank"
+
+  );
+
+}
+
+
+/* =========================================================
+   RELATÓRIO
+========================================================= */
+
+function gerarRelatorio() {
+
+  const competencia =
+    document.getElementById(
+      "competencia"
+    ).value;
+
+
+  if (!competencia) {
+
+    mostrarMensagem(
+      "Selecione uma competência.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  window.open(
+
+    URL_SISTEMA +
+    "?page=relatorio" +
+    "&competencia=" +
+    encodeURIComponent(
+      competencia
+    ),
+
+    "_blank"
+
+  );
+
+}
+
+
+/* =========================================================
+   GRÁFICOS
+========================================================= */
+
+function abrirGraficos() {
+
+  const competencia =
+    document.getElementById(
+      "competencia"
+    ).value;
+
+
+  if (!competencia) {
+
+    mostrarMensagem(
+      "Selecione uma competência.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  const ano =
+    competencia.substring(
+      0,
+      4
+    );
+
+
+  window.open(
+
+    URL_SISTEMA +
+    "?page=graficos" +
+    "&ano=" +
+    encodeURIComponent(
+      ano
+    ),
+
+    "_blank"
+
+  );
+
+}
+
+
+/* =========================================================
+   ATENDIMENTO
+========================================================= */
+
+function abrirAtendimento() {
+
+  window.open(
+
+    URL_SISTEMA +
+    "?page=atendimento",
+
+    "_blank"
+
+  );
+
+}
+
+
+/* =========================================================
+   MENSAGEM
+========================================================= */
+
+function mostrarMensagem(
+  texto,
+  tipo = ""
+) {
+
+  const m =
+    document.getElementById(
+      "mensagemSistema"
+    );
+
+
+  m.textContent =
+    texto;
+
+
+  m.className =
+    "mensagem " +
+    tipo;
+
+
+  m.style.display =
+    "block";
+
+
+  setTimeout(function() {
+
+    m.style.display =
+      "none";
+
+  }, 4000);
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+function mostrarLoading(valor) {
+
+  document.getElementById(
+    "loading"
+  ).style.display =
+
+    valor
+      ? "flex"
+      : "none";
+
+}
+
+
+/* =========================================================
+   CARREGAR RESUMO
+========================================================= */
+
+async function carregar() {
+
+  const competencia =
+    document.getElementById(
+      "competencia"
+    ).value;
+
+
+  if (!competencia) {
+    return;
+  }
+
+
+  mostrarLoading(true);
+
+
+  try {
+
+    const r =
+      await apiGet(
+        "obterResumo",
+        {
+          competencia:
+            competencia
+        }
+      );
+
+
+    document.getElementById(
+      "saldoInicialCard"
+    ).value =
+      formatar(
+        r.saldoInicial
+      );
+
+
+    document.getElementById(
+      "totalReceber"
+    ).value =
+      formatar(
+        r.receber
+      );
+
+
+    document.getElementById(
+      "totalPagar"
+    ).value =
+      formatar(
+        r.pagar
+      );
+
+
+    document.getElementById(
+      "valorPago"
+    ).value =
+      formatar(
+        r.valorPago
+      );
+
+
+    document.getElementById(
+      "valorRecebido"
+    ).value =
+      formatar(
+        r.valorRecebido
+      );
+
+
+    document.getElementById(
+      "saldoBanco"
+    ).value =
+      formatar(
+        r.saldoBanco
+      );
+
+
+  }
+  catch (erro) {
+
+    console.error(
+      erro
+    );
+
+    mostrarMensagem(
+      "Erro ao carregar o resumo: " +
+      erro.message,
+      "erro"
+    );
+
+  }
+  finally {
+
+    mostrarLoading(false);
+
+  }
+
+}
+
+
+/* =========================================================
+   MOEDA
+========================================================= */
+
+function formatar(valor) {
+
+  const numero =
+    Number(
+      valor || 0
+    );
+
+
+  return numero.toLocaleString(
+    "pt-BR",
+    {
+      style: "currency",
+      currency: "BRL"
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CARREGAR DESCRIÇÕES
+========================================================= */
+
+async function carregarDescricoes() {
+
+  const campo =
+    document.getElementById(
+      "descricao"
+    );
+
+
+  try {
+
+    const lista =
+      await apiGet(
+        "listarDescricoes"
+      );
+
+
+    campo.innerHTML = "";
+
+
+    if (
+      !Array.isArray(lista)
+    ) {
+
+      throw new Error(
+        "A resposta de descrições não é uma lista."
+      );
+
+    }
+
+
+    if (lista.length === 0) {
+
+      const op =
+        document.createElement(
+          "option"
+        );
+
+      op.value = "";
+
+      op.textContent =
+        "Nenhuma descrição cadastrada";
+
+      campo.appendChild(
+        op
+      );
+
+      return;
+
+    }
+
+
+    const primeira =
+      document.createElement(
+        "option"
+      );
+
+    primeira.value = "";
+
+    primeira.textContent =
+      "Selecione";
+
+    campo.appendChild(
+      primeira
+    );
+
+
+    lista.forEach(function(item) {
+
+      const op =
+        document.createElement(
+          "option"
+        );
+
+
+      op.value =
+        item;
+
+
+      op.textContent =
+        item;
+
+
+      campo.appendChild(
+        op
+      );
+
+    });
+
+  }
+  catch (erro) {
+
+    console.error(
+      erro
+    );
+
+    campo.innerHTML = "";
+
+    const op =
+      document.createElement(
+        "option"
+      );
+
+    op.value = "";
+
+    op.textContent =
+      "Erro ao carregar";
+
+    campo.appendChild(
+      op
+    );
+
+
+    mostrarMensagem(
+      "Não foi possível carregar as descrições.",
+      "erro"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   GRAVAR LANÇAMENTO
+========================================================= */
+
+async function gravar() {
+
+  const dados = {
+
+    competencia:
+      document.getElementById(
+        "competencia"
+      ).value,
+
+    tipo:
+      document.getElementById(
+        "tipo"
+      ).value,
+
+    descricao:
+      document.getElementById(
+        "descricao"
+      ).value,
+
+    valor:
+      document.getElementById(
+        "valor"
+      ).value,
+
+    vencimento:
+      document.getElementById(
+        "vencimento"
+      ).value
+
+  };
+
+
+  if (!dados.competencia) {
+
+    mostrarMensagem(
+      "Informe a competência.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  if (!dados.descricao) {
+
+    mostrarMensagem(
+      "Informe a descrição.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  if (
+    !dados.valor ||
+    Number(dados.valor) <= 0
+  ) {
+
+    mostrarMensagem(
+      "Informe um valor válido.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  mostrarLoading(true);
+
+
+  try {
+
+    const res =
+      await apiPost(
+        "salvarLancamento",
+        dados
+      );
+
+
+    mostrarMensagem(
+      res.mensagem ||
+      "Lançamento salvo com sucesso."
+    );
+
+
+    if (
+      res.sucesso !== false
+    ) {
+
+      document.getElementById(
+        "valor"
+      ).value = "";
+
+
+      document.getElementById(
+        "vencimento"
+      ).value = "";
+
+
+      document.getElementById(
+        "descricao"
+      ).selectedIndex = 0;
+
+
+      await carregar();
+
+    }
+
+  }
+  catch (erro) {
+
+    console.error(
+      erro
+    );
+
+    mostrarMensagem(
+      "Erro ao gravar lançamento: " +
+      erro.message,
+      "erro"
+    );
+
+  }
+  finally {
+
+    mostrarLoading(false);
+
+  }
+
+}
+
+
+/* =========================================================
+   FECHAR COMPETÊNCIA
+========================================================= */
+
+async function fecharMes() {
+
+  const comp =
+    document.getElementById(
+      "competencia"
+    ).value;
+
+
+  if (!comp) {
+
+    mostrarMensagem(
+      "Selecione uma competência.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  const confirmar =
+    confirm(
+      "Confirma o fechamento da competência " +
+      comp +
+      "?"
+    );
+
+
+  if (!confirmar) {
+    return;
+  }
+
+
+  mostrarLoading(true);
+
+
+  try {
+
+    const res =
+      await apiPost(
+        "fecharMes",
+        {
+          competencia:
+            comp
+        }
+      );
+
+
+    mostrarMensagem(
+      typeof res === "string"
+        ? res
+        : (
+          res.mensagem ||
+          "Competência fechada."
+        )
+    );
+
+
+    await carregar();
+
+  }
+  catch (erro) {
+
+    console.error(
+      erro
+    );
+
+    mostrarMensagem(
+      "Erro ao fechar competência: " +
+      erro.message,
+      "erro"
+    );
+
+  }
+  finally {
+
+    mostrarLoading(false);
+
+  }
+
+}
+
+
+/* =========================================================
+   ABRIR SALDO
+========================================================= */
+
+function abrirSaldo() {
+
+  const modal =
+    document.getElementById(
+      "janelaSaldo"
+    );
+
+
+  const saldoAtual =
+    document.getElementById(
+      "saldoInicialCard"
+    ).value;
+
+
+  document.getElementById(
+    "novoSaldo"
+  ).value = "";
+
+
+  modal.style.display =
+    "flex";
+
+
+}
+
+
+/* =========================================================
+   FECHAR SALDO
+========================================================= */
+
+function fecharSaldo() {
+
+  document.getElementById(
+    "janelaSaldo"
+  ).style.display =
+    "none";
+
+}
+
+
+/* =========================================================
+   SALVAR NOVO SALDO
+========================================================= */
+
+async function salvarNovoSaldo() {
+
+  const competencia =
+    document.getElementById(
+      "competencia"
+    ).value;
+
+
+  const valor =
+    document.getElementById(
+      "novoSaldo"
+    ).value;
+
+
+  if (!competencia) {
+
+    mostrarMensagem(
+      "Selecione uma competência.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  if (
+    valor === "" ||
+    Number(valor) < 0
+  ) {
+
+    mostrarMensagem(
+      "Informe um saldo válido.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  mostrarLoading(true);
+
+
+  try {
+
+    const res =
+      await apiPost(
+        "salvarSaldoInicial",
+        {
+          competencia:
+            competencia,
+
+          valor:
+            valor
+        }
+      );
+
+
+    mostrarMensagem(
+      res.mensagem ||
+      "Saldo inicial salvo!"
+    );
+
+
+    fecharSaldo();
+
+    await carregar();
+
+  }
+  catch (erro) {
+
+    console.error(
+      erro
+    );
+
+    mostrarMensagem(
+      "Erro ao salvar saldo: " +
+      erro.message,
+      "erro"
+    );
+
+  }
+  finally {
+
+    mostrarLoading(false);
+
+  }
+
+}
+
+
+/* =========================================================
+   FECHAR MODAL AO CLICAR FORA
+========================================================= */
+
+document
+  .getElementById("janelaSaldo")
+  .addEventListener(
+    "click",
+    function(event) {
+
+      if (
+        event.target ===
+        this
+      ) {
+
+        fecharSaldo();
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   TECLA ESC
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function(event) {
+
+    if (
+      event.key === "Escape"
+    ) {
+
+      fecharSaldo();
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+
+</html>
