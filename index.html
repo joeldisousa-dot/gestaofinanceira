@@ -3,487 +3,1089 @@
 
 <head>
 
-  <meta charset="UTF-8">
-
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-  <title>Controle Financeiro</title>
-
-  <style>
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 15px;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: linear-gradient(135deg, #e8eef5, #ffffff);
-      color: #333;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      background: white;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0,0,0,.15);
-    }
-
-    .header {
-      background: linear-gradient(135deg, #0d47a1, #1976d2);
-      color: white;
-      padding: 25px;
-    }
-
-    .header h1 {
-      margin: 0;
-      font-size: 30px;
-    }
-
-    .header p {
-      margin-top: 8px;
-      margin-bottom: 0;
-    }
-
-    .conteudo {
-      padding: 25px;
-    }
-
-    .titulo-secao {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin: 25px 0 20px;
-    }
-
-    .titulo-secao h2 {
-      margin: 0;
-      font-size: 21px;
-      white-space: nowrap;
-    }
-
-    .linha {
-      height: 3px;
-      background: #1976d2;
-      flex: 1;
-    }
-
-    /* ==========================
-       RESUMO
-    ========================== */
-
-    .resumo {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 18px;
-      margin-bottom: 30px;
-    }
-
-    .campo-resumo {
-      width: 160px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .campo-resumo label {
-      font-weight: bold;
-      font-size: 14px;
-      text-align: center;
-    }
-
-    .campo-resumo input {
-      width: 160px;
-      height: 42px;
-      margin-top: 8px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      background: #fafafa;
-      padding: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      text-align: right;
-    }
-
-    hr {
-      border: none;
-      border-top: 1px solid #ddd;
-      margin: 25px 0;
-    }
-
-    /* ==========================
-       FORMULÁRIOS
-    ========================== */
-
-    .formulario {
-      display: grid;
-      grid-template-columns: 250px 250px;
-      gap: 20px 30px;
-      justify-content: center;
-    }
-
-    .campo {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .campo label {
-      font-weight: 600;
-    }
-
-    .campo input,
-    .campo select {
-      width: 250px;
-      height: 38px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      padding: 8px;
-      font-size: 15px;
-      background: white;
-    }
-
-    .campo input:focus,
-    .campo select:focus {
-      outline: none;
-      border-color: #1976d2;
-      box-shadow: 0 0 0 3px rgba(25,118,210,.12);
-    }
-
-    .full {
-      grid-column: 1 / 3;
-    }
-
-    /* ==========================
-       BOTÕES
-    ========================== */
-
-    .btnSaldo,
-    .btnFechar,
-    .btnRelatorio,
-    .btnGravar {
-
-      border: none;
-      min-height: 65px;
-      min-width: 230px;
-      padding: 0 35px;
-      border-radius: 16px;
-      cursor: pointer;
-      font-size: 19px;
-      font-weight: 800;
-      color: #ffffff !important;
-      text-shadow: 0 1px 2px rgba(0,0,0,.35);
-      letter-spacing: .4px;
-      box-shadow: 0 6px 15px rgba(0,0,0,.25);
-      transition: .25s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .btnSaldo {
-      background: linear-gradient(135deg, #00796b, #00bfa5);
-    }
-
-    .btnFechar {
-      background: linear-gradient(135deg, #512da8, #9c27b0);
-    }
-
-    .btnRelatorio {
-      background: linear-gradient(135deg, #e65100, #ff9800);
-    }
-
-    .btnGravar {
-      background: linear-gradient(135deg, #0d47a1, #2196f3);
-    }
-
-    .btnSaldo:hover,
-    .btnFechar:hover,
-    .btnRelatorio:hover,
-    .btnGravar:hover {
-
-      transform: translateY(-4px);
-      box-shadow: 0 10px 22px rgba(0,0,0,.35);
-      filter: brightness(1.08);
-    }
-
-    .btnSaldo:active,
-    .btnFechar:active,
-    .btnRelatorio:active,
-    .btnGravar:active {
-      transform: translateY(0);
-    }
-
-    .acoes {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 15px;
-    }
-
-    /* ==========================
-       LOADING
-    ========================== */
-
-    #loading {
-
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255,255,255,.75);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .loading-box {
-      background: white;
-      padding: 25px 35px;
-      border-radius: 15px;
-      box-shadow: 0 8px 30px rgba(0,0,0,.2);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .spinner {
-
-      width: 45px;
-      height: 45px;
-      border: 5px solid #ddd;
-      border-top-color: #1976d2;
-      border-radius: 50%;
-      animation: girar 1s linear infinite;
-    }
-
-    @keyframes girar {
-
-      to {
-        transform: rotate(360deg);
-      }
-
-    }
-
-    /* ==========================
-       MENSAGEM
-    ========================== */
-
-    .mensagem {
-
-      display: none;
-      position: fixed;
-      right: 20px;
-      top: 20px;
-      max-width: 400px;
-      padding: 15px 25px;
-      border-radius: 10px;
-      background: #2e7d32;
-      color: white;
-      font-weight: bold;
-      z-index: 10000;
-      box-shadow: 0 5px 20px rgba(0,0,0,.25);
-    }
-
-    .mensagem.erro {
-      background: #c62828;
-    }
-
-    .mensagem.aviso {
-      background: #ef6c00;
-    }
-
-    /* ==========================
-       MODAL SALDO
-    ========================== */
-
-    #janelaSaldo {
-
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,.4);
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-      padding: 20px;
-    }
-
-    .modal {
-
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      width: 100%;
-      max-width: 350px;
-      box-shadow: 0 10px 35px rgba(0,0,0,.3);
-    }
-
-    .modal h3 {
-      margin-top: 0;
-    }
-
-    .modal label {
-      font-weight: 600;
-    }
-
-    .modal input {
-
-      width: 100%;
-      height: 42px;
-      margin: 10px 0 20px;
-      padding: 8px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-    }
-
-    .modal-acoes {
-      display: flex;
-      gap: 10px;
-    }
-
-    .modal-acoes button {
-      flex: 1;
-      min-width: 0;
-    }
-
-    /* ==========================
-       STATUS
-    ========================== */
-
-    .status-api {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 13px;
-      color: #777;
-    }
-
-    .status-api.online {
-      color: #2e7d32;
-    }
-
-    .status-api.offline {
-      color: #c62828;
-    }
-
-    /* ==========================
-       RESPONSIVO
-    ========================== */
-
-    @media (max-width: 700px) {
-
-      body {
-        padding: 0;
-      }
-
-      .container {
-        border-radius: 0;
-        min-height: 100vh;
-      }
-
-      .header {
-        padding: 22px 18px;
-      }
-
-      .header h1 {
-        font-size: 25px;
-      }
-
-      .conteudo {
-        padding: 18px;
-      }
-
-      .titulo-secao {
-        gap: 10px;
-      }
-
-      .titulo-secao h2 {
-        font-size: 18px;
-      }
-
-      .formulario {
-        grid-template-columns: 1fr;
-        gap: 18px;
-      }
-
-      .full {
-        grid-column: 1;
-      }
-
-      .campo input,
-      .campo select {
-        width: 100%;
-      }
-
-      .campo-resumo,
-      .campo-resumo input {
-        width: 145px;
-      }
-
-      .acoes {
-        flex-direction: column;
-        padding: 0;
-      }
-
-      .btnSaldo,
-      .btnFechar,
-      .btnRelatorio,
-      .btnGravar {
-        width: 100%;
-        min-width: 0;
-      }
-
-      .modal-acoes {
-        flex-direction: column;
-      }
-
-    }
-
-  </style>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#0f4c81">
+
+<meta name="description"
+      content="Controle Financeiro">
+
+<title>Controle Financeiro</title>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+
+  font-family:
+    Inter,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  color:#1e293b;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eef4f9 0%,
+      #f8fafc 45%,
+      #e9f0f7 100%
+    );
+}
+
+
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
+
+:root{
+
+  --azul:#0f4c81;
+  --azul-2:#1976d2;
+  --azul-claro:#e8f1fb;
+
+  --verde:#087f5b;
+  --verde-2:#12b886;
+
+  --roxo:#6d28d9;
+  --roxo-2:#9333ea;
+
+  --laranja:#e65100;
+  --laranja-2:#ff9800;
+
+  --vermelho:#c62828;
+
+  --texto:#1e293b;
+  --texto-fraco:#64748b;
+
+  --borda:#e2e8f0;
+
+  --branco:#ffffff;
+
+  --sombra:
+    0 20px 50px rgba(15,23,42,.10);
+
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container{
+
+  width:
+    min(
+      calc(100% - 30px),
+      1180px
+    );
+
+  margin:30px auto;
+
+  background:#fff;
+
+  border-radius:24px;
+
+  overflow:hidden;
+
+  box-shadow:
+    var(--sombra);
+
+}
+
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
+.header{
+
+  position:relative;
+
+  padding:32px 36px;
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #082f49 0%,
+      #0f4c81 45%,
+      #1976d2 100%
+    );
+
+  overflow:hidden;
+
+}
+
+.header::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:300px;
+  height:300px;
+
+  right:-100px;
+  top:-130px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.08);
+
+}
+
+.header-content{
+
+  position:relative;
+
+  z-index:2;
+
+}
+
+.header h1{
+
+  margin:0;
+
+  font-size:
+    clamp(
+      25px,
+      4vw,
+      34px
+    );
+
+  font-weight:800;
+
+  letter-spacing:-.6px;
+
+}
+
+.header p{
+
+  margin:8px 0 0;
+
+  color:
+    rgba(255,255,255,.82);
+
+  font-size:15px;
+
+}
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.conteudo{
+
+  padding:
+    30px 36px 40px;
+
+}
+
+
+/* =====================================================
+   TÍTULOS
+===================================================== */
+
+.titulo-secao{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:15px;
+
+  margin:
+    28px 0 20px;
+
+}
+
+.titulo-secao:first-child{
+  margin-top:0;
+}
+
+.titulo-secao h2{
+
+  margin:0;
+
+  font-size:20px;
+
+  color:#0f172a;
+
+  white-space:nowrap;
+
+}
+
+.linha{
+
+  flex:1;
+
+  height:2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #1976d2,
+      #dbeafe,
+      transparent
+    );
+
+}
+
+
+/* =====================================================
+   RESUMO
+===================================================== */
+
+.resumo{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      6,
+      minmax(140px,1fr)
+    );
+
+  gap:15px;
+
+}
+
+
+.campo-resumo{
+
+  position:relative;
+
+  padding:18px;
+
+  min-height:120px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+
+  border:
+    1px solid var(--borda);
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f8fafc
+    );
+
+  box-shadow:
+    0 5px 18px rgba(15,23,42,.05);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+
+}
+
+.campo-resumo:hover{
+
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 10px 25px rgba(15,23,42,.09);
+
+}
+
+.campo-resumo label{
+
+  display:block;
+
+  margin-bottom:9px;
+
+  color:
+    var(--texto-fraco);
+
+  font-size:13px;
+
+  font-weight:700;
+
+}
+
+.campo-resumo input{
+
+  width:100%;
+
+  border:none;
+
+  outline:none;
+
+  background:transparent;
+
+  color:#0f172a;
+
+  font-size:18px;
+
+  font-weight:800;
+
+}
+
+
+/* =====================================================
+   FORMULÁRIOS
+===================================================== */
+
+.formulario{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(250px,1fr));
+
+  gap:20px 28px;
+
+  max-width:760px;
+
+  margin:auto;
+
+}
+
+.campo{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:7px;
+
+}
+
+.campo label{
+
+  color:#334155;
+
+  font-size:14px;
+
+  font-weight:700;
+
+}
+
+.campo input,
+.campo select{
+
+  width:100%;
+
+  height:44px;
+
+  padding:
+    0 13px;
+
+  border:
+    1px solid #cbd5e1;
+
+  border-radius:10px;
+
+  background:#fff;
+
+  color:#1e293b;
+
+  font-size:15px;
+
+  outline:none;
+
+  transition:
+    border-color .2s,
+    box-shadow .2s;
+
+}
+
+.campo input:focus,
+.campo select:focus{
+
+  border-color:
+    #1976d2;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(25,118,210,.12);
+
+}
+
+.full{
+
+  grid-column:
+    1 / -1;
+
+}
+
+
+/* =====================================================
+   BOTÕES
+===================================================== */
+
+button{
+
+  font-family:inherit;
+
+}
+
+.btn{
+
+  border:none;
+
+  min-height:52px;
+
+  padding:
+    0 22px;
+
+  border-radius:13px;
+
+  cursor:pointer;
+
+  color:white;
+
+  font-size:15px;
+
+  font-weight:800;
+
+  letter-spacing:.15px;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:8px;
+
+  box-shadow:
+    0 6px 15px rgba(15,23,42,.16);
+
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    filter .18s ease;
+
+}
+
+.btn:hover{
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 10px 22px rgba(15,23,42,.22);
+
+  filter:
+    brightness(1.05);
+
+}
+
+.btn:active{
+
+  transform:
+    translateY(0);
+
+}
+
+.btn:disabled{
+
+  opacity:.6;
+
+  cursor:not-allowed;
+
+  transform:none;
+
+}
+
+.btnSaldo{
+
+  width:100%;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--verde),
+      var(--verde-2)
+    );
+
+}
+
+.btnFechar{
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--roxo),
+      var(--roxo-2)
+    );
+
+}
+
+.btnRelatorio{
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--laranja),
+      var(--laranja-2)
+    );
+
+}
+
+.btnGravar{
+
+  width:100%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0d47a1,
+      #2196f3
+    );
+
+}
+
+
+/* =====================================================
+   AÇÕES
+===================================================== */
+
+.acoes{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(190px,1fr)
+    );
+
+  gap:13px;
+
+  padding:5px 0;
+
+}
+
+.acoes .btn{
+
+  width:100%;
+
+}
+
+
+/* =====================================================
+   DIVISÓRIA
+===================================================== */
+
+hr{
+
+  border:none;
+
+  border-top:
+    1px solid #e2e8f0;
+
+  margin:
+    32px 0;
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status-bar{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  margin-top:25px;
+
+  padding:
+    12px 16px;
+
+  border-radius:12px;
+
+  background:#f8fafc;
+
+  border:
+    1px solid var(--borda);
+
+  color:
+    var(--texto-fraco);
+
+  font-size:13px;
+
+}
+
+.status-indicator{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:7px;
+
+}
+
+.status-dot{
+
+  width:9px;
+  height:9px;
+
+  border-radius:50%;
+
+  background:#22c55e;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(34,197,94,.12);
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal{
+
+  display:none;
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:3000;
+
+  padding:20px;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+    rgba(15,23,42,.58);
+
+  backdrop-filter:
+    blur(4px);
+
+}
+
+.modal.aberto{
+
+  display:flex;
+
+}
+
+.modal-card{
+
+  width:
+    min(
+      100%,
+      420px
+    );
+
+  background:white;
+
+  border-radius:20px;
+
+  padding:26px;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.28);
+
+}
+
+.modal-card h3{
+
+  margin:
+    0 0 20px;
+
+  color:#0f172a;
+
+  font-size:20px;
+
+}
+
+.modal-card label{
+
+  display:block;
+
+  margin-bottom:7px;
+
+  font-size:14px;
+
+  font-weight:700;
+
+}
+
+.modal-card input{
+
+  width:100%;
+
+  height:45px;
+
+  padding:10px;
+
+  border:
+    1px solid #cbd5e1;
+
+  border-radius:10px;
+
+  font-size:16px;
+
+  outline:none;
+
+}
+
+.modal-acoes{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:10px;
+
+  margin-top:18px;
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+#loading{
+
+  display:none;
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:9999;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+    rgba(255,255,255,.72);
+
+  backdrop-filter:
+    blur(3px);
+
+}
+
+.loading-card{
+
+  padding:25px 30px;
+
+  background:white;
+
+  border-radius:18px;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.18);
+
+  text-align:center;
+
+}
+
+.spinner{
+
+  width:42px;
+  height:42px;
+
+  margin:auto;
+
+  border:
+    4px solid #e2e8f0;
+
+  border-top-color:
+    #1976d2;
+
+  border-radius:50%;
+
+  animation:
+    girar .8s linear infinite;
+
+}
+
+.loading-text{
+
+  margin-top:12px;
+
+  color:#475569;
+
+  font-size:14px;
+
+  font-weight:700;
+
+}
+
+@keyframes girar{
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+.mensagem{
+
+  display:none;
+
+  position:fixed;
+
+  right:22px;
+
+  top:22px;
+
+  z-index:10000;
+
+  max-width:
+    min(
+      400px,
+      calc(100% - 44px)
+    );
+
+  padding:
+    14px 18px;
+
+  border-radius:12px;
+
+  background:
+    #15803d;
+
+  color:white;
+
+  font-size:14px;
+
+  font-weight:700;
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.2);
+
+}
+
+.mensagem.erro{
+
+  background:
+    #b91c1c;
+
+}
+
+
+/* =====================================================
+   RODAPÉ
+===================================================== */
+
+.footer{
+
+  margin-top:30px;
+
+  padding-top:20px;
+
+  border-top:
+    1px solid #e2e8f0;
+
+  text-align:center;
+
+  color:#94a3b8;
+
+  font-size:12px;
+
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media(max-width:1000px){
+
+  .resumo{
+
+    grid-template-columns:
+      repeat(3,1fr);
+
+  }
+
+}
+
+@media(max-width:700px){
+
+  .container{
+
+    width:
+      calc(100% - 16px);
+
+    margin:8px auto;
+
+    border-radius:18px;
+
+  }
+
+  .header{
+
+    padding:25px 20px;
+
+  }
+
+  .conteudo{
+
+    padding:
+      22px 18px 30px;
+
+  }
+
+  .resumo{
+
+    grid-template-columns:
+      repeat(2,1fr);
+
+  }
+
+  .formulario{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .full{
+
+    grid-column:1;
+
+  }
+
+  .titulo-secao h2{
+
+    font-size:18px;
+
+  }
+
+  .status-bar{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+  }
+
+}
+
+@media(max-width:430px){
+
+  .resumo{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .campo-resumo{
+
+    min-height:100px;
+
+  }
+
+  .modal-acoes{
+
+    grid-template-columns:1fr;
+
+  }
+
+}
+
+
+/* =====================================================
+   ACESSIBILIDADE
+===================================================== */
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible{
+
+  outline:
+    3px solid
+    rgba(25,118,210,.28);
+
+  outline-offset:2px;
+
+}
+
+</style>
 
 </head>
 
 
 <body>
 
+
 <div class="container">
 
-  <!-- ==========================
+
+  <!-- =================================================
        CABEÇALHO
-  ========================== -->
+  ================================================== -->
 
-  <div class="header">
+  <header class="header">
 
-    <h1>
-      💰 Controle Financeiro
-    </h1>
+    <div class="header-content">
 
-    <p>
-      Gestão pessoal de contas, fluxo de caixa e resultados
-    </p>
+      <h1>
+        💰 Controle Financeiro
+      </h1>
 
-  </div>
+      <p>
+        Gestão pessoal de contas, fluxo de caixa e resultados
+      </p>
+
+    </div>
+
+  </header>
 
 
-  <div class="conteudo">
+  <main class="conteudo">
 
 
-    <!-- ==========================
+    <!-- =================================================
          RESUMO
-    ========================== -->
+    ================================================== -->
 
     <div class="titulo-secao">
 
@@ -496,7 +1098,8 @@
     </div>
 
 
-    <div class="resumo">
+    <section class="resumo">
+
 
       <div class="campo-resumo">
 
@@ -581,15 +1184,16 @@
 
       </div>
 
-    </div>
+
+    </section>
 
 
     <hr>
 
 
-    <!-- ==========================
+    <!-- =================================================
          CONTROLE MENSAL
-    ========================== -->
+    ================================================== -->
 
     <div class="titulo-secao">
 
@@ -602,12 +1206,12 @@
     </div>
 
 
-    <div class="formulario">
+    <section class="formulario">
 
 
       <div class="campo">
 
-        <label>
+        <label for="competencia">
           📅 Competência
         </label>
 
@@ -621,12 +1225,12 @@
       <div class="campo">
 
         <label>
-          &nbsp;
+          💰 Saldo inicial
         </label>
 
         <button
           type="button"
-          class="btnSaldo"
+          class="btn btnSaldo"
           onclick="abrirSaldo()">
 
           💰 Informar Saldo Inicial
@@ -643,7 +1247,7 @@
 
           <button
             type="button"
-            class="btnFechar"
+            class="btn btnFechar"
             onclick="fecharMes()">
 
             🔒 Fechar Competência
@@ -653,7 +1257,7 @@
 
           <button
             type="button"
-            class="btnRelatorio"
+            class="btn btnRelatorio"
             onclick="gerarRelatorio()">
 
             📄 Relatório
@@ -663,7 +1267,7 @@
 
           <button
             type="button"
-            class="btnRelatorio"
+            class="btn btnRelatorio"
             onclick="abrirLancamentos()">
 
             📋 Lançamentos
@@ -673,7 +1277,7 @@
 
           <button
             type="button"
-            class="btnRelatorio"
+            class="btn btnRelatorio"
             onclick="abrirGraficos()">
 
             📊 Gráficos
@@ -683,7 +1287,7 @@
 
           <button
             type="button"
-            class="btnRelatorio"
+            class="btn btnRelatorio"
             onclick="abrirAtendimento()">
 
             📖 Atendimento
@@ -693,7 +1297,7 @@
 
           <button
             type="button"
-            class="btnRelatorio"
+            class="btn btnRelatorio"
             onclick="abrirBaixasPendentes()">
 
             ⚠️ Baixas Pendentes
@@ -705,15 +1309,16 @@
 
       </div>
 
-    </div>
+
+    </section>
 
 
     <hr>
 
 
-    <!-- ==========================
+    <!-- =================================================
          NOVO LANÇAMENTO
-    ========================== -->
+    ================================================== -->
 
     <div class="titulo-secao">
 
@@ -726,12 +1331,12 @@
     </div>
 
 
-    <div class="formulario">
+    <section class="formulario">
 
 
       <div class="campo">
 
-        <label>
+        <label for="tipo">
           📂 Tipo
         </label>
 
@@ -752,7 +1357,7 @@
 
       <div class="campo">
 
-        <label>
+        <label for="descricao">
           📝 Descrição
         </label>
 
@@ -769,15 +1374,16 @@
 
       <div class="campo">
 
-        <label>
+        <label for="valor">
           💵 Valor
         </label>
 
         <input
           id="valor"
           type="number"
-          step="0.01"
           min="0"
+          step="0.01"
+          inputmode="decimal"
           placeholder="0,00">
 
       </div>
@@ -785,7 +1391,7 @@
 
       <div class="campo">
 
-        <label>
+        <label for="vencimento">
           📆 Vencimento
         </label>
 
@@ -800,7 +1406,7 @@
 
         <button
           type="button"
-          class="btnGravar"
+          class="btn btnGravar"
           onclick="gravar()">
 
           💾 Gravar Lançamento
@@ -810,63 +1416,87 @@
       </div>
 
 
+    </section>
+
+
+    <!-- =================================================
+         STATUS
+    ================================================== -->
+
+    <div class="status-bar">
+
+      <span class="status-indicator">
+
+        <span class="status-dot"></span>
+
+        <span id="statusTexto">
+          Sistema conectado
+        </span>
+
+      </span>
+
+      <span id="ultimaAtualizacao">
+        Aguardando atualização...
+      </span>
+
     </div>
 
 
-    <div
-      id="statusApi"
-      class="status-api">
+    <footer class="footer">
 
-      Conectando ao sistema...
+      Controle Financeiro • GitHub + Google Sheets
 
-    </div>
+    </footer>
 
 
-  </div>
-
+  </main>
 
 </div>
 
 
-<!-- ==========================
+<!-- =====================================================
      MODAL SALDO
-========================== -->
+====================================================== -->
 
-<div id="janelaSaldo">
+<div
+  id="janelaSaldo"
+  class="modal"
+  onclick="fecharModalFora(event)">
 
-  <div class="modal">
+  <div
+    class="modal-card"
+    onclick="event.stopPropagation()">
 
     <h3>
       💰 Saldo Inicial
     </h3>
 
     <label for="novoSaldo">
-      Valor inicial:
+      Valor inicial
     </label>
 
     <input
       id="novoSaldo"
       type="number"
-      step="0.01"
       min="0"
+      step="0.01"
+      inputmode="decimal"
       placeholder="0,00">
-
 
     <div class="modal-acoes">
 
       <button
         type="button"
-        class="btnSaldo"
+        class="btn btnSaldo"
         onclick="salvarNovoSaldo()">
 
-        Salvar
+        💾 Salvar
 
       </button>
 
-
       <button
         type="button"
-        class="btnFechar"
+        class="btn btnFechar"
         onclick="fecharSaldo()">
 
         Cancelar
@@ -880,269 +1510,656 @@
 </div>
 
 
-<!-- ==========================
+<!-- =====================================================
      LOADING
-========================== -->
+====================================================== -->
 
 <div id="loading">
 
-  <div class="loading-box">
+  <div class="loading-card">
 
     <div class="spinner"></div>
 
-    <strong>
-      Aguarde...
-    </strong>
+    <div class="loading-text">
+      Processando...
+    </div>
 
   </div>
 
 </div>
 
 
-<!-- ==========================
+<!-- =====================================================
      MENSAGEM
-========================== -->
+====================================================== -->
 
 <div
   id="mensagemSistema"
-  class="mensagem">
+  class="mensagem"
+  role="alert">
 </div>
 
 
 <script>
 
-/* =========================================================
+/* =====================================================
    CONFIGURAÇÃO
-========================================================= */
+===================================================== */
 
 /*
-   URL DO SEU GOOGLE APPS SCRIPT
-
-   Mantenha a URL /exec.
-*/
+ * URL DA WEB APP DO GOOGLE APPS SCRIPT
+ *
+ * IMPORTANTE:
+ * Use a URL /exec da implantação publicada.
+ */
 
 const URL_SISTEMA =
   "https://script.google.com/macros/s/AKfycbwT12x2vBm0PQZ9Cfn1btBZT3y5LplAY7ysMAAlPuAdJ7psZlJhTOwqKcWf7B6g82cI/exec";
 
 
-/* =========================================================
+/*
+ * O GitHub Pages não possui google.script.run.
+ *
+ * A comunicação é feita através de JSONP.
+ */
+
+let contadorJSONP = 0;
+
+
+/* =====================================================
    INICIALIZAÇÃO
-========================================================= */
+===================================================== */
 
-document.addEventListener("DOMContentLoaded", function() {
+window.addEventListener(
+  "load",
+  inicializar
+);
 
-  definirCompetenciaAtual();
+
+function inicializar(){
+
+  const hoje =
+    new Date();
+
+  const competencia =
+    hoje.getFullYear() +
+    "-" +
+    String(
+      hoje.getMonth() + 1
+    ).padStart(2,"0");
+
+
+  document
+    .getElementById("competencia")
+    .value =
+    competencia;
+
+
+  document
+    .getElementById("competencia")
+    .addEventListener(
+      "change",
+      carregar
+    );
+
 
   carregarDescricoes();
 
   carregar();
 
-  testarConexao();
-
-});
+}
 
 
-/* =========================================================
-   COMPETÊNCIA ATUAL
-========================================================= */
+/* =====================================================
+   JSONP
+===================================================== */
 
-function definirCompetenciaAtual() {
+function chamarAPI(
+  acao,
+  parametros = {},
+  timeout = 15000
+){
 
-  const hoje = new Date();
+  return new Promise(
+    function(resolve,reject){
 
-  const ano =
-    hoje.getFullYear();
+      const callback =
+        "jsonpCallback_" +
+        Date.now() +
+        "_" +
+        (++contadorJSONP);
 
-  const mes =
-    String(hoje.getMonth() + 1)
-      .padStart(2, "0");
 
-  document.getElementById("competencia").value =
-    ano + "-" + mes;
+      const script =
+        document.createElement("script");
+
+
+      let finalizado = false;
+
+
+      const timer =
+        setTimeout(
+          function(){
+
+            finalizar();
+
+            reject(
+              new Error(
+                "Tempo limite excedido ao acessar o Google Apps Script."
+              )
+            );
+
+          },
+          timeout
+        );
+
+
+      function finalizar(){
+
+        if(finalizado){
+          return;
+        }
+
+        finalizado = true;
+
+        clearTimeout(timer);
+
+        try{
+          delete window[callback];
+        }catch(e){
+          window[callback] =
+            undefined;
+        }
+
+        if(script.parentNode){
+          script.parentNode.removeChild(
+            script
+          );
+        }
+
+      }
+
+
+      window[callback] =
+        function(resposta){
+
+          finalizar();
+
+          if(
+            resposta &&
+            resposta.sucesso === false &&
+            resposta.erro
+          ){
+
+            reject(
+              new Error(
+                resposta.erro
+              )
+            );
+
+            return;
+
+          }
+
+          resolve(
+            resposta
+          );
+
+        };
+
+
+      script.onerror =
+        function(){
+
+          finalizar();
+
+          reject(
+            new Error(
+              "Falha ao conectar ao Google Apps Script."
+            )
+          );
+
+        };
+
+
+      const query =
+        new URLSearchParams();
+
+
+      query.set(
+        "action",
+        acao
+      );
+
+
+      query.set(
+        "callback",
+        callback
+      );
+
+
+      Object.keys(parametros)
+        .forEach(
+          function(chave){
+
+            const valor =
+              parametros[chave];
+
+            if(
+              valor !== undefined &&
+              valor !== null
+            ){
+
+              query.set(
+                chave,
+                String(valor)
+              );
+
+            }
+
+          }
+        );
+
+
+      script.src =
+        URL_SISTEMA +
+        "?" +
+        query.toString();
+
+
+      document
+        .head
+        .appendChild(script);
+
+    }
+  );
 
 }
 
 
-/* =========================================================
-   ALTERAÇÃO DA COMPETÊNCIA
-========================================================= */
+/* =====================================================
+   LOADING
+===================================================== */
 
-document
-  .getElementById("competencia")
-  .addEventListener("change", function() {
+function mostrarLoading(
+  valor,
+  texto = "Processando..."
+){
 
-    carregar();
+  const loading =
+    document.getElementById(
+      "loading"
+    );
 
-  });
+  const textoEl =
+    document.querySelector(
+      ".loading-text"
+    );
 
 
-/* =========================================================
-   TESTAR CONEXÃO
-========================================================= */
+  textoEl.textContent =
+    texto;
 
-async function testarConexao() {
 
-  const status =
-    document.getElementById("statusApi");
+  loading.style.display =
+    valor
+      ? "flex"
+      : "none";
 
-  try {
+}
 
-    const resposta =
-      await fetch(
-        URL_SISTEMA +
-        "?acao=ping",
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+function mostrarMensagem(
+  texto,
+  tipo = ""
+){
+
+  const elemento =
+    document.getElementById(
+      "mensagemSistema"
+    );
+
+
+  elemento.textContent =
+    texto;
+
+
+  elemento.className =
+    "mensagem " +
+    tipo;
+
+
+  elemento.style.display =
+    "block";
+
+
+  setTimeout(
+    function(){
+
+      elemento.style.display =
+        "none";
+
+    },
+    4000
+  );
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function atualizarStatus(
+  texto
+){
+
+  document
+    .getElementById(
+      "statusTexto"
+    )
+    .textContent =
+    texto;
+
+
+  document
+    .getElementById(
+      "ultimaAtualizacao"
+    )
+    .textContent =
+    "Atualizado em " +
+    new Date().toLocaleTimeString(
+      "pt-BR"
+    );
+
+}
+
+
+/* =====================================================
+   FORMATAR MOEDA
+===================================================== */
+
+function formatar(valor){
+
+  return Number(
+    valor || 0
+  ).toLocaleString(
+    "pt-BR",
+    {
+      style:"currency",
+      currency:"BRL"
+    }
+  );
+
+}
+
+
+/* =====================================================
+   CARREGAR RESUMO
+===================================================== */
+
+async function carregar(){
+
+  const competencia =
+    document
+      .getElementById(
+        "competencia"
+      )
+      .value;
+
+
+  if(!competencia){
+    return;
+  }
+
+
+  mostrarLoading(
+    true,
+    "Carregando resumo..."
+  );
+
+
+  try{
+
+    const r =
+      await chamarAPI(
+        "obterResumo",
         {
-          method: "GET",
-          redirect: "follow"
+          competencia:
+            competencia
         }
       );
 
-    if (!resposta.ok) {
-      throw new Error("Servidor indisponível.");
-    }
 
-    status.textContent =
-      "● Sistema conectado";
+    document
+      .getElementById(
+        "saldoInicialCard"
+      )
+      .value =
+      formatar(
+        r.saldoInicial
+      );
 
-    status.className =
-      "status-api online";
 
-  }
-  catch (erro) {
+    document
+      .getElementById(
+        "totalReceber"
+      )
+      .value =
+      formatar(
+        r.receber
+      );
 
-    console.warn(
-      "Falha na conexão:",
-      erro
+
+    document
+      .getElementById(
+        "totalPagar"
+      )
+      .value =
+      formatar(
+        r.pagar
+      );
+
+
+    document
+      .getElementById(
+        "valorPago"
+      )
+      .value =
+      formatar(
+        r.valorPago
+      );
+
+
+    document
+      .getElementById(
+        "valorRecebido"
+      )
+      .value =
+      formatar(
+        r.valorRecebido
+      );
+
+
+    document
+      .getElementById(
+        "saldoBanco"
+      )
+      .value =
+      formatar(
+        r.saldoBanco
+      );
+
+
+    atualizarStatus(
+      "Sistema conectado"
     );
 
-    status.textContent =
-      "● Verifique a conexão com o Google Apps Script";
+  }
+  catch(e){
 
-    status.className =
-      "status-api offline";
+    atualizarStatus(
+      "Erro de conexão"
+    );
+
+
+    mostrarMensagem(
+      "Erro ao carregar o resumo: " +
+      e.message,
+      "erro"
+    );
+
+    console.error(e);
+
+  }
+  finally{
+
+    mostrarLoading(false);
 
   }
 
 }
 
 
-/* =========================================================
-   FUNÇÃO GET
-========================================================= */
+/* =====================================================
+   DESCRIÇÕES
+===================================================== */
 
-async function apiGet(acao, parametros = {}) {
+async function carregarDescricoes(){
 
-  const url =
-    new URL(URL_SISTEMA);
+  const campo =
+    document.getElementById(
+      "descricao"
+    );
 
-  url.searchParams.set(
-    "acao",
-    acao
-  );
 
-  Object.keys(parametros).forEach(function(chave) {
+  try{
 
-    if (
-      parametros[chave] !== undefined &&
-      parametros[chave] !== null
-    ) {
+    const lista =
+      await chamarAPI(
+        "listarDescricoes"
+      );
 
-      url.searchParams.set(
-        chave,
-        parametros[chave]
+
+    campo.innerHTML =
+      "";
+
+
+    const primeira =
+      document.createElement(
+        "option"
+      );
+
+
+    primeira.value =
+      "";
+
+    primeira.textContent =
+      "Selecione";
+
+
+    campo.appendChild(
+      primeira
+    );
+
+
+    if(
+      Array.isArray(lista)
+    ){
+
+      lista.forEach(
+        function(item){
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+
+          option.value =
+            item;
+
+
+          option.textContent =
+            item;
+
+
+          campo.appendChild(
+            option
+          );
+
+        }
       );
 
     }
 
-  });
+  }
+  catch(e){
+
+    campo.innerHTML =
+      '<option value="">Erro ao carregar</option>';
 
 
-  const resposta =
-    await fetch(
-      url.toString(),
-      {
-        method: "GET",
-        redirect: "follow"
-      }
-    );
-
-
-  if (!resposta.ok) {
-
-    throw new Error(
-      "Erro HTTP " +
-      resposta.status
+    console.error(
+      e
     );
 
   }
 
-
-  return await resposta.json();
-
 }
 
 
-/* =========================================================
-   FUNÇÃO POST
-========================================================= */
+/* =====================================================
+   GRAVAR LANÇAMENTO
+===================================================== */
 
-async function apiPost(acao, dados = {}) {
-
-  const corpo = {
-
-    acao: acao,
-
-    ...dados
-
-  };
-
-
-  const resposta =
-    await fetch(
-      URL_SISTEMA,
-      {
-        method: "POST",
-
-        headers: {
-          "Content-Type":
-            "text/plain;charset=utf-8"
-        },
-
-        body: JSON.stringify(corpo),
-
-        redirect: "follow"
-      }
-    );
-
-
-  if (!resposta.ok) {
-
-    throw new Error(
-      "Erro HTTP " +
-      resposta.status
-    );
-
-  }
-
-
-  return await resposta.json();
-
-}
-
-
-/* =========================================================
-   ABRIR LANÇAMENTOS
-========================================================= */
-
-function abrirLancamentos() {
+async function gravar(){
 
   const competencia =
-    document.getElementById(
-      "competencia"
-    ).value;
+    document
+      .getElementById(
+        "competencia"
+      )
+      .value;
 
 
-  if (!competencia) {
+  const tipo =
+    document
+      .getElementById(
+        "tipo"
+      )
+      .value;
+
+
+  const descricao =
+    document
+      .getElementById(
+        "descricao"
+      )
+      .value;
+
+
+  const valor =
+    document
+      .getElementById(
+        "valor"
+      )
+      .value;
+
+
+  const vencimento =
+    document
+      .getElementById(
+        "vencimento"
+      )
+      .value;
+
+
+  if(!competencia){
 
     mostrarMensagem(
       "Selecione uma competência.",
@@ -1154,53 +2171,448 @@ function abrirLancamentos() {
   }
 
 
+  if(!descricao){
+
+    mostrarMensagem(
+      "Informe a descrição.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !valor ||
+    Number(valor) < 0
+  ){
+
+    mostrarMensagem(
+      "Informe um valor válido.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  mostrarLoading(
+    true,
+    "Gravando lançamento..."
+  );
+
+
+  try{
+
+    const res =
+      await chamarAPI(
+        "salvarLancamento",
+        {
+          competencia:
+            competencia,
+
+          tipo:
+            tipo,
+
+          descricao:
+            descricao,
+
+          valor:
+            valor,
+
+          vencimento:
+            vencimento
+        }
+      );
+
+
+    mostrarMensagem(
+      res.mensagem ||
+      "Lançamento salvo com sucesso."
+    );
+
+
+    document
+      .getElementById(
+        "valor"
+      )
+      .value =
+      "";
+
+
+    document
+      .getElementById(
+        "vencimento"
+      )
+      .value =
+      "";
+
+
+    await carregar();
+
+  }
+  catch(e){
+
+    mostrarMensagem(
+      e.message,
+      "erro"
+    );
+
+  }
+  finally{
+
+    mostrarLoading(false);
+
+  }
+
+}
+
+
+/* =====================================================
+   SALDO INICIAL
+===================================================== */
+
+function abrirSaldo(){
+
+  document
+    .getElementById(
+      "janelaSaldo"
+    )
+    .classList.add(
+      "aberto"
+    );
+
+
+  document
+    .getElementById(
+      "novoSaldo"
+    )
+    .focus();
+
+}
+
+
+function fecharSaldo(){
+
+  document
+    .getElementById(
+      "janelaSaldo"
+    )
+    .classList.remove(
+      "aberto"
+    );
+
+}
+
+
+function fecharModalFora(
+  event
+){
+
+  if(
+    event.target.id ===
+    "janelaSaldo"
+  ){
+
+    fecharSaldo();
+
+  }
+
+}
+
+
+async function salvarNovoSaldo(){
+
+  const competencia =
+    document
+      .getElementById(
+        "competencia"
+      )
+      .value;
+
+
+  const valor =
+    document
+      .getElementById(
+        "novoSaldo"
+      )
+      .value;
+
+
+  if(!competencia){
+
+    mostrarMensagem(
+      "Selecione uma competência.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    valor === "" ||
+    isNaN(Number(valor))
+  ){
+
+    mostrarMensagem(
+      "Informe um saldo válido.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  mostrarLoading(
+    true,
+    "Salvando saldo inicial..."
+  );
+
+
+  try{
+
+    await chamarAPI(
+      "salvarSaldoInicial",
+      {
+        competencia:
+          competencia,
+
+        valor:
+          valor
+      }
+    );
+
+
+    fecharSaldo();
+
+
+    document
+      .getElementById(
+        "novoSaldo"
+      )
+      .value =
+      "";
+
+
+    mostrarMensagem(
+      "Saldo inicial salvo com sucesso."
+    );
+
+
+    await carregar();
+
+  }
+  catch(e){
+
+    mostrarMensagem(
+      e.message,
+      "erro"
+    );
+
+  }
+  finally{
+
+    mostrarLoading(false);
+
+  }
+
+}
+
+
+/* =====================================================
+   FECHAR COMPETÊNCIA
+===================================================== */
+
+async function fecharMes(){
+
+  const comp =
+    document
+      .getElementById(
+        "competencia"
+      )
+      .value;
+
+
+  if(!comp){
+
+    mostrarMensagem(
+      "Selecione uma competência.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  const confirmado =
+    confirm(
+      "Confirma o fechamento da competência " +
+      comp +
+      "?"
+    );
+
+
+  if(!confirmado){
+    return;
+  }
+
+
+  mostrarLoading(
+    true,
+    "Fechando competência..."
+  );
+
+
+  try{
+
+    const res =
+      await chamarAPI(
+        "fecharMes",
+        {
+          competencia:
+            comp
+        }
+      );
+
+
+    mostrarMensagem(
+      res
+    );
+
+
+    await carregar();
+
+  }
+  catch(e){
+
+    mostrarMensagem(
+      e.message,
+      "erro"
+    );
+
+  }
+  finally{
+
+    mostrarLoading(false);
+
+  }
+
+}
+
+
+/* =====================================================
+   ABRIR PÁGINAS DO APPS SCRIPT
+===================================================== */
+
+function abrirPagina(
+  pagina,
+  parametros = {}
+){
+
+  const url =
+    new URL(
+      URL_SISTEMA
+    );
+
+
+  url.searchParams.set(
+    "page",
+    pagina
+  );
+
+
+  Object.keys(parametros)
+    .forEach(
+      function(chave){
+
+        url.searchParams.set(
+          chave,
+          parametros[chave]
+        );
+
+      }
+    );
+
+
   window.open(
-
-    URL_SISTEMA +
-    "?page=Lancamentos" +
-    "&competencia=" +
-    encodeURIComponent(
-      competencia
-    ),
-
+    url.toString(),
     "_blank"
-
   );
 
 }
 
 
-/* =========================================================
+/* =====================================================
+   LANÇAMENTOS
+===================================================== */
+
+function abrirLancamentos(){
+
+  const competencia =
+    document
+      .getElementById(
+        "competencia"
+      )
+      .value;
+
+
+  if(!competencia){
+
+    mostrarMensagem(
+      "Selecione uma competência.",
+      "erro"
+    );
+
+    return;
+
+  }
+
+
+  abrirPagina(
+    "Lancamentos",
+    {
+      competencia:
+        competencia
+    }
+  );
+
+}
+
+
+/* =====================================================
    BAIXAS PENDENTES
-========================================================= */
+===================================================== */
 
-function abrirBaixasPendentes() {
+function abrirBaixasPendentes(){
 
-  window.open(
-
-    URL_SISTEMA +
-    "?page=BaixasPendentes",
-
-    "_blank"
-
+  abrirPagina(
+    "BaixasPendentes"
   );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    RELATÓRIO
-========================================================= */
+===================================================== */
 
-function gerarRelatorio() {
+function gerarRelatorio(){
 
   const competencia =
-    document.getElementById(
-      "competencia"
-    ).value;
+    document
+      .getElementById(
+        "competencia"
+      )
+      .value;
 
 
-  if (!competencia) {
+  if(!competencia){
 
     mostrarMensagem(
       "Selecione uma competência.",
@@ -1212,35 +2624,32 @@ function gerarRelatorio() {
   }
 
 
-  window.open(
-
-    URL_SISTEMA +
-    "?page=relatorio" +
-    "&competencia=" +
-    encodeURIComponent(
-      competencia
-    ),
-
-    "_blank"
-
+  abrirPagina(
+    "relatorio",
+    {
+      competencia:
+        competencia
+    }
   );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    GRÁFICOS
-========================================================= */
+===================================================== */
 
-function abrirGraficos() {
+function abrirGraficos(){
 
   const competencia =
-    document.getElementById(
-      "competencia"
-    ).value;
+    document
+      .getElementById(
+        "competencia"
+      )
+      .value;
 
 
-  if (!competencia) {
+  if(!competencia){
 
     mostrarMensagem(
       "Selecione uma competência.",
@@ -1259,747 +2668,42 @@ function abrirGraficos() {
     );
 
 
-  window.open(
-
-    URL_SISTEMA +
-    "?page=graficos" +
-    "&ano=" +
-    encodeURIComponent(
-      ano
-    ),
-
-    "_blank"
-
-  );
-
-}
-
-
-/* =========================================================
-   ATENDIMENTO
-========================================================= */
-
-function abrirAtendimento() {
-
-  window.open(
-
-    URL_SISTEMA +
-    "?page=atendimento",
-
-    "_blank"
-
-  );
-
-}
-
-
-/* =========================================================
-   MENSAGEM
-========================================================= */
-
-function mostrarMensagem(
-  texto,
-  tipo = ""
-) {
-
-  const m =
-    document.getElementById(
-      "mensagemSistema"
-    );
-
-
-  m.textContent =
-    texto;
-
-
-  m.className =
-    "mensagem " +
-    tipo;
-
-
-  m.style.display =
-    "block";
-
-
-  setTimeout(function() {
-
-    m.style.display =
-      "none";
-
-  }, 4000);
-
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-function mostrarLoading(valor) {
-
-  document.getElementById(
-    "loading"
-  ).style.display =
-
-    valor
-      ? "flex"
-      : "none";
-
-}
-
-
-/* =========================================================
-   CARREGAR RESUMO
-========================================================= */
-
-async function carregar() {
-
-  const competencia =
-    document.getElementById(
-      "competencia"
-    ).value;
-
-
-  if (!competencia) {
-    return;
-  }
-
-
-  mostrarLoading(true);
-
-
-  try {
-
-    const r =
-      await apiGet(
-        "obterResumo",
-        {
-          competencia:
-            competencia
-        }
-      );
-
-
-    document.getElementById(
-      "saldoInicialCard"
-    ).value =
-      formatar(
-        r.saldoInicial
-      );
-
-
-    document.getElementById(
-      "totalReceber"
-    ).value =
-      formatar(
-        r.receber
-      );
-
-
-    document.getElementById(
-      "totalPagar"
-    ).value =
-      formatar(
-        r.pagar
-      );
-
-
-    document.getElementById(
-      "valorPago"
-    ).value =
-      formatar(
-        r.valorPago
-      );
-
-
-    document.getElementById(
-      "valorRecebido"
-    ).value =
-      formatar(
-        r.valorRecebido
-      );
-
-
-    document.getElementById(
-      "saldoBanco"
-    ).value =
-      formatar(
-        r.saldoBanco
-      );
-
-
-  }
-  catch (erro) {
-
-    console.error(
-      erro
-    );
-
-    mostrarMensagem(
-      "Erro ao carregar o resumo: " +
-      erro.message,
-      "erro"
-    );
-
-  }
-  finally {
-
-    mostrarLoading(false);
-
-  }
-
-}
-
-
-/* =========================================================
-   MOEDA
-========================================================= */
-
-function formatar(valor) {
-
-  const numero =
-    Number(
-      valor || 0
-    );
-
-
-  return numero.toLocaleString(
-    "pt-BR",
+  abrirPagina(
+    "graficos",
     {
-      style: "currency",
-      currency: "BRL"
+      ano:
+        ano
     }
   );
 
 }
 
 
-/* =========================================================
-   CARREGAR DESCRIÇÕES
-========================================================= */
+/* =====================================================
+   ATENDIMENTO
+===================================================== */
 
-async function carregarDescricoes() {
+function abrirAtendimento(){
 
-  const campo =
-    document.getElementById(
-      "descricao"
-    );
-
-
-  try {
-
-    const lista =
-      await apiGet(
-        "listarDescricoes"
-      );
-
-
-    campo.innerHTML = "";
-
-
-    if (
-      !Array.isArray(lista)
-    ) {
-
-      throw new Error(
-        "A resposta de descrições não é uma lista."
-      );
-
-    }
-
-
-    if (lista.length === 0) {
-
-      const op =
-        document.createElement(
-          "option"
-        );
-
-      op.value = "";
-
-      op.textContent =
-        "Nenhuma descrição cadastrada";
-
-      campo.appendChild(
-        op
-      );
-
-      return;
-
-    }
-
-
-    const primeira =
-      document.createElement(
-        "option"
-      );
-
-    primeira.value = "";
-
-    primeira.textContent =
-      "Selecione";
-
-    campo.appendChild(
-      primeira
-    );
-
-
-    lista.forEach(function(item) {
-
-      const op =
-        document.createElement(
-          "option"
-        );
-
-
-      op.value =
-        item;
-
-
-      op.textContent =
-        item;
-
-
-      campo.appendChild(
-        op
-      );
-
-    });
-
-  }
-  catch (erro) {
-
-    console.error(
-      erro
-    );
-
-    campo.innerHTML = "";
-
-    const op =
-      document.createElement(
-        "option"
-      );
-
-    op.value = "";
-
-    op.textContent =
-      "Erro ao carregar";
-
-    campo.appendChild(
-      op
-    );
-
-
-    mostrarMensagem(
-      "Não foi possível carregar as descrições.",
-      "erro"
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   GRAVAR LANÇAMENTO
-========================================================= */
-
-async function gravar() {
-
-  const dados = {
-
-    competencia:
-      document.getElementById(
-        "competencia"
-      ).value,
-
-    tipo:
-      document.getElementById(
-        "tipo"
-      ).value,
-
-    descricao:
-      document.getElementById(
-        "descricao"
-      ).value,
-
-    valor:
-      document.getElementById(
-        "valor"
-      ).value,
-
-    vencimento:
-      document.getElementById(
-        "vencimento"
-      ).value
-
-  };
-
-
-  if (!dados.competencia) {
-
-    mostrarMensagem(
-      "Informe a competência.",
-      "erro"
-    );
-
-    return;
-
-  }
-
-
-  if (!dados.descricao) {
-
-    mostrarMensagem(
-      "Informe a descrição.",
-      "erro"
-    );
-
-    return;
-
-  }
-
-
-  if (
-    !dados.valor ||
-    Number(dados.valor) <= 0
-  ) {
-
-    mostrarMensagem(
-      "Informe um valor válido.",
-      "erro"
-    );
-
-    return;
-
-  }
-
-
-  mostrarLoading(true);
-
-
-  try {
-
-    const res =
-      await apiPost(
-        "salvarLancamento",
-        dados
-      );
-
-
-    mostrarMensagem(
-      res.mensagem ||
-      "Lançamento salvo com sucesso."
-    );
-
-
-    if (
-      res.sucesso !== false
-    ) {
-
-      document.getElementById(
-        "valor"
-      ).value = "";
-
-
-      document.getElementById(
-        "vencimento"
-      ).value = "";
-
-
-      document.getElementById(
-        "descricao"
-      ).selectedIndex = 0;
-
-
-      await carregar();
-
-    }
-
-  }
-  catch (erro) {
-
-    console.error(
-      erro
-    );
-
-    mostrarMensagem(
-      "Erro ao gravar lançamento: " +
-      erro.message,
-      "erro"
-    );
-
-  }
-  finally {
-
-    mostrarLoading(false);
-
-  }
-
-}
-
-
-/* =========================================================
-   FECHAR COMPETÊNCIA
-========================================================= */
-
-async function fecharMes() {
-
-  const comp =
-    document.getElementById(
-      "competencia"
-    ).value;
-
-
-  if (!comp) {
-
-    mostrarMensagem(
-      "Selecione uma competência.",
-      "erro"
-    );
-
-    return;
-
-  }
-
-
-  const confirmar =
-    confirm(
-      "Confirma o fechamento da competência " +
-      comp +
-      "?"
-    );
-
-
-  if (!confirmar) {
-    return;
-  }
-
-
-  mostrarLoading(true);
-
-
-  try {
-
-    const res =
-      await apiPost(
-        "fecharMes",
-        {
-          competencia:
-            comp
-        }
-      );
-
-
-    mostrarMensagem(
-      typeof res === "string"
-        ? res
-        : (
-          res.mensagem ||
-          "Competência fechada."
-        )
-    );
-
-
-    await carregar();
-
-  }
-  catch (erro) {
-
-    console.error(
-      erro
-    );
-
-    mostrarMensagem(
-      "Erro ao fechar competência: " +
-      erro.message,
-      "erro"
-    );
-
-  }
-  finally {
-
-    mostrarLoading(false);
-
-  }
-
-}
-
-
-/* =========================================================
-   ABRIR SALDO
-========================================================= */
-
-function abrirSaldo() {
-
-  const modal =
-    document.getElementById(
-      "janelaSaldo"
-    );
-
-
-  const saldoAtual =
-    document.getElementById(
-      "saldoInicialCard"
-    ).value;
-
-
-  document.getElementById(
-    "novoSaldo"
-  ).value = "";
-
-
-  modal.style.display =
-    "flex";
-
-
-}
-
-
-/* =========================================================
-   FECHAR SALDO
-========================================================= */
-
-function fecharSaldo() {
-
-  document.getElementById(
-    "janelaSaldo"
-  ).style.display =
-    "none";
-
-}
-
-
-/* =========================================================
-   SALVAR NOVO SALDO
-========================================================= */
-
-async function salvarNovoSaldo() {
-
-  const competencia =
-    document.getElementById(
-      "competencia"
-    ).value;
-
-
-  const valor =
-    document.getElementById(
-      "novoSaldo"
-    ).value;
-
-
-  if (!competencia) {
-
-    mostrarMensagem(
-      "Selecione uma competência.",
-      "erro"
-    );
-
-    return;
-
-  }
-
-
-  if (
-    valor === "" ||
-    Number(valor) < 0
-  ) {
-
-    mostrarMensagem(
-      "Informe um saldo válido.",
-      "erro"
-    );
-
-    return;
-
-  }
-
-
-  mostrarLoading(true);
-
-
-  try {
-
-    const res =
-      await apiPost(
-        "salvarSaldoInicial",
-        {
-          competencia:
-            competencia,
-
-          valor:
-            valor
-        }
-      );
-
-
-    mostrarMensagem(
-      res.mensagem ||
-      "Saldo inicial salvo!"
-    );
-
-
-    fecharSaldo();
-
-    await carregar();
-
-  }
-  catch (erro) {
-
-    console.error(
-      erro
-    );
-
-    mostrarMensagem(
-      "Erro ao salvar saldo: " +
-      erro.message,
-      "erro"
-    );
-
-  }
-  finally {
-
-    mostrarLoading(false);
-
-  }
-
-}
-
-
-/* =========================================================
-   FECHAR MODAL AO CLICAR FORA
-========================================================= */
-
-document
-  .getElementById("janelaSaldo")
-  .addEventListener(
-    "click",
-    function(event) {
-
-      if (
-        event.target ===
-        this
-      ) {
-
-        fecharSaldo();
-
-      }
-
-    }
+  abrirPagina(
+    "atendimento"
   );
 
+}
 
-/* =========================================================
-   TECLA ESC
-========================================================= */
+
+/* =====================================================
+   TECLADO
+===================================================== */
 
 document.addEventListener(
   "keydown",
-  function(event) {
+  function(event){
 
-    if (
-      event.key === "Escape"
-    ) {
+    if(
+      event.key ===
+      "Escape"
+    ){
 
       fecharSaldo();
 
