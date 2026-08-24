@@ -5,12 +5,14 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1"
+>
 
 <title>Gráficos Financeiros</title>
 
 <script src="https://www.gstatic.com/charts/loader.js"></script>
-
 
 <style>
 
@@ -18,13 +20,11 @@
   box-sizing:border-box;
 }
 
-
 body{
 
   font-family:
-  "Segoe UI",
-  Arial,
-  sans-serif;
+    Arial,
+    sans-serif;
 
   background:#f1f5f9;
 
@@ -32,10 +32,7 @@ body{
 
   padding:20px;
 
-  color:#333;
-
 }
-
 
 .container{
 
@@ -50,10 +47,9 @@ body{
   border-radius:15px;
 
   box-shadow:
-  0 5px 20px rgba(0,0,0,.15);
+    0 5px 20px #ccc;
 
 }
-
 
 .topo{
 
@@ -67,15 +63,11 @@ body{
 
 }
 
-
 .topo h2{
 
   margin:0;
 
-  color:#0d47a1;
-
 }
-
 
 button{
 
@@ -93,46 +85,13 @@ button{
 
   font-weight:bold;
 
-  font-size:14px;
-
-  transition:.2s;
-
 }
-
 
 button:hover{
 
   background:#0d47a1;
 
-  transform:translateY(-1px);
-
 }
-
-
-button:disabled{
-
-  opacity:.6;
-
-  cursor:not-allowed;
-
-  transform:none;
-
-}
-
-
-.voltar{
-
-  background:#546e7a;
-
-}
-
-
-.voltar:hover{
-
-  background:#37474f;
-
-}
-
 
 .filtros{
 
@@ -144,16 +103,7 @@ button:disabled{
 
   margin-top:25px;
 
-  padding:20px;
-
-  background:#f8fafc;
-
-  border-radius:12px;
-
-  border:1px solid #e2e8f0;
-
 }
-
 
 .filtro{
 
@@ -161,28 +111,15 @@ button:disabled{
 
   flex-direction:column;
 
-  min-width:200px;
-
 }
-
-
-.filtro-botao{
-
-  justify-content:flex-end;
-
-}
-
 
 label{
 
   font-weight:bold;
 
-  margin-bottom:6px;
-
-  color:#374151;
+  margin-bottom:5px;
 
 }
-
 
 select{
 
@@ -194,79 +131,7 @@ select{
 
   border:1px solid #ccc;
 
-  background:white;
-
-  font-size:14px;
-
 }
-
-
-select:focus{
-
-  outline:none;
-
-  border-color:#1976d2;
-
-  box-shadow:
-  0 0 0 2px rgba(25,118,210,.12);
-
-}
-
-
-.mensagem{
-
-  margin-top:15px;
-
-  min-height:24px;
-
-  font-size:14px;
-
-}
-
-
-.sucesso{
-
-  color:#2e7d32;
-
-  font-weight:bold;
-
-}
-
-
-.erro{
-
-  color:#c62828;
-
-  font-weight:bold;
-
-  background:#ffebee;
-
-  border-left:4px solid #c62828;
-
-  padding:10px;
-
-  border-radius:6px;
-
-}
-
-
-.carregando{
-
-  color:#666;
-
-}
-
-
-.grafico-box{
-
-  margin-top:25px;
-
-  background:#fff;
-
-  border-radius:12px;
-
-}
-
 
 #grafico{
 
@@ -274,10 +139,9 @@ select:focus{
 
   height:500px;
 
-  margin-top:10px;
+  margin-top:30px;
 
 }
-
 
 #graficoLinha{
 
@@ -285,53 +149,19 @@ select:focus{
 
   height:450px;
 
-  margin-top:10px;
+  margin-top:30px;
 
 }
 
+.erro{
 
-.titulo-secao{
+  color:#c62828;
 
-  margin-top:35px;
-
-  color:#1976d2;
-
-  border-left:5px solid #1976d2;
-
-  padding-left:10px;
+  font-weight:bold;
 
 }
 
-
-.status-api{
-
-  margin-top:15px;
-
-  font-size:12px;
-
-  color:#777;
-
-}
-
-
-.rodape{
-
-  text-align:center;
-
-  margin-top:25px;
-
-  color:#888;
-
-  font-size:12px;
-
-}
-
-
-/* ==========================================
-   RESPONSIVO
-========================================== */
-
-@media(max-width:700px){
+@media(max-width:600px){
 
   body{
 
@@ -339,81 +169,26 @@ select:focus{
 
   }
 
-
   .container{
 
     padding:15px;
 
-    border-radius:10px;
-
   }
-
 
   .topo{
 
-    flex-direction:column;
-
-    align-items:stretch;
+    align-items:flex-start;
 
   }
 
-
-  .topo h2{
-
-    font-size:22px;
-
-  }
-
-
-  .topo button{
-
-    width:100%;
-
-  }
-
-
-  .filtros{
-
-    flex-direction:column;
-
-    gap:15px;
-
-  }
-
-
-  .filtro{
-
-    width:100%;
-
-    min-width:0;
-
-  }
-
-
+  .filtro,
   select{
 
     width:100%;
 
-    min-width:0;
-
   }
 
-
-  .filtro button{
-
-    width:100%;
-
-  }
-
-
-  #grafico{
-
-    height:400px;
-
-  }
-
-
-  #graficoLinha{
+  .grafico{
 
     height:350px;
 
@@ -425,588 +200,278 @@ select:focus{
 
 </head>
 
-
 <body>
-
 
 <div class="container">
 
+<div class="topo">
 
-  <!-- =========================================
-       TOPO
-  ========================================== -->
+<h2>
+📊 Gráficos Financeiros
+</h2>
 
-  <div class="topo">
+<button onclick="voltar()">
+⬅ Voltar
+</button>
 
-    <h2>
-      📊 Gráficos Financeiros
-    </h2>
+</div>
 
 
-    <button
-      class="voltar"
-      onclick="voltar()">
+<div class="filtros">
 
-      ⬅ Voltar
+<div class="filtro">
 
-    </button>
+<label>
+Ano
+</label>
 
-  </div>
+<select id="selecionaAno">
 
+<option>
+Carregando...
+</option>
 
-  <!-- =========================================
-       FILTROS
-  ========================================== -->
+</select>
 
-  <div class="filtros">
+</div>
 
 
-    <div class="filtro">
+<div class="filtro">
 
-      <label for="selecionaAno">
-        Ano
-      </label>
+<label>
+Tipo
+</label>
 
-      <select id="selecionaAno">
+<select id="tipoGrafico">
 
-        <option value="">
-          Carregando...
-        </option>
+<option value="Contas a Receber">
+Receita
+</option>
 
-      </select>
+<option value="Contas a Pagar">
+Despesa
+</option>
 
-    </div>
+</select>
 
+</div>
 
 
-    <div class="filtro">
+<div class="filtro">
 
-      <label for="tipoGrafico">
-        Tipo
-      </label>
+<label>
+Categoria
+</label>
 
-      <select id="tipoGrafico">
+<select id="categoriaSelecionada">
 
-        <option value="Contas a Receber">
-          Receita
-        </option>
+<option>
+Carregando...
+</option>
 
-        <option value="Contas a Pagar">
-          Despesa
-        </option>
+</select>
 
-      </select>
+</div>
 
-    </div>
 
+<div class="filtro">
 
+<button onclick="carregarTudo()">
+🔄 Atualizar
+</button>
 
-    <div class="filtro">
+</div>
 
-      <label for="categoriaSelecionada">
-        Categoria
-      </label>
+</div>
 
-      <select id="categoriaSelecionada">
 
-        <option value="">
-          Carregando...
-        </option>
+<div id="mensagem"></div>
 
-      </select>
+<div id="grafico"></div>
 
-    </div>
 
+<h3>
+📈 Evolução da Categoria
+</h3>
 
-
-    <div class="filtro filtro-botao">
-
-      <button
-        id="btnAtualizar"
-        onclick="carregarTudo()">
-
-        🔄 Atualizar
-
-      </button>
-
-    </div>
-
-
-  </div>
-
-
-  <!-- =========================================
-       MENSAGEM
-  ========================================== -->
-
-  <div
-    id="mensagem"
-    class="mensagem">
-  </div>
-
-
-  <!-- =========================================
-       GRÁFICO PRINCIPAL
-  ========================================== -->
-
-  <div class="grafico-box">
-
-    <h3 class="titulo-secao">
-
-      📊 Receitas x Despesas por Mês
-
-    </h3>
-
-
-    <div id="grafico">
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================================
-       LINHA DO TEMPO
-  ========================================== -->
-
-  <div class="grafico-box">
-
-    <h3 class="titulo-secao">
-
-      📈 Evolução da Categoria
-
-    </h3>
-
-
-    <div id="graficoLinha">
-
-    </div>
-
-  </div>
-
-
-  <div
-    id="statusApi"
-    class="status-api">
-
-    Verificando conexão com a API...
-
-  </div>
-
-
-  <div class="rodape">
-
-    Controle Financeiro Pessoal
-
-  </div>
-
+<div id="graficoLinha"></div>
 
 </div>
 
 
 <script>
 
-
-// =====================================================
-// CONFIGURAÇÃO DA API
-// =====================================================
+/* =========================================================
+   API
+========================================================= */
 
 const URL_API =
   "https://script.google.com/macros/s/AKfycbxJzdCPkPxk2N4FhnoUflb-iWTyiLLn1XmSJDcUwkKsapI0qv-6DBpKWWBLuoHBqn8Y/exec";
 
 
-// =====================================================
-// CONFIGURAÇÃO DO GITHUB
-// =====================================================
+/* =========================================================
+   API REQUEST
+========================================================= */
 
-// Página inicial do sistema.
-// Se o seu index tiver outro nome, altere aqui.
+async function apiRequest(
+  action,
+  params={}
+){
 
-const URL_INDEX =
-  "index.html";
+  const url =
+    new URL(URL_API);
 
 
-// =====================================================
-// GOOGLE CHARTS
-// =====================================================
+  url.searchParams.set(
+    "action",
+    action
+  );
+
+
+  Object.keys(params)
+    .forEach(function(chave){
+
+      const valor =
+        params[chave];
+
+
+      if(
+        valor !== undefined &&
+        valor !== null
+      ){
+
+        url.searchParams.set(
+          chave,
+          valor
+        );
+
+      }
+
+    });
+
+
+  const resposta =
+    await fetch(
+      url.toString(),
+      {
+        method:"GET",
+        redirect:"follow",
+        cache:"no-store"
+      }
+    );
+
+
+  if(!resposta.ok){
+
+    throw new Error(
+      "Erro HTTP " +
+      resposta.status
+    );
+
+  }
+
+
+  const texto =
+    await resposta.text();
+
+
+  let dados;
+
+
+  try{
+
+    dados =
+      JSON.parse(texto);
+
+  }
+  catch(e){
+
+    console.error(texto);
+
+    throw new Error(
+      "Resposta inválida da API."
+    );
+
+  }
+
+
+  if(
+    dados &&
+    dados.sucesso === false
+  ){
+
+    throw new Error(
+      dados.erro ||
+      dados.mensagem ||
+      "Erro na API."
+    );
+
+  }
+
+
+  return dados;
+
+}
+
+
+/* =========================================================
+   GOOGLE CHARTS
+========================================================= */
 
 google.charts.load(
   "current",
   {
-    packages:[
-      "corechart"
-    ]
+    packages:["corechart"]
   }
 );
 
 
 google.charts.setOnLoadCallback(
-  function(){
-
-    console.log(
-      "Google Charts carregado."
-    );
-
-    verificarAPI();
-
-    carregarAnos();
-
-  }
+  iniciar
 );
 
 
-// =====================================================
-// VARIÁVEIS
-// =====================================================
+/* =========================================================
+   INICIAR
+========================================================= */
 
-let carregandoAnos = false;
+function iniciar(){
 
-let carregandoCategorias = false;
-
-let carregandoGrafico = false;
-
-let carregandoLinha = false;
-
-
-// =====================================================
-// JSONP
-// =====================================================
-
-/*
-  O GitHub Pages e o Apps Script estão
-  em domínios diferentes.
-
-  Por isso não usamos:
-
-  google.script.run
-
-  e também não dependemos de CORS.
-
-  A API do Apps Script já aceita:
-
-  ?callback=nomeDaFuncao
-
-  então usamos JSONP.
-*/
-
-function chamarAPI(
-  parametros
-){
-
-  return new Promise(
-    function(resolve, reject){
-
-      const callbackName =
-        "apiCallback_" +
-        Date.now() +
-        "_" +
-        Math.floor(
-          Math.random() * 100000
-        );
-
-
-      let finalizado = false;
-
-
-      const script =
-        document.createElement(
-          "script"
-        );
-
-
-      const timeout =
-        setTimeout(
-          function(){
-
-            if(finalizado){
-              return;
-            }
-
-            finalizado = true;
-
-            limpar();
-
-            reject(
-              new Error(
-                "Tempo limite excedido ao conectar com a API."
-              )
-            );
-
-          },
-          30000
-        );
-
-
-      function limpar(){
-
-        clearTimeout(
-          timeout
-        );
-
-
-        if(
-          script &&
-          script.parentNode
-        ){
-
-          script.parentNode.removeChild(
-            script
-          );
-
-        }
-
-
-        try{
-
-          delete window[
-            callbackName
-          ];
-
-        }
-        catch(e){
-
-          window[
-            callbackName
-          ] = undefined;
-
-        }
-
-      }
-
-
-      window[
-        callbackName
-      ] = function(
-        resposta
-      ){
-
-        if(finalizado){
-          return;
-        }
-
-
-        finalizado = true;
-
-        limpar();
-
-
-        if(
-          resposta &&
-          resposta.sucesso === false
-        ){
-
-          reject(
-            new Error(
-              resposta.erro ||
-              resposta.mensagem ||
-              "A API retornou um erro."
-            )
-          );
-
-          return;
-
-        }
-
-
-        resolve(
-          resposta || {}
-        );
-
-      };
-
-
-      script.onerror =
-        function(){
-
-          if(finalizado){
-            return;
-          }
-
-
-          finalizado = true;
-
-          limpar();
-
-
-          reject(
-            new Error(
-              "Não foi possível acessar a API do Google Apps Script."
-            )
-          );
-
-        };
-
-
-      const query =
-        new URLSearchParams();
-
-
-      Object.keys(
-        parametros || {}
-      ).forEach(
-        function(chave){
-
-          const valor =
-            parametros[chave];
-
-
-          if(
-            valor !== undefined &&
-            valor !== null
-          ){
-
-            query.set(
-              chave,
-              valor
-            );
-
-          }
-
-        }
-      );
-
-
-      query.set(
-        "callback",
-        callbackName
-      );
-
-
-      query.set(
-        "_",
-        Date.now()
-      );
-
-
-      script.src =
-        URL_API +
-        "?" +
-        query.toString();
-
-
-      script.async = true;
-
-
-      document
-        .head
-        .appendChild(
-          script
-        );
-
-    }
-  );
+  carregarAnos();
 
 }
 
 
-// =====================================================
-// VERIFICAR API
-// =====================================================
+/* =========================================================
+   VOLTAR
+========================================================= */
 
-async function verificarAPI(){
+function voltar(){
 
-  const status =
-    document.getElementById(
-      "statusApi"
-    );
-
-
-  try{
-
-    const resposta =
-      await chamarAPI({
-        action:"ping"
-      });
-
-
-    if(
-      resposta &&
-      resposta.sucesso
-    ){
-
-      status.innerHTML =
-        "🟢 API conectada e funcionando.";
-
-      status.style.color =
-        "#2e7d32";
-
-    }
-    else{
-
-      status.innerHTML =
-        "🟠 API respondeu, mas retornou um status inesperado.";
-
-    }
-
-  }
-  catch(erro){
-
-    console.error(
-      "Erro API:",
-      erro
-    );
-
-
-    status.innerHTML =
-      "🔴 Erro de conexão com a API.";
-
-    status.style.color =
-      "#c62828";
-
-  }
+  window.location.href =
+    "index.html";
 
 }
 
 
-// =====================================================
-// CARREGAR ANOS
-// =====================================================
+/* =========================================================
+   ANOS
+========================================================= */
 
 async function carregarAnos(){
 
-  if(carregandoAnos){
-    return;
-  }
-
-
-  carregandoAnos = true;
-
-
-  const combo =
-    document.getElementById(
-      "selecionaAno"
-    );
-
-
-  combo.innerHTML =
-    "<option value=''>Carregando...</option>";
-
-
   try{
 
-    const resposta =
-      await chamarAPI({
-
-        action:
-          "listarAnos"
-
-      });
-
-
-    console.log(
-      "Resposta listarAnos:",
-      resposta
-    );
-
-
     const anos =
-      Array.isArray(
-        resposta.anos
-      )
-      ?
-      resposta.anos
-      :
-      [];
+      await apiRequest(
+        "listarAnos"
+      );
+
+
+    const combo =
+      document.getElementById(
+        "selecionaAno"
+      );
 
 
     combo.innerHTML =
@@ -1014,105 +479,136 @@ async function carregarAnos(){
 
 
     if(
+      !anos ||
       anos.length === 0
     ){
 
       combo.innerHTML =
-        "<option value=''>Sem dados</option>";
-
-      mostrarMensagem(
-        "Nenhum ano encontrado nos lançamentos.",
-        "carregando"
-      );
-
-      document.getElementById(
-        "categoriaSelecionada"
-      ).innerHTML =
-        "<option value=''>Sem categorias</option>";
-
-      limparGraficos();
+        "<option>Sem dados</option>";
 
       return;
 
     }
 
 
-    anos.forEach(
-      function(ano){
+    anos.forEach(function(ano){
 
-        const opcao =
-          document.createElement(
-            "option"
-          );
-
-
-        opcao.value =
-          ano;
-
-
-        opcao.textContent =
-          ano;
-
-
-        combo.appendChild(
-          opcao
+      const opcao =
+        document.createElement(
+          "option"
         );
 
-      }
-    );
+      opcao.value =
+        ano;
+
+      opcao.textContent =
+        ano;
+
+      combo.appendChild(
+        opcao
+      );
+
+    });
 
 
-    /*
-      Seleciona o ano mais recente.
-    */
+    /* =====================================================
+       SE O INDEX ENVIOU ?ano=2026
+    ===================================================== */
 
-    combo.value =
-      anos[
-        anos.length - 1
-      ];
+    const parametros =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const anoURL =
+      parametros.get(
+        "ano"
+      );
+
+
+    if(
+      anoURL &&
+      anos.includes(anoURL)
+    ){
+
+      combo.value =
+        anoURL;
+
+    }
+    else{
+
+      combo.value =
+        anos[anos.length - 1];
+
+    }
 
 
     await carregarTipos();
 
     await carregarGrafico();
 
-
   }
-  catch(erro){
+  catch(e){
 
-    console.error(
-      erro
-    );
-
-
-    mostrarErro(
-      erro
-    );
-
-
-    combo.innerHTML =
-      "<option value=''>Erro</option>";
-
-  }
-  finally{
-
-    carregandoAnos = false;
+    mostrarErro(e);
 
   }
 
 }
 
 
-// =====================================================
-// CARREGAR CATEGORIAS
-// =====================================================
+/* =========================================================
+   TIPO
+========================================================= */
+
+document
+  .getElementById("tipoGrafico")
+  .addEventListener(
+    "change",
+    function(){
+
+      carregarTipos();
+
+    }
+  );
+
+
+/* =========================================================
+   ANO
+========================================================= */
+
+document
+  .getElementById("selecionaAno")
+  .addEventListener(
+    "change",
+    function(){
+
+      carregarTipos();
+
+      carregarGrafico();
+
+    }
+  );
+
+
+/* =========================================================
+   CATEGORIA
+========================================================= */
+
+document
+  .getElementById("categoriaSelecionada")
+  .addEventListener(
+    "change",
+    carregarLinhaTempo
+  );
+
+
+/* =========================================================
+   CATEGORIAS
+========================================================= */
 
 async function carregarTipos(){
-
-  if(carregandoCategorias){
-    return;
-  }
-
 
   const ano =
     document.getElementById(
@@ -1132,57 +628,20 @@ async function carregarTipos(){
     );
 
 
-  if(
-    !ano ||
-    !tipo
-  ){
-
-    combo.innerHTML =
-      "<option value=''>Selecione os filtros</option>";
-
-    return;
-
-  }
-
-
-  carregandoCategorias = true;
-
-
   combo.innerHTML =
-    "<option value=''>Carregando...</option>";
+    "<option>Carregando...</option>";
 
 
   try{
 
-    const resposta =
-      await chamarAPI({
-
-        action:
-          "listarTiposFinanceiros",
-
-        ano:
-          ano,
-
-        tipo:
-          tipo
-
-      });
-
-
-    console.log(
-      "Resposta categorias:",
-      resposta
-    );
-
-
     const lista =
-      Array.isArray(
-        resposta.categorias
-      )
-      ?
-      resposta.categorias
-      :
-      [];
+      await apiRequest(
+        "listarTiposFinanceiros",
+        {
+          ano:ano,
+          tipo:tipo
+        }
+      );
 
 
     combo.innerHTML =
@@ -1190,160 +649,71 @@ async function carregarTipos(){
 
 
     if(
+      !lista ||
       lista.length === 0
     ){
 
       combo.innerHTML =
-        "<option value=''>Sem categorias</option>";
-
-
-      document.getElementById(
-        "graficoLinha"
-      ).innerHTML =
-        "<div style='text-align:center;color:#777;padding:40px;'>Nenhuma categoria encontrada.</div>";
-
+        "<option>Sem categorias</option>";
 
       return;
 
     }
 
 
-    lista.forEach(
-      function(item){
+    lista.forEach(function(item){
 
-        const opcao =
-          document.createElement(
-            "option"
-          );
-
-
-        opcao.value =
-          item;
-
-
-        opcao.textContent =
-          item;
-
-
-        combo.appendChild(
-          opcao
+      const opcao =
+        document.createElement(
+          "option"
         );
 
-      }
-    );
+      opcao.value =
+        item;
+
+      opcao.textContent =
+        item;
+
+      combo.appendChild(
+        opcao
+      );
+
+    });
 
 
-    /*
-      Seleciona a primeira categoria.
-    */
-
-    combo.value =
-      lista[0];
-
-
-    await carregarLinhaTempo();
-
+    carregarLinhaTempo();
 
   }
-  catch(erro){
-
-    console.error(
-      erro
-    );
-
-
-    mostrarErro(
-      erro
-    );
-
+  catch(e){
 
     combo.innerHTML =
-      "<option value=''>Erro</option>";
+      "<option>Erro</option>";
 
-  }
-  finally{
-
-    carregandoCategorias = false;
+    mostrarErro(e);
 
   }
 
 }
 
 
-// =====================================================
-// CARREGAR TUDO
-// =====================================================
+/* =========================================================
+   ATUALIZAR
+========================================================= */
 
-async function carregarTudo(){
+function carregarTudo(){
 
-  const botao =
-    document.getElementById(
-      "btnAtualizar"
-    );
+  carregarTipos();
 
-
-  botao.disabled = true;
-
-
-  mostrarMensagem(
-    "Atualizando gráficos...",
-    "carregando"
-  );
-
-
-  try{
-
-    await carregarTipos();
-
-    await carregarGrafico();
-
-    await carregarLinhaTempo();
-
-
-    mostrarMensagem(
-      "Gráficos atualizados.",
-      "sucesso"
-    );
-
-
-    setTimeout(
-      function(){
-
-        document.getElementById(
-          "mensagem"
-        ).innerHTML = "";
-
-      },
-      2000
-    );
-
-  }
-  catch(erro){
-
-    mostrarErro(
-      erro
-    );
-
-  }
-  finally{
-
-    botao.disabled = false;
-
-  }
+  carregarGrafico();
 
 }
 
 
-// =====================================================
-// CARREGAR GRÁFICO PRINCIPAL
-// =====================================================
+/* =========================================================
+   GRÁFICO PRINCIPAL
+========================================================= */
 
 async function carregarGrafico(){
-
-  if(carregandoGrafico){
-    return;
-  }
-
 
   const ano =
     document.getElementById(
@@ -1358,72 +728,48 @@ async function carregarGrafico(){
   }
 
 
-  carregandoGrafico = true;
-
-
-  mostrarMensagem(
-    "Carregando gráfico...",
-    "carregando"
-  );
+  document.getElementById(
+    "mensagem"
+  ).innerHTML =
+    "Carregando gráfico...";
 
 
   try{
 
-    const resposta =
-      await chamarAPI({
-
-        action:
-          "dadosGraficos",
-
-        ano:
-          ano
-
-      });
-
-
-    console.log(
-      "Dados gráfico:",
-      resposta
-    );
+    const dados =
+      await apiRequest(
+        "dadosGraficos",
+        {
+          ano:ano
+        }
+      );
 
 
     desenharGrafico(
-      resposta.dados
+      dados
     );
 
+
+    document.getElementById(
+      "mensagem"
+    ).innerHTML =
+      "";
 
   }
-  catch(erro){
+  catch(e){
 
-    console.error(
-      erro
-    );
-
-
-    mostrarErro(
-      erro
-    );
-
-  }
-  finally{
-
-    carregandoGrafico = false;
+    mostrarErro(e);
 
   }
 
 }
 
 
-// =====================================================
-// CARREGAR LINHA DO TEMPO
-// =====================================================
+/* =========================================================
+   LINHA
+========================================================= */
 
 async function carregarLinhaTempo(){
-
-  if(carregandoLinha){
-    return;
-  }
-
 
   const ano =
     document.getElementById(
@@ -1444,12 +790,10 @@ async function carregarLinhaTempo(){
 
 
   if(
-
     !ano ||
     !tipo ||
     !categoria ||
     categoria === "Sem categorias"
-
   ){
 
     return;
@@ -1457,153 +801,73 @@ async function carregarLinhaTempo(){
   }
 
 
-  carregandoLinha = true;
-
-
   try{
 
-    const resposta =
-      await chamarAPI({
-
-        action:
-          "dadosLinhaTempo",
-
-        ano:
-          ano,
-
-        tipo:
-          tipo,
-
-        categoria:
-          categoria
-
-      });
-
-
-    console.log(
-      "Dados linha:",
-      resposta
-    );
+    const dados =
+      await apiRequest(
+        "dadosLinhaTempo",
+        {
+          ano:ano,
+          tipo:tipo,
+          categoria:categoria
+        }
+      );
 
 
     desenharLinha(
-      resposta.dados
-    );
-
-
-  }
-  catch(erro){
-
-    console.error(
-      erro
-    );
-
-
-    mostrarErro(
-      erro
+      dados
     );
 
   }
-  finally{
+  catch(e){
 
-    carregandoLinha = false;
+    mostrarErro(e);
 
   }
 
 }
 
 
-// =====================================================
-// EVENTO — TIPO
-// =====================================================
+/* =========================================================
+   ERRO
+========================================================= */
 
-document
-  .getElementById(
-    "tipoGrafico"
-  )
-  .addEventListener(
-    "change",
-    async function(){
+function mostrarErro(erro){
 
-      await carregarTipos();
-
-      await carregarGrafico();
-
-    }
+  console.error(
+    erro
   );
 
 
-// =====================================================
-// EVENTO — ANO
-// =====================================================
+  document.getElementById(
+    "mensagem"
+  ).innerHTML =
 
-document
-  .getElementById(
-    "selecionaAno"
-  )
-  .addEventListener(
-    "change",
-    async function(){
+    "<div class='erro'>" +
 
-      await carregarTipos();
+    "Erro: " +
 
-      await carregarGrafico();
+    (
+      erro.message ||
+      erro
+    ) +
 
-    }
-  );
+    "</div>";
+
+}
 
 
-// =====================================================
-// EVENTO — CATEGORIA
-// =====================================================
+/* =========================================================
+   DESENHAR PRINCIPAL
+========================================================= */
 
-document
-  .getElementById(
-    "categoriaSelecionada"
-  )
-  .addEventListener(
-    "change",
-    function(){
-
-      carregarLinhaTempo();
-
-    }
-  );
-
-
-// =====================================================
-// DESENHAR GRÁFICO PRINCIPAL
-// =====================================================
-
-function desenharGrafico(
-  dados
-){
+function desenharGrafico(dados){
 
   if(!dados){
 
     return;
 
   }
-
-
-  const receber =
-    Array.isArray(
-      dados.receber
-    )
-    ?
-    dados.receber
-    :
-    [];
-
-
-  const pagar =
-    Array.isArray(
-      dados.pagar
-    )
-    ?
-    dados.pagar
-    :
-    [];
 
 
   const tabela =
@@ -1650,8 +914,8 @@ function desenharGrafico(
 
 
   for(
-    let i = 0;
-    i < 12;
+    let i=0;
+    i<12;
     i++
   ){
 
@@ -1660,12 +924,12 @@ function desenharGrafico(
       meses[i],
 
       Number(
-        receber[i]
-      ) || 0,
+        dados.receber?.[i] || 0
+      ),
 
       Number(
-        pagar[i]
-      ) || 0
+        dados.pagar?.[i] || 0
+      )
 
     ]);
 
@@ -1677,15 +941,11 @@ function desenharGrafico(
   );
 
 
-  const elemento =
-    document.getElementById(
-      "grafico"
-    );
-
-
   const grafico =
     new google.visualization.ColumnChart(
-      elemento
+      document.getElementById(
+        "grafico"
+      )
     );
 
 
@@ -1698,66 +958,36 @@ function desenharGrafico(
       title:
         "Receitas x Despesas por Mês",
 
-
       legend:{
         position:"top"
       },
 
-
       colors:[
-
         "#2e7d32",
-
         "#c62828"
-
       ],
 
-
       animation:{
-
         startup:true,
-
         duration:800,
-
         easing:"out"
-
       },
-
 
       chartArea:{
-
-        left:80,
-
+        left:90,
         top:60,
-
-        width:"82%",
-
+        width:"80%",
         height:"70%"
-
       },
-
 
       vAxis:{
-
-        title:
-          "Valor (R$)",
-
-        format:
-          "currency"
-
+        title:"Valor (R$)",
+        format:"currency"
       },
-
 
       hAxis:{
-
-        title:
-          "Mês"
-
-      },
-
-
-      backgroundColor:
-        "transparent"
+        title:"Mês"
+      }
 
     }
 
@@ -1766,15 +996,13 @@ function desenharGrafico(
 }
 
 
-// =====================================================
-// DESENHAR LINHA DO TEMPO
-// =====================================================
+/* =========================================================
+   DESENHAR LINHA
+========================================================= */
 
-function desenharLinha(
-  dados
-){
+function desenharLinha(dados){
 
-  if(!Array.isArray(dados)){
+  if(!dados){
 
     return;
 
@@ -1819,8 +1047,8 @@ function desenharLinha(
 
 
   for(
-    let i = 0;
-    i < 12;
+    let i=0;
+    i<12;
     i++
   ){
 
@@ -1829,8 +1057,8 @@ function desenharLinha(
       meses[i],
 
       Number(
-        dados[i]
-      ) || 0
+        dados[i] || 0
+      )
 
     ]);
 
@@ -1855,26 +1083,16 @@ function desenharLinha(
 
 
   const cor =
-
-    tipo ===
-    "Contas a Receber"
-
-    ?
-
-    "#00897b"
-
-    :
-
-    "#e53935";
+    tipo === "Contas a Receber"
+      ? "#00897b"
+      : "#e53935";
 
 
   const grafico =
     new google.visualization.LineChart(
-
       document.getElementById(
         "graficoLinha"
       )
-
     );
 
 
@@ -1888,73 +1106,43 @@ function desenharLinha(
         categoria +
         " - Evolução Mensal",
 
-
       curveType:
         "function",
 
-
       legend:
         "none",
-
 
       colors:[
         cor
       ],
 
-
       pointSize:
         6,
-
 
       lineWidth:
         4,
 
-
       animation:{
-
         startup:true,
-
         duration:900,
-
         easing:"out"
-
       },
-
 
       chartArea:{
-
-        left:80,
-
+        left:90,
         top:60,
-
-        width:"82%",
-
+        width:"80%",
         height:"70%"
-
       },
-
 
       vAxis:{
-
-        title:
-          "Valor (R$)",
-
-        format:
-          "currency"
-
+        title:"Valor (R$)",
+        format:"currency"
       },
-
 
       hAxis:{
-
-        title:
-          "Mês"
-
-      },
-
-
-      backgroundColor:
-        "transparent"
+        title:"Mês"
+      }
 
     }
 
@@ -1963,182 +1151,32 @@ function desenharLinha(
 }
 
 
-// =====================================================
-// LIMPAR GRÁFICOS
-// =====================================================
-
-function limparGraficos(){
-
-  document.getElementById(
-    "grafico"
-  ).innerHTML =
-    "";
-
-
-  document.getElementById(
-    "graficoLinha"
-  ).innerHTML =
-    "";
-
-}
-
-
-// =====================================================
-// MENSAGEM
-// =====================================================
-
-function mostrarMensagem(
-  texto,
-  classe
-){
-
-  const div =
-    document.getElementById(
-      "mensagem"
-    );
-
-
-  div.className =
-    "mensagem " +
-    (
-      classe || ""
-    );
-
-
-  div.textContent =
-    texto || "";
-
-}
-
-
-// =====================================================
-// ERRO
-// =====================================================
-
-function mostrarErro(
-  erro
-){
-
-  console.error(
-    erro
-  );
-
-
-  let mensagem =
-    "Erro desconhecido.";
-
-
-  if(
-    erro &&
-    erro.message
-  ){
-
-    mensagem =
-      erro.message;
-
-  }
-  else if(
-    typeof erro === "string"
-  ){
-
-    mensagem =
-      erro;
-
-  }
-
-
-  mostrarMensagem(
-    "Erro: " + mensagem,
-    "erro"
-  );
-
-}
-
-
-// =====================================================
-// VOLTAR
-// =====================================================
-
-function voltar(){
-
-  /*
-    Como agora o sistema está no GitHub,
-    não usamos mais:
-
-    ?page=index
-
-    nem:
-
-    window.top.location.href
-
-    do Apps Script.
-  */
-
-  window.location.href =
-    URL_INDEX;
-
-}
-
-
-// =====================================================
-// REDIMENSIONAR GRÁFICOS
-// =====================================================
-
-let resizeTimer;
-
+/* =========================================================
+   REDIMENSIONAR
+========================================================= */
 
 window.addEventListener(
   "resize",
   function(){
 
-    clearTimeout(
-      resizeTimer
-    );
+    carregarGrafico();
 
+    const categoria =
+      document.getElementById(
+        "categoriaSelecionada"
+      ).value;
 
-    resizeTimer =
-      setTimeout(
-        function(){
+    if(categoria){
 
-          carregarGrafico();
+      carregarLinhaTempo();
 
-          const categoria =
-            document.getElementById(
-              "categoriaSelecionada"
-            ).value;
-
-
-          if(categoria){
-
-            carregarLinhaTempo();
-
-          }
-
-        },
-        300
-      );
+    }
 
   }
 );
 
-
-// =====================================================
-// LOG
-// =====================================================
-
-console.log(
-  "Graficos.html iniciado."
-);
-
-console.log(
-  "API:",
-  URL_API
-);
-
 </script>
-
 
 </body>
 
 </html>
-
