@@ -1560,101 +1560,35 @@ function obterCompetencia(){
 }
 
 
-/* =========================================================
-   ABRIR PÁGINAS
-========================================================= */
+function abrirPagina(arquivo, parametros = {}){
 
-function abrirPagina(
-  arquivo
-){
+  const url =
+    new URL(
+      arquivo,
+      window.location.href
+    );
+
+
+  Object.keys(parametros).forEach(function(chave){
+
+    if(
+      parametros[chave] !== undefined &&
+      parametros[chave] !== null &&
+      parametros[chave] !== ""
+    ){
+
+      url.searchParams.set(
+        chave,
+        parametros[chave]
+      );
+
+    }
+
+  });
+
 
   window.location.href =
-    BASE_URL + arquivo;
-
-}
-
-
-/* =========================================================
-   SALDO INICIAL
-========================================================= */
-
-function abrirSaldo(){
-
-  const competencia =
-    obterCompetencia();
-
-  if(!competencia){
-
-    mostrarMensagem(
-      "Selecione a competência.",
-      "error"
-    );
-
-    return;
-
-  }
-
-  const valor =
-    prompt(
-      "Informe o saldo inicial para " +
-      competencia +
-      ":"
-    );
-
-  if(
-    valor === null ||
-    valor.trim() === ""
-  ){
-
-    return;
-
-  }
-
-  mostrarMensagem(
-    "Para salvar o saldo inicial, conecte esta página ao seu Google Apps Script.",
-    "error"
-  );
-
-}
-
-
-/* =========================================================
-   FECHAR COMPETÊNCIA
-========================================================= */
-
-function fecharMes(){
-
-  const competencia =
-    obterCompetencia();
-
-  if(!competencia){
-
-    mostrarMensagem(
-      "Selecione a competência.",
-      "error"
-    );
-
-    return;
-
-  }
-
-  const confirmar =
-    confirm(
-      "Deseja fechar a competência " +
-      competencia +
-      "?"
-    );
-
-  if(!confirmar){
-
-    return;
-
-  }
-
-  mostrarMensagem(
-    "A função de fechamento precisa estar ligada ao seu Google Apps Script.",
-    "error"
-  );
+    url.href;
 
 }
 
@@ -1665,8 +1599,28 @@ function fecharMes(){
 
 function abrirRelatorio(){
 
+  const competencia =
+    obterCompetencia();
+
+
+  if(!competencia){
+
+    mostrarMensagem(
+      "Selecione a competência.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
   abrirPagina(
-    "Relatorio.html"
+    "Relatorio.html",
+    {
+      competencia:
+        competencia
+    }
   );
 
 }
@@ -1678,8 +1632,28 @@ function abrirRelatorio(){
 
 function abrirLancamentos(){
 
+  const competencia =
+    obterCompetencia();
+
+
+  if(!competencia){
+
+    mostrarMensagem(
+      "Selecione a competência.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
   abrirPagina(
-    "Lancamentos.html"
+    "Lancamentos.html",
+    {
+      competencia:
+        competencia
+    }
   );
 
 }
@@ -1691,8 +1665,28 @@ function abrirLancamentos(){
 
 function abrirGraficos(){
 
+  const competencia =
+    obterCompetencia();
+
+
+  if(!competencia){
+
+    mostrarMensagem(
+      "Selecione a competência.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
   abrirPagina(
-    "Graficos.html"
+    "Graficos.html",
+    {
+      competencia:
+        competencia
+    }
   );
 
 }
@@ -1705,7 +1699,7 @@ function abrirGraficos(){
 function abrirAtendimento(){
 
   abrirPagina(
-    "atendimento.html"
+    "Atendimento.html"
   );
 
 }
@@ -1717,11 +1711,20 @@ function abrirAtendimento(){
 
 function abrirBaixasPendentes(){
 
+  const competencia =
+    obterCompetencia();
+
+
   abrirPagina(
-    "BaixasPendentes.html"
+    "BaixasPendentes.html",
+    {
+      competencia:
+        competencia
+    }
   );
 
 }
+
 
 
 /* =========================================================
