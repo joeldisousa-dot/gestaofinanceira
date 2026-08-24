@@ -1,1 +1,1909 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Relatório Financeiro</title>
+
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+
+body{
+
+font-family:
+"Segoe UI",
+Arial,
+sans-serif;
+
+background:
+linear-gradient(
+135deg,
+#e8eef5,
+#ffffff
+);
+
+padding:20px;
+
+color:#333;
+
+margin:0;
+
+}
+
+
+.container{
+
+max-width:1100px;
+
+margin:auto;
+
+background:white;
+
+padding:25px;
+
+border-radius:18px;
+
+box-shadow:
+0 8px 25px rgba(0,0,0,.15);
+
+}
+
+
+/* ==========================
+   CABEÇALHO
+========================== */
+
+.topo{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:25px;
+
+gap:15px;
+
+}
+
+
+.topo h1{
+
+margin:0;
+
+font-size:28px;
+
+color:#0d47a1;
+
+}
+
+
+.voltar{
+
+background:
+linear-gradient(
+135deg,
+#455a64,
+#78909c
+);
+
+border:none;
+
+padding:
+14px 28px;
+
+border-radius:12px;
+
+cursor:pointer;
+
+font-size:16px;
+
+font-weight:bold;
+
+color:white;
+
+box-shadow:
+0 5px 12px rgba(0,0,0,.25);
+
+transition:.2s;
+
+}
+
+
+.voltar:hover{
+
+transform:
+translateY(-3px);
+
+filter:
+brightness(1.1);
+
+}
+
+
+/* ==========================
+   INFORMAÇÕES
+========================== */
+
+.cabecalho{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+background:
+linear-gradient(
+135deg,
+#0d47a1,
+#1976d2
+);
+
+color:white;
+
+padding:20px;
+
+border-radius:12px;
+
+margin-bottom:25px;
+
+gap:20px;
+
+}
+
+
+.cabecalho h1{
+
+margin:0;
+
+font-size:26px;
+
+}
+
+
+.info{
+
+text-align:right;
+
+font-size:14px;
+
+line-height:25px;
+
+}
+
+
+/* ==========================
+   TÍTULOS
+========================== */
+
+h2{
+
+font-size:18px;
+
+margin-top:25px;
+
+border-left:
+6px solid #1976d2;
+
+padding-left:10px;
+
+color:#1976d2;
+
+}
+
+
+/* ==========================
+   TABELAS
+========================== */
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:12px;
+
+font-size:13px;
+
+}
+
+
+th{
+
+background:#1976d2;
+
+color:white;
+
+padding:10px;
+
+text-align:center;
+
+}
+
+
+td{
+
+padding:9px;
+
+border-bottom:
+1px solid #ddd;
+
+text-align:center;
+
+}
+
+
+tr:nth-child(even){
+
+background:#f8f9fc;
+
+}
+
+
+.valor{
+
+font-weight:bold;
+
+text-align:right;
+
+}
+
+
+/* ==========================
+   STATUS
+========================== */
+
+.pago{
+
+background:#c8e6c9;
+
+color:#256029;
+
+padding:
+4px 10px;
+
+border-radius:12px;
+
+font-size:12px;
+
+font-weight:bold;
+
+}
+
+
+.pendente{
+
+background:#fff3cd;
+
+color:#856404;
+
+padding:
+4px 10px;
+
+border-radius:12px;
+
+font-size:12px;
+
+font-weight:bold;
+
+}
+
+
+/* ==========================
+   TOTAIS
+========================== */
+
+.total-receita{
+
+margin-top:12px;
+
+padding:12px;
+
+background:#e8f5e9;
+
+border-left:
+6px solid #2e7d32;
+
+color:#2e7d32;
+
+font-weight:bold;
+
+font-size:15px;
+
+border-radius:8px;
+
+}
+
+
+.total-despesa{
+
+margin-top:12px;
+
+padding:12px;
+
+background:#ffebee;
+
+border-left:
+6px solid #c62828;
+
+color:#c62828;
+
+font-weight:bold;
+
+font-size:15px;
+
+border-radius:8px;
+
+}
+
+
+.resultado-final{
+
+margin-top:20px;
+
+padding:15px;
+
+background:#e3f2fd;
+
+border-left:
+6px solid #1976d2;
+
+font-size:18px;
+
+font-weight:bold;
+
+color:#0d47a1;
+
+border-radius:8px;
+
+}
+
+
+/* ==========================
+   BOTÕES
+========================== */
+
+button{
+
+border:none;
+
+background:
+linear-gradient(
+135deg,
+#1976d2,
+#2196f3
+);
+
+color:white;
+
+padding:
+12px 25px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+font-size:15px;
+
+}
+
+
+button:hover{
+
+filter:
+brightness(1.1);
+
+transform:
+translateY(-2px);
+
+}
+
+
+button:disabled{
+
+opacity:.6;
+
+cursor:not-allowed;
+
+transform:none;
+
+}
+
+
+/* ==========================
+   CARREGAMENTO
+========================== */
+
+.carregando{
+
+text-align:center;
+
+padding:30px;
+
+color:#777;
+
+}
+
+
+.erro{
+
+background:#ffebee;
+
+color:#c62828;
+
+padding:15px;
+
+border-radius:8px;
+
+border-left:
+5px solid #c62828;
+
+font-weight:bold;
+
+}
+
+
+/* ==========================
+   RODAPÉ
+========================== */
+
+.rodape{
+
+text-align:center;
+
+margin-top:25px;
+
+color:#777;
+
+font-size:12px;
+
+}
+
+
+/* ==========================
+   IMPRESSÃO A4
+========================== */
+
+@media print{
+
+@page{
+
+size:A4 portrait;
+
+margin:10mm;
+
+}
+
+
+body{
+
+background:white;
+
+padding:0;
+
+}
+
+
+.container{
+
+width:100%;
+
+max-width:none;
+
+box-shadow:none;
+
+padding:10px;
+
+}
+
+
+button,
+.voltar{
+
+display:none;
+
+}
+
+
+.cabecalho{
+
+background:white !important;
+
+color:#000;
+
+border:
+1px solid #ddd;
+
+}
+
+
+table{
+
+font-size:10px;
+
+}
+
+
+th,
+td{
+
+padding:5px;
+
+}
+
+
+h2{
+
+font-size:14px;
+
+}
+
+}
+
+
+/* ==========================
+   RESPONSIVO
+========================== */
+
+@media(max-width:700px){
+
+body{
+
+padding:10px;
+
+}
+
+
+.container{
+
+padding:15px;
+
+border-radius:12px;
+
+}
+
+
+.topo{
+
+align-items:flex-start;
+
+flex-direction:column;
+
+}
+
+
+.topo h1{
+
+font-size:22px;
+
+}
+
+
+.voltar{
+
+width:100%;
+
+}
+
+
+.cabecalho{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+
+.info{
+
+text-align:left;
+
+}
+
+
+table{
+
+font-size:11px;
+
+}
+
+
+th,
+td{
+
+padding:7px 5px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<!-- ==========================
+     TOPO
+========================== -->
+
+<div class="topo">
+
+<h1>
+📄 Relatório Financeiro
+</h1>
+
+
+<button
+class="voltar"
+onclick="voltar()">
+
+⬅ Voltar
+
+</button>
+
+</div>
+
+
+<!-- ==========================
+     CABEÇALHO RELATÓRIO
+========================== -->
+
+<div class="cabecalho">
+
+<div>
+
+<h1>
+💰 Controle Financeiro
+</h1>
+
+<p>
+Relatório Financeiro Pessoal
+</p>
+
+</div>
+
+
+<div class="info">
+
+Competência:
+
+<b id="competencia">
+-
+</b>
+
+
+<br>
+
+
+Emitido:
+
+<span id="data">
+-
+</span>
+
+</div>
+
+</div>
+
+
+<!-- ==========================
+     RECEITAS
+========================== -->
+
+<h2>
+📥 Receitas
+</h2>
+
+
+<div
+id="receber"
+class="carregando">
+
+Carregando receitas...
+
+</div>
+
+
+<!-- ==========================
+     DESPESAS
+========================== -->
+
+<h2>
+📤 Despesas
+</h2>
+
+
+<div
+id="pagar"
+class="carregando">
+
+Carregando despesas...
+
+</div>
+
+
+<!-- ==========================
+     RESULTADO
+========================== -->
+
+<div
+class="resultado-final"
+id="resumoFinal">
+
+Calculando resultado...
+
+</div>
+
+
+<br>
+
+
+<div style="text-align:right">
+
+<button
+onclick="window.print()">
+
+🖨 Imprimir / Salvar PDF
+
+</button>
+
+</div>
+
+
+<div class="rodape">
+
+Relatório gerado automaticamente
+
+<br>
+
+Controle Financeiro Pessoal
+
+</div>
+
+
+</div>
+
+
+<script>
+
+
+// =====================================================
+// CONFIGURAÇÃO DA API
+// =====================================================
+
+const URL_API =
+"https://script.google.com/macros/s/AKfycbxJzdCPkPxk2N4FhnoUflb-iWTyiLLn1XmSJDcUwkKsapI0qv-6DBpKWWBLuoHBqn8Y/exec";
+
+
+// =====================================================
+// URL DA PÁGINA PRINCIPAL
+// =====================================================
+//
+// COLOQUE AQUI A URL DO SEU INDEX.HTML NO GITHUB.
+//
+// Exemplo:
+// https://seuusuario.github.io/seu-repositorio/
+//
+// =====================================================
+
+const URL_INDEX =
+"https://seuusuario.github.io/seu-repositorio/";
+
+
+// =====================================================
+// PEGAR COMPETÊNCIA DA URL
+// =====================================================
+//
+// Exemplos:
+//
+// Relatorio.html?competencia=2026-08
+//
+// ou
+//
+// Relatorio.html?competencia=08/2026
+//
+// =====================================================
+
+function obterCompetencia(){
+
+const parametros =
+new URLSearchParams(
+window.location.search
+);
+
+
+let comp =
+parametros.get("competencia");
+
+
+if(!comp){
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+comp =
+params.get("comp");
+
+}
+
+
+if(!comp){
+
+const agora =
+new Date();
+
+comp =
+agora.getFullYear() +
+"-" +
+String(
+agora.getMonth() + 1
+).padStart(2,"0");
+
+}
+
+
+return converterCompetencia(comp);
+
+}
+
+
+// =====================================================
+// CONVERTER COMPETÊNCIA
+// =====================================================
+
+function converterCompetencia(valor){
+
+if(!valor){
+
+return "";
+
+}
+
+
+valor =
+String(valor).trim();
+
+
+// AAAA-MM
+
+if(
+/^\d{4}-\d{2}$/.test(valor)
+){
+
+return valor;
+
+}
+
+
+// MM/AAAA
+
+if(
+/^\d{2}\/\d{4}$/.test(valor)
+){
+
+const partes =
+valor.split("/");
+
+return partes[1] +
+"-" +
+partes[0];
+
+}
+
+
+// AAAA-MM-DD
+
+if(
+/^\d{4}-\d{2}-\d{2}/.test(valor)
+){
+
+return valor.substring(
+0,
+7
+);
+
+}
+
+
+return valor;
+
+}
+
+
+// =====================================================
+// COMPETÊNCIA
+// =====================================================
+
+const competencia =
+obterCompetencia();
+
+
+document.getElementById(
+"competencia"
+).textContent =
+formatarCompetencia(
+competencia
+);
+
+
+// =====================================================
+// DATA DE EMISSÃO
+// =====================================================
+
+document.getElementById(
+"data"
+).textContent =
+new Date().toLocaleString(
+"pt-BR"
+);
+
+
+// =====================================================
+// INICIALIZAÇÃO
+// =====================================================
+
+window.addEventListener(
+"load",
+function(){
+
+carregarRelatorio();
+
+}
+);
+
+
+// =====================================================
+// JSONP
+// =====================================================
+//
+// O GitHub Pages não pode chamar diretamente
+// google.script.run.
+// Por isso utilizamos a API publicada do Apps Script.
+//
+// =====================================================
+
+let contadorJSONP = 0;
+
+
+function chamarAPI(
+acao,
+parametros
+){
+
+return new Promise(
+function(resolve,reject){
+
+const callback =
+"callbackFinanceiro_" +
+Date.now() +
+"_" +
+(++contadorJSONP);
+
+
+const script =
+document.createElement(
+"script"
+);
+
+
+const dados =
+parametros || {};
+
+
+dados.action =
+acao;
+
+dados.callback =
+callback;
+
+
+const query =
+Object.keys(dados)
+.map(
+function(chave){
+
+return (
+encodeURIComponent(chave) +
+"=" +
+encodeURIComponent(
+dados[chave] === undefined
+?
+""
+:
+dados[chave]
+)
+);
+
+}
+)
+.join("&");
+
+
+const url =
+URL_API +
+"?" +
+query;
+
+
+let finalizado = false;
+
+
+const timeout =
+setTimeout(
+function(){
+
+if(finalizado){
+
+return;
+
+}
+
+
+finalizado = true;
+
+cleanup();
+
+reject(
+new Error(
+"Tempo limite excedido ao consultar a API."
+)
+);
+
+},
+30000
+);
+
+
+window[callback] =
+function(resposta){
+
+if(finalizado){
+
+return;
+
+}
+
+
+finalizado = true;
+
+clearTimeout(timeout);
+
+cleanup();
+
+resolve(
+resposta
+);
+
+};
+
+
+script.onerror =
+function(){
+
+if(finalizado){
+
+return;
+
+}
+
+
+finalizado = true;
+
+clearTimeout(timeout);
+
+cleanup();
+
+reject(
+new Error(
+"Não foi possível conectar à API do Google Apps Script."
+)
+);
+
+};
+
+
+script.src =
+url;
+
+
+document.body.appendChild(
+script
+);
+
+
+function cleanup(){
+
+delete window[callback];
+
+if(script.parentNode){
+
+script.parentNode.removeChild(
+script
+);
+
+}
+
+}
+
+});
+
+}
+
+
+// =====================================================
+// CARREGAR RELATÓRIO
+// =====================================================
+
+async function carregarRelatorio(){
+
+const receber =
+document.getElementById(
+"receber"
+);
+
+
+const pagar =
+document.getElementById(
+"pagar"
+);
+
+
+const resumo =
+document.getElementById(
+"resumoFinal"
+);
+
+
+try{
+
+
+if(!competencia){
+
+throw new Error(
+"Competência não informada."
+);
+
+}
+
+
+const resposta =
+await chamarAPI(
+"listarLancamentos",
+{
+competencia:
+competencia
+}
+);
+
+
+console.log(
+"Resposta da API:",
+resposta
+);
+
+
+if(
+!resposta ||
+resposta.sucesso !== true
+){
+
+throw new Error(
+resposta &&
+(
+resposta.erro ||
+resposta.mensagem
+)
+?
+(
+resposta.erro ||
+resposta.mensagem
+)
+:
+"Erro desconhecido ao carregar lançamentos."
+);
+
+}
+
+
+const lista =
+Array.isArray(
+resposta.lista
+)
+?
+resposta.lista
+:
+[];
+
+
+processarRelatorio(
+lista
+);
+
+
+}
+catch(erro){
+
+console.error(
+"Erro:",
+erro
+);
+
+
+receber.innerHTML =
+`<div class="erro">
+Erro ao carregar receitas:<br>
+${escaparHTML(erro.message)}
+</div>`;
+
+
+pagar.innerHTML =
+`<div class="erro">
+Não foi possível carregar as despesas.
+</div>`;
+
+
+resumo.innerHTML =
+"Não foi possível gerar o relatório.";
+
+}
+
+}
+
+
+// =====================================================
+// PROCESSAR RELATÓRIO
+// =====================================================
+
+function processarRelatorio(
+lista
+){
+
+const receitas = [];
+
+const despesas = [];
+
+let totalReceitas = 0;
+
+let totalDespesas = 0;
+
+let totalRepasse = 0;
+
+
+lista.forEach(
+function(item){
+
+const descricao =
+String(
+item.descricao || ""
+)
+.trim();
+
+
+const descricaoNormalizada =
+normalizarTexto(
+descricao
+);
+
+
+const baixado =
+normalizarTexto(
+item.baixado
+) === "sim";
+
+
+const valor =
+Number(
+item.valor || 0
+) || 0;
+
+
+// -----------------------------------------------
+// RECEITAS
+// -----------------------------------------------
+
+if(
+textoIgual(
+item.tipo,
+"Contas a Receber"
+)
+){
+
+receitas.push(item);
+
+totalReceitas +=
+valor;
+
+}
+
+
+// -----------------------------------------------
+// DESPESAS
+// -----------------------------------------------
+
+else if(
+textoIgual(
+item.tipo,
+"Contas a Pagar"
+)
+){
+
+if(
+
+descricaoNormalizada ===
+"repasse aluguel"
+
+&&
+
+baixado
+
+){
+
+totalRepasse +=
+valor;
+
+}
+else{
+
+despesas.push(item);
+
+totalDespesas +=
+valor;
+
+}
+
+}
+
+});
+
+
+// =================================================
+// REPASSE
+// =================================================
+//
+// Mantém a mesma regra do seu sistema:
+// o "Repasse aluguel" baixado é abatido das
+// receitas e também das despesas.
+//
+// =================================================
+
+totalReceitas -=
+totalRepasse;
+
+
+totalDespesas -=
+totalRepasse;
+
+
+// =================================================
+// MONTAR TABELAS
+// =================================================
+
+montarTabela(
+"receber",
+receitas,
+"receita",
+totalReceitas
+);
+
+
+montarTabela(
+"pagar",
+despesas,
+"despesa",
+totalDespesas
+);
+
+
+// =================================================
+// RESULTADO
+// =================================================
+
+const saldo =
+totalReceitas -
+totalDespesas;
+
+
+const classe =
+saldo >= 0
+?
+""
+:
+"";
+
+
+document.getElementById(
+"resumoFinal"
+).innerHTML =
+
+"Resultado da competência: " +
+formatar(saldo);
+
+
+}
+
+
+// =====================================================
+// MONTAR TABELA
+// =====================================================
+
+function montarTabela(
+id,
+lista,
+tipo,
+totalPersonalizado
+){
+
+const elemento =
+document.getElementById(
+id
+);
+
+
+if(
+!lista ||
+lista.length === 0
+){
+
+elemento.innerHTML =
+"Nenhum lançamento encontrado.";
+
+return;
+
+}
+
+
+let total =
+Number(
+totalPersonalizado || 0
+);
+
+
+let html = `
+
+<div style="overflow-x:auto">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Descrição
+</th>
+
+<th>
+Valor
+</th>
+
+<th>
+Vencimento
+</th>
+
+<th>
+Status
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+`;
+
+
+lista.forEach(
+function(item){
+
+const baixado =
+normalizarTexto(
+item.baixado
+) === "sim";
+
+
+html += `
+
+<tr>
+
+<td>
+${escaparHTML(
+item.descricao
+)}
+</td>
+
+
+<td class="valor">
+${formatar(
+item.valor
+)}
+</td>
+
+
+<td>
+${formatarData(
+item.vencimento
+)}
+</td>
+
+
+<td>
+
+${
+baixado
+
+?
+
+"<span class='pago'>✔ Pago</span>"
+
+:
+
+"<span class='pendente'>⏳ Pendente</span>"
+
+}
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+
+html += `
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+
+if(
+tipo === "receita"
+){
+
+html += `
+
+<div class="total-receita">
+
+Total de Receitas:
+
+<span style="
+font-size:12px;
+font-weight:normal;
+">
+
+(Já abatendo o Repasse aluguel)
+
+</span>
+
+<br>
+
+${formatar(total)}
+
+</div>
+
+`;
+
+}
+
+
+if(
+tipo === "despesa"
+){
+
+html += `
+
+<div class="total-despesa">
+
+Total de Despesas:
+
+<span style="
+font-size:12px;
+font-weight:normal;
+">
+
+(Já abatendo o Repasse aluguel)
+
+</span>
+
+<br>
+
+${formatar(total)}
+
+</div>
+
+`;
+
+}
+
+
+elemento.innerHTML =
+html;
+
+}
+
+
+// =====================================================
+// NORMALIZAR TEXTO
+// =====================================================
+
+function normalizarTexto(
+texto
+){
+
+if(
+texto === null ||
+texto === undefined
+){
+
+return "";
+
+}
+
+
+return String(texto)
+
+.toLowerCase()
+
+.normalize("NFD")
+
+.replace(
+/[\u0300-\u036f]/g,
+""
+)
+
+.trim();
+
+}
+
+
+// =====================================================
+// COMPARAR TEXTO
+// =====================================================
+
+function textoIgual(
+a,
+b
+){
+
+return (
+normalizarTexto(a) ===
+normalizarTexto(b)
+);
+
+}
+
+
+// =====================================================
+// FORMATAR COMPETÊNCIA
+// =====================================================
+
+function formatarCompetencia(
+comp
+){
+
+if(
+!comp ||
+!/^\d{4}-\d{2}$/.test(comp)
+){
+
+return comp || "-";
+
+}
+
+
+const partes =
+comp.split("-");
+
+
+return (
+partes[1] +
+"/" +
+partes[0]
+);
+
+}
+
+
+// =====================================================
+// FORMATAR MOEDA
+// =====================================================
+
+function formatar(
+valor
+){
+
+return Number(
+valor || 0
+).toLocaleString(
+"pt-BR",
+{
+style:"currency",
+currency:"BRL"
+}
+);
+
+}
+
+
+// =====================================================
+// FORMATAR DATA
+// =====================================================
+
+function formatarData(
+data
+){
+
+if(!data){
+
+return "";
+
+}
+
+
+const texto =
+String(data).trim();
+
+
+// dd/mm/aaaa
+
+if(
+/^\d{2}\/\d{2}\/\d{4}$/.test(
+texto
+)
+){
+
+return texto;
+
+}
+
+
+// yyyy-mm-dd
+
+if(
+/^\d{4}-\d{2}-\d{2}$/.test(
+texto
+)
+){
+
+const partes =
+texto.split("-");
+
+
+return (
+partes[2] +
+"/" +
+partes[1] +
+"/" +
+partes[0]
+);
+
+}
+
+
+// Outros formatos
+
+const objeto =
+new Date(data);
+
+
+if(
+!isNaN(
+objeto.getTime()
+)
+){
+
+return objeto.toLocaleDateString(
+"pt-BR"
+);
+
+}
+
+
+return texto;
+
+}
+
+
+// =====================================================
+// ESCAPAR HTML
+// =====================================================
+//
+// Evita que uma descrição cadastrada na planilha
+// seja interpretada como HTML.
+//
+// =====================================================
+
+function escaparHTML(
+valor
+){
+
+if(
+valor === null ||
+valor === undefined
+){
+
+return "";
+
+}
+
+
+return String(valor)
+
+.replace(
+/&/g,
+"&amp;"
+)
+
+.replace(
+/</g,
+"&lt;"
+)
+
+.replace(
+/>/g,
+"&gt;"
+)
+
+.replace(
+/"/g,
+"&quot;"
+)
+
+.replace(
+/'/g,
+"&#039;"
+);
+
+}
+
+
+// =====================================================
+// VOLTAR
+// =====================================================
+
+function voltar(){
+
+// Volta para o GitHub, não para o Apps Script.
+
+window.location.href =
+URL_INDEX;
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
 
