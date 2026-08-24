@@ -1,1 +1,1752 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Atendimento</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+
+    margin:0;
+    padding:20px;
+
+    font-family:
+        Arial,
+        "Segoe UI",
+        sans-serif;
+
+    background:#eef3f8;
+
+    color:#333;
+}
+
+
+.container{
+
+    max-width:900px;
+
+    margin:auto;
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.15);
+
+}
+
+
+.topo{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+    gap:15px;
+
+}
+
+
+.topo h2{
+
+    margin:0;
+
+    color:#0d47a1;
+
+}
+
+
+.voltar{
+
+    background:#546e7a;
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    font-size:15px;
+
+    color:white;
+
+}
+
+
+.voltar:hover{
+
+    background:#37474f;
+
+}
+
+
+h1{
+
+    color:#0d47a1;
+
+    text-align:center;
+
+    margin:10px 0 25px;
+
+}
+
+
+.pesquisa{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:25px;
+
+}
+
+
+input{
+
+    height:42px;
+
+    padding:8px 12px;
+
+    border-radius:8px;
+
+    border:1px solid #ccc;
+
+    font-size:16px;
+
+}
+
+
+input:focus,
+textarea:focus{
+
+    outline:none;
+
+    border-color:#1976d2;
+
+    box-shadow:
+        0 0 0 2px rgba(25,118,210,.12);
+
+}
+
+
+#pesquisa{
+
+    flex:1;
+
+}
+
+
+button{
+
+    min-height:45px;
+
+    padding:0 20px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    color:white;
+
+    background:#1976d2;
+
+    transition:.2s;
+
+}
+
+
+button:hover{
+
+    opacity:.9;
+
+    transform:translateY(-1px);
+
+}
+
+
+button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+
+.btnNovo{
+
+    background:#00897b;
+
+    margin-bottom:20px;
+
+}
+
+
+.card{
+
+    background:#f8f9fa;
+
+    border-left:5px solid #1976d2;
+
+    padding:15px;
+
+    margin-bottom:15px;
+
+    border-radius:10px;
+
+    word-break:break-word;
+
+}
+
+
+.id{
+
+    font-weight:bold;
+
+    color:#555;
+
+}
+
+
+.titulo{
+
+    font-weight:bold;
+
+    color:#0d47a1;
+
+    margin-bottom:5px;
+
+}
+
+
+.texto{
+
+    white-space:pre-wrap;
+
+    line-height:1.5;
+
+}
+
+
+.data{
+
+    margin-top:12px;
+
+    color:#777;
+
+    font-size:12px;
+
+}
+
+
+.acoes-card{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:8px;
+
+    margin-top:15px;
+
+}
+
+
+.btnExcluir{
+
+    background:#c62828;
+
+}
+
+
+.btnEditar{
+
+    background:#1565c0;
+
+}
+
+
+.vazio{
+
+    text-align:center;
+
+    padding:30px;
+
+    color:#777;
+
+}
+
+
+.carregando{
+
+    text-align:center;
+
+    padding:25px;
+
+    color:#666;
+
+}
+
+
+/* =====================================
+   MODAL
+===================================== */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,.45);
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:1000;
+
+}
+
+
+.caixa{
+
+    background:white;
+
+    width:100%;
+
+    max-width:500px;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.3);
+
+    max-height:90vh;
+
+    overflow-y:auto;
+
+}
+
+
+.caixa h2{
+
+    margin-top:0;
+
+    color:#0d47a1;
+
+}
+
+
+.form-grupo{
+
+    margin-bottom:15px;
+
+}
+
+
+label{
+
+    display:block;
+
+    font-weight:bold;
+
+    margin-bottom:6px;
+
+}
+
+
+textarea{
+
+    width:100%;
+
+    min-height:110px;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    border:1px solid #ccc;
+
+    resize:vertical;
+
+    font-family:Arial,sans-serif;
+
+    font-size:15px;
+
+}
+
+
+.acoes{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:15px;
+
+}
+
+
+.acoes button{
+
+    flex:1;
+
+}
+
+
+.btnSalvar{
+
+    background:#1976d2;
+
+}
+
+
+.btnCancelar{
+
+    background:#c62828;
+
+}
+
+
+/* =====================================
+   MENSAGEM
+===================================== */
+
+.mensagem{
+
+    padding:12px;
+
+    border-radius:8px;
+
+    margin-bottom:15px;
+
+    display:none;
+
+}
+
+
+.mensagem.sucesso{
+
+    display:block;
+
+    background:#e8f5e9;
+
+    color:#2e7d32;
+
+}
+
+
+.mensagem.erro{
+
+    display:block;
+
+    background:#ffebee;
+
+    color:#c62828;
+
+}
+
+
+/* =====================================
+   RESPONSIVO
+===================================== */
+
+@media(max-width:650px){
+
+    body{
+
+        padding:10px;
+
+    }
+
+
+    .container{
+
+        padding:18px;
+
+    }
+
+
+    .topo{
+
+        align-items:flex-start;
+
+    }
+
+
+    .topo h2{
+
+        font-size:20px;
+
+    }
+
+
+    .voltar{
+
+        padding:10px 15px;
+
+        font-size:13px;
+
+    }
+
+
+    .pesquisa{
+
+        flex-direction:column;
+
+    }
+
+
+    .pesquisa button{
+
+        width:100%;
+
+    }
+
+
+    .acoes-card{
+
+        flex-direction:column;
+
+    }
+
+
+    .acoes-card button{
+
+        width:100%;
+
+    }
+
+
+    .acoes{
+
+        flex-direction:column;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ================================
+         TOPO
+    ================================= -->
+
+    <div class="topo">
+
+        <h2>
+            📊 Atendimento
+        </h2>
+
+
+        <button
+            class="voltar"
+            onclick="voltar()">
+
+            ⬅ Voltar
+
+        </button>
+
+    </div>
+
+
+    <h1>
+        📖 Atendimento
+    </h1>
+
+
+    <!-- ================================
+         NOVO ATENDIMENTO
+    ================================= -->
+
+    <button
+        class="btnNovo"
+        onclick="abrirCadastro()">
+
+        ➕ Novo Atendimento
+
+    </button>
+
+
+    <!-- ================================
+         PESQUISA
+    ================================= -->
+
+    <div class="pesquisa">
+
+        <input
+            id="pesquisa"
+            type="search"
+            placeholder="Digite uma palavra para pesquisar Problema ou Solução"
+            onkeydown="teclaPesquisa(event)">
+
+
+        <button onclick="pesquisar()">
+
+            🔍 Pesquisar
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="mensagem"
+        class="mensagem">
+    </div>
+
+
+    <!-- ================================
+         RESULTADO
+    ================================= -->
+
+    <div id="resultado">
+
+        <p class="vazio">
+
+            Digite uma palavra para pesquisar.
+
+        </p>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================
+     MODAL CADASTRO / EDIÇÃO
+===================================== -->
+
+<div
+    id="modal"
+    class="modal"
+    onclick="fecharModalFora(event)">
+
+
+    <div
+        class="caixa"
+        onclick="event.stopPropagation()">
+
+
+        <h2 id="tituloModal">
+
+            Novo Atendimento
+
+        </h2>
+
+
+        <input
+            type="hidden"
+            id="atendimentoId">
+
+
+        <div class="form-grupo">
+
+            <label for="problema">
+
+                Problema
+
+            </label>
+
+
+            <textarea
+                id="problema"
+                placeholder="Descreva o problema..."></textarea>
+
+        </div>
+
+
+        <div class="form-grupo">
+
+            <label for="solucao">
+
+                Solução
+
+            </label>
+
+
+            <textarea
+                id="solucao"
+                placeholder="Descreva a solução..."></textarea>
+
+        </div>
+
+
+        <div class="acoes">
+
+
+            <button
+                class="btnSalvar"
+                onclick="salvar()">
+
+                💾 Salvar
+
+            </button>
+
+
+            <button
+                class="btnCancelar"
+                onclick="fecharCadastro()">
+
+                Cancelar
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+/* =====================================================
+   CONFIGURAÇÃO
+===================================================== */
+
+
+/*
+ * Os dados serão armazenados no navegador.
+ *
+ * Para usar uma API posteriormente, basta alterar
+ * as funções:
+ *
+ * - carregarAtendimentos()
+ * - salvar()
+ * - excluir()
+ *
+ */
+
+
+const CHAVE_STORAGE = "controle_financeiro_atendimentos";
+
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        console.log(
+            "Atendimento.html iniciado."
+        );
+
+        verificarDados();
+
+    }
+);
+
+
+/* =====================================================
+   BANCO LOCAL
+===================================================== */
+
+function obterAtendimentos(){
+
+    try{
+
+        const dados =
+            localStorage.getItem(
+                CHAVE_STORAGE
+            );
+
+
+        if(!dados){
+
+            return [];
+
+        }
+
+
+        const lista =
+            JSON.parse(dados);
+
+
+        return Array.isArray(lista)
+            ? lista
+            : [];
+
+    }
+    catch(erro){
+
+        console.error(
+            "Erro ao ler atendimentos:",
+            erro
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/* =====================================================
+   SALVAR BANCO LOCAL
+===================================================== */
+
+function gravarAtendimentos(lista){
+
+    localStorage.setItem(
+
+        CHAVE_STORAGE,
+
+        JSON.stringify(lista)
+
+    );
+
+}
+
+
+/* =====================================================
+   VERIFICAR DADOS
+===================================================== */
+
+function verificarDados(){
+
+    const lista =
+        obterAtendimentos();
+
+
+    console.log(
+        "Atendimentos cadastrados:",
+        lista.length
+    );
+
+}
+
+
+/* =====================================================
+   PESQUISA
+===================================================== */
+
+function pesquisar(){
+
+    const palavra =
+
+        document
+        .getElementById("pesquisa")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    if(palavra === ""){
+
+        document
+        .getElementById("resultado")
+        .innerHTML =
+
+        `<p class="vazio">
+            Digite uma palavra para pesquisar.
+        </p>`;
+
+        return;
+
+    }
+
+
+    const lista =
+        obterAtendimentos();
+
+
+    const encontrados =
+        lista.filter(function(item){
+
+            const problema =
+                String(
+                    item.problema || ""
+                )
+                .toLowerCase();
+
+
+            const solucao =
+                String(
+                    item.solucao || ""
+                )
+                .toLowerCase();
+
+
+            return (
+
+                problema.includes(palavra)
+
+                ||
+
+                solucao.includes(palavra)
+
+            );
+
+        });
+
+
+    mostrarResultado(
+        encontrados
+    );
+
+}
+
+
+/* =====================================================
+   PESQUISA AO PRESSIONAR ENTER
+===================================================== */
+
+function teclaPesquisa(event){
+
+    if(event.key === "Enter"){
+
+        pesquisar();
+
+    }
+
+}
+
+
+/* =====================================================
+   MOSTRAR RESULTADOS
+===================================================== */
+
+function mostrarResultado(lista){
+
+    const div =
+        document.getElementById(
+            "resultado"
+        );
+
+
+    if(!lista || lista.length === 0){
+
+        div.innerHTML =
+
+        `<p class="vazio">
+
+            Nenhum atendimento encontrado.
+
+        </p>`;
+
+        return;
+
+    }
+
+
+    let html = "";
+
+
+    lista.forEach(function(item){
+
+        html += `
+
+        <div class="card">
+
+            <div class="id">
+
+                ID: ${escaparHTML(item.id)}
+
+            </div>
+
+
+            <br>
+
+
+            <div class="titulo">
+
+                Problema:
+
+            </div>
+
+
+            <div class="texto">
+
+                ${escaparHTML(item.problema)}
+
+            </div>
+
+
+            <br>
+
+
+            <div class="titulo">
+
+                Solução:
+
+            </div>
+
+
+            <div class="texto">
+
+                ${escaparHTML(item.solucao)}
+
+            </div>
+
+
+            ${
+                item.data
+                ?
+
+                `<div class="data">
+                    Cadastrado em:
+                    ${formatarDataHora(item.data)}
+                </div>`
+
+                :
+
+                ""
+            }
+
+
+            <div class="acoes-card">
+
+
+                <button
+                    class="btnEditar"
+                    onclick="editarAtendimento('${escaparAtributo(item.id)}')">
+
+                    ✏️ Editar
+
+                </button>
+
+
+                <button
+                    class="btnExcluir"
+                    onclick="excluirAtendimento('${escaparAtributo(item.id)}')">
+
+                    🗑 Excluir
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+        `;
+
+    });
+
+
+    div.innerHTML = html;
+
+}
+
+
+/* =====================================================
+   ABRIR CADASTRO
+===================================================== */
+
+function abrirCadastro(){
+
+    document
+    .getElementById("tituloModal")
+    .textContent =
+        "Novo Atendimento";
+
+
+    document
+    .getElementById("atendimentoId")
+    .value = "";
+
+
+    document
+    .getElementById("problema")
+    .value = "";
+
+
+    document
+    .getElementById("solucao")
+    .value = "";
+
+
+    document
+    .getElementById("modal")
+    .style.display = "flex";
+
+
+    setTimeout(function(){
+
+        document
+        .getElementById("problema")
+        .focus();
+
+    },100);
+
+}
+
+
+/* =====================================================
+   FECHAR CADASTRO
+===================================================== */
+
+function fecharCadastro(){
+
+    document
+    .getElementById("modal")
+    .style.display = "none";
+
+}
+
+
+/* =====================================================
+   FECHAR MODAL FORA
+===================================================== */
+
+function fecharModalFora(event){
+
+    if(
+        event.target.id === "modal"
+    ){
+
+        fecharCadastro();
+
+    }
+
+}
+
+
+/* =====================================================
+   SALVAR / EDITAR
+===================================================== */
+
+function salvar(){
+
+    const id =
+
+        document
+        .getElementById("atendimentoId")
+        .value
+        .trim();
+
+
+    const problema =
+
+        document
+        .getElementById("problema")
+        .value
+        .trim();
+
+
+    const solucao =
+
+        document
+        .getElementById("solucao")
+        .value
+        .trim();
+
+
+    if(!problema){
+
+        mostrarMensagem(
+            "Informe o problema.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    if(!solucao){
+
+        mostrarMensagem(
+            "Informe a solução.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    const lista =
+        obterAtendimentos();
+
+
+    /* ==========================================
+       EDIÇÃO
+    ========================================== */
+
+    if(id){
+
+        const indice =
+            lista.findIndex(function(item){
+
+                return String(item.id) ===
+                       String(id);
+
+            });
+
+
+        if(indice === -1){
+
+            mostrarMensagem(
+                "Atendimento não encontrado.",
+                "erro"
+            );
+
+            return;
+
+        }
+
+
+        lista[indice].problema =
+            problema;
+
+
+        lista[indice].solucao =
+            solucao;
+
+
+        lista[indice].atualizadoEm =
+            new Date().toISOString();
+
+
+        gravarAtendimentos(lista);
+
+
+        fecharCadastro();
+
+
+        mostrarMensagem(
+            "Atendimento alterado com sucesso.",
+            "sucesso"
+        );
+
+
+        pesquisarAtual();
+
+        return;
+
+    }
+
+
+    /* ==========================================
+       NOVO CADASTRO
+    ========================================== */
+
+    const novo = {
+
+        id: gerarId(),
+
+        problema: problema,
+
+        solucao: solucao,
+
+        data:
+            new Date().toISOString()
+
+    };
+
+
+    lista.push(novo);
+
+
+    gravarAtendimentos(lista);
+
+
+    fecharCadastro();
+
+
+    mostrarMensagem(
+        "Atendimento salvo com sucesso.",
+        "sucesso"
+    );
+
+
+    document
+    .getElementById("pesquisa")
+    .value = "";
+
+
+    mostrarResultado(
+        [novo]
+    );
+
+}
+
+
+/* =====================================================
+   GERAR ID
+===================================================== */
+
+function gerarId(){
+
+    const lista =
+        obterAtendimentos();
+
+
+    if(lista.length === 0){
+
+        return 1;
+
+    }
+
+
+    const maior =
+        lista.reduce(
+
+            function(max,item){
+
+                const numero =
+                    Number(item.id) || 0;
+
+                return Math.max(
+                    max,
+                    numero
+                );
+
+            },
+
+            0
+
+        );
+
+
+    return maior + 1;
+
+}
+
+
+/* =====================================================
+   EDITAR
+===================================================== */
+
+function editarAtendimento(id){
+
+    const lista =
+        obterAtendimentos();
+
+
+    const item =
+        lista.find(function(registro){
+
+            return String(registro.id) ===
+                   String(id);
+
+        });
+
+
+    if(!item){
+
+        alert(
+            "Atendimento não encontrado."
+        );
+
+        return;
+
+    }
+
+
+    document
+    .getElementById("tituloModal")
+    .textContent =
+        "Editar Atendimento";
+
+
+    document
+    .getElementById("atendimentoId")
+    .value =
+        item.id;
+
+
+    document
+    .getElementById("problema")
+    .value =
+        item.problema || "";
+
+
+    document
+    .getElementById("solucao")
+    .value =
+        item.solucao || "";
+
+
+    document
+    .getElementById("modal")
+    .style.display =
+        "flex";
+
+
+    setTimeout(function(){
+
+        document
+        .getElementById("problema")
+        .focus();
+
+    },100);
+
+}
+
+
+/* =====================================================
+   EXCLUIR
+===================================================== */
+
+function excluirAtendimento(id){
+
+    const confirmar =
+        confirm(
+            "Deseja excluir este atendimento?"
+        );
+
+
+    if(!confirmar){
+
+        return;
+
+    }
+
+
+    let lista =
+        obterAtendimentos();
+
+
+    const tamanhoAntes =
+        lista.length;
+
+
+    lista =
+        lista.filter(function(item){
+
+            return String(item.id) !==
+                   String(id);
+
+        });
+
+
+    if(lista.length === tamanhoAntes){
+
+        alert(
+            "Atendimento não encontrado."
+        );
+
+        return;
+
+    }
+
+
+    gravarAtendimentos(lista);
+
+
+    mostrarMensagem(
+        "Atendimento excluído com sucesso.",
+        "sucesso"
+    );
+
+
+    pesquisarAtual();
+
+}
+
+
+/* =====================================================
+   REPETIR PESQUISA ATUAL
+===================================================== */
+
+function pesquisarAtual(){
+
+    const campo =
+        document.getElementById(
+            "pesquisa"
+        );
+
+
+    const palavra =
+        campo.value
+        .trim()
+        .toLowerCase();
+
+
+    if(!palavra){
+
+        document
+        .getElementById("resultado")
+        .innerHTML =
+
+        `<p class="vazio">
+
+            Digite uma palavra para pesquisar.
+
+        </p>`;
+
+        return;
+
+    }
+
+
+    const lista =
+        obterAtendimentos();
+
+
+    const encontrados =
+        lista.filter(function(item){
+
+            return (
+
+                String(
+                    item.problema || ""
+                )
+                .toLowerCase()
+                .includes(palavra)
+
+                ||
+
+                String(
+                    item.solucao || ""
+                )
+                .toLowerCase()
+                .includes(palavra)
+
+            );
+
+        });
+
+
+    mostrarResultado(
+        encontrados
+    );
+
+}
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+function mostrarMensagem(
+    texto,
+    tipo
+){
+
+    const div =
+        document.getElementById(
+            "mensagem"
+        );
+
+
+    div.textContent =
+        texto;
+
+
+    div.className =
+        "mensagem " +
+        tipo;
+
+
+    setTimeout(function(){
+
+        div.className =
+            "mensagem";
+
+        div.textContent = "";
+
+    },4000);
+
+}
+
+
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
+
+function escaparHTML(valor){
+
+    if(
+        valor === null ||
+        valor === undefined
+    ){
+
+        return "";
+
+    }
+
+
+    return String(valor)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   ESCAPAR ATRIBUTO
+===================================================== */
+
+function escaparAtributo(valor){
+
+    return String(
+        valor ?? ""
+    )
+    .replace(
+        /\\/g,
+        "\\\\"
+    )
+    .replace(
+        /'/g,
+        "\\'"
+    );
+
+}
+
+
+/* =====================================================
+   DATA E HORA
+===================================================== */
+
+function formatarDataHora(data){
+
+    if(!data){
+
+        return "";
+
+    }
+
+
+    const d =
+        new Date(data);
+
+
+    if(
+        isNaN(
+            d.getTime()
+        )
+    ){
+
+        return data;
+
+    }
+
+
+    return d.toLocaleString(
+        "pt-BR"
+    );
+
+}
+
+
+/* =====================================================
+   ESC
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape"
+        ){
+
+            fecharCadastro();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   VOLTAR
+===================================================== */
+
+function voltar(){
+
+    /*
+     * No GitHub Pages, "?page=index"
+     * não é a melhor opção.
+     *
+     * Aqui usamos index.html.
+     */
+
+    window.location.href =
+        "index.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
 
