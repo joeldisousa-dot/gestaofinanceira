@@ -1,7 +1,1959 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+  name="theme-color"
+  content="#0f172a"
+>
+
+<title>Controle Financeiro</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+
+  --primary:#2563eb;
+  --primary-dark:#1d4ed8;
+
+  --success:#059669;
+  --success-dark:#047857;
+
+  --danger:#dc2626;
+  --danger-dark:#b91c1c;
+
+  --warning:#ea580c;
+  --warning-dark:#c2410c;
+
+  --purple:#7c3aed;
+
+  --dark:#0f172a;
+  --dark-2:#1e293b;
+
+  --text:#1e293b;
+  --muted:#64748b;
+
+  --border:#e2e8f0;
+  --background:#f1f5f9;
+  --white:#ffffff;
+
+  --shadow:
+    0 10px 30px rgba(15,23,42,.08);
+
+  --radius:18px;
+
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+
+  min-height:100vh;
+
+  font-family:
+    Inter,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+  color:var(--text);
+
+  background:
+    linear-gradient(
+      135deg,
+      #eef4ff 0%,
+      #f8fafc 45%,
+      #eef2ff 100%
+    );
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.topbar{
+
+  position:sticky;
+
+  top:0;
+
+  z-index:1000;
+
+  background:
+    rgba(15,23,42,.96);
+
+  backdrop-filter:
+    blur(15px);
+
+  color:white;
+
+  box-shadow:
+    0 4px 20px rgba(0,0,0,.12);
+
+}
+
+.topbar-inner{
+
+  max-width:1250px;
+
+  margin:auto;
+
+  padding:15px 24px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:20px;
+
+}
+
+.logo{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+}
+
+.logo-icon{
+
+  width:45px;
+  height:45px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #7c3aed
+    );
+
+  font-size:22px;
+
+}
+
+.logo-text h1{
+
+  font-size:18px;
+
+  font-weight:800;
+
+}
+
+.logo-text span{
+
+  display:block;
+
+  margin-top:2px;
+
+  color:#94a3b8;
+
+  font-size:12px;
+
+}
+
+.status{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  color:#cbd5e1;
+
+  font-size:13px;
+
+}
+
+.status-dot{
+
+  width:9px;
+  height:9px;
+
+  border-radius:50%;
+
+  background:#22c55e;
+
+  box-shadow:
+    0 0 0 4px rgba(34,197,94,.15);
+
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container{
+
+  width:
+    min(
+      calc(100% - 32px),
+      1250px
+    );
+
+  margin:28px auto 50px;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+  position:relative;
+
+  overflow:hidden;
+
+  padding:34px;
+
+  border-radius:24px;
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #1e3a8a 55%,
+      #2563eb
+    );
+
+  box-shadow:
+    0 18px 40px rgba(15,23,42,.18);
+
+}
+
+.hero::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:280px;
+  height:280px;
+
+  right:-100px;
+  top:-130px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.08);
+
+}
+
+.hero h2{
+
+  position:relative;
+
+  z-index:1;
+
+  font-size:30px;
+
+  margin-bottom:8px;
+
+}
+
+.hero p{
+
+  position:relative;
+
+  z-index:1;
+
+  color:#cbd5e1;
+
+  max-width:700px;
+
+  line-height:1.6;
+
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section{
+
+  margin-top:24px;
+
+  background:white;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:var(--radius);
+
+  box-shadow:var(--shadow);
+
+  overflow:hidden;
+
+}
+
+.section-header{
+
+  padding:20px 24px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  border-bottom:
+    1px solid var(--border);
+
+}
+
+.section-title{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:11px;
+
+}
+
+.section-icon{
+
+  width:40px;
+  height:40px;
+
+  border-radius:11px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  background:#eff6ff;
+
+  color:var(--primary);
+
+  font-size:19px;
+
+}
+
+.section-title h3{
+
+  font-size:18px;
+
+}
+
+.section-title p{
+
+  margin-top:3px;
+
+  color:var(--muted);
+
+  font-size:12px;
+
+}
+
+.section-body{
+
+  padding:24px;
+
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.cards{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      6,
+      minmax(0,1fr)
+    );
+
+  gap:15px;
+
+}
+
+.card{
+
+  position:relative;
+
+  overflow:hidden;
+
+  padding:18px;
+
+  border-radius:15px;
+
+  border:
+    1px solid var(--border);
+
+  background:#fff;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+
+}
+
+.card:hover{
+
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 12px 25px rgba(15,23,42,.08);
+
+}
+
+.card::after{
+
+  content:"";
+
+  position:absolute;
+
+  right:-20px;
+  bottom:-35px;
+
+  width:90px;
+  height:90px;
+
+  border-radius:50%;
+
+  background:
+    rgba(37,99,235,.05);
+
+}
+
+.card-top{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:8px;
+
+}
+
+.card-label{
+
+  color:var(--muted);
+
+  font-size:12px;
+
+  font-weight:700;
+
+}
+
+.card-icon{
+
+  width:34px;
+  height:34px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  border-radius:10px;
+
+  background:#f1f5f9;
+
+}
+
+.card-value{
+
+  margin-top:12px;
+
+  font-size:20px;
+
+  font-weight:800;
+
+  color:var(--dark);
+
+  white-space:nowrap;
+
+}
+
+.card.blue .card-icon{
+  background:#eff6ff;
+}
+
+.card.green .card-icon{
+  background:#ecfdf5;
+}
+
+.card.red .card-icon{
+  background:#fef2f2;
+}
+
+.card.orange .card-icon{
+  background:#fff7ed;
+}
+
+.card.purple .card-icon{
+  background:#f5f3ff;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+  gap:20px;
+
+}
+
+.field{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:7px;
+
+}
+
+.field.full{
+
+  grid-column:
+    1 / -1;
+
+}
+
+.field label{
+
+  font-size:13px;
+
+  font-weight:700;
+
+  color:#334155;
+
+}
+
+.field input,
+.field select{
+
+  width:100%;
+
+  height:45px;
+
+  border:
+    1px solid #cbd5e1;
+
+  border-radius:10px;
+
+  background:#fff;
+
+  padding:
+    0 13px;
+
+  font-size:14px;
+
+  color:var(--text);
+
+  outline:none;
+
+  transition:
+    border .2s,
+    box-shadow .2s;
+
+}
+
+.field input:focus,
+.field select:focus{
+
+  border-color:
+    var(--primary);
+
+  box-shadow:
+    0 0 0 4px
+    rgba(37,99,235,.10);
+
+}
+
+.field input[readonly]{
+
+  background:#f8fafc;
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.actions{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:12px;
+
+}
+
+button{
+
+  border:none;
+
+  cursor:pointer;
+
+  font-family:inherit;
+
+}
+
+.btn{
+
+  min-height:45px;
+
+  padding:
+    0 17px;
+
+  border-radius:10px;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:8px;
+
+  font-size:13px;
+
+  font-weight:800;
+
+  transition:
+    transform .18s,
+    box-shadow .18s,
+    filter .18s;
+
+}
+
+.btn:hover{
+
+  transform:
+    translateY(-2px);
+
+  filter:brightness(1.04);
+
+}
+
+.btn:active{
+
+  transform:
+    translateY(0);
+
+}
+
+.btn-primary{
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--primary),
+      #3b82f6
+    );
+
+  box-shadow:
+    0 6px 15px
+    rgba(37,99,235,.22);
+
+}
+
+.btn-success{
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--success-dark),
+      #10b981
+    );
+
+  box-shadow:
+    0 6px 15px
+    rgba(5,150,105,.20);
+
+}
+
+.btn-purple{
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6d28d9,
+      #8b5cf6
+    );
+
+}
+
+.btn-orange{
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #c2410c,
+      #f97316
+    );
+
+}
+
+.btn-dark{
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #334155
+    );
+
+}
+
+.btn-danger{
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #b91c1c,
+      #ef4444
+    );
+
+}
+
+.btn-secondary{
+
+  color:#334155;
+
+  background:#f1f5f9;
+
+  border:
+    1px solid #e2e8f0;
+
+}
+
+
+/* =========================================================
+   COMPETÊNCIA
+========================================================= */
+
+.competencia-box{
+
+  display:flex;
+
+  align-items:flex-end;
+
+  gap:15px;
+
+  flex-wrap:wrap;
+
+}
+
+.competencia-box .field{
+
+  width:230px;
+
+}
+
+
+/* =========================================================
+   DIVISOR
+========================================================= */
+
+.divider{
+
+  height:1px;
+
+  background:
+    var(--border);
+
+  margin:
+    25px 0;
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:5000;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  background:
+    rgba(15,23,42,.58);
+
+  backdrop-filter:
+    blur(5px);
+
+}
+
+.modal.show{
+
+  display:flex;
+
+}
+
+.modal-box{
+
+  width:
+    min(
+      100%,
+      430px
+    );
+
+  background:white;
+
+  border-radius:20px;
+
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.25);
+
+  overflow:hidden;
+
+  animation:
+    modalIn .2s ease;
+
+}
+
+@keyframes modalIn{
+
+  from{
+
+    opacity:0;
+
+    transform:
+      translateY(15px)
+      scale(.98);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+  }
+
+}
+
+.modal-header{
+
+  padding:20px 22px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  border-bottom:
+    1px solid var(--border);
+
+}
+
+.modal-header h3{
+
+  font-size:18px;
+
+}
+
+.close{
+
+  width:35px;
+  height:35px;
+
+  border-radius:9px;
+
+  background:#f1f5f9;
+
+  color:#475569;
+
+  font-size:20px;
+
+}
+
+.modal-body{
+
+  padding:22px;
+
+}
+
+.modal-footer{
+
+  padding:16px 22px;
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:10px;
+
+  border-top:
+    1px solid var(--border);
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+
+  position:fixed;
+
+  right:20px;
+
+  top:85px;
+
+  z-index:9000;
+
+  width:
+    min(
+      calc(100% - 40px),
+      380px
+    );
+
+  padding:15px 18px;
+
+  border-radius:12px;
+
+  color:white;
+
+  font-size:13px;
+
+  font-weight:700;
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.18);
+
+  display:none;
+
+  animation:
+    toastIn .2s ease;
+
+}
+
+.toast.show{
+
+  display:block;
+
+}
+
+.toast.success{
+
+  background:
+    linear-gradient(
+      135deg,
+      #047857,
+      #10b981
+    );
+
+}
+
+.toast.error{
+
+  background:
+    linear-gradient(
+      135deg,
+      #b91c1c,
+      #ef4444
+    );
+
+}
+
+.toast.warning{
+
+  background:
+    linear-gradient(
+      135deg,
+      #c2410c,
+      #f97316
+    );
+
+}
+
+@keyframes toastIn{
+
+  from{
+
+    opacity:0;
+
+    transform:
+      translateX(20px);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:
+      translateX(0);
+
+  }
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:10000;
+
+  display:none;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+    rgba(255,255,255,.72);
+
+  backdrop-filter:
+    blur(3px);
+
+}
+
+.loading.show{
+
+  display:flex;
+
+}
+
+.loading-box{
+
+  min-width:190px;
+
+  padding:25px;
+
+  background:white;
+
+  border-radius:18px;
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.15);
+
+  text-align:center;
+
+}
+
+.spinner{
+
+  width:42px;
+  height:42px;
+
+  margin:
+    0 auto 14px;
+
+  border:
+    4px solid #e2e8f0;
+
+  border-top-color:
+    var(--primary);
+
+  border-radius:50%;
+
+  animation:
+    spin .8s linear infinite;
+
+}
+
+@keyframes spin{
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
+.loading-box span{
+
+  color:var(--muted);
+
+  font-size:13px;
+
+  font-weight:700;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+  text-align:center;
+
+  color:#64748b;
+
+  font-size:12px;
+
+  padding:25px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media(max-width:1100px){
+
+  .cards{
+
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+
+  }
+
+}
+
+@media(max-width:700px){
+
+  .topbar-inner{
+
+    padding:
+      12px 16px;
+
+  }
+
+  .status{
+
+    display:none;
+
+  }
+
+  .container{
+
+    width:
+      calc(100% - 20px);
+
+    margin-top:15px;
+
+  }
+
+  .hero{
+
+    padding:25px 20px;
+
+  }
+
+  .hero h2{
+
+    font-size:24px;
+
+  }
+
+  .section-body{
+
+    padding:18px;
+
+  }
+
+  .cards{
+
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
+  }
+
+  .form-grid{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .field.full{
+
+    grid-column:1;
+
+  }
+
+  .competencia-box .field{
+
+    width:100%;
+
+  }
+
+  .actions{
+
+    flex-direction:column;
+
+  }
+
+  .actions .btn{
+
+    width:100%;
+
+  }
+
+}
+
+@media(max-width:430px){
+
+  .cards{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .card-value{
+
+    font-size:19px;
+
+  }
+
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible{
+
+  outline:
+    3px solid
+    rgba(37,99,235,.25);
+
+  outline-offset:2px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOPO
+===================================================== -->
+
+<header class="topbar">
+
+  <div class="topbar-inner">
+
+    <div class="logo">
+
+      <div class="logo-icon">
+        💰
+      </div>
+
+      <div class="logo-text">
+
+        <h1>Controle Financeiro</h1>
+
+        <span>Gestão financeira inteligente</span>
+
+      </div>
+
+    </div>
+
+
+    <div class="status">
+
+      <span class="status-dot"></span>
+
+      Sistema conectado
+
+    </div>
+
+  </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     CONTEÚDO
+===================================================== -->
+
+<main class="container">
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <h2>
+      Painel Financeiro
+    </h2>
+
+    <p>
+      Acompanhe seu saldo, contas a receber,
+      contas a pagar e movimentações financeiras
+      em um único lugar.
+    </p>
+
+  </section>
+
+
+
+  <!-- ===================================================
+       RESUMO
+  ==================================================== -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <div class="section-title">
+
+        <div class="section-icon">
+          📊
+        </div>
+
+        <div>
+
+          <h3>Resumo financeiro</h3>
+
+          <p>
+            Visão geral da competência selecionada
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="section-body">
+
+      <div class="cards">
+
+
+        <div class="card blue">
+
+          <div class="card-top">
+
+            <span class="card-label">
+              SALDO INICIAL
+            </span>
+
+            <span class="card-icon">
+              💰
+            </span>
+
+          </div>
+
+          <div
+            class="card-value"
+            id="saldoInicialCard"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+
+
+        <div class="card green">
+
+          <div class="card-top">
+
+            <span class="card-label">
+              A RECEBER
+            </span>
+
+            <span class="card-icon">
+              📥
+            </span>
+
+          </div>
+
+          <div
+            class="card-value"
+            id="totalReceber"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+
+
+        <div class="card red">
+
+          <div class="card-top">
+
+            <span class="card-label">
+              A PAGAR
+            </span>
+
+            <span class="card-icon">
+              📤
+            </span>
+
+          </div>
+
+          <div
+            class="card-value"
+            id="totalPagar"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+
+
+        <div class="card orange">
+
+          <div class="card-top">
+
+            <span class="card-label">
+              VALOR PAGO
+            </span>
+
+            <span class="card-icon">
+              💸
+            </span>
+
+          </div>
+
+          <div
+            class="card-value"
+            id="valorPago"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+
+
+        <div class="card green">
+
+          <div class="card-top">
+
+            <span class="card-label">
+              VALOR RECEBIDO
+            </span>
+
+            <span class="card-icon">
+              💵
+            </span>
+
+          </div>
+
+          <div
+            class="card-value"
+            id="valorRecebido"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+
+
+        <div class="card purple">
+
+          <div class="card-top">
+
+            <span class="card-label">
+              SALDO BANCO
+            </span>
+
+            <span class="card-icon">
+              🏦
+            </span>
+
+          </div>
+
+          <div
+            class="card-value"
+            id="saldoBanco"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ===================================================
+       CONTROLE MENSAL
+  ==================================================== -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <div class="section-title">
+
+        <div class="section-icon">
+          ⚙️
+        </div>
+
+        <div>
+
+          <h3>Controle mensal</h3>
+
+          <p>
+            Selecione a competência e acesse as ferramentas
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="section-body">
+
+
+      <div class="competencia-box">
+
+
+        <div class="field">
+
+          <label for="competencia">
+            📅 Competência
+          </label>
+
+          <input
+            id="competencia"
+            type="month"
+          >
+
+        </div>
+
+
+        <button
+          class="btn btn-success"
+          onclick="abrirSaldo()"
+        >
+          💰 Informar Saldo Inicial
+        </button>
+
+
+      </div>
+
+
+      <div class="divider"></div>
+
+
+      <div class="actions">
+
+
+        <button
+          class="btn btn-purple"
+          onclick="fecharMes()"
+        >
+          🔒 Fechar Competência
+        </button>
+
+
+        <button
+          class="btn btn-orange"
+          onclick="gerarRelatorio()"
+        >
+          📄 Relatório
+        </button>
+
+
+        <button
+          class="btn btn-orange"
+          onclick="abrirLancamentos()"
+        >
+          📋 Lançamentos
+        </button>
+
+
+        <button
+          class="btn btn-orange"
+          onclick="abrirGraficos()"
+        >
+          📊 Gráficos
+        </button>
+
+
+        <button
+          class="btn btn-orange"
+          onclick="abrirAtendimento()"
+        >
+          📖 Atendimento
+        </button>
+
+
+        <button
+          class="btn btn-danger"
+          onclick="abrirBaixasPendentes()"
+        >
+          ⚠️ Baixas Pendentes
+        </button>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ===================================================
+       NOVO LANÇAMENTO
+  ==================================================== -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <div class="section-title">
+
+        <div class="section-icon">
+          ➕
+        </div>
+
+        <div>
+
+          <h3>Novo lançamento</h3>
+
+          <p>
+            Registre uma nova conta a receber ou pagar
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="section-body">
+
+
+      <div class="form-grid">
+
+
+        <div class="field">
+
+          <label for="tipo">
+            📂 Tipo
+          </label>
+
+          <select id="tipo">
+
+            <option value="Contas a Receber">
+              Contas a Receber
+            </option>
+
+            <option value="Contas a Pagar">
+              Contas a Pagar
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+        <div class="field">
+
+          <label for="descricao">
+            📝 Descrição
+          </label>
+
+          <select id="descricao">
+
+            <option value="">
+              Carregando...
+            </option>
+
+          </select>
+
+        </div>
+
+
+
+        <div class="field">
+
+          <label for="valor">
+            💵 Valor
+          </label>
+
+          <input
+            id="valor"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="0,00"
+          >
+
+        </div>
+
+
+
+        <div class="field">
+
+          <label for="vencimento">
+            📆 Vencimento
+          </label>
+
+          <input
+            id="vencimento"
+            type="date"
+          >
+
+        </div>
+
+
+
+        <div class="field full">
+
+          <button
+            class="btn btn-primary"
+            onclick="gravar()"
+          >
+            💾 Gravar Lançamento
+          </button>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <div class="footer">
+
+    Controle Financeiro • Sistema integrado ao Google Sheets
+
+  </div>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     MODAL SALDO
+===================================================== -->
+
+<div
+  class="modal"
+  id="janelaSaldo"
+  onclick="fecharModalFora(event)"
+>
+
+
+  <div
+    class="modal-box"
+    onclick="event.stopPropagation()"
+  >
+
+
+    <div class="modal-header">
+
+      <h3>
+        💰 Saldo Inicial
+      </h3>
+
+      <button
+        class="close"
+        onclick="fecharSaldo()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+
+      <div class="field">
+
+        <label for="novoSaldo">
+          Valor inicial
+        </label>
+
+        <input
+          id="novoSaldo"
+          type="number"
+          step="0.01"
+          placeholder="0,00"
+        >
+
+      </div>
+
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn btn-secondary"
+        onclick="fecharSaldo()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        class="btn btn-success"
+        onclick="salvarNovoSaldo()"
+      >
+        Salvar
+      </button>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+  id="mensagemSistema"
+  class="toast"
+></div>
+
+
+
+<!-- =====================================================
+     LOADING
+===================================================== -->
+
+<div
+  id="loading"
+  class="loading"
+>
+
+  <div class="loading-box">
+
+    <div class="spinner"></div>
+
+    <span id="loadingText">
+      Processando...
+    </span>
+
+  </div>
+
+</div>
+
+
+
 <script>
 
 /* =========================================================
-   CONFIGURAÇÃO
+   CONFIGURAÇÃO DO GOOGLE APPS SCRIPT
 ========================================================= */
 
 const URL_API =
@@ -14,30 +1966,6 @@ const URL_API =
 
 const $ = id =>
   document.getElementById(id);
-
-
-/* =========================================================
-   PÁGINAS DO GITHUB
-========================================================= */
-
-const PAGINAS = {
-
-  lancamentos:
-    "Lancamentos.html",
-
-  graficos:
-    "Graficos.html",
-
-  atendimento:
-    "atendimento.html",
-
-  baixasPendentes:
-    "BaixasPendentes.html",
-
-  relatorio:
-    "Relatorio.html"
-
-};
 
 
 /* =========================================================
@@ -108,7 +2036,7 @@ async function iniciar(){
 
 
 /* =========================================================
-   API GOOGLE APPS SCRIPT
+   REQUISIÇÃO PARA O GOOGLE APPS SCRIPT
 ========================================================= */
 
 async function apiRequest(
@@ -169,7 +2097,8 @@ async function apiRequest(
   catch(e){
 
     throw new Error(
-      "Falha ao conectar ao Google Apps Script."
+      "Falha ao conectar ao Google Apps Script. " +
+      "Verifique a URL /exec e as permissões da implantação."
     );
 
   }
@@ -288,7 +2217,9 @@ async function carregar(){
 
 
     $("valorRecebido").textContent =
-      formatar(r.valorRecebido);
+      formatar(
+        r.valorRecebido
+      );
 
 
     $("saldoBanco").textContent =
@@ -314,7 +2245,7 @@ async function carregar(){
 
 
 /* =========================================================
-   COMPETÊNCIA
+   MUDANÇA DE COMPETÊNCIA
 ========================================================= */
 
 $("competencia").addEventListener(
@@ -324,7 +2255,7 @@ $("competencia").addEventListener(
 
 
 /* =========================================================
-   MOEDA
+   FORMATAR MOEDA
 ========================================================= */
 
 function formatar(valor){
@@ -343,7 +2274,7 @@ function formatar(valor){
 
 
 /* =========================================================
-   DESCRIÇÕES
+   CARREGAR DESCRIÇÕES
 ========================================================= */
 
 async function carregarDescricoes(){
@@ -429,7 +2360,7 @@ async function carregarDescricoes(){
 
 
 /* =========================================================
-   GRAVAR
+   GRAVAR LANÇAMENTO
 ========================================================= */
 
 async function gravar(){
@@ -546,7 +2477,7 @@ async function gravar(){
 
 
 /* =========================================================
-   SALDO
+   SALDO INICIAL
 ========================================================= */
 
 function abrirSaldo(){
@@ -678,7 +2609,7 @@ async function salvarNovoSaldo(){
 
 
 /* =========================================================
-   FECHAR MÊS
+   FECHAR COMPETÊNCIA
 ========================================================= */
 
 async function fecharMes(){
@@ -761,20 +2692,36 @@ async function fecharMes(){
 
 
 /* =========================================================
-   NAVEGAÇÃO GITHUB
+   NAVEGAÇÃO PARA OS HTML DO GITHUB
 ========================================================= */
+
+/*
+   Como todos os arquivos estão na mesma pasta:
+
+   index.html
+   Graficos.html
+   atendimento.html
+   BaixasPendentes.html
+   Lancamentos.html
+   Relatorio.html
+
+   usamos caminhos relativos.
+
+   Isso é importante no GitHub Pages porque o site
+   pode estar dentro de uma subpasta do domínio.
+*/
+
 
 function abrirPagina(
   pagina,
   params={}
 ){
 
-  let url =
-    pagina;
-
-
-  const query =
-    new URLSearchParams();
+  const url =
+    new URL(
+      pagina,
+      window.location.href
+    );
 
 
   Object.keys(params)
@@ -790,7 +2737,7 @@ function abrirPagina(
         valor !== ""
       ){
 
-        query.set(
+        url.searchParams.set(
           chave,
           valor
         );
@@ -800,27 +2747,14 @@ function abrirPagina(
     });
 
 
-  const queryString =
-    query.toString();
-
-
-  if(queryString){
-
-    url +=
-      "?" +
-      queryString;
-
-  }
-
-
   window.location.href =
-    url;
+    url.href;
 
 }
 
 
 /* =========================================================
-   LANÇAMENTOS
+   ABRIR LANÇAMENTOS
 ========================================================= */
 
 function abrirLancamentos(){
@@ -842,7 +2776,7 @@ function abrirLancamentos(){
 
 
   abrirPagina(
-    PAGINAS.lancamentos,
+    "Lancamentos.html",
     {
       competencia:
         competencia
@@ -853,7 +2787,20 @@ function abrirLancamentos(){
 
 
 /* =========================================================
-   RELATÓRIO
+   ABRIR BAIXAS PENDENTES
+========================================================= */
+
+function abrirBaixasPendentes(){
+
+  abrirPagina(
+    "BaixasPendentes.html"
+  );
+
+}
+
+
+/* =========================================================
+   ABRIR RELATÓRIO
 ========================================================= */
 
 function gerarRelatorio(){
@@ -875,7 +2822,7 @@ function gerarRelatorio(){
 
 
   abrirPagina(
-    PAGINAS.relatorio,
+    "Relatorio.html",
     {
       competencia:
         competencia
@@ -886,7 +2833,7 @@ function gerarRelatorio(){
 
 
 /* =========================================================
-   GRÁFICOS
+   ABRIR GRÁFICOS
 ========================================================= */
 
 function abrirGraficos(){
@@ -915,7 +2862,7 @@ function abrirGraficos(){
 
 
   abrirPagina(
-    PAGINAS.graficos,
+    "Graficos.html",
     {
       ano:
         ano
@@ -926,26 +2873,13 @@ function abrirGraficos(){
 
 
 /* =========================================================
-   ATENDIMENTO
+   ABRIR ATENDIMENTO
 ========================================================= */
 
 function abrirAtendimento(){
 
   abrirPagina(
-    PAGINAS.atendimento
-  );
-
-}
-
-
-/* =========================================================
-   BAIXAS PENDENTES
-========================================================= */
-
-function abrirBaixasPendentes(){
-
-  abrirPagina(
-    PAGINAS.baixasPendentes
+    "atendimento.html"
   );
 
 }
@@ -1032,7 +2966,7 @@ function mostrarLoading(
 
 
 /* =========================================================
-   VALIDAÇÃO
+   VALIDAÇÃO LOCAL
 ========================================================= */
 
 function validarCompetenciaLocal(
@@ -1087,7 +3021,7 @@ function validarCompetenciaLocal(
 
 
 /* =========================================================
-   ESC
+   TECLA ESC FECHA MODAL
 ========================================================= */
 
 document.addEventListener(
@@ -1107,7 +3041,7 @@ document.addEventListener(
 
 
 /* =========================================================
-   ENTER
+   ENTER NO SALDO
 ========================================================= */
 
 $("novoSaldo")
@@ -1126,4 +3060,10 @@ $("novoSaldo")
     }
   );
 
+
 </script>
+
+
+</body>
+
+</html>
