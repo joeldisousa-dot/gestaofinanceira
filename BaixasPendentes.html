@@ -5,445 +5,136 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1"
+>
 
 <title>Baixas Pendentes</title>
 
-
 <style>
 
-/* =====================================================
-   RESET
-===================================================== */
-
 *{
-    box-sizing:border-box;
+  box-sizing:border-box;
 }
-
-
-/* =====================================================
-   BODY
-===================================================== */
 
 body{
 
-    margin:0;
+  font-family:
+    Arial,
+    sans-serif;
 
-    padding:20px;
+  background:#f4f6f8;
 
-    font-family:
-        Arial,
-        "Segoe UI",
-        sans-serif;
+  padding:20px;
 
-    background:#f4f6f8;
-
-    color:#333;
+  margin:0;
 
 }
-
-
-/* =====================================================
-   CONTAINER
-===================================================== */
 
 .container{
 
-    max-width:1200px;
+  background:white;
 
-    margin:auto;
+  padding:25px;
 
-    background:white;
+  border-radius:15px;
 
-    padding:25px;
-
-    border-radius:15px;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.12);
+  box-shadow:
+    0 5px 20px rgba(0,0,0,.08);
 
 }
-
-
-/* =====================================================
-   TOPO
-===================================================== */
-
-.topo{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:20px;
-
-    gap:15px;
-
-}
-
-
-.topo h2{
-
-    margin:0;
-
-    color:#c62828;
-
-}
-
-
-/* =====================================================
-   BOTÃO VOLTAR
-===================================================== */
 
 .btn-voltar{
 
-    background:#6c757d;
+  background:#6c757d;
 
-    color:white;
+  color:white;
 
-    border:none;
+  border:none;
 
-    padding:10px 18px;
+  padding:10px 18px;
 
-    border-radius:8px;
+  border-radius:8px;
 
-    cursor:pointer;
+  cursor:pointer;
 
-    font-size:14px;
+  margin-bottom:15px;
 
-    font-weight:bold;
+  font-size:14px;
 
 }
-
 
 .btn-voltar:hover{
 
-    background:#5a6268;
+  background:#5a6268;
 
 }
 
+h2{
 
-/* =====================================================
-   TABELA
-===================================================== */
+  color:#c62828;
+
+}
 
 .tabela-container{
 
-    width:100%;
-
-    overflow-x:auto;
+  overflow-x:auto;
 
 }
-
 
 table{
 
-    width:100%;
+  width:100%;
 
-    min-width:850px;
+  border-collapse:collapse;
 
-    border-collapse:collapse;
+  min-width:800px;
 
 }
-
 
 th{
 
-    background:#c62828;
+  background:#c62828;
 
-    color:white;
+  color:white;
 
-    padding:10px;
-
-    text-align:center;
+  padding:10px;
 
 }
-
 
 td{
 
-    padding:10px;
+  padding:10px;
 
-    border-bottom:
-        1px solid #ddd;
+  border-bottom:
+    1px solid #ddd;
 
-    text-align:center;
-
-}
-
-
-tr:nth-child(even){
-
-    background:#fafafa;
+  text-align:center;
 
 }
-
-
-tr:hover{
-
-    background:#fff3f3;
-
-}
-
-
-/* =====================================================
-   VALOR
-===================================================== */
 
 .valor{
 
-    text-align:right;
+  text-align:right;
 
-    font-weight:bold;
-
-    color:#333;
+  font-weight:bold;
 
 }
-
-
-/* =====================================================
-   TIPO
-===================================================== */
-
-.receber{
-
-    color:#2e7d32;
-
-    font-weight:bold;
-
-}
-
-
-.pagar{
-
-    color:#c62828;
-
-    font-weight:bold;
-
-}
-
-
-/* =====================================================
-   STATUS
-===================================================== */
-
-.status-pendente{
-
-    display:inline-block;
-
-    background:#fff3cd;
-
-    color:#856404;
-
-    padding:5px 10px;
-
-    border-radius:12px;
-
-    font-size:12px;
-
-    font-weight:bold;
-
-}
-
-
-/* =====================================================
-   VAZIO
-===================================================== */
-
-.vazio{
-
-    text-align:center;
-
-    padding:35px;
-
-    color:#777;
-
-}
-
-
-/* =====================================================
-   CARREGANDO
-===================================================== */
-
-.carregando{
-
-    text-align:center;
-
-    padding:35px;
-
-    color:#777;
-
-}
-
-
-/* =====================================================
-   MENSAGEM
-===================================================== */
 
 .mensagem{
 
-    display:none;
+  padding:15px;
 
-    padding:12px 15px;
-
-    border-radius:8px;
-
-    margin-bottom:15px;
-
-    font-weight:bold;
+  text-align:center;
 
 }
 
+.erro{
 
-.mensagem.erro{
+  color:#c62828;
 
-    display:block;
-
-    background:#ffebee;
-
-    color:#c62828;
-
-}
-
-
-.mensagem.info{
-
-    display:block;
-
-    background:#e3f2fd;
-
-    color:#1565c0;
-
-}
-
-
-/* =====================================================
-   RESUMO
-===================================================== */
-
-.resumo{
-
-    display:flex;
-
-    gap:15px;
-
-    flex-wrap:wrap;
-
-    margin-bottom:20px;
-
-}
-
-
-.resumo-card{
-
-    flex:1;
-
-    min-width:180px;
-
-    padding:15px;
-
-    border-radius:10px;
-
-    background:#f8f9fa;
-
-    border-left:5px solid #c62828;
-
-}
-
-
-.resumo-card strong{
-
-    display:block;
-
-    font-size:22px;
-
-    color:#c62828;
-
-}
-
-
-.resumo-card span{
-
-    font-size:13px;
-
-    color:#666;
-
-}
-
-
-/* =====================================================
-   BOTÃO ATUALIZAR
-===================================================== */
-
-.btn-atualizar{
-
-    background:#1976d2;
-
-    color:white;
-
-    border:none;
-
-    padding:10px 18px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    font-weight:bold;
-
-}
-
-
-.btn-atualizar:hover{
-
-    background:#0d47a1;
-
-}
-
-
-/* =====================================================
-   RESPONSIVO
-===================================================== */
-
-@media(max-width:700px){
-
-    body{
-
-        padding:10px;
-
-    }
-
-
-    .container{
-
-        padding:15px;
-
-    }
-
-
-    .topo{
-
-        flex-direction:column;
-
-        align-items:stretch;
-
-    }
-
-
-    .btn-voltar{
-
-        width:100%;
-
-    }
-
-
-    .topo h2{
-
-        font-size:21px;
-
-    }
+  font-weight:bold;
 
 }
 
@@ -451,907 +142,374 @@ tr:hover{
 
 </head>
 
-
 <body>
-
 
 <div class="container">
 
+<button
+  onclick="voltarIndex()"
+  class="btn-voltar"
+>
+← Voltar
+</button>
 
-    <!-- =================================================
-         TOPO
-    ================================================== -->
+<h2>
+⚠️ Baixas Pendentes
+</h2>
 
-    <div class="topo">
+<div class="tabela-container">
 
+<table>
 
-        <h2>
+<thead>
 
-            ⚠️ Baixas Pendentes
+<tr>
 
-        </h2>
+<th>ID</th>
 
+<th>Competência</th>
 
-        <button
-            onclick="voltarIndex()"
-            class="btn-voltar">
+<th>Tipo</th>
 
-            ← Voltar
+<th>Descrição</th>
 
-        </button>
+<th>Valor</th>
 
+<th>Vencimento</th>
 
-    </div>
+<th>Baixado</th>
 
+</tr>
 
-    <!-- =================================================
-         RESUMO
-    ================================================== -->
+</thead>
 
-    <div class="resumo">
+<tbody id="lista">
 
+<tr>
 
-        <div class="resumo-card">
+<td
+  colspan="7"
+>
+Carregando...
+</td>
 
-            <strong id="quantidade">
+</tr>
 
-                0
+</tbody>
 
-            </strong>
+</table>
 
-            <span>
-
-                Lançamentos pendentes
-
-            </span>
-
-        </div>
-
-
-        <div class="resumo-card">
-
-            <strong id="total">
-
-                R$ 0,00
-
-            </strong>
-
-            <span>
-
-                Total pendente
-
-            </span>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- =================================================
-         CONTROLES
-    ================================================== -->
-
-    <div style="margin-bottom:15px;">
-
-        <button
-            class="btn-atualizar"
-            onclick="carregar()">
-
-            🔄 Atualizar
-
-        </button>
-
-    </div>
-
-
-    <div
-        id="mensagem"
-        class="mensagem">
-    </div>
-
-
-    <!-- =================================================
-         TABELA
-    ================================================== -->
-
-    <div class="tabela-container">
-
-
-        <table>
-
-
-            <thead>
-
-                <tr>
-
-                    <th>ID</th>
-
-                    <th>Competência</th>
-
-                    <th>Tipo</th>
-
-                    <th>Descrição</th>
-
-                    <th>Valor</th>
-
-                    <th>Vencimento</th>
-
-                    <th>Baixado</th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody id="lista">
-
-                <tr>
-
-                    <td
-                        colspan="7"
-                        class="carregando">
-
-                        Carregando...
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-
-        </table>
-
-
-    </div>
-
+</div>
 
 </div>
 
 
 <script>
 
+/* =========================================================
+   API
+========================================================= */
 
-/* =====================================================
-   CONFIGURAÇÃO
-===================================================== */
+const URL_API =
+  "https://script.google.com/macros/s/AKfycbxJzdCPkPxk2N4FhnoUflb-iWTyiLLn1XmSJDcUwkKsapI0qv-6DBpKWWBLuoHBqn8Y/exec";
 
 
-/*
- * Banco local utilizado pelo GitHub Pages.
- *
- * O mesmo nome deve ser utilizado pelos demais
- * arquivos que trabalham com lançamentos.
- */
-
-const CHAVE_LANCAMENTOS =
-    "controle_financeiro_lancamentos";
-
-
-/* =====================================================
-   INICIALIZAÇÃO
-===================================================== */
-
-window.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        carregar();
-
-    }
-);
-
-
-/* =====================================================
-   CARREGAR LANÇAMENTOS
-===================================================== */
-
-function carregar(){
-
-    mostrarCarregando();
-
-
-    try{
-
-        const lista =
-            obterLancamentos();
-
-
-        const pendentes =
-            lista.filter(function(item){
-
-                const baixado =
-                    String(
-                        item.baixado || ""
-                    )
-                    .trim()
-                    .toLowerCase();
-
-
-                return (
-                    baixado !== "sim" &&
-                    baixado !== "baixado" &&
-                    baixado !== "true"
-                );
-
-            });
-
-
-        montarTabela(
-            pendentes
-        );
-
-
-    }
-    catch(erro){
-
-        console.error(
-            "Erro ao carregar:",
-            erro
-        );
-
-
-        mostrarErro(
-            "Erro ao carregar os lançamentos: " +
-            erro.message
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   OBTER LANÇAMENTOS
-===================================================== */
-
-function obterLancamentos(){
-
-    const dados =
-        localStorage.getItem(
-            CHAVE_LANCAMENTOS
-        );
-
-
-    if(!dados){
-
-        return [];
-
-    }
-
-
-    try{
-
-        const lista =
-            JSON.parse(dados);
-
-
-        if(
-            !Array.isArray(lista)
-        ){
-
-            return [];
-
-        }
-
-
-        return lista;
-
-    }
-    catch(erro){
-
-        console.error(
-            "Erro ao interpretar lançamentos:",
-            erro
-        );
-
-        return [];
-
-    }
-
-}
-
-
-/* =====================================================
-   MOSTRAR CARREGANDO
-===================================================== */
-
-function mostrarCarregando(){
-
-    document
-    .getElementById("lista")
-    .innerHTML =
-
-    `
-
-    <tr>
-
-        <td
-            colspan="7"
-            class="carregando">
-
-            ⏳ Carregando lançamentos...
-
-        </td>
-
-    </tr>
-
-    `;
-
-}
-
-
-/* =====================================================
-   MONTAR TABELA
-===================================================== */
-
-function montarTabela(lista){
-
-    const corpo =
-        document.getElementById(
-            "lista"
-        );
-
-
-    corpo.innerHTML = "";
-
-
-    /* ==========================================
-       ATUALIZA RESUMO
-    ========================================== */
-
-    document
-    .getElementById("quantidade")
-    .textContent =
-        lista.length;
-
-
-    let total = 0;
-
-
-    lista.forEach(function(item){
-
-        total +=
-            normalizarValor(
-                item.valor
-            );
-
-    });
-
-
-    document
-    .getElementById("total")
-    .textContent =
-        formatarMoeda(total);
-
-
-    /* ==========================================
-       NENHUM PENDENTE
-    ========================================== */
-
-    if(
-        !lista ||
-        lista.length === 0
-    ){
-
-        corpo.innerHTML =
-
-        `
-
-        <tr>
-
-            <td
-                colspan="7"
-                class="vazio">
-
-                ✅ Nenhum lançamento pendente.
-
-            </td>
-
-        </tr>
-
-        `;
-
-        return;
-
-    }
-
-
-    /* ==========================================
-       ORDENA POR VENCIMENTO
-    ========================================== */
-
-    lista.sort(function(a,b){
-
-        return compararDatas(
-            a.vencimento,
-            b.vencimento
-        );
-
-    });
-
-
-    /* ==========================================
-       MONTAR LINHAS
-    ========================================== */
-
-    lista.forEach(function(item){
-
-        const linha =
-            document.createElement(
-                "tr"
-            );
-
-
-        const tipo =
-            String(
-                item.tipo || ""
-            );
-
-
-        const classeTipo =
-
-            tipo === "Contas a Receber"
-
-            ?
-
-            "receber"
-
-            :
-
-            "pagar";
-
-
-        linha.innerHTML =
-
-        `
-
-        <td>
-
-            ${escaparHTML(
-                item.id
-            )}
-
-        </td>
-
-
-        <td>
-
-            ${escaparHTML(
-                item.competencia
-            )}
-
-        </td>
-
-
-        <td class="${classeTipo}">
-
-            ${escaparHTML(
-                tipo
-            )}
-
-        </td>
-
-
-        <td>
-
-            ${escaparHTML(
-                item.descricao
-            )}
-
-        </td>
-
-
-        <td class="valor">
-
-            ${formatarMoeda(
-                item.valor
-            )}
-
-        </td>
-
-
-        <td>
-
-            ${formatarData(
-                item.vencimento
-            )}
-
-        </td>
-
-
-        <td>
-
-            <span class="status-pendente">
-
-                ⏳ ${escaparHTML(
-                    item.baixado || "Não"
-                )}
-
-            </span>
-
-        </td>
-
-        `;
-
-
-        corpo.appendChild(
-            linha
-        );
-
-    });
-
-}
-
-
-/* =====================================================
-   NORMALIZAR VALOR
-===================================================== */
-
-function normalizarValor(valor){
-
-    if(
-        valor === null ||
-        valor === undefined ||
-        valor === ""
-    ){
-
-        return 0;
-
-    }
-
-
-    if(
-        typeof valor === "number"
-    ){
-
-        return valor;
-
-    }
-
-
-    let texto =
-        String(valor)
-        .trim();
-
-
-    texto =
-        texto.replace(
-            /R\$\s?/gi,
-            ""
-        );
-
-
-    /*
-     * Trata valores brasileiros:
-     *
-     * 1.234,56
-     * 1234,56
-     * 1234.56
-     */
-
-    if(
-        texto.includes(",")
-    ){
-
-        texto =
-            texto.replace(
-                /\./g,
-                ""
-            );
-
-
-        texto =
-            texto.replace(
-                ",",
-                "."
-            );
-
-    }
-
-
-    const numero =
-        parseFloat(texto);
-
-
-    return isNaN(numero)
-        ? 0
-        : numero;
-
-}
-
-
-/* =====================================================
-   FORMATAR MOEDA
-===================================================== */
-
-function formatarMoeda(valor){
-
-    return Number(
-        normalizarValor(valor)
-    )
-    .toLocaleString(
-        "pt-BR",
-        {
-            style:"currency",
-            currency:"BRL"
-        }
-    );
-
-}
-
-
-/* =====================================================
-   FORMATAR DATA
-===================================================== */
-
-function formatarData(data){
-
-    if(!data){
-
-        return "";
-
-    }
-
-
-    const texto =
-        String(data)
-        .trim();
-
-
-    /* dd/mm/yyyy */
-
-    if(
-        /^\d{2}\/\d{2}\/\d{4}$/
-        .test(texto)
-    ){
-
-        return texto;
-
-    }
-
-
-    /* yyyy-mm-dd */
-
-    if(
-        /^\d{4}-\d{2}-\d{2}$/
-        .test(texto)
-    ){
-
-        const partes =
-            texto.split("-");
-
-
-        return (
-
-            partes[2] +
-            "/" +
-            partes[1] +
-            "/" +
-            partes[0]
-
-        );
-
-    }
-
-
-    const dataObj =
-        new Date(data);
-
-
-    if(
-        isNaN(
-            dataObj.getTime()
-        )
-    ){
-
-        return texto;
-
-    }
-
-
-    return dataObj.toLocaleDateString(
-        "pt-BR"
-    );
-
-}
-
-
-/* =====================================================
-   COMPARAR DATAS
-===================================================== */
-
-function compararDatas(a,b){
-
-    const dataA =
-        converterData(a);
-
-
-    const dataB =
-        converterData(b);
-
-
-    if(!dataA && !dataB){
-
-        return 0;
-
-    }
-
-
-    if(!dataA){
-
-        return 1;
-
-    }
-
-
-    if(!dataB){
-
-        return -1;
-
-    }
-
-
-    return dataA - dataB;
-
-}
-
-
-/* =====================================================
-   CONVERTER DATA
-===================================================== */
-
-function converterData(data){
-
-    if(!data){
-
-        return null;
-
-    }
-
-
-    const texto =
-        String(data)
-        .trim();
-
-
-    if(
-        /^\d{2}\/\d{2}\/\d{4}$/
-        .test(texto)
-    ){
-
-        const partes =
-            texto.split("/");
-
-
-        const dataObj =
-            new Date(
-
-                Number(partes[2]),
-
-                Number(partes[1]) - 1,
-
-                Number(partes[0])
-
-            );
-
-
-        return dataObj;
-
-    }
-
-
-    const dataObj =
-        new Date(data);
-
-
-    if(
-        isNaN(
-            dataObj.getTime()
-        )
-    ){
-
-        return null;
-
-    }
-
-
-    return dataObj;
-
-}
-
-
-/* =====================================================
-   ESCAPAR HTML
-===================================================== */
-
-function escaparHTML(valor){
-
-    if(
-        valor === null ||
-        valor === undefined
-    ){
-
-        return "";
-
-    }
-
-
-    return String(valor)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-/* =====================================================
-   MOSTRAR ERRO
-===================================================== */
-
-function mostrarErro(texto){
-
-    const mensagem =
-        document.getElementById(
-            "mensagem"
-        );
-
-
-    mensagem.className =
-        "mensagem erro";
-
-
-    mensagem.textContent =
-        texto;
-
-}
-
-
-/* =====================================================
+/* =========================================================
    VOLTAR
-===================================================== */
+========================================================= */
 
 function voltarIndex(){
 
-    /*
-     * GitHub Pages
-     *
-     * Se seu index estiver em outra pasta,
-     * altere para o caminho correspondente.
-     */
-
-    window.location.href =
-        "index.html";
+  window.location.href =
+    "index.html";
 
 }
 
-</script>
 
+/* =========================================================
+   API REQUEST
+========================================================= */
+
+async function apiRequest(
+  action,
+  params={}
+){
+
+  const url =
+    new URL(URL_API);
+
+
+  url.searchParams.set(
+    "action",
+    action
+  );
+
+
+  Object.keys(params)
+    .forEach(function(chave){
+
+      const valor =
+        params[chave];
+
+
+      if(
+        valor !== undefined &&
+        valor !== null
+      ){
+
+        url.searchParams.set(
+          chave,
+          valor
+        );
+
+      }
+
+    });
+
+
+  const resposta =
+    await fetch(
+      url.toString(),
+      {
+        method:"GET",
+        redirect:"follow",
+        cache:"no-store"
+      }
+    );
+
+
+  if(!resposta.ok){
+
+    throw new Error(
+      "Erro HTTP " +
+      resposta.status
+    );
+
+  }
+
+
+  const texto =
+    await resposta.text();
+
+
+  let dados;
+
+
+  try{
+
+    dados =
+      JSON.parse(texto);
+
+  }
+  catch(e){
+
+    console.error(texto);
+
+    throw new Error(
+      "Resposta inválida da API."
+    );
+
+  }
+
+
+  if(
+    dados &&
+    dados.sucesso === false
+  ){
+
+    throw new Error(
+      dados.erro ||
+      dados.mensagem ||
+      "Erro na API."
+    );
+
+  }
+
+
+  return dados;
+
+}
+
+
+/* =========================================================
+   CARREGAR
+========================================================= */
+
+async function carregar(){
+
+  const corpo =
+    document.getElementById(
+      "lista"
+    );
+
+
+  try{
+
+    const lista =
+      await apiRequest(
+        "listarBaixasPendentes"
+      );
+
+
+    corpo.innerHTML =
+      "";
+
+
+    if(
+      !lista ||
+      lista.length === 0
+    ){
+
+      corpo.innerHTML = `
+
+        <tr>
+
+          <td colspan="7">
+
+            Nenhum lançamento pendente.
+
+          </td>
+
+        </tr>
+
+      `;
+
+      return;
+
+    }
+
+
+    lista.forEach(function(item){
+
+      corpo.innerHTML += `
+
+        <tr>
+
+          <td>
+            ${escapar(item.id)}
+          </td>
+
+          <td>
+            ${escapar(item.competencia)}
+          </td>
+
+          <td>
+            ${escapar(item.tipo)}
+          </td>
+
+          <td>
+            ${escapar(item.descricao)}
+          </td>
+
+          <td class="valor">
+
+            ${formatarMoeda(item.valor)}
+
+          </td>
+
+          <td>
+            ${escapar(item.vencimento)}
+          </td>
+
+          <td>
+            ${escapar(item.baixado)}
+          </td>
+
+        </tr>
+
+      `;
+
+    });
+
+  }
+  catch(e){
+
+    corpo.innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="7"
+          class="erro"
+        >
+
+          Erro:
+          ${escapar(e.message)}
+
+        </td>
+
+      </tr>
+
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   MOEDA
+========================================================= */
+
+function formatarMoeda(valor){
+
+  return Number(
+    valor || 0
+  ).toLocaleString(
+    "pt-BR",
+    {
+      style:"currency",
+      currency:"BRL"
+    }
+  );
+
+}
+
+
+/* =========================================================
+   SEGURANÇA HTML
+========================================================= */
+
+function escapar(valor){
+
+  return String(
+    valor ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =========================================================
+   INICIAR
+========================================================= */
+
+window.addEventListener(
+  "DOMContentLoaded",
+  carregar
+);
+
+</script>
 
 </body>
 
 </html>
-
