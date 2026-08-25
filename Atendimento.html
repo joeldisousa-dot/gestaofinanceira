@@ -5,15 +5,30 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-<title>Atendimento</title>
+<meta
+  name="theme-color"
+  content="#0d47a1"
+>
+
+<title>Atendimento | Base de Conhecimento</title>
 
 <style>
 
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
   box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
@@ -23,33 +38,64 @@ body{
   padding:20px;
 
   font-family:
+    Inter,
+    "Segoe UI",
     Arial,
     sans-serif;
 
-  background:#eef3f8;
+  background:
+    linear-gradient(
+      135deg,
+      #eef4ff 0%,
+      #f8fafc 50%,
+      #eef2ff 100%
+    );
 
-  color:#333;
+  color:#1e293b;
+
+  min-height:100vh;
 
 }
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
 
 .container{
 
-  max-width:900px;
+  width:
+    min(
+      100%,
+      980px
+    );
 
   margin:auto;
 
-  background:white;
+  background:#fff;
 
-  padding:25px;
+  border:
+    1px solid #e2e8f0;
 
-  border-radius:15px;
+  border-radius:20px;
 
   box-shadow:
-    0 5px 20px rgba(0,0,0,.15);
+    0 15px 45px
+    rgba(15,23,42,.10);
+
+  overflow:hidden;
 
 }
 
+
+/* =====================================================
+   TOPO
+===================================================== */
+
 .topo{
+
+  padding:
+    18px 25px;
 
   display:flex;
 
@@ -57,49 +103,126 @@ body{
 
   align-items:center;
 
-  margin-bottom:25px;
-
   gap:15px;
 
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #0d47a1
+    );
+
 }
+
+
+.topo-titulo{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+}
+
+
+.topo-icone{
+
+  width:44px;
+
+  height:44px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+    rgba(255,255,255,.12);
+
+  border-radius:12px;
+
+  font-size:22px;
+
+}
+
 
 .topo h2{
 
   margin:0;
 
-  color:#0d47a1;
+  font-size:19px;
 
 }
+
+
+.topo-subtitulo{
+
+  margin-top:3px;
+
+  color:#cbd5e1;
+
+  font-size:12px;
+
+}
+
 
 .voltar{
 
-  background:#546e7a;
-
-  color:white;
-
   border:none;
 
-  padding:12px 20px;
+  padding:
+    10px 16px;
 
-  border-radius:10px;
+  border-radius:9px;
 
   cursor:pointer;
 
-  font-weight:bold;
+  font-weight:700;
 
-  font-size:14px;
+  font-size:13px;
+
+  color:white;
+
+  background:
+    rgba(255,255,255,.12);
+
+  border:
+    1px solid
+    rgba(255,255,255,.15);
+
+  transition:
+    .2s ease;
 
 }
+
 
 .voltar:hover{
 
-  background:#37474f;
+  background:
+    rgba(255,255,255,.20);
+
+  transform:
+    translateY(-1px);
 
 }
 
-h1{
 
-  color:#0d47a1;
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.conteudo{
+
+  padding:28px;
+
+}
+
+
+.titulo-principal{
 
   text-align:center;
 
@@ -107,105 +230,467 @@ h1{
 
 }
 
+
+.titulo-principal h1{
+
+  margin:0;
+
+  color:#0d47a1;
+
+  font-size:27px;
+
+}
+
+
+.titulo-principal p{
+
+  margin:
+    7px 0 0;
+
+  color:#64748b;
+
+  font-size:14px;
+
+}
+
+
+/* =====================================================
+   BOTÃO NOVO
+===================================================== */
+
+.btnNovo{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:8px;
+
+  min-height:44px;
+
+  padding:
+    0 18px;
+
+  margin-bottom:20px;
+
+  border:none;
+
+  border-radius:10px;
+
+  cursor:pointer;
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00897b,
+      #10b981
+    );
+
+  font-weight:800;
+
+  font-size:14px;
+
+  box-shadow:
+    0 6px 15px
+    rgba(5,150,105,.18);
+
+  transition:
+    transform .2s,
+    box-shadow .2s;
+
+}
+
+
+.btnNovo:hover{
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 9px 20px
+    rgba(5,150,105,.25);
+
+}
+
+
+/* =====================================================
+   PESQUISA
+===================================================== */
+
+.caixa-pesquisa{
+
+  padding:18px;
+
+  background:#f8fafc;
+
+  border:
+    1px solid #e2e8f0;
+
+  border-radius:14px;
+
+}
+
+
 .pesquisa{
 
   display:flex;
 
   gap:10px;
 
-  margin-bottom:25px;
-
 }
 
-input{
-
-  height:44px;
-
-  padding:8px 12px;
-
-  border-radius:8px;
-
-  border:1px solid #ccc;
-
-  font-size:15px;
-
-}
 
 #pesquisa{
 
   flex:1;
 
-}
+  height:46px;
 
-button{
+  padding:
+    0 14px;
 
-  min-height:44px;
-
-  padding:0 20px;
-
-  border:none;
-
-  border-radius:8px;
-
-  cursor:pointer;
-
-  font-size:15px;
-
-  font-weight:bold;
-
-  color:white;
-
-  background:#1976d2;
-
-}
-
-button:hover{
-
-  opacity:.88;
-
-}
-
-.btnNovo{
-
-  background:#00897b;
-
-  margin-bottom:20px;
-
-}
-
-.card{
-
-  background:#f8f9fa;
-
-  border-left:5px solid #1976d2;
-
-  padding:15px;
-
-  margin-bottom:15px;
+  border:
+    1px solid #cbd5e1;
 
   border-radius:10px;
 
-  line-height:1.5;
+  outline:none;
+
+  font-size:14px;
+
+  color:#1e293b;
+
+  background:white;
+
+  transition:
+    border .2s,
+    box-shadow .2s;
 
 }
+
+
+#pesquisa:focus{
+
+  border-color:#1976d2;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(25,118,210,.10);
+
+}
+
+
+#pesquisa::placeholder{
+
+  color:#94a3b8;
+
+}
+
+
+.btnPesquisar{
+
+  min-height:46px;
+
+  padding:
+    0 20px;
+
+  border:none;
+
+  border-radius:10px;
+
+  cursor:pointer;
+
+  color:white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1565c0,
+      #1976d2
+    );
+
+  font-size:14px;
+
+  font-weight:800;
+
+  transition:
+    transform .2s,
+    box-shadow .2s;
+
+}
+
+
+.btnPesquisar:hover{
+
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0 6px 15px
+    rgba(25,118,210,.20);
+
+}
+
+
+/* =====================================================
+   STATUS DA PESQUISA
+===================================================== */
+
+.status-pesquisa{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:10px;
+
+  margin-top:15px;
+
+  min-height:20px;
+
+}
+
+
+.status-texto{
+
+  color:#64748b;
+
+  font-size:13px;
+
+}
+
+
+.status-contador{
+
+  display:none;
+
+  padding:
+    5px 10px;
+
+  border-radius:20px;
+
+  background:#eff6ff;
+
+  color:#1565c0;
+
+  font-size:12px;
+
+  font-weight:800;
+
+}
+
+
+.status-contador.show{
+
+  display:inline-flex;
+
+}
+
+
+/* =====================================================
+   RESULTADO
+===================================================== */
+
+#resultado{
+
+  margin-top:20px;
+
+}
+
+
+.info{
+
+  padding:18px;
+
+  background:#f8fafc;
+
+  border:
+    1px solid #e2e8f0;
+
+  border-radius:12px;
+
+  color:#64748b;
+
+  font-size:14px;
+
+  text-align:center;
+
+}
+
+
+.erro{
+
+  padding:16px;
+
+  background:#fef2f2;
+
+  color:#b91c1c;
+
+  border:
+    1px solid #fecaca;
+
+  border-radius:12px;
+
+  font-weight:700;
+
+}
+
+
+.sucesso{
+
+  padding:16px;
+
+  background:#ecfdf5;
+
+  color:#047857;
+
+  border:
+    1px solid #a7f3d0;
+
+  border-radius:12px;
+
+  font-weight:700;
+
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.card{
+
+  position:relative;
+
+  padding:20px;
+
+  margin-bottom:15px;
+
+  background:white;
+
+  border:
+    1px solid #e2e8f0;
+
+  border-left:
+    5px solid #1976d2;
+
+  border-radius:13px;
+
+  box-shadow:
+    0 5px 18px
+    rgba(15,23,42,.06);
+
+  transition:
+    transform .2s,
+    box-shadow .2s;
+
+}
+
+
+.card:hover{
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 10px 25px
+    rgba(15,23,42,.09);
+
+}
+
+
+.card:last-child{
+
+  margin-bottom:0;
+
+}
+
 
 .id{
 
-  font-weight:bold;
+  display:inline-flex;
 
-  color:#555;
+  padding:
+    4px 8px;
+
+  border-radius:6px;
+
+  background:#f1f5f9;
+
+  color:#64748b;
+
+  font-size:11px;
+
+  font-weight:800;
 
 }
+
 
 .titulo{
 
-  font-weight:bold;
+  margin-top:14px;
+
+  margin-bottom:6px;
 
   color:#0d47a1;
 
-  margin-bottom:4px;
+  font-size:13px;
+
+  font-weight:800;
+
+  text-transform:uppercase;
+
+  letter-spacing:.2px;
 
 }
+
+
+.texto{
+
+  color:#334155;
+
+  font-size:14px;
+
+  line-height:1.65;
+
+  white-space:normal;
+
+}
+
+
+/* =====================================================
+   DESTAQUE DA PESQUISA
+===================================================== */
+
+.highlight{
+
+  padding:
+    1px 4px;
+
+  border-radius:4px;
+
+  color:#713f12;
+
+  background:#fde68a;
+
+  box-shadow:
+    0 0 0 1px
+    rgba(234,179,8,.15);
+
+  font-weight:800;
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
 
 .modal{
 
@@ -215,19 +700,22 @@ button:hover{
 
   inset:0;
 
-  width:100%;
+  z-index:5000;
 
-  height:100%;
+  padding:20px;
 
-  background:rgba(0,0,0,.4);
+  background:
+    rgba(15,23,42,.55);
+
+  backdrop-filter:
+    blur(4px);
 
   align-items:center;
 
   justify-content:center;
 
-  padding:20px;
-
 }
+
 
 .modal.show{
 
@@ -235,129 +723,443 @@ button:hover{
 
 }
 
+
 .caixa{
+
+  width:
+    min(
+      100%,
+      500px
+    );
+
+  max-height:
+    calc(100vh - 40px);
+
+  overflow:auto;
 
   background:white;
 
-  width:min(400px,100%);
-
-  padding:25px;
-
-  border-radius:15px;
+  border-radius:18px;
 
   box-shadow:
-    0 10px 30px rgba(0,0,0,.2);
+    0 25px 70px
+    rgba(0,0,0,.25);
+
+  animation:
+    modalEntrada .2s ease;
 
 }
 
-.caixa h2{
 
-  margin-top:0;
+@keyframes modalEntrada{
+
+  from{
+
+    opacity:0;
+
+    transform:
+      translateY(15px)
+      scale(.98);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+  }
+
+}
+
+
+.modal-header{
+
+  padding:
+    20px 22px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  border-bottom:
+    1px solid #e2e8f0;
+
+}
+
+
+.modal-header h2{
+
+  margin:0;
 
   color:#0d47a1;
 
+  font-size:18px;
+
 }
+
+
+.btnFechar{
+
+  width:35px;
+
+  height:35px;
+
+  border:none;
+
+  border-radius:9px;
+
+  cursor:pointer;
+
+  background:#f1f5f9;
+
+  color:#475569;
+
+  font-size:21px;
+
+}
+
+
+.modal-body{
+
+  padding:22px;
+
+}
+
 
 .caixa label{
 
   display:block;
 
-  font-weight:bold;
-
   margin:
-    12px 0 5px;
+    15px 0 7px;
+
+  color:#334155;
+
+  font-size:13px;
+
+  font-weight:800;
 
 }
+
+
+.caixa label:first-child{
+
+  margin-top:0;
+
+}
+
 
 textarea{
 
   width:100%;
 
-  height:90px;
+  min-height:120px;
 
-  padding:10px;
+  padding:12px;
 
-  border-radius:8px;
+  border:
+    1px solid #cbd5e1;
 
-  border:1px solid #ccc;
+  border-radius:10px;
 
-  resize:none;
+  resize:vertical;
 
-  font-family:Arial;
+  outline:none;
+
+  font-family:inherit;
 
   font-size:14px;
 
+  line-height:1.5;
+
 }
 
-.acoes{
+
+textarea:focus{
+
+  border-color:#1976d2;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(25,118,210,.10);
+
+}
+
+
+.modal-footer{
 
   display:flex;
 
+  justify-content:flex-end;
+
   gap:10px;
 
-  margin-top:15px;
+  padding:
+    16px 22px;
+
+  border-top:
+    1px solid #e2e8f0;
 
 }
+
+
+.btn{
+
+  min-height:43px;
+
+  padding:
+    0 17px;
+
+  border:none;
+
+  border-radius:9px;
+
+  cursor:pointer;
+
+  color:white;
+
+  font-size:13px;
+
+  font-weight:800;
+
+}
+
 
 .btnSalvar{
 
-  background:#1976d2;
+  background:
+    linear-gradient(
+      135deg,
+      #1565c0,
+      #1976d2
+    );
 
 }
+
 
 .btnCancelar{
 
-  background:#c62828;
+  background:
+    #c62828;
 
 }
 
-#resultado{
 
-  margin-top:20px;
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading{
+
+  display:none;
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:10000;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+    rgba(255,255,255,.70);
+
+  backdrop-filter:
+    blur(3px);
 
 }
 
-.info{
 
-  padding:15px;
+.loading.show{
 
-  background:#f1f5f9;
+  display:flex;
 
-  border-radius:8px;
+}
+
+
+.loading-box{
+
+  min-width:210px;
+
+  padding:25px;
+
+  text-align:center;
+
+  background:white;
+
+  border-radius:16px;
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.15);
+
+}
+
+
+.spinner{
+
+  width:40px;
+
+  height:40px;
+
+  margin:
+    0 auto 14px;
+
+  border:
+    4px solid #e2e8f0;
+
+  border-top-color:#1976d2;
+
+  border-radius:50%;
+
+  animation:
+    girar .8s linear infinite;
+
+}
+
+
+@keyframes girar{
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
+
+.loading-texto{
 
   color:#64748b;
 
-}
+  font-size:13px;
 
-.erro{
-
-  padding:15px;
-
-  background:#ffebee;
-
-  color:#c62828;
-
-  border-radius:8px;
-
-  font-weight:bold;
+  font-weight:700;
 
 }
 
-.sucesso{
 
-  padding:15px;
+/* =====================================================
+   TOAST
+===================================================== */
 
-  background:#e8f5e9;
+.toast{
 
-  color:#2e7d32;
+  position:fixed;
 
-  border-radius:8px;
+  top:20px;
 
-  font-weight:bold;
+  right:20px;
+
+  z-index:11000;
+
+  display:none;
+
+  width:
+    min(
+      calc(100% - 40px),
+      380px
+    );
+
+  padding:
+    15px 18px;
+
+  border-radius:12px;
+
+  color:white;
+
+  font-size:13px;
+
+  font-weight:700;
+
+  box-shadow:
+    0 12px 30px
+    rgba(0,0,0,.18);
 
 }
 
-@media(max-width:600px){
+
+.toast.show{
+
+  display:block;
+
+}
+
+
+.toast.success{
+
+  background:
+    linear-gradient(
+      135deg,
+      #047857,
+      #10b981
+    );
+
+}
+
+
+.toast.error{
+
+  background:
+    linear-gradient(
+      135deg,
+      #b91c1c,
+      #ef4444
+    );
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+
+  padding:
+    20px;
+
+  text-align:center;
+
+  color:#94a3b8;
+
+  font-size:11px;
+
+  border-top:
+    1px solid #e2e8f0;
+
+}
+
+
+/* =====================================================
+   ACESSIBILIDADE
+===================================================== */
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible{
+
+  outline:
+    3px solid
+    rgba(25,118,210,.25);
+
+  outline-offset:2px;
+
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media(max-width:650px){
 
   body{
 
@@ -365,17 +1167,57 @@ textarea{
 
   }
 
+
   .container{
+
+    border-radius:15px;
+
+  }
+
+
+  .topo{
+
+    padding:
+      15px;
+
+  }
+
+
+  .topo h2{
+
+    font-size:16px;
+
+  }
+
+
+  .topo-subtitulo{
+
+    display:none;
+
+  }
+
+
+  .voltar{
+
+    padding:
+      9px 12px;
+
+  }
+
+
+  .conteudo{
 
     padding:18px;
 
   }
 
-  .topo{
 
-    align-items:flex-start;
+  .titulo-principal h1{
+
+    font-size:23px;
 
   }
+
 
   .pesquisa{
 
@@ -383,19 +1225,31 @@ textarea{
 
   }
 
-  .pesquisa button{
+
+  .btnPesquisar{
 
     width:100%;
 
   }
 
-  .acoes{
+
+  .status-pesquisa{
+
+    align-items:flex-start;
 
     flex-direction:column;
 
   }
 
-  .acoes button{
+
+  .modal-footer{
+
+    flex-direction:column;
+
+  }
+
+
+  .modal-footer .btn{
 
     width:100%;
 
@@ -407,21 +1261,48 @@ textarea{
 
 </head>
 
+
 <body>
 
+
+<!-- =====================================================
+     CONTAINER
+===================================================== -->
 
 <div class="container">
 
 
+  <!-- ===================================================
+       TOPO
+  ==================================================== -->
+
   <div class="topo">
 
-    <h2>
-      📖 Atendimento
-    </h2>
+    <div class="topo-titulo">
+
+      <div class="topo-icone">
+        📖
+      </div>
+
+      <div>
+
+        <h2>
+          Atendimento
+        </h2>
+
+        <div class="topo-subtitulo">
+          Base de conhecimento
+        </div>
+
+      </div>
+
+    </div>
+
 
     <button
       class="voltar"
-      onclick="voltar()">
+      onclick="voltar()"
+    >
 
       ← Voltar
 
@@ -430,44 +1311,124 @@ textarea{
   </div>
 
 
-  <h1>
-    Base de Conhecimento
-  </h1>
+  <!-- ===================================================
+       CONTEÚDO
+  ==================================================== -->
+
+  <div class="conteudo">
 
 
-  <button
-    class="btnNovo"
-    onclick="abrirCadastro()">
+    <div class="titulo-principal">
 
-    ➕ Novo Atendimento
+      <h1>
+        Base de Conhecimento
+      </h1>
 
-  </button>
+      <p>
+        Pesquise problemas e soluções cadastrados no sistema.
+      </p>
+
+    </div>
 
 
-  <div class="pesquisa">
+    <!-- =================================================
+         NOVO ATENDIMENTO
+    ================================================== -->
 
-    <input
-      id="pesquisa"
-      placeholder="Digite uma palavra para pesquisar problema ou solução"
-      onkeydown="if(event.key==='Enter') pesquisar()"
+    <button
+      class="btnNovo"
+      onclick="abrirCadastro()"
     >
 
-    <button onclick="pesquisar()">
-
-      🔍 Pesquisar
+      ➕ Novo Atendimento
 
     </button>
+
+
+    <!-- =================================================
+         PESQUISA
+    ================================================== -->
+
+    <div class="caixa-pesquisa">
+
+
+      <div class="pesquisa">
+
+        <input
+          id="pesquisa"
+          autocomplete="off"
+          placeholder="Digite uma palavra ou expressão exata..."
+          onkeydown="
+            if(event.key === 'Enter'){
+              pesquisar();
+            }
+          "
+        >
+
+
+        <button
+          class="btnPesquisar"
+          onclick="pesquisar()"
+        >
+
+          🔍 Pesquisar
+
+        </button>
+
+      </div>
+
+
+      <div class="status-pesquisa">
+
+        <div
+          id="statusTexto"
+          class="status-texto"
+        >
+
+          Digite uma palavra para pesquisar.
+
+        </div>
+
+
+        <div
+          id="contador"
+          class="status-contador"
+        >
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         RESULTADO
+    ================================================== -->
+
+    <div id="resultado">
+
+      <div class="info">
+
+        🔎 Digite uma palavra ou expressão
+        para pesquisar.
+
+      </div>
+
+    </div>
+
 
   </div>
 
 
-  <div id="resultado">
+  <!-- ===================================================
+       FOOTER
+  ==================================================== -->
 
-    <div class="info">
+  <div class="footer">
 
-      Digite uma palavra para pesquisar.
-
-    </div>
+    Base de Conhecimento • Sistema de Atendimento
 
   </div>
 
@@ -486,60 +1447,124 @@ textarea{
   onclick="fecharModalFora(event)"
 >
 
+
   <div
     class="caixa"
     onclick="event.stopPropagation()"
   >
 
-    <h2>
-      Novo Atendimento
-    </h2>
 
+    <div class="modal-header">
 
-    <label for="problema">
-      Problema
-    </label>
+      <h2>
+        ➕ Novo Atendimento
+      </h2>
 
-    <textarea
-      id="problema"
-      placeholder="Descreva o problema..."
-    ></textarea>
-
-
-    <label for="solucao">
-      Solução
-    </label>
-
-    <textarea
-      id="solucao"
-      placeholder="Descreva a solução..."
-    ></textarea>
-
-
-    <div class="acoes">
 
       <button
-        class="btnSalvar"
-        onclick="salvar()">
+        class="btnFechar"
+        onclick="fecharCadastro()"
+      >
 
-        💾 Salvar
+        ×
 
       </button>
 
+    </div>
+
+
+    <div class="modal-body">
+
+
+      <label for="problema">
+        Problema
+      </label>
+
+      <textarea
+        id="problema"
+        placeholder="Descreva o problema..."
+      ></textarea>
+
+
+      <label for="solucao">
+        Solução
+      </label>
+
+      <textarea
+        id="solucao"
+        placeholder="Descreva a solução..."
+      ></textarea>
+
+
+    </div>
+
+
+    <div class="modal-footer">
 
       <button
-        class="btnCancelar"
-        onclick="fecharCadastro()">
+        class="btn btnCancelar"
+        onclick="fecharCadastro()"
+      >
 
         Cancelar
 
       </button>
+
+
+      <button
+        class="btn btnSalvar"
+        onclick="salvar()"
+      >
+
+        💾 Salvar Atendimento
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     LOADING
+===================================================== -->
+
+<div
+  id="loading"
+  class="loading"
+>
+
+  <div class="loading-box">
+
+    <div class="spinner"></div>
+
+    <div
+      id="loadingTexto"
+      class="loading-texto"
+    >
+
+      Processando...
 
     </div>
 
   </div>
 
 </div>
+
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+  id="toast"
+  class="toast"
+></div>
 
 
 
@@ -554,7 +1579,7 @@ const URL_API =
 
 
 /* =====================================================
-   FUNÇÃO GENÉRICA DA API
+   API
 ===================================================== */
 
 async function apiRequest(
@@ -575,7 +1600,7 @@ async function apiRequest(
   Object.keys(params)
     .forEach(function(chave){
 
-      let valor =
+      const valor =
         params[chave];
 
 
@@ -585,10 +1610,13 @@ async function apiRequest(
       ){
 
         url.searchParams.set(
+
           chave,
+
           typeof valor === "object"
             ? JSON.stringify(valor)
-            : valor
+            : String(valor)
+
         );
 
       }
@@ -661,13 +1689,20 @@ async function apiRequest(
 
   if(
     dados &&
-    dados.sucesso === false
+    (
+      dados.sucesso === false ||
+      dados.success === false ||
+      dados.erro
+    )
   ){
 
     throw new Error(
+
       dados.erro ||
       dados.mensagem ||
+      dados.message ||
       "Erro retornado pelo servidor."
+
     );
 
   }
@@ -679,38 +1714,12 @@ async function apiRequest(
 
 
 /* =====================================================
-   NORMALIZAR LISTA
+   OBTER LISTA
 ===================================================== */
 
 function obterLista(
   resposta
 ){
-
-  /*
-     O Apps Script pode retornar:
-
-     1. diretamente:
-        [ {...}, {...} ]
-
-     2. dentro de dados:
-        {
-          sucesso:true,
-          dados:[...]
-        }
-
-     3. dentro de lista:
-        {
-          sucesso:true,
-          lista:[...]
-        }
-
-     4. dentro de resultado:
-        {
-          sucesso:true,
-          resultado:[...]
-        }
-  */
-
 
   if(
     Array.isArray(resposta)
@@ -723,7 +1732,9 @@ function obterLista(
 
   if(
     resposta &&
-    Array.isArray(resposta.dados)
+    Array.isArray(
+      resposta.dados
+    )
   ){
 
     return resposta.dados;
@@ -733,7 +1744,9 @@ function obterLista(
 
   if(
     resposta &&
-    Array.isArray(resposta.lista)
+    Array.isArray(
+      resposta.lista
+    )
   ){
 
     return resposta.lista;
@@ -743,7 +1756,9 @@ function obterLista(
 
   if(
     resposta &&
-    Array.isArray(resposta.resultado)
+    Array.isArray(
+      resposta.resultado
+    )
   ){
 
     return resposta.resultado;
@@ -753,7 +1768,9 @@ function obterLista(
 
   if(
     resposta &&
-    Array.isArray(resposta.atendimentos)
+    Array.isArray(
+      resposta.atendimentos
+    )
   ){
 
     return resposta.atendimentos;
@@ -767,16 +1784,236 @@ function obterLista(
 
 
 /* =====================================================
-   PESQUISA
+   NORMALIZAR TEXTO
+===================================================== */
+
+function normalizarTexto(
+  texto
+){
+
+  return String(texto)
+
+    .normalize("NFD")
+
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+
+    .toLowerCase()
+
+    .trim();
+
+}
+
+
+/* =====================================================
+   ESCAPAR REGEX
+===================================================== */
+
+function escaparRegex(
+  texto
+){
+
+  return String(texto)
+    .replace(
+      /[.*+?^${}()|[\]\\]/g,
+      "\\$&"
+    );
+
+}
+
+
+/* =====================================================
+   VERIFICAR EXPRESSÃO EXATA
+===================================================== */
+
+function palavraExata(
+  texto,
+  termo
+){
+
+  if(
+    !texto ||
+    !termo
+  ){
+
+    return false;
+
+  }
+
+
+  const textoNormalizado =
+    normalizarTexto(
+      texto
+    );
+
+
+  const termoNormalizado =
+    normalizarTexto(
+      termo
+    );
+
+
+  if(!termoNormalizado){
+
+    return false;
+
+  }
+
+
+  /*
+   * Para uma expressão como:
+   *
+   * FGTS Digital
+   *
+   * procura a expressão completa,
+   * respeitando os limites das palavras.
+   */
+
+
+  const regex =
+    new RegExp(
+
+      "(^|[^a-z0-9])" +
+
+      escaparRegex(
+        termoNormalizado
+      ) +
+
+      "(?=$|[^a-z0-9])",
+
+      "i"
+
+    );
+
+
+  return regex.test(
+    textoNormalizado
+  );
+
+}
+
+
+/* =====================================================
+   DESTACAR TERMO
+===================================================== */
+
+function destacarTexto(
+  texto,
+  termo
+){
+
+  const textoOriginal =
+    String(
+      texto ?? ""
+    );
+
+
+  if(!termo){
+
+    return escapeHtml(
+      textoOriginal
+    )
+    .replace(
+      /\n/g,
+      "<br>"
+    );
+
+  }
+
+
+  const termoNormalizado =
+    normalizarTexto(
+      termo
+    );
+
+
+  if(!termoNormalizado){
+
+    return escapeHtml(
+      textoOriginal
+    )
+    .replace(
+      /\n/g,
+      "<br>"
+    );
+
+  }
+
+
+  /*
+   * Primeiro escapa o texto.
+   */
+
+  const textoSeguro =
+    escapeHtml(
+      textoOriginal
+    );
+
+
+  /*
+   * Escapa o termo para Regex.
+   */
+
+  const termoEscapado =
+    escaparRegex(
+      escapeHtml(
+        termo
+      )
+    );
+
+
+  /*
+   * Destaca o termo ignorando
+   * maiúsculas/minúsculas.
+   *
+   * Observação:
+   * o destaque considera a forma
+   * digitada pelo usuário.
+   */
+
+  let resultado =
+    textoSeguro.replace(
+      new RegExp(
+        termoEscapado,
+        "gi"
+      ),
+      function(match){
+
+        return (
+          '<span class="highlight">' +
+          match +
+          '</span>'
+        );
+
+      }
+    );
+
+
+  return resultado
+    .replace(
+      /\n/g,
+      "<br>"
+    );
+
+}
+
+
+/* =====================================================
+   PESQUISAR
 ===================================================== */
 
 async function pesquisar(){
 
+  const campo =
+    document.getElementById(
+      "pesquisa"
+    );
+
+
   const palavra =
-    document
-      .getElementById("pesquisa")
-      .value
-      .trim();
+    campo.value.trim();
 
 
   const resultado =
@@ -785,29 +2022,69 @@ async function pesquisar(){
     );
 
 
+  const statusTexto =
+    document.getElementById(
+      "statusTexto"
+    );
+
+
+  const contador =
+    document.getElementById(
+      "contador"
+    );
+
+
+  /*
+   * Limpa contador.
+   */
+
+  contador.classList.remove(
+    "show"
+  );
+
+
   if(!palavra){
 
-    resultado.innerHTML =
-      `
+    statusTexto.textContent =
+      "Digite uma palavra ou expressão para pesquisar.";
+
+
+    resultado.innerHTML = `
       <div class="info">
-        Digite uma palavra para pesquisar.
+        🔎 Digite uma palavra ou expressão
+        para pesquisar.
       </div>
-      `;
+    `;
 
     return;
 
   }
 
 
-  resultado.innerHTML =
-    `
+  statusTexto.innerHTML =
+    "🔎 Pesquisando por <strong>" +
+    escapeHtml(palavra) +
+    "</strong>...";
+
+
+  resultado.innerHTML = `
     <div class="info">
-      🔎 Pesquisando...
+      🔄 Pesquisando na base de conhecimento...
     </div>
-    `;
+  `;
+
+
+  mostrarLoading(
+    true,
+    "Pesquisando..."
+  );
 
 
   try{
+
+    /*
+     * Consulta a API.
+     */
 
     const resposta =
       await apiRequest(
@@ -825,28 +2102,146 @@ async function pesquisar(){
     );
 
 
-    const lista =
-      obterLista(resposta);
+    /*
+     * Obtém lista retornada.
+     */
 
+    let lista =
+      obterLista(
+        resposta
+      );
+
+
+    /*
+     * =================================================
+     * FILTRO EXATO NO FRONTEND
+     * =================================================
+     *
+     * Mesmo que o Apps Script retorne
+     * resultados aproximados, o frontend
+     * faz uma segunda validação.
+     */
+
+
+    const termo =
+      normalizarTexto(
+        palavra
+      );
+
+
+    lista =
+      lista.filter(
+        function(item){
+
+          const problema =
+            item.problema ??
+            item.Problema ??
+            "";
+
+
+          const solucao =
+            item.solucao ??
+            item.Solucao ??
+            "";
+
+
+          return (
+
+            palavraExata(
+              problema,
+              termo
+            )
+
+            ||
+
+            palavraExata(
+              solucao,
+              termo
+            )
+
+          );
+
+        }
+      );
+
+
+    /*
+     * Mostra resultados.
+     */
 
     mostrarResultado(
-      lista
+      lista,
+      palavra
     );
+
+
+    /*
+     * Atualiza contador.
+     */
+
+    if(
+      lista.length > 0
+    ){
+
+      contador.textContent =
+        lista.length +
+        (
+          lista.length === 1
+            ? " resultado"
+            : " resultados"
+        );
+
+
+      contador.classList.add(
+        "show"
+      );
+
+
+      statusTexto.innerHTML =
+        "Resultados para <strong>" +
+        escapeHtml(
+          palavra
+        ) +
+        "</strong>";
+
+    }
+    else{
+
+      statusTexto.innerHTML =
+        "Nenhum resultado para <strong>" +
+        escapeHtml(
+          palavra
+        ) +
+        "</strong>";
+
+    }
 
   }
   catch(e){
 
-    console.error(e);
+    console.error(
+      "Erro pesquisa:",
+      e
+    );
 
 
-    resultado.innerHTML =
-      `
+    statusTexto.textContent =
+      "Não foi possível realizar a pesquisa.";
+
+
+    resultado.innerHTML = `
       <div class="erro">
-        Erro: ${escapeHtml(
-          e.message
-        )}
+        ❌ Erro ao pesquisar:
+        ${escapeHtml(e.message)}
       </div>
-      `;
+    `;
+
+  }
+  finally{
+
+    mostrarLoading(
+      false
+    );
 
   }
 
@@ -854,11 +2249,12 @@ async function pesquisar(){
 
 
 /* =====================================================
-   MOSTRAR RESULTADOS
+   MOSTRAR RESULTADO
 ===================================================== */
 
 function mostrarResultado(
-  lista
+  lista,
+  termo
 ){
 
   const div =
@@ -872,12 +2268,25 @@ function mostrarResultado(
     lista.length === 0
   ){
 
-    div.innerHTML =
-      `
+    div.innerHTML = `
+
       <div class="info">
-        Nenhum atendimento encontrado.
+
+        <div style="font-size:28px;margin-bottom:8px;">
+          🔍
+        </div>
+
+        <strong>
+          Nenhum atendimento encontrado.
+        </strong>
+
+        <div style="margin-top:6px;font-size:13px;">
+          Tente pesquisar outra palavra ou expressão.
+        </div>
+
       </div>
-      `;
+
+    `;
 
     return;
 
@@ -890,44 +2299,68 @@ function mostrarResultado(
   lista.forEach(
     function(item){
 
+      const id =
+        item.id ??
+        item.ID ??
+        item.Id ??
+        "";
+
+
+      const problema =
+        item.problema ??
+        item.Problema ??
+        "";
+
+
+      const solucao =
+        item.solucao ??
+        item.Solucao ??
+        "";
+
+
       html += `
 
         <div class="card">
 
           <div class="id">
-            ID: ${escapeHtml(
-              item.id ?? ""
-            )}
+
+            ID:
+            ${escapeHtml(id)}
+
           </div>
 
-          <br>
 
           <div class="titulo">
-            Problema:
+
+            Problema
+
           </div>
 
-          <div>
-            ${escapeHtml(
-              item.problema ?? ""
-            ).replace(
-              /\n/g,
-              "<br>"
+
+          <div class="texto">
+
+            ${destacarTexto(
+              problema,
+              termo
             )}
+
           </div>
 
-          <br>
 
           <div class="titulo">
-            Solução:
+
+            Solução
+
           </div>
 
-          <div>
-            ${escapeHtml(
-              item.solucao ?? ""
-            ).replace(
-              /\n/g,
-              "<br>"
+
+          <div class="texto">
+
+            ${destacarTexto(
+              solucao,
+              termo
             )}
+
           </div>
 
         </div>
@@ -955,22 +2388,27 @@ function escapeHtml(
   return String(
     valor
   )
+
   .replace(
     /&/g,
     "&amp;"
   )
+
   .replace(
     /</g,
     "&lt;"
   )
+
   .replace(
     />/g,
     "&gt;"
   )
+
   .replace(
     /"/g,
     "&quot;"
   )
+
   .replace(
     /'/g,
     "&#039;"
@@ -986,13 +2424,26 @@ function escapeHtml(
 function abrirCadastro(){
 
   document
-    .getElementById("modal")
-    .classList.add("show");
+    .getElementById(
+      "modal"
+    )
+    .classList.add(
+      "show"
+    );
 
 
-  document
-    .getElementById("problema")
-    .focus();
+  setTimeout(
+    function(){
+
+      document
+        .getElementById(
+          "problema"
+        )
+        .focus();
+
+    },
+    100
+  );
 
 }
 
@@ -1000,8 +2451,12 @@ function abrirCadastro(){
 function fecharCadastro(){
 
   document
-    .getElementById("modal")
-    .classList.remove("show");
+    .getElementById(
+      "modal"
+    )
+    .classList.remove(
+      "show"
+    );
 
 }
 
@@ -1030,14 +2485,18 @@ async function salvar(){
 
   const problema =
     document
-      .getElementById("problema")
+      .getElementById(
+        "problema"
+      )
       .value
       .trim();
 
 
   const solucao =
     document
-      .getElementById("solucao")
+      .getElementById(
+        "solucao"
+      )
       .value
       .trim();
 
@@ -1047,13 +2506,20 @@ async function salvar(){
     !solucao
   ){
 
-    alert(
-      "Informe problema e solução."
+    mostrarToast(
+      "Informe o problema e a solução.",
+      "error"
     );
 
     return;
 
   }
+
+
+  mostrarLoading(
+    true,
+    "Salvando atendimento..."
+  );
 
 
   try{
@@ -1077,44 +2543,71 @@ async function salvar(){
     );
 
 
-    alert(
+    mostrarToast(
       resposta.mensagem ||
-      "Atendimento salvo com sucesso."
+      resposta.message ||
+      "Atendimento salvo com sucesso.",
+      "success"
     );
 
 
     document
-      .getElementById("problema")
+      .getElementById(
+        "problema"
+      )
       .value = "";
 
 
     document
-      .getElementById("solucao")
+      .getElementById(
+        "solucao"
+      )
       .value = "";
 
 
     fecharCadastro();
 
 
+    /*
+     * Se houver uma pesquisa ativa,
+     * atualiza automaticamente.
+     */
+
     const palavra =
       document
-        .getElementById("pesquisa")
+        .getElementById(
+          "pesquisa"
+        )
         .value
         .trim();
 
 
     if(palavra){
 
-      pesquisar();
+      await pesquisar();
 
     }
 
   }
   catch(e){
 
-    alert(
+    console.error(
+      "Erro salvar:",
+      e
+    );
+
+
+    mostrarToast(
       "Erro: " +
-      e.message
+      e.message,
+      "error"
+    );
+
+  }
+  finally{
+
+    mostrarLoading(
+      false
     );
 
   }
@@ -1123,7 +2616,97 @@ async function salvar(){
 
 
 /* =====================================================
-   VOLTAR PARA O GITHUB PAGES
+   LOADING
+===================================================== */
+
+function mostrarLoading(
+  mostrar,
+  texto="Processando..."
+){
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+
+  const textoElemento =
+    document.getElementById(
+      "loadingTexto"
+    );
+
+
+  if(mostrar){
+
+    textoElemento.textContent =
+      texto;
+
+
+    loading.classList.add(
+      "show"
+    );
+
+  }
+  else{
+
+    loading.classList.remove(
+      "show"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+
+function mostrarToast(
+  mensagem,
+  tipo="success"
+){
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toast.textContent =
+    mensagem;
+
+
+  toast.className =
+    "toast show " +
+    tipo;
+
+
+  toastTimer =
+    setTimeout(
+      function(){
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      4500
+    );
+
+}
+
+
+/* =====================================================
+   VOLTAR
 ===================================================== */
 
 function voltar(){
@@ -1147,6 +2730,34 @@ document.addEventListener(
     ){
 
       fecharCadastro();
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   CTRL + K
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(
+      (event.ctrlKey ||
+       event.metaKey) &&
+      event.key.toLowerCase() === "k"
+    ){
+
+      event.preventDefault();
+
+      document
+        .getElementById(
+          "pesquisa"
+        )
+        .focus();
 
     }
 
