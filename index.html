@@ -19,10 +19,6 @@
 
 <style>
 
-/* =========================================================
-   DESIGN SYSTEM
-========================================================= */
-
 :root{
 
   --primary:#2563eb;
@@ -110,11 +106,6 @@ body{
 
 }
 
-
-/* =========================================================
-   SVG ICONS
-========================================================= */
-
 .icon{
 
   width:19px;
@@ -146,32 +137,22 @@ body{
 
 }
 
-
-/* =========================================================
-   TOPBAR
-========================================================= */
-
 .topbar{
 
   position:sticky;
-
   top:0;
-
   z-index:1000;
 
   color:white;
 
-  background:
-    rgba(11,18,32,.94);
+  background:rgba(11,18,32,.94);
 
   border-bottom:
     1px solid rgba(255,255,255,.07);
 
-  backdrop-filter:
-    blur(18px);
+  backdrop-filter:blur(18px);
 
-  -webkit-backdrop-filter:
-    blur(18px);
+  -webkit-backdrop-filter:blur(18px);
 
   box-shadow:
     0 4px 25px rgba(0,0,0,.12);
@@ -203,9 +184,7 @@ body{
 .logo{
 
   display:flex;
-
   align-items:center;
-
   gap:13px;
 
 }
@@ -216,7 +195,6 @@ body{
   height:42px;
 
   display:flex;
-
   align-items:center;
   justify-content:center;
 
@@ -237,20 +215,15 @@ body{
 }
 
 .logo-icon svg{
-
   width:22px;
   height:22px;
-
 }
 
 .logo-text h1{
 
   font-size:16px;
-
   line-height:1.2;
-
   font-weight:800;
-
   letter-spacing:-.2px;
 
 }
@@ -258,13 +231,11 @@ body{
 .logo-text span{
 
   display:block;
-
   margin-top:3px;
 
   color:#94a3b8;
 
   font-size:11px;
-
   font-weight:500;
 
 }
@@ -272,9 +243,7 @@ body{
 .header-right{
 
   display:flex;
-
   align-items:center;
-
   gap:18px;
 
 }
@@ -282,18 +251,14 @@ body{
 .status{
 
   display:flex;
-
   align-items:center;
-
   gap:8px;
 
-  padding:
-    7px 11px;
+  padding:7px 11px;
 
   color:#cbd5e1;
 
   font-size:11px;
-
   font-weight:700;
 
   border:
@@ -321,11 +286,6 @@ body{
 
 }
 
-
-/* =========================================================
-   CONTAINER
-========================================================= */
-
 .container{
 
   width:
@@ -339,11 +299,6 @@ body{
 
 }
 
-
-/* =========================================================
-   HERO
-========================================================= */
-
 .hero{
 
   position:relative;
@@ -352,8 +307,7 @@ body{
 
   overflow:hidden;
 
-  padding:
-    32px 36px;
+  padding:32px 36px;
 
   display:flex;
 
@@ -375,8 +329,7 @@ body{
       #2563eb 100%
     );
 
-  box-shadow:
-    var(--shadow-lg);
+  box-shadow:var(--shadow-lg);
 
 }
 
@@ -421,7 +374,6 @@ body{
 .hero-content{
 
   position:relative;
-
   z-index:2;
 
 }
@@ -431,7 +383,6 @@ body{
   display:inline-flex;
 
   align-items:center;
-
   gap:7px;
 
   margin-bottom:10px;
@@ -439,7 +390,6 @@ body{
   color:#93c5fd;
 
   font-size:11px;
-
   font-weight:800;
 
   letter-spacing:.09em;
@@ -462,7 +412,6 @@ body{
 .hero h2{
 
   font-size:31px;
-
   line-height:1.15;
 
   letter-spacing:-.7px;
@@ -478,7 +427,6 @@ body{
   color:#cbd5e1;
 
   font-size:13px;
-
   line-height:1.65;
 
 }
@@ -486,7 +434,6 @@ body{
 .hero-period{
 
   position:relative;
-
   z-index:2;
 
   min-width:185px;
@@ -494,8 +441,7 @@ body{
   padding:18px;
 
   border:
-    1px solid
-    rgba(255,255,255,.10);
+    1px solid rgba(255,255,255,.10);
 
   border-radius:15px;
 
@@ -511,7 +457,6 @@ body{
   color:#94a3b8;
 
   font-size:10px;
-
   font-weight:800;
 
   letter-spacing:.08em;
@@ -525,15 +470,9 @@ body{
   margin-top:7px;
 
   font-size:18px;
-
   font-weight:800;
 
 }
-
-
-/* =========================================================
-   SECTION
-========================================================= */
 
 .section{
 
@@ -556,8 +495,7 @@ body{
 
   min-height:76px;
 
-  padding:
-    17px 22px;
+  padding:17px 22px;
 
   display:flex;
 
@@ -575,9 +513,7 @@ body{
 .section-title{
 
   display:flex;
-
   align-items:center;
-
   gap:12px;
 
 }
@@ -588,7 +524,6 @@ body{
   height:39px;
 
   display:flex;
-
   align-items:center;
   justify-content:center;
 
@@ -601,8 +536,7 @@ body{
 
   border-radius:11px;
 
-  background:
-    var(--primary-soft);
+  background:var(--primary-soft);
 
 }
 
@@ -616,9 +550,7 @@ body{
 .section-title h3{
 
   font-size:15px;
-
   font-weight:800;
-
   letter-spacing:-.1px;
 
 }
@@ -634,15 +566,8 @@ body{
 }
 
 .section-body{
-
   padding:22px;
-
 }
-
-
-/* =========================================================
-   DASHBOARD CARDS
-========================================================= */
 
 .cards{
 
@@ -660,11 +585,9 @@ body{
   position:relative;
 
   min-width:0;
-
   overflow:hidden;
 
-  grid-column:
-    span 3;
+  grid-column:span 3;
 
   padding:18px;
 
@@ -689,11 +612,9 @@ body{
 
 .card:hover{
 
-  transform:
-    translateY(-3px);
+  transform:translateY(-3px);
 
-  border-color:
-    #d7deea;
+  border-color:#d7deea;
 
   box-shadow:
     0 12px 28px
@@ -723,7 +644,6 @@ body{
 .card-top{
 
   position:relative;
-
   z-index:1;
 
   display:flex;
@@ -741,7 +661,6 @@ body{
   color:#64748b;
 
   font-size:10px;
-
   font-weight:800;
 
   letter-spacing:.05em;
@@ -772,7 +691,6 @@ body{
 .card-value{
 
   position:relative;
-
   z-index:1;
 
   margin-top:15px;
@@ -782,7 +700,6 @@ body{
   text-overflow:ellipsis;
 
   font-size:20px;
-
   line-height:1.2;
 
   font-weight:850;
@@ -798,7 +715,6 @@ body{
 .card-subtitle{
 
   position:relative;
-
   z-index:1;
 
   margin-top:8px;
@@ -806,60 +722,42 @@ body{
   color:#94a3b8;
 
   font-size:10px;
-
   font-weight:600;
 
 }
 
 .card.blue .card-icon{
-
   color:var(--primary);
-
   background:#eff6ff;
-
 }
 
 .card.green .card-icon{
-
   color:var(--success);
-
   background:var(--success-soft);
-
 }
 
 .card.red .card-icon{
-
   color:var(--danger);
-
   background:var(--danger-soft);
-
 }
 
 .card.orange .card-icon{
-
   color:var(--warning);
-
   background:var(--warning-soft);
-
 }
 
 .card.purple .card-icon{
-
   color:var(--purple);
-
   background:var(--purple-soft);
-
 }
 
 .card.bank{
 
-  grid-column:
-    span 6;
+  grid-column:span 6;
 
   color:white;
 
-  border-color:
-    transparent;
+  border-color:transparent;
 
   background:
     linear-gradient(
@@ -888,9 +786,7 @@ body{
 }
 
 .card.bank .card-label{
-
   color:#bfdbfe;
-
 }
 
 .card.bank .card-icon{
@@ -905,21 +801,13 @@ body{
 .card.bank .card-value{
 
   color:white;
-
   font-size:25px;
 
 }
 
 .card.bank .card-subtitle{
-
   color:#bfdbfe;
-
 }
-
-
-/* =========================================================
-   COMPETÊNCIA
-========================================================= */
 
 .competencia-box{
 
@@ -934,15 +822,8 @@ body{
 }
 
 .competencia-box .field{
-
   width:230px;
-
 }
-
-
-/* =========================================================
-   FORM
-========================================================= */
 
 .form-grid{
 
@@ -966,10 +847,7 @@ body{
 }
 
 .field.full{
-
-  grid-column:
-    1 / -1;
-
+  grid-column:1 / -1;
 }
 
 .field label{
@@ -983,7 +861,6 @@ body{
   color:#334155;
 
   font-size:11px;
-
   font-weight:800;
 
 }
@@ -995,8 +872,7 @@ body{
 
   height:46px;
 
-  padding:
-    0 13px;
+  padding:0 13px;
 
   color:var(--text);
 
@@ -1022,16 +898,13 @@ body{
 
 .field input:hover,
 .field select:hover{
-
   border-color:#b8c4d4;
-
 }
 
 .field input:focus,
 .field select:focus{
 
-  border-color:
-    var(--primary);
+  border-color:var(--primary);
 
   box-shadow:
     0 0 0 4px
@@ -1040,38 +913,22 @@ body{
 }
 
 .field input[readonly]{
-
   background:#f8fafc;
-
 }
 
 .field input::placeholder{
-
   color:#a3afbf;
-
 }
-
-
-/* =========================================================
-   DIVISOR
-========================================================= */
 
 .divider{
 
   height:1px;
 
-  margin:
-    22px 0;
+  margin:22px 0;
 
-  background:
-    var(--border);
+  background:var(--border);
 
 }
-
-
-/* =========================================================
-   ACTIONS
-========================================================= */
 
 .actions{
 
@@ -1085,22 +942,13 @@ body{
 }
 
 .actions .btn{
-
   width:100%;
-
 }
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
 
 button{
 
   border:0;
-
   cursor:pointer;
-
   font-family:inherit;
 
 }
@@ -1109,13 +957,11 @@ button{
 
   min-height:44px;
 
-  padding:
-    0 15px;
+  padding:0 15px;
 
   display:inline-flex;
 
   align-items:center;
-
   justify-content:center;
 
   gap:8px;
@@ -1126,7 +972,6 @@ button{
   border-radius:10px;
 
   font-size:11px;
-
   font-weight:800;
 
   transition:
@@ -1139,19 +984,13 @@ button{
 
 .btn:hover{
 
-  transform:
-    translateY(-1px);
-
-  filter:
-    brightness(1.02);
+  transform:translateY(-1px);
+  filter:brightness(1.02);
 
 }
 
 .btn:active{
-
-  transform:
-    translateY(0);
-
+  transform:translateY(0);
 }
 
 .btn-primary{
@@ -1238,21 +1077,11 @@ button{
 }
 
 .btn-secondary:hover{
-
   background:#f1f5f9;
-
 }
 
-
-/* =========================================================
-   NOVO LANÇAMENTO
-========================================================= */
-
 .launch-section{
-
-  border-color:
-    #dce4f0;
-
+  border-color:#dce4f0;
 }
 
 .launch-section .section-icon{
@@ -1275,8 +1104,7 @@ button{
 
   margin-top:18px;
 
-  padding:
-    11px 13px;
+  padding:11px 13px;
 
   color:#64748b;
 
@@ -1292,15 +1120,8 @@ button{
 }
 
 .launch-hint strong{
-
   color:#334155;
-
 }
-
-
-/* =========================================================
-   MODAL
-========================================================= */
 
 .modal{
 
@@ -1313,7 +1134,6 @@ button{
   display:none;
 
   align-items:center;
-
   justify-content:center;
 
   padding:20px;
@@ -1321,24 +1141,17 @@ button{
   background:
     rgba(15,23,42,.62);
 
-  backdrop-filter:
-    blur(7px);
+  backdrop-filter:blur(7px);
 
 }
 
 .modal.show{
-
   display:flex;
-
 }
 
 .modal-box{
 
-  width:
-    min(
-      100%,
-      430px
-    );
+  width:min(100%,430px);
 
   overflow:hidden;
 
@@ -1353,41 +1166,13 @@ button{
     0 30px 80px
     rgba(0,0,0,.25);
 
-  animation:
-    modalIn .2s ease;
-
-}
-
-@keyframes modalIn{
-
-  from{
-
-    opacity:0;
-
-    transform:
-      translateY(12px)
-      scale(.98);
-
-  }
-
-  to{
-
-    opacity:1;
-
-    transform:
-      translateY(0)
-      scale(1);
-
-  }
-
 }
 
 .modal-header{
 
   min-height:64px;
 
-  padding:
-    14px 19px;
+  padding:14px 19px;
 
   display:flex;
 
@@ -1403,7 +1188,6 @@ button{
 .modal-header h3{
 
   font-size:15px;
-
   font-weight:800;
 
 }
@@ -1429,29 +1213,22 @@ button{
 
   font-size:20px;
 
-  transition:
-    .18s ease;
-
 }
 
 .close:hover{
 
   color:#dc2626;
-
   background:#fef2f2;
 
 }
 
 .modal-body{
-
   padding:20px;
-
 }
 
 .modal-footer{
 
-  padding:
-    14px 20px;
+  padding:14px 20px;
 
   display:flex;
 
@@ -1466,11 +1243,6 @@ button{
 
 }
 
-
-/* =========================================================
-   TOAST
-========================================================= */
-
 .toast{
 
   position:fixed;
@@ -1480,14 +1252,12 @@ button{
 
   z-index:9000;
 
-  width:
-    min(
-      calc(100% - 40px),
-      390px
-    );
+  width:min(
+    calc(100% - 40px),
+    390px
+  );
 
-  padding:
-    14px 16px;
+  padding:14px 16px;
 
   display:none;
 
@@ -1496,7 +1266,6 @@ button{
   border-radius:12px;
 
   font-size:11px;
-
   font-weight:700;
 
   line-height:1.45;
@@ -1508,34 +1277,7 @@ button{
 }
 
 .toast.show{
-
   display:block;
-
-  animation:
-    toastIn .25s ease;
-
-}
-
-@keyframes toastIn{
-
-  from{
-
-    opacity:0;
-
-    transform:
-      translateX(15px);
-
-  }
-
-  to{
-
-    opacity:1;
-
-    transform:
-      translateX(0);
-
-  }
-
 }
 
 .toast.success{
@@ -1571,11 +1313,6 @@ button{
 
 }
 
-
-/* =========================================================
-   LOADING
-========================================================= */
-
 .loading{
 
   position:fixed;
@@ -1587,21 +1324,17 @@ button{
   display:none;
 
   align-items:center;
-
   justify-content:center;
 
   background:
     rgba(248,250,252,.76);
 
-  backdrop-filter:
-    blur(5px);
+  backdrop-filter:blur(5px);
 
 }
 
 .loading.show{
-
   display:flex;
-
 }
 
 .loading-box{
@@ -1630,8 +1363,7 @@ button{
   width:40px;
   height:40px;
 
-  margin:
-    0 auto 14px;
+  margin:0 auto 14px;
 
   border:
     4px solid #e2e8f0;
@@ -1659,20 +1391,13 @@ button{
   color:#64748b;
 
   font-size:11px;
-
   font-weight:800;
 
 }
 
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
 .footer{
 
-  padding:
-    25px 10px;
+  padding:25px 10px;
 
   color:#94a3b8;
 
@@ -1683,27 +1408,16 @@ button{
 }
 
 .footer strong{
-
   color:#64748b;
-
 }
 
-
-/* =========================================================
-   SCROLLBAR
-========================================================= */
-
 ::-webkit-scrollbar{
-
   width:8px;
   height:8px;
-
 }
 
 ::-webkit-scrollbar-track{
-
   background:#f1f5f9;
-
 }
 
 ::-webkit-scrollbar-thumb{
@@ -1715,76 +1429,51 @@ button{
 }
 
 ::-webkit-scrollbar-thumb:hover{
-
   background:#94a3b8;
-
 }
-
-
-/* =========================================================
-   RESPONSIVO
-========================================================= */
 
 @media(max-width:1100px){
 
   .cards{
-
     grid-template-columns:
       repeat(6,minmax(0,1fr));
-
   }
 
   .card{
-
-    grid-column:
-      span 3;
-
+    grid-column:span 3;
   }
 
   .card.bank{
-
-    grid-column:
-      span 6;
-
+    grid-column:span 6;
   }
 
   .actions{
-
     grid-template-columns:
       repeat(2,minmax(0,1fr));
-
   }
 
 }
-
 
 @media(max-width:760px){
 
   .topbar-inner{
 
-    width:
-      calc(100% - 28px);
-
+    width:calc(100% - 28px);
     min-height:64px;
 
   }
 
   .header-right{
-
     gap:0;
-
   }
 
   .status{
-
     display:none;
-
   }
 
   .container{
 
-    width:
-      calc(100% - 20px);
+    width:calc(100% - 20px);
 
     margin-top:15px;
 
@@ -1803,28 +1492,19 @@ button{
   }
 
   .hero h2{
-
     font-size:25px;
-
   }
 
   .hero-period{
-
     width:100%;
-
   }
 
   .section-body{
-
     padding:17px;
-
   }
 
   .section-header{
-
-    padding:
-      15px 17px;
-
+    padding:15px 17px;
   }
 
   .cards{
@@ -1838,76 +1518,51 @@ button{
 
   .card,
   .card.bank{
-
-    grid-column:
-      span 1;
-
+    grid-column:span 1;
   }
 
   .card.bank{
-
-    grid-column:
-      1 / -1;
-
+    grid-column:1 / -1;
   }
 
   .card-value{
-
     font-size:17px;
-
   }
 
   .card.bank .card-value{
-
     font-size:23px;
-
   }
 
   .form-grid{
-
     grid-template-columns:1fr;
-
   }
 
   .field.full{
-
     grid-column:1;
-
   }
 
   .competencia-box .field{
-
     width:100%;
-
   }
 
   .competencia-box{
-
     align-items:stretch;
-
   }
 
   .competencia-box .btn{
-
     width:100%;
-
   }
 
   .actions{
-
     grid-template-columns:1fr;
-
   }
 
 }
 
-
 @media(max-width:430px){
 
   .logo-text span{
-
     display:none;
-
   }
 
   .logo-icon{
@@ -1918,31 +1573,19 @@ button{
   }
 
   .hero{
-
     border-radius:17px;
-
   }
 
   .cards{
-
     grid-template-columns:1fr;
-
   }
 
   .card,
   .card.bank{
-
-    grid-column:
-      1 / -1;
-
+    grid-column:1 / -1;
   }
 
 }
-
-
-/* =========================================================
-   ACESSIBILIDADE
-========================================================= */
 
 button:focus-visible,
 input:focus-visible,
@@ -1960,13 +1603,7 @@ select:focus-visible{
 
 </head>
 
-
 <body>
-
-
-<!-- =====================================================
-     ÍCONES SVG
-===================================================== -->
 
 <svg
   xmlns="http://www.w3.org/2000/svg"
@@ -2071,10 +1708,6 @@ select:focus-visible{
 </svg>
 
 
-<!-- =====================================================
-     TOPO
-===================================================== -->
-
 <header class="topbar">
 
   <div class="topbar-inner">
@@ -2116,615 +1749,600 @@ select:focus-visible{
 </header>
 
 
-<!-- =====================================================
-     CONTEÚDO
-===================================================== -->
-
 <main class="container">
 
 
-  <!-- HERO -->
+<section class="hero">
 
-  <section class="hero">
+  <div class="hero-content">
 
-    <div class="hero-content">
+    <div class="hero-eyebrow">
 
-      <div class="hero-eyebrow">
+      <span class="dot"></span>
 
-        <span class="dot"></span>
-
-        Visão financeira
-
-      </div>
-
-      <h2>Painel Financeiro</h2>
-
-      <p>
-        Acompanhe seu saldo, contas a receber,
-        contas a pagar e movimentações financeiras
-        em um único lugar.
-      </p>
+      Visão financeira
 
     </div>
 
-    <div class="hero-period">
+    <h2>Painel Financeiro</h2>
 
-      <div class="hero-period-label">
-        Competência selecionada
-      </div>
+    <p>
+      Acompanhe seu saldo, contas a receber,
+      contas a pagar e movimentações financeiras
+      em um único lugar.
+    </p>
 
-      <div
-        class="hero-period-value"
-        id="heroCompetencia"
-      >
-        —
-      </div>
+  </div>
 
+  <div class="hero-period">
+
+    <div class="hero-period-label">
+      Competência selecionada
     </div>
 
-  </section>
-
-
-  <!-- RESUMO -->
-
-  <section class="section">
-
-    <div class="section-header">
-
-      <div class="section-title">
-
-        <div class="section-icon">
-
-          <svg class="icon">
-            <use href="#i-chart"></use>
-          </svg>
-
-        </div>
-
-        <div>
-
-          <h3>Resumo financeiro</h3>
-
-          <p id="textoCompetencia">
-            Visão geral da competência selecionada
-          </p>
-
-        </div>
-
-      </div>
-
+    <div
+      class="hero-period-value"
+      id="heroCompetencia"
+    >
+      —
     </div>
 
-    <div class="section-body">
+  </div>
 
-      <div class="cards">
+</section>
 
-        <div class="card blue">
 
-          <div class="card-top">
+<section class="section">
 
-            <span class="card-label">
-              SALDO INICIAL
-            </span>
+  <div class="section-header">
 
-            <span class="card-icon">
+    <div class="section-title">
 
-              <svg class="icon">
-                <use href="#i-wallet"></use>
-              </svg>
-
-            </span>
-
-          </div>
-
-          <div
-            class="card-value"
-            id="saldoInicialCard"
-          >
-            R$ 0,00
-          </div>
-
-          <div class="card-subtitle">
-            Posição no início do período
-          </div>
-
-        </div>
-
-
-        <div class="card green">
-
-          <div class="card-top">
-
-            <span class="card-label">
-              A RECEBER
-            </span>
-
-            <span class="card-icon">
-
-              <svg class="icon">
-                <use href="#i-arrow-down"></use>
-              </svg>
-
-            </span>
-
-          </div>
-
-          <div
-            class="card-value"
-            id="totalReceber"
-          >
-            R$ 0,00
-          </div>
-
-          <div class="card-subtitle">
-            Valores previstos
-          </div>
-
-        </div>
-
-
-        <div class="card red">
-
-          <div class="card-top">
-
-            <span class="card-label">
-              A PAGAR
-            </span>
-
-            <span class="card-icon">
-
-              <svg class="icon">
-                <use href="#i-arrow-up"></use>
-              </svg>
-
-            </span>
-
-          </div>
-
-          <div
-            class="card-value"
-            id="totalPagar"
-          >
-            R$ 0,00
-          </div>
-
-          <div class="card-subtitle">
-            Compromissos previstos
-          </div>
-
-        </div>
-
-
-        <div class="card orange">
-
-          <div class="card-top">
-
-            <span class="card-label">
-              VALOR PAGO
-            </span>
-
-            <span class="card-icon">
-
-              <svg class="icon">
-                <use href="#i-arrow-up"></use>
-              </svg>
-
-            </span>
-
-          </div>
-
-          <div
-            class="card-value"
-            id="valorPago"
-          >
-            R$ 0,00
-          </div>
-
-          <div class="card-subtitle">
-            Total já pago
-          </div>
-
-        </div>
-
-
-        <div class="card green">
-
-          <div class="card-top">
-
-            <span class="card-label">
-              VALOR RECEBIDO
-            </span>
-
-            <span class="card-icon">
-
-              <svg class="icon">
-                <use href="#i-arrow-down"></use>
-              </svg>
-
-            </span>
-
-          </div>
-
-          <div
-            class="card-value"
-            id="valorRecebido"
-          >
-            R$ 0,00
-          </div>
-
-          <div class="card-subtitle">
-            Total já recebido
-          </div>
-
-        </div>
-
-
-        <div class="card purple bank">
-
-          <div class="card-top">
-
-            <span class="card-label">
-              SALDO BANCO
-            </span>
-
-            <span class="card-icon">
-
-              <svg class="icon">
-                <use href="#i-bank"></use>
-              </svg>
-
-            </span>
-
-          </div>
-
-          <div
-            class="card-value"
-            id="saldoBanco"
-          >
-            R$ 0,00
-          </div>
-
-          <div class="card-subtitle">
-            Saldo financeiro da competência
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- CONTROLE MENSAL -->
-
-  <section class="section">
-
-    <div class="section-header">
-
-      <div class="section-title">
-
-        <div class="section-icon">
-
-          <svg class="icon">
-            <use href="#i-settings"></use>
-          </svg>
-
-        </div>
-
-        <div>
-
-          <h3>Controle mensal</h3>
-
-          <p>
-            Selecione a competência e acesse as ferramentas
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="section-body">
-
-      <div class="competencia-box">
-
-        <div class="field">
-
-          <label for="competencia">
-
-            <svg class="icon" style="width:14px;height:14px">
-              <use href="#i-calendar"></use>
-            </svg>
-
-            Competência
-
-          </label>
-
-          <input
-            id="competencia"
-            type="month"
-          >
-
-        </div>
-
-
-        <button
-          class="btn btn-success"
-          onclick="abrirSaldo()"
-        >
-
-          <svg class="icon">
-            <use href="#i-wallet"></use>
-          </svg>
-
-          Informar Saldo Inicial
-
-        </button>
-
-      </div>
-
-
-      <div class="divider"></div>
-
-
-      <div class="actions">
-
-        <button
-          class="btn btn-purple"
-          onclick="fecharMes()"
-        >
-
-          <svg class="icon">
-            <use href="#i-lock"></use>
-          </svg>
-
-          Fechar Competência
-
-        </button>
-
-
-        <button
-          class="btn btn-orange"
-          onclick="gerarRelatorio()"
-        >
-
-          <svg class="icon">
-            <use href="#i-file"></use>
-          </svg>
-
-          Relatório
-
-        </button>
-
-
-        <button
-          class="btn btn-orange"
-          onclick="abrirLancamentos()"
-        >
-
-          <svg class="icon">
-            <use href="#i-list"></use>
-          </svg>
-
-          Lançamentos
-
-        </button>
-
-
-        <button
-          class="btn btn-orange"
-          onclick="abrirGraficos()"
-        >
-
-          <svg class="icon">
-            <use href="#i-chart"></use>
-          </svg>
-
-          Gráficos
-
-        </button>
-
-
-        <button
-          class="btn btn-orange"
-          onclick="abrirAtendimento()"
-        >
-
-          <svg class="icon">
-            <use href="#i-book"></use>
-          </svg>
-
-          Atendimento
-
-        </button>
-
-
-        <button
-          class="btn btn-danger"
-          onclick="abrirBaixasPendentes()"
-        >
-
-          <svg class="icon">
-            <use href="#i-alert"></use>
-          </svg>
-
-          Baixas Pendentes
-
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- NOVO LANÇAMENTO -->
-
-  <section class="section launch-section">
-
-    <div class="section-header">
-
-      <div class="section-title">
-
-        <div class="section-icon">
-
-          <svg class="icon">
-            <use href="#i-plus"></use>
-          </svg>
-
-        </div>
-
-        <div>
-
-          <h3>Novo lançamento</h3>
-
-          <p>
-            Registre uma nova conta a receber ou pagar
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="section-body">
-
-      <div class="form-grid">
-
-
-        <div class="field">
-
-          <label for="tipo">
-            Tipo
-          </label>
-
-          <select id="tipo">
-
-            <option value="Contas a Receber">
-              Contas a Receber
-            </option>
-
-            <option value="Contas a Pagar">
-              Contas a Pagar
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <div class="field">
-
-          <label for="descricao">
-            Descrição
-          </label>
-
-          <select id="descricao">
-
-            <option value="">
-              Carregando...
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <div class="field">
-
-          <label for="valor">
-            Valor
-          </label>
-
-          <input
-            id="valor"
-            type="number"
-            min="0"
-            step="0.01"
-            placeholder="0,00"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label for="vencimento">
-            Vencimento
-          </label>
-
-          <input
-            id="vencimento"
-            type="date"
-          >
-
-        </div>
-
-
-        <div class="field full">
-
-          <button
-            class="btn btn-primary"
-            onclick="gravar()"
-          >
-
-            <svg class="icon">
-              <use href="#i-save"></use>
-            </svg>
-
-            Gravar Lançamento
-
-          </button>
-
-        </div>
-
-
-      </div>
-
-
-      <div class="launch-hint">
+      <div class="section-icon">
 
         <svg class="icon">
-          <use href="#i-info"></use>
+          <use href="#i-chart"></use>
         </svg>
 
-        <span>
+      </div>
 
-          <strong>Dica:</strong>
+      <div>
 
-          confira a competência, o valor e o vencimento
-          antes de gravar o lançamento.
+        <h3>Resumo financeiro</h3>
 
-        </span>
+        <p id="textoCompetencia">
+          Visão geral da competência selecionada
+        </p>
 
       </div>
 
     </div>
 
-  </section>
+  </div>
+
+  <div class="section-body">
+
+    <div class="cards">
 
 
-  <div class="footer">
+      <div class="card blue">
 
-    <strong>Controle Financeiro</strong>
-    • Sistema integrado ao Google Sheets
+        <div class="card-top">
+
+          <span class="card-label">
+            SALDO INICIAL
+          </span>
+
+          <span class="card-icon">
+
+            <svg class="icon">
+              <use href="#i-wallet"></use>
+            </svg>
+
+          </span>
+
+        </div>
+
+        <div
+          class="card-value"
+          id="saldoInicialCard"
+        >
+          R$ 0,00
+        </div>
+
+        <div class="card-subtitle">
+          Posição no início do período
+        </div>
+
+      </div>
+
+
+      <div class="card green">
+
+        <div class="card-top">
+
+          <span class="card-label">
+            A RECEBER
+          </span>
+
+          <span class="card-icon">
+
+            <svg class="icon">
+              <use href="#i-arrow-down"></use>
+            </svg>
+
+          </span>
+
+        </div>
+
+        <div
+          class="card-value"
+          id="totalReceber"
+        >
+          R$ 0,00
+        </div>
+
+        <div class="card-subtitle">
+          Valores previstos
+        </div>
+
+      </div>
+
+
+      <div class="card red">
+
+        <div class="card-top">
+
+          <span class="card-label">
+            A PAGAR
+          </span>
+
+          <span class="card-icon">
+
+            <svg class="icon">
+              <use href="#i-arrow-up"></use>
+            </svg>
+
+          </span>
+
+        </div>
+
+        <div
+          class="card-value"
+          id="totalPagar"
+        >
+          R$ 0,00
+        </div>
+
+        <div class="card-subtitle">
+          Compromissos previstos
+        </div>
+
+      </div>
+
+
+      <div class="card orange">
+
+        <div class="card-top">
+
+          <span class="card-label">
+            VALOR PAGO
+          </span>
+
+          <span class="card-icon">
+
+            <svg class="icon">
+              <use href="#i-arrow-up"></use>
+            </svg>
+
+          </span>
+
+        </div>
+
+        <div
+          class="card-value"
+          id="valorPago"
+        >
+          R$ 0,00
+        </div>
+
+        <div class="card-subtitle">
+          Total já pago
+        </div>
+
+      </div>
+
+
+      <div class="card green">
+
+        <div class="card-top">
+
+          <span class="card-label">
+            VALOR RECEBIDO
+          </span>
+
+          <span class="card-icon">
+
+            <svg class="icon">
+              <use href="#i-arrow-down"></use>
+            </svg>
+
+          </span>
+
+        </div>
+
+        <div
+          class="card-value"
+          id="valorRecebido"
+        >
+          R$ 0,00
+        </div>
+
+        <div class="card-subtitle">
+          Total já recebido
+        </div>
+
+      </div>
+
+
+      <div class="card purple bank">
+
+        <div class="card-top">
+
+          <span class="card-label">
+            SALDO BANCO
+          </span>
+
+          <span class="card-icon">
+
+            <svg class="icon">
+              <use href="#i-bank"></use>
+            </svg>
+
+          </span>
+
+        </div>
+
+        <div
+          class="card-value"
+          id="saldoBanco"
+        >
+          R$ 0,00
+        </div>
+
+        <div class="card-subtitle">
+          Saldo financeiro da competência
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section">
+
+  <div class="section-header">
+
+    <div class="section-title">
+
+      <div class="section-icon">
+
+        <svg class="icon">
+          <use href="#i-settings"></use>
+        </svg>
+
+      </div>
+
+      <div>
+
+        <h3>Controle mensal</h3>
+
+        <p>
+          Selecione a competência e acesse as ferramentas
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="section-body">
+
+    <div class="competencia-box">
+
+      <div class="field">
+
+        <label for="competencia">
+
+          <svg class="icon"
+               style="width:14px;height:14px">
+
+            <use href="#i-calendar"></use>
+
+          </svg>
+
+          Competência
+
+        </label>
+
+        <input
+          id="competencia"
+          type="month"
+        >
+
+      </div>
+
+
+      <button
+        class="btn btn-success"
+        onclick="abrirSaldo()"
+      >
+
+        <svg class="icon">
+          <use href="#i-wallet"></use>
+        </svg>
+
+        Informar Saldo Inicial
+
+      </button>
+
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <div class="actions">
+
+      <button
+        class="btn btn-purple"
+        onclick="fecharMes()"
+      >
+
+        <svg class="icon">
+          <use href="#i-lock"></use>
+        </svg>
+
+        Fechar Competência
+
+      </button>
+
+
+      <button
+        class="btn btn-orange"
+        onclick="gerarRelatorio()"
+      >
+
+        <svg class="icon">
+          <use href="#i-file"></use>
+        </svg>
+
+        Relatório
+
+      </button>
+
+
+      <button
+        class="btn btn-orange"
+        onclick="abrirLancamentos()"
+      >
+
+        <svg class="icon">
+          <use href="#i-list"></use>
+        </svg>
+
+        Lançamentos
+
+      </button>
+
+
+      <button
+        class="btn btn-orange"
+        onclick="abrirGraficos()"
+      >
+
+        <svg class="icon">
+          <use href="#i-chart"></use>
+        </svg>
+
+        Gráficos
+
+      </button>
+
+
+      <button
+        class="btn btn-orange"
+        onclick="abrirAtendimento()"
+      >
+
+        <svg class="icon">
+          <use href="#i-book"></use>
+        </svg>
+
+        Atendimento
+
+      </button>
+
+
+      <button
+        class="btn btn-danger"
+        onclick="abrirBaixasPendentes()"
+      >
+
+        <svg class="icon">
+          <use href="#i-alert"></use>
+        </svg>
+
+        Baixas Pendentes
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section launch-section">
+
+  <div class="section-header">
+
+    <div class="section-title">
+
+      <div class="section-icon">
+
+        <svg class="icon">
+          <use href="#i-plus"></use>
+        </svg>
+
+      </div>
+
+      <div>
+
+        <h3>Novo lançamento</h3>
+
+        <p>
+          Registre uma nova conta a receber ou pagar
+        </p>
+
+      </div>
+
+    </div>
 
   </div>
 
 
+  <div class="section-body">
+
+    <div class="form-grid">
+
+
+      <div class="field">
+
+        <label for="tipo">
+          Tipo
+        </label>
+
+        <select id="tipo">
+
+          <option value="Contas a Receber">
+            Contas a Receber
+          </option>
+
+          <option value="Contas a Pagar">
+            Contas a Pagar
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="descricao">
+          Descrição
+        </label>
+
+        <select id="descricao">
+
+          <option value="">
+            Carregando...
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="valor">
+          Valor
+        </label>
+
+        <input
+          id="valor"
+          type="number"
+          min="0"
+          step="0.01"
+          placeholder="0,00"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="vencimento">
+          Vencimento
+        </label>
+
+        <input
+          id="vencimento"
+          type="date"
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <button
+          class="btn btn-primary"
+          onclick="gravar()"
+        >
+
+          <svg class="icon">
+            <use href="#i-save"></use>
+          </svg>
+
+          Gravar Lançamento
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="launch-hint">
+
+      <svg class="icon">
+        <use href="#i-info"></use>
+      </svg>
+
+      <span>
+
+        <strong>Dica:</strong>
+
+        confira a competência, o valor e o vencimento
+        antes de gravar o lançamento.
+
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="footer">
+
+  <strong>Controle Financeiro</strong>
+  • Sistema integrado ao Google Sheets
+
+</div>
+
 </main>
 
-
-<!-- =====================================================
-     MODAL SALDO
-===================================================== -->
 
 <div
   class="modal"
@@ -2746,7 +2364,6 @@ select:focus-visible{
       <button
         class="close"
         onclick="fecharSaldo()"
-        aria-label="Fechar"
       >
 
         <svg class="icon">
@@ -2801,15 +2418,11 @@ select:focus-visible{
 </div>
 
 
-<!-- TOAST -->
-
 <div
   id="mensagemSistema"
   class="toast"
 ></div>
 
-
-<!-- LOADING -->
 
 <div
   id="loading"
@@ -2838,7 +2451,6 @@ select:focus-visible{
 const URL_API =
   "https://script.google.com/macros/s/AKfycbxJzdCPkPxk2N4FhnoUflb-iWTyiLLn1XmSJDcUwkKsapI0qv-6DBpKWWBLuoHBqn8Y/exec";
 
-
 const URL_GITHUB =
   "https://joeldisousa-dot.github.io/gestaofinanceira/";
 
@@ -2863,16 +2475,10 @@ document.addEventListener(
 
 async function iniciar(){
 
-  const parametros =
+  let competencia =
     new URLSearchParams(
       window.location.search
-    );
-
-
-  let competencia =
-    parametros.get(
-      "competencia"
-    );
+    ).get("competencia");
 
 
   if(
@@ -2891,7 +2497,7 @@ async function iniciar(){
       "-"
       +
       String(
-        hoje.getMonth()+1
+        hoje.getMonth() + 1
       ).padStart(
         2,
         "0"
@@ -2915,27 +2521,14 @@ async function iniciar(){
     );
 
 
-    /*
-     * Primeiro carrega as descrições.
-     */
-
     await carregarDescricoes();
-
-
-    /*
-     * Depois carrega o resumo.
-     */
 
     await carregar();
 
   }
   catch(e){
 
-    console.error(
-      "Erro na inicialização:",
-      e
-    );
-
+    console.error(e);
 
     mostrarMensagem(
       e.message ||
@@ -2954,16 +2547,174 @@ async function iniciar(){
 
 
 /* =========================================================
+   NORMALIZAR COMPETÊNCIA
+========================================================= */
+
+function normalizarCompetencia(valor){
+
+  if(
+    valor === undefined ||
+    valor === null
+  ){
+
+    return "";
+
+  }
+
+
+  let texto =
+    String(valor)
+      .trim();
+
+
+  /*
+   * Se já estiver em AAAA-MM
+   */
+  if(
+    /^\d{4}-\d{2}$/.test(texto)
+  ){
+
+    return texto;
+
+  }
+
+
+  /*
+   * Aceita AAAA/MM
+   */
+  if(
+    /^\d{4}\/\d{2}$/.test(texto)
+  ){
+
+    return texto.replace(
+      "/",
+      "-"
+    );
+
+  }
+
+
+  /*
+   * Aceita datas como:
+   * 2026-08-25
+   * 2026/08/25
+   */
+  let match =
+    texto.match(
+      /^(\d{4})[-\/](\d{2})[-\/]\d{2}$/
+    );
+
+
+  if(match){
+
+    return (
+      match[1]
+      +
+      "-"
+      +
+      match[2]
+    );
+
+  }
+
+
+  /*
+   * Aceita Date
+   */
+  if(
+    valor instanceof Date &&
+    !isNaN(valor.getTime())
+  ){
+
+    return (
+      valor.getFullYear()
+      +
+      "-"
+      +
+      String(
+        valor.getMonth() + 1
+      ).padStart(2,"0")
+    );
+
+  }
+
+
+  return "";
+
+}
+
+
+/* =========================================================
+   VALIDAR COMPETÊNCIA
+========================================================= */
+
+function validarCompetenciaLocal(
+  competencia
+){
+
+  const valor =
+    normalizarCompetencia(
+      competencia
+    );
+
+
+  if(
+    !/^\d{4}-\d{2}$/.test(valor)
+  ){
+
+    throw new Error(
+      "Competência inválida. Use AAAA-MM."
+    );
+
+  }
+
+
+  const ano =
+    Number(
+      valor.substring(0,4)
+    );
+
+
+  const mes =
+    Number(
+      valor.substring(5,7)
+    );
+
+
+  if(
+    ano < 1900 ||
+    ano > 3000 ||
+    mes < 1 ||
+    mes > 12
+  ){
+
+    throw new Error(
+      "Competência inválida. Use AAAA-MM."
+    );
+
+  }
+
+
+  return valor;
+
+}
+
+
+/* =========================================================
    ATUALIZAR COMPETÊNCIA
 ========================================================= */
 
 function atualizarTextoCompetencia(){
 
   const competencia =
-    $("competencia").value;
+    normalizarCompetencia(
+      $("competencia").value
+    );
 
 
-  if(!competencia){
+  if(
+    !competencia
+  ){
 
     return;
 
@@ -3006,8 +2757,10 @@ function atualizarTextoCompetencia(){
   ){
 
     const texto =
-      nomes[mes-1] +
-      " de " +
+      nomes[mes - 1]
+      +
+      " de "
+      +
       ano;
 
 
@@ -3046,26 +2799,45 @@ async function apiRequest(
   Object.keys(params)
     .forEach(function(chave){
 
-      const valor =
+      let valor =
         params[chave];
 
 
       if(
-        valor !== undefined &&
-        valor !== null
+        valor === undefined ||
+        valor === null
       ){
 
-        url.searchParams.set(
-
-          chave,
-
-          typeof valor === "object"
-            ? JSON.stringify(valor)
-            : String(valor)
-
-        );
+        return;
 
       }
+
+
+      /*
+       * IMPORTANTE:
+       * competência sempre vai como texto AAAA-MM
+       */
+      if(
+        chave === "competencia"
+      ){
+
+        valor =
+          normalizarCompetencia(
+            valor
+          );
+
+      }
+
+
+      url.searchParams.set(
+
+        chave,
+
+        typeof valor === "object"
+          ? JSON.stringify(valor)
+          : String(valor)
+
+      );
 
     });
 
@@ -3133,11 +2905,6 @@ async function apiRequest(
 
   }
   catch(e){
-
-    console.error(
-      "JSON inválido:",
-      texto
-    );
 
     throw new Error(
       "O Google Apps Script não retornou JSON válido."
@@ -3225,20 +2992,31 @@ function obterCampo(
 
 async function carregar(){
 
-  const competencia =
-    $("competencia").value;
+  let competencia;
 
 
-  if(!competencia){
+  try{
+
+    competencia =
+      validarCompetenciaLocal(
+        $("competencia").value
+      );
+
+  }
+  catch(e){
+
+    mostrarMensagem(
+      e.message,
+      "error"
+    );
 
     return;
 
   }
 
 
-  validarCompetenciaLocal(
-    competencia
-  );
+  $("competencia").value =
+    competencia;
 
 
   atualizarTextoCompetencia();
@@ -3387,22 +3165,17 @@ async function carregar(){
     $("saldoInicialCard").textContent =
       formatar(saldoInicial);
 
-
     $("totalReceber").textContent =
       formatar(receber);
-
 
     $("totalPagar").textContent =
       formatar(pagar);
 
-
     $("valorPago").textContent =
       formatar(valorPago);
 
-
     $("valorRecebido").textContent =
       formatar(valorRecebido);
-
 
     $("saldoBanco").textContent =
       formatar(saldoBanco);
@@ -3433,31 +3206,38 @@ async function carregar(){
 
 
 /* =========================================================
-   COMPETÊNCIA
+   ALTERAÇÃO DE COMPETÊNCIA
 ========================================================= */
 
 $("competencia").addEventListener(
   "change",
   function(){
 
-    atualizarTextoCompetencia();
+    try{
 
-    carregar();
+      const competencia =
+        validarCompetenciaLocal(
+          this.value
+        );
 
-  }
-);
+
+      this.value =
+        competencia;
 
 
-/* =========================================================
-   TIPO
-   NOVO AJUSTE
-========================================================= */
+      atualizarTextoCompetencia();
 
-$("tipo").addEventListener(
-  "change",
-  async function(){
+      carregar();
 
-    await carregarDescricoes();
+    }
+    catch(e){
+
+      mostrarMensagem(
+        e.message,
+        "error"
+      );
+
+    }
 
   }
 );
@@ -3495,7 +3275,6 @@ function formatar(valor){
 
 /* =========================================================
    DESCRIÇÕES
-   VERSÃO CORRIGIDA E ROBUSTA
 ========================================================= */
 
 async function carregarDescricoes(){
@@ -3504,39 +3283,8 @@ async function carregarDescricoes(){
     $("descricao");
 
 
-  const tipoAtual =
-    $("tipo").value;
-
-
-  /*
-   * Estado inicial.
-   */
-
-  campo.disabled =
-    true;
-
-
   campo.innerHTML =
-    "";
-
-
-  const carregando =
-    document.createElement(
-      "option"
-    );
-
-
-  carregando.value =
-    "";
-
-
-  carregando.textContent =
-    "Carregando descrições...";
-
-
-  campo.appendChild(
-    carregando
-  );
+    "<option value=''>Carregando...</option>";
 
 
   try{
@@ -3548,45 +3296,27 @@ async function carregarDescricoes(){
 
 
     console.log(
-      "===================================="
-    );
-
-    console.log(
-      "RESPOSTA listarDescricoes:"
-    );
-
-    console.log(
+      "Descrições recebidas:",
       resposta
     );
 
-    console.log(
-      "TIPO SELECIONADO:",
-      tipoAtual
-    );
-
-    console.log(
-      "===================================="
-    );
-
-
-    /*
-     * =====================================================
-     * NORMALIZAÇÃO DA RESPOSTA
-     * =====================================================
-     */
 
     let lista = [];
 
 
     /*
-     * Caso 1:
+     * Aceita:
      *
-     * [
-     *   "Descrição 1",
-     *   "Descrição 2"
-     * ]
+     * ["Aluguel","Energia"]
+     *
+     * {dados:[...]}
+     *
+     * {resultado:[...]}
+     *
+     * {descricoes:[...]}
+     *
+     * {data:[...]}
      */
-
     if(
       Array.isArray(resposta)
     ){
@@ -3595,16 +3325,6 @@ async function carregarDescricoes(){
         resposta;
 
     }
-
-
-    /*
-     * Caso 2:
-     *
-     * {
-     *   dados: [...]
-     * }
-     */
-
     else if(
       resposta &&
       Array.isArray(
@@ -3616,16 +3336,6 @@ async function carregarDescricoes(){
         resposta.dados;
 
     }
-
-
-    /*
-     * Caso 3:
-     *
-     * {
-     *   resultado: [...]
-     * }
-     */
-
     else if(
       resposta &&
       Array.isArray(
@@ -3637,16 +3347,6 @@ async function carregarDescricoes(){
         resposta.resultado;
 
     }
-
-
-    /*
-     * Caso 4:
-     *
-     * {
-     *   descricoes: [...]
-     * }
-     */
-
     else if(
       resposta &&
       Array.isArray(
@@ -3658,196 +3358,21 @@ async function carregarDescricoes(){
         resposta.descricoes;
 
     }
-
-
-    /*
-     * Caso 5:
-     *
-     * {
-     *   lista: [...]
-     * }
-     */
-
     else if(
       resposta &&
       Array.isArray(
-        resposta.lista
+        resposta.data
       )
     ){
 
       lista =
-        resposta.lista;
+        resposta.data;
 
     }
 
 
-    /*
-     * Caso 6:
-     *
-     * {
-     *   dados: {
-     *
-     *     "Contas a Receber": [...],
-     *     "Contas a Pagar": [...]
-     *
-     *   }
-     * }
-     */
+    campo.innerHTML = "";
 
-    else if(
-      resposta &&
-      resposta.dados &&
-      typeof resposta.dados === "object" &&
-      !Array.isArray(resposta.dados)
-    ){
-
-      const dados =
-        resposta.dados;
-
-
-      /*
-       * Primeiro tenta encontrar
-       * exatamente o tipo selecionado.
-       */
-
-      if(
-        Array.isArray(
-          dados[tipoAtual]
-        )
-      ){
-
-        lista =
-          dados[tipoAtual];
-
-      }
-
-
-      /*
-       * Caso a API utilize variações
-       * no nome do tipo.
-       */
-
-      else if(
-        tipoAtual === "Contas a Receber" &&
-        Array.isArray(
-          dados.receber
-        )
-      ){
-
-        lista =
-          dados.receber;
-
-      }
-
-      else if(
-        tipoAtual === "Contas a Pagar" &&
-        Array.isArray(
-          dados.pagar
-        )
-      ){
-
-        lista =
-          dados.pagar;
-
-      }
-
-
-      /*
-       * Se não encontrou por tipo,
-       * procura qualquer array dentro
-       * do objeto.
-       */
-
-      else{
-
-        Object.keys(dados)
-          .forEach(
-            function(chave){
-
-              if(
-                Array.isArray(
-                  dados[chave]
-                )
-              ){
-
-                lista =
-                  lista.concat(
-                    dados[chave]
-                  );
-
-              }
-
-            }
-          );
-
-      }
-
-    }
-
-
-    /*
-     * Caso a API retorne um objeto com
-     * uma propriedade que contenha a lista.
-     */
-
-    if(
-      lista.length === 0 &&
-      resposta &&
-      typeof resposta === "object"
-    ){
-
-      const possiveisCampos = [
-
-        "items",
-        "itens",
-        "rows",
-        "registros",
-        "data",
-        "values"
-
-      ];
-
-
-      for(
-        const campoNome
-        of possiveisCampos
-      ){
-
-        if(
-          Array.isArray(
-            resposta[campoNome]
-          )
-        ){
-
-          lista =
-            resposta[campoNome];
-
-          break;
-
-        }
-
-      }
-
-    }
-
-
-    console.log(
-      "LISTA NORMALIZADA:",
-      lista
-    );
-
-
-    /*
-     * Limpa o select.
-     */
-
-    campo.innerHTML =
-      "";
-
-
-    /*
-     * Opção inicial.
-     */
 
     const primeira =
       document.createElement(
@@ -3860,7 +3385,7 @@ async function carregarDescricoes(){
 
 
     primeira.textContent =
-      "Selecione uma descrição";
+      "Selecione a descrição";
 
 
     campo.appendChild(
@@ -3868,44 +3393,31 @@ async function carregarDescricoes(){
     );
 
 
-    /*
-     * Verifica se a lista é válida.
-     */
-
     if(
-      !Array.isArray(lista) ||
-      lista.length === 0
+      !lista.length
     ){
 
-      const nenhuma =
+      const vazia =
         document.createElement(
           "option"
         );
 
 
-      nenhuma.value =
+      vazia.value =
         "";
 
 
-      nenhuma.textContent =
+      vazia.textContent =
         "Nenhuma descrição encontrada";
 
 
-      nenhuma.disabled =
-        true;
-
-
       campo.appendChild(
-        nenhuma
+        vazia
       );
 
 
-      campo.disabled =
-        false;
-
-
       console.warn(
-        "Nenhuma descrição foi encontrada na resposta da API.",
+        "Nenhuma descrição encontrada:",
         resposta
       );
 
@@ -3915,13 +3427,7 @@ async function carregarDescricoes(){
     }
 
 
-    /*
-     * =====================================================
-     * TRANSFORMA OS REGISTROS EM OPTIONS
-     * =====================================================
-     */
-
-    const descricoesEncontradas =
+    const descricoesUnicas =
       new Set();
 
 
@@ -3932,17 +3438,16 @@ async function carregarDescricoes(){
           "";
 
 
-        let tipoItem =
-          "";
-
-
-        /*
-         * -----------------------------------------------
-         * ITEM OBJETO
-         * -----------------------------------------------
-         */
-
         if(
+          typeof item === "string" ||
+          typeof item === "number"
+        ){
+
+          descricao =
+            String(item).trim();
+
+        }
+        else if(
           item &&
           typeof item === "object"
         ){
@@ -3951,75 +3456,34 @@ async function carregarDescricoes(){
             item.descricao ??
             item.Descricao ??
             item.DESCRICAO ??
-            item["Descrição"] ??
-            item["DESCRIÇÃO"] ??
             item.nome ??
             item.Nome ??
-            item.NOME ??
             item.valor ??
             item.Valor ??
-            item.VALOR ??
+            item.description ??
+            item.Description ??
             "";
-
-
-          tipoItem =
-            item.tipo ??
-            item.Tipo ??
-            item.TIPO ??
-            item["Tipo"] ??
-            item["TIPO"] ??
-            "";
-
-        }
-
-
-        /*
-         * -----------------------------------------------
-         * ITEM TEXTO / NÚMERO
-         * -----------------------------------------------
-         */
-
-        else{
 
           descricao =
-            item;
+            String(
+              descricao
+            ).trim();
 
         }
 
 
-        descricao =
-          String(
-            descricao ?? ""
-          ).trim();
-
-
-        tipoItem =
-          String(
-            tipoItem ?? ""
-          ).trim();
-
-
-        /*
-         * Ignora registros sem descrição.
-         */
-
-        if(!descricao){
+        if(
+          !descricao
+        ){
 
           return;
 
         }
 
 
-        /*
-         * Se a API informou o tipo,
-         * respeita o filtro.
-         */
-
         if(
-          tipoItem &&
-          !tiposSaoIguais(
-            tipoItem,
-            tipoAtual
+          descricoesUnicas.has(
+            descricao
           )
         ){
 
@@ -4028,33 +3492,10 @@ async function carregarDescricoes(){
         }
 
 
-        /*
-         * Evita duplicidades.
-         */
-
-        const chave =
-          descricao.toLowerCase();
-
-
-        if(
-          descricoesEncontradas.has(
-            chave
-          )
-        ){
-
-          return;
-
-        }
-
-
-        descricoesEncontradas.add(
-          chave
+        descricoesUnicas.add(
+          descricao
         );
 
-
-        /*
-         * Cria option.
-         */
 
         const option =
           document.createElement(
@@ -4070,14 +3511,6 @@ async function carregarDescricoes(){
           descricao;
 
 
-        if(tipoItem){
-
-          option.dataset.tipo =
-            tipoItem;
-
-        }
-
-
         campo.appendChild(
           option
         );
@@ -4086,194 +3519,28 @@ async function carregarDescricoes(){
     );
 
 
-    /*
-     * Se nenhuma descrição passou
-     * pelo filtro de tipo.
-     */
-
     if(
       campo.options.length === 1
     ){
 
-      const nenhuma =
-        document.createElement(
-          "option"
-        );
-
-
-      nenhuma.value =
-        "";
-
-
-      nenhuma.textContent =
-        "Nenhuma descrição para este tipo";
-
-
-      nenhuma.disabled =
-        true;
-
-
-      campo.appendChild(
-        nenhuma
-      );
+      campo.innerHTML =
+        "<option value=''>Nenhuma descrição encontrada</option>";
 
     }
-
-
-    /*
-     * Reativa o campo.
-     */
-
-    campo.disabled =
-      false;
-
-
-    console.log(
-      "TOTAL DE DESCRIÇÕES:",
-      campo.options.length - 1
-    );
 
   }
   catch(e){
 
     console.error(
-      "ERRO AO CARREGAR DESCRIÇÕES:",
+      "Erro ao carregar descrições:",
       e
     );
 
 
     campo.innerHTML =
-      "";
-
-
-    const erro =
-      document.createElement(
-        "option"
-      );
-
-
-    erro.value =
-      "";
-
-
-    erro.textContent =
-      "Erro ao carregar descrições";
-
-
-    erro.disabled =
-      true;
-
-
-    campo.appendChild(
-      erro
-    );
-
-
-    campo.disabled =
-      false;
-
-
-    mostrarMensagem(
-      "Não foi possível carregar as descrições: " +
-      e.message,
-      "error"
-    );
+      "<option value=''>Erro ao carregar descrições</option>";
 
   }
-
-}
-
-
-/* =========================================================
-   COMPARAR TIPOS
-========================================================= */
-
-function tiposSaoIguais(
-  tipo1,
-  tipo2
-){
-
-  const normalizar =
-    function(valor){
-
-      return String(
-        valor || ""
-      )
-      .trim()
-      .toLowerCase()
-      .normalize(
-        "NFD"
-      )
-      .replace(
-        /[\u0300-\u036f]/g,
-        ""
-      );
-
-    };
-
-
-  const a =
-    normalizar(tipo1);
-
-
-  const b =
-    normalizar(tipo2);
-
-
-  /*
-   * Correspondência exata.
-   */
-
-  if(a === b){
-
-    return true;
-
-  }
-
-
-  /*
-   * Contas a Receber
-   */
-
-  if(
-    (
-      a.includes("receber") ||
-      a.includes("receita")
-    )
-    &&
-    (
-      b.includes("receber") ||
-      b.includes("receita")
-    )
-  ){
-
-    return true;
-
-  }
-
-
-  /*
-   * Contas a Pagar
-   */
-
-  if(
-    (
-      a.includes("pagar") ||
-      a.includes("despesa")
-    )
-    &&
-    (
-      b.includes("pagar") ||
-      b.includes("despesa")
-    )
-  ){
-
-    return true;
-
-  }
-
-
-  return false;
 
 }
 
@@ -4284,30 +3551,29 @@ function tiposSaoIguais(
 
 async function gravar(){
 
-  const dados = {
+  /*
+   * CORREÇÃO PRINCIPAL
+   *
+   * A competência é obtida diretamente
+   * do input type="month" e validada
+   * antes de enviar para a API.
+   */
 
-    competencia:
-      $("competencia").value,
-
-    tipo:
-      $("tipo").value,
-
-    descricao:
-      $("descricao").value,
-
-    valor:
-      $("valor").value,
-
-    vencimento:
-      $("vencimento").value
-
-  };
+  let competencia;
 
 
-  if(!dados.competencia){
+  try{
+
+    competencia =
+      validarCompetenciaLocal(
+        $("competencia").value
+      );
+
+  }
+  catch(e){
 
     mostrarMensagem(
-      "Selecione uma competência.",
+      e.message,
       "error"
     );
 
@@ -4316,7 +3582,29 @@ async function gravar(){
   }
 
 
-  if(!dados.descricao){
+  const tipo =
+    $("tipo").value;
+
+
+  const descricao =
+    $("descricao").value.trim();
+
+
+  const valor =
+    $("valor").value;
+
+
+  const vencimento =
+    $("vencimento").value;
+
+
+  /*
+   * Validação da descrição
+   */
+  if(
+    !descricao ||
+    descricao === ""
+  ){
 
     mostrarMensagem(
       "Selecione uma descrição.",
@@ -4330,10 +3618,13 @@ async function gravar(){
   }
 
 
+  /*
+   * Validação do valor
+   */
   if(
-    dados.valor === "" ||
-    isNaN(Number(dados.valor)) ||
-    Number(dados.valor) < 0
+    valor === "" ||
+    isNaN(Number(valor)) ||
+    Number(valor) < 0
   ){
 
     mostrarMensagem(
@@ -4348,6 +3639,54 @@ async function gravar(){
   }
 
 
+  /*
+   * Validação do vencimento
+   */
+  if(
+    !vencimento
+  ){
+
+    mostrarMensagem(
+      "Informe o vencimento.",
+      "error"
+    );
+
+    $("vencimento").focus();
+
+    return;
+
+  }
+
+
+  /*
+   * Objeto completo do lançamento
+   */
+  const dados = {
+
+    competencia:
+      competencia,
+
+    tipo:
+      tipo,
+
+    descricao:
+      descricao,
+
+    valor:
+      Number(valor),
+
+    vencimento:
+      vencimento
+
+  };
+
+
+  console.log(
+    "Lançamento que será enviado:",
+    dados
+  );
+
+
   mostrarLoading(
     true,
     "Salvando lançamento..."
@@ -4356,27 +3695,95 @@ async function gravar(){
 
   try{
 
+    /*
+     * IMPORTANTE:
+     *
+     * competencia é enviada:
+     *
+     * 1. diretamente como parâmetro
+     * 2. dentro de dados
+     *
+     * Isso garante compatibilidade
+     * com o Apps Script atual.
+     */
+
     const resposta =
       await apiRequest(
         "salvarLancamento",
         {
+
+          competencia:
+            competencia,
+
+          tipo:
+            tipo,
+
+          descricao:
+            descricao,
+
+          valor:
+            Number(valor),
+
+          vencimento:
+            vencimento,
+
           dados:
             dados
+
         }
       );
 
 
-    mostrarMensagem(
-      resposta.mensagem ||
-      resposta.message ||
-      "Lançamento salvo com sucesso.",
-      "success"
+    console.log(
+      "Resposta salvarLancamento:",
+      resposta
     );
 
 
+    /*
+     * Caso o Apps Script retorne erro
+     * dentro de alguma estrutura diferente.
+     */
+
+    if(
+      resposta &&
+      (
+        resposta.sucesso === false ||
+        resposta.success === false ||
+        resposta.erro
+      )
+    ){
+
+      throw new Error(
+
+        resposta.erro ||
+        resposta.mensagem ||
+        resposta.message ||
+        "Não foi possível gravar o lançamento."
+
+      );
+
+    }
+
+
+    mostrarMensagem(
+
+      resposta?.mensagem ||
+      resposta?.message ||
+      "Lançamento salvo com sucesso.",
+
+      "success"
+
+    );
+
+
+    /*
+     * Limpa somente valor e vencimento.
+     * Competência, tipo e descrição permanecem.
+     */
+
     $("valor").value =
       "";
-
 
     $("vencimento").value =
       "";
@@ -4387,8 +3794,15 @@ async function gravar(){
   }
   catch(e){
 
+    console.error(
+      "Erro ao gravar lançamento:",
+      e
+    );
+
+
     mostrarMensagem(
-      e.message,
+      e.message ||
+      "Não foi possível gravar o lançamento.",
       "error"
     );
 
@@ -4445,24 +3859,31 @@ function fecharModalFora(event){
 
 async function salvarNovoSaldo(){
 
-  const competencia =
-    $("competencia").value;
+  let competencia;
 
 
-  const valor =
-    $("novoSaldo").value;
+  try{
 
+    competencia =
+      validarCompetenciaLocal(
+        $("competencia").value
+      );
 
-  if(!competencia){
+  }
+  catch(e){
 
     mostrarMensagem(
-      "Selecione uma competência.",
+      e.message,
       "error"
     );
 
     return;
 
   }
+
+
+  const valor =
+    $("novoSaldo").value;
 
 
   if(
@@ -4492,20 +3913,25 @@ async function salvarNovoSaldo(){
       await apiRequest(
         "salvarSaldoInicial",
         {
+
           competencia:
             competencia,
 
           valor:
-            valor
+            Number(valor)
+
         }
       );
 
 
     mostrarMensagem(
+
       resposta.mensagem ||
       resposta.message ||
       "Saldo inicial salvo com sucesso.",
+
       "success"
+
     );
 
 
@@ -4514,7 +3940,6 @@ async function salvarNovoSaldo(){
 
 
     fecharSaldo();
-
 
     await carregar();
 
@@ -4542,14 +3967,21 @@ async function salvarNovoSaldo(){
 
 async function fecharMes(){
 
-  const competencia =
-    $("competencia").value;
+  let competencia;
 
 
-  if(!competencia){
+  try{
+
+    competencia =
+      validarCompetenciaLocal(
+        $("competencia").value
+      );
+
+  }
+  catch(e){
 
     mostrarMensagem(
-      "Selecione uma competência.",
+      e.message,
       "error"
     );
 
@@ -4568,9 +4000,7 @@ async function fecharMes(){
 
 
   if(!confirmar){
-
     return;
-
   }
 
 
@@ -4593,10 +4023,13 @@ async function fecharMes(){
 
 
     mostrarMensagem(
+
       resposta.mensagem ||
       resposta.message ||
       "Competência fechada com sucesso.",
+
       "success"
+
     );
 
 
@@ -4670,20 +4103,23 @@ function abrirPagina(
 }
 
 
-/* =========================================================
-   LANÇAMENTOS
-========================================================= */
-
 function abrirLancamentos(){
 
-  const competencia =
-    $("competencia").value;
+  let competencia;
 
 
-  if(!competencia){
+  try{
+
+    competencia =
+      validarCompetenciaLocal(
+        $("competencia").value
+      );
+
+  }
+  catch(e){
 
     mostrarMensagem(
-      "Selecione uma competência.",
+      e.message,
       "error"
     );
 
@@ -4703,20 +4139,23 @@ function abrirLancamentos(){
 }
 
 
-/* =========================================================
-   GRÁFICOS
-========================================================= */
-
 function abrirGraficos(){
 
-  const competencia =
-    $("competencia").value;
+  let competencia;
 
 
-  if(!competencia){
+  try{
+
+    competencia =
+      validarCompetenciaLocal(
+        $("competencia").value
+      );
+
+  }
+  catch(e){
 
     mostrarMensagem(
-      "Selecione uma competência.",
+      e.message,
       "error"
     );
 
@@ -4735,20 +4174,18 @@ function abrirGraficos(){
   abrirPagina(
     "Graficos.html",
     {
+
       competencia:
         competencia,
 
       ano:
         ano
+
     }
   );
 
 }
 
-
-/* =========================================================
-   ATENDIMENTO
-========================================================= */
 
 function abrirAtendimento(){
 
@@ -4759,10 +4196,6 @@ function abrirAtendimento(){
 }
 
 
-/* =========================================================
-   BAIXAS PENDENTES
-========================================================= */
-
 function abrirBaixasPendentes(){
 
   abrirPagina(
@@ -4772,20 +4205,23 @@ function abrirBaixasPendentes(){
 }
 
 
-/* =========================================================
-   RELATÓRIO
-========================================================= */
-
 function gerarRelatorio(){
 
-  const competencia =
-    $("competencia").value;
+  let competencia;
 
 
-  if(!competencia){
+  try{
+
+    competencia =
+      validarCompetenciaLocal(
+        $("competencia").value
+      );
+
+  }
+  catch(e){
 
     mostrarMensagem(
-      "Selecione uma competência.",
+      e.message,
       "error"
     );
 
@@ -4879,61 +4315,6 @@ function mostrarLoading(
 
     elemento.classList.remove(
       "show"
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   VALIDAR COMPETÊNCIA
-========================================================= */
-
-function validarCompetenciaLocal(
-  competencia
-){
-
-  if(
-    !/^\d{4}-\d{2}$/.test(
-      competencia
-    )
-  ){
-
-    throw new Error(
-      "Competência inválida."
-    );
-
-  }
-
-
-  const ano =
-    Number(
-      competencia.substring(
-        0,
-        4
-      )
-    );
-
-
-  const mes =
-    Number(
-      competencia.substring(
-        5,
-        7
-      )
-    );
-
-
-  if(
-    ano < 1900 ||
-    ano > 3000 ||
-    mes < 1 ||
-    mes > 12
-  ){
-
-    throw new Error(
-      "Competência inválida."
     );
 
   }
