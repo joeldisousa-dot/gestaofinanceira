@@ -442,8 +442,7 @@ body{
 
   font-weight:800;
 
-  letter-spacing:
-    .09em;
+  letter-spacing:.09em;
 
   text-transform:uppercase;
 
@@ -852,8 +851,6 @@ body{
 
 }
 
-/* Saldo banco em destaque */
-
 .card.bank{
 
   grid-column:
@@ -1213,19 +1210,6 @@ button{
       135deg,
       #c2410c,
       #f97316
-    );
-
-}
-
-.btn-dark{
-
-  color:white;
-
-  background:
-    linear-gradient(
-      135deg,
-      #0f172a,
-      #334155
     );
 
 }
@@ -2115,7 +2099,6 @@ select:focus-visible{
 
     </div>
 
-
     <div class="header-right">
 
       <div class="status">
@@ -2140,9 +2123,7 @@ select:focus-visible{
 <main class="container">
 
 
-  <!-- ===================================================
-       HERO
-  ==================================================== -->
+  <!-- HERO -->
 
   <section class="hero">
 
@@ -2166,7 +2147,6 @@ select:focus-visible{
 
     </div>
 
-
     <div class="hero-period">
 
       <div class="hero-period-label">
@@ -2185,9 +2165,7 @@ select:focus-visible{
   </section>
 
 
-  <!-- ===================================================
-       RESUMO
-  ==================================================== -->
+  <!-- RESUMO -->
 
   <section class="section">
 
@@ -2217,13 +2195,9 @@ select:focus-visible{
 
     </div>
 
-
     <div class="section-body">
 
       <div class="cards">
-
-
-        <!-- SALDO INICIAL -->
 
         <div class="card blue">
 
@@ -2257,8 +2231,6 @@ select:focus-visible{
         </div>
 
 
-        <!-- A RECEBER -->
-
         <div class="card green">
 
           <div class="card-top">
@@ -2290,8 +2262,6 @@ select:focus-visible{
 
         </div>
 
-
-        <!-- A PAGAR -->
 
         <div class="card red">
 
@@ -2325,8 +2295,6 @@ select:focus-visible{
         </div>
 
 
-        <!-- VALOR PAGO -->
-
         <div class="card orange">
 
           <div class="card-top">
@@ -2358,8 +2326,6 @@ select:focus-visible{
 
         </div>
 
-
-        <!-- VALOR RECEBIDO -->
 
         <div class="card green">
 
@@ -2393,8 +2359,6 @@ select:focus-visible{
         </div>
 
 
-        <!-- SALDO BANCO -->
-
         <div class="card purple bank">
 
           <div class="card-top">
@@ -2426,7 +2390,6 @@ select:focus-visible{
 
         </div>
 
-
       </div>
 
     </div>
@@ -2434,9 +2397,7 @@ select:focus-visible{
   </section>
 
 
-  <!-- ===================================================
-       CONTROLE MENSAL
-  ==================================================== -->
+  <!-- CONTROLE MENSAL -->
 
   <section class="section">
 
@@ -2468,7 +2429,6 @@ select:focus-visible{
 
 
     <div class="section-body">
-
 
       <div class="competencia-box">
 
@@ -2512,7 +2472,6 @@ select:focus-visible{
 
 
       <div class="actions">
-
 
         <button
           class="btn btn-purple"
@@ -2597,7 +2556,6 @@ select:focus-visible{
 
         </button>
 
-
       </div>
 
     </div>
@@ -2605,9 +2563,7 @@ select:focus-visible{
   </section>
 
 
-  <!-- ===================================================
-       NOVO LANÇAMENTO
-  ==================================================== -->
+  <!-- NOVO LANÇAMENTO -->
 
   <section class="section launch-section">
 
@@ -2639,7 +2595,6 @@ select:focus-visible{
 
 
     <div class="section-body">
-
 
       <div class="form-grid">
 
@@ -2741,9 +2696,12 @@ select:focus-visible{
         </svg>
 
         <span>
+
           <strong>Dica:</strong>
+
           confira a competência, o valor e o vencimento
           antes de gravar o lançamento.
+
         </span>
 
       </div>
@@ -2843,9 +2801,7 @@ select:focus-visible{
 </div>
 
 
-<!-- =====================================================
-     TOAST
-===================================================== -->
+<!-- TOAST -->
 
 <div
   id="mensagemSistema"
@@ -2853,9 +2809,7 @@ select:focus-visible{
 ></div>
 
 
-<!-- =====================================================
-     LOADING
-===================================================== -->
+<!-- LOADING -->
 
 <div
   id="loading"
@@ -2961,14 +2915,27 @@ async function iniciar(){
     );
 
 
+    /*
+     * Primeiro carrega as descrições.
+     */
+
     await carregarDescricoes();
+
+
+    /*
+     * Depois carrega o resumo.
+     */
 
     await carregar();
 
   }
   catch(e){
 
-    console.error(e);
+    console.error(
+      "Erro na inicialização:",
+      e
+    );
+
 
     mostrarMensagem(
       e.message ||
@@ -3166,6 +3133,11 @@ async function apiRequest(
 
   }
   catch(e){
+
+    console.error(
+      "JSON inválido:",
+      texto
+    );
 
     throw new Error(
       "O Google Apps Script não retornou JSON válido."
@@ -3435,7 +3407,6 @@ async function carregar(){
     $("saldoBanco").textContent =
       formatar(saldoBanco);
 
-
   }
   catch(e){
 
@@ -3478,6 +3449,21 @@ $("competencia").addEventListener(
 
 
 /* =========================================================
+   TIPO
+   NOVO AJUSTE
+========================================================= */
+
+$("tipo").addEventListener(
+  "change",
+  async function(){
+
+    await carregarDescricoes();
+
+  }
+);
+
+
+/* =========================================================
    MOEDA
 ========================================================= */
 
@@ -3509,6 +3495,7 @@ function formatar(valor){
 
 /* =========================================================
    DESCRIÇÕES
+   VERSÃO CORRIGIDA E ROBUSTA
 ========================================================= */
 
 async function carregarDescricoes(){
@@ -3517,8 +3504,39 @@ async function carregarDescricoes(){
     $("descricao");
 
 
+  const tipoAtual =
+    $("tipo").value;
+
+
+  /*
+   * Estado inicial.
+   */
+
+  campo.disabled =
+    true;
+
+
   campo.innerHTML =
-    "<option value=''>Carregando...</option>";
+    "";
+
+
+  const carregando =
+    document.createElement(
+      "option"
+    );
+
+
+  carregando.value =
+    "";
+
+
+  carregando.textContent =
+    "Carregando descrições...";
+
+
+  campo.appendChild(
+    carregando
+  );
 
 
   try{
@@ -3530,16 +3548,64 @@ async function carregarDescricoes(){
 
 
     console.log(
-      "Descrições:",
+      "===================================="
+    );
+
+    console.log(
+      "RESPOSTA listarDescricoes:"
+    );
+
+    console.log(
       resposta
     );
 
+    console.log(
+      "TIPO SELECIONADO:",
+      tipoAtual
+    );
 
-    let lista =
-      resposta;
+    console.log(
+      "===================================="
+    );
 
+
+    /*
+     * =====================================================
+     * NORMALIZAÇÃO DA RESPOSTA
+     * =====================================================
+     */
+
+    let lista = [];
+
+
+    /*
+     * Caso 1:
+     *
+     * [
+     *   "Descrição 1",
+     *   "Descrição 2"
+     * ]
+     */
 
     if(
+      Array.isArray(resposta)
+    ){
+
+      lista =
+        resposta;
+
+    }
+
+
+    /*
+     * Caso 2:
+     *
+     * {
+     *   dados: [...]
+     * }
+     */
+
+    else if(
       resposta &&
       Array.isArray(
         resposta.dados
@@ -3550,6 +3616,16 @@ async function carregarDescricoes(){
         resposta.dados;
 
     }
+
+
+    /*
+     * Caso 3:
+     *
+     * {
+     *   resultado: [...]
+     * }
+     */
+
     else if(
       resposta &&
       Array.isArray(
@@ -3563,8 +3639,215 @@ async function carregarDescricoes(){
     }
 
 
-    campo.innerHTML = "";
+    /*
+     * Caso 4:
+     *
+     * {
+     *   descricoes: [...]
+     * }
+     */
 
+    else if(
+      resposta &&
+      Array.isArray(
+        resposta.descricoes
+      )
+    ){
+
+      lista =
+        resposta.descricoes;
+
+    }
+
+
+    /*
+     * Caso 5:
+     *
+     * {
+     *   lista: [...]
+     * }
+     */
+
+    else if(
+      resposta &&
+      Array.isArray(
+        resposta.lista
+      )
+    ){
+
+      lista =
+        resposta.lista;
+
+    }
+
+
+    /*
+     * Caso 6:
+     *
+     * {
+     *   dados: {
+     *
+     *     "Contas a Receber": [...],
+     *     "Contas a Pagar": [...]
+     *
+     *   }
+     * }
+     */
+
+    else if(
+      resposta &&
+      resposta.dados &&
+      typeof resposta.dados === "object" &&
+      !Array.isArray(resposta.dados)
+    ){
+
+      const dados =
+        resposta.dados;
+
+
+      /*
+       * Primeiro tenta encontrar
+       * exatamente o tipo selecionado.
+       */
+
+      if(
+        Array.isArray(
+          dados[tipoAtual]
+        )
+      ){
+
+        lista =
+          dados[tipoAtual];
+
+      }
+
+
+      /*
+       * Caso a API utilize variações
+       * no nome do tipo.
+       */
+
+      else if(
+        tipoAtual === "Contas a Receber" &&
+        Array.isArray(
+          dados.receber
+        )
+      ){
+
+        lista =
+          dados.receber;
+
+      }
+
+      else if(
+        tipoAtual === "Contas a Pagar" &&
+        Array.isArray(
+          dados.pagar
+        )
+      ){
+
+        lista =
+          dados.pagar;
+
+      }
+
+
+      /*
+       * Se não encontrou por tipo,
+       * procura qualquer array dentro
+       * do objeto.
+       */
+
+      else{
+
+        Object.keys(dados)
+          .forEach(
+            function(chave){
+
+              if(
+                Array.isArray(
+                  dados[chave]
+                )
+              ){
+
+                lista =
+                  lista.concat(
+                    dados[chave]
+                  );
+
+              }
+
+            }
+          );
+
+      }
+
+    }
+
+
+    /*
+     * Caso a API retorne um objeto com
+     * uma propriedade que contenha a lista.
+     */
+
+    if(
+      lista.length === 0 &&
+      resposta &&
+      typeof resposta === "object"
+    ){
+
+      const possiveisCampos = [
+
+        "items",
+        "itens",
+        "rows",
+        "registros",
+        "data",
+        "values"
+
+      ];
+
+
+      for(
+        const campoNome
+        of possiveisCampos
+      ){
+
+        if(
+          Array.isArray(
+            resposta[campoNome]
+          )
+        ){
+
+          lista =
+            resposta[campoNome];
+
+          break;
+
+        }
+
+      }
+
+    }
+
+
+    console.log(
+      "LISTA NORMALIZADA:",
+      lista
+    );
+
+
+    /*
+     * Limpa o select.
+     */
+
+    campo.innerHTML =
+      "";
+
+
+    /*
+     * Opção inicial.
+     */
 
     const primeira =
       document.createElement(
@@ -3577,7 +3860,7 @@ async function carregarDescricoes(){
 
 
     primeira.textContent =
-      "Selecione";
+      "Selecione uma descrição";
 
 
     campo.appendChild(
@@ -3585,18 +3868,193 @@ async function carregarDescricoes(){
     );
 
 
+    /*
+     * Verifica se a lista é válida.
+     */
+
     if(
       !Array.isArray(lista) ||
       lista.length === 0
     ){
+
+      const nenhuma =
+        document.createElement(
+          "option"
+        );
+
+
+      nenhuma.value =
+        "";
+
+
+      nenhuma.textContent =
+        "Nenhuma descrição encontrada";
+
+
+      nenhuma.disabled =
+        true;
+
+
+      campo.appendChild(
+        nenhuma
+      );
+
+
+      campo.disabled =
+        false;
+
+
+      console.warn(
+        "Nenhuma descrição foi encontrada na resposta da API.",
+        resposta
+      );
+
 
       return;
 
     }
 
 
+    /*
+     * =====================================================
+     * TRANSFORMA OS REGISTROS EM OPTIONS
+     * =====================================================
+     */
+
+    const descricoesEncontradas =
+      new Set();
+
+
     lista.forEach(
       function(item){
+
+        let descricao =
+          "";
+
+
+        let tipoItem =
+          "";
+
+
+        /*
+         * -----------------------------------------------
+         * ITEM OBJETO
+         * -----------------------------------------------
+         */
+
+        if(
+          item &&
+          typeof item === "object"
+        ){
+
+          descricao =
+            item.descricao ??
+            item.Descricao ??
+            item.DESCRICAO ??
+            item["Descrição"] ??
+            item["DESCRIÇÃO"] ??
+            item.nome ??
+            item.Nome ??
+            item.NOME ??
+            item.valor ??
+            item.Valor ??
+            item.VALOR ??
+            "";
+
+
+          tipoItem =
+            item.tipo ??
+            item.Tipo ??
+            item.TIPO ??
+            item["Tipo"] ??
+            item["TIPO"] ??
+            "";
+
+        }
+
+
+        /*
+         * -----------------------------------------------
+         * ITEM TEXTO / NÚMERO
+         * -----------------------------------------------
+         */
+
+        else{
+
+          descricao =
+            item;
+
+        }
+
+
+        descricao =
+          String(
+            descricao ?? ""
+          ).trim();
+
+
+        tipoItem =
+          String(
+            tipoItem ?? ""
+          ).trim();
+
+
+        /*
+         * Ignora registros sem descrição.
+         */
+
+        if(!descricao){
+
+          return;
+
+        }
+
+
+        /*
+         * Se a API informou o tipo,
+         * respeita o filtro.
+         */
+
+        if(
+          tipoItem &&
+          !tiposSaoIguais(
+            tipoItem,
+            tipoAtual
+          )
+        ){
+
+          return;
+
+        }
+
+
+        /*
+         * Evita duplicidades.
+         */
+
+        const chave =
+          descricao.toLowerCase();
+
+
+        if(
+          descricoesEncontradas.has(
+            chave
+          )
+        ){
+
+          return;
+
+        }
+
+
+        descricoesEncontradas.add(
+          chave
+        );
+
+
+        /*
+         * Cria option.
+         */
 
         const option =
           document.createElement(
@@ -3604,33 +4062,18 @@ async function carregarDescricoes(){
           );
 
 
-        if(
-          typeof item === "object"
-        ){
-
-          const valor =
-            item.descricao ||
-            item.nome ||
-            item.valor ||
-            "";
+        option.value =
+          descricao;
 
 
-          option.value =
-            valor;
+        option.textContent =
+          descricao;
 
 
-          option.textContent =
-            valor;
+        if(tipoItem){
 
-        }
-        else{
-
-          option.value =
-            item;
-
-
-          option.textContent =
-            item;
+          option.dataset.tipo =
+            tipoItem;
 
         }
 
@@ -3643,16 +4086,194 @@ async function carregarDescricoes(){
     );
 
 
+    /*
+     * Se nenhuma descrição passou
+     * pelo filtro de tipo.
+     */
+
+    if(
+      campo.options.length === 1
+    ){
+
+      const nenhuma =
+        document.createElement(
+          "option"
+        );
+
+
+      nenhuma.value =
+        "";
+
+
+      nenhuma.textContent =
+        "Nenhuma descrição para este tipo";
+
+
+      nenhuma.disabled =
+        true;
+
+
+      campo.appendChild(
+        nenhuma
+      );
+
+    }
+
+
+    /*
+     * Reativa o campo.
+     */
+
+    campo.disabled =
+      false;
+
+
+    console.log(
+      "TOTAL DE DESCRIÇÕES:",
+      campo.options.length - 1
+    );
+
   }
   catch(e){
 
-    console.error(e);
+    console.error(
+      "ERRO AO CARREGAR DESCRIÇÕES:",
+      e
+    );
 
 
     campo.innerHTML =
-      "<option value=''>Erro ao carregar</option>";
+      "";
+
+
+    const erro =
+      document.createElement(
+        "option"
+      );
+
+
+    erro.value =
+      "";
+
+
+    erro.textContent =
+      "Erro ao carregar descrições";
+
+
+    erro.disabled =
+      true;
+
+
+    campo.appendChild(
+      erro
+    );
+
+
+    campo.disabled =
+      false;
+
+
+    mostrarMensagem(
+      "Não foi possível carregar as descrições: " +
+      e.message,
+      "error"
+    );
 
   }
+
+}
+
+
+/* =========================================================
+   COMPARAR TIPOS
+========================================================= */
+
+function tiposSaoIguais(
+  tipo1,
+  tipo2
+){
+
+  const normalizar =
+    function(valor){
+
+      return String(
+        valor || ""
+      )
+      .trim()
+      .toLowerCase()
+      .normalize(
+        "NFD"
+      )
+      .replace(
+        /[\u0300-\u036f]/g,
+        ""
+      );
+
+    };
+
+
+  const a =
+    normalizar(tipo1);
+
+
+  const b =
+    normalizar(tipo2);
+
+
+  /*
+   * Correspondência exata.
+   */
+
+  if(a === b){
+
+    return true;
+
+  }
+
+
+  /*
+   * Contas a Receber
+   */
+
+  if(
+    (
+      a.includes("receber") ||
+      a.includes("receita")
+    )
+    &&
+    (
+      b.includes("receber") ||
+      b.includes("receita")
+    )
+  ){
+
+    return true;
+
+  }
+
+
+  /*
+   * Contas a Pagar
+   */
+
+  if(
+    (
+      a.includes("pagar") ||
+      a.includes("despesa")
+    )
+    &&
+    (
+      b.includes("pagar") ||
+      b.includes("despesa")
+    )
+  ){
+
+    return true;
+
+  }
+
+
+  return false;
 
 }
 
@@ -3698,9 +4319,11 @@ async function gravar(){
   if(!dados.descricao){
 
     mostrarMensagem(
-      "Informe a descrição.",
+      "Selecione uma descrição.",
       "error"
     );
+
+    $("descricao").focus();
 
     return;
 
@@ -3717,6 +4340,8 @@ async function gravar(){
       "Informe um valor válido.",
       "error"
     );
+
+    $("valor").focus();
 
     return;
 
