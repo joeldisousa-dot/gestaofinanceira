@@ -28,7 +28,6 @@ content="width=device-width, initial-scale=1.0"
     }
 
     body {
-      margin: 0;
       font-family:
         Arial,
         Helvetica,
@@ -479,6 +478,7 @@ content="width=device-width, initial-scale=1.0"
 
 </div>
 
+
 <div class="competencia-area">
 
   <div class="campo">
@@ -494,6 +494,7 @@ content="width=device-width, initial-scale=1.0"
 
   </div>
 
+
   <button
     id="btnAtualizar"
     class="btn btn-principal"
@@ -504,6 +505,7 @@ content="width=device-width, initial-scale=1.0"
   </button>
 
 </div>
+
 
 <div
   id="erro"
@@ -536,7 +538,9 @@ content="width=device-width, initial-scale=1.0"
 
 </div>
 
+
 <div class="menu-grid">
+
 
   <!-- NOVO LANÇAMENTO -->
 
@@ -709,10 +713,12 @@ content="width=device-width, initial-scale=1.0"
 
 </div>
 
+
 <div
   id="resumo"
   class="resumo-grid"
 >
+
 
   <div class="resumo-item">
 
@@ -865,25 +871,24 @@ Sistema integrado ao Google Sheets
 <script>
 
 /* =========================================================
-   CONFIGURAÇÃO DA API
+   CONFIGURAÇÃO
    ========================================================= */
 
+
 /*
- * GOOGLE APPS SCRIPT
+ * URL DA API
  *
- * Usado somente para comunicação com a API.
+ * Google Apps Script responsável pelos dados.
  */
 
 const URL_API =
   "https://script.google.com/macros/s/AKfycbwfSLxtEomSQ5rkt1NHF7VlOZS-KOKmBP9f08UJcuSprdm8ITVEAj3dSqww7QuzCxGx/exec";
 
 
-/* =========================================================
-   CONFIGURAÇÃO DO GITHUB PAGES
-   ========================================================= */
-
 /*
- * ESTA É A URL REAL DO SEU GITHUB PAGES.
+ * URL DO SITE
+ *
+ * GitHub Pages REAL do projeto.
  */
 
 const URL_SITE =
@@ -921,11 +926,14 @@ function definirCompetenciaAtual() {
     return;
   }
 
+
   const agora =
     new Date();
 
+
   const ano =
     agora.getFullYear();
+
 
   const mes =
     String(
@@ -935,20 +943,24 @@ function definirCompetenciaAtual() {
       "0"
     );
 
+
   campo.value =
-    ano + "-" + mes;
+    ano +
+    "-" +
+    mes;
 
 }
 
 
 /* =========================================================
-   MOEDA
+   FORMATA MOEDA
    ========================================================= */
 
 function moeda(valor) {
 
   const numero =
     Number(valor) || 0;
+
 
   return numero.toLocaleString(
     "pt-BR",
@@ -962,7 +974,7 @@ function moeda(valor) {
 
 
 /* =========================================================
-   CHAMADA DA API VIA JSONP
+   CHAMADA API JSONP
    ========================================================= */
 
 function chamarAPI(
@@ -972,6 +984,7 @@ function chamarAPI(
 
   parametros =
     parametros || {};
+
 
   return new Promise(
     function(resolve, reject) {
@@ -984,13 +997,16 @@ function chamarAPI(
           Math.random() * 100000
         );
 
+
       const params =
         new URLSearchParams();
+
 
       params.append(
         "action",
         action
       );
+
 
       params.append(
         "callback",
@@ -1005,6 +1021,7 @@ function chamarAPI(
 
           const valor =
             parametros[chave];
+
 
           if (
             valor !== undefined &&
@@ -1027,6 +1044,7 @@ function chamarAPI(
           "script"
         );
 
+
       let finalizado =
         false;
 
@@ -1039,10 +1057,13 @@ function chamarAPI(
               return;
             }
 
+
             finalizado =
               true;
 
+
             limpar();
+
 
             reject(
               new Error(
@@ -1061,6 +1082,7 @@ function chamarAPI(
           timeout
         );
 
+
         if (
           script.parentNode
         ) {
@@ -1071,6 +1093,7 @@ function chamarAPI(
             );
 
         }
+
 
         try {
 
@@ -1099,8 +1122,10 @@ function chamarAPI(
             return;
           }
 
+
           finalizado =
             true;
+
 
           limpar();
 
@@ -1149,10 +1174,13 @@ function chamarAPI(
             return;
           }
 
+
           finalizado =
             true;
 
+
           limpar();
+
 
           reject(
             new Error(
@@ -1190,6 +1218,7 @@ async function testarConexao() {
     false
   );
 
+
   try {
 
     const resposta =
@@ -1200,7 +1229,7 @@ async function testarConexao() {
 
     if (
       resposta &&
-      resposta.sucesso
+      resposta.sucesso === true
     ) {
 
       alterarStatus(
@@ -1208,7 +1237,9 @@ async function testarConexao() {
         false
       );
 
+
       carregarResumo();
+
 
     } else {
 
@@ -1226,10 +1257,12 @@ async function testarConexao() {
       erro
     );
 
+
     alterarStatus(
       "Falha na conexão",
       true
     );
+
 
     mostrarErro(
       erro.message
@@ -1254,10 +1287,12 @@ function alterarStatus(
       "status"
     );
 
+
   const textoEl =
     document.getElementById(
       "statusTexto"
     );
+
 
   if (
     !status ||
@@ -1265,6 +1300,7 @@ function alterarStatus(
   ) {
     return;
   }
+
 
   textoEl.textContent =
     texto;
@@ -1300,13 +1336,16 @@ function mostrarErro(
       "erro"
     );
 
+
   if (!box) {
     return;
   }
 
+
   box.textContent =
     mensagem ||
     "Ocorreu um erro.";
+
 
   box.style.display =
     "block";
@@ -1325,12 +1364,15 @@ function limparErro() {
       "erro"
     );
 
+
   if (!box) {
     return;
   }
 
+
   box.textContent =
     "";
+
 
   box.style.display =
     "none";
@@ -1396,6 +1438,7 @@ async function carregarResumo() {
     botao.disabled =
       true;
 
+
     botao.textContent =
       "⏳ Carregando...";
 
@@ -1426,6 +1469,7 @@ async function carregarResumo() {
       erro
     );
 
+
     mostrarErro(
       erro.message
     );
@@ -1437,6 +1481,7 @@ async function carregarResumo() {
 
       botao.disabled =
         false;
+
 
       botao.textContent =
         "🔄 Atualizar resumo";
@@ -1517,6 +1562,12 @@ function preencherResumo(
     );
 
 
+  /*
+   * RESULTADO
+   *
+   * Recebido - Pago
+   */
+
   const resultado =
     (
       Number(
@@ -1557,6 +1608,7 @@ function preencherResumo(
       "positivo"
     );
 
+
   } else if (
     resultado < 0
   ) {
@@ -1564,6 +1616,7 @@ function preencherResumo(
     resultadoEl.classList.add(
       "negativo"
     );
+
 
   } else {
 
@@ -1666,24 +1719,20 @@ function formatarCompetencia(
 
 
 /* =========================================================
-   BASE DO GITHUB
+   NORMALIZAR URL DO GITHUB
    ========================================================= */
 
-function obterBaseSite() {
+function obterURLSite(
+  pagina
+) {
+
+  if (!pagina) {
+    return URL_SITE;
+  }
+
 
   let base =
-    String(
-      URL_SITE
-    ).trim();
-
-
-  if (!base) {
-
-    throw new Error(
-      "URL do GitHub Pages não configurada."
-    );
-
-  }
+    URL_SITE.trim();
 
 
   if (
@@ -1695,13 +1744,30 @@ function obterBaseSite() {
   }
 
 
-  return base;
+  /*
+   * Remove barras iniciais da página
+   * para evitar URLs como //pagina.html.
+   */
+
+  pagina =
+    String(
+      pagina
+    ).replace(
+      /^\/+/,
+      ""
+    );
+
+
+  return (
+    base +
+    pagina
+  );
 
 }
 
 
 /* =========================================================
-   ABRIR PÁGINA DO GITHUB
+   ABRIR PÁGINA NO GITHUB
    ========================================================= */
 
 function abrirPagina(
@@ -1715,17 +1781,14 @@ function abrirPagina(
 
   try {
 
-    const base =
-      obterBaseSite();
-
-
     const url =
-      base +
-      pagina;
+      obterURLSite(
+        pagina
+      );
 
 
     console.log(
-      "Abrindo página:",
+      "Abrindo:",
       url
     );
 
@@ -1737,11 +1800,13 @@ function abrirPagina(
   } catch (erro) {
 
     console.error(
+      "Erro ao abrir página:",
       erro
     );
 
+
     mostrarErro(
-      erro.message
+      "Não foi possível abrir a rotina."
     );
 
   }
@@ -1802,13 +1867,10 @@ function abrirPaginaComCompetencia(
 
   try {
 
-    const base =
-      obterBaseSite();
-
-
     const url =
-      base +
-      pagina +
+      obterURLSite(
+        pagina
+      ) +
       "?competencia=" +
       encodeURIComponent(
         competencia
@@ -1816,7 +1878,7 @@ function abrirPaginaComCompetencia(
 
 
     console.log(
-      "Abrindo relatório:",
+      "Abrindo:",
       url
     );
 
@@ -1828,11 +1890,13 @@ function abrirPaginaComCompetencia(
   } catch (erro) {
 
     console.error(
+      "Erro ao abrir página:",
       erro
     );
 
+
     mostrarErro(
-      erro.message
+      "Não foi possível abrir o relatório."
     );
 
   }
