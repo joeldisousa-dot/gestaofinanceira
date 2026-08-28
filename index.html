@@ -44,7 +44,7 @@ content="width=device-width, initial-scale=1.0"
     }
 
     /* =====================================================
-       CABEÇALHO
+       TOPO
        ===================================================== */
 
     .topo {
@@ -100,6 +100,15 @@ content="width=device-width, initial-scale=1.0"
 
     .status.erro .status-ponto {
       background: #ef4444;
+    }
+
+    .status.carregando {
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .status.carregando .status-ponto {
+      background: #2563eb;
     }
 
     /* =====================================================
@@ -202,8 +211,8 @@ content="width=device-width, initial-scale=1.0"
     }
 
     .btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
+      opacity: 0.65;
+      cursor: wait;
       transform: none;
     }
 
@@ -424,7 +433,7 @@ content="width=device-width, initial-scale=1.0"
 <div class="container">
 
   <!-- =====================================================
-       CABEÇALHO
+       TOPO
        ===================================================== -->
 
   <div class="topo">
@@ -441,13 +450,13 @@ content="width=device-width, initial-scale=1.0"
 
 <div
   id="status"
-  class="status"
+  class="status carregando"
 >
 
   <span class="status-ponto"></span>
 
   <span id="statusTexto">
-    Conectando...
+    Inicializando...
   </span>
 
 </div>
@@ -691,7 +700,7 @@ content="width=device-width, initial-scale=1.0"
   </div>
 
   <!-- =====================================================
-       RESUMO GERAL
+       RESUMO
        ===================================================== -->
 
   <div class="card">
@@ -706,7 +715,7 @@ content="width=device-width, initial-scale=1.0"
     </h2>
 
     <span id="resumoCompetencia">
-      Selecione uma competência.
+      Carregando competência...
     </span>
 
   </div>
@@ -876,9 +885,10 @@ Sistema integrado ao Google Sheets
 
 
 /*
- * URL DA API
+ * GOOGLE APPS SCRIPT
  *
- * Google Apps Script responsável pelos dados.
+ * Esta URL é usada somente para consultar
+ * os dados e executar as operações da API.
  */
 
 const URL_API =
@@ -886,33 +896,68 @@ const URL_API =
 
 
 /*
- * URL DO SITE
+ * GITHUB PAGES
  *
- * GitHub Pages REAL do projeto.
+ * As páginas HTML são abertas diretamente
+ * neste endereço.
  */
 
 const URL_SITE =
   "https://joeldisousa-dot.github.io/gestaofinanceira/";
 
 
+/*
+ * TIMEOUT DA API
+ *
+ * O index NÃO ficará preso durante 20 segundos.
+ */
+
+const TIMEOUT_API =
+  10000;
+
+
 /* =========================================================
-   INICIALIZAÇÃO
+   INICIALIZAÇÃO RÁPIDA
    ========================================================= */
 
 document.addEventListener(
   "DOMContentLoaded",
   function() {
 
+    /*
+     * Primeiro configuramos a tela.
+     *
+     * Não esperamos a API.
+     */
+
     definirCompetenciaAtual();
 
-    testarConexao();
+    alterarStatus(
+      "Conectando ao sistema...",
+      false,
+      true
+    );
+
+
+    /*
+     * A conexão acontece em segundo plano.
+     */
+
+    setTimeout(
+      function() {
+
+        testarConexao();
+
+      },
+      50
+    );
 
   }
 );
 
 
 /* =========================================================
-   COMPETÊNCIA ATUAL
+   DEFINIR COMPETÊNCIA ATUAL
    ========================================================= */
 
 function definirCompetenciaAtual() {
@@ -921,6 +966,7 @@ function definirCompetenciaAtual() {
     document.getElementById(
       "competencia"
     );
+
 
   if (!campo) {
     return;
@@ -1067,12 +1113,12 @@ function chamarAPI(
 
             reject(
               new Error(
-                "Tempo esgotado ao conectar ao Google Apps Script."
+                "Tempo esgotado ao consultar o Google Apps Script."
               )
             );
 
           },
-          20000
+          TIMEOUT_API
         );
 
 
@@ -1197,7 +1243,11 @@ function chamarAPI(
         params.toString();
 
 
-      document.body.appendChild(
+      /*
+       * JSONP precisa ser adicionado ao documento.
+       */
+
+      document.head.appendChild(
         script
       );
 
@@ -1214,8 +1264,9 @@ function chamarAPI(
 async function testarConexao() {
 
   alterarStatus(
-    "Conectando...",
-    false
+    "Conectando ao sistema...",
+    false,
+    true
   );
 
 
@@ -1234,9 +1285,15 @@ async function testarConexao() {
 
       alterarStatus(
         "Sistema online",
+        false,
         false
       );
 
+
+      /*
+       * Só depois de confirmar a API
+       * carregamos o resumo.
+       */
 
       carregarResumo();
 
@@ -1253,19 +1310,28 @@ async function testarConexao() {
   } catch (erro) {
 
     console.error(
-      "Erro na conexão:",
+      "Erro de conexão:",
       erro
     );
 
 
+    /*
+     * A tela NÃO fica bloqueada.
+     *
+     * O usuário continua podendo usar
+     * o menu do GitHub Pages.
+     */
+
     alterarStatus(
-      "Falha na conexão",
-      true
+      "API indisponível",
+      true,
+      false
     );
 
 
     mostrarErro(
-      erro.message
+      "Não foi possível carregar o resumo agora. " +
+      "As rotinas do sistema continuam disponíveis."
     );
 
   }
@@ -1274,12 +1340,13 @@ async function testarConexao() {
 
 
 /* =========================================================
-   STATUS
+   ALTERAR STATUS
    ========================================================= */
 
 function alterarStatus(
   texto,
-  erro
+  erro,
+  carregando
 ) {
 
   const status =
@@ -1306,16 +1373,22 @@ function alterarStatus(
     texto;
 
 
+  status.classList.remove(
+    "erro",
+    "carregando"
+  );
+
+
   if (erro) {
 
     status.classList.add(
       "erro"
     );
 
-  } else {
+  } else if (carregando) {
 
-    status.classList.remove(
-      "erro"
+    status.classList.add(
+      "carregando"
     );
 
   }
@@ -1440,7 +1513,7 @@ async function carregarResumo() {
 
 
     botao.textContent =
-      "⏳ Carregando...";
+      "⏳ Consultando...";
 
   }
 
@@ -1459,6 +1532,13 @@ async function carregarResumo() {
 
     preencherResumo(
       resposta
+    );
+
+
+    alterarStatus(
+      "Sistema online",
+      false,
+      false
     );
 
 
@@ -1506,11 +1586,53 @@ function preencherResumo(
   }
 
 
+  const saldoInicial =
+    Number(
+      dados.saldoInicial
+    ) || 0;
+
+
+  const receber =
+    Number(
+      dados.receber
+    ) || 0;
+
+
+  const pagar =
+    Number(
+      dados.pagar
+    ) || 0;
+
+
+  const saldoBanco =
+    Number(
+      dados.saldoBanco
+    ) || 0;
+
+
+  const recebido =
+    Number(
+      dados.recebido
+    ) || 0;
+
+
+  const pago =
+    Number(
+      dados.pago
+    ) || 0;
+
+
+  const repasse =
+    Number(
+      dados.repasseAluguel
+    ) || 0;
+
+
   document.getElementById(
     "saldoInicial"
   ).textContent =
     moeda(
-      dados.saldoInicial
+      saldoInicial
     );
 
 
@@ -1518,7 +1640,7 @@ function preencherResumo(
     "receber"
   ).textContent =
     moeda(
-      dados.receber
+      receber
     );
 
 
@@ -1526,7 +1648,7 @@ function preencherResumo(
     "pagar"
   ).textContent =
     moeda(
-      dados.pagar
+      pagar
     );
 
 
@@ -1534,7 +1656,7 @@ function preencherResumo(
     "saldoBanco"
   ).textContent =
     moeda(
-      dados.saldoBanco
+      saldoBanco
     );
 
 
@@ -1542,7 +1664,7 @@ function preencherResumo(
     "recebido"
   ).textContent =
     moeda(
-      dados.recebido
+      recebido
     );
 
 
@@ -1550,7 +1672,7 @@ function preencherResumo(
     "pago"
   ).textContent =
     moeda(
-      dados.pago
+      pago
     );
 
 
@@ -1558,27 +1680,19 @@ function preencherResumo(
     "repasse"
   ).textContent =
     moeda(
-      dados.repasseAluguel
+      repasse
     );
 
 
   /*
-   * RESULTADO
+   * Resultado financeiro:
    *
-   * Recebido - Pago
+   * RECEBIDO - PAGO
    */
 
   const resultado =
-    (
-      Number(
-        dados.recebido
-      ) || 0
-    ) -
-    (
-      Number(
-        dados.pago
-      ) || 0
-    );
+    recebido -
+    pago;
 
 
   const resultadoEl =
@@ -1719,7 +1833,7 @@ function formatarCompetencia(
 
 
 /* =========================================================
-   NORMALIZAR URL DO GITHUB
+   OBTER URL DO GITHUB
    ========================================================= */
 
 function obterURLSite(
@@ -1744,11 +1858,6 @@ function obterURLSite(
   }
 
 
-  /*
-   * Remove barras iniciais da página
-   * para evitar URLs como //pagina.html.
-   */
-
   pagina =
     String(
       pagina
@@ -1767,7 +1876,7 @@ function obterURLSite(
 
 
 /* =========================================================
-   ABRIR PÁGINA NO GITHUB
+   ABRIR PÁGINA DO GITHUB
    ========================================================= */
 
 function abrirPagina(
@@ -1779,37 +1888,26 @@ function abrirPagina(
   }
 
 
-  try {
-
-    const url =
-      obterURLSite(
-        pagina
-      );
-
-
-    console.log(
-      "Abrindo:",
-      url
+  const url =
+    obterURLSite(
+      pagina
     );
 
 
-    window.location.href =
-      url;
+  console.log(
+    "Abrindo página:",
+    url
+  );
 
 
-  } catch (erro) {
+  /*
+   * Navegação direta para o GitHub Pages.
+   *
+   * NÃO passa pelo Apps Script.
+   */
 
-    console.error(
-      "Erro ao abrir página:",
-      erro
-    );
-
-
-    mostrarErro(
-      "Não foi possível abrir a rotina."
-    );
-
-  }
+  window.location.href =
+    url;
 
 }
 
@@ -1865,41 +1963,24 @@ function abrirPaginaComCompetencia(
   }
 
 
-  try {
-
-    const url =
-      obterURLSite(
-        pagina
-      ) +
-      "?competencia=" +
-      encodeURIComponent(
-        competencia
-      );
-
-
-    console.log(
-      "Abrindo:",
-      url
+  const url =
+    obterURLSite(
+      pagina
+    ) +
+    "?competencia=" +
+    encodeURIComponent(
+      competencia
     );
 
 
-    window.location.href =
-      url;
+  console.log(
+    "Abrindo página:",
+    url
+  );
 
 
-  } catch (erro) {
-
-    console.error(
-      "Erro ao abrir página:",
-      erro
-    );
-
-
-    mostrarErro(
-      "Não foi possível abrir o relatório."
-    );
-
-  }
+  window.location.href =
+    url;
 
 }
 
