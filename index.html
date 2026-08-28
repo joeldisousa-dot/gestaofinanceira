@@ -3410,15 +3410,29 @@ async function apiRequest(
 
   try{
 
-    resposta =
-      await fetch(
-        url.toString(),
-        {
-          method:"GET",
-          redirect:"follow",
-          cache:"no-store"
-        }
-      );
+    const controller =
+      new AbortController();
+
+    const timer =
+      setTimeout(function(){
+        controller.abort();
+      }, 10000);
+
+    try{
+      resposta =
+        await fetch(
+          url.toString(),
+          {
+            method:"GET",
+            redirect:"follow",
+            cache:"no-store",
+            signal:controller.signal
+          }
+        );
+    }
+    finally{
+      clearTimeout(timer);
+    }
 
   }
   catch(e){
