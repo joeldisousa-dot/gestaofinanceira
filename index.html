@@ -1432,6 +1432,217 @@ button{
   background:#94a3b8;
 }
 
+
+/* =========================================================
+   LAYOUT COM MENU VERTICAL + GRID DE CONTEÚDO
+========================================================= */
+
+.workspace{
+  display:grid;
+  grid-template-columns:235px minmax(0,1fr);
+  gap:18px;
+  margin-top:20px;
+  align-items:stretch;
+}
+
+.sidebar{
+  position:sticky;
+  top:92px;
+  align-self:start;
+  overflow:hidden;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+}
+
+.sidebar-header{
+  padding:18px 17px 14px;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,#fff,#f8fafc);
+}
+
+.sidebar-header strong{
+  display:block;
+  font-size:13px;
+  font-weight:850;
+  color:var(--dark);
+}
+
+.sidebar-header span{
+  display:block;
+  margin-top:4px;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.4;
+}
+
+.sidebar-menu{
+  padding:9px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.menu-item{
+  width:100%;
+  min-height:43px;
+  padding:0 11px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#475569;
+  border:1px solid transparent;
+  border-radius:10px;
+  background:transparent;
+  text-align:left;
+  font-family:inherit;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.18s ease;
+}
+
+.menu-item:hover{
+  color:var(--primary);
+  background:var(--primary-soft);
+  border-color:#dbeafe;
+  transform:translateX(2px);
+}
+
+.menu-item.active{
+  color:white;
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
+  box-shadow:0 6px 15px rgba(37,99,235,.18);
+}
+
+.menu-item.danger:hover{
+  color:var(--danger);
+  background:var(--danger-soft);
+  border-color:#fee2e2;
+}
+
+.menu-item.danger.active{
+  color:white;
+  background:linear-gradient(135deg,#b91c1c,#ef4444);
+}
+
+.menu-item .icon{
+  width:18px;
+  height:18px;
+}
+
+.menu-separator{
+  height:1px;
+  margin:5px 4px;
+  background:var(--border);
+}
+
+.content-grid{
+  min-width:0;
+  min-height:620px;
+  overflow:hidden;
+  position:relative;
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+}
+
+.content-grid-header{
+  min-height:64px;
+  padding:12px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  border-bottom:1px solid var(--border);
+  background:#fff;
+}
+
+.content-grid-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.content-grid-title .section-icon{
+  width:35px;
+  height:35px;
+}
+
+.content-grid-title h3{
+  font-size:14px;
+  font-weight:850;
+}
+
+.content-grid-title p{
+  margin-top:2px;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.content-frame{
+  width:100%;
+  height:calc(100vh - 190px);
+  min-height:550px;
+  display:block;
+  border:0;
+  background:#f8fafc;
+}
+
+.grid-empty{
+  min-height:550px;
+  padding:50px 30px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:var(--muted);
+}
+
+.grid-empty .empty-icon{
+  width:62px;
+  height:62px;
+  margin-bottom:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--primary);
+  border-radius:18px;
+  background:var(--primary-soft);
+}
+
+.grid-empty .empty-icon .icon{
+  width:30px;
+  height:30px;
+}
+
+.grid-empty h3{
+  color:var(--dark);
+  font-size:17px;
+  font-weight:850;
+}
+
+.grid-empty p{
+  max-width:420px;
+  margin-top:7px;
+  font-size:11px;
+  line-height:1.6;
+}
+
+@media(max-width:900px){
+  .workspace{
+    grid-template-columns:190px minmax(0,1fr);
+  }
+
+  .menu-item{
+    font-size:10px;
+    padding:0 9px;
+  }
+}
+
 @media(max-width:1100px){
 
   .cards{
@@ -1452,6 +1663,36 @@ button{
       repeat(2,minmax(0,1fr));
   }
 
+}
+
+
+@media(max-width:760px){
+  .workspace{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .sidebar{
+    position:static;
+  }
+
+  .sidebar-menu{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .menu-separator{
+    display:none;
+  }
+
+  .content-grid{
+    min-height:560px;
+  }
+
+  .content-frame{
+    height:650px;
+    min-height:650px;
+  }
 }
 
 @media(max-width:760px){
@@ -1792,7 +2033,127 @@ select:focus-visible{
 </section>
 
 
-<section class="section">
+
+<!-- =========================================================
+     MENU VERTICAL + GRID CENTRAL
+========================================================= -->
+<section class="workspace">
+
+  <aside class="sidebar">
+
+    <div class="sidebar-header">
+      <strong>Menu financeiro</strong>
+      <span>Selecione uma opção para abrir no painel ao lado.</span>
+    </div>
+
+    <nav class="sidebar-menu">
+
+      <button class="menu-item active"
+              data-page="dashboard"
+              onclick="mostrarNoGrid('dashboard', this)">
+        <svg class="icon"><use href="#i-chart"></use></svg>
+        Dashboard
+      </button>
+
+      <button class="menu-item"
+              data-page="novo"
+              onclick="mostrarNoGrid('novo', this)">
+        <svg class="icon"><use href="#i-plus"></use></svg>
+        Novo lançamento
+      </button>
+
+      <button class="menu-item"
+              data-page="lancamentos"
+              onclick="mostrarNoGrid('lancamentos', this)">
+        <svg class="icon"><use href="#i-list"></use></svg>
+        Lançamentos
+      </button>
+
+      <button class="menu-item"
+              data-page="relatorio"
+              onclick="mostrarNoGrid('relatorio', this)">
+        <svg class="icon"><use href="#i-file"></use></svg>
+        Relatório
+      </button>
+
+      <button class="menu-item"
+              data-page="graficos"
+              onclick="mostrarNoGrid('graficos', this)">
+        <svg class="icon"><use href="#i-chart"></use></svg>
+        Gráficos
+      </button>
+
+      <button class="menu-item"
+              data-page="atendimento"
+              onclick="mostrarNoGrid('atendimento', this)">
+        <svg class="icon"><use href="#i-book"></use></svg>
+        Atendimento
+      </button>
+
+      <button class="menu-item danger"
+              data-page="pendentes"
+              onclick="mostrarNoGrid('pendentes', this)">
+        <svg class="icon"><use href="#i-alert"></use></svg>
+        Baixas pendentes
+      </button>
+
+      <div class="menu-separator"></div>
+
+      <button class="menu-item"
+              data-page="saldo"
+              onclick="mostrarNoGrid('saldo', this)">
+        <svg class="icon"><use href="#i-wallet"></use></svg>
+        Informar saldo inicial
+      </button>
+
+      <button class="menu-item"
+              data-page="fechar"
+              onclick="mostrarNoGrid('fechar', this)">
+        <svg class="icon"><use href="#i-lock"></use></svg>
+        Fechar competência
+      </button>
+
+    </nav>
+  </aside>
+
+  <section class="content-grid" id="contentGrid">
+
+    <div class="content-grid-header">
+      <div class="content-grid-title">
+        <div class="section-icon">
+          <svg class="icon"><use href="#i-chart"></use></svg>
+        </div>
+        <div>
+          <h3 id="gridTitulo">Painel Financeiro</h3>
+          <p id="gridSubtitulo">Resumo da competência selecionada</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-empty" id="gridVazio">
+      <div class="empty-icon">
+        <svg class="icon"><use href="#i-list"></use></svg>
+      </div>
+      <h3>Escolha uma opção no menu</h3>
+      <p>
+        O conteúdo será exibido aqui, sem sair do index.
+        A competência selecionada será enviada automaticamente
+        para as telas que utilizam esse filtro.
+      </p>
+    </div>
+
+    <iframe
+      id="conteudoGrid"
+      class="content-frame"
+      title="Conteúdo do Controle Financeiro"
+      style="display:none">
+    </iframe>
+
+  </section>
+
+</section>
+
+<section class="section legacy-controls" style="display:none">
 
   <div class="section-header">
 
@@ -2189,7 +2550,7 @@ select:focus-visible{
 </section>
 
 
-<section class="section launch-section">
+<section class="section launch-section legacy-launch" style="display:none">
 
   <div class="section-header">
 
@@ -4052,6 +4413,199 @@ async function fecharMes(){
 
 }
 
+
+
+/* =========================================================
+   MENU VERTICAL + GRID
+========================================================= */
+
+function obterCompetenciaMenu(){
+  try{
+    return validarCompetenciaLocal($("competencia").value);
+  }
+  catch(e){
+    mostrarMensagem(
+      e.message || "Selecione uma competência válida.",
+      "error"
+    );
+    return "";
+  }
+}
+
+function ativarMenu(botao){
+  document.querySelectorAll(".menu-item").forEach(function(item){
+    item.classList.remove("active");
+  });
+
+  if(botao){
+    botao.classList.add("active");
+  }
+}
+
+function mostrarNoGrid(pagina, botao){
+
+  ativarMenu(botao);
+
+  const grid = $("conteudoGrid");
+  const vazio = $("gridVazio");
+  const titulo = $("gridTitulo");
+  const subtitulo = $("gridSubtitulo");
+
+  const competencia = obterCompetenciaMenu();
+
+  if(!competencia && pagina !== "atendimento"){
+    return;
+  }
+
+  const configuracoes = {
+    dashboard:{
+      titulo:"Painel Financeiro",
+      subtitulo:"Resumo da competência selecionada"
+    },
+    novo:{
+      titulo:"Novo lançamento",
+      subtitulo:"Registro de contas a receber ou pagar"
+    },
+    lancamentos:{
+      titulo:"Lançamentos",
+      subtitulo:"Lançamentos da competência selecionada"
+    },
+    relatorio:{
+      titulo:"Relatório Financeiro",
+      subtitulo:"Relatório da competência selecionada"
+    },
+    graficos:{
+      titulo:"Gráficos",
+      subtitulo:"Análise visual da competência selecionada"
+    },
+    atendimento:{
+      titulo:"Atendimento",
+      subtitulo:"Central de atendimento"
+    },
+    pendentes:{
+      titulo:"Baixas Pendentes",
+      subtitulo:"Lançamentos que aguardam baixa"
+    },
+    saldo:{
+      titulo:"Saldo Inicial",
+      subtitulo:"Informar o saldo inicial da competência"
+    },
+    fechar:{
+      titulo:"Fechar Competência",
+      subtitulo:"Encerramento da competência selecionada"
+    }
+  };
+
+  const cfg = configuracoes[pagina] || configuracoes.dashboard;
+
+  titulo.textContent = cfg.titulo;
+  subtitulo.textContent = cfg.subtitulo;
+
+  /* Dashboard */
+  if(pagina === "dashboard"){
+    $("conteudoGrid").style.display = "none";
+    vazio.style.display = "flex";
+    carregar();
+    return;
+  }
+
+  /* Ações que continuam usando os recursos nativos do index */
+  if(pagina === "saldo"){
+    $("janelaSaldo").classList.add("show");
+    $("novoSaldo").focus();
+    return;
+  }
+
+  if(pagina === "fechar"){
+    fecharMes();
+    return;
+  }
+
+  let arquivo = "";
+  const params = {};
+
+  switch(pagina){
+
+    case "novo":
+      arquivo = "Lancamento.html";
+      params.competencia = competencia;
+      break;
+
+    case "lancamentos":
+      arquivo = "Lancamentos.html";
+      params.competencia = competencia;
+      break;
+
+    case "relatorio":
+      arquivo = "Relatorio.html";
+      params.competencia = competencia;
+      break;
+
+    case "graficos":
+      arquivo = "Graficos.html";
+      params.competencia = competencia;
+      params.ano = competencia.substring(0,4);
+      break;
+
+    case "atendimento":
+      arquivo = "Atendimento.html";
+      break;
+
+    case "pendentes":
+      arquivo = "BaixasPendentes.html";
+      break;
+
+    default:
+      return;
+  }
+
+  const url = new URL(arquivo, URL_GITHUB);
+
+  Object.keys(params).forEach(function(chave){
+    if(
+      params[chave] !== undefined &&
+      params[chave] !== null &&
+      params[chave] !== ""
+    ){
+      url.searchParams.set(chave, params[chave]);
+    }
+  });
+
+  console.log("Carregando no grid:", url.toString());
+
+  vazio.style.display = "none";
+  grid.style.display = "block";
+
+  /* Mostra o iframe somente depois de definir a URL. */
+  $("conteudoGrid").style.display = "block";
+  $("conteudoGrid").src = url.toString();
+}
+
+/* Mantém compatibilidade com as funções antigas. */
+function abrirLancamentos(){
+  const botao = document.querySelector('[data-page="lancamentos"]');
+  mostrarNoGrid("lancamentos", botao);
+}
+
+function abrirGraficos(){
+  const botao = document.querySelector('[data-page="graficos"]');
+  mostrarNoGrid("graficos", botao);
+}
+
+function abrirAtendimento(){
+  const botao = document.querySelector('[data-page="atendimento"]');
+  mostrarNoGrid("atendimento", botao);
+}
+
+function abrirBaixasPendentes(){
+  const botao = document.querySelector('[data-page="pendentes"]');
+  mostrarNoGrid("pendentes", botao);
+}
+
+function gerarRelatorio(){
+  const botao = document.querySelector('[data-page="relatorio"]');
+  mostrarNoGrid("relatorio", botao);
+}
 
 /* =========================================================
    ABRIR PÁGINAS
