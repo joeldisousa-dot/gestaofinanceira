@@ -1,24 +1,14 @@
+```html
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Baixas Pendentes - Controle Financeiro</title>
 
 <style>
-
-/* =====================================================
-   BASE
-===================================================== */
 
 *{
     box-sizing:border-box;
@@ -27,141 +17,76 @@ content="width=device-width, initial-scale=1.0"
 body{
     margin:0;
     padding:20px;
-
-    font-family:
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
+    font-family:"Segoe UI",Arial,sans-serif;
     background:#f4f6f8;
-
     color:#333;
 }
 
 .container{
-    width:100%;
     max-width:1200px;
-
-    margin:0 auto;
-
-    padding:25px;
-
+    margin:auto;
     background:#fff;
-
+    padding:25px;
     border-radius:15px;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.10);
+    box-shadow:0 5px 20px rgba(0,0,0,.10);
 }
-
-
-/* =====================================================
-   TOPO
-===================================================== */
 
 .topo{
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     gap:15px;
-
-    margin-bottom:12px;
-
+    margin-bottom:20px;
     flex-wrap:wrap;
 }
 
 h2{
     margin:0;
-
     color:#c62828;
-
-    font-size:26px;
 }
 
-.competencia{
-    margin:0 0 20px 0;
-
-    color:#64748b;
-
-    font-size:15px;
-
-    font-weight:600;
+#tituloCompetencia{
+    margin:0 0 20px;
+    color:#555;
 }
-
-
-/* =====================================================
-   BOTÃO VOLTAR
-===================================================== */
 
 .btn-voltar{
     border:0;
-
-    padding:10px 18px;
-
-    border-radius:8px;
-
-    background:#6c757d;
-
+    background:#546e7a;
     color:#fff;
-
-    font-size:14px;
-
-    font-weight:bold;
-
+    padding:10px 18px;
+    border-radius:8px;
     cursor:pointer;
-
-    transition:.2s;
+    font-weight:bold;
 }
 
 .btn-voltar:hover{
-    background:#5a6268;
-
-    transform:translateY(-1px);
+    background:#455a64;
 }
-
-
-/* =====================================================
-   TABELA
-===================================================== */
 
 .area-tabela{
     width:100%;
-
     overflow-x:auto;
 }
 
 table{
     width:100%;
-
-    min-width:850px;
-
     border-collapse:collapse;
+    min-width:850px;
 }
 
 th{
-    padding:12px;
-
     background:#c62828;
-
     color:#fff;
-
+    padding:12px;
     text-align:center;
-
     white-space:nowrap;
 }
 
 td{
     padding:10px;
-
-    border-bottom:
-        1px solid #ddd;
-
+    border-bottom:1px solid #ddd;
     text-align:center;
-
-    vertical-align:middle;
 }
 
 tbody tr:hover{
@@ -170,138 +95,81 @@ tbody tr:hover{
 
 .valor{
     text-align:right;
-
     font-weight:bold;
-
     white-space:nowrap;
 }
 
+.loading{
+    text-align:center;
+    padding:30px;
+    color:#64748b;
+    font-weight:bold;
+}
 
-/* =====================================================
-   BADGE
-===================================================== */
+.vazio{
+    text-align:center;
+    padding:30px;
+    color:#64748b;
+}
+
+.erro{
+    background:#ffebee;
+    color:#c62828;
+    font-weight:bold;
+    text-align:center;
+    padding:20px;
+}
 
 .badge{
     display:inline-block;
-
     padding:5px 10px;
-
     border-radius:20px;
-
     font-size:12px;
-
     font-weight:bold;
 }
 
 .badge-pendente{
     background:#fff3e0;
-
     color:#e65100;
 }
 
-
-/* =====================================================
-   CARREGAMENTO
-===================================================== */
-
-.loading{
-    padding:30px;
-
-    color:#64748b;
-
-    text-align:center;
-
-    font-weight:bold;
-}
-
-.spinner{
-    display:inline-block;
-
-    width:22px;
-
-    height:22px;
-
-    margin-right:8px;
-
-    border:
-        3px solid #ddd;
-
-    border-top-color:#c62828;
-
-    border-radius:50%;
-
-    vertical-align:middle;
-
-    animation:
-        girar .8s linear infinite;
-}
-
-@keyframes girar{
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-
-/* =====================================================
-   VAZIO
-===================================================== */
-
-.vazio{
-    padding:35px;
-
-    color:#64748b;
-
-    text-align:center;
-
-    font-weight:600;
-}
-
-
-/* =====================================================
-   MENSAGEM
-===================================================== */
-
 .mensagem{
     display:none;
-
-    margin-bottom:18px;
-
-    padding:13px 15px;
-
+    padding:12px 15px;
+    margin-bottom:15px;
     border-radius:8px;
-
-    font-weight:600;
+    font-weight:bold;
 }
 
 .mensagem.erro{
     display:block;
-
     background:#ffebee;
-
     color:#c62828;
-
-    border:
-        1px solid #ffcdd2;
 }
 
 .mensagem.sucesso{
     display:block;
-
     background:#e8f5e9;
-
     color:#2e7d32;
-
-    border:
-        1px solid #c8e6c9;
 }
 
+.spinner{
+    display:inline-block;
+    width:22px;
+    height:22px;
+    border:3px solid #ddd;
+    border-top-color:#c62828;
+    border-radius:50%;
+    animation:girar .8s linear infinite;
+    vertical-align:middle;
+    margin-right:8px;
+}
 
-/* =====================================================
-   RESPONSIVO
-===================================================== */
+@keyframes girar{
+    to{
+        transform:rotate(360deg);
+    }
+}
 
 @media(max-width:600px){
 
@@ -315,128 +183,84 @@ tbody tr:hover{
 
     .topo{
         align-items:flex-start;
-
-        flex-direction:column;
-    }
-
-    .btn-voltar{
-        width:100%;
-    }
-
-    h2{
-        font-size:23px;
     }
 
 }
 
 </style>
-
 </head>
+
 
 <body>
 
 <div class="container">
 
-```
-<!-- =================================================
-     TOPO
-================================================= -->
+    <div class="topo">
 
-<div class="topo">
+        <h2>
+            ⚠️ Baixas Pendentes
+        </h2>
 
-    <h2>
-        ⚠️ Baixas Pendentes
-    </h2>
+        <button
+            type="button"
+            class="btn-voltar"
+            onclick="voltarIndex()"
+        >
+            ← Voltar
+        </button>
 
-    <button
-        type="button"
-        class="btn-voltar"
-        onclick="voltarIndex()"
-    >
-        ← Voltar
-    </button>
-
-</div>
+    </div>
 
 
-<!-- =================================================
-     COMPETÊNCIA
-================================================= -->
-
-<div
-    id="competenciaTexto"
-    class="competencia"
->
-    Carregando competência...
-</div>
+    <h3 id="tituloCompetencia">
+        Carregando...
+    </h3>
 
 
-<!-- =================================================
-     MENSAGEM
-================================================= -->
-
-<div
-    id="mensagem"
-    class="mensagem"
-></div>
+    <div
+        id="mensagem"
+        class="mensagem"
+    ></div>
 
 
-<!-- =================================================
-     TABELA
-================================================= -->
+    <div class="area-tabela">
 
-<div class="area-tabela">
+        <table>
 
-    <table>
+            <thead>
 
-        <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Competência</th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Vencimento</th>
+                    <th>Baixado</th>
+                </tr>
 
-            <tr>
+            </thead>
 
-                <th>ID</th>
+            <tbody id="lista">
 
-                <th>Competência</th>
+                <tr>
+                    <td
+                        colspan="7"
+                        class="loading"
+                    >
+                        <span class="spinner"></span>
+                        Carregando baixas pendentes...
+                    </td>
+                </tr>
 
-                <th>Tipo</th>
+            </tbody>
 
-                <th>Descrição</th>
+        </table>
 
-                <th>Valor</th>
-
-                <th>Vencimento</th>
-
-                <th>Baixado</th>
-
-            </tr>
-
-        </thead>
-
-
-        <tbody id="lista">
-
-            <tr>
-
-                <td
-                    colspan="7"
-                    class="loading"
-                >
-
-                    <span class="spinner"></span>
-
-                    Carregando baixas pendentes...
-
-                </td>
-
-            </tr>
-
-        </tbody>
-
-    </table>
+    </div>
 
 </div>
-```
 
-</div>
 
 <script>
 
@@ -444,20 +268,47 @@ tbody tr:hover{
    CONFIGURAÇÃO DA API
 ===================================================== */
 
-/*
- * ESTA É A MESMA API QUE ESTÁ FUNCIONANDO
- * NA ROTINA DE LANÇAMENTOS.
- */
-
 const URL_API =
 "https://script.google.com/macros/s/AKfycbxJzdCPkPxk2N4FhnoUflb-iWTyiLLn1XmSJDcUwkKsapI0qv-6DBpKWWBLuoHBqn8Y/exec";
 
 
 /* =====================================================
-   CONTADOR JSONP
+   CONTROLE DE CALLBACK
 ===================================================== */
 
 let contadorCallback = 0;
+
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        atualizarTitulo();
+
+        carregar();
+
+    }
+);
+
+
+/* =====================================================
+   PEGAR PARÂMETRO DA URL
+===================================================== */
+
+function obterParametroURL(nome){
+
+    const parametros =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    return parametros.get(nome) || "";
+
+}
 
 
 /* =====================================================
@@ -471,84 +322,28 @@ let competencia =
 
 
 /* =====================================================
-   INICIALIZAÇÃO
-===================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        competencia =
-            converterCompetencia(
-                competencia
-            );
-
-        atualizarCompetencia();
-
-        carregar();
-
-    }
-);
-
-
-/* =====================================================
-   PARÂMETRO DA URL
-===================================================== */
-
-function obterParametroURL(nome){
-
-    const parametros =
-        new URLSearchParams(
-            window.location.search
-        );
-
-    return (
-        parametros.get(nome) || ""
-    );
-
-}
-
-
-/* =====================================================
    CONVERTER COMPETÊNCIA
 ===================================================== */
 
 function converterCompetencia(valor){
 
     if(!valor){
-
         return "";
-
     }
-
 
     const texto =
         String(valor).trim();
 
 
-    /*
-     * YYYY-MM
-     */
-
     if(
-        /^\d{4}-\d{2}$/.test(
-            texto
-        )
+        /^\d{4}-\d{2}$/.test(texto)
     ){
-
         return texto;
-
     }
 
 
-    /*
-     * MM/YYYY
-     */
-
     if(
-        /^\d{2}\/\d{4}$/.test(
-            texto
-        )
+        /^\d{2}\/\d{4}$/.test(texto)
     ){
 
         const partes =
@@ -563,14 +358,8 @@ function converterCompetencia(valor){
     }
 
 
-    /*
-     * YYYY-MM-DD
-     */
-
     if(
-        /^\d{4}-\d{2}-\d{2}/.test(
-            texto
-        )
+        /^\d{4}-\d{2}-\d{2}/.test(texto)
     ){
 
         return texto.substring(
@@ -587,30 +376,35 @@ function converterCompetencia(valor){
 
 
 /* =====================================================
-   EXIBIR COMPETÊNCIA
+   TÍTULO
 ===================================================== */
 
-function atualizarCompetencia(){
+function atualizarTitulo(){
 
     const elemento =
         document.getElementById(
-            "competenciaTexto"
+            "tituloCompetencia"
         );
 
 
-    if(!competencia){
+    const comp =
+        converterCompetencia(
+            competencia
+        );
+
+
+    if(comp){
 
         elemento.textContent =
-            "Competência: Todas";
-
-        return;
+            "Competência: " + comp;
 
     }
+    else{
 
+        elemento.textContent =
+            "Todas as competências";
 
-    elemento.textContent =
-        "Competência: " +
-        competencia;
+    }
 
 }
 
@@ -619,19 +413,8 @@ function atualizarCompetencia(){
    API JSONP
 ===================================================== */
 
-/*
- * IMPORTANTE:
- *
- * NÃO usamos fetch().
- *
- * O GitHub Pages chama o Apps Script
- * através de JSONP.
- *
- * Isso evita o problema de CORS.
- */
-
 function chamarAPI(
-    action,
+    acao,
     parametros
 ){
 
@@ -646,7 +429,7 @@ function chamarAPI(
 
 
             const nomeCallback =
-                "baixasPendentesCallback_" +
+                "controleFinanceiroCallback_" +
                 Date.now() +
                 "_" +
                 contadorCallback;
@@ -658,16 +441,11 @@ function chamarAPI(
                 );
 
 
-            let finalizado =
-                false;
+            let finalizado = false;
 
 
             let timeout;
 
-
-            /* =========================================
-               LIMPAR
-            ========================================= */
 
             function limpar(){
 
@@ -681,7 +459,6 @@ function chamarAPI(
 
 
                 if(
-                    script &&
                     script.parentNode
                 ){
 
@@ -703,32 +480,22 @@ function chamarAPI(
 
                     window[
                         nomeCallback
-                    ] =
-                        undefined;
+                    ] = undefined;
 
                 }
 
             }
 
 
-            /* =========================================
-               CALLBACK
-            ========================================= */
-
-            window[
-                nomeCallback
-            ] =
+            window[nomeCallback] =
                 function(resposta){
 
                     if(finalizado){
-
                         return;
-
                     }
 
 
-                    finalizado =
-                        true;
+                    finalizado = true;
 
 
                     limpar();
@@ -740,28 +507,13 @@ function chamarAPI(
                     );
 
 
-                    if(!resposta){
-
-                        reject(
-                            new Error(
-                                "O Apps Script retornou uma resposta vazia."
-                            )
-                        );
-
-                        return;
-
-                    }
-
-
                     if(
-                        resposta.sucesso === false
+                        !resposta
                     ){
 
                         reject(
                             new Error(
-                                resposta.erro ||
-                                resposta.mensagem ||
-                                "Erro retornado pelo Apps Script."
+                                "Resposta vazia do Google Apps Script."
                             )
                         );
 
@@ -777,17 +529,19 @@ function chamarAPI(
                 };
 
 
-            /* =========================================
-               PARÂMETROS
-            ========================================= */
-
             const params =
                 new URLSearchParams();
 
 
+            /*
+             * IMPORTANTE:
+             *
+             * O Apps Script recebe ACTION.
+             */
+
             params.set(
                 "action",
-                action
+                acao
             );
 
 
@@ -825,14 +579,10 @@ function chamarAPI(
             );
 
 
-            /* =========================================
-               URL
-            ========================================= */
-
             const separador =
                 URL_API.indexOf("?") >= 0
-                    ? "&"
-                    : "?";
+                ? "&"
+                : "?";
 
 
             const url =
@@ -847,22 +597,19 @@ function chamarAPI(
             );
 
 
-            /* =========================================
-               ERRO DO SCRIPT
-            ========================================= */
+            script.src =
+                url;
+
 
             script.onerror =
                 function(){
 
                     if(finalizado){
-
                         return;
-
                     }
 
 
-                    finalizado =
-                        true;
+                    finalizado = true;
 
 
                     limpar();
@@ -877,23 +624,16 @@ function chamarAPI(
                 };
 
 
-            /* =========================================
-               TIMEOUT
-            ========================================= */
-
             timeout =
                 setTimeout(
                     function(){
 
                         if(finalizado){
-
                             return;
-
                         }
 
 
-                        finalizado =
-                            true;
+                        finalizado = true;
 
 
                         limpar();
@@ -906,16 +646,8 @@ function chamarAPI(
                         );
 
                     },
-                    20000
+                    15000
                 );
-
-
-            /* =========================================
-               EXECUTAR
-            ========================================= */
-
-            script.src =
-                url;
 
 
             document.head.appendChild(
@@ -934,7 +666,23 @@ function chamarAPI(
 
 async function carregar(){
 
-    mostrarCarregando();
+    const corpo =
+        document.getElementById(
+            "lista"
+        );
+
+
+    corpo.innerHTML = `
+        <tr>
+            <td
+                colspan="7"
+                class="loading"
+            >
+                <span class="spinner"></span>
+                Carregando baixas pendentes...
+            </td>
+        </tr>
+    `;
 
 
     try{
@@ -943,21 +691,23 @@ async function carregar(){
 
 
         /*
-         * Se existe competência na URL,
+         * Se veio competência do index,
          * envia para o Apps Script.
          */
 
         if(competencia){
 
             parametros.competencia =
-                competencia;
+                converterCompetencia(
+                    competencia
+                );
 
         }
 
 
         console.log(
-            "Listando baixas pendentes.",
-            parametros
+            "Competência enviada:",
+            parametros.competencia || "TODAS"
         );
 
 
@@ -969,7 +719,7 @@ async function carregar(){
 
 
         console.log(
-            "Resposta baixas pendentes:",
+            "Resposta listarBaixasPendentes:",
             resposta
         );
 
@@ -991,7 +741,7 @@ async function carregar(){
                     resposta.mensagem
                 )
                 :
-                "Erro ao carregar baixas pendentes."
+                "Erro retornado pelo Apps Script."
             );
 
         }
@@ -1001,12 +751,6 @@ async function carregar(){
             obterLista(
                 resposta
             );
-
-
-        console.log(
-            "Lista normalizada:",
-            lista
-        );
 
 
         mostrarLista(
@@ -1023,48 +767,21 @@ async function carregar(){
         );
 
 
-        mostrarErro(
-            "Erro ao carregar baixas pendentes: " +
-            obterMensagemErro(
-                erro
-            )
-        );
+        corpo.innerHTML = `
+            <tr>
+                <td
+                    colspan="7"
+                    class="erro"
+                >
+                    ⚠ Erro ao carregar baixas pendentes:
+                    ${escapeHtml(
+                        obterMensagemErro(erro)
+                    )}
+                </td>
+            </tr>
+        `;
 
     }
-
-}
-
-
-/* =====================================================
-   MOSTRAR CARREGANDO
-===================================================== */
-
-function mostrarCarregando(){
-
-    const corpo =
-        document.getElementById(
-            "lista"
-        );
-
-
-    corpo.innerHTML = `
-
-        <tr>
-
-            <td
-                colspan="7"
-                class="loading"
-            >
-
-                <span class="spinner"></span>
-
-                Carregando baixas pendentes...
-
-            </td>
-
-        </tr>
-
-    `;
 
 }
 
@@ -1073,14 +790,10 @@ function mostrarCarregando(){
    OBTER LISTA
 ===================================================== */
 
-function obterLista(
-    resposta
-){
+function obterLista(resposta){
 
     if(
-        Array.isArray(
-            resposta
-        )
+        Array.isArray(resposta)
     ){
 
         return resposta;
@@ -1096,30 +809,6 @@ function obterLista(
     ){
 
         return resposta.lista;
-
-    }
-
-
-    if(
-        resposta &&
-        Array.isArray(
-            resposta.dados
-        )
-    ){
-
-        return resposta.dados;
-
-    }
-
-
-    if(
-        resposta &&
-        Array.isArray(
-            resposta.resultado
-        )
-    ){
-
-        return resposta.resultado;
 
     }
 
@@ -1148,6 +837,30 @@ function obterLista(
     }
 
 
+    if(
+        resposta &&
+        Array.isArray(
+            resposta.dados
+        )
+    ){
+
+        return resposta.dados;
+
+    }
+
+
+    if(
+        resposta &&
+        Array.isArray(
+            resposta.resultado
+        )
+    ){
+
+        return resposta.resultado;
+
+    }
+
+
     return [];
 
 }
@@ -1157,9 +870,7 @@ function obterLista(
    MOSTRAR LISTA
 ===================================================== */
 
-function mostrarLista(
-    lista
-){
+function mostrarLista(lista){
 
     const corpo =
         document.getElementById(
@@ -1167,8 +878,7 @@ function mostrarLista(
         );
 
 
-    corpo.innerHTML =
-        "";
+    corpo.innerHTML = "";
 
 
     if(
@@ -1177,21 +887,14 @@ function mostrarLista(
     ){
 
         corpo.innerHTML = `
-
             <tr>
-
                 <td
                     colspan="7"
                     class="vazio"
                 >
-
-                    ✅ Nenhum lançamento pendente
-                    para esta competência.
-
+                    ✅ Nenhum lançamento pendente.
                 </td>
-
             </tr>
-
         `;
 
         return;
@@ -1203,8 +906,8 @@ function mostrarLista(
         function(item){
 
             const valor =
-                normalizarValor(
-                    item.valor
+                Number(
+                    item.valor || 0
                 );
 
 
@@ -1222,13 +925,11 @@ function mostrarLista(
                     )}
                 </td>
 
-
                 <td>
                     ${escapeHtml(
                         item.competencia ?? ""
                     )}
                 </td>
-
 
                 <td>
                     ${escapeHtml(
@@ -1236,22 +937,21 @@ function mostrarLista(
                     )}
                 </td>
 
-
                 <td>
                     ${escapeHtml(
                         item.descricao ?? ""
                     )}
                 </td>
 
-
                 <td class="valor">
-
-                    ${formatarMoeda(
-                        valor
+                    ${valor.toLocaleString(
+                        "pt-BR",
+                        {
+                            style:"currency",
+                            currency:"BRL"
+                        }
                     )}
-
                 </td>
-
 
                 <td>
                     ${escapeHtml(
@@ -1261,18 +961,14 @@ function mostrarLista(
                     )}
                 </td>
 
-
                 <td>
 
                     <span
                         class="badge badge-pendente"
                     >
-
                         ${escapeHtml(
-                            item.baixado ||
-                            "Não"
+                            item.baixado || "Não"
                         )}
-
                     </span>
 
                 </td>
@@ -1291,120 +987,19 @@ function mostrarLista(
 
 
 /* =====================================================
-   NORMALIZAR VALOR
-===================================================== */
-
-function normalizarValor(
-    valor
-){
-
-    if(
-        valor === null ||
-        valor === undefined ||
-        valor === ""
-    ){
-
-        return 0;
-
-    }
-
-
-    if(
-        typeof valor === "number"
-    ){
-
-        return valor;
-
-    }
-
-
-    let texto =
-        String(valor).trim();
-
-
-    texto =
-        texto.replace(
-            /R\$\s?/g,
-            ""
-        );
-
-
-    if(
-        texto.includes(",")
-    ){
-
-        texto =
-            texto.replace(
-                /\./g,
-                ""
-            );
-
-
-        texto =
-            texto.replace(
-                ",",
-                "."
-            );
-
-    }
-
-
-    const numero =
-        parseFloat(
-            texto
-        );
-
-
-    return isNaN(numero)
-        ? 0
-        : numero;
-
-}
-
-
-/* =====================================================
-   FORMATAR MOEDA
-===================================================== */
-
-function formatarMoeda(
-    valor
-){
-
-    return Number(
-        valor || 0
-    ).toLocaleString(
-        "pt-BR",
-        {
-            style:"currency",
-            currency:"BRL"
-        }
-    );
-
-}
-
-
-/* =====================================================
    FORMATAR DATA
 ===================================================== */
 
-function formatarData(
-    data
-){
+function formatarData(data){
 
     if(!data){
-
         return "";
-
     }
 
 
     const texto =
         String(data).trim();
 
-
-    /*
-     * DD/MM/YYYY
-     */
 
     if(
         /^\d{2}\/\d{2}\/\d{4}$/.test(
@@ -1416,10 +1011,6 @@ function formatarData(
 
     }
 
-
-    /*
-     * YYYY-MM-DD
-     */
 
     if(
         /^\d{4}-\d{2}-\d{2}$/.test(
@@ -1451,34 +1042,27 @@ function formatarData(
    ESCAPAR HTML
 ===================================================== */
 
-function escapeHtml(
-    valor
-){
+function escapeHtml(valor){
 
     return String(
         valor ?? ""
     )
-
     .replace(
         /&/g,
         "&amp;"
     )
-
     .replace(
         /</g,
         "&lt;"
     )
-
     .replace(
         />/g,
         "&gt;"
     )
-
     .replace(
         /"/g,
         "&quot;"
     )
-
     .replace(
         /'/g,
         "&#039;"
@@ -1488,76 +1072,10 @@ function escapeHtml(
 
 
 /* =====================================================
-   MENSAGEM DE ERRO
+   ERRO
 ===================================================== */
 
-function mostrarErro(
-    texto
-){
-
-    const elemento =
-        document.getElementById(
-            "mensagem"
-        );
-
-
-    elemento.className =
-        "mensagem erro";
-
-
-    elemento.textContent =
-        "⚠ " + texto;
-
-
-    elemento.style.display =
-        "block";
-
-
-    window.scrollTo(
-        {
-            top:0,
-            behavior:"smooth"
-        }
-    );
-
-}
-
-
-/* =====================================================
-   MENSAGEM DE SUCESSO
-===================================================== */
-
-function mostrarSucesso(
-    texto
-){
-
-    const elemento =
-        document.getElementById(
-            "mensagem"
-        );
-
-
-    elemento.className =
-        "mensagem sucesso";
-
-
-    elemento.textContent =
-        "✓ " + texto;
-
-
-    elemento.style.display =
-        "block";
-
-}
-
-
-/* =====================================================
-   MENSAGEM DE ERRO
-===================================================== */
-
-function obterMensagemErro(
-    erro
-){
+function obterMensagemErro(erro){
 
     if(
         erro &&
@@ -1570,8 +1088,7 @@ function obterMensagemErro(
 
 
     return String(
-        erro ||
-        "Erro desconhecido."
+        erro || "Erro desconhecido."
     );
 
 }
@@ -1583,36 +1100,13 @@ function obterMensagemErro(
 
 function voltarIndex(){
 
-    /*
-     * Volta para o index do GitHub.
-     *
-     * Mantém a competência selecionada.
-     */
-
-    const url =
-        new URL(
-            "index.html",
-            window.location.href
-        );
-
-
-    if(competencia){
-
-        url.searchParams.set(
-            "competencia",
-            competencia
-        );
-
-    }
-
-
     window.location.href =
-        url.href;
+        "./index.html";
 
 }
 
 </script>
 
 </body>
-
 </html>
+```
