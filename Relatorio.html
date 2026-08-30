@@ -1,634 +1,360 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Relatório Financeiro</title>
 
-
 <style>
 
 *{
-box-sizing:border-box;
+  box-sizing:border-box;
 }
-
 
 body{
-
-font-family:
-"Segoe UI",
-Arial,
-sans-serif;
-
-background:
-linear-gradient(
-135deg,
-#e8eef5,
-#ffffff
-);
-
-padding:20px;
-
-color:#333;
-
-margin:0;
-
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:linear-gradient(135deg,#e8eef5,#ffffff);
+  padding:20px;
+  color:#333;
+  margin:0;
 }
-
 
 .container{
-
-max-width:1100px;
-
-margin:auto;
-
-background:white;
-
-padding:25px;
-
-border-radius:18px;
-
-box-shadow:
-0 8px 25px rgba(0,0,0,.15);
-
+  max-width:1100px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
 
-
-/* ==========================
-   CABEÇALHO
-========================== */
+/* =====================================================
+   TOPO
+===================================================== */
 
 .topo{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-margin-bottom:25px;
-
-gap:15px;
-
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+  gap:15px;
 }
-
 
 .topo h1{
-
-margin:0;
-
-font-size:28px;
-
-color:#0d47a1;
-
+  margin:0;
+  font-size:28px;
+  color:#0d47a1;
 }
-
 
 .voltar{
-
-background:
-linear-gradient(
-135deg,
-#455a64,
-#78909c
-);
-
-border:none;
-
-padding:
-14px 28px;
-
-border-radius:12px;
-
-cursor:pointer;
-
-font-size:16px;
-
-font-weight:bold;
-
-color:white;
-
-box-shadow:
-0 5px 12px rgba(0,0,0,.25);
-
-transition:.2s;
-
+  background:linear-gradient(135deg,#455a64,#78909c);
+  border:none;
+  padding:14px 28px;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:bold;
+  color:white;
+  box-shadow:0 5px 12px rgba(0,0,0,.25);
+  transition:.2s;
 }
-
 
 .voltar:hover{
-
-transform:
-translateY(-3px);
-
-filter:
-brightness(1.1);
-
+  transform:translateY(-3px);
+  filter:brightness(1.1);
 }
 
-
-/* ==========================
-   INFORMAÇÕES
-========================== */
+/* =====================================================
+   CABEÇALHO
+===================================================== */
 
 .cabecalho{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-background:
-linear-gradient(
-135deg,
-#0d47a1,
-#1976d2
-);
-
-color:white;
-
-padding:20px;
-
-border-radius:12px;
-
-margin-bottom:25px;
-
-gap:20px;
-
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:linear-gradient(135deg,#0d47a1,#1976d2);
+  color:white;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:25px;
+  gap:20px;
 }
-
 
 .cabecalho h1{
-
-margin:0;
-
-font-size:26px;
-
+  margin:0;
+  font-size:26px;
 }
-
 
 .info{
-
-text-align:right;
-
-font-size:14px;
-
-line-height:25px;
-
+  text-align:right;
+  font-size:14px;
+  line-height:25px;
 }
 
-
-/* ==========================
+/* =====================================================
    TÍTULOS
-========================== */
+===================================================== */
 
 h2{
-
-font-size:18px;
-
-margin-top:25px;
-
-border-left:
-6px solid #1976d2;
-
-padding-left:10px;
-
-color:#1976d2;
-
+  font-size:18px;
+  margin-top:25px;
+  border-left:6px solid #1976d2;
+  padding-left:10px;
+  color:#1976d2;
 }
 
-
-/* ==========================
+/* =====================================================
    TABELAS
-========================== */
+===================================================== */
 
 table{
-
-width:100%;
-
-border-collapse:collapse;
-
-margin-top:12px;
-
-font-size:13px;
-
+  width:100%;
+  border-collapse:collapse;
+  margin-top:12px;
+  font-size:13px;
 }
-
 
 th{
-
-background:#1976d2;
-
-color:white;
-
-padding:10px;
-
-text-align:center;
-
+  background:#1976d2;
+  color:white;
+  padding:10px;
+  text-align:center;
 }
-
 
 td{
-
-padding:9px;
-
-border-bottom:
-1px solid #ddd;
-
-text-align:center;
-
+  padding:9px;
+  border-bottom:1px solid #ddd;
+  text-align:center;
 }
 
+td:first-child{
+  text-align:left;
+}
 
 tr:nth-child(even){
-
-background:#f8f9fc;
-
+  background:#f8f9fc;
 }
-
 
 .valor{
-
-font-weight:bold;
-
-text-align:right;
-
+  font-weight:bold;
+  text-align:right !important;
 }
 
-
-/* ==========================
+/* =====================================================
    STATUS
-========================== */
+===================================================== */
 
 .pago{
-
-background:#c8e6c9;
-
-color:#256029;
-
-padding:
-4px 10px;
-
-border-radius:12px;
-
-font-size:12px;
-
-font-weight:bold;
-
+  background:#c8e6c9;
+  color:#256029;
+  padding:4px 10px;
+  border-radius:12px;
+  font-size:12px;
+  font-weight:bold;
 }
-
 
 .pendente{
-
-background:#fff3cd;
-
-color:#856404;
-
-padding:
-4px 10px;
-
-border-radius:12px;
-
-font-size:12px;
-
-font-weight:bold;
-
+  background:#fff3cd;
+  color:#856404;
+  padding:4px 10px;
+  border-radius:12px;
+  font-size:12px;
+  font-weight:bold;
 }
 
-
-/* ==========================
+/* =====================================================
    TOTAIS
-========================== */
+===================================================== */
 
 .total-receita{
-
-margin-top:12px;
-
-padding:12px;
-
-background:#e8f5e9;
-
-border-left:
-6px solid #2e7d32;
-
-color:#2e7d32;
-
-font-weight:bold;
-
-font-size:15px;
-
-border-radius:8px;
-
+  margin-top:12px;
+  padding:12px;
+  background:#e8f5e9;
+  border-left:6px solid #2e7d32;
+  color:#2e7d32;
+  font-weight:bold;
+  font-size:15px;
+  border-radius:8px;
 }
-
 
 .total-despesa{
-
-margin-top:12px;
-
-padding:12px;
-
-background:#ffebee;
-
-border-left:
-6px solid #c62828;
-
-color:#c62828;
-
-font-weight:bold;
-
-font-size:15px;
-
-border-radius:8px;
-
+  margin-top:12px;
+  padding:12px;
+  background:#ffebee;
+  border-left:6px solid #c62828;
+  color:#c62828;
+  font-weight:bold;
+  font-size:15px;
+  border-radius:8px;
 }
 
+/* =====================================================
+   RESULTADO
+===================================================== */
 
 .resultado-final{
-
-margin-top:20px;
-
-padding:15px;
-
-background:#e3f2fd;
-
-border-left:
-6px solid #1976d2;
-
-font-size:18px;
-
-font-weight:bold;
-
-color:#0d47a1;
-
-border-radius:8px;
-
+  margin-top:20px;
+  padding:15px;
+  background:#e3f2fd;
+  border-left:6px solid #1976d2;
+  font-size:18px;
+  font-weight:bold;
+  color:#0d47a1;
+  border-radius:8px;
 }
 
-
-/* ==========================
+/* =====================================================
    BOTÕES
-========================== */
+===================================================== */
 
 button{
-
-border:none;
-
-background:
-linear-gradient(
-135deg,
-#1976d2,
-#2196f3
-);
-
-color:white;
-
-padding:
-12px 25px;
-
-border-radius:10px;
-
-cursor:pointer;
-
-font-weight:bold;
-
-font-size:15px;
-
+  border:none;
+  background:linear-gradient(135deg,#1976d2,#2196f3);
+  color:white;
+  padding:12px 25px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:15px;
 }
-
 
 button:hover{
-
-filter:
-brightness(1.1);
-
-transform:
-translateY(-2px);
-
+  filter:brightness(1.1);
+  transform:translateY(-2px);
 }
-
 
 button:disabled{
-
-opacity:.6;
-
-cursor:not-allowed;
-
-transform:none;
-
+  opacity:.6;
+  cursor:not-allowed;
+  transform:none;
 }
 
-
-/* ==========================
+/* =====================================================
    CARREGAMENTO
-========================== */
+===================================================== */
 
 .carregando{
-
-text-align:center;
-
-padding:30px;
-
-color:#777;
-
+  text-align:center;
+  padding:30px;
+  color:#777;
 }
-
 
 .erro{
-
-background:#ffebee;
-
-color:#c62828;
-
-padding:15px;
-
-border-radius:8px;
-
-border-left:
-5px solid #c62828;
-
-font-weight:bold;
-
+  background:#ffebee;
+  color:#c62828;
+  padding:15px;
+  border-radius:8px;
+  border-left:5px solid #c62828;
+  font-weight:bold;
 }
 
-
-/* ==========================
+/* =====================================================
    RODAPÉ
-========================== */
+===================================================== */
 
 .rodape{
-
-text-align:center;
-
-margin-top:25px;
-
-color:#777;
-
-font-size:12px;
-
+  text-align:center;
+  margin-top:25px;
+  color:#777;
+  font-size:12px;
 }
 
-
-/* ==========================
-   IMPRESSÃO A4
-========================== */
+/* =====================================================
+   IMPRESSÃO
+===================================================== */
 
 @media print{
 
-@page{
+  @page{
+    size:A4 portrait;
+    margin:10mm;
+  }
 
-size:A4 portrait;
+  body{
+    background:white;
+    padding:0;
+  }
 
-margin:10mm;
+  .container{
+    width:100%;
+    max-width:none;
+    box-shadow:none;
+    padding:10px;
+  }
 
+  button,
+  .voltar{
+    display:none;
+  }
+
+  .cabecalho{
+    background:white !important;
+    color:#000;
+    border:1px solid #ddd;
+  }
+
+  table{
+    font-size:10px;
+  }
+
+  th,
+  td{
+    padding:5px;
+  }
+
+  h2{
+    font-size:14px;
+  }
 }
 
-
-body{
-
-background:white;
-
-padding:0;
-
-}
-
-
-.container{
-
-width:100%;
-
-max-width:none;
-
-box-shadow:none;
-
-padding:10px;
-
-}
-
-
-button,
-.voltar{
-
-display:none;
-
-}
-
-
-.cabecalho{
-
-background:white !important;
-
-color:#000;
-
-border:
-1px solid #ddd;
-
-}
-
-
-table{
-
-font-size:10px;
-
-}
-
-
-th,
-td{
-
-padding:5px;
-
-}
-
-
-h2{
-
-font-size:14px;
-
-}
-
-}
-
-
-/* ==========================
+/* =====================================================
    RESPONSIVO
-========================== */
+===================================================== */
 
 @media(max-width:700px){
 
-body{
+  body{
+    padding:10px;
+  }
 
-padding:10px;
+  .container{
+    padding:15px;
+    border-radius:12px;
+  }
 
-}
+  .topo{
+    align-items:flex-start;
+    flex-direction:column;
+  }
 
+  .topo h1{
+    font-size:22px;
+  }
 
-.container{
+  .voltar{
+    width:100%;
+  }
 
-padding:15px;
+  .cabecalho{
+    flex-direction:column;
+    align-items:flex-start;
+  }
 
-border-radius:12px;
+  .info{
+    text-align:left;
+  }
 
-}
+  table{
+    font-size:11px;
+  }
 
-
-.topo{
-
-align-items:flex-start;
-
-flex-direction:column;
-
-}
-
-
-.topo h1{
-
-font-size:22px;
-
-}
-
-
-.voltar{
-
-width:100%;
-
-}
-
-
-.cabecalho{
-
-flex-direction:column;
-
-align-items:flex-start;
-
-}
-
-
-.info{
-
-text-align:left;
-
-}
-
-
-table{
-
-font-size:11px;
-
-}
-
-
-th,
-td{
-
-padding:7px 5px;
-
-}
+  th,
+  td{
+    padding:7px 5px;
+  }
 
 }
 
@@ -636,16 +362,13 @@ padding:7px 5px;
 
 </head>
 
-
 <body>
-
 
 <div class="container">
 
-
-<!-- ==========================
+<!-- =====================================================
      TOPO
-========================== -->
+===================================================== -->
 
 <div class="topo">
 
@@ -653,21 +376,16 @@ padding:7px 5px;
 📄 Relatório Financeiro
 </h1>
 
-
 <button
 class="voltar"
 onclick="voltar()">
-
-⬅ Voltar
-
-</button>
+⬅ Voltar </button>
 
 </div>
 
-
-<!-- ==========================
-     CABEÇALHO RELATÓRIO
-========================== -->
+<!-- =====================================================
+     CABEÇALHO
+===================================================== -->
 
 <div class="cabecalho">
 
@@ -683,38 +401,25 @@ Relatório Financeiro Pessoal
 
 </div>
 
-
 <div class="info">
 
-Competência:
-
-<b id="competencia">
--
-</b>
-
+Competência: <b id="competencia">-</b>
 
 <br>
 
-
-Emitido:
-
-<span id="data">
--
-</span>
+Emitido: <span id="data">-</span>
 
 </div>
 
 </div>
 
-
-<!-- ==========================
+<!-- =====================================================
      RECEITAS
-========================== -->
+===================================================== -->
 
 <h2>
 📥 Receitas
 </h2>
-
 
 <div
 id="receber"
@@ -724,15 +429,13 @@ Carregando receitas...
 
 </div>
 
-
-<!-- ==========================
+<!-- =====================================================
      DESPESAS
-========================== -->
+===================================================== -->
 
 <h2>
 📤 Despesas
 </h2>
-
 
 <div
 id="pagar"
@@ -742,10 +445,9 @@ Carregando despesas...
 
 </div>
 
-
-<!-- ==========================
+<!-- =====================================================
      RESULTADO
-========================== -->
+===================================================== -->
 
 <div
 class="resultado-final"
@@ -755,21 +457,15 @@ Calculando resultado...
 
 </div>
 
-
 <br>
-
 
 <div style="text-align:right">
 
-<button
-onclick="window.print()">
-
+<button onclick="window.print()">
 🖨 Imprimir / Salvar PDF
-
 </button>
 
 </div>
-
 
 <div class="rodape">
 
@@ -781,1114 +477,1049 @@ Controle Financeiro Pessoal
 
 </div>
 
-
 </div>
-
 
 <script>
 
-
-// =====================================================
-// CONFIGURAÇÃO DA API
-// =====================================================
+/* =====================================================
+   CONFIGURAÇÃO DA API
+===================================================== */
 
 const URL_API =
-"https://script.google.com/macros/s/AKfycbxJzdCPkPxk2N4FhnoUflb-iWTyiLLn1XmSJDcUwkKsapI0qv-6DBpKWWBLuoHBqn8Y/exec";
+"https://script.google.com/macros/s/AKfycbw-Fry_UM89-p0FjPEoDNdfdTSNdz56sYzUA8VJIpD9_862l5dPSNmkWOGLXyZiqnRn/exec";
 
 
-// =====================================================
-// URL DA PÁGINA PRINCIPAL
-// =====================================================
-//
-// COLOQUE AQUI A URL DO SEU INDEX.HTML NO GITHUB.
-//
-// Exemplo:
-// https://seuusuario.github.io/seu-repositorio/
-//
-// =====================================================
-
-const URL_INDEX =
-"https://seuusuario.github.io/seu-repositorio/";
-
-
-// =====================================================
-// PEGAR COMPETÊNCIA DA URL
-// =====================================================
-//
-// Exemplos:
-//
-// Relatorio.html?competencia=2026-08
-//
-// ou
-//
-// Relatorio.html?competencia=08/2026
-//
-// =====================================================
-
-function obterCompetencia(){
-
-const parametros =
-new URLSearchParams(
-window.location.search
-);
-
-
-let comp =
-parametros.get("competencia");
-
-
-if(!comp){
-
-const params =
-new URLSearchParams(
-window.location.search
-);
-
-comp =
-params.get("comp");
-
-}
-
-
-if(!comp){
-
-const agora =
-new Date();
-
-comp =
-agora.getFullYear() +
-"-" +
-String(
-agora.getMonth() + 1
-).padStart(2,"0");
-
-}
-
-
-return converterCompetencia(comp);
-
-}
-
-
-// =====================================================
-// CONVERTER COMPETÊNCIA
-// =====================================================
-
-function converterCompetencia(valor){
-
-if(!valor){
-
-return "";
-
-}
-
-
-valor =
-String(valor).trim();
-
-
-// AAAA-MM
-
-if(
-/^\d{4}-\d{2}$/.test(valor)
-){
-
-return valor;
-
-}
-
-
-// MM/AAAA
-
-if(
-/^\d{2}\/\d{4}$/.test(valor)
-){
-
-const partes =
-valor.split("/");
-
-return partes[1] +
-"-" +
-partes[0];
-
-}
-
-
-// AAAA-MM-DD
-
-if(
-/^\d{4}-\d{2}-\d{2}/.test(valor)
-){
-
-return valor.substring(
-0,
-7
-);
-
-}
-
-
-return valor;
-
-}
-
-
-// =====================================================
-// COMPETÊNCIA
-// =====================================================
-
-const competencia =
-obterCompetencia();
-
-
-document.getElementById(
-"competencia"
-).textContent =
-formatarCompetencia(
-competencia
-);
-
-
-// =====================================================
-// DATA DE EMISSÃO
-// =====================================================
-
-document.getElementById(
-"data"
-).textContent =
-new Date().toLocaleString(
-"pt-BR"
-);
-
-
-// =====================================================
-// INICIALIZAÇÃO
-// =====================================================
-
-window.addEventListener(
-"load",
-function(){
-
-carregarRelatorio();
-
-}
-);
-
-
-// =====================================================
-// JSONP
-// =====================================================
-//
-// O GitHub Pages não pode chamar diretamente
-// google.script.run.
-// Por isso utilizamos a API publicada do Apps Script.
-//
-// =====================================================
+/* =====================================================
+   CONTROLE JSONP
+===================================================== */
 
 let contadorJSONP = 0;
 
 
+/* =====================================================
+   COMPETÊNCIA
+===================================================== */
+
+function obterCompetencia(){
+
+  const parametros =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  let comp =
+    parametros.get("competencia") ||
+    parametros.get("comp");
+
+  if(!comp){
+
+    const agora = new Date();
+
+    comp =
+      agora.getFullYear() +
+      "-" +
+      String(
+        agora.getMonth() + 1
+      ).padStart(2,"0");
+
+  }
+
+  return converterCompetencia(comp);
+
+}
+
+
+/* =====================================================
+   CONVERTER COMPETÊNCIA
+===================================================== */
+
+function converterCompetencia(valor){
+
+  if(!valor){
+    return "";
+  }
+
+  const texto =
+    String(valor).trim();
+
+
+  /* AAAA-MM */
+
+  if(
+    /^\d{4}-\d{2}$/.test(texto)
+  ){
+
+    return texto;
+
+  }
+
+
+  /* MM/AAAA */
+
+  if(
+    /^\d{1,2}\/\d{4}$/.test(texto)
+  ){
+
+    const partes =
+      texto.split("/");
+
+    return (
+      partes[1] +
+      "-" +
+      String(partes[0]).padStart(2,"0")
+    );
+
+  }
+
+
+  /* DD/MM/AAAA */
+
+  if(
+    /^\d{1,2}\/\d{1,2}\/\d{4}$/.test(texto)
+  ){
+
+    const partes =
+      texto.split("/");
+
+    return (
+      partes[2] +
+      "-" +
+      String(partes[1]).padStart(2,"0")
+    );
+
+  }
+
+
+  /* AAAA-MM-DD */
+
+  if(
+    /^\d{4}-\d{2}-\d{2}$/.test(texto)
+  ){
+
+    return texto.substring(0,7);
+
+  }
+
+
+  return texto;
+
+}
+
+
+/* =====================================================
+   COMPETÊNCIA ATUAL
+===================================================== */
+
+const competencia =
+  obterCompetencia();
+
+
+document.getElementById(
+  "competencia"
+).textContent =
+  formatarCompetencia(
+    competencia
+  );
+
+
+/* =====================================================
+   DATA
+===================================================== */
+
+document.getElementById(
+  "data"
+).textContent =
+  new Date().toLocaleString(
+    "pt-BR"
+  );
+
+
+/* =====================================================
+   CHAMADA À API
+===================================================== */
+
 function chamarAPI(
-acao,
-parametros
+  acao,
+  parametros
 ){
 
-return new Promise(
-function(resolve,reject){
+  return new Promise(
+    function(resolve,reject){
 
-const callback =
-"callbackFinanceiro_" +
-Date.now() +
-"_" +
-(++contadorJSONP);
-
-
-const script =
-document.createElement(
-"script"
-);
+      const callback =
+        "financeiroCallback_" +
+        Date.now() +
+        "_" +
+        (++contadorJSONP);
 
 
-const dados =
-parametros || {};
+      const script =
+        document.createElement(
+          "script"
+        );
 
 
-dados.action =
-acao;
+      const dados =
+        Object.assign(
+          {},
+          parametros || {},
+          {
+            action: acao,
+            callback: callback
+          }
+        );
 
-dados.callback =
-callback;
+
+      const query =
+        Object.keys(dados)
+          .map(
+            function(chave){
+
+              return (
+                encodeURIComponent(chave) +
+                "=" +
+                encodeURIComponent(
+                  dados[chave] == null
+                    ? ""
+                    : String(dados[chave])
+                )
+              );
+
+            }
+          )
+          .join("&");
 
 
-const query =
-Object.keys(dados)
-.map(
-function(chave){
+      const url =
+        URL_API +
+        "?" +
+        query;
 
-return (
-encodeURIComponent(chave) +
-"=" +
-encodeURIComponent(
-dados[chave] === undefined
-?
-""
-:
-dados[chave]
-)
-);
+
+      let finalizado =
+        false;
+
+
+      function limpar(){
+
+        clearTimeout(
+          temporizador
+        );
+
+
+        delete window[
+          callback
+        ];
+
+
+        if(
+          script.parentNode
+        ){
+
+          script.parentNode.removeChild(
+            script
+          );
+
+        }
+
+      }
+
+
+      const temporizador =
+        setTimeout(
+          function(){
+
+            if(finalizado){
+              return;
+            }
+
+            finalizado = true;
+
+            limpar();
+
+            reject(
+              new Error(
+                "Tempo limite excedido ao consultar a API."
+              )
+            );
+
+          },
+          30000
+        );
+
+
+      window[callback] =
+        function(resposta){
+
+          if(finalizado){
+            return;
+          }
+
+          finalizado = true;
+
+          limpar();
+
+          resolve(
+            resposta
+          );
+
+        };
+
+
+      script.onerror =
+        function(){
+
+          if(finalizado){
+            return;
+          }
+
+          finalizado = true;
+
+          limpar();
+
+          reject(
+            new Error(
+              "Não foi possível conectar à API do Google Apps Script."
+            )
+          );
+
+        };
+
+
+      script.src =
+        url;
+
+
+      script.async =
+        true;
+
+
+      document.head.appendChild(
+        script
+      );
+
+    }
+  );
 
 }
-)
-.join("&");
 
 
-const url =
-URL_API +
-"?" +
-query;
-
-
-let finalizado = false;
-
-
-const timeout =
-setTimeout(
-function(){
-
-if(finalizado){
-
-return;
-
-}
-
-
-finalizado = true;
-
-cleanup();
-
-reject(
-new Error(
-"Tempo limite excedido ao consultar a API."
-)
-);
-
-},
-30000
-);
-
-
-window[callback] =
-function(resposta){
-
-if(finalizado){
-
-return;
-
-}
-
-
-finalizado = true;
-
-clearTimeout(timeout);
-
-cleanup();
-
-resolve(
-resposta
-);
-
-};
-
-
-script.onerror =
-function(){
-
-if(finalizado){
-
-return;
-
-}
-
-
-finalizado = true;
-
-clearTimeout(timeout);
-
-cleanup();
-
-reject(
-new Error(
-"Não foi possível conectar à API do Google Apps Script."
-)
-);
-
-};
-
-
-script.src =
-url;
-
-
-document.body.appendChild(
-script
-);
-
-
-function cleanup(){
-
-delete window[callback];
-
-if(script.parentNode){
-
-script.parentNode.removeChild(
-script
-);
-
-}
-
-}
-
-});
-
-}
-
-
-// =====================================================
-// CARREGAR RELATÓRIO
-// =====================================================
+/* =====================================================
+   CARREGAR RELATÓRIO
+===================================================== */
 
 async function carregarRelatorio(){
 
-const receber =
-document.getElementById(
-"receber"
-);
+  const receber =
+    document.getElementById(
+      "receber"
+    );
+
+  const pagar =
+    document.getElementById(
+      "pagar"
+    );
+
+  const resumo =
+    document.getElementById(
+      "resumoFinal"
+    );
 
 
-const pagar =
-document.getElementById(
-"pagar"
-);
+  receber.innerHTML =
+    '<div class="carregando">Carregando receitas...</div>';
+
+  pagar.innerHTML =
+    '<div class="carregando">Carregando despesas...</div>';
+
+  resumo.textContent =
+    "Calculando resultado...";
 
 
-const resumo =
-document.getElementById(
-"resumoFinal"
-);
+  try{
+
+    if(
+      !competencia ||
+      !/^\d{4}-\d{2}$/.test(
+        competencia
+      )
+    ){
+
+      throw new Error(
+        "Competência inválida. Use AAAA-MM."
+      );
+
+    }
 
 
-try{
+    console.log(
+      "Consultando API:"
+    );
+
+    console.log(
+      URL_API
+    );
+
+    console.log(
+      "Competência:",
+      competencia
+    );
 
 
-if(!competencia){
+    const resposta =
+      await chamarAPI(
+        "listarLancamentos",
+        {
+          competencia:
+            competencia
+        }
+      );
 
-throw new Error(
-"Competência não informada."
-);
+
+    console.log(
+      "Resposta recebida:",
+      resposta
+    );
+
+
+    if(
+      !resposta
+    ){
+
+      throw new Error(
+        "A API não retornou resposta."
+      );
+
+    }
+
+
+    if(
+      resposta.sucesso !== true
+    ){
+
+      throw new Error(
+        resposta.erro ||
+        resposta.mensagem ||
+        "A API retornou um erro."
+      );
+
+    }
+
+
+    let lista =
+      [];
+
+
+    if(
+      Array.isArray(
+        resposta.lista
+      )
+    ){
+
+      lista =
+        resposta.lista;
+
+    }
+
+    else if(
+      Array.isArray(
+        resposta.lancamentos
+      )
+    ){
+
+      lista =
+        resposta.lancamentos;
+
+    }
+
+    else if(
+      Array.isArray(
+        resposta.dados
+      )
+    ){
+
+      lista =
+        resposta.dados;
+
+    }
+
+
+    console.log(
+      "Lançamentos:",
+      lista
+    );
+
+
+    processarRelatorio(
+      lista
+    );
+
+
+  }
+  catch(erro){
+
+    console.error(
+      "Erro ao carregar relatório:",
+      erro
+    );
+
+
+    const mensagem =
+      escaparHTML(
+        erro &&
+        erro.message
+          ? erro.message
+          : String(erro)
+      );
+
+
+    receber.innerHTML =
+      '<div class="erro">' +
+      '⚠ Erro ao carregar receitas:<br>' +
+      mensagem +
+      '</div>';
+
+
+    pagar.innerHTML =
+      '<div class="erro">' +
+      '⚠ Não foi possível carregar as despesas.' +
+      '</div>';
+
+
+    resumo.innerHTML =
+      '<span style="color:#c62828;">' +
+      'Não foi possível gerar o relatório.' +
+      '</span>';
+
+  }
 
 }
 
 
-const resposta =
-await chamarAPI(
-"listarLancamentos",
-{
-competencia:
-competencia
-}
-);
+/* =====================================================
+   PROCESSAR RELATÓRIO
+===================================================== */
+
+function processarRelatorio(lista){
+
+  const receitas = [];
+
+  const despesas = [];
+
+  let totalReceitas = 0;
+
+  let totalDespesas = 0;
+
+  let totalRepasse = 0;
 
 
-console.log(
-"Resposta da API:",
-resposta
-);
+  lista.forEach(
+    function(item){
+
+      const descricao =
+        String(
+          item.descricao || ""
+        ).trim();
 
 
-if(
-!resposta ||
-resposta.sucesso !== true
-){
-
-throw new Error(
-resposta &&
-(
-resposta.erro ||
-resposta.mensagem
-)
-?
-(
-resposta.erro ||
-resposta.mensagem
-)
-:
-"Erro desconhecido ao carregar lançamentos."
-);
-
-}
+      const descricaoNormalizada =
+        normalizarTexto(
+          descricao
+        );
 
 
-const lista =
-Array.isArray(
-resposta.lista
-)
-?
-resposta.lista
-:
-[];
+      const baixado =
+        normalizarTexto(
+          item.baixado
+        ) === "sim";
 
 
-processarRelatorio(
-lista
-);
+      const valor =
+        Number(
+          item.valor || 0
+        ) || 0;
 
 
-}
-catch(erro){
+      /* RECEITAS */
 
-console.error(
-"Erro:",
-erro
-);
+      if(
+        textoIgual(
+          item.tipo,
+          "Contas a Receber"
+        )
+      ){
 
+        receitas.push(
+          item
+        );
 
-receber.innerHTML =
-`<div class="erro">
-Erro ao carregar receitas:<br>
-${escaparHTML(erro.message)}
-</div>`;
+        totalReceitas +=
+          valor;
 
-
-pagar.innerHTML =
-`<div class="erro">
-Não foi possível carregar as despesas.
-</div>`;
+      }
 
 
-resumo.innerHTML =
-"Não foi possível gerar o relatório.";
+      /* DESPESAS */
 
-}
+      else if(
+        textoIgual(
+          item.tipo,
+          "Contas a Pagar"
+        )
+      ){
 
-}
+        if(
+          descricaoNormalizada ===
+            "repasse aluguel" &&
+          baixado
+        ){
 
+          totalRepasse +=
+            valor;
 
-// =====================================================
-// PROCESSAR RELATÓRIO
-// =====================================================
+        }
+        else{
 
-function processarRelatorio(
-lista
-){
+          despesas.push(
+            item
+          );
 
-const receitas = [];
+          totalDespesas +=
+            valor;
 
-const despesas = [];
+        }
 
-let totalReceitas = 0;
+      }
 
-let totalDespesas = 0;
-
-let totalRepasse = 0;
-
-
-lista.forEach(
-function(item){
-
-const descricao =
-String(
-item.descricao || ""
-)
-.trim();
-
-
-const descricaoNormalizada =
-normalizarTexto(
-descricao
-);
+    }
+  );
 
 
-const baixado =
-normalizarTexto(
-item.baixado
-) === "sim";
+  /*
+   * Regra existente do sistema:
+   * Repasse aluguel baixado é abatido
+   * das receitas e despesas.
+   */
+
+  totalReceitas -=
+    totalRepasse;
+
+  totalDespesas -=
+    totalRepasse;
 
 
-const valor =
-Number(
-item.valor || 0
-) || 0;
+  montarTabela(
+    "receber",
+    receitas,
+    "receita",
+    totalReceitas
+  );
 
 
-// -----------------------------------------------
-// RECEITAS
-// -----------------------------------------------
-
-if(
-textoIgual(
-item.tipo,
-"Contas a Receber"
-)
-){
-
-receitas.push(item);
-
-totalReceitas +=
-valor;
-
-}
+  montarTabela(
+    "pagar",
+    despesas,
+    "despesa",
+    totalDespesas
+  );
 
 
-// -----------------------------------------------
-// DESPESAS
-// -----------------------------------------------
+  const saldo =
+    totalReceitas -
+    totalDespesas;
 
-else if(
-textoIgual(
-item.tipo,
-"Contas a Pagar"
-)
-){
 
-if(
+  const cor =
+    saldo >= 0
+      ? "#2e7d32"
+      : "#c62828";
 
-descricaoNormalizada ===
-"repasse aluguel"
 
-&&
+  document.getElementById(
+    "resumoFinal"
+  ).innerHTML =
 
-baixado
-
-){
-
-totalRepasse +=
-valor;
-
-}
-else{
-
-despesas.push(item);
-
-totalDespesas +=
-valor;
+    "Resultado da competência: " +
+    '<span style="color:' +
+    cor +
+    ';">' +
+    formatar(saldo) +
+    '</span>';
 
 }
 
-}
 
-});
-
-
-// =================================================
-// REPASSE
-// =================================================
-//
-// Mantém a mesma regra do seu sistema:
-// o "Repasse aluguel" baixado é abatido das
-// receitas e também das despesas.
-//
-// =================================================
-
-totalReceitas -=
-totalRepasse;
-
-
-totalDespesas -=
-totalRepasse;
-
-
-// =================================================
-// MONTAR TABELAS
-// =================================================
-
-montarTabela(
-"receber",
-receitas,
-"receita",
-totalReceitas
-);
-
-
-montarTabela(
-"pagar",
-despesas,
-"despesa",
-totalDespesas
-);
-
-
-// =================================================
-// RESULTADO
-// =================================================
-
-const saldo =
-totalReceitas -
-totalDespesas;
-
-
-const classe =
-saldo >= 0
-?
-""
-:
-"";
-
-
-document.getElementById(
-"resumoFinal"
-).innerHTML =
-
-"Resultado da competência: " +
-formatar(saldo);
-
-
-}
-
-
-// =====================================================
-// MONTAR TABELA
-// =====================================================
+/* =====================================================
+   MONTAR TABELA
+===================================================== */
 
 function montarTabela(
-id,
-lista,
-tipo,
-totalPersonalizado
+  id,
+  lista,
+  tipo,
+  totalPersonalizado
 ){
 
-const elemento =
-document.getElementById(
-id
-);
+  const elemento =
+    document.getElementById(
+      id
+    );
 
 
-if(
-!lista ||
-lista.length === 0
-){
+  if(
+    !lista ||
+    lista.length === 0
+  ){
 
-elemento.innerHTML =
-"Nenhum lançamento encontrado.";
+    elemento.innerHTML =
+      '<div class="carregando">' +
+      'Nenhum lançamento encontrado.' +
+      '</div>';
 
-return;
+    return;
 
-}
-
-
-let total =
-Number(
-totalPersonalizado || 0
-);
+  }
 
 
-let html = `
-
-<div style="overflow-x:auto">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>
-Descrição
-</th>
-
-<th>
-Valor
-</th>
-
-<th>
-Vencimento
-</th>
-
-<th>
-Status
-</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-`;
+  const total =
+    Number(
+      totalPersonalizado || 0
+    );
 
 
-lista.forEach(
-function(item){
+  let html =
 
-const baixado =
-normalizarTexto(
-item.baixado
-) === "sim";
+    '<div style="overflow-x:auto">' +
 
+    '<table>' +
 
-html += `
+    '<thead>' +
 
-<tr>
+    '<tr>' +
 
-<td>
-${escaparHTML(
-item.descricao
-)}
-</td>
+    '<th>Descrição</th>' +
 
+    '<th>Valor</th>' +
 
-<td class="valor">
-${formatar(
-item.valor
-)}
-</td>
+    '<th>Vencimento</th>' +
+
+    '<th>Status</th>' +
+
+    '</tr>' +
+
+    '</thead>' +
+
+    '<tbody>';
 
 
-<td>
-${formatarData(
-item.vencimento
-)}
-</td>
+  lista.forEach(
+    function(item){
+
+      const baixado =
+        normalizarTexto(
+          item.baixado
+        ) === "sim";
 
 
-<td>
+      html +=
 
-${
-baixado
+        '<tr>' +
 
-?
+        '<td>' +
+        escaparHTML(
+          item.descricao
+        ) +
+        '</td>' +
 
-"<span class='pago'>✔ Pago</span>"
+        '<td class="valor">' +
+        formatar(
+          item.valor
+        ) +
+        '</td>' +
 
-:
+        '<td>' +
+        formatarData(
+          item.vencimento
+        ) +
+        '</td>' +
 
-"<span class='pendente'>⏳ Pendente</span>"
+        '<td>' +
 
-}
+        (
+          baixado
+            ? '<span class="pago">✔ Pago</span>'
+            : '<span class="pendente">⏳ Pendente</span>'
+        ) +
 
-</td>
+        '</td>' +
 
-</tr>
+        '</tr>';
 
-`;
-
-});
-
-
-html += `
-
-</tbody>
-
-</table>
-
-</div>
-
-`;
+    }
+  );
 
 
-if(
-tipo === "receita"
-){
+  html +=
+    '</tbody>' +
+    '</table>' +
+    '</div>';
 
-html += `
 
-<div class="total-receita">
+  if(
+    tipo === "receita"
+  ){
 
-Total de Receitas:
+    html +=
 
-<span style="
-font-size:12px;
-font-weight:normal;
-">
+      '<div class="total-receita">' +
 
-(Já abatendo o Repasse aluguel)
+      'Total de Receitas:' +
 
-</span>
+      '<span style="font-size:12px;font-weight:normal;">' +
+      ' (já abatendo o Repasse aluguel)' +
+      '</span>' +
 
-<br>
+      '<br>' +
 
-${formatar(total)}
+      formatar(total) +
 
-</div>
+      '</div>';
 
-`;
+  }
+
+
+  if(
+    tipo === "despesa"
+  ){
+
+    html +=
+
+      '<div class="total-despesa">' +
+
+      'Total de Despesas:' +
+
+      '<span style="font-size:12px;font-weight:normal;">' +
+      ' (já abatendo o Repasse aluguel)' +
+      '</span>' +
+
+      '<br>' +
+
+      formatar(total) +
+
+      '</div>';
+
+  }
+
+
+  elemento.innerHTML =
+    html;
 
 }
 
 
-if(
-tipo === "despesa"
-){
+/* =====================================================
+   NORMALIZAR TEXTO
+===================================================== */
 
-html += `
+function normalizarTexto(texto){
 
-<div class="total-despesa">
+  if(
+    texto === null ||
+    texto === undefined
+  ){
 
-Total de Despesas:
+    return "";
 
-<span style="
-font-size:12px;
-font-weight:normal;
-">
+  }
 
-(Já abatendo o Repasse aluguel)
 
-</span>
-
-<br>
-
-${formatar(total)}
-
-</div>
-
-`;
+  return String(texto)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .trim();
 
 }
 
 
-elemento.innerHTML =
-html;
+/* =====================================================
+   TEXTO IGUAL
+===================================================== */
+
+function textoIgual(a,b){
+
+  return (
+    normalizarTexto(a) ===
+    normalizarTexto(b)
+  );
 
 }
 
 
-// =====================================================
-// NORMALIZAR TEXTO
-// =====================================================
+/* =====================================================
+   FORMATAR COMPETÊNCIA
+===================================================== */
 
-function normalizarTexto(
-texto
-){
+function formatarCompetencia(comp){
 
-if(
-texto === null ||
-texto === undefined
-){
+  if(
+    !comp ||
+    !/^\d{4}-\d{2}$/.test(comp)
+  ){
 
-return "";
+    return comp || "-";
 
-}
+  }
 
 
-return String(texto)
+  const partes =
+    comp.split("-");
 
-.toLowerCase()
 
-.normalize("NFD")
-
-.replace(
-/[\u0300-\u036f]/g,
-""
-)
-
-.trim();
+  return (
+    partes[1] +
+    "/" +
+    partes[0]
+  );
 
 }
 
 
-// =====================================================
-// COMPARAR TEXTO
-// =====================================================
+/* =====================================================
+   FORMATAR MOEDA
+===================================================== */
 
-function textoIgual(
-a,
-b
-){
+function formatar(valor){
 
-return (
-normalizarTexto(a) ===
-normalizarTexto(b)
-);
-
-}
-
-
-// =====================================================
-// FORMATAR COMPETÊNCIA
-// =====================================================
-
-function formatarCompetencia(
-comp
-){
-
-if(
-!comp ||
-!/^\d{4}-\d{2}$/.test(comp)
-){
-
-return comp || "-";
+  return Number(
+    valor || 0
+  ).toLocaleString(
+    "pt-BR",
+    {
+      style:"currency",
+      currency:"BRL"
+    }
+  );
 
 }
 
 
-const partes =
-comp.split("-");
+/* =====================================================
+   FORMATAR DATA
+===================================================== */
+
+function formatarData(data){
+
+  if(!data){
+    return "";
+  }
 
 
-return (
-partes[1] +
-"/" +
-partes[0]
-);
-
-}
+  const texto =
+    String(data).trim();
 
 
-// =====================================================
-// FORMATAR MOEDA
-// =====================================================
+  if(
+    /^\d{2}\/\d{2}\/\d{4}$/.test(
+      texto
+    )
+  ){
 
-function formatar(
-valor
-){
+    return texto;
 
-return Number(
-valor || 0
-).toLocaleString(
-"pt-BR",
-{
-style:"currency",
-currency:"BRL"
-}
-);
-
-}
+  }
 
 
-// =====================================================
-// FORMATAR DATA
-// =====================================================
+  if(
+    /^\d{4}-\d{2}-\d{2}$/.test(
+      texto
+    )
+  ){
 
-function formatarData(
-data
-){
-
-if(!data){
-
-return "";
-
-}
+    const partes =
+      texto.split("-");
 
 
-const texto =
-String(data).trim();
+    return (
+      partes[2] +
+      "/" +
+      partes[1] +
+      "/" +
+      partes[0]
+    );
+
+  }
 
 
-// dd/mm/aaaa
-
-if(
-/^\d{2}\/\d{2}\/\d{4}$/.test(
-texto
-)
-){
-
-return texto;
-
-}
+  const objeto =
+    new Date(data);
 
 
-// yyyy-mm-dd
+  if(
+    !isNaN(
+      objeto.getTime()
+    )
+  ){
 
-if(
-/^\d{4}-\d{2}-\d{2}$/.test(
-texto
-)
-){
+    return objeto.toLocaleDateString(
+      "pt-BR"
+    );
 
-const partes =
-texto.split("-");
+  }
 
 
-return (
-partes[2] +
-"/" +
-partes[1] +
-"/" +
-partes[0]
-);
+  return texto;
 
 }
 
 
-// Outros formatos
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
 
-const objeto =
-new Date(data);
+function escaparHTML(valor){
 
+  if(
+    valor === null ||
+    valor === undefined
+  ){
 
-if(
-!isNaN(
-objeto.getTime()
-)
-){
+    return "";
 
-return objeto.toLocaleDateString(
-"pt-BR"
-);
-
-}
+  }
 
 
-return texto;
-
-}
-
-
-// =====================================================
-// ESCAPAR HTML
-// =====================================================
-//
-// Evita que uma descrição cadastrada na planilha
-// seja interpretada como HTML.
-//
-// =====================================================
-
-function escaparHTML(
-valor
-){
-
-if(
-valor === null ||
-valor === undefined
-){
-
-return "";
+  return String(valor)
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
-return String(valor)
-
-.replace(
-/&/g,
-"&amp;"
-)
-
-.replace(
-/</g,
-"&lt;"
-)
-
-.replace(
-/>/g,
-"&gt;"
-)
-
-.replace(
-/"/g,
-"&quot;"
-)
-
-.replace(
-/'/g,
-"&#039;"
-);
-
-}
-
-
-// =====================================================
-// VOLTAR
-// =====================================================
+/* =====================================================
+   VOLTAR
+===================================================== */
 
 function voltar(){
 
@@ -1898,10 +1529,21 @@ function voltar(){
 }
 
 
-</script>
+/* =====================================================
+   INICIAR
+===================================================== */
 
+window.addEventListener(
+  "load",
+  function(){
+
+    carregarRelatorio();
+
+  }
+);
+
+</script>
 
 </body>
 
 </html>
-
