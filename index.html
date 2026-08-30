@@ -1,1207 +1,925 @@
-html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
+  <meta charset="UTF-8">
 
-<meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+  <title>Controle Financeiro</title>
 
-<title>Controle Financeiro</title>
+  <style>
 
-<style>
+    * {
+      box-sizing: border-box;
+    }
 
-/* =========================================================
-   RESET
-   ========================================================= */
+    body {
+      margin: 0;
+      min-height: 100vh;
 
-* {
-  box-sizing: border-box;
-}
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-}
+      background:
+        linear-gradient(
+          135deg,
+          #f4f7fb 0%,
+          #eef3f9 100%
+        );
 
-body {
+      color: #1f2937;
+    }
 
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
+    .container {
+      width: 100%;
+      max-width: 1100px;
 
-  background: #f1f5f9;
+      margin: 0 auto;
 
-  color: #0f172a;
+      padding:
+        30px 18px 40px;
+    }
 
-}
+    .card {
+      background: #ffffff;
 
+      border-radius: 18px;
 
-/* =========================================================
-   CONTAINER
-   ========================================================= */
+      padding: 28px;
 
-.container {
+      box-shadow:
+        0 10px 35px rgba(15, 23, 42, 0.08);
 
-  width: 100%;
+      border:
+        1px solid #e5eaf0;
+    }
 
-  max-width: 1100px;
+    /* =====================================================
+       CABEÇALHO
+       ===================================================== */
 
-  margin: 0 auto;
+    .header {
+      display: flex;
 
-  padding: 25px;
+      align-items: center;
 
-}
+      justify-content: space-between;
 
+      gap: 20px;
 
-/* =========================================================
-   TOPO
-   ========================================================= */
+      margin-bottom: 28px;
+    }
 
-.topo {
+    .titulo {
+      margin: 0;
 
-  background: #ffffff;
+      color: #17365d;
 
-  border-radius: 18px;
+      font-size: 28px;
 
-  padding: 25px;
+      font-weight: 700;
+    }
 
-  margin-bottom: 20px;
+    .subtitulo {
+      margin-top: 7px;
 
-  box-shadow:
-    0 8px 25px
-    rgba(15, 23, 42, 0.08);
+      color: #64748b;
 
-}
+      font-size: 14px;
+    }
 
-.topo h1 {
+    .status {
+      display: inline-flex;
 
-  margin: 0;
+      align-items: center;
 
-  font-size: 28px;
+      gap: 7px;
 
-  color: #0f172a;
+      padding:
+        8px 13px;
 
-}
+      border-radius: 20px;
 
-.topo p {
+      background: #f1f5f9;
 
-  margin: 8px 0 0;
+      color: #64748b;
 
-  color: #64748b;
+      font-size: 13px;
 
-  font-size: 14px;
+      font-weight: 600;
 
-}
+      white-space: nowrap;
+    }
 
+    .status::before {
+      content: "";
 
-/* =========================================================
-   STATUS
-   ========================================================= */
+      width: 8px;
 
-.status {
+      height: 8px;
 
-  display: inline-flex;
+      border-radius: 50%;
 
-  align-items: center;
+      background: #94a3b8;
+    }
 
-  gap: 7px;
+    .status.online {
+      background: #ecfdf3;
 
-  margin-top: 15px;
+      color: #166534;
+    }
 
-  padding: 7px 12px;
+    .status.online::before {
+      background: #22c55e;
+    }
 
-  border-radius: 20px;
+    .status.erro {
+      background: #fef2f2;
 
-  background: #ecfdf5;
+      color: #991b1b;
+    }
 
-  color: #047857;
+    .status.erro::before {
+      background: #ef4444;
+    }
 
-  font-size: 13px;
+    /* =====================================================
+       COMPETÊNCIA
+       ===================================================== */
 
-  font-weight: bold;
+    .competencia-box {
+      background: #f8fafc;
 
-}
+      border:
+        1px solid #e2e8f0;
 
-.status.erro {
+      border-radius: 12px;
 
-  background: #fef2f2;
+      padding: 16px 18px;
 
-  color: #b91c1c;
+      margin-bottom: 22px;
+    }
 
-}
+    .competencia-label {
+      display: block;
 
-.status-ponto {
+      margin-bottom: 8px;
 
-  width: 8px;
+      font-size: 13px;
 
-  height: 8px;
+      font-weight: 700;
 
-  border-radius: 50%;
+      color: #475569;
+    }
 
-  background: #10b981;
+    .competencia-linha {
+      display: flex;
 
-}
+      align-items: center;
 
-.status.erro .status-ponto {
+      gap: 12px;
 
-  background: #ef4444;
+      flex-wrap: wrap;
+    }
 
-}
+    #competencia {
+      width: 210px;
 
+      padding:
+        11px 13px;
 
-/* =========================================================
-   CARDS
-   ========================================================= */
+      border:
+        1px solid #cbd5e1;
 
-.card {
+      border-radius: 9px;
 
-  background: #ffffff;
+      background: #ffffff;
 
-  border-radius: 18px;
+      color: #1e293b;
 
-  padding: 22px;
+      font-size: 15px;
 
-  margin-bottom: 20px;
+      outline: none;
+    }
 
-  box-shadow:
-    0 8px 25px
-    rgba(15, 23, 42, 0.08);
+    #competencia:focus {
+      border-color: #2563eb;
 
-}
+      box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+    }
 
-.card-titulo {
+    .btn-atualizar {
+      border: 0;
 
-  display: flex;
+      border-radius: 9px;
 
-  align-items: center;
+      padding:
+        11px 17px;
 
-  justify-content: space-between;
+      background: #17365d;
 
-  gap: 15px;
+      color: #ffffff;
 
-  margin-bottom: 18px;
+      font-size: 14px;
 
-}
+      font-weight: 700;
 
-.card-titulo h2 {
+      cursor: pointer;
 
-  margin: 0;
+      transition: .2s;
+    }
 
-  font-size: 19px;
+    .btn-atualizar:hover {
+      background: #214c7d;
 
-}
+      transform: translateY(-1px);
+    }
 
-.card-titulo span {
+    /* =====================================================
+       RESUMO
+       ===================================================== */
 
-  color: #64748b;
+    .secao-titulo {
+      margin:
+        25px 0 14px;
 
-  font-size: 13px;
+      color: #17365d;
 
-}
+      font-size: 18px;
 
+      font-weight: 700;
+    }
 
-/* =========================================================
-   COMPETÊNCIA
-   ========================================================= */
+    .resumo {
+      display: grid;
 
-.competencia-area {
+      grid-template-columns:
+        repeat(4, 1fr);
 
-  display: flex;
+      gap: 14px;
 
-  align-items: end;
+      margin-bottom: 28px;
+    }
 
-  gap: 12px;
+    .resumo-card {
+      min-height: 105px;
 
-  flex-wrap: wrap;
+      padding: 17px;
 
-}
+      border:
+        1px solid #e5e7eb;
 
-.campo {
+      border-radius: 13px;
 
-  display: flex;
+      background: #ffffff;
 
-  flex-direction: column;
+      box-shadow:
+        0 3px 12px rgba(15, 23, 42, 0.04);
+    }
 
-  gap: 7px;
+    .resumo-label {
+      color: #64748b;
 
-}
+      font-size: 12px;
 
-.campo label {
+      font-weight: 600;
 
-  font-size: 13px;
+      margin-bottom: 10px;
+    }
 
-  font-weight: bold;
+    .resumo-valor {
+      color: #17365d;
 
-  color: #475569;
+      font-size: 21px;
 
-}
+      font-weight: 700;
 
+      word-break: break-word;
+    }
 
-/* =========================================================
-   INPUT
-   ========================================================= */
+    /* =====================================================
+       MENU
+       ===================================================== */
 
-input,
-select {
+    .menu {
+      display: grid;
 
-  height: 42px;
+      grid-template-columns:
+        repeat(3, 1fr);
 
-  border: 1px solid #cbd5e1;
+      gap: 15px;
+    }
 
-  border-radius: 9px;
+    .menu-item {
+      width: 100%;
 
-  padding: 0 12px;
+      min-height: 125px;
 
-  font-size: 14px;
+      border: 0;
 
-  background: #ffffff;
+      border-radius: 14px;
 
-  color: #0f172a;
+      padding: 20px 15px;
 
-  outline: none;
+      background: #17365d;
 
-}
+      color: #ffffff;
 
-input:focus,
-select:focus {
+      cursor: pointer;
 
-  border-color: #2563eb;
+      text-align: center;
 
-  box-shadow:
-    0 0 0 3px
-    rgba(37, 99, 235, 0.10);
+      font-size: 15px;
 
-}
+      font-weight: 700;
 
+      transition:
+        transform .18s ease,
+        background .18s ease,
+        box-shadow .18s ease;
+    }
 
-/* =========================================================
-   BOTÕES
-   ========================================================= */
+    .menu-item:hover {
+      background: #214c7d;
 
-.btn {
+      transform:
+        translateY(-2px);
 
-  border: 0;
+      box-shadow:
+        0 7px 18px rgba(23, 54, 93, 0.18);
+    }
 
-  border-radius: 10px;
+    .menu-item:active {
+      transform:
+        translateY(0);
+    }
 
-  height: 42px;
+    .menu-icone {
+      display: block;
 
-  padding: 0 17px;
+      font-size: 31px;
 
-  cursor: pointer;
+      line-height: 1;
 
-  font-size: 14px;
+      margin-bottom: 12px;
+    }
 
-  font-weight: bold;
+    .menu-descricao {
+      display: block;
 
-  transition: 0.2s ease;
+      margin-top: 6px;
 
-}
+      font-size: 11px;
 
-.btn:hover {
+      font-weight: 400;
 
-  transform: translateY(-1px);
+      opacity: .80;
+    }
 
-  opacity: 0.94;
+    /* =====================================================
+       MENSAGEM
+       ===================================================== */
 
-}
+    .mensagem {
+      display: none;
 
-.btn-principal {
+      margin-top: 20px;
 
-  background: #2563eb;
+      padding: 13px 15px;
 
-  color: #ffffff;
+      border-radius: 9px;
 
-}
+      background: #fff7ed;
 
-.btn-secundario {
+      border:
+        1px solid #fed7aa;
 
-  background: #e2e8f0;
+      color: #9a3412;
 
-  color: #0f172a;
+      font-size: 14px;
+    }
 
-}
+    .mensagem.erro {
+      background: #fef2f2;
 
+      border-color: #fecaca;
 
-/* =========================================================
-   MENU
-   ========================================================= */
+      color: #991b1b;
+    }
 
-.menu-grid {
+    .mensagem.sucesso {
+      background: #f0fdf4;
 
-  display: grid;
+      border-color: #bbf7d0;
 
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
+      color: #166534;
+    }
 
-  gap: 15px;
+    /* =====================================================
+       RODAPÉ
+       ===================================================== */
 
-}
+    .rodape {
+      margin-top: 25px;
 
-.menu-btn {
+      padding-top: 17px;
 
-  min-height: 105px;
+      border-top:
+        1px solid #e5e7eb;
 
-  border: 1px solid #e2e8f0;
+      display: flex;
 
-  border-radius: 15px;
+      justify-content: space-between;
 
-  padding: 18px;
+      align-items: center;
 
-  background: #ffffff;
+      gap: 15px;
 
-  cursor: pointer;
+      color: #94a3b8;
 
-  text-align: left;
+      font-size: 12px;
+    }
 
-  transition: 0.2s ease;
+    /* =====================================================
+       RESPONSIVO
+       ===================================================== */
 
-}
+    @media (max-width: 850px) {
 
-.menu-btn:hover {
+      .resumo {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
 
-  transform: translateY(-2px);
+      .menu {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
 
-  border-color: #93c5fd;
+    }
 
-  box-shadow:
-    0 8px 20px
-    rgba(15, 23, 42, 0.08);
+    @media (max-width: 560px) {
 
-}
+      .container {
+        padding:
+          15px 10px 25px;
+      }
 
-.menu-btn:active {
+      .card {
+        padding: 18px;
+      }
 
-  transform: translateY(0);
+      .header {
+        align-items: flex-start;
 
-}
+        flex-direction: column;
+      }
 
-.menu-icone {
+      .titulo {
+        font-size: 24px;
+      }
 
-  font-size: 26px;
+      .resumo {
+        grid-template-columns: 1fr;
+      }
 
-  margin-bottom: 10px;
+      .menu {
+        grid-template-columns: 1fr;
+      }
 
-}
+      .menu-item {
+        min-height: 105px;
+      }
 
-.menu-titulo {
+      .competencia-linha {
+        align-items: stretch;
 
-  display: block;
+        flex-direction: column;
+      }
 
-  font-size: 15px;
+      #competencia {
+        width: 100%;
+      }
 
-  font-weight: bold;
+      .btn-atualizar {
+        width: 100%;
+      }
 
-  color: #0f172a;
+      .rodape {
+        flex-direction: column;
 
-}
+        align-items: flex-start;
+      }
 
-.menu-descricao {
+    }
 
-  display: block;
-
-  margin-top: 5px;
-
-  color: #64748b;
-
-  font-size: 12px;
-
-  line-height: 1.4;
-
-}
-
-
-/* =========================================================
-   RESUMO
-   ========================================================= */
-
-.resumo-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, minmax(0, 1fr));
-
-  gap: 14px;
-
-}
-
-.resumo-item {
-
-  border-radius: 13px;
-
-  padding: 17px;
-
-  background: #f8fafc;
-
-  border: 1px solid #e2e8f0;
-
-}
-
-.resumo-label {
-
-  color: #64748b;
-
-  font-size: 12px;
-
-  margin-bottom: 8px;
-
-}
-
-.resumo-valor {
-
-  font-size: 20px;
-
-  font-weight: bold;
-
-}
-
-.positivo {
-
-  color: #059669;
-
-}
-
-.negativo {
-
-  color: #dc2626;
-
-}
-
-.azul {
-
-  color: #2563eb;
-
-}
-
-.cinza {
-
-  color: #334155;
-
-}
-
-
-/* =========================================================
-   MENSAGENS
-   ========================================================= */
-
-.loading {
-
-  text-align: center;
-
-  padding: 25px;
-
-  color: #64748b;
-
-  font-size: 14px;
-
-}
-
-.erro-box {
-
-  display: none;
-
-  margin-top: 15px;
-
-  padding: 13px 15px;
-
-  border-radius: 10px;
-
-  background: #fef2f2;
-
-  color: #b91c1c;
-
-  font-size: 13px;
-
-  line-height: 1.5;
-
-}
-
-
-/* =========================================================
-   RODAPÉ
-   ========================================================= */
-
-.rodape {
-
-  text-align: center;
-
-  color: #94a3b8;
-
-  font-size: 12px;
-
-  padding: 5px 0 20px;
-
-}
-
-
-/* =========================================================
-   RESPONSIVO
-   ========================================================= */
-
-@media (max-width: 850px) {
-
-  .menu-grid {
-
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-
-  }
-
-  .resumo-grid {
-
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-
-  }
-
-}
-
-
-@media (max-width: 600px) {
-
-  .container {
-
-    padding: 12px;
-
-  }
-
-  .topo,
-  .card {
-
-    border-radius: 14px;
-
-    padding: 17px;
-
-  }
-
-  .menu-grid {
-
-    grid-template-columns: 1fr;
-
-  }
-
-  .resumo-grid {
-
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-
-  }
-
-  .competencia-area {
-
-    align-items: stretch;
-
-    flex-direction: column;
-
-  }
-
-  .campo {
-
-    width: 100%;
-
-  }
-
-  input,
-  select,
-  .btn {
-
-    width: 100%;
-
-  }
-
-  .card-titulo {
-
-    align-items: flex-start;
-
-    flex-direction: column;
-
-  }
-
-}
-
-</style>
+  </style>
 
 </head>
 
 
 <body>
 
+  <div class="container">
 
-<div class="container">
+    <div class="card">
+
+      <!-- =================================================
+           CABEÇALHO
+           ================================================= -->
+
+      <div class="header">
+
+        <div>
+
+          <h1 class="titulo">
+            Controle Financeiro
+          </h1>
+
+          <div class="subtitulo">
+            Gestão de lançamentos e fluxo financeiro
+          </div>
+
+        </div>
+
+        <div
+          id="status"
+          class="status"
+        >
+          Conectando...
+        </div>
+
+      </div>
 
 
-<!-- =======================================================
-     CABEÇALHO
-     ======================================================= -->
+      <!-- =================================================
+           COMPETÊNCIA
+           ================================================= -->
 
-<div class="topo">
+      <div class="competencia-box">
 
-  <h1>
-    💰 Controle Financeiro
-  </h1>
+        <label
+          class="competencia-label"
+          for="competencia"
+        >
+          Competência
+        </label>
 
-  <p>
-    Gestão de lançamentos, pagamentos,
-    recebimentos e acompanhamento financeiro.
-  </p>
+        <div class="competencia-linha">
 
-  <div
-    id="status"
-    class="status"
-  >
+          <input
+            id="competencia"
+            type="month"
+            title="Selecione a competência"
+          >
 
-    <span class="status-ponto"></span>
+          <button
+            type="button"
+            class="btn-atualizar"
+            onclick="carregarResumo()"
+          >
+            ↻ Atualizar
+          </button>
 
-    <span id="statusTexto">
-      Conectando...
-    </span>
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           RESUMO
+           ================================================= -->
+
+      <div class="secao-titulo">
+        Resumo da Competência
+      </div>
+
+      <div class="resumo">
+
+        <div class="resumo-card">
+
+          <div class="resumo-label">
+            SALDO INICIAL
+          </div>
+
+          <div
+            id="saldoInicial"
+            class="resumo-valor"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+
+        <div class="resumo-card">
+
+          <div class="resumo-label">
+            A RECEBER
+          </div>
+
+          <div
+            id="receber"
+            class="resumo-valor"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+
+        <div class="resumo-card">
+
+          <div class="resumo-label">
+            A PAGAR
+          </div>
+
+          <div
+            id="pagar"
+            class="resumo-valor"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+
+        <div class="resumo-card">
+
+          <div class="resumo-label">
+            SALDO BANCÁRIO
+          </div>
+
+          <div
+            id="saldoBanco"
+            class="resumo-valor"
+          >
+            R$ 0,00
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           MENU
+           ================================================= -->
+
+      <div class="secao-titulo">
+        Rotinas
+      </div>
+
+      <div class="menu">
+
+
+        <!-- LANÇAMENTOS -->
+
+        <button
+          type="button"
+          class="menu-item"
+          onclick="abrirPagina('lancamentos')"
+        >
+
+          <span class="menu-icone">
+            📋
+          </span>
+
+          Lançamentos
+
+          <span class="menu-descricao">
+            Incluir, editar, excluir e consultar
+          </span>
+
+        </button>
+
+
+        <!-- BAIXAS PENDENTES -->
+
+        <button
+          type="button"
+          class="menu-item"
+          onclick="abrirPagina('pendentes')"
+        >
+
+          <span class="menu-icone">
+            ⏳
+          </span>
+
+          Baixas Pendentes
+
+          <span class="menu-descricao">
+            Consultar lançamentos pendentes
+          </span>
+
+        </button>
+
+
+        <!-- RELATÓRIO -->
+
+        <button
+          type="button"
+          class="menu-item"
+          onclick="abrirPagina('relatorio')"
+        >
+
+          <span class="menu-icone">
+            📊
+          </span>
+
+          Relatório Financeiro
+
+          <span class="menu-descricao">
+            Visualizar relatório da competência
+          </span>
+
+        </button>
+
+
+        <!-- GRÁFICOS -->
+
+        <button
+          type="button"
+          class="menu-item"
+          onclick="abrirPagina('graficos')"
+        >
+
+          <span class="menu-icone">
+            📈
+          </span>
+
+          Gráficos
+
+          <span class="menu-descricao">
+            Análise visual dos dados financeiros
+          </span>
+
+        </button>
+
+
+        <!-- ATENDIMENTO -->
+
+        <button
+          type="button"
+          class="menu-item"
+          onclick="abrirPagina('atendimento')"
+        >
+
+          <span class="menu-icone">
+            👤
+          </span>
+
+          Atendimento
+
+          <span class="menu-descricao">
+            Pesquisa e registro de atendimento
+          </span>
+
+        </button>
+
+
+        <!-- NOVO LANÇAMENTO
+             Não existe arquivo separado no GitHub.
+             O botão leva para Lancamentos.html.
+        -->
+
+        <button
+          type="button"
+          class="menu-item"
+          onclick="abrirPagina('lancamentos')"
+        >
+
+          <span class="menu-icone">
+            ➕
+          </span>
+
+          Novo Lançamento
+
+          <span class="menu-descricao">
+            Acessar a rotina de lançamentos
+          </span>
+
+        </button>
+
+
+      </div>
+
+
+      <!-- =================================================
+           MENSAGEM
+           ================================================= -->
+
+      <div
+        id="mensagem"
+        class="mensagem"
+      ></div>
+
+
+      <!-- =================================================
+           RODAPÉ
+           ================================================= -->
+
+      <div class="rodape">
+
+        <span>
+          Controle Financeiro
+        </span>
+
+        <span>
+          GitHub Pages + Google Apps Script
+        </span>
+
+      </div>
+
+    </div>
 
   </div>
-
-</div>
-
-
-<!-- =======================================================
-     COMPETÊNCIA
-     ======================================================= -->
-
-<div class="card">
-
-  <div class="card-titulo">
-
-    <div>
-
-      <h2>
-        📅 Competência
-      </h2>
-
-      <span>
-        Selecione o mês para consultar o financeiro.
-      </span>
-
-    </div>
-
-  </div>
-
-
-  <div class="competencia-area">
-
-    <div class="campo">
-
-      <label for="competencia">
-        Competência
-      </label>
-
-      <input
-        type="month"
-        id="competencia"
-      >
-
-    </div>
-
-
-    <button
-      type="button"
-      class="btn btn-principal"
-      onclick="carregarResumo()"
-    >
-
-      🔄 Atualizar resumo
-
-    </button>
-
-  </div>
-
-
-  <div
-    id="erro"
-    class="erro-box"
-  ></div>
-
-</div>
-
-
-<!-- =======================================================
-     MENU
-     ======================================================= -->
-
-<div class="card">
-
-  <div class="card-titulo">
-
-    <div>
-
-      <h2>
-        📋 Menu principal
-      </h2>
-
-      <span>
-        Escolha uma rotina.
-      </span>
-
-    </div>
-
-  </div>
-
-
-  <div class="menu-grid">
-
-
-    <!-- NOVO LANÇAMENTO -->
-
-    <button
-      type="button"
-      class="menu-btn"
-      onclick="abrirPagina('lancamentos')"
-    >
-
-      <div class="menu-icone">
-        ➕
-      </div>
-
-      <span class="menu-titulo">
-        Novo Lançamento
-      </span>
-
-      <span class="menu-descricao">
-        Cadastre contas a receber
-        ou contas a pagar.
-      </span>
-
-    </button>
-
-
-    <!-- LANÇAMENTOS -->
-
-    <button
-      type="button"
-      class="menu-btn"
-      onclick="abrirPagina('lancamentos')"
-    >
-
-      <div class="menu-icone">
-        📋
-      </div>
-
-      <span class="menu-titulo">
-        Lançamentos
-      </span>
-
-      <span class="menu-descricao">
-        Consulte, edite, baixe
-        ou exclua lançamentos.
-      </span>
-
-    </button>
-
-
-    <!-- BAIXAS PENDENTES -->
-
-    <button
-      type="button"
-      class="menu-btn"
-      onclick="abrirPagina('baixaspendentes')"
-    >
-
-      <div class="menu-icone">
-        ⏳
-      </div>
-
-      <span class="menu-titulo">
-        Baixas Pendentes
-      </span>
-
-      <span class="menu-descricao">
-        Consulte os lançamentos
-        ainda não baixados.
-      </span>
-
-    </button>
-
-
-    <!-- RELATÓRIO -->
-
-    <button
-      type="button"
-      class="menu-btn"
-      onclick="abrirPaginaComCompetencia('relatorio')"
-    >
-
-      <div class="menu-icone">
-        📊
-      </div>
-
-      <span class="menu-titulo">
-        Relatório Financeiro
-      </span>
-
-      <span class="menu-descricao">
-        Consulte o resultado financeiro
-        da competência selecionada.
-      </span>
-
-    </button>
-
-
-    <!-- GRÁFICOS -->
-
-    <button
-      type="button"
-      class="menu-btn"
-      onclick="abrirPagina('graficos')"
-    >
-
-      <div class="menu-icone">
-        📈
-      </div>
-
-      <span class="menu-titulo">
-        Gráficos
-      </span>
-
-      <span class="menu-descricao">
-        Analise a evolução financeira
-        por período e categoria.
-      </span>
-
-    </button>
-
-
-    <!-- ATENDIMENTO -->
-
-    <button
-      type="button"
-      class="menu-btn"
-      onclick="abrirPagina('atendimento')"
-    >
-
-      <div class="menu-icone">
-        🛠️
-      </div>
-
-      <span class="menu-titulo">
-        Atendimento
-      </span>
-
-      <span class="menu-descricao">
-        Pesquise problemas e soluções
-        sem filtro de competência.
-      </span>
-
-    </button>
-
-
-  </div>
-
-</div>
-
-
-<!-- =======================================================
-     RESUMO
-     ======================================================= -->
-
-<div class="card">
-
-  <div class="card-titulo">
-
-    <div>
-
-      <h2>
-        📊 Resumo Geral
-      </h2>
-
-      <span id="resumoCompetencia">
-        Selecione uma competência.
-      </span>
-
-    </div>
-
-  </div>
-
-
-  <div
-    id="resumo"
-    class="resumo-grid"
-  >
-
-
-    <div class="resumo-item">
-
-      <div class="resumo-label">
-        Saldo Inicial
-      </div>
-
-      <div
-        id="saldoInicial"
-        class="resumo-valor azul"
-      >
-        R$ 0,00
-      </div>
-
-    </div>
-
-
-    <div class="resumo-item">
-
-      <div class="resumo-label">
-        Contas a Receber
-      </div>
-
-      <div
-        id="receber"
-        class="resumo-valor positivo"
-      >
-        R$ 0,00
-      </div>
-
-    </div>
-
-
-    <div class="resumo-item">
-
-      <div class="resumo-label">
-        Contas a Pagar
-      </div>
-
-      <div
-        id="pagar"
-        class="resumo-valor negativo"
-      >
-        R$ 0,00
-      </div>
-
-    </div>
-
-
-    <div class="resumo-item">
-
-      <div class="resumo-label">
-        Saldo Banco
-      </div>
-
-      <div
-        id="saldoBanco"
-        class="resumo-valor cinza"
-      >
-        R$ 0,00
-      </div>
-
-    </div>
-
-
-    <div class="resumo-item">
-
-      <div class="resumo-label">
-        Recebido
-      </div>
-
-      <div
-        id="recebido"
-        class="resumo-valor positivo"
-      >
-        R$ 0,00
-      </div>
-
-    </div>
-
-
-    <div class="resumo-item">
-
-      <div class="resumo-label">
-        Pago
-      </div>
-
-      <div
-        id="pago"
-        class="resumo-valor negativo"
-      >
-        R$ 0,00
-      </div>
-
-    </div>
-
-
-    <div class="resumo-item">
-
-      <div class="resumo-label">
-        Repasse Aluguel
-      </div>
-
-      <div
-        id="repasse"
-        class="resumo-valor cinza"
-      >
-        R$ 0,00
-      </div>
-
-    </div>
-
-
-    <div class="resumo-item">
-
-      <div class="resumo-label">
-        Resultado
-      </div>
-
-      <div
-        id="resultado"
-        class="resumo-valor azul"
-      >
-        R$ 0,00
-      </div>
-
-    </div>
-
-
-  </div>
-
-</div>
-
-
-<!-- =======================================================
-     RODAPÉ
-     ======================================================= -->
-
-<div class="rodape">
-
-  Controle Financeiro
-  •
-  Sistema integrado ao Google Sheets
-
-</div>
-
-
-</div>
 
 
 <script>
 
-
 /* =========================================================
-   CONFIGURAÇÃO
+   CONFIGURAÇÃO DA API
+   =========================================================
+
+   COLOQUE AQUI A URL /exec DA SUA IMPLANTAÇÃO DO
+   GOOGLE APPS SCRIPT.
+
+   EXEMPLO:
+
+   https://script.google.com/macros/s/ABC123/exec
+
+   NÃO coloque a URL do GitHub aqui.
    ========================================================= */
-
-
-/*
- * IMPORTANTE:
- *
- * URL_SITE = GitHub Pages
- * URL_API  = Google Apps Script
- *
- * Não misturar as duas.
- */
-
-
-const URL_SITE =
-  "https://joeldisousa-dot.github.io/gestaofinanceira/";
-
 
 const URL_API =
-  "https://script.google.com/macros/s/AKfycbwfSLxtEomSQ5rkt1NHF7VlOZS-KOKmBP9f08UJcuSprdm8ITVEAj3dSqww7QuzCxGx/exec";
-
-
-/*
- * Tempo máximo para uma consulta da API.
- *
- * Foi reduzido para evitar que o index
- * fique travado por muito tempo.
- */
-
-
-const TEMPO_API =
-  8000;
+  'COLE_AQUI_A_URL_DA_IMPLANTACAO_DO_APPS_SCRIPT';
 
 
 /* =========================================================
-   INICIALIZAÇÃO
+   ELEMENTOS
    ========================================================= */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  function() {
+const statusEl =
+  document.getElementById('status');
 
-    definirCompetenciaAtual();
+const mensagemEl =
+  document.getElementById('mensagem');
 
-    testarConexao();
-
-  }
-);
+const competenciaEl =
+  document.getElementById('competencia');
 
 
 /* =========================================================
    COMPETÊNCIA ATUAL
    ========================================================= */
 
-function definirCompetenciaAtual() {
-
-  const campo =
-    document.getElementById(
-      "competencia"
-    );
-
-
-  if (!campo) {
-    return;
-  }
-
-
-  /*
-   * Usa a data local do navegador.
-   */
+function competenciaAtual() {
 
   const agora =
     new Date();
 
-
   const ano =
     agora.getFullYear();
-
 
   const mes =
     String(
       agora.getMonth() + 1
-    ).padStart(
-      2,
-      "0"
-    );
+    ).padStart(2, '0');
 
-
-  campo.value =
-    ano +
-    "-" +
-    mes;
-
+  return ano + '-' + mes;
 }
 
 
 /* =========================================================
-   MOEDA
+   DEFINIR COMPETÊNCIA INICIAL
    ========================================================= */
 
-function moeda(
-  valor
-) {
+competenciaEl.value =
+  competenciaAtual();
+
+
+/* =========================================================
+   FORMATAÇÃO DE MOEDA
+   ========================================================= */
+
+function moeda(valor) {
 
   const numero =
-    Number(
-      valor
-    ) || 0;
-
+    Number(valor || 0);
 
   return numero.toLocaleString(
-    "pt-BR",
+    'pt-BR',
     {
-      style: "currency",
-      currency: "BRL"
+      style: 'currency',
+      currency: 'BRL'
     }
   );
 
@@ -1209,172 +927,184 @@ function moeda(
 
 
 /* =========================================================
-   API JSONP
+   MENSAGEM
+   ========================================================= */
+
+function mostrarMensagem(
+  texto,
+  tipo = ''
+) {
+
+  mensagemEl.textContent =
+    texto || '';
+
+  mensagemEl.className =
+    'mensagem';
+
+  if (tipo) {
+    mensagemEl.classList.add(tipo);
+  }
+
+  mensagemEl.style.display =
+    texto
+      ? 'block'
+      : 'none';
+
+}
+
+
+/* =========================================================
+   VALIDAR COMPETÊNCIA
+   ========================================================= */
+
+function validarCompetenciaFront(
+  competencia
+) {
+
+  if (
+    !/^\d{4}-\d{2}$/.test(
+      competencia
+    )
+  ) {
+
+    throw new Error(
+      'Competência inválida. Selecione uma competência no formato AAAA-MM.'
+    );
+
+  }
+
+  const partes =
+    competencia.split('-');
+
+  const ano =
+    Number(partes[0]);
+
+  const mes =
+    Number(partes[1]);
+
+  if (
+    ano < 2000 ||
+    ano > 2100 ||
+    mes < 1 ||
+    mes > 12
+  ) {
+
+    throw new Error(
+      'Competência inválida.'
+    );
+
+  }
+
+  return true;
+
+}
+
+
+/* =========================================================
+   JSONP
+   =========================================================
+
+   O index está no GitHub Pages e a API está no Apps Script.
+
+   Por isso utilizamos JSONP.
+
+   O Apps Script deverá responder:
+
+   callback_xxxxx({
+      sucesso:true
+   });
+
    ========================================================= */
 
 function chamarAPI(
-  action,
-  parametros
+  acao,
+  parametros = {}
 ) {
-
-  parametros =
-    parametros || {};
-
 
   return new Promise(
     function(resolve, reject) {
 
+      /* -----------------------------------------------
+         Verificar URL
+         ----------------------------------------------- */
 
-      const callback =
-        "cfCallback_" +
-        Date.now() +
-        "_" +
-        Math.floor(
-          Math.random() *
-          100000
+      if (
+        !URL_API ||
+        URL_API.indexOf('COLE_AQUI') !== -1
+      ) {
+
+        reject(
+          new Error(
+            'URL_API não configurada no index.html.'
+          )
         );
 
-
-      const params =
-        new URLSearchParams();
-
-
-      params.append(
-        "action",
-        action
-      );
+        return;
+      }
 
 
-      params.append(
-        "callback",
-        callback
-      );
+      /* -----------------------------------------------
+         Criar callback
+         ----------------------------------------------- */
 
-
-      Object.keys(
-        parametros
-      ).forEach(
-        function(chave) {
-
-          const valor =
-            parametros[chave];
-
-
-          if (
-            valor !== undefined &&
-            valor !== null
-          ) {
-
-            params.append(
-              chave,
-              valor
-            );
-
-          }
-
-        }
-      );
+      const nomeCallback =
+        'controleFinanceiroCallback_' +
+        Date.now() +
+        '_' +
+        Math.floor(
+          Math.random() * 100000
+        );
 
 
       const script =
-        document.createElement(
-          "script"
-        );
+        document.createElement('script');
 
 
       let finalizado =
         false;
 
 
+      /* -----------------------------------------------
+         Timeout
+         ----------------------------------------------- */
+
       const timeout =
         setTimeout(
           function() {
 
-            if (
-              finalizado
-            ) {
-
+            if (finalizado) {
               return;
-
             }
 
-
-            finalizado =
-              true;
-
+            finalizado = true;
 
             limpar();
 
-
             reject(
               new Error(
-                "Tempo esgotado ao consultar a API."
+                'Tempo limite excedido ao conectar ao Google Apps Script.'
               )
             );
 
           },
-          TEMPO_API
+          20000
         );
 
 
-      function limpar() {
+      /* -----------------------------------------------
+         Callback
+         ----------------------------------------------- */
 
-        clearTimeout(
-          timeout
-        );
+      window[nomeCallback] =
+        function(resposta) {
 
-
-        if (
-          script.parentNode
-        ) {
-
-          script.parentNode
-            .removeChild(
-              script
-            );
-
-        }
-
-
-        try {
-
-          delete window[
-            callback
-          ];
-
-        } catch (
-          erro
-        ) {
-
-          window[
-            callback
-          ] =
-            undefined;
-
-        }
-
-      }
-
-
-      window[
-        callback
-      ] =
-        function(
-          resposta
-        ) {
-
-          if (
-            finalizado
-          ) {
-
+          if (finalizado) {
             return;
-
           }
 
+          finalizado = true;
 
-          finalizado =
-            true;
-
+          clearTimeout(timeout);
 
           limpar();
 
@@ -1385,12 +1115,11 @@ function chamarAPI(
 
             reject(
               new Error(
-                "A API não retornou dados."
+                'A API retornou uma resposta vazia.'
               )
             );
 
             return;
-
           }
 
 
@@ -1402,27 +1131,89 @@ function chamarAPI(
               new Error(
                 resposta.erro ||
                 resposta.mensagem ||
-                "Erro retornado pela API."
+                'Erro retornado pela API.'
               )
             );
 
             return;
-
           }
 
 
-          resolve(
-            resposta
-          );
+          resolve(resposta);
 
         };
 
 
-      script.onerror =
-        function() {
+      /* -----------------------------------------------
+         Limpeza
+         ----------------------------------------------- */
+
+      function limpar() {
+
+        try {
 
           if (
-            finalizado
+            script &&
+            script.parentNode
+          ) {
+
+            script.parentNode.removeChild(
+              script
+            );
+
+          }
+
+        } catch (erro) {
+          // Não fazer nada
+        }
+
+
+        try {
+
+          delete window[nomeCallback];
+
+        } catch (erro) {
+
+          window[nomeCallback] =
+            undefined;
+
+        }
+
+      }
+
+
+      /* -----------------------------------------------
+         Montar parâmetros
+         ----------------------------------------------- */
+
+      const query =
+        new URLSearchParams();
+
+
+      query.set(
+        'acao',
+        acao
+      );
+
+
+      query.set(
+        'callback',
+        nomeCallback
+      );
+
+
+      Object.keys(
+        parametros || {}
+      ).forEach(
+        function(chave) {
+
+          const valor =
+            parametros[chave];
+
+
+          if (
+            valor === undefined ||
+            valor === null
           ) {
 
             return;
@@ -1430,29 +1221,75 @@ function chamarAPI(
           }
 
 
-          finalizado =
-            true;
+          if (
+            typeof valor === 'object'
+          ) {
 
+            query.set(
+              chave,
+              JSON.stringify(valor)
+            );
+
+          } else {
+
+            query.set(
+              chave,
+              String(valor)
+            );
+
+          }
+
+        }
+      );
+
+
+      /* -----------------------------------------------
+         Montar URL
+         ----------------------------------------------- */
+
+      const separador =
+        URL_API.indexOf('?') >= 0
+          ? '&'
+          : '?';
+
+
+      script.src =
+        URL_API +
+        separador +
+        query.toString();
+
+
+      /* -----------------------------------------------
+         Erro de carregamento
+         ----------------------------------------------- */
+
+      script.onerror =
+        function() {
+
+          if (finalizado) {
+            return;
+          }
+
+          finalizado = true;
+
+          clearTimeout(timeout);
 
           limpar();
 
-
           reject(
             new Error(
-              "Não foi possível conectar à API."
+              'Falha ao conectar ao Google Apps Script.'
             )
           );
 
         };
 
 
-      script.src =
-        URL_API +
-        "?" +
-        params.toString();
+      /* -----------------------------------------------
+         Adicionar script
+         ----------------------------------------------- */
 
-
-      document.body.appendChild(
+      document.head.appendChild(
         script
       );
 
@@ -1468,17 +1305,18 @@ function chamarAPI(
 
 async function testarConexao() {
 
-  alterarStatus(
-    "Conectando...",
-    false
-  );
+  statusEl.textContent =
+    'Conectando...';
+
+  statusEl.className =
+    'status';
 
 
   try {
 
     const resposta =
       await chamarAPI(
-        "ping"
+        'ping'
       );
 
 
@@ -1487,170 +1325,41 @@ async function testarConexao() {
       resposta.sucesso === true
     ) {
 
-      alterarStatus(
-        "Sistema online",
-        false
-      );
+      statusEl.textContent =
+        'Sistema online';
+
+      statusEl.className =
+        'status online';
 
 
-      /*
-       * O ping funcionou.
-       *
-       * Agora carregamos o resumo.
-       */
-
-      carregarResumo();
-
-    } else {
-
-      throw new Error(
-        "A API não confirmou a conexão."
-      );
+      return true;
 
     }
 
 
-  } catch (
-    erro
-  ) {
-
-    console.error(
-      "Erro API:",
-      erro
+    throw new Error(
+      'A API não respondeu corretamente.'
     );
 
 
-    /*
-     * O menu continua funcionando mesmo
-     * que o resumo não consiga carregar.
-     */
+  } catch (erro) {
 
-    alterarStatus(
-      "API indisponível",
-      true
+    statusEl.textContent =
+      'Erro na conexão';
+
+    statusEl.className =
+      'status erro';
+
+
+    mostrarMensagem(
+      erro.message,
+      'erro'
     );
 
 
-    mostrarErro(
-      "Não foi possível carregar o resumo agora. As rotinas do sistema continuam disponíveis."
-    );
+    return false;
 
   }
-
-}
-
-
-/* =========================================================
-   STATUS
-   ========================================================= */
-
-function alterarStatus(
-  texto,
-  erro
-) {
-
-  const status =
-    document.getElementById(
-      "status"
-    );
-
-
-  const textoEl =
-    document.getElementById(
-      "statusTexto"
-    );
-
-
-  if (
-    !status ||
-    !textoEl
-  ) {
-
-    return;
-
-  }
-
-
-  textoEl.textContent =
-    texto;
-
-
-  if (
-    erro
-  ) {
-
-    status.classList.add(
-      "erro"
-    );
-
-  } else {
-
-    status.classList.remove(
-      "erro"
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   ERRO
-   ========================================================= */
-
-function mostrarErro(
-  mensagem
-) {
-
-  const box =
-    document.getElementById(
-      "erro"
-    );
-
-
-  if (!box) {
-
-    return;
-
-  }
-
-
-  box.textContent =
-    mensagem ||
-    "Ocorreu um erro.";
-
-
-  box.style.display =
-    "block";
-
-}
-
-
-/* =========================================================
-   LIMPAR ERRO
-   ========================================================= */
-
-function limparErro() {
-
-  const box =
-    document.getElementById(
-      "erro"
-    );
-
-
-  if (!box) {
-
-    return;
-
-  }
-
-
-  box.textContent =
-    "";
-
-
-  box.style.display =
-    "none";
 
 }
 
@@ -1661,25 +1370,25 @@ function limparErro() {
 
 async function carregarResumo() {
 
-  limparErro();
+  const competencia =
+    competenciaEl.value;
 
 
-  const campo =
-    document.getElementById(
-      "competencia"
+  /* -----------------------------------------------
+     Validar
+     ----------------------------------------------- */
+
+  try {
+
+    validarCompetenciaFront(
+      competencia
     );
 
+  } catch (erro) {
 
-  const competencia =
-    campo
-      ? campo.value
-      : "";
-
-
-  if (!competencia) {
-
-    mostrarErro(
-      "Selecione uma competência."
+    mostrarMensagem(
+      erro.message,
+      'erro'
     );
 
     return;
@@ -1687,11 +1396,31 @@ async function carregarResumo() {
   }
 
 
+  /* -----------------------------------------------
+     Indicação visual
+     ----------------------------------------------- */
+
+  const cards =
+    document.querySelectorAll(
+      '.resumo-valor'
+    );
+
+
+  cards.forEach(
+    function(elemento) {
+
+      elemento.style.opacity =
+        '0.55';
+
+    }
+  );
+
+
   try {
 
     const resposta =
       await chamarAPI(
-        "obterResumo",
+        'obterResumo',
         {
           competencia:
             competencia
@@ -1699,48 +1428,78 @@ async function carregarResumo() {
       );
 
 
-    if (
-      resposta &&
-      resposta.sucesso
-    ) {
+    /* ---------------------------------------------
+       Saldo inicial
+       --------------------------------------------- */
 
-      preencherResumo(
-        resposta
+    document.getElementById(
+      'saldoInicial'
+    ).textContent =
+      moeda(
+        resposta.saldoInicial
       );
 
-      alterarStatus(
-        "Sistema online",
-        false
+
+    /* ---------------------------------------------
+       Receber
+       --------------------------------------------- */
+
+    document.getElementById(
+      'receber'
+    ).textContent =
+      moeda(
+        resposta.receber
       );
 
-    } else {
 
-      throw new Error(
-        "A API não retornou o resumo."
+    /* ---------------------------------------------
+       Pagar
+       --------------------------------------------- */
+
+    document.getElementById(
+      'pagar'
+    ).textContent =
+      moeda(
+        resposta.pagar
       );
 
-    }
+
+    /* ---------------------------------------------
+       Saldo bancário
+       --------------------------------------------- */
+
+    document.getElementById(
+      'saldoBanco'
+    ).textContent =
+      moeda(
+        resposta.saldoBanco
+      );
 
 
-  } catch (
-    erro
-  ) {
-
-    console.error(
-      "Erro resumo:",
-      erro
+    mostrarMensagem(
+      '',
+      ''
     );
 
 
-    /*
-     * Não derruba o index.
-     *
-     * O usuário ainda pode acessar
-     * todas as rotinas.
-     */
+  } catch (erro) {
 
-    mostrarErro(
-      "Não foi possível carregar o resumo agora. As rotinas do sistema continuam disponíveis."
+    mostrarMensagem(
+      'Erro ao carregar o resumo: ' +
+      erro.message,
+      'erro'
+    );
+
+
+  } finally {
+
+    cards.forEach(
+      function(elemento) {
+
+        elemento.style.opacity =
+          '1';
+
+      }
     );
 
   }
@@ -1749,405 +1508,40 @@ async function carregarResumo() {
 
 
 /* =========================================================
-   PREENCHER RESUMO
-   ========================================================= */
+   ABRIR PÁGINAS DO GITHUB
+   =========================================================
 
-function preencherResumo(
-  dados
-) {
+   ATENÇÃO:
 
-  if (!dados) {
+   Estes nomes precisam ser exatamente iguais aos arquivos
+   existentes no seu repositório.
 
-    return;
-
-  }
-
-
-  const saldoInicial =
-    document.getElementById(
-      "saldoInicial"
-    );
-
-
-  const receber =
-    document.getElementById(
-      "receber"
-    );
-
-
-  const pagar =
-    document.getElementById(
-      "pagar"
-    );
-
-
-  const saldoBanco =
-    document.getElementById(
-      "saldoBanco"
-    );
-
-
-  const recebido =
-    document.getElementById(
-      "recebido"
-    );
-
-
-  const pago =
-    document.getElementById(
-      "pago"
-    );
-
-
-  const repasse =
-    document.getElementById(
-      "repasse"
-    );
-
-
-  const resultadoEl =
-    document.getElementById(
-      "resultado"
-    );
-
-
-  if (saldoInicial) {
-
-    saldoInicial.textContent =
-      moeda(
-        dados.saldoInicial
-      );
-
-  }
-
-
-  if (receber) {
-
-    receber.textContent =
-      moeda(
-        dados.receber
-      );
-
-  }
-
-
-  if (pagar) {
-
-    pagar.textContent =
-      moeda(
-        dados.pagar
-      );
-
-  }
-
-
-  if (saldoBanco) {
-
-    saldoBanco.textContent =
-      moeda(
-        dados.saldoBanco
-      );
-
-  }
-
-
-  if (recebido) {
-
-    recebido.textContent =
-      moeda(
-        dados.recebido
-      );
-
-  }
-
-
-  if (pago) {
-
-    pago.textContent =
-      moeda(
-        dados.pago
-      );
-
-  }
-
-
-  if (repasse) {
-
-    repasse.textContent =
-      moeda(
-        dados.repasseAluguel
-      );
-
-  }
-
-
-  /*
-   * Usa o resultado fornecido pela API
-   * quando disponível.
-   */
-
-  let resultado;
-
-
-  if (
-    dados.resultado !== undefined &&
-    dados.resultado !== null
-  ) {
-
-    resultado =
-      Number(
-        dados.resultado
-      ) || 0;
-
-  } else {
-
-    resultado =
-      (
-        Number(
-          dados.recebido
-        ) || 0
-      ) -
-      (
-        Number(
-          dados.pago
-        ) || 0
-      );
-
-  }
-
-
-  if (resultadoEl) {
-
-    resultadoEl.textContent =
-      moeda(
-        resultado
-      );
-
-
-    resultadoEl.classList.remove(
-      "positivo",
-      "negativo",
-      "azul"
-    );
-
-
-    if (
-      resultado > 0
-    ) {
-
-      resultadoEl.classList.add(
-        "positivo"
-      );
-
-    } else if (
-      resultado < 0
-    ) {
-
-      resultadoEl.classList.add(
-        "negativo"
-      );
-
-    } else {
-
-      resultadoEl.classList.add(
-        "azul"
-      );
-
-    }
-
-  }
-
-
-  const resumoCompetencia =
-    document.getElementById(
-      "resumoCompetencia"
-    );
-
-
-  if (
-    resumoCompetencia
-  ) {
-
-    resumoCompetencia.textContent =
-      "Competência: " +
-      formatarCompetencia(
-        dados.competencia
-      );
-
-  }
-
-}
-
-
-/* =========================================================
-   FORMATAR COMPETÊNCIA
-   ========================================================= */
-
-function formatarCompetencia(
-  valor
-) {
-
-  if (!valor) {
-
-    return "";
-
-  }
-
-
-  const partes =
-    String(
-      valor
-    ).split("-");
-
-
-  if (
-    partes.length !== 2
-  ) {
-
-    return valor;
-
-  }
-
-
-  const meses = [
-
-    "Janeiro",
-
-    "Fevereiro",
-
-    "Março",
-
-    "Abril",
-
-    "Maio",
-
-    "Junho",
-
-    "Julho",
-
-    "Agosto",
-
-    "Setembro",
-
-    "Outubro",
-
-    "Novembro",
-
-    "Dezembro"
-
-  ];
-
-
-  const mes =
-    Number(
-      partes[1]
-    );
-
-
-  if (
-    mes < 1 ||
-    mes > 12
-  ) {
-
-    return valor;
-
-  }
-
-
-  return (
-    meses[
-      mes - 1
-    ] +
-    "/" +
-    partes[0]
-  );
-
-}
-
-
-/* =========================================================
-   NAVEGAÇÃO - GITHUB PAGES
    ========================================================= */
 
 function abrirPagina(
   pagina
 ) {
 
-  if (!pagina) {
-
-    return;
-
-  }
-
-
-  /*
-   * Remove barras ou caracteres
-   * desnecessários.
-   */
-
-  pagina =
-    String(
-      pagina
-    )
-    .replace(
-      /^\/+/,
-      ""
-    )
-    .replace(
-      /\.html$/i,
-      ""
-    );
-
-
-  const url =
-    URL_SITE +
-    pagina +
-    ".html";
-
-
-  console.log(
-    "Abrindo:",
-    url
-  );
-
-
-  window.location.href =
-    url;
-
-}
-
-
-/* =========================================================
-   NAVEGAÇÃO COM COMPETÊNCIA
-   ========================================================= */
-
-function abrirPaginaComCompetencia(
-  pagina
-) {
-
-  if (!pagina) {
-
-    return;
-
-  }
-
-
-  const campo =
-    document.getElementById(
-      "competencia"
-    );
-
-
   const competencia =
-    campo
-      ? campo.value
-      : "";
+    competenciaEl.value ||
+    competenciaAtual();
 
 
-  if (!competencia) {
+  /* -----------------------------------------------
+     Validar competência
+     ----------------------------------------------- */
 
-    mostrarErro(
-      "Selecione uma competência antes de abrir esta rotina."
+  try {
+
+    validarCompetenciaFront(
+      competencia
+    );
+
+  } catch (erro) {
+
+    mostrarMensagem(
+      erro.message,
+      'erro'
     );
 
     return;
@@ -2155,34 +1549,67 @@ function abrirPaginaComCompetencia(
   }
 
 
-  pagina =
-    String(
-      pagina
-    )
-    .replace(
-      /^\/+/,
-      ""
-    )
-    .replace(
-      /\.html$/i,
-      ""
+  /* -----------------------------------------------
+     Mapeamento REAL dos arquivos do GitHub
+     ----------------------------------------------- */
+
+  const arquivos = {
+
+    lancamentos:
+      'Lancamentos.html',
+
+    pendentes:
+      'BaixasPendente​s.html'.replace(/\u200b/g, ''),
+
+    relatorio:
+      'Relatorio.html',
+
+    graficos:
+      'Graficos.html',
+
+    atendimento:
+      'Atendimento.html'
+
+  };
+
+
+  const arquivo =
+    arquivos[pagina];
+
+
+  if (!arquivo) {
+
+    mostrarMensagem(
+      'Rotina não encontrada: ' +
+      pagina,
+      'erro'
     );
 
+    return;
+
+  }
+
+
+  /* -----------------------------------------------
+     Montar endereço
+
+     IMPORTANTE:
+     A página continua no GitHub.
+
+     O Apps Script NÃO abre a página.
+     ----------------------------------------------- */
 
   const url =
-    URL_SITE +
-    pagina +
-    ".html?competencia=" +
+    arquivo +
+    '?competencia=' +
     encodeURIComponent(
       competencia
     );
 
 
-  console.log(
-    "Abrindo:",
-    url
-  );
-
+  /* -----------------------------------------------
+     Navegar
+     ----------------------------------------------- */
 
   window.location.href =
     url;
@@ -2191,30 +1618,29 @@ function abrirPaginaComCompetencia(
 
 
 /* =========================================================
-   ENTER NA COMPETÊNCIA
+   ALTERAÇÃO DA COMPETÊNCIA
    ========================================================= */
 
-document.addEventListener(
-  "keydown",
-  function(event) {
+competenciaEl.addEventListener(
+  'change',
+  function() {
+
+    carregarResumo();
+
+  }
+);
+
+
+/* =========================================================
+   TECLA ENTER
+   ========================================================= */
+
+competenciaEl.addEventListener(
+  'keydown',
+  function(evento) {
 
     if (
-      event.key !== "Enter"
-    ) {
-
-      return;
-
-    }
-
-
-    const ativo =
-      document.activeElement;
-
-
-    if (
-      ativo &&
-      ativo.id ===
-      "competencia"
+      evento.key === 'Enter'
     ) {
 
       carregarResumo();
@@ -2226,23 +1652,39 @@ document.addEventListener(
 
 
 /* =========================================================
-   EVITAR ERRO CASO A PÁGINA SEJA ABERTA
-   * DENTRO DE UM FRAME
-   * ========================================================= */
+   INICIALIZAÇÃO
+   ========================================================= */
 
-window.abrirPagina =
-  abrirPagina;
+async function iniciarSistema() {
 
-window.abrirPaginaComCompetencia =
-  abrirPaginaComCompetencia;
+  mostrarMensagem(
+    '',
+    ''
+  );
 
-window.carregarResumo =
-  carregarResumo;
+
+  const online =
+    await testarConexao();
+
+
+  if (!online) {
+    return;
+  }
+
+
+  await carregarResumo();
+
+}
+
+
+/* =========================================================
+   INICIAR
+   ========================================================= */
+
+iniciarSistema();
 
 </script>
-
 
 </body>
 
 </html>
-
