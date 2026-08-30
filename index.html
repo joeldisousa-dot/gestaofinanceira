@@ -1,13 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
+
   <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
 
   <title>Controle Financeiro</title>
 
@@ -17,8 +20,15 @@
       box-sizing: border-box;
     }
 
+    html,
     body {
       margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+
       min-height: 100vh;
 
       font-family:
@@ -36,8 +46,15 @@
       color: #1f2937;
     }
 
+
+    /* =====================================================
+       CONTAINER
+       ===================================================== */
+
     .container {
+
       width: 100%;
+
       max-width: 1100px;
 
       margin: 0 auto;
@@ -46,25 +63,40 @@
         30px 18px 40px;
     }
 
+
+    /* =====================================================
+       CARD PRINCIPAL
+       ===================================================== */
+
     .card {
+
+      width: 100%;
+
       background: #ffffff;
+
+      border:
+        1px solid #e5eaf0;
 
       border-radius: 18px;
 
       padding: 28px;
 
       box-shadow:
-        0 10px 35px rgba(15, 23, 42, 0.08);
-
-      border:
-        1px solid #e5eaf0;
+        0 10px 35px rgba(
+          15,
+          23,
+          42,
+          0.08
+        );
     }
+
 
     /* =====================================================
        CABEÇALHO
        ===================================================== */
 
     .header {
+
       display: flex;
 
       align-items: center;
@@ -76,17 +108,23 @@
       margin-bottom: 28px;
     }
 
+
     .titulo {
+
       margin: 0;
 
       color: #17365d;
 
       font-size: 28px;
 
+      line-height: 1.2;
+
       font-weight: 700;
     }
 
+
     .subtitulo {
+
       margin-top: 7px;
 
       color: #64748b;
@@ -94,7 +132,13 @@
       font-size: 14px;
     }
 
+
+    /* =====================================================
+       STATUS
+       ===================================================== */
+
     .status {
+
       display: inline-flex;
 
       align-items: center;
@@ -117,43 +161,71 @@
       white-space: nowrap;
     }
 
+
     .status::before {
+
       content: "";
 
       width: 8px;
 
       height: 8px;
 
+      flex: 0 0 8px;
+
       border-radius: 50%;
 
       background: #94a3b8;
     }
 
+
     .status.online {
+
       background: #ecfdf3;
 
       color: #166534;
     }
 
+
     .status.online::before {
+
       background: #22c55e;
     }
 
+
     .status.erro {
+
       background: #fef2f2;
 
       color: #991b1b;
     }
 
+
     .status.erro::before {
+
       background: #ef4444;
     }
+
+
+    .status.carregando {
+
+      background: #eff6ff;
+
+      color: #1d4ed8;
+    }
+
+
+    .status.carregando::before {
+
+      background: #3b82f6;
+    }
+
 
     /* =====================================================
        COMPETÊNCIA
        ===================================================== */
 
     .competencia-box {
+
       background: #f8fafc;
 
       border:
@@ -161,24 +233,29 @@
 
       border-radius: 12px;
 
-      padding: 16px 18px;
+      padding:
+        16px 18px;
 
       margin-bottom: 22px;
     }
 
+
     .competencia-label {
+
       display: block;
 
       margin-bottom: 8px;
 
+      color: #475569;
+
       font-size: 13px;
 
       font-weight: 700;
-
-      color: #475569;
     }
 
+
     .competencia-linha {
+
       display: flex;
 
       align-items: center;
@@ -188,7 +265,9 @@
       flex-wrap: wrap;
     }
 
+
     #competencia {
+
       width: 210px;
 
       padding:
@@ -208,14 +287,24 @@
       outline: none;
     }
 
+
     #competencia:focus {
+
       border-color: #2563eb;
 
       box-shadow:
-        0 0 0 3px rgba(37, 99, 235, 0.10);
+        0 0 0 3px
+        rgba(
+          37,
+          99,
+          235,
+          0.10
+        );
     }
 
+
     .btn-atualizar {
+
       border: 0;
 
       border-radius: 9px;
@@ -233,20 +322,36 @@
 
       cursor: pointer;
 
-      transition: .2s;
+      transition:
+        .2s;
     }
+
 
     .btn-atualizar:hover {
+
       background: #214c7d;
 
-      transform: translateY(-1px);
+      transform:
+        translateY(-1px);
     }
 
+
+    .btn-atualizar:disabled {
+
+      opacity: .60;
+
+      cursor: wait;
+
+      transform: none;
+    }
+
+
     /* =====================================================
-       RESUMO
+       SEÇÃO
        ===================================================== */
 
     .secao-titulo {
+
       margin:
         25px 0 14px;
 
@@ -257,7 +362,13 @@
       font-weight: 700;
     }
 
+
+    /* =====================================================
+       RESUMO
+       ===================================================== */
+
     .resumo {
+
       display: grid;
 
       grid-template-columns:
@@ -268,7 +379,9 @@
       margin-bottom: 28px;
     }
 
+
     .resumo-card {
+
       min-height: 105px;
 
       padding: 17px;
@@ -281,10 +394,37 @@
       background: #ffffff;
 
       box-shadow:
-        0 3px 12px rgba(15, 23, 42, 0.04);
+        0 3px 12px
+        rgba(
+          15,
+          23,
+          42,
+          0.04
+        );
+
+      transition:
+        .2s;
     }
 
+
+    .resumo-card:hover {
+
+      transform:
+        translateY(-1px);
+
+      box-shadow:
+        0 5px 16px
+        rgba(
+          15,
+          23,
+          42,
+          0.07
+        );
+    }
+
+
     .resumo-label {
+
       color: #64748b;
 
       font-size: 12px;
@@ -294,7 +434,9 @@
       margin-bottom: 10px;
     }
 
+
     .resumo-valor {
+
       color: #17365d;
 
       font-size: 21px;
@@ -304,11 +446,13 @@
       word-break: break-word;
     }
 
+
     /* =====================================================
        MENU
        ===================================================== */
 
     .menu {
+
       display: grid;
 
       grid-template-columns:
@@ -317,7 +461,9 @@
       gap: 15px;
     }
 
+
     .menu-item {
+
       width: 100%;
 
       min-height: 125px;
@@ -326,7 +472,8 @@
 
       border-radius: 14px;
 
-      padding: 20px 15px;
+      padding:
+        20px 15px;
 
       background: #17365d;
 
@@ -346,22 +493,46 @@
         box-shadow .18s ease;
     }
 
+
     .menu-item:hover {
+
       background: #214c7d;
 
       transform:
         translateY(-2px);
 
       box-shadow:
-        0 7px 18px rgba(23, 54, 93, 0.18);
+        0 7px 18px
+        rgba(
+          23,
+          54,
+          93,
+          0.18
+        );
     }
 
+
     .menu-item:active {
+
       transform:
         translateY(0);
     }
 
+
+    .menu-item:disabled {
+
+      opacity: .60;
+
+      cursor: wait;
+
+      transform: none;
+
+      box-shadow: none;
+    }
+
+
     .menu-icone {
+
       display: block;
 
       font-size: 31px;
@@ -371,7 +542,9 @@
       margin-bottom: 12px;
     }
 
+
     .menu-descricao {
+
       display: block;
 
       margin-top: 6px;
@@ -383,16 +556,19 @@
       opacity: .80;
     }
 
+
     /* =====================================================
        MENSAGEM
        ===================================================== */
 
     .mensagem {
+
       display: none;
 
       margin-top: 20px;
 
-      padding: 13px 15px;
+      padding:
+        13px 15px;
 
       border-radius: 9px;
 
@@ -404,9 +580,13 @@
       color: #9a3412;
 
       font-size: 14px;
+
+      line-height: 1.5;
     }
 
+
     .mensagem.erro {
+
       background: #fef2f2;
 
       border-color: #fecaca;
@@ -414,7 +594,9 @@
       color: #991b1b;
     }
 
+
     .mensagem.sucesso {
+
       background: #f0fdf4;
 
       border-color: #bbf7d0;
@@ -422,11 +604,23 @@
       color: #166534;
     }
 
+
+    .mensagem.info {
+
+      background: #eff6ff;
+
+      border-color: #bfdbfe;
+
+      color: #1e40af;
+    }
+
+
     /* =====================================================
        RODAPÉ
        ===================================================== */
 
     .rodape {
+
       margin-top: 25px;
 
       padding-top: 17px;
@@ -447,6 +641,7 @@
       font-size: 12px;
     }
 
+
     /* =====================================================
        RESPONSIVO
        ===================================================== */
@@ -454,65 +649,96 @@
     @media (max-width: 850px) {
 
       .resumo {
+
         grid-template-columns:
           repeat(2, 1fr);
       }
 
+
       .menu {
+
         grid-template-columns:
           repeat(2, 1fr);
       }
 
     }
 
+
     @media (max-width: 560px) {
 
       .container {
+
         padding:
           15px 10px 25px;
       }
 
+
       .card {
+
         padding: 18px;
       }
 
+
       .header {
+
         align-items: flex-start;
 
         flex-direction: column;
       }
 
+
       .titulo {
+
         font-size: 24px;
       }
 
+
+      .status {
+
+        align-self: flex-start;
+      }
+
+
       .resumo {
+
         grid-template-columns: 1fr;
       }
+
 
       .menu {
+
         grid-template-columns: 1fr;
       }
 
+
       .menu-item {
+
         min-height: 105px;
       }
 
+
       .competencia-linha {
+
         align-items: stretch;
 
         flex-direction: column;
       }
 
+
       #competencia {
+
         width: 100%;
       }
+
 
       .btn-atualizar {
+
         width: 100%;
       }
 
+
       .rodape {
+
         flex-direction: column;
 
         align-items: flex-start;
@@ -524,318 +750,151 @@
 
 </head>
 
-
 <body>
 
   <div class="container">
 
-    <div class="card">
+```
+<div class="card">
 
-      <!-- =================================================
-           CABEÇALHO
-           ================================================= -->
 
-      <div class="header">
+  <!-- =================================================
+       CABEÇALHO
+       ================================================= -->
 
-        <div>
+  <div class="header">
 
-          <h1 class="titulo">
-            Controle Financeiro
-          </h1>
+    <div>
 
-          <div class="subtitulo">
-            Gestão de lançamentos e fluxo financeiro
-          </div>
+      <h1 class="titulo">
+        Controle Financeiro
+      </h1>
 
-        </div>
-
-        <div
-          id="status"
-          class="status"
-        >
-          Conectando...
-        </div>
-
+      <div class="subtitulo">
+        Gestão de lançamentos e fluxo financeiro
       </div>
 
+    </div>
 
-      <!-- =================================================
-           COMPETÊNCIA
-           ================================================= -->
 
-      <div class="competencia-box">
+    <div
+      id="status"
+      class="status carregando"
+    >
+      Conectando...
+    </div>
 
-        <label
-          class="competencia-label"
-          for="competencia"
-        >
-          Competência
-        </label>
+  </div>
 
-        <div class="competencia-linha">
 
-          <input
-            id="competencia"
-            type="month"
-            title="Selecione a competência"
-          >
+  <!-- =================================================
+       COMPETÊNCIA
+       ================================================= -->
 
-          <button
-            type="button"
-            class="btn-atualizar"
-            onclick="carregarResumo()"
-          >
-            ↻ Atualizar
-          </button>
+  <div class="competencia-box">
 
-        </div>
+    <label
+      class="competencia-label"
+      for="competencia"
+    >
+      Competência
+    </label>
 
+
+    <div class="competencia-linha">
+
+      <input
+        id="competencia"
+        type="month"
+        title="Selecione a competência"
+      >
+
+
+      <button
+        id="btnAtualizar"
+        type="button"
+        class="btn-atualizar"
+        onclick="carregarResumo()"
+      >
+        ↻ Atualizar
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =================================================
+       RESUMO
+       ================================================= -->
+
+  <div class="secao-titulo">
+    Resumo da Competência
+  </div>
+
+
+  <div class="resumo">
+
+
+    <div class="resumo-card">
+
+      <div class="resumo-label">
+        SALDO INICIAL
       </div>
-
-
-      <!-- =================================================
-           RESUMO
-           ================================================= -->
-
-      <div class="secao-titulo">
-        Resumo da Competência
-      </div>
-
-      <div class="resumo">
-
-        <div class="resumo-card">
-
-          <div class="resumo-label">
-            SALDO INICIAL
-          </div>
-
-          <div
-            id="saldoInicial"
-            class="resumo-valor"
-          >
-            R$ 0,00
-          </div>
-
-        </div>
-
-
-        <div class="resumo-card">
-
-          <div class="resumo-label">
-            A RECEBER
-          </div>
-
-          <div
-            id="receber"
-            class="resumo-valor"
-          >
-            R$ 0,00
-          </div>
-
-        </div>
-
-
-        <div class="resumo-card">
-
-          <div class="resumo-label">
-            A PAGAR
-          </div>
-
-          <div
-            id="pagar"
-            class="resumo-valor"
-          >
-            R$ 0,00
-          </div>
-
-        </div>
-
-
-        <div class="resumo-card">
-
-          <div class="resumo-label">
-            SALDO BANCÁRIO
-          </div>
-
-          <div
-            id="saldoBanco"
-            class="resumo-valor"
-          >
-            R$ 0,00
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- =================================================
-           MENU
-           ================================================= -->
-
-      <div class="secao-titulo">
-        Rotinas
-      </div>
-
-      <div class="menu">
-
-
-        <!-- LANÇAMENTOS -->
-
-        <button
-          type="button"
-          class="menu-item"
-          onclick="abrirPagina('lancamentos')"
-        >
-
-          <span class="menu-icone">
-            📋
-          </span>
-
-          Lançamentos
-
-          <span class="menu-descricao">
-            Incluir, editar, excluir e consultar
-          </span>
-
-        </button>
-
-
-        <!-- BAIXAS PENDENTES -->
-
-        <button
-          type="button"
-          class="menu-item"
-          onclick="abrirPagina('pendentes')"
-        >
-
-          <span class="menu-icone">
-            ⏳
-          </span>
-
-          Baixas Pendentes
-
-          <span class="menu-descricao">
-            Consultar lançamentos pendentes
-          </span>
-
-        </button>
-
-
-        <!-- RELATÓRIO -->
-
-        <button
-          type="button"
-          class="menu-item"
-          onclick="abrirPagina('relatorio')"
-        >
-
-          <span class="menu-icone">
-            📊
-          </span>
-
-          Relatório Financeiro
-
-          <span class="menu-descricao">
-            Visualizar relatório da competência
-          </span>
-
-        </button>
-
-
-        <!-- GRÁFICOS -->
-
-        <button
-          type="button"
-          class="menu-item"
-          onclick="abrirPagina('graficos')"
-        >
-
-          <span class="menu-icone">
-            📈
-          </span>
-
-          Gráficos
-
-          <span class="menu-descricao">
-            Análise visual dos dados financeiros
-          </span>
-
-        </button>
-
-
-        <!-- ATENDIMENTO -->
-
-        <button
-          type="button"
-          class="menu-item"
-          onclick="abrirPagina('atendimento')"
-        >
-
-          <span class="menu-icone">
-            👤
-          </span>
-
-          Atendimento
-
-          <span class="menu-descricao">
-            Pesquisa e registro de atendimento
-          </span>
-
-        </button>
-
-
-        <!-- NOVO LANÇAMENTO
-             Não existe arquivo separado no GitHub.
-             O botão leva para Lancamentos.html.
-        -->
-
-        <button
-          type="button"
-          class="menu-item"
-          onclick="abrirPagina('lancamentos')"
-        >
-
-          <span class="menu-icone">
-            ➕
-          </span>
-
-          Novo Lançamento
-
-          <span class="menu-descricao">
-            Acessar a rotina de lançamentos
-          </span>
-
-        </button>
-
-
-      </div>
-
-
-      <!-- =================================================
-           MENSAGEM
-           ================================================= -->
 
       <div
-        id="mensagem"
-        class="mensagem"
-      ></div>
+        id="saldoInicial"
+        class="resumo-valor"
+      >
+        R$ 0,00
+      </div>
+
+    </div>
 
 
-      <!-- =================================================
-           RODAPÉ
-           ================================================= -->
+    <div class="resumo-card">
 
-      <div class="rodape">
+      <div class="resumo-label">
+        A RECEBER
+      </div>
 
-        <span>
-          Controle Financeiro
-        </span>
+      <div
+        id="receber"
+        class="resumo-valor"
+      >
+        R$ 0,00
+      </div>
 
-        <span>
-          GitHub Pages + Google Apps Script
-        </span>
+    </div>
 
+
+    <div class="resumo-card">
+
+      <div class="resumo-label">
+        A PAGAR
+      </div>
+
+      <div
+        id="pagar"
+        class="resumo-valor"
+      >
+        R$ 0,00
+      </div>
+
+    </div>
+
+
+    <div class="resumo-card">
+
+      <div class="resumo-label">
+        SALDO BANCÁRIO
+      </div>
+
+      <div
+        id="saldoBanco"
+        class="resumo-valor"
+      >
+        R$ 0,00
       </div>
 
     </div>
@@ -843,24 +902,196 @@
   </div>
 
 
+  <!-- =================================================
+       MENU
+       ================================================= -->
+
+  <div class="secao-titulo">
+    Rotinas
+  </div>
+
+
+  <div class="menu">
+
+
+    <!-- LANÇAMENTOS -->
+
+    <button
+      type="button"
+      class="menu-item"
+      onclick="abrirPagina('lancamentos')"
+    >
+
+      <span class="menu-icone">
+        📋
+      </span>
+
+      Lançamentos
+
+      <span class="menu-descricao">
+        Incluir, editar, excluir e consultar
+      </span>
+
+    </button>
+
+
+    <!-- BAIXAS PENDENTES -->
+
+    <button
+      type="button"
+      class="menu-item"
+      onclick="abrirPagina('pendentes')"
+    >
+
+      <span class="menu-icone">
+        ⏳
+      </span>
+
+      Baixas Pendentes
+
+      <span class="menu-descricao">
+        Consultar lançamentos pendentes
+      </span>
+
+    </button>
+
+
+    <!-- RELATÓRIO -->
+
+    <button
+      type="button"
+      class="menu-item"
+      onclick="abrirPagina('relatorio')"
+    >
+
+      <span class="menu-icone">
+        📊
+      </span>
+
+      Relatório Financeiro
+
+      <span class="menu-descricao">
+        Visualizar relatório da competência
+      </span>
+
+    </button>
+
+
+    <!-- GRÁFICOS -->
+
+    <button
+      type="button"
+      class="menu-item"
+      onclick="abrirPagina('graficos')"
+    >
+
+      <span class="menu-icone">
+        📈
+      </span>
+
+      Gráficos
+
+      <span class="menu-descricao">
+        Análise visual dos dados financeiros
+      </span>
+
+    </button>
+
+
+    <!-- ATENDIMENTO -->
+
+    <button
+      type="button"
+      class="menu-item"
+      onclick="abrirPagina('atendimento')"
+    >
+
+      <span class="menu-icone">
+        👤
+      </span>
+
+      Atendimento
+
+      <span class="menu-descricao">
+        Pesquisa e registro de atendimento
+      </span>
+
+    </button>
+
+
+    <!-- NOVO LANÇAMENTO -->
+
+    <button
+      type="button"
+      class="menu-item"
+      onclick="abrirPagina('lancamentos')"
+    >
+
+      <span class="menu-icone">
+        ➕
+      </span>
+
+      Novo Lançamento
+
+      <span class="menu-descricao">
+        Acessar a rotina de lançamentos
+      </span>
+
+    </button>
+
+
+  </div>
+
+
+  <!-- =================================================
+       MENSAGEM
+       ================================================= -->
+
+  <div
+    id="mensagem"
+    class="mensagem"
+  ></div>
+
+
+  <!-- =================================================
+       RODAPÉ
+       ================================================= -->
+
+  <div class="rodape">
+
+    <span>
+      Controle Financeiro
+    </span>
+
+    <span>
+      GitHub Pages + Google Apps Script
+    </span>
+
+  </div>
+
+
+</div>
+```
+
+  </div>
+
 <script>
+
 
 /* =========================================================
    CONFIGURAÇÃO DA API
    =========================================================
 
-   COLOQUE AQUI A URL /exec DA SUA IMPLANTAÇÃO DO
-   GOOGLE APPS SCRIPT.
+   O INDEX ESTÁ NO GITHUB PAGES.
 
-   EXEMPLO:
+   A API ESTÁ NO GOOGLE APPS SCRIPT.
 
-   https://script.google.com/macros/s/ABC123/exec
+   NÃO ALTERE PARA A URL DO GITHUB.
 
-   NÃO coloque a URL do GitHub aqui.
    ========================================================= */
 
 const URL_API =
-  'COLE_AQUI_A_URL_DA_IMPLANTACAO_DO_APPS_SCRIPT';
+  'https://script.google.com/macros/s/AKfycbwfSLxtEomSQ5rkt1NHF7VlOZS-KOKmBP9f08UJcuSprdm8ITVEAj3dSqww7QuzCxGx/exec';
 
 
 /* =========================================================
@@ -868,13 +1099,27 @@ const URL_API =
    ========================================================= */
 
 const statusEl =
-  document.getElementById('status');
+  document.getElementById(
+    'status'
+  );
+
 
 const mensagemEl =
-  document.getElementById('mensagem');
+  document.getElementById(
+    'mensagem'
+  );
+
 
 const competenciaEl =
-  document.getElementById('competencia');
+  document.getElementById(
+    'competencia'
+  );
+
+
+const btnAtualizar =
+  document.getElementById(
+    'btnAtualizar'
+  );
 
 
 /* =========================================================
@@ -886,15 +1131,26 @@ function competenciaAtual() {
   const agora =
     new Date();
 
+
   const ano =
     agora.getFullYear();
+
 
   const mes =
     String(
       agora.getMonth() + 1
-    ).padStart(2, '0');
+    ).padStart(
+      2,
+      '0'
+    );
 
-  return ano + '-' + mes;
+
+  return (
+    ano +
+    '-' +
+    mes
+  );
+
 }
 
 
@@ -907,13 +1163,23 @@ competenciaEl.value =
 
 
 /* =========================================================
-   FORMATAÇÃO DE MOEDA
+   MOEDA
    ========================================================= */
 
 function moeda(valor) {
 
-  const numero =
-    Number(valor || 0);
+  let numero =
+    Number(valor);
+
+
+  if (
+    !Number.isFinite(numero)
+  ) {
+
+    numero = 0;
+
+  }
+
 
   return numero.toLocaleString(
     'pt-BR',
@@ -932,23 +1198,58 @@ function moeda(valor) {
 
 function mostrarMensagem(
   texto,
-  tipo = ''
+  tipo
 ) {
 
   mensagemEl.textContent =
     texto || '';
 
+
   mensagemEl.className =
     'mensagem';
 
+
   if (tipo) {
-    mensagemEl.classList.add(tipo);
+
+    mensagemEl.classList.add(
+      tipo
+    );
+
   }
+
 
   mensagemEl.style.display =
     texto
       ? 'block'
       : 'none';
+
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+function alterarStatus(
+  texto,
+  tipo
+) {
+
+  statusEl.textContent =
+    texto;
+
+
+  statusEl.className =
+    'status';
+
+
+  if (tipo) {
+
+    statusEl.classList.add(
+      tipo
+    );
+
+  }
 
 }
 
@@ -973,27 +1274,46 @@ function validarCompetenciaFront(
 
   }
 
+
   const partes =
     competencia.split('-');
 
+
   const ano =
-    Number(partes[0]);
+    Number(
+      partes[0]
+    );
+
 
   const mes =
-    Number(partes[1]);
+    Number(
+      partes[1]
+    );
+
 
   if (
-    ano < 2000 ||
-    ano > 2100 ||
+    ano < 1900 ||
+    ano > 2100
+  ) {
+
+    throw new Error(
+      'Ano da competência inválido.'
+    );
+
+  }
+
+
+  if (
     mes < 1 ||
     mes > 12
   ) {
 
     throw new Error(
-      'Competência inválida.'
+      'Mês da competência inválido.'
     );
 
   }
+
 
   return true;
 
@@ -1001,110 +1321,177 @@ function validarCompetenciaFront(
 
 
 /* =========================================================
-   JSONP
+   CHAMAR GOOGLE APPS SCRIPT
    =========================================================
 
-   O index está no GitHub Pages e a API está no Apps Script.
+   O Apps Script utiliza:
 
-   Por isso utilizamos JSONP.
+   parametros.action
 
-   O Apps Script deverá responder:
+   e não:
 
-   callback_xxxxx({
-      sucesso:true
-   });
+   parametros.acao
+
+   Portanto o index envia exatamente:
+
+   ?action=ping
+
+   ?action=obterResumo
+
+   etc.
 
    ========================================================= */
 
 function chamarAPI(
-  acao,
+  action,
   parametros = {}
 ) {
 
   return new Promise(
     function(resolve, reject) {
 
-      /* -----------------------------------------------
-         Verificar URL
-         ----------------------------------------------- */
+
+      /* ---------------------------------------------------
+         VALIDAR URL
+         --------------------------------------------------- */
 
       if (
         !URL_API ||
-        URL_API.indexOf('COLE_AQUI') !== -1
+        !URL_API.includes(
+          'script.google.com/macros/s/'
+        ) ||
+        !URL_API.endsWith(
+          '/exec'
+        )
       ) {
 
         reject(
           new Error(
-            'URL_API não configurada no index.html.'
+            'URL do Google Apps Script inválida ou não configurada.'
           )
         );
 
         return;
+
       }
 
 
-      /* -----------------------------------------------
-         Criar callback
-         ----------------------------------------------- */
+      /* ---------------------------------------------------
+         CALLBACK JSONP
+         --------------------------------------------------- */
 
-      const nomeCallback =
-        'controleFinanceiroCallback_' +
+      const callback =
+        'controleFinanceiro_' +
         Date.now() +
         '_' +
         Math.floor(
-          Math.random() * 100000
+          Math.random() * 1000000
         );
 
 
       const script =
-        document.createElement('script');
-
-
-      let finalizado =
-        false;
-
-
-      /* -----------------------------------------------
-         Timeout
-         ----------------------------------------------- */
-
-      const timeout =
-        setTimeout(
-          function() {
-
-            if (finalizado) {
-              return;
-            }
-
-            finalizado = true;
-
-            limpar();
-
-            reject(
-              new Error(
-                'Tempo limite excedido ao conectar ao Google Apps Script.'
-              )
-            );
-
-          },
-          20000
+        document.createElement(
+          'script'
         );
 
 
-      /* -----------------------------------------------
-         Callback
-         ----------------------------------------------- */
+      let concluido =
+        false;
 
-      window[nomeCallback] =
+
+      let timer =
+        null;
+
+
+      /* ---------------------------------------------------
+         LIMPAR
+         --------------------------------------------------- */
+
+      function limpar() {
+
+        if (timer) {
+
+          clearTimeout(
+            timer
+          );
+
+          timer = null;
+
+        }
+
+
+        try {
+
+          delete window[
+            callback
+          ];
+
+        } catch (erro) {
+
+          window[
+            callback
+          ] = undefined;
+
+        }
+
+
+        if (
+          script &&
+          script.parentNode
+        ) {
+
+          script.parentNode.removeChild(
+            script
+          );
+
+        }
+
+      }
+
+
+      /* ---------------------------------------------------
+         FINALIZAR ERRO
+         --------------------------------------------------- */
+
+      function falhar(
+        erro
+      ) {
+
+        if (concluido) {
+          return;
+        }
+
+
+        concluido = true;
+
+        limpar();
+
+        reject(
+          erro instanceof Error
+            ? erro
+            : new Error(
+                String(erro)
+              )
+        );
+
+      }
+
+
+      /* ---------------------------------------------------
+         CALLBACK
+         --------------------------------------------------- */
+
+      window[
+        callback
+      ] =
         function(resposta) {
 
-          if (finalizado) {
+          if (concluido) {
             return;
           }
 
-          finalizado = true;
 
-          clearTimeout(timeout);
+          concluido = true;
 
           limpar();
 
@@ -1115,11 +1502,12 @@ function chamarAPI(
 
             reject(
               new Error(
-                'A API retornou uma resposta vazia.'
+                'O Google Apps Script retornou uma resposta vazia.'
               )
             );
 
             return;
+
           }
 
 
@@ -1131,74 +1519,44 @@ function chamarAPI(
               new Error(
                 resposta.erro ||
                 resposta.mensagem ||
-                'Erro retornado pela API.'
+                'O Google Apps Script retornou um erro.'
               )
             );
 
             return;
+
           }
 
 
-          resolve(resposta);
+          resolve(
+            resposta
+          );
 
         };
 
 
-      /* -----------------------------------------------
-         Limpeza
-         ----------------------------------------------- */
-
-      function limpar() {
-
-        try {
-
-          if (
-            script &&
-            script.parentNode
-          ) {
-
-            script.parentNode.removeChild(
-              script
-            );
-
-          }
-
-        } catch (erro) {
-          // Não fazer nada
-        }
-
-
-        try {
-
-          delete window[nomeCallback];
-
-        } catch (erro) {
-
-          window[nomeCallback] =
-            undefined;
-
-        }
-
-      }
-
-
-      /* -----------------------------------------------
-         Montar parâmetros
-         ----------------------------------------------- */
+      /* ---------------------------------------------------
+         MONTAR QUERY STRING
+         --------------------------------------------------- */
 
       const query =
         new URLSearchParams();
 
 
+      /*
+       * IMPORTANTE:
+       * O servidor espera "action".
+       */
+
       query.set(
-        'acao',
-        acao
+        'action',
+        action
       );
 
 
       query.set(
         'callback',
-        nomeCallback
+        callback
       );
 
 
@@ -1227,14 +1585,18 @@ function chamarAPI(
 
             query.set(
               chave,
-              JSON.stringify(valor)
+              JSON.stringify(
+                valor
+              )
             );
 
           } else {
 
             query.set(
               chave,
-              String(valor)
+              String(
+                valor
+              )
             );
 
           }
@@ -1243,51 +1605,62 @@ function chamarAPI(
       );
 
 
-      /* -----------------------------------------------
-         Montar URL
-         ----------------------------------------------- */
+      /* ---------------------------------------------------
+         URL FINAL
+         --------------------------------------------------- */
 
-      const separador =
-        URL_API.indexOf('?') >= 0
-          ? '&'
-          : '?';
-
-
-      script.src =
+      const url =
         URL_API +
-        separador +
+        '?' +
         query.toString();
 
 
-      /* -----------------------------------------------
-         Erro de carregamento
-         ----------------------------------------------- */
+      /* ---------------------------------------------------
+         ERRO DO SCRIPT
+         --------------------------------------------------- */
 
       script.onerror =
         function() {
 
-          if (finalizado) {
-            return;
-          }
-
-          finalizado = true;
-
-          clearTimeout(timeout);
-
-          limpar();
-
-          reject(
+          falhar(
             new Error(
-              'Falha ao conectar ao Google Apps Script.'
+              'Não foi possível conectar ao Google Apps Script.'
             )
           );
 
         };
 
 
-      /* -----------------------------------------------
-         Adicionar script
-         ----------------------------------------------- */
+      /* ---------------------------------------------------
+         TIMEOUT
+         --------------------------------------------------- */
+
+      timer =
+        setTimeout(
+          function() {
+
+            falhar(
+              new Error(
+                'Tempo limite excedido ao conectar ao Google Apps Script.'
+              )
+            );
+
+          },
+          20000
+        );
+
+
+      /* ---------------------------------------------------
+         CARREGAR
+         --------------------------------------------------- */
+
+      script.src =
+        url;
+
+
+      script.async =
+        true;
+
 
       document.head.appendChild(
         script
@@ -1305,11 +1678,10 @@ function chamarAPI(
 
 async function testarConexao() {
 
-  statusEl.textContent =
-    'Conectando...';
-
-  statusEl.className =
-    'status';
+  alterarStatus(
+    'Conectando...',
+    'carregando'
+  );
 
 
   try {
@@ -1325,11 +1697,10 @@ async function testarConexao() {
       resposta.sucesso === true
     ) {
 
-      statusEl.textContent =
-        'Sistema online';
-
-      statusEl.className =
-        'status online';
+      alterarStatus(
+        'Sistema online',
+        'online'
+      );
 
 
       return true;
@@ -1344,14 +1715,14 @@ async function testarConexao() {
 
   } catch (erro) {
 
-    statusEl.textContent =
-      'Erro na conexão';
-
-    statusEl.className =
-      'status erro';
+    alterarStatus(
+      'Erro na conexão',
+      'erro'
+    );
 
 
     mostrarMensagem(
+      'Falha ao conectar ao Google Apps Script: ' +
       erro.message,
       'erro'
     );
@@ -1374,9 +1745,9 @@ async function carregarResumo() {
     competenciaEl.value;
 
 
-  /* -----------------------------------------------
-     Validar
-     ----------------------------------------------- */
+  /* -------------------------------------------------------
+     VALIDAR
+     ------------------------------------------------------- */
 
   try {
 
@@ -1396,9 +1767,17 @@ async function carregarResumo() {
   }
 
 
-  /* -----------------------------------------------
-     Indicação visual
-     ----------------------------------------------- */
+  /* -------------------------------------------------------
+     BLOQUEAR BOTÃO
+     ------------------------------------------------------- */
+
+  btnAtualizar.disabled =
+    true;
+
+
+  btnAtualizar.textContent =
+    '↻ Carregando...';
+
 
   const cards =
     document.querySelectorAll(
@@ -1410,7 +1789,7 @@ async function carregarResumo() {
     function(elemento) {
 
       elemento.style.opacity =
-        '0.55';
+        '0.50';
 
     }
   );
@@ -1428,9 +1807,9 @@ async function carregarResumo() {
       );
 
 
-    /* ---------------------------------------------
-       Saldo inicial
-       --------------------------------------------- */
+    /* ---------------------------------------------------
+       SALDO INICIAL
+       --------------------------------------------------- */
 
     document.getElementById(
       'saldoInicial'
@@ -1440,9 +1819,9 @@ async function carregarResumo() {
       );
 
 
-    /* ---------------------------------------------
-       Receber
-       --------------------------------------------- */
+    /* ---------------------------------------------------
+       RECEBER
+       --------------------------------------------------- */
 
     document.getElementById(
       'receber'
@@ -1452,9 +1831,9 @@ async function carregarResumo() {
       );
 
 
-    /* ---------------------------------------------
-       Pagar
-       --------------------------------------------- */
+    /* ---------------------------------------------------
+       PAGAR
+       --------------------------------------------------- */
 
     document.getElementById(
       'pagar'
@@ -1464,9 +1843,9 @@ async function carregarResumo() {
       );
 
 
-    /* ---------------------------------------------
-       Saldo bancário
-       --------------------------------------------- */
+    /* ---------------------------------------------------
+       SALDO BANCÁRIO
+       --------------------------------------------------- */
 
     document.getElementById(
       'saldoBanco'
@@ -1476,13 +1855,56 @@ async function carregarResumo() {
       );
 
 
+    /* ---------------------------------------------------
+       STATUS
+       --------------------------------------------------- */
+
+    alterarStatus(
+      'Sistema online',
+      'online'
+    );
+
+
     mostrarMensagem(
-      '',
-      ''
+      'Resumo atualizado para a competência ' +
+      competencia +
+      '.',
+      'sucesso'
+    );
+
+
+    /*
+     * Remove a mensagem depois de alguns segundos.
+     */
+
+    setTimeout(
+      function() {
+
+        if (
+          mensagemEl.classList.contains(
+            'sucesso'
+          )
+        ) {
+
+          mostrarMensagem(
+            '',
+            ''
+          );
+
+        }
+
+      },
+      3500
     );
 
 
   } catch (erro) {
+
+    alterarStatus(
+      'Erro na conexão',
+      'erro'
+    );
+
 
     mostrarMensagem(
       'Erro ao carregar o resumo: ' +
@@ -1502,19 +1924,30 @@ async function carregarResumo() {
       }
     );
 
+
+    btnAtualizar.disabled =
+      false;
+
+
+    btnAtualizar.textContent =
+      '↻ Atualizar';
+
   }
 
 }
 
 
 /* =========================================================
-   ABRIR PÁGINAS DO GITHUB
+   ABRIR ROTINAS DO GITHUB PAGES
    =========================================================
 
-   ATENÇÃO:
+   IMPORTANTE:
 
-   Estes nomes precisam ser exatamente iguais aos arquivos
-   existentes no seu repositório.
+   As páginas NÃO são abertas pelo Google Apps Script.
+
+   Elas ficam no mesmo repositório GitHub:
+
+   /gestaofinanceira/
 
    ========================================================= */
 
@@ -1527,9 +1960,9 @@ function abrirPagina(
     competenciaAtual();
 
 
-  /* -----------------------------------------------
-     Validar competência
-     ----------------------------------------------- */
+  /* -------------------------------------------------------
+     VALIDAR COMPETÊNCIA
+     ------------------------------------------------------- */
 
   try {
 
@@ -1549,9 +1982,14 @@ function abrirPagina(
   }
 
 
-  /* -----------------------------------------------
-     Mapeamento REAL dos arquivos do GitHub
-     ----------------------------------------------- */
+  /* -------------------------------------------------------
+     MAPA DOS ARQUIVOS
+     -------------------------------------------------------
+
+     ESTES NOMES DEVEM SER EXATAMENTE IGUAIS
+     AOS NOMES DOS ARQUIVOS DO GITHUB.
+
+     ------------------------------------------------------- */
 
   const arquivos = {
 
@@ -1559,7 +1997,7 @@ function abrirPagina(
       'Lancamentos.html',
 
     pendentes:
-      'BaixasPendente​s.html'.replace(/\u200b/g, ''),
+      'BaixasPendentes.html',
 
     relatorio:
       'Relatorio.html',
@@ -1590,14 +2028,9 @@ function abrirPagina(
   }
 
 
-  /* -----------------------------------------------
-     Montar endereço
-
-     IMPORTANTE:
-     A página continua no GitHub.
-
-     O Apps Script NÃO abre a página.
-     ----------------------------------------------- */
+  /* -------------------------------------------------------
+     PRESERVAR A COMPETÊNCIA
+     ------------------------------------------------------- */
 
   const url =
     arquivo +
@@ -1607,9 +2040,9 @@ function abrirPagina(
     );
 
 
-  /* -----------------------------------------------
-     Navegar
-     ----------------------------------------------- */
+  /* -------------------------------------------------------
+     NAVEGAR NO GITHUB PAGES
+     ------------------------------------------------------- */
 
   window.location.href =
     url;
@@ -1618,7 +2051,7 @@ function abrirPagina(
 
 
 /* =========================================================
-   ALTERAÇÃO DA COMPETÊNCIA
+   ALTERAR COMPETÊNCIA
    ========================================================= */
 
 competenciaEl.addEventListener(
@@ -1632,7 +2065,7 @@ competenciaEl.addEventListener(
 
 
 /* =========================================================
-   TECLA ENTER
+   ENTER NO CAMPO
    ========================================================= */
 
 competenciaEl.addEventListener(
@@ -1668,7 +2101,9 @@ async function iniciarSistema() {
 
 
   if (!online) {
+
     return;
+
   }
 
 
@@ -1681,7 +2116,14 @@ async function iniciarSistema() {
    INICIAR
    ========================================================= */
 
-iniciarSistema();
+document.addEventListener(
+  'DOMContentLoaded',
+  function() {
+
+    iniciarSistema();
+
+  }
+);
 
 </script>
 
