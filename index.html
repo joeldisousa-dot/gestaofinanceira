@@ -1136,121 +1136,186 @@ function validarCompetencia(
 
    ========================================================= */
 
-function chamarAPI(
-  action,
-  parametros
-) {
+function chamarAPI(action, parametros) {
 
-  parametros =
-    parametros || {};
+  parametros = parametros || {};
 
-  return new Promise(
-    function(resolve, reject) {
+  return new Promise(function(resolve, reject) {
 
-      if (!URL_API) {
+    const callback =
+      'testeAPI_' +
+      Date.now() +
+      '_' +
+      Math.floor(Math.random() * 100000);
+
+    const script =
+      document.createElement('script');
+
+    let finalizado = false;
+
+    const timeout =
+      setTimeout(function() {
+
+        if (finalizado) return;
+
+        finalizado = true;
+
+        limpar();
 
         reject(
           new Error(
-            'URL da API não configurada.'
+            'Tempo limite excedido ao conectar ao Google Apps Script.'
           )
         );
 
-        return;
+      }, 15000);
+
+
+    window[callback] =
+      function(resposta) {
+
+        if (finalizado) return;
+
+        finalizado = true;
+
+        clearTimeout(timeout);
+
+        limpar();
+
+        console.log(
+          'Resposta recebida do Apps Script:',
+          resposta
+        );
+
+        if (!resposta) {
+
+          reject(
+            new Error(
+              'O Apps Script retornou uma resposta vazia.'
+            )
+          );
+
+          return;
+        }
+
+        if (resposta.sucesso === false) {
+
+          reject(
+            new Error(
+              resposta.erro ||
+              resposta.mensagem ||
+              'Erro retornado pelo Apps Script.'
+            )
+          );
+
+          return;
+        }
+
+        resolve(resposta);
+
+      };
+
+
+    function limpar() {
+
+      if (script.parentNode) {
+
+        script.parentNode.removeChild(
+          script
+        );
 
       }
 
+      try {
 
-      const callback =
-        'callback_' +
-        Date.now() +
-        '_' +
-        Math.floor(
-          Math.random() * 100000
+        delete window[callback];
+
+      } catch (e) {
+
+        window[callback] = undefined;
+
+      }
+
+    }
+
+
+    const query =
+      new URLSearchParams();
+
+    query.set(
+      'action',
+      action
+    );
+
+    query.set(
+      'callback',
+      callback
+    );
+
+
+    Object.keys(parametros)
+      .forEach(function(chave) {
+
+        const valor =
+          parametros[chave];
+
+        if (
+          valor === undefined ||
+          valor === null
+        ) {
+          return;
+        }
+
+        query.set(
+          chave,
+          String(valor)
         );
 
+      });
 
-      const script =
-        document.createElement(
-          'script'
+
+    const url =
+      URL_API +
+      '?' +
+      query.toString();
+
+
+    console.log(
+      'Chamando Apps Script:',
+      url
+    );
+
+
+    script.src = url;
+
+
+    script.onerror =
+      function() {
+
+        if (finalizado) return;
+
+        finalizado = true;
+
+        clearTimeout(timeout);
+
+        limpar();
+
+        reject(
+          new Error(
+            'O navegador não conseguiu carregar a resposta do Google Apps Script.'
+          )
         );
 
-
-      let terminou = false;
-
-
-      const timeout =
-        setTimeout(
-          function() {
-
-            if (terminou) {
-              return;
-            }
-
-            terminou = true;
-
-            limpar();
-
-            reject(
-              new Error(
-                'Tempo limite excedido ao conectar ao Google Apps Script.'
-              )
-            );
-
-          },
-          25000
-        );
+      };
 
 
-      window[callback] =
-        function(resposta) {
+    document.head.appendChild(
+      script
+    );
 
-          if (terminou) {
-            return;
-          }
+  });
 
-          terminou = true;
-
-          clearTimeout(timeout);
-
-          limpar();
-
-
-          if (!resposta) {
-
-            reject(
-              new Error(
-                'Resposta vazia da API.'
-              )
-            );
-
-            return;
-
-          }
-
-
-          if (
-            resposta.sucesso === false
-          ) {
-
-            reject(
-              new Error(
-                resposta.erro ||
-                resposta.mensagem ||
-                'Erro retornado pela API.'
-              )
-            );
-
-            return;
-
-          }
-
-
-          resolve(
-            resposta
-          );
-
-        };
-
+}
 
       function limpar() {
 
