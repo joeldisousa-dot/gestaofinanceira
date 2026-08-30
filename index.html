@@ -3,14 +3,9 @@
 <html lang="pt-BR">
 
 <head>
-
   <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-
->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Controle Financeiro</title>
 
@@ -20,15 +15,8 @@ content="width=device-width, initial-scale=1.0"
       box-sizing: border-box;
     }
 
-    html,
     body {
       margin: 0;
-      padding: 0;
-      min-height: 100%;
-    }
-
-    body {
-
       min-height: 100vh;
 
       font-family:
@@ -46,57 +34,33 @@ content="width=device-width, initial-scale=1.0"
       color: #1f2937;
     }
 
-
-    /* =====================================================
-       CONTAINER
-       ===================================================== */
-
     .container {
-
       width: 100%;
-
       max-width: 1100px;
 
       margin: 0 auto;
 
-      padding:
-        30px 18px 40px;
+      padding: 30px 18px 40px;
     }
 
-
-    /* =====================================================
-       CARD PRINCIPAL
-       ===================================================== */
-
     .card {
-
-      width: 100%;
-
       background: #ffffff;
-
-      border:
-        1px solid #e5eaf0;
 
       border-radius: 18px;
 
       padding: 28px;
 
       box-shadow:
-        0 10px 35px rgba(
-          15,
-          23,
-          42,
-          0.08
-        );
-    }
+        0 10px 35px rgba(15, 23, 42, 0.08);
 
+      border: 1px solid #e5eaf0;
+    }
 
     /* =====================================================
        CABEÇALHO
        ===================================================== */
 
     .header {
-
       display: flex;
 
       align-items: center;
@@ -108,23 +72,17 @@ content="width=device-width, initial-scale=1.0"
       margin-bottom: 28px;
     }
 
-
     .titulo {
-
       margin: 0;
 
       color: #17365d;
 
       font-size: 28px;
 
-      line-height: 1.2;
-
       font-weight: 700;
     }
 
-
     .subtitulo {
-
       margin-top: 7px;
 
       color: #64748b;
@@ -132,21 +90,14 @@ content="width=device-width, initial-scale=1.0"
       font-size: 14px;
     }
 
-
-    /* =====================================================
-       STATUS
-       ===================================================== */
-
     .status {
-
       display: inline-flex;
 
       align-items: center;
 
       gap: 7px;
 
-      padding:
-        8px 13px;
+      padding: 8px 13px;
 
       border-radius: 20px;
 
@@ -161,101 +112,67 @@ content="width=device-width, initial-scale=1.0"
       white-space: nowrap;
     }
 
-
     .status::before {
-
       content: "";
 
       width: 8px;
 
       height: 8px;
 
-      flex: 0 0 8px;
-
       border-radius: 50%;
 
       background: #94a3b8;
     }
 
-
     .status.online {
-
       background: #ecfdf3;
 
       color: #166534;
     }
 
-
     .status.online::before {
-
       background: #22c55e;
     }
 
-
     .status.erro {
-
       background: #fef2f2;
 
       color: #991b1b;
     }
 
-
     .status.erro::before {
-
       background: #ef4444;
     }
-
-
-    .status.carregando {
-
-      background: #eff6ff;
-
-      color: #1d4ed8;
-    }
-
-
-    .status.carregando::before {
-
-      background: #3b82f6;
-    }
-
 
     /* =====================================================
        COMPETÊNCIA
        ===================================================== */
 
     .competencia-box {
-
       background: #f8fafc;
 
-      border:
-        1px solid #e2e8f0;
+      border: 1px solid #e2e8f0;
 
       border-radius: 12px;
 
-      padding:
-        16px 18px;
+      padding: 16px 18px;
 
       margin-bottom: 22px;
     }
 
-
     .competencia-label {
-
       display: block;
 
       margin-bottom: 8px;
 
-      color: #475569;
-
       font-size: 13px;
 
       font-weight: 700;
+
+      color: #475569;
     }
 
-
     .competencia-linha {
-
       display: flex;
 
       align-items: center;
@@ -265,16 +182,12 @@ content="width=device-width, initial-scale=1.0"
       flex-wrap: wrap;
     }
 
-
     #competencia {
-
       width: 210px;
 
-      padding:
-        11px 13px;
+      padding: 11px 13px;
 
-      border:
-        1px solid #cbd5e1;
+      border: 1px solid #cbd5e1;
 
       border-radius: 9px;
 
@@ -287,30 +200,19 @@ content="width=device-width, initial-scale=1.0"
       outline: none;
     }
 
-
     #competencia:focus {
-
       border-color: #2563eb;
 
       box-shadow:
-        0 0 0 3px
-        rgba(
-          37,
-          99,
-          235,
-          0.10
-        );
+        0 0 0 3px rgba(37, 99, 235, 0.10);
     }
 
-
     .btn-atualizar {
-
       border: 0;
 
       border-radius: 9px;
 
-      padding:
-        11px 17px;
+      padding: 11px 17px;
 
       background: #17365d;
 
@@ -322,38 +224,21 @@ content="width=device-width, initial-scale=1.0"
 
       cursor: pointer;
 
-      transition:
-        .2s;
+      transition: .2s;
     }
-
 
     .btn-atualizar:hover {
-
       background: #214c7d;
 
-      transform:
-        translateY(-1px);
+      transform: translateY(-1px);
     }
-
-
-    .btn-atualizar:disabled {
-
-      opacity: .60;
-
-      cursor: wait;
-
-      transform: none;
-    }
-
 
     /* =====================================================
-       SEÇÃO
+       TÍTULOS
        ===================================================== */
 
     .secao-titulo {
-
-      margin:
-        25px 0 14px;
+      margin: 25px 0 14px;
 
       color: #17365d;
 
@@ -362,13 +247,11 @@ content="width=device-width, initial-scale=1.0"
       font-weight: 700;
     }
 
-
     /* =====================================================
        RESUMO
        ===================================================== */
 
     .resumo {
-
       display: grid;
 
       grid-template-columns:
@@ -379,52 +262,22 @@ content="width=device-width, initial-scale=1.0"
       margin-bottom: 28px;
     }
 
-
     .resumo-card {
-
       min-height: 105px;
 
       padding: 17px;
 
-      border:
-        1px solid #e5e7eb;
+      border: 1px solid #e5e7eb;
 
       border-radius: 13px;
 
       background: #ffffff;
 
       box-shadow:
-        0 3px 12px
-        rgba(
-          15,
-          23,
-          42,
-          0.04
-        );
-
-      transition:
-        .2s;
+        0 3px 12px rgba(15, 23, 42, 0.04);
     }
-
-
-    .resumo-card:hover {
-
-      transform:
-        translateY(-1px);
-
-      box-shadow:
-        0 5px 16px
-        rgba(
-          15,
-          23,
-          42,
-          0.07
-        );
-    }
-
 
     .resumo-label {
-
       color: #64748b;
 
       font-size: 12px;
@@ -434,9 +287,7 @@ content="width=device-width, initial-scale=1.0"
       margin-bottom: 10px;
     }
 
-
     .resumo-valor {
-
       color: #17365d;
 
       font-size: 21px;
@@ -446,13 +297,11 @@ content="width=device-width, initial-scale=1.0"
       word-break: break-word;
     }
 
-
     /* =====================================================
        MENU
        ===================================================== */
 
     .menu {
-
       display: grid;
 
       grid-template-columns:
@@ -461,9 +310,7 @@ content="width=device-width, initial-scale=1.0"
       gap: 15px;
     }
 
-
     .menu-item {
-
       width: 100%;
 
       min-height: 125px;
@@ -472,8 +319,7 @@ content="width=device-width, initial-scale=1.0"
 
       border-radius: 14px;
 
-      padding:
-        20px 15px;
+      padding: 20px 15px;
 
       background: #17365d;
 
@@ -493,46 +339,20 @@ content="width=device-width, initial-scale=1.0"
         box-shadow .18s ease;
     }
 
-
     .menu-item:hover {
-
       background: #214c7d;
 
-      transform:
-        translateY(-2px);
+      transform: translateY(-2px);
 
       box-shadow:
-        0 7px 18px
-        rgba(
-          23,
-          54,
-          93,
-          0.18
-        );
+        0 7px 18px rgba(23, 54, 93, 0.18);
     }
-
 
     .menu-item:active {
-
-      transform:
-        translateY(0);
+      transform: translateY(0);
     }
-
-
-    .menu-item:disabled {
-
-      opacity: .60;
-
-      cursor: wait;
-
-      transform: none;
-
-      box-shadow: none;
-    }
-
 
     .menu-icone {
-
       display: block;
 
       font-size: 31px;
@@ -542,9 +362,7 @@ content="width=device-width, initial-scale=1.0"
       margin-bottom: 12px;
     }
 
-
     .menu-descricao {
-
       display: block;
 
       margin-top: 6px;
@@ -556,26 +374,22 @@ content="width=device-width, initial-scale=1.0"
       opacity: .80;
     }
 
-
     /* =====================================================
        MENSAGEM
        ===================================================== */
 
     .mensagem {
-
       display: none;
 
       margin-top: 20px;
 
-      padding:
-        13px 15px;
+      padding: 13px 15px;
 
       border-radius: 9px;
 
       background: #fff7ed;
 
-      border:
-        1px solid #fed7aa;
+      border: 1px solid #fed7aa;
 
       color: #9a3412;
 
@@ -584,9 +398,7 @@ content="width=device-width, initial-scale=1.0"
       line-height: 1.5;
     }
 
-
     .mensagem.erro {
-
       background: #fef2f2;
 
       border-color: #fecaca;
@@ -594,9 +406,7 @@ content="width=device-width, initial-scale=1.0"
       color: #991b1b;
     }
 
-
     .mensagem.sucesso {
-
       background: #f0fdf4;
 
       border-color: #bbf7d0;
@@ -604,29 +414,16 @@ content="width=device-width, initial-scale=1.0"
       color: #166534;
     }
 
-
-    .mensagem.info {
-
-      background: #eff6ff;
-
-      border-color: #bfdbfe;
-
-      color: #1e40af;
-    }
-
-
     /* =====================================================
        RODAPÉ
        ===================================================== */
 
     .rodape {
-
       margin-top: 25px;
 
       padding-top: 17px;
 
-      border-top:
-        1px solid #e5e7eb;
+      border-top: 1px solid #e5e7eb;
 
       display: flex;
 
@@ -641,7 +438,6 @@ content="width=device-width, initial-scale=1.0"
       font-size: 12px;
     }
 
-
     /* =====================================================
        RESPONSIVO
        ===================================================== */
@@ -649,96 +445,64 @@ content="width=device-width, initial-scale=1.0"
     @media (max-width: 850px) {
 
       .resumo {
-
         grid-template-columns:
           repeat(2, 1fr);
       }
 
-
       .menu {
-
         grid-template-columns:
           repeat(2, 1fr);
       }
 
     }
 
-
     @media (max-width: 560px) {
 
       .container {
-
-        padding:
-          15px 10px 25px;
+        padding: 15px 10px 25px;
       }
 
-
       .card {
-
         padding: 18px;
       }
 
-
       .header {
-
         align-items: flex-start;
 
         flex-direction: column;
       }
 
-
       .titulo {
-
         font-size: 24px;
       }
 
-
-      .status {
-
-        align-self: flex-start;
-      }
-
-
       .resumo {
-
         grid-template-columns: 1fr;
       }
-
 
       .menu {
-
         grid-template-columns: 1fr;
       }
 
-
       .menu-item {
-
         min-height: 105px;
       }
 
-
       .competencia-linha {
-
         align-items: stretch;
 
         flex-direction: column;
       }
 
-
       #competencia {
-
         width: 100%;
       }
-
 
       .btn-atualizar {
-
         width: 100%;
       }
 
-
       .rodape {
-
         flex-direction: column;
 
         align-items: flex-start;
@@ -756,7 +520,6 @@ content="width=device-width, initial-scale=1.0"
 
 ```
 <div class="card">
-
 
   <!-- =================================================
        CABEÇALHO
@@ -776,10 +539,9 @@ content="width=device-width, initial-scale=1.0"
 
     </div>
 
-
     <div
       id="status"
-      class="status carregando"
+      class="status"
     >
       Conectando...
     </div>
@@ -800,7 +562,6 @@ content="width=device-width, initial-scale=1.0"
       Competência
     </label>
 
-
     <div class="competencia-linha">
 
       <input
@@ -809,9 +570,7 @@ content="width=device-width, initial-scale=1.0"
         title="Selecione a competência"
       >
 
-
       <button
-        id="btnAtualizar"
         type="button"
         class="btn-atualizar"
         onclick="carregarResumo()"
@@ -832,9 +591,7 @@ content="width=device-width, initial-scale=1.0"
     Resumo da Competência
   </div>
 
-
   <div class="resumo">
-
 
     <div class="resumo-card">
 
@@ -909,7 +666,6 @@ content="width=device-width, initial-scale=1.0"
   <div class="secao-titulo">
     Rotinas
   </div>
-
 
   <div class="menu">
 
@@ -1069,7 +825,6 @@ content="width=device-width, initial-scale=1.0"
 
   </div>
 
-
 </div>
 ```
 
@@ -1077,16 +832,11 @@ content="width=device-width, initial-scale=1.0"
 
 <script>
 
-
 /* =========================================================
-   CONFIGURAÇÃO DA API
+   CONFIGURAÇÃO
    =========================================================
 
-   O INDEX ESTÁ NO GITHUB PAGES.
-
-   A API ESTÁ NO GOOGLE APPS SCRIPT.
-
-   NÃO ALTERE PARA A URL DO GITHUB.
+   URL REAL DA API DO GOOGLE APPS SCRIPT
 
    ========================================================= */
 
@@ -1099,27 +849,13 @@ const URL_API =
    ========================================================= */
 
 const statusEl =
-  document.getElementById(
-    'status'
-  );
-
+  document.getElementById('status');
 
 const mensagemEl =
-  document.getElementById(
-    'mensagem'
-  );
-
+  document.getElementById('mensagem');
 
 const competenciaEl =
-  document.getElementById(
-    'competencia'
-  );
-
-
-const btnAtualizar =
-  document.getElementById(
-    'btnAtualizar'
-  );
+  document.getElementById('competencia');
 
 
 /* =========================================================
@@ -1128,34 +864,23 @@ const btnAtualizar =
 
 function competenciaAtual() {
 
-  const agora =
-    new Date();
-
+  const agora = new Date();
 
   const ano =
     agora.getFullYear();
 
-
   const mes =
     String(
       agora.getMonth() + 1
-    ).padStart(
-      2,
-      '0'
-    );
+    ).padStart(2, '0');
 
-
-  return (
-    ano +
-    '-' +
-    mes
-  );
+  return ano + '-' + mes;
 
 }
 
 
 /* =========================================================
-   DEFINIR COMPETÊNCIA INICIAL
+   DEFINIR COMPETÊNCIA
    ========================================================= */
 
 competenciaEl.value =
@@ -1168,18 +893,8 @@ competenciaEl.value =
 
 function moeda(valor) {
 
-  let numero =
-    Number(valor);
-
-
-  if (
-    !Number.isFinite(numero)
-  ) {
-
-    numero = 0;
-
-  }
-
+  const numero =
+    Number(valor || 0);
 
   return numero.toLocaleString(
     'pt-BR',
@@ -1198,16 +913,14 @@ function moeda(valor) {
 
 function mostrarMensagem(
   texto,
-  tipo
+  tipo = ''
 ) {
 
   mensagemEl.textContent =
     texto || '';
 
-
   mensagemEl.className =
     'mensagem';
-
 
   if (tipo) {
 
@@ -1217,39 +930,10 @@ function mostrarMensagem(
 
   }
 
-
   mensagemEl.style.display =
     texto
       ? 'block'
       : 'none';
-
-}
-
-
-/* =========================================================
-   STATUS
-   ========================================================= */
-
-function alterarStatus(
-  texto,
-  tipo
-) {
-
-  statusEl.textContent =
-    texto;
-
-
-  statusEl.className =
-    'status';
-
-
-  if (tipo) {
-
-    statusEl.classList.add(
-      tipo
-    );
-
-  }
 
 }
 
@@ -1274,22 +958,14 @@ function validarCompetenciaFront(
 
   }
 
-
   const partes =
     competencia.split('-');
 
-
   const ano =
-    Number(
-      partes[0]
-    );
-
+    Number(partes[0]);
 
   const mes =
-    Number(
-      partes[1]
-    );
-
+    Number(partes[1]);
 
   if (
     ano < 1900 ||
@@ -1302,7 +978,6 @@ function validarCompetenciaFront(
 
   }
 
-
   if (
     mes < 1 ||
     mes > 12
@@ -1314,60 +989,45 @@ function validarCompetenciaFront(
 
   }
 
-
   return true;
 
 }
 
 
 /* =========================================================
-   CHAMAR GOOGLE APPS SCRIPT
+   CHAMAR API - JSONP
    =========================================================
 
-   O Apps Script utiliza:
+   IMPORTANTE:
 
-   parametros.action
+   O Apps Script recebe:
 
-   e não:
+       action=ping
 
-   parametros.acao
+   e NÃO:
 
-   Portanto o index envia exatamente:
+       acao=ping
 
-   ?action=ping
-
-   ?action=obterResumo
-
-   etc.
+   Essa era a causa principal do erro de conexão.
 
    ========================================================= */
 
 function chamarAPI(
-  action,
+  acao,
   parametros = {}
 ) {
 
   return new Promise(
     function(resolve, reject) {
 
-
-      /* ---------------------------------------------------
-         VALIDAR URL
-         --------------------------------------------------- */
-
       if (
         !URL_API ||
-        !URL_API.includes(
-          'script.google.com/macros/s/'
-        ) ||
-        !URL_API.endsWith(
-          '/exec'
-        )
+        URL_API.indexOf('AKfy') === -1
       ) {
 
         reject(
           new Error(
-            'URL do Google Apps Script inválida ou não configurada.'
+            'URL da API não configurada corretamente.'
           )
         );
 
@@ -1376,133 +1036,64 @@ function chamarAPI(
       }
 
 
-      /* ---------------------------------------------------
-         CALLBACK JSONP
-         --------------------------------------------------- */
-
-      const callback =
-        'controleFinanceiro_' +
+      const nomeCallback =
+        'controleFinanceiroCallback_' +
         Date.now() +
         '_' +
         Math.floor(
-          Math.random() * 1000000
+          Math.random() * 100000
         );
 
 
       const script =
-        document.createElement(
-          'script'
-        );
+        document.createElement('script');
 
 
-      let concluido =
-        false;
+      let finalizado = false;
 
 
-      let timer =
-        null;
+      const timeout =
+        setTimeout(
+          function() {
 
+            if (finalizado) {
+              return;
+            }
 
-      /* ---------------------------------------------------
-         LIMPAR
-         --------------------------------------------------- */
+            finalizado = true;
 
-      function limpar() {
+            limpar();
 
-        if (timer) {
-
-          clearTimeout(
-            timer
-          );
-
-          timer = null;
-
-        }
-
-
-        try {
-
-          delete window[
-            callback
-          ];
-
-        } catch (erro) {
-
-          window[
-            callback
-          ] = undefined;
-
-        }
-
-
-        if (
-          script &&
-          script.parentNode
-        ) {
-
-          script.parentNode.removeChild(
-            script
-          );
-
-        }
-
-      }
-
-
-      /* ---------------------------------------------------
-         FINALIZAR ERRO
-         --------------------------------------------------- */
-
-      function falhar(
-        erro
-      ) {
-
-        if (concluido) {
-          return;
-        }
-
-
-        concluido = true;
-
-        limpar();
-
-        reject(
-          erro instanceof Error
-            ? erro
-            : new Error(
-                String(erro)
+            reject(
+              new Error(
+                'Tempo limite excedido ao conectar ao Google Apps Script.'
               )
+            );
+
+          },
+          20000
         );
 
-      }
 
-
-      /* ---------------------------------------------------
-         CALLBACK
-         --------------------------------------------------- */
-
-      window[
-        callback
-      ] =
+      window[nomeCallback] =
         function(resposta) {
 
-          if (concluido) {
+          if (finalizado) {
             return;
           }
 
+          finalizado = true;
 
-          concluido = true;
+          clearTimeout(timeout);
 
           limpar();
 
 
-          if (
-            !resposta
-          ) {
+          if (!resposta) {
 
             reject(
               new Error(
-                'O Google Apps Script retornou uma resposta vazia.'
+                'A API retornou uma resposta vazia.'
               )
             );
 
@@ -1519,7 +1110,7 @@ function chamarAPI(
               new Error(
                 resposta.erro ||
                 resposta.mensagem ||
-                'O Google Apps Script retornou um erro.'
+                'Erro retornado pela API.'
               )
             );
 
@@ -1528,35 +1119,64 @@ function chamarAPI(
           }
 
 
-          resolve(
-            resposta
-          );
+          resolve(resposta);
 
         };
 
 
-      /* ---------------------------------------------------
-         MONTAR QUERY STRING
-         --------------------------------------------------- */
+      function limpar() {
+
+        try {
+
+          if (
+            script &&
+            script.parentNode
+          ) {
+
+            script.parentNode.removeChild(
+              script
+            );
+
+          }
+
+        } catch (erro) {}
+
+
+        try {
+
+          delete window[nomeCallback];
+
+        } catch (erro) {
+
+          window[nomeCallback] =
+            undefined;
+
+        }
+
+      }
+
 
       const query =
         new URLSearchParams();
 
 
       /*
-       * IMPORTANTE:
-       * O servidor espera "action".
+       * CORREÇÃO PRINCIPAL:
+       *
+       * O Apps Script usa parametros.action
+       *
+       * Portanto o index precisa enviar action.
        */
 
       query.set(
         'action',
-        action
+        acao
       );
 
 
       query.set(
         'callback',
-        callback
+        nomeCallback
       );
 
 
@@ -1585,18 +1205,14 @@ function chamarAPI(
 
             query.set(
               chave,
-              JSON.stringify(
-                valor
-              )
+              JSON.stringify(valor)
             );
 
           } else {
 
             query.set(
               chave,
-              String(
-                valor
-              )
+              String(valor)
             );
 
           }
@@ -1605,61 +1221,38 @@ function chamarAPI(
       );
 
 
-      /* ---------------------------------------------------
-         URL FINAL
-         --------------------------------------------------- */
+      const separador =
+        URL_API.indexOf('?') >= 0
+          ? '&'
+          : '?';
 
-      const url =
+
+      script.src =
         URL_API +
-        '?' +
+        separador +
         query.toString();
 
-
-      /* ---------------------------------------------------
-         ERRO DO SCRIPT
-         --------------------------------------------------- */
 
       script.onerror =
         function() {
 
-          falhar(
+          if (finalizado) {
+            return;
+          }
+
+          finalizado = true;
+
+          clearTimeout(timeout);
+
+          limpar();
+
+          reject(
             new Error(
-              'Não foi possível conectar ao Google Apps Script.'
+              'Falha ao conectar ao Google Apps Script.'
             )
           );
 
         };
-
-
-      /* ---------------------------------------------------
-         TIMEOUT
-         --------------------------------------------------- */
-
-      timer =
-        setTimeout(
-          function() {
-
-            falhar(
-              new Error(
-                'Tempo limite excedido ao conectar ao Google Apps Script.'
-              )
-            );
-
-          },
-          20000
-        );
-
-
-      /* ---------------------------------------------------
-         CARREGAR
-         --------------------------------------------------- */
-
-      script.src =
-        url;
-
-
-      script.async =
-        true;
 
 
       document.head.appendChild(
@@ -1678,10 +1271,11 @@ function chamarAPI(
 
 async function testarConexao() {
 
-  alterarStatus(
-    'Conectando...',
-    'carregando'
-  );
+  statusEl.textContent =
+    'Conectando...';
+
+  statusEl.className =
+    'status';
 
 
   try {
@@ -1697,10 +1291,11 @@ async function testarConexao() {
       resposta.sucesso === true
     ) {
 
-      alterarStatus(
-        'Sistema online',
-        'online'
-      );
+      statusEl.textContent =
+        'Sistema online';
+
+      statusEl.className =
+        'status online';
 
 
       return true;
@@ -1715,16 +1310,23 @@ async function testarConexao() {
 
   } catch (erro) {
 
-    alterarStatus(
-      'Erro na conexão',
+    statusEl.textContent =
+      'Erro na conexão';
+
+    statusEl.className =
+      'status erro';
+
+
+    mostrarMensagem(
+      'Erro na conexão: ' +
+      erro.message,
       'erro'
     );
 
 
-    mostrarMensagem(
-      'Falha ao conectar ao Google Apps Script: ' +
-      erro.message,
-      'erro'
+    console.error(
+      'Erro na API:',
+      erro
     );
 
 
@@ -1745,10 +1347,6 @@ async function carregarResumo() {
     competenciaEl.value;
 
 
-  /* -------------------------------------------------------
-     VALIDAR
-     ------------------------------------------------------- */
-
   try {
 
     validarCompetenciaFront(
@@ -1767,18 +1365,6 @@ async function carregarResumo() {
   }
 
 
-  /* -------------------------------------------------------
-     BLOQUEAR BOTÃO
-     ------------------------------------------------------- */
-
-  btnAtualizar.disabled =
-    true;
-
-
-  btnAtualizar.textContent =
-    '↻ Carregando...';
-
-
   const cards =
     document.querySelectorAll(
       '.resumo-valor'
@@ -1789,7 +1375,7 @@ async function carregarResumo() {
     function(elemento) {
 
       elemento.style.opacity =
-        '0.50';
+        '0.55';
 
     }
   );
@@ -1807,10 +1393,6 @@ async function carregarResumo() {
       );
 
 
-    /* ---------------------------------------------------
-       SALDO INICIAL
-       --------------------------------------------------- */
-
     document.getElementById(
       'saldoInicial'
     ).textContent =
@@ -1818,10 +1400,6 @@ async function carregarResumo() {
         resposta.saldoInicial
       );
 
-
-    /* ---------------------------------------------------
-       RECEBER
-       --------------------------------------------------- */
 
     document.getElementById(
       'receber'
@@ -1831,10 +1409,6 @@ async function carregarResumo() {
       );
 
 
-    /* ---------------------------------------------------
-       PAGAR
-       --------------------------------------------------- */
-
     document.getElementById(
       'pagar'
     ).textContent =
@@ -1842,10 +1416,6 @@ async function carregarResumo() {
         resposta.pagar
       );
 
-
-    /* ---------------------------------------------------
-       SALDO BANCÁRIO
-       --------------------------------------------------- */
 
     document.getElementById(
       'saldoBanco'
@@ -1855,56 +1425,13 @@ async function carregarResumo() {
       );
 
 
-    /* ---------------------------------------------------
-       STATUS
-       --------------------------------------------------- */
-
-    alterarStatus(
-      'Sistema online',
-      'online'
-    );
-
-
     mostrarMensagem(
-      'Resumo atualizado para a competência ' +
-      competencia +
-      '.',
-      'sucesso'
-    );
-
-
-    /*
-     * Remove a mensagem depois de alguns segundos.
-     */
-
-    setTimeout(
-      function() {
-
-        if (
-          mensagemEl.classList.contains(
-            'sucesso'
-          )
-        ) {
-
-          mostrarMensagem(
-            '',
-            ''
-          );
-
-        }
-
-      },
-      3500
+      '',
+      ''
     );
 
 
   } catch (erro) {
-
-    alterarStatus(
-      'Erro na conexão',
-      'erro'
-    );
-
 
     mostrarMensagem(
       'Erro ao carregar o resumo: ' +
@@ -1924,30 +1451,17 @@ async function carregarResumo() {
       }
     );
 
-
-    btnAtualizar.disabled =
-      false;
-
-
-    btnAtualizar.textContent =
-      '↻ Atualizar';
-
   }
 
 }
 
 
 /* =========================================================
-   ABRIR ROTINAS DO GITHUB PAGES
+   ABRIR PÁGINAS DO GITHUB
    =========================================================
 
-   IMPORTANTE:
-
-   As páginas NÃO são abertas pelo Google Apps Script.
-
-   Elas ficam no mesmo repositório GitHub:
-
-   /gestaofinanceira/
+   Os nomes abaixo são exatamente os nomes apresentados
+   no seu repositório GitHub.
 
    ========================================================= */
 
@@ -1959,10 +1473,6 @@ function abrirPagina(
     competenciaEl.value ||
     competenciaAtual();
 
-
-  /* -------------------------------------------------------
-     VALIDAR COMPETÊNCIA
-     ------------------------------------------------------- */
 
   try {
 
@@ -1981,15 +1491,6 @@ function abrirPagina(
 
   }
 
-
-  /* -------------------------------------------------------
-     MAPA DOS ARQUIVOS
-     -------------------------------------------------------
-
-     ESTES NOMES DEVEM SER EXATAMENTE IGUAIS
-     AOS NOMES DOS ARQUIVOS DO GITHUB.
-
-     ------------------------------------------------------- */
 
   const arquivos = {
 
@@ -2028,9 +1529,13 @@ function abrirPagina(
   }
 
 
-  /* -------------------------------------------------------
-     PRESERVAR A COMPETÊNCIA
-     ------------------------------------------------------- */
+  /*
+   * GitHub Pages trabalha com os arquivos diretamente.
+   *
+   * NÃO enviar ?page=
+   *
+   * A competência é enviada para a rotina.
+   */
 
   const url =
     arquivo +
@@ -2040,9 +1545,11 @@ function abrirPagina(
     );
 
 
-  /* -------------------------------------------------------
-     NAVEGAR NO GITHUB PAGES
-     ------------------------------------------------------- */
+  console.log(
+    'Abrindo:',
+    url
+  );
+
 
   window.location.href =
     url;
@@ -2065,7 +1572,7 @@ competenciaEl.addEventListener(
 
 
 /* =========================================================
-   ENTER NO CAMPO
+   ENTER NA COMPETÊNCIA
    ========================================================= */
 
 competenciaEl.addEventListener(
@@ -2101,9 +1608,7 @@ async function iniciarSistema() {
 
 
   if (!online) {
-
     return;
-
   }
 
 
@@ -2116,14 +1621,7 @@ async function iniciarSistema() {
    INICIAR
    ========================================================= */
 
-document.addEventListener(
-  'DOMContentLoaded',
-  function() {
-
-    iniciarSistema();
-
-  }
-);
+iniciarSistema();
 
 </script>
 
