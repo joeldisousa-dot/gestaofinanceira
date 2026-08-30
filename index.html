@@ -1,843 +1,980 @@
+```html
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 
-  <title>Controle Financeiro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
+<title>Controle Financeiro</title>
 
-    * {
-      box-sizing: border-box;
-    }
+<style>
 
-    body {
-      margin: 0;
-      min-height: 100vh;
+* {
+  box-sizing: border-box;
+}
 
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+body {
 
-      background:
-        linear-gradient(
-          135deg,
-          #f4f7fb 0%,
-          #eef3f9 100%
-        );
+  margin: 0;
 
-      color: #1f2937;
-    }
+  min-height: 100vh;
 
-    .container {
-      width: 100%;
-      max-width: 1100px;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 
-      margin: 0 auto;
+  background:
+    linear-gradient(
+      135deg,
+      #f4f7fb 0%,
+      #eef3f9 100%
+    );
 
-      padding: 30px 18px 40px;
-    }
+  color: #1f2937;
 
-    .card {
-      background: #ffffff;
+}
 
-      border-radius: 18px;
+.container {
 
-      padding: 28px;
+  width: 100%;
 
-      box-shadow:
-        0 10px 35px rgba(15, 23, 42, 0.08);
+  max-width: 1100px;
 
-      border: 1px solid #e5eaf0;
-    }
+  margin: 0 auto;
 
-    /* =====================================================
-       CABEÇALHO
-       ===================================================== */
+  padding:
+    30px 18px 40px;
 
-    .header {
-      display: flex;
+}
 
-      align-items: center;
+.card {
 
-      justify-content: space-between;
+  background: #ffffff;
 
-      gap: 20px;
+  border-radius: 18px;
 
-      margin-bottom: 28px;
-    }
+  padding: 28px;
 
-    .titulo {
-      margin: 0;
+  box-shadow:
+    0 10px 35px rgba(
+      15,
+      23,
+      42,
+      0.08
+    );
 
-      color: #17365d;
+  border:
+    1px solid #e5eaf0;
 
-      font-size: 28px;
+}
 
-      font-weight: 700;
-    }
 
-    .subtitulo {
-      margin-top: 7px;
+/* =====================================================
+   CABEÇALHO
+   ===================================================== */
 
-      color: #64748b;
+.header {
 
-      font-size: 14px;
-    }
+  display: flex;
 
-    .status {
-      display: inline-flex;
+  align-items: center;
 
-      align-items: center;
+  justify-content: space-between;
 
-      gap: 7px;
+  gap: 20px;
 
-      padding: 8px 13px;
+  margin-bottom: 28px;
 
-      border-radius: 20px;
+}
 
-      background: #f1f5f9;
+.titulo {
 
-      color: #64748b;
+  margin: 0;
 
-      font-size: 13px;
+  color: #17365d;
 
-      font-weight: 600;
+  font-size: 28px;
 
-      white-space: nowrap;
-    }
+  font-weight: 700;
 
-    .status::before {
-      content: "";
+}
 
-      width: 8px;
+.subtitulo {
 
-      height: 8px;
+  margin-top: 7px;
 
-      border-radius: 50%;
+  color: #64748b;
 
-      background: #94a3b8;
-    }
+  font-size: 14px;
 
-    .status.online {
-      background: #ecfdf3;
+}
 
-      color: #166534;
-    }
 
-    .status.online::before {
-      background: #22c55e;
-    }
+/* =====================================================
+   STATUS
+   ===================================================== */
 
-    .status.erro {
-      background: #fef2f2;
+.status {
 
-      color: #991b1b;
-    }
+  display: inline-flex;
 
-    .status.erro::before {
-      background: #ef4444;
-    }
+  align-items: center;
 
-    /* =====================================================
-       COMPETÊNCIA
-       ===================================================== */
+  gap: 7px;
 
-    .competencia-box {
-      background: #f8fafc;
+  padding:
+    8px 13px;
 
-      border: 1px solid #e2e8f0;
+  border-radius: 20px;
 
-      border-radius: 12px;
+  background: #f1f5f9;
 
-      padding: 16px 18px;
+  color: #64748b;
 
-      margin-bottom: 22px;
-    }
+  font-size: 13px;
 
-    .competencia-label {
-      display: block;
+  font-weight: 600;
 
-      margin-bottom: 8px;
+  white-space: nowrap;
 
-      font-size: 13px;
+}
 
-      font-weight: 700;
+.status::before {
 
-      color: #475569;
-    }
+  content: "";
 
-    .competencia-linha {
-      display: flex;
+  width: 8px;
 
-      align-items: center;
+  height: 8px;
 
-      gap: 12px;
+  border-radius: 50%;
 
-      flex-wrap: wrap;
-    }
+  background: #94a3b8;
 
-    #competencia {
-      width: 210px;
+}
 
-      padding: 11px 13px;
+.status.online {
 
-      border: 1px solid #cbd5e1;
+  background: #ecfdf3;
 
-      border-radius: 9px;
+  color: #166534;
 
-      background: #ffffff;
+}
 
-      color: #1e293b;
+.status.online::before {
 
-      font-size: 15px;
+  background: #22c55e;
 
-      outline: none;
-    }
+}
 
-    #competencia:focus {
-      border-color: #2563eb;
+.status.erro {
 
-      box-shadow:
-        0 0 0 3px rgba(37, 99, 235, 0.10);
-    }
+  background: #fef2f2;
 
-    .btn-atualizar {
-      border: 0;
+  color: #991b1b;
 
-      border-radius: 9px;
+}
 
-      padding: 11px 17px;
+.status.erro::before {
 
-      background: #17365d;
+  background: #ef4444;
 
-      color: #ffffff;
+}
 
-      font-size: 14px;
 
-      font-weight: 700;
+/* =====================================================
+   COMPETÊNCIA
+   ===================================================== */
 
-      cursor: pointer;
+.competencia-box {
 
-      transition: .2s;
-    }
+  background: #f8fafc;
 
-    .btn-atualizar:hover {
-      background: #214c7d;
+  border:
+    1px solid #e2e8f0;
 
-      transform: translateY(-1px);
-    }
+  border-radius: 12px;
 
-    /* =====================================================
-       TÍTULOS
-       ===================================================== */
+  padding:
+    16px 18px;
 
-    .secao-titulo {
-      margin: 25px 0 14px;
+  margin-bottom: 22px;
 
-      color: #17365d;
+}
 
-      font-size: 18px;
+.competencia-label {
 
-      font-weight: 700;
-    }
+  display: block;
 
-    /* =====================================================
-       RESUMO
-       ===================================================== */
+  margin-bottom: 8px;
 
-    .resumo {
-      display: grid;
+  font-size: 13px;
 
-      grid-template-columns:
-        repeat(4, 1fr);
+  font-weight: 700;
 
-      gap: 14px;
+  color: #475569;
 
-      margin-bottom: 28px;
-    }
+}
 
-    .resumo-card {
-      min-height: 105px;
+.competencia-linha {
 
-      padding: 17px;
+  display: flex;
 
-      border: 1px solid #e5e7eb;
+  align-items: center;
 
-      border-radius: 13px;
+  gap: 12px;
 
-      background: #ffffff;
+  flex-wrap: wrap;
 
-      box-shadow:
-        0 3px 12px rgba(15, 23, 42, 0.04);
-    }
+}
 
-    .resumo-label {
-      color: #64748b;
+#competencia {
 
-      font-size: 12px;
+  width: 210px;
 
-      font-weight: 600;
+  padding:
+    11px 13px;
 
-      margin-bottom: 10px;
-    }
+  border:
+    1px solid #cbd5e1;
 
-    .resumo-valor {
-      color: #17365d;
+  border-radius: 9px;
 
-      font-size: 21px;
+  background: #ffffff;
 
-      font-weight: 700;
+  color: #1e293b;
 
-      word-break: break-word;
-    }
+  font-size: 15px;
 
-    /* =====================================================
-       MENU
-       ===================================================== */
+  outline: none;
 
-    .menu {
-      display: grid;
+}
 
-      grid-template-columns:
-        repeat(3, 1fr);
+#competencia:focus {
 
-      gap: 15px;
-    }
+  border-color: #2563eb;
 
-    .menu-item {
-      width: 100%;
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      37,
+      99,
+      235,
+      0.10
+    );
 
-      min-height: 125px;
+}
 
-      border: 0;
+.btn-atualizar {
 
-      border-radius: 14px;
+  border: 0;
 
-      padding: 20px 15px;
+  border-radius: 9px;
 
-      background: #17365d;
+  padding:
+    11px 17px;
 
-      color: #ffffff;
+  background: #17365d;
 
-      cursor: pointer;
+  color: #ffffff;
 
-      text-align: center;
+  font-size: 14px;
 
-      font-size: 15px;
+  font-weight: 700;
 
-      font-weight: 700;
+  cursor: pointer;
 
-      transition:
-        transform .18s ease,
-        background .18s ease,
-        box-shadow .18s ease;
-    }
+  transition: .2s;
 
-    .menu-item:hover {
-      background: #214c7d;
+}
 
-      transform: translateY(-2px);
+.btn-atualizar:hover {
 
-      box-shadow:
-        0 7px 18px rgba(23, 54, 93, 0.18);
-    }
+  background: #214c7d;
 
-    .menu-item:active {
-      transform: translateY(0);
-    }
+  transform:
+    translateY(-1px);
 
-    .menu-icone {
-      display: block;
+}
 
-      font-size: 31px;
 
-      line-height: 1;
+/* =====================================================
+   TÍTULOS
+   ===================================================== */
 
-      margin-bottom: 12px;
-    }
+.secao-titulo {
 
-    .menu-descricao {
-      display: block;
+  margin:
+    25px 0 14px;
 
-      margin-top: 6px;
+  color: #17365d;
 
-      font-size: 11px;
+  font-size: 18px;
 
-      font-weight: 400;
+  font-weight: 700;
 
-      opacity: .80;
-    }
+}
 
-    /* =====================================================
-       MENSAGEM
-       ===================================================== */
 
-    .mensagem {
-      display: none;
+/* =====================================================
+   RESUMO
+   ===================================================== */
 
-      margin-top: 20px;
+.resumo {
 
-      padding: 13px 15px;
+  display: grid;
 
-      border-radius: 9px;
+  grid-template-columns:
+    repeat(4, 1fr);
 
-      background: #fff7ed;
+  gap: 14px;
 
-      border: 1px solid #fed7aa;
+  margin-bottom: 28px;
 
-      color: #9a3412;
+}
 
-      font-size: 14px;
+.resumo-card {
 
-      line-height: 1.5;
-    }
+  min-height: 105px;
 
-    .mensagem.erro {
-      background: #fef2f2;
+  padding: 17px;
 
-      border-color: #fecaca;
+  border:
+    1px solid #e5e7eb;
 
-      color: #991b1b;
-    }
+  border-radius: 13px;
 
-    .mensagem.sucesso {
-      background: #f0fdf4;
+  background: #ffffff;
 
-      border-color: #bbf7d0;
+  box-shadow:
+    0 3px 12px
+    rgba(
+      15,
+      23,
+      42,
+      0.04
+    );
 
-      color: #166534;
-    }
+}
 
-    /* =====================================================
-       RODAPÉ
-       ===================================================== */
+.resumo-label {
 
-    .rodape {
-      margin-top: 25px;
+  color: #64748b;
 
-      padding-top: 17px;
+  font-size: 12px;
 
-      border-top: 1px solid #e5e7eb;
+  font-weight: 600;
 
-      display: flex;
+  margin-bottom: 10px;
 
-      justify-content: space-between;
+}
 
-      align-items: center;
+.resumo-valor {
 
-      gap: 15px;
+  color: #17365d;
 
-      color: #94a3b8;
+  font-size: 21px;
 
-      font-size: 12px;
-    }
+  font-weight: 700;
 
-    /* =====================================================
-       RESPONSIVO
-       ===================================================== */
+  word-break: break-word;
 
-    @media (max-width: 850px) {
+}
 
-      .resumo {
-        grid-template-columns:
-          repeat(2, 1fr);
-      }
 
-      .menu {
-        grid-template-columns:
-          repeat(2, 1fr);
-      }
+/* =====================================================
+   MENU
+   ===================================================== */
 
-    }
+.menu {
 
-    @media (max-width: 560px) {
+  display: grid;
 
-      .container {
-        padding: 15px 10px 25px;
-      }
+  grid-template-columns:
+    repeat(3, 1fr);
 
-      .card {
-        padding: 18px;
-      }
+  gap: 15px;
 
-      .header {
-        align-items: flex-start;
+}
 
-        flex-direction: column;
-      }
+.menu-item {
 
-      .titulo {
-        font-size: 24px;
-      }
+  width: 100%;
 
-      .resumo {
-        grid-template-columns: 1fr;
-      }
+  min-height: 125px;
 
-      .menu {
-        grid-template-columns: 1fr;
-      }
+  border: 0;
 
-      .menu-item {
-        min-height: 105px;
-      }
+  border-radius: 14px;
 
-      .competencia-linha {
-        align-items: stretch;
+  padding:
+    20px 15px;
 
-        flex-direction: column;
-      }
+  background: #17365d;
 
-      #competencia {
-        width: 100%;
-      }
+  color: #ffffff;
 
-      .btn-atualizar {
-        width: 100%;
-      }
+  cursor: pointer;
 
-      .rodape {
-        flex-direction: column;
+  text-align: center;
 
-        align-items: flex-start;
-      }
+  font-size: 15px;
 
-    }
+  font-weight: 700;
 
-  </style>
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    box-shadow .18s ease;
+
+}
+
+.menu-item:hover {
+
+  background: #214c7d;
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 7px 18px
+    rgba(
+      23,
+      54,
+      93,
+      0.18
+    );
+
+}
+
+.menu-item:active {
+
+  transform:
+    translateY(0);
+
+}
+
+.menu-icone {
+
+  display: block;
+
+  font-size: 31px;
+
+  line-height: 1;
+
+  margin-bottom: 12px;
+
+}
+
+.menu-descricao {
+
+  display: block;
+
+  margin-top: 6px;
+
+  font-size: 11px;
+
+  font-weight: 400;
+
+  opacity: .80;
+
+}
+
+
+/* =====================================================
+   MENSAGEM
+   ===================================================== */
+
+.mensagem {
+
+  display: none;
+
+  margin-top: 20px;
+
+  padding:
+    13px 15px;
+
+  border-radius: 9px;
+
+  background: #fff7ed;
+
+  border:
+    1px solid #fed7aa;
+
+  color: #9a3412;
+
+  font-size: 14px;
+
+}
+
+.mensagem.erro {
+
+  background: #fef2f2;
+
+  border-color: #fecaca;
+
+  color: #991b1b;
+
+}
+
+.mensagem.sucesso {
+
+  background: #f0fdf4;
+
+  border-color: #bbf7d0;
+
+  color: #166534;
+
+}
+
+
+/* =====================================================
+   RODAPÉ
+   ===================================================== */
+
+.rodape {
+
+  margin-top: 25px;
+
+  padding-top: 17px;
+
+  border-top:
+    1px solid #e5e7eb;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  color: #94a3b8;
+
+  font-size: 12px;
+
+}
+
+
+/* =====================================================
+   RESPONSIVO
+   ===================================================== */
+
+@media (max-width: 850px) {
+
+  .resumo {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+  }
+
+  .menu {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+  }
+
+}
+
+@media (max-width: 560px) {
+
+  .container {
+
+    padding:
+      15px 10px 25px;
+
+  }
+
+  .card {
+
+    padding: 18px;
+
+  }
+
+  .header {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+  }
+
+  .titulo {
+
+    font-size: 24px;
+
+  }
+
+  .resumo {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .menu {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .menu-item {
+
+    min-height: 105px;
+
+  }
+
+  .competencia-linha {
+
+    align-items: stretch;
+
+    flex-direction: column;
+
+  }
+
+  #competencia {
+
+    width: 100%;
+
+  }
+
+  .btn-atualizar {
+
+    width: 100%;
+
+  }
+
+  .rodape {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+  }
+
+}
+
+</style>
 
 </head>
 
+
 <body>
 
-  <div class="container">
+<div class="container">
 
-```
 <div class="card">
 
-  <!-- =================================================
-       CABEÇALHO
-       ================================================= -->
 
-  <div class="header">
+<!-- =====================================================
+     CABEÇALHO
+     ===================================================== -->
 
-    <div>
+<div class="header">
 
-      <h1 class="titulo">
-        Controle Financeiro
-      </h1>
+<div>
 
-      <div class="subtitulo">
-        Gestão de lançamentos e fluxo financeiro
-      </div>
+<h1 class="titulo">
+Controle Financeiro
+</h1>
 
-    </div>
-
-    <div
-      id="status"
-      class="status"
-    >
-      Conectando...
-    </div>
-
-  </div>
-
-
-  <!-- =================================================
-       COMPETÊNCIA
-       ================================================= -->
-
-  <div class="competencia-box">
-
-    <label
-      class="competencia-label"
-      for="competencia"
-    >
-      Competência
-    </label>
-
-    <div class="competencia-linha">
-
-      <input
-        id="competencia"
-        type="month"
-        title="Selecione a competência"
-      >
-
-      <button
-        type="button"
-        class="btn-atualizar"
-        onclick="carregarResumo()"
-      >
-        ↻ Atualizar
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- =================================================
-       RESUMO
-       ================================================= -->
-
-  <div class="secao-titulo">
-    Resumo da Competência
-  </div>
-
-  <div class="resumo">
-
-    <div class="resumo-card">
-
-      <div class="resumo-label">
-        SALDO INICIAL
-      </div>
-
-      <div
-        id="saldoInicial"
-        class="resumo-valor"
-      >
-        R$ 0,00
-      </div>
-
-    </div>
-
-
-    <div class="resumo-card">
-
-      <div class="resumo-label">
-        A RECEBER
-      </div>
-
-      <div
-        id="receber"
-        class="resumo-valor"
-      >
-        R$ 0,00
-      </div>
-
-    </div>
-
-
-    <div class="resumo-card">
-
-      <div class="resumo-label">
-        A PAGAR
-      </div>
-
-      <div
-        id="pagar"
-        class="resumo-valor"
-      >
-        R$ 0,00
-      </div>
-
-    </div>
-
-
-    <div class="resumo-card">
-
-      <div class="resumo-label">
-        SALDO BANCÁRIO
-      </div>
-
-      <div
-        id="saldoBanco"
-        class="resumo-valor"
-      >
-        R$ 0,00
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- =================================================
-       MENU
-       ================================================= -->
-
-  <div class="secao-titulo">
-    Rotinas
-  </div>
-
-  <div class="menu">
-
-
-    <!-- LANÇAMENTOS -->
-
-    <button
-      type="button"
-      class="menu-item"
-      onclick="abrirPagina('lancamentos')"
-    >
-
-      <span class="menu-icone">
-        📋
-      </span>
-
-      Lançamentos
-
-      <span class="menu-descricao">
-        Incluir, editar, excluir e consultar
-      </span>
-
-    </button>
-
-
-    <!-- BAIXAS PENDENTES -->
-
-    <button
-      type="button"
-      class="menu-item"
-      onclick="abrirPagina('pendentes')"
-    >
-
-      <span class="menu-icone">
-        ⏳
-      </span>
-
-      Baixas Pendentes
-
-      <span class="menu-descricao">
-        Consultar lançamentos pendentes
-      </span>
-
-    </button>
-
-
-    <!-- RELATÓRIO -->
-
-    <button
-      type="button"
-      class="menu-item"
-      onclick="abrirPagina('relatorio')"
-    >
-
-      <span class="menu-icone">
-        📊
-      </span>
-
-      Relatório Financeiro
-
-      <span class="menu-descricao">
-        Visualizar relatório da competência
-      </span>
-
-    </button>
-
-
-    <!-- GRÁFICOS -->
-
-    <button
-      type="button"
-      class="menu-item"
-      onclick="abrirPagina('graficos')"
-    >
-
-      <span class="menu-icone">
-        📈
-      </span>
-
-      Gráficos
-
-      <span class="menu-descricao">
-        Análise visual dos dados financeiros
-      </span>
-
-    </button>
-
-
-    <!-- ATENDIMENTO -->
-
-    <button
-      type="button"
-      class="menu-item"
-      onclick="abrirPagina('atendimento')"
-    >
-
-      <span class="menu-icone">
-        👤
-      </span>
-
-      Atendimento
-
-      <span class="menu-descricao">
-        Pesquisa e registro de atendimento
-      </span>
-
-    </button>
-
-
-    <!-- NOVO LANÇAMENTO -->
-
-    <button
-      type="button"
-      class="menu-item"
-      onclick="abrirPagina('lancamentos')"
-    >
-
-      <span class="menu-icone">
-        ➕
-      </span>
-
-      Novo Lançamento
-
-      <span class="menu-descricao">
-        Acessar a rotina de lançamentos
-      </span>
-
-    </button>
-
-
-  </div>
-
-
-  <!-- =================================================
-       MENSAGEM
-       ================================================= -->
-
-  <div
-    id="mensagem"
-    class="mensagem"
-  ></div>
-
-
-  <!-- =================================================
-       RODAPÉ
-       ================================================= -->
-
-  <div class="rodape">
-
-    <span>
-      Controle Financeiro
-    </span>
-
-    <span>
-      GitHub Pages + Google Apps Script
-    </span>
-
-  </div>
+<div class="subtitulo">
+Gestão de lançamentos e fluxo financeiro
+</div>
 
 </div>
-```
 
-  </div>
+<div
+id="status"
+class="status"
+>
+Conectando...
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     COMPETÊNCIA
+     ===================================================== -->
+
+<div class="competencia-box">
+
+<label
+class="competencia-label"
+for="competencia"
+>
+Competência
+</label>
+
+<div class="competencia-linha">
+
+<input
+id="competencia"
+type="month"
+title="Selecione a competência"
+>
+
+<button
+type="button"
+class="btn-atualizar"
+onclick="carregarResumo()"
+>
+↻ Atualizar
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     RESUMO
+     ===================================================== -->
+
+<div class="secao-titulo">
+Resumo da Competência
+</div>
+
+<div class="resumo">
+
+
+<div class="resumo-card">
+
+<div class="resumo-label">
+SALDO INICIAL
+</div>
+
+<div
+id="saldoInicial"
+class="resumo-valor"
+>
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="resumo-card">
+
+<div class="resumo-label">
+A RECEBER
+</div>
+
+<div
+id="receber"
+class="resumo-valor"
+>
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="resumo-card">
+
+<div class="resumo-label">
+A PAGAR
+</div>
+
+<div
+id="pagar"
+class="resumo-valor"
+>
+R$ 0,00
+</div>
+
+</div>
+
+
+<div class="resumo-card">
+
+<div class="resumo-label">
+SALDO BANCÁRIO
+</div>
+
+<div
+id="saldoBanco"
+class="resumo-valor"
+>
+R$ 0,00
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     MENU
+     ===================================================== -->
+
+<div class="secao-titulo">
+Rotinas
+</div>
+
+<div class="menu">
+
+
+<button
+type="button"
+class="menu-item"
+onclick="abrirPagina('lancamentos')"
+>
+
+<span class="menu-icone">
+📋
+</span>
+
+Lançamentos
+
+<span class="menu-descricao">
+Incluir, editar, excluir e consultar
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="menu-item"
+onclick="abrirPagina('pendentes')"
+>
+
+<span class="menu-icone">
+⏳
+</span>
+
+Baixas Pendentes
+
+<span class="menu-descricao">
+Consultar lançamentos pendentes
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="menu-item"
+onclick="abrirPagina('relatorio')"
+>
+
+<span class="menu-icone">
+📊
+</span>
+
+Relatório Financeiro
+
+<span class="menu-descricao">
+Visualizar relatório da competência
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="menu-item"
+onclick="abrirPagina('graficos')"
+>
+
+<span class="menu-icone">
+📈
+</span>
+
+Gráficos
+
+<span class="menu-descricao">
+Análise visual dos dados financeiros
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="menu-item"
+onclick="abrirPagina('atendimento')"
+>
+
+<span class="menu-icone">
+👤
+</span>
+
+Atendimento
+
+<span class="menu-descricao">
+Pesquisa e registro de atendimento
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="menu-item"
+onclick="abrirPagina('lancamentos')"
+>
+
+<span class="menu-icone">
+➕
+</span>
+
+Novo Lançamento
+
+<span class="menu-descricao">
+Acessar a rotina de lançamentos
+</span>
+
+</button>
+
+
+</div>
+
+
+<!-- =====================================================
+     MENSAGEM
+     ===================================================== -->
+
+<div
+id="mensagem"
+class="mensagem"
+></div>
+
+
+<!-- =====================================================
+     RODAPÉ
+     ===================================================== -->
+
+<div class="rodape">
+
+<span>
+Controle Financeiro
+</span>
+
+<span>
+GitHub Pages + Google Apps Script
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
 
 <script>
 
 /* =========================================================
-   CONFIGURAÇÃO
-   =========================================================
-
-   URL REAL DA API DO GOOGLE APPS SCRIPT
-
+   CONFIGURAÇÃO DA API
    ========================================================= */
 
 const URL_API =
@@ -913,7 +1050,7 @@ function moeda(valor) {
 
 function mostrarMensagem(
   texto,
-  tipo = ''
+  tipo
 ) {
 
   mensagemEl.textContent =
@@ -942,7 +1079,7 @@ function mostrarMensagem(
    VALIDAR COMPETÊNCIA
    ========================================================= */
 
-function validarCompetenciaFront(
+function validarCompetencia(
   competencia
 ) {
 
@@ -953,7 +1090,7 @@ function validarCompetenciaFront(
   ) {
 
     throw new Error(
-      'Competência inválida. Selecione uma competência no formato AAAA-MM.'
+      'Selecione uma competência válida.'
     );
 
   }
@@ -969,65 +1106,52 @@ function validarCompetenciaFront(
 
   if (
     ano < 1900 ||
-    ano > 2100
-  ) {
-
-    throw new Error(
-      'Ano da competência inválido.'
-    );
-
-  }
-
-  if (
+    ano > 2100 ||
     mes < 1 ||
     mes > 12
   ) {
 
     throw new Error(
-      'Mês da competência inválido.'
+      'Competência inválida.'
     );
 
   }
-
-  return true;
 
 }
 
 
 /* =========================================================
-   CHAMAR API - JSONP
+   CHAMAR API
    =========================================================
 
    IMPORTANTE:
 
-   O Apps Script recebe:
+   O Apps Script usa:
 
-       action=ping
+       action
 
    e NÃO:
 
-       acao=ping
-
-   Essa era a causa principal do erro de conexão.
+       acao
 
    ========================================================= */
 
 function chamarAPI(
-  acao,
-  parametros = {}
+  action,
+  parametros
 ) {
+
+  parametros =
+    parametros || {};
 
   return new Promise(
     function(resolve, reject) {
 
-      if (
-        !URL_API ||
-        URL_API.indexOf('AKfy') === -1
-      ) {
+      if (!URL_API) {
 
         reject(
           new Error(
-            'URL da API não configurada corretamente.'
+            'URL da API não configurada.'
           )
         );
 
@@ -1036,8 +1160,8 @@ function chamarAPI(
       }
 
 
-      const nomeCallback =
-        'controleFinanceiroCallback_' +
+      const callback =
+        'callback_' +
         Date.now() +
         '_' +
         Math.floor(
@@ -1046,21 +1170,23 @@ function chamarAPI(
 
 
       const script =
-        document.createElement('script');
+        document.createElement(
+          'script'
+        );
 
 
-      let finalizado = false;
+      let terminou = false;
 
 
       const timeout =
         setTimeout(
           function() {
 
-            if (finalizado) {
+            if (terminou) {
               return;
             }
 
-            finalizado = true;
+            terminou = true;
 
             limpar();
 
@@ -1071,18 +1197,18 @@ function chamarAPI(
             );
 
           },
-          20000
+          25000
         );
 
 
-      window[nomeCallback] =
+      window[callback] =
         function(resposta) {
 
-          if (finalizado) {
+          if (terminou) {
             return;
           }
 
-          finalizado = true;
+          terminou = true;
 
           clearTimeout(timeout);
 
@@ -1093,7 +1219,7 @@ function chamarAPI(
 
             reject(
               new Error(
-                'A API retornou uma resposta vazia.'
+                'Resposta vazia da API.'
               )
             );
 
@@ -1119,7 +1245,9 @@ function chamarAPI(
           }
 
 
-          resolve(resposta);
+          resolve(
+            resposta
+          );
 
         };
 
@@ -1129,26 +1257,26 @@ function chamarAPI(
         try {
 
           if (
-            script &&
             script.parentNode
           ) {
 
-            script.parentNode.removeChild(
-              script
-            );
+            script.parentNode
+              .removeChild(
+                script
+              );
 
           }
 
-        } catch (erro) {}
+        } catch (e) {}
 
 
         try {
 
-          delete window[nomeCallback];
+          delete window[callback];
 
-        } catch (erro) {
+        } catch (e) {
 
-          window[nomeCallback] =
+          window[callback] =
             undefined;
 
         }
@@ -1163,31 +1291,28 @@ function chamarAPI(
       /*
        * CORREÇÃO PRINCIPAL:
        *
-       * O Apps Script usa parametros.action
-       *
-       * Portanto o index precisa enviar action.
+       * Apps Script espera "action".
        */
 
       query.set(
         'action',
-        acao
+        action
       );
 
 
       query.set(
         'callback',
-        nomeCallback
+        callback
       );
 
 
       Object.keys(
-        parametros || {}
+        parametros
       ).forEach(
         function(chave) {
 
           const valor =
             parametros[chave];
-
 
           if (
             valor === undefined ||
@@ -1198,24 +1323,10 @@ function chamarAPI(
 
           }
 
-
-          if (
-            typeof valor === 'object'
-          ) {
-
-            query.set(
-              chave,
-              JSON.stringify(valor)
-            );
-
-          } else {
-
-            query.set(
-              chave,
-              String(valor)
-            );
-
-          }
+          query.set(
+            chave,
+            String(valor)
+          );
 
         }
       );
@@ -1236,11 +1347,11 @@ function chamarAPI(
       script.onerror =
         function() {
 
-          if (finalizado) {
+          if (terminou) {
             return;
           }
 
-          finalizado = true;
+          terminou = true;
 
           clearTimeout(timeout);
 
@@ -1297,7 +1408,6 @@ async function testarConexao() {
       statusEl.className =
         'status online';
 
-
       return true;
 
     }
@@ -1318,7 +1428,6 @@ async function testarConexao() {
 
 
     mostrarMensagem(
-      'Erro na conexão: ' +
       erro.message,
       'erro'
     );
@@ -1349,7 +1458,7 @@ async function carregarResumo() {
 
   try {
 
-    validarCompetenciaFront(
+    validarCompetencia(
       competencia
     );
 
@@ -1372,10 +1481,10 @@ async function carregarResumo() {
 
 
   cards.forEach(
-    function(elemento) {
+    function(card) {
 
-      elemento.style.opacity =
-        '0.55';
+      card.style.opacity =
+        '0.45';
 
     }
   );
@@ -1439,13 +1548,12 @@ async function carregarResumo() {
       'erro'
     );
 
-
   } finally {
 
     cards.forEach(
-      function(elemento) {
+      function(card) {
 
-        elemento.style.opacity =
+        card.style.opacity =
           '1';
 
       }
@@ -1458,11 +1566,6 @@ async function carregarResumo() {
 
 /* =========================================================
    ABRIR PÁGINAS DO GITHUB
-   =========================================================
-
-   Os nomes abaixo são exatamente os nomes apresentados
-   no seu repositório GitHub.
-
    ========================================================= */
 
 function abrirPagina(
@@ -1476,7 +1579,7 @@ function abrirPagina(
 
   try {
 
-    validarCompetenciaFront(
+    validarCompetencia(
       competencia
     );
 
@@ -1491,6 +1594,11 @@ function abrirPagina(
 
   }
 
+
+  /*
+   * Nomes EXATOS dos arquivos
+   * existentes no GitHub.
+   */
 
   const arquivos = {
 
@@ -1519,8 +1627,7 @@ function abrirPagina(
   if (!arquivo) {
 
     mostrarMensagem(
-      'Rotina não encontrada: ' +
-      pagina,
+      'Rotina não encontrada.',
       'erro'
     );
 
@@ -1530,35 +1637,41 @@ function abrirPagina(
 
 
   /*
-   * GitHub Pages trabalha com os arquivos diretamente.
+   * Usa o mesmo diretório do index.html.
    *
-   * NÃO enviar ?page=
-   *
-   * A competência é enviada para a rotina.
+   * Isso evita problemas com:
+   * - nome do usuário
+   * - nome do repositório
+   * - domínio GitHub Pages
    */
 
   const url =
-    arquivo +
-    '?competencia=' +
-    encodeURIComponent(
-      competencia
+    new URL(
+      arquivo,
+      window.location.href
     );
 
 
-  console.log(
-    'Abrindo:',
-    url
+  url.searchParams.set(
+    'competencia',
+    competencia
   );
 
 
+  /*
+   * Navegação REAL para o GitHub.
+   *
+   * Não passa pelo Apps Script.
+   */
+
   window.location.href =
-    url;
+    url.href;
 
 }
 
 
 /* =========================================================
-   ALTERAR COMPETÊNCIA
+   ALTERAÇÃO DE COMPETÊNCIA
    ========================================================= */
 
 competenciaEl.addEventListener(
@@ -1572,7 +1685,7 @@ competenciaEl.addEventListener(
 
 
 /* =========================================================
-   ENTER NA COMPETÊNCIA
+   ENTER
    ========================================================= */
 
 competenciaEl.addEventListener(
@@ -1618,7 +1731,7 @@ async function iniciarSistema() {
 
 
 /* =========================================================
-   INICIAR
+   INICIAR SISTEMA
    ========================================================= */
 
 iniciarSistema();
@@ -1628,3 +1741,4 @@ iniciarSistema();
 </body>
 
 </html>
+```
