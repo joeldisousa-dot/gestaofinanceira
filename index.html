@@ -5,7 +5,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Controle Financeiro</title>
@@ -39,6 +38,7 @@ body {
   border: 1px solid #e5eaf0;
 }
 
+
 /* =====================================================
    CABEÇALHO
    ===================================================== */
@@ -63,6 +63,7 @@ body {
   color: #64748b;
   font-size: 14px;
 }
+
 
 /* =====================================================
    STATUS
@@ -106,6 +107,7 @@ body {
 .status.erro::before {
   background: #ef4444;
 }
+
 
 /* =====================================================
    COMPETÊNCIA
@@ -167,11 +169,6 @@ body {
   transform: translateY(-1px);
 }
 
-.btn-atualizar:disabled {
-  opacity: .65;
-  cursor: wait;
-  transform: none;
-}
 
 /* =====================================================
    TÍTULOS
@@ -183,6 +180,7 @@ body {
   font-size: 18px;
   font-weight: 700;
 }
+
 
 /* =====================================================
    RESUMO
@@ -218,6 +216,7 @@ body {
   word-break: break-word;
 }
 
+
 /* =====================================================
    MENU
    ===================================================== */
@@ -240,6 +239,7 @@ body {
   text-align: center;
   font-size: 15px;
   font-weight: 700;
+
   transition:
     transform .18s ease,
     background .18s ease,
@@ -256,12 +256,6 @@ body {
   transform: translateY(0);
 }
 
-.menu-item:disabled {
-  opacity: .65;
-  cursor: wait;
-  transform: none;
-}
-
 .menu-icone {
   display: block;
   font-size: 31px;
@@ -276,6 +270,7 @@ body {
   font-weight: 400;
   opacity: .80;
 }
+
 
 /* =====================================================
    MENSAGEM
@@ -304,6 +299,7 @@ body {
   color: #166534;
 }
 
+
 /* =====================================================
    RODAPÉ
    ===================================================== */
@@ -312,13 +308,16 @@ body {
   margin-top: 25px;
   padding-top: 17px;
   border-top: 1px solid #e5e7eb;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 15px;
+
   color: #94a3b8;
   font-size: 12px;
 }
+
 
 /* =====================================================
    RESPONSIVO
@@ -419,7 +418,7 @@ Gestão de lançamentos e fluxo financeiro
 id="status"
 class="status"
 >
-Conectando...
+Sistema
 </div>
 
 </div>
@@ -448,7 +447,6 @@ title="Selecione a competência"
 >
 
 <button
-id="btnAtualizar"
 type="button"
 class="btn-atualizar"
 onclick="carregarResumo()"
@@ -711,16 +709,6 @@ const mensagemEl =
 const competenciaEl =
   document.getElementById('competencia');
 
-const btnAtualizar =
-  document.getElementById('btnAtualizar');
-
-
-/* =========================================================
-   CONTROLE DE REQUISIÇÕES
-   ========================================================= */
-
-let requisicaoAtual = null;
-
 
 /* =========================================================
    COMPETÊNCIA ATUAL
@@ -804,32 +792,6 @@ function mostrarMensagem(
 
 
 /* =========================================================
-   STATUS
-   ========================================================= */
-
-function alterarStatus(
-  texto,
-  tipo
-) {
-
-  statusEl.textContent =
-    texto;
-
-  statusEl.className =
-    'status';
-
-  if (tipo) {
-
-    statusEl.classList.add(
-      tipo
-    );
-
-  }
-
-}
-
-
-/* =========================================================
    VALIDAR COMPETÊNCIA
    ========================================================= */
 
@@ -875,23 +837,19 @@ function validarCompetencia(
 
 
 /* =========================================================
-   CHAMAR GOOGLE APPS SCRIPT
+   CHAMAR API
    =========================================================
 
-   UMA ÚNICA IMPLEMENTAÇÃO.
+   USAMOS JSONP.
 
-   O Apps Script deve aceitar:
+   O index NÃO fica dependendo da API para abrir
+   as páginas do GitHub.
 
-       acao
-
-   e também:
-
-       action
-
+   A API é utilizada somente para o resumo.
    ========================================================= */
 
 function chamarAPI(
-  acao,
+  action,
   parametros
 ) {
 
@@ -902,7 +860,7 @@ function chamarAPI(
     function(resolve, reject) {
 
       const callback =
-        'apiCallback_' +
+        'cfCallback_' +
         Date.now() +
         '_' +
         Math.floor(
@@ -918,6 +876,33 @@ function chamarAPI(
         false;
 
 
+      function limpar() {
+
+        if (
+          script &&
+          script.parentNode
+        ) {
+
+          script.parentNode.removeChild(
+            script
+          );
+
+        }
+
+        try {
+
+          delete window[callback];
+
+        } catch (e) {
+
+          window[callback] =
+            undefined;
+
+        }
+
+      }
+
+
       const timeout =
         setTimeout(
           function() {
@@ -926,18 +911,19 @@ function chamarAPI(
               return;
             }
 
-            finalizado = true;
+            finalizado =
+              true;
 
             limpar();
 
             reject(
               new Error(
-                'Tempo limite excedido ao conectar ao Google Apps Script.'
+                'Tempo limite da API.'
               )
             );
 
           },
-          15000
+          10000
         );
 
 
@@ -948,24 +934,21 @@ function chamarAPI(
             return;
           }
 
-          finalizado = true;
+          finalizado =
+            true;
 
-          clearTimeout(timeout);
+          clearTimeout(
+            timeout
+          );
 
           limpar();
-
-
-          console.log(
-            'Resposta recebida do Apps Script:',
-            resposta
-          );
 
 
           if (!resposta) {
 
             reject(
               new Error(
-                'O Google Apps Script retornou uma resposta vazia.'
+                'Resposta vazia do Apps Script.'
               )
             );
 
@@ -982,7 +965,7 @@ function chamarAPI(
               new Error(
                 resposta.erro ||
                 resposta.mensagem ||
-                'Erro retornado pelo Google Apps Script.'
+                'Erro retornado pela API.'
               )
             );
 
@@ -998,52 +981,13 @@ function chamarAPI(
         };
 
 
-      function limpar() {
-
-        try {
-
-          if (
-            script &&
-            script.parentNode
-          ) {
-
-            script.parentNode.removeChild(
-              script
-            );
-
-          }
-
-        } catch (erro) {}
-
-
-        try {
-
-          delete window[callback];
-
-        } catch (erro) {
-
-          window[callback] =
-            undefined;
-
-        }
-
-      }
-
-
       const query =
         new URLSearchParams();
 
 
-      /*
-       * Envia "acao".
-       *
-       * O GS atualizado aceita
-       * "acao" e "action".
-       */
-
       query.set(
-        'acao',
-        acao
+        'action',
+        action
       );
 
 
@@ -1079,20 +1023,10 @@ function chamarAPI(
       );
 
 
-      const url =
+      script.src =
         URL_API +
         '?' +
         query.toString();
-
-
-      console.log(
-        'Chamando Apps Script:',
-        url
-      );
-
-
-      script.src =
-        url;
 
 
       script.onerror =
@@ -1102,15 +1036,18 @@ function chamarAPI(
             return;
           }
 
-          finalizado = true;
+          finalizado =
+            true;
 
-          clearTimeout(timeout);
+          clearTimeout(
+            timeout
+          );
 
           limpar();
 
           reject(
             new Error(
-              'Não foi possível carregar a resposta do Google Apps Script.'
+              'Não foi possível conectar com o Google Apps Script.'
             )
           );
 
@@ -1123,73 +1060,6 @@ function chamarAPI(
 
     }
   );
-
-}
-
-
-/* =========================================================
-   TESTAR CONEXÃO
-   ========================================================= */
-
-async function testarConexao() {
-
-  alterarStatus(
-    'Conectando...',
-    ''
-  );
-
-
-  try {
-
-    const resposta =
-      await chamarAPI(
-        'ping'
-      );
-
-
-    if (
-      resposta &&
-      resposta.sucesso === true
-    ) {
-
-      alterarStatus(
-        'Sistema online',
-        'online'
-      );
-
-      return true;
-
-    }
-
-
-    throw new Error(
-      'A API não respondeu corretamente.'
-    );
-
-
-  } catch (erro) {
-
-    console.error(
-      'Erro de conexão:',
-      erro
-    );
-
-
-    alterarStatus(
-      'Erro na conexão',
-      'erro'
-    );
-
-
-    mostrarMensagem(
-      erro.message,
-      'erro'
-    );
-
-
-    return false;
-
-  }
 
 }
 
@@ -1222,14 +1092,6 @@ async function carregarResumo() {
   }
 
 
-  btnAtualizar.disabled =
-    true;
-
-
-  btnAtualizar.textContent =
-    '⏳ Atualizando...';
-
-
   const cards =
     document.querySelectorAll(
       '.resumo-valor'
@@ -1244,6 +1106,13 @@ async function carregarResumo() {
 
     }
   );
+
+
+  statusEl.textContent =
+    'Atualizando...';
+
+  statusEl.className =
+    'status';
 
 
   try {
@@ -1290,32 +1159,45 @@ async function carregarResumo() {
       );
 
 
+    statusEl.textContent =
+      'Sistema online';
+
+    statusEl.className =
+      'status online';
+
+
     mostrarMensagem(
       '',
       ''
     );
 
 
-    alterarStatus(
-      'Sistema online',
-      'online'
+  } catch (erro) {
+
+    /*
+     * IMPORTANTE:
+     *
+     * O erro no resumo NÃO bloqueia
+     * as rotinas do GitHub.
+     */
+
+    statusEl.textContent =
+      'API indisponível';
+
+    statusEl.className =
+      'status erro';
+
+
+    mostrarMensagem(
+      'Não foi possível atualizar o resumo. As rotinas continuam disponíveis.',
+      'erro'
     );
 
-
-  } catch (erro) {
 
     console.error(
       'Erro ao carregar resumo:',
       erro
     );
-
-
-    mostrarMensagem(
-      'Erro ao carregar o resumo: ' +
-      erro.message,
-      'erro'
-    );
-
 
   } finally {
 
@@ -1328,14 +1210,6 @@ async function carregarResumo() {
       }
     );
 
-
-    btnAtualizar.disabled =
-      false;
-
-
-    btnAtualizar.textContent =
-      '↻ Atualizar';
-
   }
 
 }
@@ -1343,6 +1217,19 @@ async function carregarResumo() {
 
 /* =========================================================
    ABRIR ROTINAS DO GITHUB
+   =========================================================
+
+   ATENÇÃO:
+
+   Esta função NÃO chama o Apps Script.
+
+   Ela abre diretamente o arquivo HTML
+   publicado no GitHub Pages.
+
+   Isso elimina o erro:
+
+   "Erro ao carregar lançamentos:
+    Não foi possível conectar com o Google Apps Script."
    ========================================================= */
 
 function abrirPagina(
@@ -1371,13 +1258,6 @@ function abrirPagina(
 
   }
 
-
-  /*
-   * ARQUIVOS DO GITHUB
-   *
-   * As rotinas NÃO passam pelo
-   * Google Apps Script.
-   */
 
   const arquivos = {
 
@@ -1416,16 +1296,35 @@ function abrirPagina(
 
 
   /*
-   * Cria a URL relativa ao
-   * index.html atual.
+   * Monta a URL a partir da URL atual
+   * do GitHub Pages.
    */
 
-  const url =
-    new URL(
-      arquivo,
-      window.location.href
+  let url;
+
+  try {
+
+    url =
+      new URL(
+        arquivo,
+        window.location.href
+      );
+
+  } catch (erro) {
+
+    mostrarMensagem(
+      'Não foi possível montar o endereço da rotina.',
+      'erro'
     );
 
+    return;
+
+  }
+
+
+  /*
+   * Envia a competência para a página.
+   */
 
   url.searchParams.set(
     'competencia',
@@ -1434,12 +1333,12 @@ function abrirPagina(
 
 
   /*
-   * Navegação direta para
-   * o GitHub Pages.
+   * Navegação direta para o GitHub.
    */
 
-  window.location.href =
-    url.href;
+  window.location.assign(
+    url.href
+  );
 
 }
 
@@ -1459,7 +1358,7 @@ competenciaEl.addEventListener(
 
 
 /* =========================================================
-   ENTER NA COMPETÊNCIA
+   ENTER
    ========================================================= */
 
 competenciaEl.addEventListener(
@@ -1482,49 +1381,40 @@ competenciaEl.addEventListener(
    INICIALIZAÇÃO
    ========================================================= */
 
-async function iniciarSistema() {
+document.addEventListener(
+  'DOMContentLoaded',
+  function() {
 
-  mostrarMensagem(
-    '',
-    ''
-  );
+    /*
+     * O index abre imediatamente.
+     *
+     * Não existe mais:
+     *
+     * testarConexao()
+     *
+     * antes de liberar o menu.
+     *
+     * Isso evita deixar a tela eternamente
+     * em "Conectando..."
+     */
+
+    statusEl.textContent =
+      'Sistema';
+
+    statusEl.className =
+      'status';
 
 
-  /*
-   * Primeiro verifica a API.
-   */
+    /*
+     * Carrega o resumo em segundo plano.
+     *
+     * Se a API falhar, o menu continua funcionando.
+     */
 
-  const online =
-    await testarConexao();
-
-
-  /*
-   * Se a API não respondeu,
-   * NÃO tenta carregar o resumo.
-   */
-
-  if (!online) {
-
-    return;
+    carregarResumo();
 
   }
-
-
-  /*
-   * API online.
-   * Agora carrega o resumo.
-   */
-
-  await carregarResumo();
-
-}
-
-
-/* =========================================================
-   INICIAR
-   ========================================================= */
-
-iniciarSistema();
+);
 
 </script>
 
