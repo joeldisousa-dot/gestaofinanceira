@@ -1,1258 +1,305 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<meta
-  name="theme-color"
-  content="#0d47a1"
->
-
-<title>Atendimento | Base de Conhecimento</title>
+<title>Atendimento - Controle Financeiro</title>
 
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
 
 *{
   box-sizing:border-box;
 }
 
-html{
-  scroll-behavior:smooth;
-}
-
 body{
-
   margin:0;
-
   padding:20px;
-
-  font-family:
-    Inter,
-    "Segoe UI",
-    Arial,
-    sans-serif;
-
-  background:
-    linear-gradient(
-      135deg,
-      #eef4ff 0%,
-      #f8fafc 50%,
-      #eef2ff 100%
-    );
-
-  color:#1e293b;
-
-  min-height:100vh;
-
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:linear-gradient(135deg,#e8eef5,#ffffff);
+  color:#333;
 }
-
-
-/* =====================================================
-   CONTAINER
-===================================================== */
 
 .container{
-
-  width:
-    min(
-      100%,
-      980px
-    );
-
+  max-width:1100px;
   margin:auto;
-
   background:#fff;
-
-  border:
-    1px solid #e2e8f0;
-
-  border-radius:20px;
-
-  box-shadow:
-    0 15px 45px
-    rgba(15,23,42,.10);
-
-  overflow:hidden;
-
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
-
 
 /* =====================================================
    TOPO
 ===================================================== */
 
 .topo{
-
-  padding:
-    18px 25px;
-
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
   gap:15px;
-
-  color:white;
-
-  background:
-    linear-gradient(
-      135deg,
-      #0f172a,
-      #0d47a1
-    );
-
-}
-
-
-.topo-titulo{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:12px;
-
-}
-
-
-.topo-icone{
-
-  width:44px;
-
-  height:44px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  background:
-    rgba(255,255,255,.12);
-
-  border-radius:12px;
-
-  font-size:22px;
-
-}
-
-
-.topo h2{
-
-  margin:0;
-
-  font-size:19px;
-
-}
-
-
-.topo-subtitulo{
-
-  margin-top:3px;
-
-  color:#cbd5e1;
-
-  font-size:12px;
-
-}
-
-
-.voltar{
-
-  border:none;
-
-  padding:
-    10px 16px;
-
-  border-radius:9px;
-
-  cursor:pointer;
-
-  font-weight:700;
-
-  font-size:13px;
-
-  color:white;
-
-  background:
-    rgba(255,255,255,.12);
-
-  border:
-    1px solid
-    rgba(255,255,255,.15);
-
-  transition:
-    .2s ease;
-
-}
-
-
-.voltar:hover{
-
-  background:
-    rgba(255,255,255,.20);
-
-  transform:
-    translateY(-1px);
-
-}
-
-
-/* =====================================================
-   CONTEÚDO
-===================================================== */
-
-.conteudo{
-
-  padding:28px;
-
-}
-
-
-.titulo-principal{
-
-  text-align:center;
-
   margin-bottom:25px;
-
 }
 
-
-.titulo-principal h1{
-
+.topo h1{
   margin:0;
-
   color:#0d47a1;
-
-  font-size:27px;
-
+  font-size:28px;
 }
 
-
-.titulo-principal p{
-
-  margin:
-    7px 0 0;
-
-  color:#64748b;
-
-  font-size:14px;
-
-}
-
-
-/* =====================================================
-   BOTÃO NOVO
-===================================================== */
-
-.btnNovo{
-
-  display:inline-flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:8px;
-
-  min-height:44px;
-
-  padding:
-    0 18px;
-
-  margin-bottom:20px;
-
+.btn-voltar{
   border:none;
-
+  padding:12px 24px;
   border-radius:10px;
-
+  background:linear-gradient(135deg,#455a64,#78909c);
+  color:#fff;
+  font-weight:bold;
+  font-size:15px;
   cursor:pointer;
-
-  color:white;
-
-  background:
-    linear-gradient(
-      135deg,
-      #00897b,
-      #10b981
-    );
-
-  font-weight:800;
-
-  font-size:14px;
-
-  box-shadow:
-    0 6px 15px
-    rgba(5,150,105,.18);
-
-  transition:
-    transform .2s,
-    box-shadow .2s;
-
 }
 
-
-.btnNovo:hover{
-
-  transform:
-    translateY(-2px);
-
-  box-shadow:
-    0 9px 20px
-    rgba(5,150,105,.25);
-
+.btn-voltar:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.08);
 }
-
 
 /* =====================================================
    PESQUISA
 ===================================================== */
 
-.caixa-pesquisa{
-
-  padding:18px;
-
-  background:#f8fafc;
-
-  border:
-    1px solid #e2e8f0;
-
-  border-radius:14px;
-
-}
-
-
 .pesquisa{
-
-  display:flex;
-
-  gap:10px;
-
+  background:#f5f7fa;
+  border:1px solid #e0e6ed;
+  border-radius:14px;
+  padding:20px;
+  margin-bottom:20px;
 }
 
+.pesquisa h2{
+  margin:0 0 15px 0;
+  color:#1976d2;
+  font-size:19px;
+}
 
-#pesquisa{
+.linha-pesquisa{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+}
 
-  flex:1;
-
+input{
+  width:100%;
   height:46px;
-
-  padding:
-    0 14px;
-
-  border:
-    1px solid #cbd5e1;
-
-  border-radius:10px;
-
+  padding:0 14px;
+  border:1px solid #cbd5e1;
+  border-radius:9px;
+  font-size:15px;
   outline:none;
-
-  font-size:14px;
-
-  color:#1e293b;
-
-  background:white;
-
-  transition:
-    border .2s,
-    box-shadow .2s;
-
 }
 
-
-#pesquisa:focus{
-
+input:focus{
   border-color:#1976d2;
-
-  box-shadow:
-    0 0 0 4px
-    rgba(25,118,210,.10);
-
+  box-shadow:0 0 0 3px rgba(25,118,210,.12);
 }
 
-
-#pesquisa::placeholder{
-
-  color:#94a3b8;
-
-}
-
-
-.btnPesquisar{
-
-  min-height:46px;
-
-  padding:
-    0 20px;
-
+.btn-pesquisar{
+  height:46px;
+  padding:0 25px;
   border:none;
-
-  border-radius:10px;
-
+  border-radius:9px;
+  background:linear-gradient(135deg,#1976d2,#2196f3);
+  color:#fff;
+  font-size:15px;
+  font-weight:bold;
   cursor:pointer;
-
-  color:white;
-
-  background:
-    linear-gradient(
-      135deg,
-      #1565c0,
-      #1976d2
-    );
-
-  font-size:14px;
-
-  font-weight:800;
-
-  transition:
-    transform .2s,
-    box-shadow .2s;
-
 }
 
-
-.btnPesquisar:hover{
-
-  transform:
-    translateY(-1px);
-
-  box-shadow:
-    0 6px 15px
-    rgba(25,118,210,.20);
-
+.btn-pesquisar:hover{
+  filter:brightness(1.08);
+  transform:translateY(-2px);
 }
 
+.btn-pesquisar:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+  transform:none;
+}
 
 /* =====================================================
-   STATUS DA PESQUISA
+   MENSAGENS
 ===================================================== */
 
-.status-pesquisa{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  gap:10px;
-
-  margin-top:15px;
-
-  min-height:20px;
-
-}
-
-
-.status-texto{
-
-  color:#64748b;
-
-  font-size:13px;
-
-}
-
-
-.status-contador{
-
+.mensagem{
   display:none;
+  margin:15px 0;
+  padding:13px;
+  border-radius:8px;
+}
 
-  padding:
-    5px 10px;
-
-  border-radius:20px;
-
-  background:#eff6ff;
-
+.mensagem.info{
+  display:block;
+  background:#e3f2fd;
   color:#1565c0;
-
-  font-size:12px;
-
-  font-weight:800;
-
 }
 
-
-.status-contador.show{
-
-  display:inline-flex;
-
+.mensagem.erro{
+  display:block;
+  background:#ffebee;
+  color:#c62828;
+  border-left:5px solid #c62828;
+  font-weight:bold;
 }
 
+.mensagem.sucesso{
+  display:block;
+  background:#e8f5e9;
+  color:#2e7d32;
+}
 
 /* =====================================================
    RESULTADO
 ===================================================== */
 
-#resultado{
-
+.resultado{
   margin-top:20px;
-
 }
-
-
-.info{
-
-  padding:18px;
-
-  background:#f8fafc;
-
-  border:
-    1px solid #e2e8f0;
-
-  border-radius:12px;
-
-  color:#64748b;
-
-  font-size:14px;
-
-  text-align:center;
-
-}
-
-
-.erro{
-
-  padding:16px;
-
-  background:#fef2f2;
-
-  color:#b91c1c;
-
-  border:
-    1px solid #fecaca;
-
-  border-radius:12px;
-
-  font-weight:700;
-
-}
-
-
-.sucesso{
-
-  padding:16px;
-
-  background:#ecfdf5;
-
-  color:#047857;
-
-  border:
-    1px solid #a7f3d0;
-
-  border-radius:12px;
-
-  font-weight:700;
-
-}
-
-
-/* =====================================================
-   CARD
-===================================================== */
 
 .card{
-
-  position:relative;
-
-  padding:20px;
-
-  margin-bottom:15px;
-
-  background:white;
-
-  border:
-    1px solid #e2e8f0;
-
-  border-left:
-    5px solid #1976d2;
-
-  border-radius:13px;
-
-  box-shadow:
-    0 5px 18px
-    rgba(15,23,42,.06);
-
-  transition:
-    transform .2s,
-    box-shadow .2s;
-
+  border:1px solid #e1e5ea;
+  border-radius:12px;
+  overflow:hidden;
+  background:#fff;
 }
 
-
-.card:hover{
-
-  transform:
-    translateY(-2px);
-
-  box-shadow:
-    0 10px 25px
-    rgba(15,23,42,.09);
-
-}
-
-
-.card:last-child{
-
-  margin-bottom:0;
-
-}
-
-
-.id{
-
-  display:inline-flex;
-
-  padding:
-    4px 8px;
-
-  border-radius:6px;
-
-  background:#f1f5f9;
-
-  color:#64748b;
-
-  font-size:11px;
-
-  font-weight:800;
-
-}
-
-
-.titulo{
-
-  margin-top:14px;
-
-  margin-bottom:6px;
-
-  color:#0d47a1;
-
-  font-size:13px;
-
-  font-weight:800;
-
-  text-transform:uppercase;
-
-  letter-spacing:.2px;
-
-}
-
-
-.texto{
-
-  color:#334155;
-
-  font-size:14px;
-
-  line-height:1.65;
-
-  white-space:normal;
-
-}
-
-
-/* =====================================================
-   DESTAQUE DA PESQUISA
-===================================================== */
-
-.highlight{
-
-  padding:
-    1px 4px;
-
-  border-radius:4px;
-
-  color:#713f12;
-
-  background:#fde68a;
-
-  box-shadow:
-    0 0 0 1px
-    rgba(234,179,8,.15);
-
-  font-weight:800;
-
-}
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-.modal{
-
-  display:none;
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:5000;
-
-  padding:20px;
-
-  background:
-    rgba(15,23,42,.55);
-
-  backdrop-filter:
-    blur(4px);
-
-  align-items:center;
-
-  justify-content:center;
-
-}
-
-
-.modal.show{
-
-  display:flex;
-
-}
-
-
-.caixa{
-
-  width:
-    min(
-      100%,
-      500px
-    );
-
-  max-height:
-    calc(100vh - 40px);
-
-  overflow:auto;
-
-  background:white;
-
-  border-radius:18px;
-
-  box-shadow:
-    0 25px 70px
-    rgba(0,0,0,.25);
-
-  animation:
-    modalEntrada .2s ease;
-
-}
-
-
-@keyframes modalEntrada{
-
-  from{
-
-    opacity:0;
-
-    transform:
-      translateY(15px)
-      scale(.98);
-
-  }
-
-  to{
-
-    opacity:1;
-
-    transform:
-      translateY(0)
-      scale(1);
-
-  }
-
-}
-
-
-.modal-header{
-
-  padding:
-    20px 22px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  border-bottom:
-    1px solid #e2e8f0;
-
-}
-
-
-.modal-header h2{
-
-  margin:0;
-
-  color:#0d47a1;
-
+.card-titulo{
+  background:linear-gradient(135deg,#0d47a1,#1976d2);
+  color:#fff;
+  padding:15px 18px;
   font-size:18px;
-
+  font-weight:bold;
 }
 
-
-.btnFechar{
-
-  width:35px;
-
-  height:35px;
-
-  border:none;
-
-  border-radius:9px;
-
-  cursor:pointer;
-
-  background:#f1f5f9;
-
-  color:#475569;
-
-  font-size:21px;
-
+.dados{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
 }
 
-
-.modal-body{
-
-  padding:22px;
-
+.campo{
+  padding:14px 18px;
+  border-bottom:1px solid #eee;
 }
 
+.campo:nth-child(odd){
+  border-right:1px solid #eee;
+}
 
-.caixa label{
-
+.rotulo{
   display:block;
-
-  margin:
-    15px 0 7px;
-
-  color:#334155;
-
-  font-size:13px;
-
-  font-weight:800;
-
+  color:#777;
+  font-size:12px;
+  margin-bottom:4px;
 }
 
-
-.caixa label:first-child{
-
-  margin-top:0;
-
+.valor{
+  font-weight:bold;
+  font-size:15px;
+  color:#263238;
 }
 
+.endereco{
+  grid-column:1 / -1;
+}
 
-textarea{
+/* =====================================================
+   TABELA
+===================================================== */
 
+table{
   width:100%;
-
-  min-height:120px;
-
-  padding:12px;
-
-  border:
-    1px solid #cbd5e1;
-
-  border-radius:10px;
-
-  resize:vertical;
-
-  outline:none;
-
-  font-family:inherit;
-
-  font-size:14px;
-
-  line-height:1.5;
-
+  border-collapse:collapse;
+  margin-top:20px;
 }
 
-
-textarea:focus{
-
-  border-color:#1976d2;
-
-  box-shadow:
-    0 0 0 4px
-    rgba(25,118,210,.10);
-
-}
-
-
-.modal-footer{
-
-  display:flex;
-
-  justify-content:flex-end;
-
-  gap:10px;
-
-  padding:
-    16px 22px;
-
-  border-top:
-    1px solid #e2e8f0;
-
-}
-
-
-.btn{
-
-  min-height:43px;
-
-  padding:
-    0 17px;
-
-  border:none;
-
-  border-radius:9px;
-
-  cursor:pointer;
-
+th{
+  background:#1976d2;
   color:white;
-
-  font-size:13px;
-
-  font-weight:800;
-
+  padding:10px;
+  text-align:left;
 }
 
-
-.btnSalvar{
-
-  background:
-    linear-gradient(
-      135deg,
-      #1565c0,
-      #1976d2
-    );
-
+td{
+  padding:10px;
+  border-bottom:1px solid #ddd;
 }
 
-
-.btnCancelar{
-
-  background:
-    #c62828;
-
+tr:nth-child(even){
+  background:#f8f9fc;
 }
 
+.nenhum{
+  text-align:center;
+  padding:30px;
+  color:#777;
+}
 
 /* =====================================================
    LOADING
 ===================================================== */
 
-.loading{
-
-  display:none;
-
-  position:fixed;
-
-  inset:0;
-
-  z-index:10000;
-
-  align-items:center;
-
-  justify-content:center;
-
-  background:
-    rgba(255,255,255,.70);
-
-  backdrop-filter:
-    blur(3px);
-
-}
-
-
-.loading.show{
-
-  display:flex;
-
-}
-
-
-.loading-box{
-
-  min-width:210px;
-
-  padding:25px;
-
+.carregando{
   text-align:center;
-
-  background:white;
-
-  border-radius:16px;
-
-  box-shadow:
-    0 20px 60px
-    rgba(0,0,0,.15);
-
+  padding:30px;
+  color:#777;
 }
-
-
-.spinner{
-
-  width:40px;
-
-  height:40px;
-
-  margin:
-    0 auto 14px;
-
-  border:
-    4px solid #e2e8f0;
-
-  border-top-color:#1976d2;
-
-  border-radius:50%;
-
-  animation:
-    girar .8s linear infinite;
-
-}
-
-
-@keyframes girar{
-
-  to{
-    transform:rotate(360deg);
-  }
-
-}
-
-
-.loading-texto{
-
-  color:#64748b;
-
-  font-size:13px;
-
-  font-weight:700;
-
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-.toast{
-
-  position:fixed;
-
-  top:20px;
-
-  right:20px;
-
-  z-index:11000;
-
-  display:none;
-
-  width:
-    min(
-      calc(100% - 40px),
-      380px
-    );
-
-  padding:
-    15px 18px;
-
-  border-radius:12px;
-
-  color:white;
-
-  font-size:13px;
-
-  font-weight:700;
-
-  box-shadow:
-    0 12px 30px
-    rgba(0,0,0,.18);
-
-}
-
-
-.toast.show{
-
-  display:block;
-
-}
-
-
-.toast.success{
-
-  background:
-    linear-gradient(
-      135deg,
-      #047857,
-      #10b981
-    );
-
-}
-
-
-.toast.error{
-
-  background:
-    linear-gradient(
-      135deg,
-      #b91c1c,
-      #ef4444
-    );
-
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-.footer{
-
-  padding:
-    20px;
-
-  text-align:center;
-
-  color:#94a3b8;
-
-  font-size:11px;
-
-  border-top:
-    1px solid #e2e8f0;
-
-}
-
-
-/* =====================================================
-   ACESSIBILIDADE
-===================================================== */
-
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible{
-
-  outline:
-    3px solid
-    rgba(25,118,210,.25);
-
-  outline-offset:2px;
-
-}
-
 
 /* =====================================================
    RESPONSIVO
 ===================================================== */
 
-@media(max-width:650px){
+@media(max-width:700px){
 
   body{
-
     padding:10px;
-
   }
-
 
   .container{
-
-    border-radius:15px;
-
+    padding:15px;
+    border-radius:12px;
   }
-
 
   .topo{
-
-    padding:
-      15px;
-
+    flex-direction:column;
+    align-items:stretch;
   }
 
-
-  .topo h2{
-
-    font-size:16px;
-
-  }
-
-
-  .topo-subtitulo{
-
-    display:none;
-
-  }
-
-
-  .voltar{
-
-    padding:
-      9px 12px;
-
-  }
-
-
-  .conteudo{
-
-    padding:18px;
-
-  }
-
-
-  .titulo-principal h1{
-
+  .topo h1{
     font-size:23px;
-
   }
 
-
-  .pesquisa{
-
-    flex-direction:column;
-
-  }
-
-
-  .btnPesquisar{
-
+  .btn-voltar{
     width:100%;
-
   }
 
-
-  .status-pesquisa{
-
-    align-items:flex-start;
-
-    flex-direction:column;
-
+  .linha-pesquisa{
+    grid-template-columns:1fr;
   }
 
-
-  .modal-footer{
-
-    flex-direction:column;
-
-  }
-
-
-  .modal-footer .btn{
-
+  .btn-pesquisar{
     width:100%;
+  }
 
+  .dados{
+    grid-template-columns:1fr;
+  }
+
+  .campo:nth-child(odd){
+    border-right:none;
+  }
+
+  .endereco{
+    grid-column:auto;
   }
 
 }
@@ -1261,463 +308,452 @@ textarea:focus-visible{
 
 </head>
 
-
 <body>
-
-
-<!-- =====================================================
-     CONTAINER
-===================================================== -->
 
 <div class="container">
 
-
-  <!-- ===================================================
+  <!-- =================================================
        TOPO
-  ==================================================== -->
+  ================================================== -->
 
   <div class="topo">
 
-    <div class="topo-titulo">
 
-      <div class="topo-icone">
-        📖
-      </div>
+<h1>
+  🔎 Atendimento
+</h1>
 
-      <div>
+<button
+  class="btn-voltar"
+  onclick="voltar()">
 
-        <h2>
-          Atendimento
-        </h2>
+  ⬅ Voltar
 
-        <div class="topo-subtitulo">
-          Base de conhecimento
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <button
-      class="voltar"
-      onclick="voltar()"
-    >
-
-      ← Voltar
-
-    </button>
-
-  </div>
-
-
-  <!-- ===================================================
-       CONTEÚDO
-  ==================================================== -->
-
-  <div class="conteudo">
-
-
-    <div class="titulo-principal">
-
-      <h1>
-        Base de Conhecimento
-      </h1>
-
-      <p>
-        Pesquise problemas e soluções cadastrados no sistema.
-      </p>
-
-    </div>
-
-
-    <!-- =================================================
-         NOVO ATENDIMENTO
-    ================================================== -->
-
-    <button
-      class="btnNovo"
-      onclick="abrirCadastro()"
-    >
-
-      ➕ Novo Atendimento
-
-    </button>
-
-
-    <!-- =================================================
-         PESQUISA
-    ================================================== -->
-
-    <div class="caixa-pesquisa">
-
-
-      <div class="pesquisa">
-
-        <input
-          id="pesquisa"
-          autocomplete="off"
-          placeholder="Digite uma palavra ou expressão exata..."
-          onkeydown="
-            if(event.key === 'Enter'){
-              pesquisar();
-            }
-          "
-        >
-
-
-        <button
-          class="btnPesquisar"
-          onclick="pesquisar()"
-        >
-
-          🔍 Pesquisar
-
-        </button>
-
-      </div>
-
-
-      <div class="status-pesquisa">
-
-        <div
-          id="statusTexto"
-          class="status-texto"
-        >
-
-          Digite uma palavra para pesquisar.
-
-        </div>
-
-
-        <div
-          id="contador"
-          class="status-contador"
-        >
-
-        </div>
-
-      </div>
-
-
-    </div>
-
-
-    <!-- =================================================
-         RESULTADO
-    ================================================== -->
-
-    <div id="resultado">
-
-      <div class="info">
-
-        🔎 Digite uma palavra ou expressão
-        para pesquisar.
-
-      </div>
-
-    </div>
+</button>
 
 
   </div>
 
+  <!-- =================================================
+       PESQUISA
+  ================================================== -->
 
-  <!-- ===================================================
-       FOOTER
-  ==================================================== -->
+  <div class="pesquisa">
 
-  <div class="footer">
 
-    Base de Conhecimento • Sistema de Atendimento
+<h2>
+  Pesquisar cliente
+</h2>
 
-  </div>
+<div class="linha-pesquisa">
 
+  <input
+    id="campoPesquisa"
+    type="text"
+    placeholder="Digite o nome ou sobrenome..."
+    autocomplete="off">
+
+  <button
+    id="btnPesquisar"
+    class="btn-pesquisar"
+    onclick="pesquisar()">
+
+    🔎 Pesquisar
+
+  </button>
 
 </div>
 
 
+  </div>
 
-<!-- =====================================================
-     MODAL
-===================================================== -->
-
-<div
-  id="modal"
-  class="modal"
-  onclick="fecharModalFora(event)"
->
-
+  <!-- =================================================
+       MENSAGEM
+  ================================================== -->
 
   <div
-    class="caixa"
-    onclick="event.stopPropagation()"
-  >
+    id="mensagem"
+    class="mensagem">
+  </div>
+
+  <!-- =================================================
+       RESULTADO
+  ================================================== -->
+
+  <div
+    id="resultado"
+    class="resultado">
 
 
-    <div class="modal-header">
+<div class="nenhum">
 
-      <h2>
-        ➕ Novo Atendimento
-      </h2>
+  Digite um nome ou sobrenome para realizar a pesquisa.
 
-
-      <button
-        class="btnFechar"
-        onclick="fecharCadastro()"
-      >
-
-        ×
-
-      </button>
-
-    </div>
-
-
-    <div class="modal-body">
-
-
-      <label for="problema">
-        Problema
-      </label>
-
-      <textarea
-        id="problema"
-        placeholder="Descreva o problema..."
-      ></textarea>
-
-
-      <label for="solucao">
-        Solução
-      </label>
-
-      <textarea
-        id="solucao"
-        placeholder="Descreva a solução..."
-      ></textarea>
-
-
-    </div>
-
-
-    <div class="modal-footer">
-
-      <button
-        class="btn btnCancelar"
-        onclick="fecharCadastro()"
-      >
-
-        Cancelar
-
-      </button>
-
-
-      <button
-        class="btn btnSalvar"
-        onclick="salvar()"
-      >
-
-        💾 Salvar Atendimento
-
-      </button>
-
-    </div>
+</div>
 
 
   </div>
 
 </div>
-
-
-
-<!-- =====================================================
-     LOADING
-===================================================== -->
-
-<div
-  id="loading"
-  class="loading"
->
-
-  <div class="loading-box">
-
-    <div class="spinner"></div>
-
-    <div
-      id="loadingTexto"
-      class="loading-texto"
-    >
-
-      Processando...
-
-    </div>
-
-  </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     TOAST
-===================================================== -->
-
-<div
-  id="toast"
-  class="toast"
-></div>
-
-
 
 <script>
 
-/* =====================================================
-   CONFIGURAÇÃO
-===================================================== */
+/* =========================================================
+   CONFIGURAÇÃO DA API
+========================================================= */
 
 const URL_API =
 "https://script.google.com/macros/s/AKfycbw-Fry_UM89-p0FjPEoDNdfdTSNdz56sYzUA8VJIpD9_862l5dPSNmkWOGLXyZiqnRn/exec";
 
 
-/* =====================================================
-   API
-===================================================== */
+/* =========================================================
+   URL DO GITHUB
+========================================================= */
 
-async function apiRequest(
-  action,
-  params={}
-){
-
-  const url =
-    new URL(URL_API);
+const URL_INDEX =
+"https://joeldisousa-dot.github.io/gestaofinanceira/";
 
 
-  url.searchParams.set(
-    "action",
-    action
-  );
+/* =========================================================
+   CONTROLE JSONP
+========================================================= */
+
+let contadorJSONP = 0;
 
 
-  Object.keys(params)
-    .forEach(function(chave){
+/* =========================================================
+   CHAMAR API
+========================================================= */
 
-      const valor =
-        params[chave];
+function chamarAPI(acao, parametros){
+
+  return new Promise(function(resolve,reject){
+
+    const callback =
+      "callbackAtendimento_" +
+      Date.now() +
+      "_" +
+      (++contadorJSONP);
 
 
-      if(
-        valor !== undefined &&
-        valor !== null
-      ){
+    const script =
+      document.createElement("script");
 
-        url.searchParams.set(
 
-          chave,
+    const dados =
+      Object.assign({}, parametros || {});
 
-          typeof valor === "object"
-            ? JSON.stringify(valor)
-            : String(valor)
 
+    dados.action =
+      acao;
+
+    dados.callback =
+      callback;
+
+
+    const query =
+      Object.keys(dados)
+        .map(function(chave){
+
+          return (
+            encodeURIComponent(chave) +
+            "=" +
+            encodeURIComponent(
+              dados[chave] === undefined ||
+              dados[chave] === null
+                ? ""
+                : dados[chave]
+            )
+          );
+
+        })
+        .join("&");
+
+
+    const url =
+      URL_API +
+      "?" +
+      query;
+
+
+    let finalizado =
+      false;
+
+
+    const timeout =
+      setTimeout(function(){
+
+        if(finalizado){
+          return;
+        }
+
+        finalizado =
+          true;
+
+        cleanup();
+
+        reject(
+          new Error(
+            "Tempo limite excedido ao consultar a API."
+          )
+        );
+
+      },30000);
+
+
+    window[callback] =
+      function(resposta){
+
+        if(finalizado){
+          return;
+        }
+
+        finalizado =
+          true;
+
+        clearTimeout(timeout);
+
+        cleanup();
+
+        resolve(resposta);
+
+      };
+
+
+    script.onerror =
+      function(){
+
+        if(finalizado){
+          return;
+        }
+
+        finalizado =
+          true;
+
+        clearTimeout(timeout);
+
+        cleanup();
+
+        reject(
+          new Error(
+            "Não foi possível conectar ao Google Apps Script."
+          )
+        );
+
+      };
+
+
+    script.src =
+      url;
+
+
+    document.body.appendChild(
+      script
+    );
+
+
+    function cleanup(){
+
+      delete window[callback];
+
+      if(script.parentNode){
+
+        script.parentNode.removeChild(
+          script
         );
 
       }
 
-    });
+    }
 
-
-  let resposta;
-
-
-  try{
-
-    resposta =
-      await fetch(
-        url.toString(),
-        {
-          method:"GET",
-          redirect:"follow",
-          cache:"no-store"
-        }
-      );
-
-  }
-  catch(e){
-
-    throw new Error(
-      "Não foi possível conectar ao Google Apps Script."
-    );
-
-  }
-
-
-  if(!resposta.ok){
-
-    throw new Error(
-      "Erro HTTP " +
-      resposta.status
-    );
-
-  }
-
-
-  const texto =
-    await resposta.text();
-
-
-  console.log(
-    "Resposta da API:",
-    texto
-  );
-
-
-  let dados;
-
-
-  try{
-
-    dados =
-      JSON.parse(texto);
-
-  }
-  catch(e){
-
-    throw new Error(
-      "O servidor não retornou JSON válido."
-    );
-
-  }
-
-
-  if(
-    dados &&
-    (
-      dados.sucesso === false ||
-      dados.success === false ||
-      dados.erro
-    )
-  ){
-
-    throw new Error(
-
-      dados.erro ||
-      dados.mensagem ||
-      dados.message ||
-      "Erro retornado pelo servidor."
-
-    );
-
-  }
-
-
-  return dados;
+  });
 
 }
 
 
-/* =====================================================
-   OBTER LISTA
-===================================================== */
+/* =========================================================
+   PESQUISA
+========================================================= */
 
-function obterLista(
+async function pesquisar(){
+
+  const campo =
+    document.getElementById(
+      "campoPesquisa"
+    );
+
+
+  const botao =
+    document.getElementById(
+      "btnPesquisar"
+    );
+
+
+  const resultado =
+    document.getElementById(
+      "resultado"
+    );
+
+
+  const texto =
+    String(
+      campo.value || ""
+    ).trim();
+
+
+  if(!texto){
+
+    mostrarErro(
+      "Digite o nome ou sobrenome para pesquisar."
+    );
+
+    campo.focus();
+
+    return;
+
+  }
+
+
+  botao.disabled =
+    true;
+
+
+  mostrarMensagem(
+    "Pesquisando...",
+    "info"
+  );
+
+
+  resultado.innerHTML =
+    `<div class="carregando">
+       🔎 Pesquisando informações...
+     </div>`;
+
+
+  try{
+
+    /*
+       Ação utilizada pelo servidor:
+       pesquisarAtendimento
+    */
+
+    const resposta =
+      await chamarAPI(
+        "pesquisarAtendimento",
+        {
+          texto:texto
+        }
+      );
+
+
+    console.log(
+      "Resposta Atendimento:",
+      resposta
+    );
+
+
+    if(
+      !resposta
+    ){
+
+      throw new Error(
+        "A API não retornou resposta."
+      );
+
+    }
+
+
+    if(
+      resposta.sucesso === false
+    ){
+
+      throw new Error(
+        resposta.erro ||
+        resposta.mensagem ||
+        "Erro retornado pelo servidor."
+      );
+
+    }
+
+
+    const lista =
+      obterListaResposta(
+        resposta
+      );
+
+
+    if(
+      lista.length === 0
+    ){
+
+      resultado.innerHTML =
+        `<div class="nenhum">
+           Nenhum cliente encontrado para:
+           <strong>${escaparHTML(texto)}</strong>
+         </div>`;
+
+      mostrarMensagem(
+        "Nenhum registro encontrado.",
+        "info"
+      );
+
+      return;
+
+    }
+
+
+    montarResultado(
+      lista
+    );
+
+
+    mostrarMensagem(
+      lista.length +
+      (
+        lista.length === 1
+          ? " registro encontrado."
+          : " registros encontrados."
+      ),
+      "sucesso"
+    );
+
+
+  }
+  catch(e){
+
+    console.error(
+      "Erro ao pesquisar:",
+      e
+    );
+
+
+    resultado.innerHTML =
+      `<div class="erro">
+         ❌ Erro ao pesquisar:<br>
+         ${escaparHTML(e.message)}
+       </div>`;
+
+
+    mostrarErro(
+      e.message
+    );
+
+  }
+  finally{
+
+    botao.disabled =
+      false;
+
+  }
+
+}
+
+
+/* =========================================================
+   NORMALIZAR RESPOSTA
+========================================================= */
+
+function obterListaResposta(
   resposta
 ){
 
@@ -1726,18 +762,6 @@ function obterLista(
   ){
 
     return resposta;
-
-  }
-
-
-  if(
-    resposta &&
-    Array.isArray(
-      resposta.dados
-    )
-  ){
-
-    return resposta.dados;
 
   }
 
@@ -1757,6 +781,18 @@ function obterLista(
   if(
     resposta &&
     Array.isArray(
+      resposta.dados
+    )
+  ){
+
+    return resposta.dados;
+
+  }
+
+
+  if(
+    resposta &&
+    Array.isArray(
       resposta.resultado
     )
   ){
@@ -1766,14 +802,21 @@ function obterLista(
   }
 
 
+  /*
+     Caso a API retorne um único objeto.
+  */
+
   if(
     resposta &&
-    Array.isArray(
-      resposta.atendimentos
+    typeof resposta === "object" &&
+    (
+      resposta.nome ||
+      resposta.endereco ||
+      resposta.cpf
     )
   ){
 
-    return resposta.atendimentos;
+    return [resposta];
 
   }
 
@@ -1783,238 +826,13 @@ function obterLista(
 }
 
 
-/* =====================================================
-   NORMALIZAR TEXTO
-===================================================== */
+/* =========================================================
+   MONTAR RESULTADO
+========================================================= */
 
-function normalizarTexto(
-  texto
+function montarResultado(
+  lista
 ){
-
-  return String(texto)
-
-    .normalize("NFD")
-
-    .replace(
-      /[\u0300-\u036f]/g,
-      ""
-    )
-
-    .toLowerCase()
-
-    .trim();
-
-}
-
-
-/* =====================================================
-   ESCAPAR REGEX
-===================================================== */
-
-function escaparRegex(
-  texto
-){
-
-  return String(texto)
-    .replace(
-      /[.*+?^${}()|[\]\\]/g,
-      "\\$&"
-    );
-
-}
-
-
-/* =====================================================
-   VERIFICAR EXPRESSÃO EXATA
-===================================================== */
-
-function palavraExata(
-  texto,
-  termo
-){
-
-  if(
-    !texto ||
-    !termo
-  ){
-
-    return false;
-
-  }
-
-
-  const textoNormalizado =
-    normalizarTexto(
-      texto
-    );
-
-
-  const termoNormalizado =
-    normalizarTexto(
-      termo
-    );
-
-
-  if(!termoNormalizado){
-
-    return false;
-
-  }
-
-
-  /*
-   * Para uma expressão como:
-   *
-   * FGTS Digital
-   *
-   * procura a expressão completa,
-   * respeitando os limites das palavras.
-   */
-
-
-  const regex =
-    new RegExp(
-
-      "(^|[^a-z0-9])" +
-
-      escaparRegex(
-        termoNormalizado
-      ) +
-
-      "(?=$|[^a-z0-9])",
-
-      "i"
-
-    );
-
-
-  return regex.test(
-    textoNormalizado
-  );
-
-}
-
-
-/* =====================================================
-   DESTACAR TERMO
-===================================================== */
-
-function destacarTexto(
-  texto,
-  termo
-){
-
-  const textoOriginal =
-    String(
-      texto ?? ""
-    );
-
-
-  if(!termo){
-
-    return escapeHtml(
-      textoOriginal
-    )
-    .replace(
-      /\n/g,
-      "<br>"
-    );
-
-  }
-
-
-  const termoNormalizado =
-    normalizarTexto(
-      termo
-    );
-
-
-  if(!termoNormalizado){
-
-    return escapeHtml(
-      textoOriginal
-    )
-    .replace(
-      /\n/g,
-      "<br>"
-    );
-
-  }
-
-
-  /*
-   * Primeiro escapa o texto.
-   */
-
-  const textoSeguro =
-    escapeHtml(
-      textoOriginal
-    );
-
-
-  /*
-   * Escapa o termo para Regex.
-   */
-
-  const termoEscapado =
-    escaparRegex(
-      escapeHtml(
-        termo
-      )
-    );
-
-
-  /*
-   * Destaca o termo ignorando
-   * maiúsculas/minúsculas.
-   *
-   * Observação:
-   * o destaque considera a forma
-   * digitada pelo usuário.
-   */
-
-  let resultado =
-    textoSeguro.replace(
-      new RegExp(
-        termoEscapado,
-        "gi"
-      ),
-      function(match){
-
-        return (
-          '<span class="highlight">' +
-          match +
-          '</span>'
-        );
-
-      }
-    );
-
-
-  return resultado
-    .replace(
-      /\n/g,
-      "<br>"
-    );
-
-}
-
-
-/* =====================================================
-   PESQUISAR
-===================================================== */
-
-async function pesquisar(){
-
-  const campo =
-    document.getElementById(
-      "pesquisa"
-    );
-
-
-  const palavra =
-    campo.value.trim();
-
 
   const resultado =
     document.getElementById(
@@ -2022,344 +840,272 @@ async function pesquisar(){
     );
 
 
-  const statusTexto =
-    document.getElementById(
-      "statusTexto"
-    );
-
-
-  const contador =
-    document.getElementById(
-      "contador"
-    );
-
-
-  /*
-   * Limpa contador.
-   */
-
-  contador.classList.remove(
-    "show"
-  );
-
-
-  if(!palavra){
-
-    statusTexto.textContent =
-      "Digite uma palavra ou expressão para pesquisar.";
-
-
-    resultado.innerHTML = `
-      <div class="info">
-        🔎 Digite uma palavra ou expressão
-        para pesquisar.
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  statusTexto.innerHTML =
-    "🔎 Pesquisando por <strong>" +
-    escapeHtml(palavra) +
-    "</strong>...";
-
-
-  resultado.innerHTML = `
-    <div class="info">
-      🔄 Pesquisando na base de conhecimento...
-    </div>
-  `;
-
-
-  mostrarLoading(
-    true,
-    "Pesquisando..."
-  );
-
-
-  try{
-
-    /*
-     * Consulta a API.
-     */
-
-    const resposta =
-      await apiRequest(
-        "pesquisarAtendimento",
-        {
-          palavra:
-            palavra
-        }
-      );
-
-
-    console.log(
-      "Resposta pesquisa:",
-      resposta
-    );
-
-
-    /*
-     * Obtém lista retornada.
-     */
-
-    let lista =
-      obterLista(
-        resposta
-      );
-
-
-    /*
-     * =================================================
-     * FILTRO EXATO NO FRONTEND
-     * =================================================
-     *
-     * Mesmo que o Apps Script retorne
-     * resultados aproximados, o frontend
-     * faz uma segunda validação.
-     */
-
-
-    const termo =
-      normalizarTexto(
-        palavra
-      );
-
-
-    lista =
-      lista.filter(
-        function(item){
-
-          const problema =
-            item.problema ??
-            item.Problema ??
-            "";
-
-
-          const solucao =
-            item.solucao ??
-            item.Solucao ??
-            "";
-
-
-          return (
-
-            palavraExata(
-              problema,
-              termo
-            )
-
-            ||
-
-            palavraExata(
-              solucao,
-              termo
-            )
-
-          );
-
-        }
-      );
-
-
-    /*
-     * Mostra resultados.
-     */
-
-    mostrarResultado(
-      lista,
-      palavra
-    );
-
-
-    /*
-     * Atualiza contador.
-     */
-
-    if(
-      lista.length > 0
-    ){
-
-      contador.textContent =
-        lista.length +
-        (
-          lista.length === 1
-            ? " resultado"
-            : " resultados"
-        );
-
-
-      contador.classList.add(
-        "show"
-      );
-
-
-      statusTexto.innerHTML =
-        "Resultados para <strong>" +
-        escapeHtml(
-          palavra
-        ) +
-        "</strong>";
-
-    }
-    else{
-
-      statusTexto.innerHTML =
-        "Nenhum resultado para <strong>" +
-        escapeHtml(
-          palavra
-        ) +
-        "</strong>";
-
-    }
-
-  }
-  catch(e){
-
-    console.error(
-      "Erro pesquisa:",
-      e
-    );
-
-
-    statusTexto.textContent =
-      "Não foi possível realizar a pesquisa.";
-
-
-    resultado.innerHTML = `
-      <div class="erro">
-        ❌ Erro ao pesquisar:
-        ${escapeHtml(e.message)}
-      </div>
-    `;
-
-  }
-  finally{
-
-    mostrarLoading(
-      false
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   MOSTRAR RESULTADO
-===================================================== */
-
-function mostrarResultado(
-  lista,
-  termo
-){
-
-  const div =
-    document.getElementById(
-      "resultado"
-    );
-
-
-  if(
-    !Array.isArray(lista) ||
-    lista.length === 0
-  ){
-
-    div.innerHTML = `
-
-      <div class="info">
-
-        <div style="font-size:28px;margin-bottom:8px;">
-          🔍
-        </div>
-
-        <strong>
-          Nenhum atendimento encontrado.
-        </strong>
-
-        <div style="margin-top:6px;font-size:13px;">
-          Tente pesquisar outra palavra ou expressão.
-        </div>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  let html = "";
+  let html =
+    "";
 
 
   lista.forEach(
-    function(item){
+    function(item,index){
 
-      const id =
-        item.id ??
-        item.ID ??
-        item.Id ??
-        "";
-
-
-      const problema =
-        item.problema ??
-        item.Problema ??
-        "";
+      const nome =
+        primeiroValor(
+          item,
+          [
+            "nome",
+            "Nome",
+            "NOME"
+          ]
+        );
 
 
-      const solucao =
-        item.solucao ??
-        item.Solucao ??
-        "";
+      const cpf =
+        primeiroValor(
+          item,
+          [
+            "cpf",
+            "CPF",
+            "Cpf"
+          ]
+        );
+
+
+      const endereco =
+        primeiroValor(
+          item,
+          [
+            "endereco",
+            "Endereco",
+            "ENDERECO",
+            "endereço",
+            "Endereço"
+          ]
+        );
+
+
+      const numero =
+        primeiroValor(
+          item,
+          [
+            "numero",
+            "Número",
+            "numeroEndereco",
+            "num"
+          ]
+        );
+
+
+      const bairro =
+        primeiroValor(
+          item,
+          [
+            "bairro",
+            "Bairro"
+          ]
+        );
+
+
+      const cidade =
+        primeiroValor(
+          item,
+          [
+            "cidade",
+            "Cidade",
+            "municipio",
+            "Município"
+          ]
+        );
+
+
+      const estado =
+        primeiroValor(
+          item,
+          [
+            "estado",
+            "Estado",
+            "uf",
+            "UF"
+          ]
+        );
+
+
+      const cep =
+        primeiroValor(
+          item,
+          [
+            "cep",
+            "CEP"
+          ]
+        );
+
+
+      const telefone =
+        primeiroValor(
+          item,
+          [
+            "telefone",
+            "Telefone",
+            "celular",
+            "Celular"
+          ]
+        );
+
+
+      const complemento =
+        primeiroValor(
+          item,
+          [
+            "complemento",
+            "Complemento"
+          ]
+        );
 
 
       html += `
 
-        <div class="card">
+        <div class="card"
+             style="margin-bottom:20px">
 
-          <div class="id">
+          <div class="card-titulo">
 
-            ID:
-            ${escapeHtml(id)}
-
-          </div>
-
-
-          <div class="titulo">
-
-            Problema
-
-          </div>
-
-
-          <div class="texto">
-
-            ${destacarTexto(
-              problema,
-              termo
+            👤 ${escaparHTML(
+              nome || "Cliente"
             )}
 
           </div>
 
 
-          <div class="titulo">
-
-            Solução
-
-          </div>
+          <div class="dados">
 
 
-          <div class="texto">
+            <div class="campo">
 
-            ${destacarTexto(
-              solucao,
-              termo
-            )}
+              <span class="rotulo">
+                Nome
+              </span>
+
+              <span class="valor">
+                ${escaparHTML(
+                  nome || "-"
+                )}
+              </span>
+
+            </div>
+
+
+            <div class="campo">
+
+              <span class="rotulo">
+                CPF
+              </span>
+
+              <span class="valor">
+                ${escaparHTML(
+                  cpf || "-"
+                )}
+              </span>
+
+            </div>
+
+
+            <div class="campo endereco">
+
+              <span class="rotulo">
+                Endereço
+              </span>
+
+              <span class="valor">
+
+                ${escaparHTML(
+                  endereco || "-"
+                )}
+
+                ${
+                  numero
+                    ? ", " +
+                      escaparHTML(numero)
+                    : ""
+                }
+
+                ${
+                  complemento
+                    ? " - " +
+                      escaparHTML(complemento)
+                    : ""
+                }
+
+              </span>
+
+            </div>
+
+
+            <div class="campo">
+
+              <span class="rotulo">
+                Bairro
+              </span>
+
+              <span class="valor">
+                ${escaparHTML(
+                  bairro || "-"
+                )}
+              </span>
+
+            </div>
+
+
+            <div class="campo">
+
+              <span class="rotulo">
+                CEP
+              </span>
+
+              <span class="valor">
+                ${escaparHTML(
+                  cep || "-"
+                )}
+              </span>
+
+            </div>
+
+
+            <div class="campo">
+
+              <span class="rotulo">
+                Cidade
+              </span>
+
+              <span class="valor">
+
+                ${escaparHTML(
+                  cidade || "-"
+                )}
+
+                ${
+                  estado
+                    ? " / " +
+                      escaparHTML(estado)
+                    : ""
+                }
+
+              </span>
+
+            </div>
+
+
+            <div class="campo">
+
+              <span class="rotulo">
+                Telefone
+              </span>
+
+              <span class="valor">
+                ${escaparHTML(
+                  telefone || "-"
+                )}
+              </span>
+
+            </div>
+
 
           </div>
 
@@ -2371,401 +1117,178 @@ function mostrarResultado(
   );
 
 
-  div.innerHTML =
+  resultado.innerHTML =
     html;
 
 }
 
 
-/* =====================================================
-   ESCAPAR HTML
-===================================================== */
+/* =========================================================
+   PRIMEIRO VALOR
+========================================================= */
 
-function escapeHtml(
-  valor
+function primeiroValor(
+  objeto,
+  campos
 ){
 
-  return String(
-    valor
-  )
-
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-
-  .replace(
-    /</g,
-    "&lt;"
-  )
-
-  .replace(
-    />/g,
-    "&gt;"
-  )
-
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-
-  .replace(
-    /'/g,
-    "&#039;"
-  );
-
-}
-
-
-/* =====================================================
-   NOVO ATENDIMENTO
-===================================================== */
-
-function abrirCadastro(){
-
-  document
-    .getElementById(
-      "modal"
-    )
-    .classList.add(
-      "show"
-    );
-
-
-  setTimeout(
-    function(){
-
-      document
-        .getElementById(
-          "problema"
-        )
-        .focus();
-
-    },
-    100
-  );
-
-}
-
-
-function fecharCadastro(){
-
-  document
-    .getElementById(
-      "modal"
-    )
-    .classList.remove(
-      "show"
-    );
-
-}
-
-
-function fecharModalFora(
-  event
-){
-
-  if(
-    event.target.id ===
-    "modal"
+  for(
+    let i=0;
+    i<campos.length;
+    i++
   ){
 
-    fecharCadastro();
-
-  }
-
-}
+    const campo =
+      campos[i];
 
 
-/* =====================================================
-   SALVAR
-===================================================== */
+    if(
+      objeto &&
+      objeto[campo] !== undefined &&
+      objeto[campo] !== null &&
+      String(
+        objeto[campo]
+      ).trim() !== ""
+    ){
 
-async function salvar(){
-
-  const problema =
-    document
-      .getElementById(
-        "problema"
-      )
-      .value
-      .trim();
-
-
-  const solucao =
-    document
-      .getElementById(
-        "solucao"
-      )
-      .value
-      .trim();
-
-
-  if(
-    !problema ||
-    !solucao
-  ){
-
-    mostrarToast(
-      "Informe o problema e a solução.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  mostrarLoading(
-    true,
-    "Salvando atendimento..."
-  );
-
-
-  try{
-
-    const resposta =
-      await apiRequest(
-        "incluirAtendimento",
-        {
-          problema:
-            problema,
-
-          solucao:
-            solucao
-        }
-      );
-
-
-    console.log(
-      "Resposta salvar:",
-      resposta
-    );
-
-
-    mostrarToast(
-      resposta.mensagem ||
-      resposta.message ||
-      "Atendimento salvo com sucesso.",
-      "success"
-    );
-
-
-    document
-      .getElementById(
-        "problema"
-      )
-      .value = "";
-
-
-    document
-      .getElementById(
-        "solucao"
-      )
-      .value = "";
-
-
-    fecharCadastro();
-
-
-    /*
-     * Se houver uma pesquisa ativa,
-     * atualiza automaticamente.
-     */
-
-    const palavra =
-      document
-        .getElementById(
-          "pesquisa"
-        )
-        .value
-        .trim();
-
-
-    if(palavra){
-
-      await pesquisar();
+      return String(
+        objeto[campo]
+      ).trim();
 
     }
 
   }
-  catch(e){
-
-    console.error(
-      "Erro salvar:",
-      e
-    );
 
 
-    mostrarToast(
-      "Erro: " +
-      e.message,
-      "error"
-    );
-
-  }
-  finally{
-
-    mostrarLoading(
-      false
-    );
-
-  }
+  return "";
 
 }
 
 
-/* =====================================================
-   LOADING
-===================================================== */
+/* =========================================================
+   MENSAGEM
+========================================================= */
 
-function mostrarLoading(
-  mostrar,
-  texto="Processando..."
+function mostrarMensagem(
+  texto,
+  tipo
 ){
 
-  const loading =
+  const div =
     document.getElementById(
-      "loading"
+      "mensagem"
     );
 
 
-  const textoElemento =
-    document.getElementById(
-      "loadingTexto"
-    );
+  div.textContent =
+    texto;
 
 
-  if(mostrar){
-
-    textoElemento.textContent =
-      texto;
-
-
-    loading.classList.add(
-      "show"
-    );
-
-  }
-  else{
-
-    loading.classList.remove(
-      "show"
-    );
-
-  }
+  div.className =
+    "mensagem " +
+    tipo;
 
 }
 
 
-/* =====================================================
-   TOAST
-===================================================== */
-
-let toastTimer;
-
-
-function mostrarToast(
-  mensagem,
-  tipo="success"
+function mostrarErro(
+  texto
 ){
 
-  const toast =
-    document.getElementById(
-      "toast"
+  mostrarMensagem(
+    "❌ " + texto,
+    "erro"
+  );
+
+}
+
+
+/* =========================================================
+   ESCAPAR HTML
+========================================================= */
+
+function escaparHTML(
+  valor
+){
+
+  if(
+    valor === null ||
+    valor === undefined
+  ){
+
+    return "";
+
+  }
+
+
+  return String(valor)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
     );
 
+}
 
-  clearTimeout(
-    toastTimer
+
+/* =========================================================
+   ENTER PARA PESQUISAR
+========================================================= */
+
+document
+  .getElementById(
+    "campoPesquisa"
+  )
+  .addEventListener(
+    "keydown",
+    function(event){
+
+      if(
+        event.key === "Enter"
+      ){
+
+        event.preventDefault();
+
+        pesquisar();
+
+      }
+
+    }
   );
 
 
-  toast.textContent =
-    mensagem;
-
-
-  toast.className =
-    "toast show " +
-    tipo;
-
-
-  toastTimer =
-    setTimeout(
-      function(){
-
-        toast.classList.remove(
-          "show"
-        );
-
-      },
-      4500
-    );
-
-}
-
-
-/* =====================================================
+/* =========================================================
    VOLTAR
-===================================================== */
+========================================================= */
 
 function voltar(){
 
   window.location.href =
-    "index.html";
+    URL_INDEX;
 
 }
 
-
-/* =====================================================
-   ESC
-===================================================== */
-
-document.addEventListener(
-  "keydown",
-  function(event){
-
-    if(
-      event.key === "Escape"
-    ){
-
-      fecharCadastro();
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   CTRL + K
-===================================================== */
-
-document.addEventListener(
-  "keydown",
-  function(event){
-
-    if(
-      (event.ctrlKey ||
-       event.metaKey) &&
-      event.key.toLowerCase() === "k"
-    ){
-
-      event.preventDefault();
-
-      document
-        .getElementById(
-          "pesquisa"
-        )
-        .focus();
-
-    }
-
-  }
-);
-
 </script>
-
 
 </body>
 
