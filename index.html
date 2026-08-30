@@ -167,6 +167,12 @@ body {
   transform: translateY(-1px);
 }
 
+.btn-atualizar:disabled {
+  opacity: .65;
+  cursor: wait;
+  transform: none;
+}
+
 /* =====================================================
    TÍTULOS
    ===================================================== */
@@ -442,9 +448,9 @@ title="Selecione a competência"
 >
 
 <button
+id="btnAtualizar"
 type="button"
 class="btn-atualizar"
-id="btnAtualizar"
 onclick="carregarResumo()"
 
 >
@@ -710,12 +716,20 @@ const btnAtualizar =
 
 
 /* =========================================================
+   CONTROLE DE REQUISIÇÕES
+   ========================================================= */
+
+let requisicaoAtual = null;
+
+
+/* =========================================================
    COMPETÊNCIA ATUAL
    ========================================================= */
 
 function competenciaAtual() {
 
-  const agora = new Date();
+  const agora =
+    new Date();
 
   const ano =
     agora.getFullYear();
@@ -790,6 +804,32 @@ function mostrarMensagem(
 
 
 /* =========================================================
+   STATUS
+   ========================================================= */
+
+function alterarStatus(
+  texto,
+  tipo
+) {
+
+  statusEl.textContent =
+    texto;
+
+  statusEl.className =
+    'status';
+
+  if (tipo) {
+
+    statusEl.classList.add(
+      tipo
+    );
+
+  }
+
+}
+
+
+/* =========================================================
    VALIDAR COMPETÊNCIA
    ========================================================= */
 
@@ -838,16 +878,20 @@ function validarCompetencia(
    CHAMAR GOOGLE APPS SCRIPT
    =========================================================
 
-   Comunicação por JSONP.
+   UMA ÚNICA IMPLEMENTAÇÃO.
 
-   O Apps Script deve retornar:
+   O Apps Script deve aceitar:
 
-   callback({...});
+       acao
+
+   e também:
+
+       action
 
    ========================================================= */
 
 function chamarAPI(
-  action,
+  acao,
   parametros
 ) {
 
@@ -858,7 +902,7 @@ function chamarAPI(
     function(resolve, reject) {
 
       const callback =
-        'cf_callback_' +
+        'apiCallback_' +
         Date.now() +
         '_' +
         Math.floor(
@@ -873,7 +917,8 @@ function chamarAPI(
       let finalizado =
         false;
 
-      const tempoLimite =
+
+      const timeout =
         setTimeout(
           function() {
 
@@ -892,7 +937,7 @@ function chamarAPI(
             );
 
           },
-          12000
+          15000
         );
 
 
@@ -905,15 +950,13 @@ function chamarAPI(
 
           finalizado = true;
 
-          clearTimeout(
-            tempoLimite
-          );
+          clearTimeout(timeout);
 
           limpar();
 
 
           console.log(
-            'Resposta Apps Script:',
+            'Resposta recebida do Apps Script:',
             resposta
           );
 
@@ -964,21 +1007,13 @@ function chamarAPI(
             script.parentNode
           ) {
 
-            script.parentNode
-              .removeChild(
-                script
-              );
+            script.parentNode.removeChild(
+              script
+            );
 
           }
 
-        } catch (erro) {
-
-          console.warn(
-            'Erro ao remover script:',
-            erro
-          );
-
-        }
+        } catch (erro) {}
 
 
         try {
@@ -1000,23 +1035,23 @@ function chamarAPI(
 
 
       /*
-       * PARÂMETROS PRINCIPAIS
+       * Envia "acao".
+       *
+       * O GS atualizado aceita
+       * "acao" e "action".
        */
 
       query.set(
-        'action',
-        action
+        'acao',
+        acao
       );
+
 
       query.set(
         'callback',
         callback
       );
 
-
-      /*
-       * PARÂMETROS DA ROTINA
-       */
 
       Object.keys(
         parametros
@@ -1044,10 +1079,6 @@ function chamarAPI(
       );
 
 
-      /*
-       * MONTA A URL
-       */
-
       const url =
         URL_API +
         '?' +
@@ -1055,17 +1086,10 @@ function chamarAPI(
 
 
       console.log(
-        'Chamando API:',
+        'Chamando Apps Script:',
         url
       );
 
-
-      /*
-       * CONFIGURA SCRIPT JSONP
-       */
-
-      script.async =
-        true;
 
       script.src =
         url;
@@ -1080,15 +1104,13 @@ function chamarAPI(
 
           finalizado = true;
 
-          clearTimeout(
-            tempoLimite
-          );
+          clearTimeout(timeout);
 
           limpar();
 
           reject(
             new Error(
-              'O navegador não conseguiu carregar a resposta do Google Apps Script.'
+              'Não foi possível carregar a resposta do Google Apps Script.'
             )
           );
 
@@ -1111,11 +1133,10 @@ function chamarAPI(
 
 async function testarConexao() {
 
-  statusEl.textContent =
-    'Conectando...';
-
-  statusEl.className =
-    'status';
+  alterarStatus(
+    'Conectando...',
+    ''
+  );
 
 
   try {
@@ -1131,11 +1152,10 @@ async function testarConexao() {
       resposta.sucesso === true
     ) {
 
-      statusEl.textContent =
-        'Sistema online';
-
-      statusEl.className =
-        'status online';
+      alterarStatus(
+        'Sistema online',
+        'online'
+      );
 
       return true;
 
@@ -1149,22 +1169,21 @@ async function testarConexao() {
 
   } catch (erro) {
 
-    statusEl.textContent =
-      'Erro na conexão';
+    console.error(
+      'Erro de conexão:',
+      erro
+    );
 
-    statusEl.className =
-      'status erro';
+
+    alterarStatus(
+      'Erro na conexão',
+      'erro'
+    );
 
 
     mostrarMensagem(
       erro.message,
       'erro'
-    );
-
-
-    console.error(
-      'Erro na conexão:',
-      erro
     );
 
 
@@ -1206,8 +1225,9 @@ async function carregarResumo() {
   btnAtualizar.disabled =
     true;
 
+
   btnAtualizar.textContent =
-    'Carregando...';
+    '⏳ Atualizando...';
 
 
   const cards =
@@ -1276,30 +1296,24 @@ async function carregarResumo() {
     );
 
 
-    /*
-     * Se a consulta funcionar,
-     * garante que o status continue online.
-     */
-
-    statusEl.textContent =
-      'Sistema online';
-
-    statusEl.className =
-      'status online';
+    alterarStatus(
+      'Sistema online',
+      'online'
+    );
 
 
   } catch (erro) {
+
+    console.error(
+      'Erro ao carregar resumo:',
+      erro
+    );
+
 
     mostrarMensagem(
       'Erro ao carregar o resumo: ' +
       erro.message,
       'erro'
-    );
-
-
-    console.error(
-      'Erro ao carregar resumo:',
-      erro
     );
 
 
@@ -1318,6 +1332,7 @@ async function carregarResumo() {
     btnAtualizar.disabled =
       false;
 
+
     btnAtualizar.textContent =
       '↻ Atualizar';
 
@@ -1327,7 +1342,7 @@ async function carregarResumo() {
 
 
 /* =========================================================
-   ABRIR ROTINAS DO GITHUB PAGES
+   ABRIR ROTINAS DO GITHUB
    ========================================================= */
 
 function abrirPagina(
@@ -1358,11 +1373,10 @@ function abrirPagina(
 
 
   /*
-   * ARQUIVOS EXISTENTES NO GITHUB
+   * ARQUIVOS DO GITHUB
    *
-   * IMPORTANTE:
-   * os nomes precisam ser exatamente iguais
-   * aos nomes dos arquivos publicados.
+   * As rotinas NÃO passam pelo
+   * Google Apps Script.
    */
 
   const arquivos = {
@@ -1392,8 +1406,7 @@ function abrirPagina(
   if (!arquivo) {
 
     mostrarMensagem(
-      'Rotina não encontrada: ' +
-      pagina,
+      'Rotina não encontrada.',
       'erro'
     );
 
@@ -1403,15 +1416,8 @@ function abrirPagina(
 
 
   /*
-   * MONTA O ENDEREÇO A PARTIR
-   * DO PRÓPRIO INDEX DO GITHUB.
-   *
-   * Exemplo:
-   *
-   * index.html
-   * Lancamentos.html
-   *
-   * ficam no mesmo diretório.
+   * Cria a URL relativa ao
+   * index.html atual.
    */
 
   const url =
@@ -1421,27 +1427,15 @@ function abrirPagina(
     );
 
 
-  /*
-   * Envia a competência para
-   * a página aberta.
-   */
-
   url.searchParams.set(
     'competencia',
     competencia
   );
 
 
-  console.log(
-    'Abrindo rotina:',
-    url.href
-  );
-
-
   /*
-   * NAVEGAÇÃO DIRETA NO GITHUB.
-   *
-   * NÃO passa pelo Apps Script.
+   * Navegação direta para
+   * o GitHub Pages.
    */
 
   window.location.href =
@@ -1451,7 +1445,7 @@ function abrirPagina(
 
 
 /* =========================================================
-   ALTERAR COMPETÊNCIA
+   ALTERAÇÃO DA COMPETÊNCIA
    ========================================================= */
 
 competenciaEl.addEventListener(
@@ -1465,7 +1459,7 @@ competenciaEl.addEventListener(
 
 
 /* =========================================================
-   ENTER NO CAMPO
+   ENTER NA COMPETÊNCIA
    ========================================================= */
 
 competenciaEl.addEventListener(
@@ -1497,7 +1491,7 @@ async function iniciarSistema() {
 
 
   /*
-   * Primeiro testa o ping.
+   * Primeiro verifica a API.
    */
 
   const online =
@@ -1505,8 +1499,8 @@ async function iniciarSistema() {
 
 
   /*
-   * Se a API não responder,
-   * não tenta carregar o resumo.
+   * Se a API não respondeu,
+   * NÃO tenta carregar o resumo.
    */
 
   if (!online) {
@@ -1517,8 +1511,8 @@ async function iniciarSistema() {
 
 
   /*
-   * API online:
-   * carrega o resumo.
+   * API online.
+   * Agora carrega o resumo.
    */
 
   await carregarResumo();
