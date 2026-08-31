@@ -35,14 +35,16 @@ body {
     width: 100%;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 30px 18px 40px;
+    padding: 20px 18px 30px;
 }
 
 .card {
     background: #ffffff;
-    border-radius: 18px;
-    padding: 28px;
-    box-shadow: 0 10px 35px rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow:
+        0 8px 28px
+        rgba(15, 23, 42, 0.08);
     border: 1px solid #e5eaf0;
 }
 
@@ -55,21 +57,22 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 28px;
+    gap: 15px;
+    margin-bottom: 18px;
 }
 
 .titulo {
     margin: 0;
     color: #17365d;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
+    line-height: 1.2;
 }
 
 .subtitulo {
-    margin-top: 7px;
+    margin-top: 5px;
     color: #64748b;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 
@@ -80,20 +83,20 @@ body {
 .status {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
-    padding: 8px 13px;
-    border-radius: 20px;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 18px;
     background: #f1f5f9;
     color: #64748b;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     white-space: nowrap;
 }
 
 .status::before {
     content: "";
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: #94a3b8;
 }
@@ -124,15 +127,15 @@ body {
 .competencia-box {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 16px 18px;
-    margin-bottom: 22px;
+    border-radius: 9px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
 }
 
 .competencia-label {
     display: block;
-    margin-bottom: 8px;
-    font-size: 13px;
+    margin-bottom: 4px;
+    font-size: 12px;
     font-weight: 700;
     color: #475569;
 }
@@ -140,23 +143,19 @@ body {
 .competencia-linha {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     flex-wrap: wrap;
 }
 
-/* =====================================================
-   CAMPOS COMPACTOS
-===================================================== */
-
 #competencia {
-    width: 190px;
-    height: 38px;
-    padding: 6px 10px;
+    width: 180px;
+    height: 34px;
+    padding: 5px 9px;
     border: 1px solid #cbd5e1;
     border-radius: 7px;
     background: #ffffff;
     color: #1e293b;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.2;
     outline: none;
 }
@@ -170,17 +169,17 @@ body {
 
 
 /* =====================================================
-   BOTÕES COMPACTOS
+   BOTÃO ATUALIZAR
 ===================================================== */
 
-.btn-atualizar,
-.btn-exportar {
-    height: 38px;
-    padding: 6px 11px;
+.btn-atualizar {
+    height: 34px;
+    padding: 5px 10px;
     border: 0;
     border-radius: 7px;
+    background: #17365d;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.2;
     font-weight: 700;
     cursor: pointer;
@@ -188,119 +187,94 @@ body {
     transition: .2s;
 }
 
-.btn-atualizar {
-    background: #17365d;
-}
-
 .btn-atualizar:hover {
     background: #214c7d;
     transform: translateY(-1px);
 }
 
-.btn-exportar {
-    background: #15803d;
+.btn-atualizar:active {
+    transform: translateY(0);
 }
-
-.btn-exportar:hover {
-    background: #166534;
-    transform: translateY(-1px);
-}
-
-
-/* =====================================================
-   LINHA DA COMPETÊNCIA
-===================================================== */
-
-.competencia-linha {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-}
-
-
-/* =====================================================
-   LABEL DA COMPETÊNCIA
-===================================================== */
-
-.competencia-label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #475569;
-}
-
-
-/* =====================================================
-   CAIXA DA COMPETÊNCIA
-===================================================== */
-
-.competencia-box {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 11px 14px;
-    margin-bottom: 16px;
-}
-
 
 
 /* =====================================================
    TÍTULOS DAS SEÇÕES
 ===================================================== */
 
-/*
- * AJUSTE:
- * O título "Resumo da Competência" não ocupa
- * uma área de botão grande.
- */
-
 .secao-titulo {
-    display: inline-block;
-    margin: 25px 0 14px;
+    display: block;
+    margin: 16px 0 7px;
     padding: 0;
     color: #17365d;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     line-height: 1.2;
 }
 
 
 /* =====================================================
-   RESUMO
+   RESUMO — SUPER COMPACTO
 ===================================================== */
 
 .resumo {
     display: grid;
     grid-template-columns:
         repeat(4, 1fr);
-    gap: 14px;
-    margin-bottom: 28px;
+
+    gap: 8px;
+
+    margin-bottom: 18px;
 }
+
+
+/*
+ * IMPORTANTE:
+ *
+ * Não existe mais min-height.
+ *
+ * A altura será determinada somente
+ * pelo conteúdo.
+ */
 
 .resumo-card {
-    min-height: 105px;
-    padding: 17px;
+    min-height: 0;
+    height: auto;
+
+    padding: 7px 9px;
+
     border: 1px solid #e5e7eb;
-    border-radius: 13px;
+    border-radius: 8px;
+
     background: #ffffff;
+
     box-shadow:
-        0 3px 12px
-        rgba(15, 23, 42, 0.04);
+        0 2px 6px
+        rgba(15, 23, 42, 0.03);
 }
+
 
 .resumo-label {
+    margin: 0 0 2px 0;
+
     color: #64748b;
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 10px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    line-height: 1.15;
 }
 
+
 .resumo-valor {
+    margin: 0;
+
     color: #17365d;
-    font-size: 21px;
+
+    font-size: 15px;
     font-weight: 700;
+
+    line-height: 1.15;
+
     word-break: break-word;
 }
 
@@ -313,20 +287,28 @@ body {
     display: grid;
     grid-template-columns:
         repeat(3, 1fr);
-    gap: 15px;
+
+    gap: 12px;
 }
 
 .menu-item {
     width: 100%;
-    min-height: 125px;
+
+    min-height: 105px;
+
     border: 0;
-    border-radius: 14px;
-    padding: 20px 15px;
+    border-radius: 12px;
+
+    padding: 15px 12px;
+
     background: #17365d;
     color: #ffffff;
+
     cursor: pointer;
+
     text-align: center;
-    font-size: 15px;
+
+    font-size: 14px;
     font-weight: 700;
 
     transition:
@@ -337,14 +319,18 @@ body {
 
 .menu-item:hover {
     background: #214c7d;
-    transform: translateY(-2px);
+
+    transform:
+        translateY(-2px);
+
     box-shadow:
-        0 7px 18px
+        0 6px 15px
         rgba(23, 54, 93, 0.18);
 }
 
 .menu-item:active {
-    transform: translateY(0);
+    transform:
+        translateY(0);
 }
 
 .menu-item.novo {
@@ -357,16 +343,25 @@ body {
 
 .menu-icone {
     display: block;
-    font-size: 31px;
+
+    font-size: 28px;
+
     line-height: 1;
-    margin-bottom: 12px;
+
+    margin-bottom: 9px;
 }
 
 .menu-descricao {
     display: block;
-    margin-top: 6px;
-    font-size: 11px;
+
+    margin-top: 5px;
+
+    font-size: 10px;
+
     font-weight: 400;
+
+    line-height: 1.25;
+
     opacity: .80;
 }
 
@@ -377,24 +372,35 @@ body {
 
 .mensagem {
     display: none;
-    margin-top: 20px;
-    padding: 13px 15px;
-    border-radius: 9px;
+
+    margin-top: 15px;
+
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
     background: #fff7ed;
+
     border: 1px solid #fed7aa;
+
     color: #9a3412;
-    font-size: 14px;
+
+    font-size: 13px;
 }
 
 .mensagem.erro {
     background: #fef2f2;
+
     border-color: #fecaca;
+
     color: #991b1b;
 }
 
 .mensagem.sucesso {
     background: #f0fdf4;
+
     border-color: #bbf7d0;
+
     color: #166534;
 }
 
@@ -404,17 +410,25 @@ body {
 ===================================================== */
 
 .rodape {
-    margin-top: 25px;
-    padding-top: 17px;
-    border-top: 1px solid #e5e7eb;
+    margin-top: 18px;
+
+    padding-top: 12px;
+
+    border-top:
+        1px solid #e5e7eb;
 
     display: flex;
-    justify-content: space-between;
+
+    justify-content:
+        space-between;
+
     align-items: center;
-    gap: 15px;
+
+    gap: 12px;
 
     color: #94a3b8;
-    font-size: 12px;
+
+    font-size: 11px;
 }
 
 
@@ -440,57 +454,116 @@ body {
 @media (max-width: 560px) {
 
     .container {
-        padding: 15px 10px 25px;
+        padding:
+            10px 8px 20px;
     }
 
     .card {
-        padding: 18px;
+        padding: 15px;
+        border-radius: 13px;
     }
 
     .header {
-        align-items: flex-start;
-        flex-direction: column;
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap: 8px;
     }
 
     .titulo {
-        font-size: 24px;
+        font-size: 23px;
+    }
+
+    .subtitulo {
+        font-size: 12px;
     }
 
     .resumo {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 6px;
+    }
+
+    .resumo-card {
+        padding: 6px 7px;
+    }
+
+    .resumo-label {
+        font-size: 9px;
+    }
+
+    .resumo-valor {
+        font-size: 14px;
     }
 
     .menu {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
 
     .menu-item {
-        min-height: 105px;
+        min-height: 90px;
     }
 
     .competencia-linha {
-        align-items: stretch;
-        flex-direction: column;
+        align-items:
+            center;
+
+        flex-direction:
+            row;
     }
 
     #competencia {
-        width: 100%;
+        width: 165px;
     }
 
-    /*
-     * No celular os botões continuam usando
-     * somente o espaço necessário quando possível.
-     */
-
-    .btn-atualizar,
-    .btn-exportar {
+    .btn-atualizar {
         width: auto;
-        align-self: flex-start;
     }
 
     .rodape {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+    }
+
+}
+
+
+/* =====================================================
+   TELAS MUITO PEQUENAS
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .resumo {
+        grid-template-columns:
+            1fr;
+    }
+
+    .resumo-card {
+        display: flex;
+
+        align-items: center;
+
+        justify-content:
+            space-between;
+
+        gap: 8px;
+    }
+
+    .resumo-label {
+        margin: 0;
+    }
+
+    .resumo-valor {
+        text-align: right;
     }
 
 }
@@ -570,16 +643,6 @@ body {
 
         </button>
 
-
-        <button
-            type="button"
-            class="btn-exportar"
-            onclick="exportarTXT()">
-
-            📄 Exportar TXT
-
-        </button>
-
     </div>
 
 </div>
@@ -598,6 +661,8 @@ body {
 
 <div class="resumo">
 
+
+    <!-- SALDO INICIAL -->
 
     <div class="resumo-card">
 
@@ -618,6 +683,8 @@ body {
     </div>
 
 
+    <!-- A RECEBER -->
+
     <div class="resumo-card">
 
         <div class="resumo-label">
@@ -637,6 +704,8 @@ body {
     </div>
 
 
+    <!-- A PAGAR -->
+
     <div class="resumo-card">
 
         <div class="resumo-label">
@@ -655,6 +724,8 @@ body {
 
     </div>
 
+
+    <!-- SALDO BANCÁRIO -->
 
     <div class="resumo-card">
 
@@ -848,7 +919,7 @@ body {
 <script>
 
 /* =========================================================
-   CONFIGURAÇÃO DA API
+   CONFIGURAÇÃO
 ========================================================= */
 
 const URL_API =
@@ -860,13 +931,19 @@ const URL_API =
 ========================================================= */
 
 const statusEl =
-document.getElementById('status');
+document.getElementById(
+    'status'
+);
 
 const mensagemEl =
-document.getElementById('mensagem');
+document.getElementById(
+    'mensagem'
+);
 
 const competenciaEl =
-document.getElementById('competencia');
+document.getElementById(
+    'competencia'
+);
 
 
 /* =========================================================
@@ -899,7 +976,7 @@ function competenciaAtual() {
 
 
 /* =========================================================
-   DEFINIR COMPETÊNCIA INICIAL
+   DEFINIR COMPETÊNCIA
 ========================================================= */
 
 competenciaEl.value =
@@ -920,8 +997,11 @@ function moeda(valor) {
     return numero.toLocaleString(
         'pt-BR',
         {
-            style: 'currency',
-            currency: 'BRL'
+            style:
+                'currency',
+
+            currency:
+                'BRL'
         }
     );
 
@@ -943,6 +1023,7 @@ function mostrarMensagem(
     mensagemEl.className =
         'mensagem';
 
+
     if (tipo) {
 
         mensagemEl.classList.add(
@@ -950,6 +1031,7 @@ function mostrarMensagem(
         );
 
     }
+
 
     mensagemEl.style.display =
         texto
@@ -979,18 +1061,22 @@ function validarCompetencia(
 
     }
 
+
     const partes =
         competencia.split('-');
+
 
     const ano =
         Number(
             partes[0]
         );
 
+
     const mes =
         Number(
             partes[1]
         );
+
 
     if (
         ano < 1900 ||
@@ -1009,7 +1095,7 @@ function validarCompetencia(
 
 
 /* =========================================================
-   CHAMAR API JSONP
+   CHAMAR API
 ========================================================= */
 
 function chamarAPI(
@@ -1019,6 +1105,7 @@ function chamarAPI(
 
     parametros =
         parametros || {};
+
 
     return new Promise(
         function(resolve, reject) {
@@ -1031,10 +1118,12 @@ function chamarAPI(
                     Math.random() * 100000
                 );
 
+
             const script =
                 document.createElement(
                     'script'
                 );
+
 
             let finalizado =
                 false;
@@ -1052,6 +1141,7 @@ function chamarAPI(
                     );
 
                 }
+
 
                 try {
 
@@ -1083,10 +1173,13 @@ function chamarAPI(
 
                         }
 
+
                         finalizado =
                             true;
 
+
                         limpar();
+
 
                         reject(
                             new Error(
@@ -1110,12 +1203,15 @@ function chamarAPI(
 
                     }
 
+
                     finalizado =
                         true;
+
 
                     clearTimeout(
                         timeout
                     );
+
 
                     limpar();
 
@@ -1181,6 +1277,7 @@ function chamarAPI(
                     const valor =
                         parametros[chave];
 
+
                     if (
                         valor === undefined ||
                         valor === null
@@ -1189,6 +1286,7 @@ function chamarAPI(
                         return;
 
                     }
+
 
                     query.set(
                         chave,
@@ -1216,14 +1314,18 @@ function chamarAPI(
 
                     }
 
+
                     finalizado =
                         true;
+
 
                     clearTimeout(
                         timeout
                     );
 
+
                     limpar();
+
 
                     reject(
                         new Error(
@@ -1308,6 +1410,10 @@ async function carregarResumo() {
             );
 
 
+        /*
+         * SALDO INICIAL
+         */
+
         document.getElementById(
             'saldoInicial'
         ).textContent =
@@ -1315,6 +1421,10 @@ async function carregarResumo() {
                 resposta.saldoInicial
             );
 
+
+        /*
+         * A RECEBER
+         */
 
         document.getElementById(
             'receber'
@@ -1324,6 +1434,10 @@ async function carregarResumo() {
             );
 
 
+        /*
+         * A PAGAR
+         */
+
         document.getElementById(
             'pagar'
         ).textContent =
@@ -1332,6 +1446,10 @@ async function carregarResumo() {
             );
 
 
+        /*
+         * SALDO BANCÁRIO
+         */
+
         document.getElementById(
             'saldoBanco'
         ).textContent =
@@ -1339,6 +1457,10 @@ async function carregarResumo() {
                 resposta.saldoBanco
             );
 
+
+        /*
+         * STATUS
+         */
 
         statusEl.textContent =
             'Sistema online';
@@ -1386,213 +1508,6 @@ async function carregarResumo() {
         );
 
     }
-
-}
-
-
-/* =========================================================
-   EXPORTAR RESUMO PARA TXT
-========================================================= */
-
-function exportarTXT() {
-
-    const competencia =
-        competenciaEl.value;
-
-
-    try {
-
-        validarCompetencia(
-            competencia
-        );
-
-    }
-    catch (erro) {
-
-        mostrarMensagem(
-            erro.message,
-            'erro'
-        );
-
-        return;
-
-    }
-
-
-    /*
-     * Obtém os valores atualmente exibidos
-     * na tela.
-     */
-
-    const saldoInicial =
-        document.getElementById(
-            'saldoInicial'
-        ).textContent.trim();
-
-
-    const receber =
-        document.getElementById(
-            'receber'
-        ).textContent.trim();
-
-
-    const pagar =
-        document.getElementById(
-            'pagar'
-        ).textContent.trim();
-
-
-    const saldoBanco =
-        document.getElementById(
-            'saldoBanco'
-        ).textContent.trim();
-
-
-    /*
-     * Converte 2026-08 para 08/2026.
-     */
-
-    const partes =
-        competencia.split('-');
-
-
-    const competenciaFormatada =
-        partes[1] +
-        '/' +
-        partes[0];
-
-
-    /*
-     * Data e hora da exportação.
-     */
-
-    const agora =
-        new Date();
-
-
-    const dataExportacao =
-        agora.toLocaleString(
-            'pt-BR'
-        );
-
-
-    /*
-     * Monta o conteúdo do TXT.
-     */
-
-    const conteudo =
-
-`==================================================
-              CONTROLE FINANCEIRO
-              RESUMO DA COMPETÊNCIA
-==================================================
-
-Competência: ${competenciaFormatada}
-
---------------------------------------------------
-RESUMO FINANCEIRO
---------------------------------------------------
-
-Saldo Inicial:   ${saldoInicial}
-
-A Receber:       ${receber}
-
-A Pagar:         ${pagar}
-
-Saldo Bancário:  ${saldoBanco}
-
---------------------------------------------------
-Exportado em: ${dataExportacao}
---------------------------------------------------
-
-Controle Financeiro
-GitHub Pages + Google Apps Script
-`;
-
-
-    /*
-     * BOM UTF-8.
-     *
-     * Isso ajuda o Windows/Bloco de Notas
-     * a reconhecer corretamente os acentos.
-     */
-
-    const BOM =
-        '\uFEFF';
-
-
-    const blob =
-        new Blob(
-            [
-                BOM +
-                conteudo
-            ],
-            {
-                type:
-                    'text/plain;charset=utf-8'
-            }
-        );
-
-
-    /*
-     * Cria o download.
-     */
-
-    const url =
-        URL.createObjectURL(
-            blob
-        );
-
-
-    const link =
-        document.createElement(
-            'a'
-        );
-
-
-    link.href =
-        url;
-
-
-    link.download =
-        'Resumo_Competencia_' +
-        competencia +
-        '.txt';
-
-
-    document.body.appendChild(
-        link
-    );
-
-
-    link.click();
-
-
-    document.body.removeChild(
-        link
-    );
-
-
-    /*
-     * Libera memória.
-     */
-
-    setTimeout(
-        function() {
-
-            URL.revokeObjectURL(
-                url
-            );
-
-        },
-        1000
-    );
-
-
-    mostrarMensagem(
-        'Resumo exportado para TXT com sucesso.',
-        'sucesso'
-    );
 
 }
 
@@ -1686,8 +1601,7 @@ function abrirPagina(
 
 
         /*
-         * Modo normal:
-         * abre a consulta/listagem.
+         * Abre a rotina no modo lista.
          */
 
         url.searchParams.set(
@@ -1728,8 +1642,7 @@ function abrirNovoLancamento() {
 
 
         /*
-         * Indica que a página deve abrir
-         * o formulário de novo lançamento.
+         * Abre diretamente no modo NOVO.
          */
 
         url.searchParams.set(
@@ -1737,6 +1650,11 @@ function abrirNovoLancamento() {
             'novo'
         );
 
+
+        /*
+         * Indicador adicional para
+         * compatibilidade com Lancamentos.html.
+         */
 
         url.searchParams.set(
             'novo',
