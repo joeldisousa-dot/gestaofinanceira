@@ -1194,6 +1194,42 @@ function montarTabela(lista){
     }
 
 
+    /*
+     * =================================================
+     * ORDENAÇÃO ALFABÉTICA PELO CAMPO "TIPO"
+     * =================================================
+     *
+     * localeCompare() respeita acentos e caracteres
+     * do idioma português.
+     *
+     * A opção sensitivity:"base" faz com que:
+     *
+     * "contas a pagar"
+     * "Contas a Pagar"
+     *
+     * sejam considerados equivalentes na ordenação.
+     */
+
+    lista.sort(function(a, b){
+
+        const tipoA =
+            String(a.tipo || "").trim();
+
+        const tipoB =
+            String(b.tipo || "").trim();
+
+
+        return tipoA.localeCompare(
+            tipoB,
+            "pt-BR",
+            {
+                sensitivity: "base"
+            }
+        );
+
+    });
+
+
     lista.forEach(
         function(item){
 
@@ -1211,12 +1247,6 @@ function montarTabela(lista){
                     "tr"
                 );
 
-
-            /*
-             * Não usamos innerHTML com JSON.stringify
-             * no onclick. O objeto fica armazenado
-             * diretamente na função.
-             */
 
             linha.innerHTML = `
 
@@ -1369,6 +1399,7 @@ function montarTabela(lista){
     );
 
 }
+
 
 
 /* =====================================================
