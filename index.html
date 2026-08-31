@@ -144,47 +144,48 @@ body {
     flex-wrap: wrap;
 }
 
+/* =====================================================
+   CAMPOS COMPACTOS
+===================================================== */
+
 #competencia {
-    width: 210px;
-    padding: 11px 13px;
+    width: 190px;
+    height: 38px;
+    padding: 6px 10px;
     border: 1px solid #cbd5e1;
-    border-radius: 9px;
+    border-radius: 7px;
     background: #ffffff;
     color: #1e293b;
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 1.2;
     outline: none;
 }
 
 #competencia:focus {
     border-color: #2563eb;
     box-shadow:
-        0 0 0 3px
+        0 0 0 2px
         rgba(37, 99, 235, 0.10);
 }
 
 
 /* =====================================================
-   BOTÕES DA COMPETÊNCIA
+   BOTÕES COMPACTOS
 ===================================================== */
-
-/*
- * AJUSTE:
- * Os botões agora ocupam somente o espaço
- * necessário para o conteúdo.
- */
 
 .btn-atualizar,
 .btn-exportar {
+    height: 38px;
+    padding: 6px 11px;
     border: 0;
-    border-radius: 9px;
-    padding: 11px 13px;
+    border-radius: 7px;
     color: #ffffff;
     font-size: 14px;
+    line-height: 1.2;
     font-weight: 700;
     cursor: pointer;
     white-space: nowrap;
-    transition:
-        .2s;
+    transition: .2s;
 }
 
 .btn-atualizar {
@@ -205,10 +206,44 @@ body {
     transform: translateY(-1px);
 }
 
-.btn-atualizar:active,
-.btn-exportar:active {
-    transform: translateY(0);
+
+/* =====================================================
+   LINHA DA COMPETÊNCIA
+===================================================== */
+
+.competencia-linha {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
 }
+
+
+/* =====================================================
+   LABEL DA COMPETÊNCIA
+===================================================== */
+
+.competencia-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #475569;
+}
+
+
+/* =====================================================
+   CAIXA DA COMPETÊNCIA
+===================================================== */
+
+.competencia-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 11px 14px;
+    margin-bottom: 16px;
+}
+
 
 
 /* =====================================================
