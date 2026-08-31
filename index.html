@@ -796,6 +796,146 @@ function(resolve, reject) {
 );
 
 }
+<!-- =====================================================
+     MODAL NOVO LANÇAMENTO
+===================================================== -->
+
+<div
+    id="modalNovo"
+    class="modal"
+    onclick="fecharModalNovoFora(event)"
+>
+
+    <div
+        class="modal-conteudo"
+        onclick="event.stopPropagation()"
+    >
+
+        <h2>
+            ➕ Novo Lançamento
+        </h2>
+
+        <!-- COMPETÊNCIA -->
+
+        <div class="form-grupo">
+
+            <label for="novoCompetencia">
+                Competência
+            </label>
+
+            <input
+                type="month"
+                id="novoCompetencia"
+            >
+
+        </div>
+
+
+        <!-- TIPO -->
+
+        <div class="form-grupo">
+
+            <label for="novoTipo">
+                Tipo
+            </label>
+
+            <select id="novoTipo">
+
+                <option value="Contas a Pagar">
+                    Contas a Pagar
+                </option>
+
+                <option value="Contas a Receber">
+                    Contas a Receber
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- DESCRIÇÃO -->
+
+        <div class="form-grupo">
+
+            <label for="novoDescricao">
+                Descrição
+            </label>
+
+            <input
+                type="text"
+                id="novoDescricao"
+                placeholder="Descrição do lançamento"
+            >
+
+        </div>
+
+
+        <!-- VALOR -->
+
+        <div class="form-grupo">
+
+            <label for="novoValor">
+                Valor
+            </label>
+
+            <input
+                type="number"
+                id="novoValor"
+                step="0.01"
+                min="0"
+                placeholder="0,00"
+            >
+
+        </div>
+
+
+        <!-- VENCIMENTO -->
+
+        <div class="form-grupo">
+
+            <label for="novoVencimento">
+                Vencimento
+            </label>
+
+            <input
+                type="date"
+                id="novoVencimento"
+            >
+
+        </div>
+
+
+        <!-- BOTÕES -->
+
+        <div class="botoes-modal">
+
+            <button
+                id="btnSalvarNovo"
+                class="salvar"
+                onclick="salvarNovoLancamento()"
+            >
+
+                💾 Salvar Lançamento
+
+            </button>
+
+
+            <button
+                id="btnCancelarNovo"
+                class="cancelar"
+                onclick="fecharModalNovo()"
+            >
+
+                Cancelar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 /* =========================================================
 CARREGAR RESUMO
@@ -1032,132 +1172,41 @@ mostrarMensagem(
 }
 
 /* =========================================================
-ABRIR NOVO LANÇAMENTO
-ESTA É A CORREÇÃO PRINCIPAL.
-
-O botão "Novo Lançamento" NÃO chama:
-
-   abrirPagina('lancamentos')
-
-porque isso abre a lista.
-
-Ele chama esta função e envia:
-
-   modo=novo
-
-para Lancamentos.html.
-
-A página Lancamentos.html deve verificar
-esse parâmetro e abrir o formulário de inclusão.
-
-A competência selecionada no index também
-é enviada para o formulário.
+   ABRIR NOVO LANÇAMENTO
 ========================================================= */
 
 function abrirNovoLancamento() {
 
-try {
+    try {
 
-const url =
-  construirUrl(
-    'Lancamentos.html'
-  );
+        const url =
+            construirUrl(
+                'Lancamentos.html'
+            );
 
-/*
- * Indica explicitamente que a tela
- * deve abrir para NOVO lançamento.
- */
+        /*
+         * Indica que Lancamentos.html deve
+         * abrir diretamente o formulário de inclusão.
+         */
 
-url.searchParams.set(
-  'modo',
-  'novo'
-);
+        url.searchParams.set(
+            'modo',
+            'novo'
+        );
 
-/*
- * Também envia uma indicação clara
- * para a rotina de lançamentos.
- */
+        window.location.assign(
+            url.href
+        );
 
-url.searchParams.set(
-  'novo',
-  '1'
-);
+    }
+    catch (erro) {
 
-/*
- * Abre diretamente Lancamentos.html
- * já preparado para inclusão.
- */
+        mostrarMensagem(
+            erro.message,
+            'erro'
+        );
 
-window.location.assign(
-  url.href
-);
-
-} catch (erro) {
-
-mostrarMensagem(
-  erro.message,
-  'erro'
-);
+    }
 
 }
 
-}
-
-/* =========================================================
-ALTERAÇÃO DA COMPETÊNCIA
-========================================================= */
-
-competenciaEl.addEventListener(
-'change',
-function() {
-
-carregarResumo();
-
-}
-);
-
-/* =========================================================
-ENTER
-========================================================= */
-
-competenciaEl.addEventListener(
-'keydown',
-function(evento) {
-
-if (
-  evento.key === 'Enter'
-) {
-
-  carregarResumo();
-
-}
-
-}
-);
-
-/* =========================================================
-INICIALIZAÇÃO
-========================================================= */
-
-document.addEventListener(
-'DOMContentLoaded',
-function() {
-
-statusEl.textContent =
-  'Sistema';
-
-statusEl.className =
-  'status';
-
-/*
- * O resumo é carregado em segundo plano.
- *
- * Isso não interfere nas rotinas.
- */
-
-carregarResumo();
-
-}
-);
-
-</script> </body> </html>
