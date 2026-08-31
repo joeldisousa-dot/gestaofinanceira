@@ -1,463 +1,827 @@
-<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Controle Financeiro</title> <style>
-{
-box-sizing: border-box;
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Controle Financeiro</title>
+
+<style>
+
+/* =====================================================
+   BASE
+===================================================== */
+
+* {
+    box-sizing: border-box;
 }
+
 body {
-margin: 0;
-min-height: 100vh;
-font-family: Arial, Helvetica, sans-serif;
-background: linear-gradient(135deg, #f4f7fb 0%, #eef3f9 100%);
-color: #1f2937;
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(
+        135deg,
+        #f4f7fb 0%,
+        #eef3f9 100%
+    );
+    color: #1f2937;
 }
 
 .container {
-width: 100%;
-max-width: 1100px;
-margin: 0 auto;
-padding: 30px 18px 40px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 18px 40px;
 }
 
 .card {
-background: #ffffff;
-border-radius: 18px;
-padding: 28px;
-box-shadow: 0 10px 35px rgba(15, 23, 42, 0.08);
-border: 1px solid #e5eaf0;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 10px 35px rgba(15, 23, 42, 0.08);
+    border: 1px solid #e5eaf0;
 }
 
+
 /* =====================================================
-CABEÇALHO
+   CABEÇALHO
 ===================================================== */
 
 .header {
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 20px;
-margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 28px;
 }
 
 .titulo {
-margin: 0;
-color: #17365d;
-font-size: 28px;
-font-weight: 700;
+    margin: 0;
+    color: #17365d;
+    font-size: 28px;
+    font-weight: 700;
 }
 
 .subtitulo {
-margin-top: 7px;
-color: #64748b;
-font-size: 14px;
+    margin-top: 7px;
+    color: #64748b;
+    font-size: 14px;
 }
 
+
 /* =====================================================
-STATUS
+   STATUS
 ===================================================== */
 
 .status {
-display: inline-flex;
-align-items: center;
-gap: 7px;
-padding: 8px 13px;
-border-radius: 20px;
-background: #f1f5f9;
-color: #64748b;
-font-size: 13px;
-font-weight: 600;
-white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 13px;
+    border-radius: 20px;
+    background: #f1f5f9;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
 .status::before {
-content: "";
-width: 8px;
-height: 8px;
-border-radius: 50%;
-background: #94a3b8;
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #94a3b8;
 }
 
 .status.online {
-background: #ecfdf3;
-color: #166534;
+    background: #ecfdf3;
+    color: #166534;
 }
 
 .status.online::before {
-background: #22c55e;
+    background: #22c55e;
 }
 
 .status.erro {
-background: #fef2f2;
-color: #991b1b;
+    background: #fef2f2;
+    color: #991b1b;
 }
 
 .status.erro::before {
-background: #ef4444;
+    background: #ef4444;
 }
 
+
 /* =====================================================
-COMPETÊNCIA
+   COMPETÊNCIA
 ===================================================== */
 
 .competencia-box {
-background: #f8fafc;
-border: 1px solid #e2e8f0;
-border-radius: 12px;
-padding: 16px 18px;
-margin-bottom: 22px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 22px;
 }
 
 .competencia-label {
-display: block;
-margin-bottom: 8px;
-font-size: 13px;
-font-weight: 700;
-color: #475569;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #475569;
 }
 
 .competencia-linha {
-display: flex;
-align-items: center;
-gap: 12px;
-flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 #competencia {
-width: 210px;
-padding: 11px 13px;
-border: 1px solid #cbd5e1;
-border-radius: 9px;
-background: #ffffff;
-color: #1e293b;
-font-size: 15px;
-outline: none;
+    width: 210px;
+    padding: 11px 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #1e293b;
+    font-size: 15px;
+    outline: none;
 }
 
 #competencia:focus {
-border-color: #2563eb;
-box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+    border-color: #2563eb;
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.10);
+}
+
+
+/* =====================================================
+   BOTÕES DA COMPETÊNCIA
+===================================================== */
+
+/*
+ * AJUSTE:
+ * Os botões agora ocupam somente o espaço
+ * necessário para o conteúdo.
+ */
+
+.btn-atualizar,
+.btn-exportar {
+    border: 0;
+    border-radius: 9px;
+    padding: 11px 13px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+        .2s;
 }
 
 .btn-atualizar {
-border: 0;
-border-radius: 9px;
-padding: 11px 17px;
-background: #17365d;
-color: #ffffff;
-font-size: 14px;
-font-weight: 700;
-cursor: pointer;
-transition: .2s;
+    background: #17365d;
 }
 
 .btn-atualizar:hover {
-background: #214c7d;
-transform: translateY(-1px);
+    background: #214c7d;
+    transform: translateY(-1px);
 }
 
+.btn-exportar {
+    background: #15803d;
+}
+
+.btn-exportar:hover {
+    background: #166534;
+    transform: translateY(-1px);
+}
+
+.btn-atualizar:active,
+.btn-exportar:active {
+    transform: translateY(0);
+}
+
+
 /* =====================================================
-TÍTULOS
+   TÍTULOS DAS SEÇÕES
 ===================================================== */
 
+/*
+ * AJUSTE:
+ * O título "Resumo da Competência" não ocupa
+ * uma área de botão grande.
+ */
+
 .secao-titulo {
-margin: 25px 0 14px;
-color: #17365d;
-font-size: 18px;
-font-weight: 700;
+    display: inline-block;
+    margin: 25px 0 14px;
+    padding: 0;
+    color: #17365d;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
 }
 
+
 /* =====================================================
-RESUMO
+   RESUMO
 ===================================================== */
 
 .resumo {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 14px;
-margin-bottom: 28px;
+    display: grid;
+    grid-template-columns:
+        repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 28px;
 }
 
 .resumo-card {
-min-height: 105px;
-padding: 17px;
-border: 1px solid #e5e7eb;
-border-radius: 13px;
-background: #ffffff;
-box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+    min-height: 105px;
+    padding: 17px;
+    border: 1px solid #e5e7eb;
+    border-radius: 13px;
+    background: #ffffff;
+    box-shadow:
+        0 3px 12px
+        rgba(15, 23, 42, 0.04);
 }
 
 .resumo-label {
-color: #64748b;
-font-size: 12px;
-font-weight: 600;
-margin-bottom: 10px;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
 .resumo-valor {
-color: #17365d;
-font-size: 21px;
-font-weight: 700;
-word-break: break-word;
+    color: #17365d;
+    font-size: 21px;
+    font-weight: 700;
+    word-break: break-word;
 }
 
+
 /* =====================================================
-MENU
+   MENU
 ===================================================== */
 
 .menu {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 15px;
+    display: grid;
+    grid-template-columns:
+        repeat(3, 1fr);
+    gap: 15px;
 }
 
 .menu-item {
-width: 100%;
-min-height: 125px;
-border: 0;
-border-radius: 14px;
-padding: 20px 15px;
-background: #17365d;
-color: #ffffff;
-cursor: pointer;
-text-align: center;
-font-size: 15px;
-font-weight: 700;
+    width: 100%;
+    min-height: 125px;
+    border: 0;
+    border-radius: 14px;
+    padding: 20px 15px;
+    background: #17365d;
+    color: #ffffff;
+    cursor: pointer;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
 
-transition:
-transform .18s ease,
-background .18s ease,
-box-shadow .18s ease;
+    transition:
+        transform .18s ease,
+        background .18s ease,
+        box-shadow .18s ease;
 }
 
 .menu-item:hover {
-background: #214c7d;
-transform: translateY(-2px);
-box-shadow: 0 7px 18px rgba(23, 54, 93, 0.18);
+    background: #214c7d;
+    transform: translateY(-2px);
+    box-shadow:
+        0 7px 18px
+        rgba(23, 54, 93, 0.18);
 }
 
 .menu-item:active {
-transform: translateY(0);
+    transform: translateY(0);
 }
 
 .menu-item.novo {
-background: #15803d;
+    background: #15803d;
 }
 
 .menu-item.novo:hover {
-background: #166534;
+    background: #166534;
 }
 
 .menu-icone {
-display: block;
-font-size: 31px;
-line-height: 1;
-margin-bottom: 12px;
+    display: block;
+    font-size: 31px;
+    line-height: 1;
+    margin-bottom: 12px;
 }
 
 .menu-descricao {
-display: block;
-margin-top: 6px;
-font-size: 11px;
-font-weight: 400;
-opacity: .80;
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 400;
+    opacity: .80;
 }
 
+
 /* =====================================================
-MENSAGEM
+   MENSAGEM
 ===================================================== */
 
 .mensagem {
-display: none;
-margin-top: 20px;
-padding: 13px 15px;
-border-radius: 9px;
-background: #fff7ed;
-border: 1px solid #fed7aa;
-color: #9a3412;
-font-size: 14px;
+    display: none;
+    margin-top: 20px;
+    padding: 13px 15px;
+    border-radius: 9px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    color: #9a3412;
+    font-size: 14px;
 }
 
 .mensagem.erro {
-background: #fef2f2;
-border-color: #fecaca;
-color: #991b1b;
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #991b1b;
 }
 
 .mensagem.sucesso {
-background: #f0fdf4;
-border-color: #bbf7d0;
-color: #166534;
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+    color: #166534;
 }
 
+
 /* =====================================================
-RODAPÉ
+   RODAPÉ
 ===================================================== */
 
 .rodape {
-margin-top: 25px;
-padding-top: 17px;
-border-top: 1px solid #e5e7eb;
+    margin-top: 25px;
+    padding-top: 17px;
+    border-top: 1px solid #e5e7eb;
 
-display: flex;
-justify-content: space-between;
-align-items: center;
-gap: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
 
-color: #94a3b8;
-font-size: 12px;
+    color: #94a3b8;
+    font-size: 12px;
 }
 
+
 /* =====================================================
-RESPONSIVO
+   RESPONSIVO
 ===================================================== */
 
 @media (max-width: 850px) {
 
-.resumo {
-grid-template-columns: repeat(2, 1fr);
+    .resumo {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .menu {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
 }
 
-.menu {
-grid-template-columns: repeat(2, 1fr);
-}
-
-}
 
 @media (max-width: 560px) {
 
-.container {
-padding: 15px 10px 25px;
+    .container {
+        padding: 15px 10px 25px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .titulo {
+        font-size: 24px;
+    }
+
+    .resumo {
+        grid-template-columns: 1fr;
+    }
+
+    .menu {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-item {
+        min-height: 105px;
+    }
+
+    .competencia-linha {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    #competencia {
+        width: 100%;
+    }
+
+    /*
+     * No celular os botões continuam usando
+     * somente o espaço necessário quando possível.
+     */
+
+    .btn-atualizar,
+    .btn-exportar {
+        width: auto;
+        align-self: flex-start;
+    }
+
+    .rodape {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
 }
 
-.card {
-padding: 18px;
-}
+</style>
 
-.header {
-align-items: flex-start;
-flex-direction: column;
-}
+</head>
 
-.titulo {
-font-size: 24px;
-}
 
-.resumo {
-grid-template-columns: 1fr;
-}
+<body>
 
-.menu {
-grid-template-columns: 1fr;
-}
+<div class="container">
 
-.menu-item {
-min-height: 105px;
-}
+<div class="card">
 
-.competencia-linha {
-align-items: stretch;
-flex-direction: column;
-}
 
-#competencia {
-width: 100%;
-}
+<!-- =====================================================
+     CABEÇALHO
+===================================================== -->
 
-.btn-atualizar {
-width: 100%;
-}
+<div class="header">
 
-.rodape {
-flex-direction: column;
-align-items: flex-start;
-}
+    <div>
 
-}
+        <h1 class="titulo">
+            Controle Financeiro
+        </h1>
 
-</style> </head> <body> <div class="container"> <div class="card"> <!-- ===================================================== CABEÇALHO ===================================================== --> <div class="header"> <div> <h1 class="titulo"> Controle Financeiro </h1> <div class="subtitulo"> Gestão de lançamentos e fluxo financeiro </div> </div> <div id="status" class="status" > Sistema </div> </div> <!-- ===================================================== COMPETÊNCIA ===================================================== --> <div class="competencia-box">
-<label
-class="competencia-label"
-for="competencia"
+        <div class="subtitulo">
+            Gestão de lançamentos e fluxo financeiro
+        </div>
 
-Competência
-</label>
+    </div>
 
-<div class="competencia-linha">
-<input
-id="competencia"
-type="month"
-title="Selecione a competência"
 
-<button
-type="button"
-class="btn-atualizar"
-onclick="carregarResumo()"
+    <div
+        id="status"
+        class="status">
 
-↻ Atualizar
-</button>
+        Sistema
 
-</div> </div> <!-- ===================================================== RESUMO ===================================================== --> <div class="secao-titulo"> Resumo da Competência </div> <div class="resumo"> <div class="resumo-card"> <div class="resumo-label"> SALDO INICIAL </div> <div id="saldoInicial" class="resumo-valor" > R$ 0,00 </div> </div> <div class="resumo-card"> <div class="resumo-label"> A RECEBER </div> <div id="receber" class="resumo-valor" > R$ 0,00 </div> </div> <div class="resumo-card"> <div class="resumo-label"> A PAGAR </div> <div id="pagar" class="resumo-valor" > R$ 0,00 </div> </div> <div class="resumo-card"> <div class="resumo-label"> SALDO BANCÁRIO </div> <div id="saldoBanco" class="resumo-valor" > R$ 0,00 </div> </div> </div> <!-- ===================================================== MENU ===================================================== --> <div class="secao-titulo"> Rotinas </div> <div class="menu"> <!-- LANÇAMENTOS -->
-<button
-type="button"
-class="menu-item"
-onclick="abrirPagina('lancamentos')"
+    </div>
 
-<span class="menu-icone"> 📋 </span>
-Lançamentos
+</div>
 
-<span class="menu-descricao"> Consultar, editar e excluir lançamentos </span> </button> <!-- PENDENTES -->
-<button
-type="button"
-class="menu-item"
-onclick="abrirPagina('pendentes')"
 
-<span class="menu-icone"> ⏳ </span>
-Baixas Pendentes
+<!-- =====================================================
+     COMPETÊNCIA
+===================================================== -->
 
-<span class="menu-descricao"> Consultar lançamentos pendentes </span> </button> <!-- RELATÓRIO -->
-<button
-type="button"
-class="menu-item"
-onclick="abrirPagina('relatorio')"
+<div class="competencia-box">
 
-<span class="menu-icone"> 📊 </span>
-Relatório Financeiro
+    <label
+        class="competencia-label"
+        for="competencia">
 
-<span class="menu-descricao"> Visualizar relatório da competência </span> </button> <!-- GRÁFICOS -->
-<button
-type="button"
-class="menu-item"
-onclick="abrirPagina('graficos')"
+        Competência
 
-<span class="menu-icone"> 📈 </span>
-Gráficos
+    </label>
 
-<span class="menu-descricao"> Análise visual dos dados financeiros </span> </button> <!-- ATENDIMENTO -->
-<button
-type="button"
-class="menu-item"
-onclick="abrirPagina('atendimento')"
 
-<span class="menu-icone"> 👤 </span>
-Atendimento
+    <div class="competencia-linha">
 
-<span class="menu-descricao"> Pesquisa e registro de atendimento </span> </button> <!-- ===================================================== NOVO LANÇAMENTO ===================================================== -->
-<button
-type="button"
-class="menu-item novo"
-onclick="abrirNovoLancamento()"
+        <input
+            id="competencia"
+            type="month"
+            title="Selecione a competência"
+        >
 
-<span class="menu-icone"> ➕ </span>
-Novo Lançamento
 
-<span class="menu-descricao"> Cadastrar novo lançamento </span> </button> </div> <!-- ===================================================== MENSAGEM ===================================================== --> <div id="mensagem" class="mensagem" ></div> <!-- ===================================================== RODAPÉ ===================================================== --> <div class="rodape"> <span> Controle Financeiro </span> <span> GitHub Pages + Google Apps Script </span> </div> </div> </div> <script>
+        <button
+            type="button"
+            class="btn-atualizar"
+            onclick="carregarResumo()">
+
+            ↻ Atualizar
+
+        </button>
+
+
+        <button
+            type="button"
+            class="btn-exportar"
+            onclick="exportarTXT()">
+
+            📄 Exportar TXT
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     RESUMO
+===================================================== -->
+
+<div class="secao-titulo">
+
+    Resumo da Competência
+
+</div>
+
+
+<div class="resumo">
+
+
+    <div class="resumo-card">
+
+        <div class="resumo-label">
+
+            SALDO INICIAL
+
+        </div>
+
+        <div
+            id="saldoInicial"
+            class="resumo-valor">
+
+            R$ 0,00
+
+        </div>
+
+    </div>
+
+
+    <div class="resumo-card">
+
+        <div class="resumo-label">
+
+            A RECEBER
+
+        </div>
+
+        <div
+            id="receber"
+            class="resumo-valor">
+
+            R$ 0,00
+
+        </div>
+
+    </div>
+
+
+    <div class="resumo-card">
+
+        <div class="resumo-label">
+
+            A PAGAR
+
+        </div>
+
+        <div
+            id="pagar"
+            class="resumo-valor">
+
+            R$ 0,00
+
+        </div>
+
+    </div>
+
+
+    <div class="resumo-card">
+
+        <div class="resumo-label">
+
+            SALDO BANCÁRIO
+
+        </div>
+
+        <div
+            id="saldoBanco"
+            class="resumo-valor">
+
+            R$ 0,00
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MENU
+===================================================== -->
+
+<div class="secao-titulo">
+
+    Rotinas
+
+</div>
+
+
+<div class="menu">
+
+
+    <!-- LANÇAMENTOS -->
+
+    <button
+        type="button"
+        class="menu-item"
+        onclick="abrirPagina('lancamentos')">
+
+        <span class="menu-icone">
+            📋
+        </span>
+
+        Lançamentos
+
+        <span class="menu-descricao">
+            Consultar, editar e excluir lançamentos
+        </span>
+
+    </button>
+
+
+    <!-- PENDENTES -->
+
+    <button
+        type="button"
+        class="menu-item"
+        onclick="abrirPagina('pendentes')">
+
+        <span class="menu-icone">
+            ⏳
+        </span>
+
+        Baixas Pendentes
+
+        <span class="menu-descricao">
+            Consultar lançamentos pendentes
+        </span>
+
+    </button>
+
+
+    <!-- RELATÓRIO -->
+
+    <button
+        type="button"
+        class="menu-item"
+        onclick="abrirPagina('relatorio')">
+
+        <span class="menu-icone">
+            📊
+        </span>
+
+        Relatório Financeiro
+
+        <span class="menu-descricao">
+            Visualizar relatório da competência
+        </span>
+
+    </button>
+
+
+    <!-- GRÁFICOS -->
+
+    <button
+        type="button"
+        class="menu-item"
+        onclick="abrirPagina('graficos')">
+
+        <span class="menu-icone">
+            📈
+        </span>
+
+        Gráficos
+
+        <span class="menu-descricao">
+            Análise visual dos dados financeiros
+        </span>
+
+    </button>
+
+
+    <!-- ATENDIMENTO -->
+
+    <button
+        type="button"
+        class="menu-item"
+        onclick="abrirPagina('atendimento')">
+
+        <span class="menu-icone">
+            👤
+        </span>
+
+        Atendimento
+
+        <span class="menu-descricao">
+            Pesquisa e registro de atendimento
+        </span>
+
+    </button>
+
+
+    <!-- NOVO LANÇAMENTO -->
+
+    <button
+        type="button"
+        class="menu-item novo"
+        onclick="abrirNovoLancamento()">
+
+        <span class="menu-icone">
+            ➕
+        </span>
+
+        Novo Lançamento
+
+        <span class="menu-descricao">
+            Cadastrar novo lançamento
+        </span>
+
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     MENSAGEM
+===================================================== -->
+
+<div
+    id="mensagem"
+    class="mensagem">
+</div>
+
+
+<!-- =====================================================
+     RODAPÉ
+===================================================== -->
+
+<div class="rodape">
+
+    <span>
+        Controle Financeiro
+    </span>
+
+    <span>
+        GitHub Pages + Google Apps Script
+    </span>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<script>
+
 /* =========================================================
-CONFIGURAÇÃO
+   CONFIGURAÇÃO DA API
 ========================================================= */
 
 const URL_API =
 'https://script.google.com/macros/s/AKfycbw-Fry_UM89-p0FjPEoDNdfdTSNdz56sYzUA8VJIpD9_862l5dPSNmkWOGLXyZiqnRn/exec';
 
+
 /* =========================================================
-ELEMENTOS
+   ELEMENTOS
 ========================================================= */
 
 const statusEl =
@@ -469,695 +833,959 @@ document.getElementById('mensagem');
 const competenciaEl =
 document.getElementById('competencia');
 
+
 /* =========================================================
-COMPETÊNCIA ATUAL
+   COMPETÊNCIA ATUAL
 ========================================================= */
 
 function competenciaAtual() {
 
-const agora =
-new Date();
+    const agora =
+        new Date();
 
-const ano =
-agora.getFullYear();
+    const ano =
+        agora.getFullYear();
 
-const mes =
-String(
-agora.getMonth() + 1
-).padStart(2, '0');
+    const mes =
+        String(
+            agora.getMonth() + 1
+        ).padStart(
+            2,
+            '0'
+        );
 
-return ano + '-' + mes;
+    return (
+        ano +
+        '-' +
+        mes
+    );
 
 }
 
+
 /* =========================================================
-DEFINIR COMPETÊNCIA
+   DEFINIR COMPETÊNCIA INICIAL
 ========================================================= */
 
 competenciaEl.value =
-competenciaAtual();
+    competenciaAtual();
+
 
 /* =========================================================
-MOEDA
+   MOEDA
 ========================================================= */
 
 function moeda(valor) {
 
-const numero =
-Number(valor || 0);
+    const numero =
+        Number(
+            valor || 0
+        );
 
-return numero.toLocaleString(
-'pt-BR',
-{
-style: 'currency',
-currency: 'BRL'
-}
-);
+    return numero.toLocaleString(
+        'pt-BR',
+        {
+            style: 'currency',
+            currency: 'BRL'
+        }
+    );
 
 }
+
 
 /* =========================================================
-MENSAGEM
+   MENSAGEM
 ========================================================= */
 
 function mostrarMensagem(
-texto,
-tipo
+    texto,
+    tipo
 ) {
 
-mensagemEl.textContent =
-texto || '';
+    mensagemEl.textContent =
+        texto || '';
 
-mensagemEl.className =
-'mensagem';
+    mensagemEl.className =
+        'mensagem';
 
-if (tipo) {
+    if (tipo) {
 
-mensagemEl.classList.add(
-  tipo
-);
+        mensagemEl.classList.add(
+            tipo
+        );
+
+    }
+
+    mensagemEl.style.display =
+        texto
+            ? 'block'
+            : 'none';
 
 }
 
-mensagemEl.style.display =
-texto
-? 'block'
-: 'none';
-
-}
 
 /* =========================================================
-VALIDAR COMPETÊNCIA
+   VALIDAR COMPETÊNCIA
 ========================================================= */
 
 function validarCompetencia(
-competencia
+    competencia
 ) {
 
-if (
-!/^\d{4}-\d{2}$/.test(
-competencia
-)
-) {
+    if (
+        !/^\d{4}-\d{2}$/.test(
+            competencia
+        )
+    ) {
 
-throw new Error(
-  'Selecione uma competência válida.'
-);
+        throw new Error(
+            'Selecione uma competência válida.'
+        );
+
+    }
+
+    const partes =
+        competencia.split('-');
+
+    const ano =
+        Number(
+            partes[0]
+        );
+
+    const mes =
+        Number(
+            partes[1]
+        );
+
+    if (
+        ano < 1900 ||
+        ano > 2100 ||
+        mes < 1 ||
+        mes > 12
+    ) {
+
+        throw new Error(
+            'Competência inválida.'
+        );
+
+    }
 
 }
 
-const partes =
-competencia.split('-');
-
-const ano =
-Number(partes[0]);
-
-const mes =
-Number(partes[1]);
-
-if (
-ano < 1900 ||
-ano > 2100 ||
-mes < 1 ||
-mes > 12
-) {
-
-throw new Error(
-  'Competência inválida.'
-);
-
-}
-
-}
 
 /* =========================================================
-CHAMAR API
+   CHAMAR API JSONP
 ========================================================= */
 
 function chamarAPI(
-action,
-parametros
+    action,
+    parametros
 ) {
 
-parametros =
-parametros || {};
+    parametros =
+        parametros || {};
 
-return new Promise(
-function(resolve, reject) {
+    return new Promise(
+        function(resolve, reject) {
 
-  const callback =
-    'cfCallback_' +
-    Date.now() +
-    '_' +
-    Math.floor(
-      Math.random() * 100000
-    );
+            const callback =
+                'cfCallback_' +
+                Date.now() +
+                '_' +
+                Math.floor(
+                    Math.random() * 100000
+                );
 
-  const script =
-    document.createElement(
-      'script'
-    );
+            const script =
+                document.createElement(
+                    'script'
+                );
 
-  let finalizado =
-    false;
+            let finalizado =
+                false;
 
-  function limpar() {
 
-    if (
-      script &&
-      script.parentNode
-    ) {
+            function limpar() {
 
-      script.parentNode.removeChild(
-        script
-      );
+                if (
+                    script &&
+                    script.parentNode
+                ) {
 
-    }
+                    script.parentNode.removeChild(
+                        script
+                    );
 
-    try {
+                }
 
-      delete window[callback];
+                try {
 
-    } catch (e) {
+                    delete window[
+                        callback
+                    ];
 
-      window[callback] =
-        undefined;
+                }
+                catch (e) {
 
-    }
+                    window[
+                        callback
+                    ] = undefined;
 
-  }
+                }
 
-  const timeout =
-    setTimeout(
-      function() {
+            }
 
-        if (finalizado) {
-          return;
+
+            const timeout =
+                setTimeout(
+                    function() {
+
+                        if (
+                            finalizado
+                        ) {
+
+                            return;
+
+                        }
+
+                        finalizado =
+                            true;
+
+                        limpar();
+
+                        reject(
+                            new Error(
+                                'Tempo limite da API.'
+                            )
+                        );
+
+                    },
+                    10000
+                );
+
+
+            window[callback] =
+                function(resposta) {
+
+                    if (
+                        finalizado
+                    ) {
+
+                        return;
+
+                    }
+
+                    finalizado =
+                        true;
+
+                    clearTimeout(
+                        timeout
+                    );
+
+                    limpar();
+
+
+                    if (!resposta) {
+
+                        reject(
+                            new Error(
+                                'Resposta vazia do Apps Script.'
+                            )
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (
+                        resposta.sucesso === false
+                    ) {
+
+                        reject(
+                            new Error(
+                                resposta.erro ||
+                                resposta.mensagem ||
+                                'Erro retornado pela API.'
+                            )
+                        );
+
+                        return;
+
+                    }
+
+
+                    resolve(
+                        resposta
+                    );
+
+                };
+
+
+            const query =
+                new URLSearchParams();
+
+
+            query.set(
+                'action',
+                action
+            );
+
+
+            query.set(
+                'callback',
+                callback
+            );
+
+
+            Object.keys(
+                parametros
+            ).forEach(
+                function(chave) {
+
+                    const valor =
+                        parametros[chave];
+
+                    if (
+                        valor === undefined ||
+                        valor === null
+                    ) {
+
+                        return;
+
+                    }
+
+                    query.set(
+                        chave,
+                        String(valor)
+                    );
+
+                }
+            );
+
+
+            script.src =
+                URL_API +
+                '?' +
+                query.toString();
+
+
+            script.onerror =
+                function() {
+
+                    if (
+                        finalizado
+                    ) {
+
+                        return;
+
+                    }
+
+                    finalizado =
+                        true;
+
+                    clearTimeout(
+                        timeout
+                    );
+
+                    limpar();
+
+                    reject(
+                        new Error(
+                            'Não foi possível conectar com o Google Apps Script.'
+                        )
+                    );
+
+                };
+
+
+            document.head.appendChild(
+                script
+            );
+
         }
-
-        finalizado =
-          true;
-
-        limpar();
-
-        reject(
-          new Error(
-            'Tempo limite da API.'
-          )
-        );
-
-      },
-      10000
     );
 
-  window[callback] =
-    function(resposta) {
-
-      if (finalizado) {
-        return;
-      }
-
-      finalizado =
-        true;
-
-      clearTimeout(
-        timeout
-      );
-
-      limpar();
-
-      if (!resposta) {
-
-        reject(
-          new Error(
-            'Resposta vazia do Apps Script.'
-          )
-        );
-
-        return;
-
-      }
-
-      if (
-        resposta.sucesso === false
-      ) {
-
-        reject(
-          new Error(
-            resposta.erro ||
-            resposta.mensagem ||
-            'Erro retornado pela API.'
-          )
-        );
-
-        return;
-
-      }
-
-      resolve(
-        resposta
-      );
-
-    };
-
-  const query =
-    new URLSearchParams();
-
-  query.set(
-    'action',
-    action
-  );
-
-  query.set(
-    'callback',
-    callback
-  );
-
-  Object.keys(
-    parametros
-  ).forEach(
-    function(chave) {
-
-      const valor =
-        parametros[chave];
-
-      if (
-        valor === undefined ||
-        valor === null
-      ) {
-
-        return;
-
-      }
-
-      query.set(
-        chave,
-        String(valor)
-      );
-
-    }
-  );
-
-  script.src =
-    URL_API +
-    '?' +
-    query.toString();
-
-  script.onerror =
-    function() {
-
-      if (finalizado) {
-        return;
-      }
-
-      finalizado =
-        true;
-
-      clearTimeout(
-        timeout
-      );
-
-      limpar();
-
-      reject(
-        new Error(
-          'Não foi possível conectar com o Google Apps Script.'
-        )
-      );
-
-    };
-
-  document.head.appendChild(
-    script
-  );
-
 }
 
-);
-
-}
 
 /* =========================================================
-CARREGAR RESUMO
+   CARREGAR RESUMO
 ========================================================= */
 
 async function carregarResumo() {
 
-const competencia =
-competenciaEl.value;
+    const competencia =
+        competenciaEl.value;
 
-try {
 
-validarCompetencia(
-  competencia
-);
+    try {
 
-} catch (erro) {
+        validarCompetencia(
+            competencia
+        );
 
-mostrarMensagem(
-  erro.message,
-  'erro'
-);
-
-return;
-
-}
-
-const cards =
-document.querySelectorAll(
-'.resumo-valor'
-);
-
-cards.forEach(
-function(card) {
-
-  card.style.opacity =
-    '0.45';
-
-}
-
-);
-
-statusEl.textContent =
-'Atualizando...';
-
-statusEl.className =
-'status';
-
-try {
-
-const resposta =
-  await chamarAPI(
-    'obterResumo',
-    {
-      competencia:
-        competencia
     }
-  );
+    catch (erro) {
 
-document.getElementById(
-  'saldoInicial'
-).textContent =
-  moeda(
-    resposta.saldoInicial
-  );
+        mostrarMensagem(
+            erro.message,
+            'erro'
+        );
 
-document.getElementById(
-  'receber'
-).textContent =
-  moeda(
-    resposta.receber
-  );
+        return;
 
-document.getElementById(
-  'pagar'
-).textContent =
-  moeda(
-    resposta.pagar
-  );
+    }
 
-document.getElementById(
-  'saldoBanco'
-).textContent =
-  moeda(
-    resposta.saldoBanco
-  );
 
-statusEl.textContent =
-  'Sistema online';
+    const cards =
+        document.querySelectorAll(
+            '.resumo-valor'
+        );
 
-statusEl.className =
-  'status online';
 
-mostrarMensagem(
-  '',
-  ''
-);
+    cards.forEach(
+        function(card) {
 
-} catch (erro) {
+            card.style.opacity =
+                '0.45';
 
-statusEl.textContent =
-  'API indisponível';
+        }
+    );
 
-statusEl.className =
-  'status erro';
 
-mostrarMensagem(
-  'Não foi possível atualizar o resumo. As rotinas continuam disponíveis.',
-  'erro'
-);
+    statusEl.textContent =
+        'Atualizando...';
 
-console.error(
-  'Erro ao carregar resumo:',
-  erro
-);
+    statusEl.className =
+        'status';
 
-} finally {
 
-cards.forEach(
-  function(card) {
+    try {
 
-    card.style.opacity =
-      '1';
+        const resposta =
+            await chamarAPI(
+                'obterResumo',
+                {
+                    competencia:
+                        competencia
+                }
+            );
 
-  }
-);
+
+        document.getElementById(
+            'saldoInicial'
+        ).textContent =
+            moeda(
+                resposta.saldoInicial
+            );
+
+
+        document.getElementById(
+            'receber'
+        ).textContent =
+            moeda(
+                resposta.receber
+            );
+
+
+        document.getElementById(
+            'pagar'
+        ).textContent =
+            moeda(
+                resposta.pagar
+            );
+
+
+        document.getElementById(
+            'saldoBanco'
+        ).textContent =
+            moeda(
+                resposta.saldoBanco
+            );
+
+
+        statusEl.textContent =
+            'Sistema online';
+
+        statusEl.className =
+            'status online';
+
+
+        mostrarMensagem(
+            '',
+            ''
+        );
+
+    }
+    catch (erro) {
+
+        statusEl.textContent =
+            'API indisponível';
+
+        statusEl.className =
+            'status erro';
+
+
+        mostrarMensagem(
+            'Não foi possível atualizar o resumo. As rotinas continuam disponíveis.',
+            'erro'
+        );
+
+
+        console.error(
+            'Erro ao carregar resumo:',
+            erro
+        );
+
+    }
+    finally {
+
+        cards.forEach(
+            function(card) {
+
+                card.style.opacity =
+                    '1';
+
+            }
+        );
+
+    }
 
 }
 
-}
 
 /* =========================================================
-CONSTRUIR URL DA ROTINA
+   EXPORTAR RESUMO PARA TXT
+========================================================= */
+
+function exportarTXT() {
+
+    const competencia =
+        competenciaEl.value;
+
+
+    try {
+
+        validarCompetencia(
+            competencia
+        );
+
+    }
+    catch (erro) {
+
+        mostrarMensagem(
+            erro.message,
+            'erro'
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Obtém os valores atualmente exibidos
+     * na tela.
+     */
+
+    const saldoInicial =
+        document.getElementById(
+            'saldoInicial'
+        ).textContent.trim();
+
+
+    const receber =
+        document.getElementById(
+            'receber'
+        ).textContent.trim();
+
+
+    const pagar =
+        document.getElementById(
+            'pagar'
+        ).textContent.trim();
+
+
+    const saldoBanco =
+        document.getElementById(
+            'saldoBanco'
+        ).textContent.trim();
+
+
+    /*
+     * Converte 2026-08 para 08/2026.
+     */
+
+    const partes =
+        competencia.split('-');
+
+
+    const competenciaFormatada =
+        partes[1] +
+        '/' +
+        partes[0];
+
+
+    /*
+     * Data e hora da exportação.
+     */
+
+    const agora =
+        new Date();
+
+
+    const dataExportacao =
+        agora.toLocaleString(
+            'pt-BR'
+        );
+
+
+    /*
+     * Monta o conteúdo do TXT.
+     */
+
+    const conteudo =
+
+`==================================================
+              CONTROLE FINANCEIRO
+              RESUMO DA COMPETÊNCIA
+==================================================
+
+Competência: ${competenciaFormatada}
+
+--------------------------------------------------
+RESUMO FINANCEIRO
+--------------------------------------------------
+
+Saldo Inicial:   ${saldoInicial}
+
+A Receber:       ${receber}
+
+A Pagar:         ${pagar}
+
+Saldo Bancário:  ${saldoBanco}
+
+--------------------------------------------------
+Exportado em: ${dataExportacao}
+--------------------------------------------------
+
+Controle Financeiro
+GitHub Pages + Google Apps Script
+`;
+
+
+    /*
+     * BOM UTF-8.
+     *
+     * Isso ajuda o Windows/Bloco de Notas
+     * a reconhecer corretamente os acentos.
+     */
+
+    const BOM =
+        '\uFEFF';
+
+
+    const blob =
+        new Blob(
+            [
+                BOM +
+                conteudo
+            ],
+            {
+                type:
+                    'text/plain;charset=utf-8'
+            }
+        );
+
+
+    /*
+     * Cria o download.
+     */
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            'a'
+        );
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        'Resumo_Competencia_' +
+        competencia +
+        '.txt';
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    document.body.removeChild(
+        link
+    );
+
+
+    /*
+     * Libera memória.
+     */
+
+    setTimeout(
+        function() {
+
+            URL.revokeObjectURL(
+                url
+            );
+
+        },
+        1000
+    );
+
+
+    mostrarMensagem(
+        'Resumo exportado para TXT com sucesso.',
+        'sucesso'
+    );
+
+}
+
+
+/* =========================================================
+   CONSTRUIR URL DA ROTINA
 ========================================================= */
 
 function construirUrl(
-arquivo
+    arquivo
 ) {
 
-const competencia =
-competenciaEl.value ||
-competenciaAtual();
+    const competencia =
+        competenciaEl.value ||
+        competenciaAtual();
 
-validarCompetencia(
-competencia
-);
 
-const url =
-new URL(
-arquivo,
-window.location.href
-);
+    validarCompetencia(
+        competencia
+    );
 
-url.searchParams.set(
-'competencia',
-competencia
-);
 
-return url;
+    const url =
+        new URL(
+            arquivo,
+            window.location.href
+        );
+
+
+    url.searchParams.set(
+        'competencia',
+        competencia
+    );
+
+
+    return url;
 
 }
 
+
 /* =========================================================
-ABRIR ROTINA NORMAL
+   ABRIR ROTINA NORMAL
 ========================================================= */
 
 function abrirPagina(
-pagina
+    pagina
 ) {
 
-const arquivos = {
+    const arquivos = {
 
-lancamentos:
-  'Lancamentos.html',
+        lancamentos:
+            'Lancamentos.html',
 
-pendentes:
-  'BaixasPendentes.html',
+        pendentes:
+            'BaixasPendentes.html',
 
-relatorio:
-  'Relatorio.html',
+        relatorio:
+            'Relatorio.html',
 
-graficos:
-  'Graficos.html',
+        graficos:
+            'Graficos.html',
 
-atendimento:
-  'Atendimento.html'
+        atendimento:
+            'Atendimento.html'
 
-};
+    };
 
-const arquivo =
-arquivos[pagina];
 
-if (!arquivo) {
+    const arquivo =
+        arquivos[pagina];
 
-mostrarMensagem(
-  'Rotina não encontrada.',
-  'erro'
-);
 
-return;
+    if (!arquivo) {
+
+        mostrarMensagem(
+            'Rotina não encontrada.',
+            'erro'
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const url =
+            construirUrl(
+                arquivo
+            );
+
+
+        /*
+         * Modo normal:
+         * abre a consulta/listagem.
+         */
+
+        url.searchParams.set(
+            'modo',
+            'lista'
+        );
+
+
+        window.location.assign(
+            url.href
+        );
+
+    }
+    catch (erro) {
+
+        mostrarMensagem(
+            erro.message,
+            'erro'
+        );
+
+    }
 
 }
 
-try {
-
-const url =
-  construirUrl(
-    arquivo
-  );
-
-/*
- * Modo normal:
- * abre a consulta/listagem.
- */
-
-url.searchParams.set(
-  'modo',
-  'lista'
-);
-
-window.location.assign(
-  url.href
-);
-
-} catch (erro) {
-
-mostrarMensagem(
-  erro.message,
-  'erro'
-);
-
-}
-
-}
 
 /* =========================================================
-ABRIR NOVO LANÇAMENTO
-ESTA É A CORREÇÃO PRINCIPAL.
-
-O botão "Novo Lançamento" NÃO chama:
-
-   abrirPagina('lancamentos')
-
-porque isso abre a lista.
-
-Ele chama esta função e envia:
-
-   modo=novo
-
-para Lancamentos.html.
-
-A página Lancamentos.html deve verificar
-esse parâmetro e abrir o formulário de inclusão.
-
-A competência selecionada no index também
-é enviada para o formulário.
+   ABRIR NOVO LANÇAMENTO
 ========================================================= */
 
 function abrirNovoLancamento() {
 
-try {
+    try {
 
-const url =
-  construirUrl(
-    'Lancamentos.html'
-  );
+        const url =
+            construirUrl(
+                'Lancamentos.html'
+            );
 
-/*
- * Indica explicitamente que a tela
- * deve abrir para NOVO lançamento.
- */
 
-url.searchParams.set(
-  'modo',
-  'novo'
-);
+        /*
+         * Indica que a página deve abrir
+         * o formulário de novo lançamento.
+         */
 
-/*
- * Também envia uma indicação clara
- * para a rotina de lançamentos.
- */
+        url.searchParams.set(
+            'modo',
+            'novo'
+        );
 
-url.searchParams.set(
-  'novo',
-  '1'
-);
 
-/*
- * Abre diretamente Lancamentos.html
- * já preparado para inclusão.
- */
+        url.searchParams.set(
+            'novo',
+            '1'
+        );
 
-window.location.assign(
-  url.href
-);
 
-} catch (erro) {
+        window.location.assign(
+            url.href
+        );
 
-mostrarMensagem(
-  erro.message,
-  'erro'
-);
+    }
+    catch (erro) {
+
+        mostrarMensagem(
+            erro.message,
+            'erro'
+        );
+
+    }
 
 }
 
-}
 
 /* =========================================================
-ALTERAÇÃO DA COMPETÊNCIA
+   ALTERAÇÃO DA COMPETÊNCIA
 ========================================================= */
 
 competenciaEl.addEventListener(
-'change',
-function() {
+    'change',
+    function() {
 
-carregarResumo();
+        carregarResumo();
 
-}
+    }
 );
 
+
 /* =========================================================
-ENTER
+   ENTER
 ========================================================= */
 
 competenciaEl.addEventListener(
-'keydown',
-function(evento) {
+    'keydown',
+    function(evento) {
 
-if (
-  evento.key === 'Enter'
-) {
+        if (
+            evento.key === 'Enter'
+        ) {
 
-  carregarResumo();
+            carregarResumo();
 
-}
+        }
 
-}
+    }
 );
 
+
 /* =========================================================
-INICIALIZAÇÃO
+   INICIALIZAÇÃO
 ========================================================= */
 
 document.addEventListener(
-'DOMContentLoaded',
-function() {
+    'DOMContentLoaded',
+    function() {
 
-statusEl.textContent =
-  'Sistema';
+        statusEl.textContent =
+            'Sistema';
 
-statusEl.className =
-  'status';
+        statusEl.className =
+            'status';
 
-/*
- * O resumo é carregado em segundo plano.
- *
- * Isso não interfere nas rotinas.
- */
 
-carregarResumo();
+        /*
+         * Carrega o resumo automaticamente.
+         */
 
-}
+        carregarResumo();
+
+    }
 );
 
-</script> </body> </html>
+</script>
+
+</body>
+
+</html>
