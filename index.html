@@ -237,6 +237,14 @@ box-shadow: 0 7px 18px rgba(23, 54, 93, 0.18);
 transform: translateY(0);
 }
 
+.menu-item.novo {
+background: #15803d;
+}
+
+.menu-item.novo:hover {
+background: #166534;
+}
+
 .menu-icone {
 display: block;
 font-size: 31px;
@@ -250,19 +258,6 @@ margin-top: 6px;
 font-size: 11px;
 font-weight: 400;
 opacity: .80;
-}
-
-/* =====================================================
-DESTAQUE DO NOVO LANÇAMENTO
-===================================================== */
-
-.menu-item.novo-lancamento {
-background: #16a34a;
-}
-
-.menu-item.novo-lancamento:hover {
-background: #15803d;
-box-shadow: 0 7px 18px rgba(22, 163, 74, 0.22);
 }
 
 /* =====================================================
@@ -408,7 +403,7 @@ onclick="abrirPagina('lancamentos')"
 <span class="menu-icone"> 📋 </span>
 Lançamentos
 
-<span class="menu-descricao"> Incluir, editar, excluir e consultar </span> </button> <!-- BAIXAS PENDENTES -->
+<span class="menu-descricao"> Consultar, editar e excluir lançamentos </span> </button> <!-- PENDENTES -->
 <button
 type="button"
 class="menu-item"
@@ -447,13 +442,13 @@ Atendimento
 <span class="menu-descricao"> Pesquisa e registro de atendimento </span> </button> <!-- ===================================================== NOVO LANÇAMENTO ===================================================== -->
 <button
 type="button"
-class="menu-item novo-lancamento"
-onclick="novoLancamento()"
+class="menu-item novo"
+onclick="abrirNovoLancamento()"
 
 <span class="menu-icone"> ➕ </span>
 Novo Lançamento
 
-<span class="menu-descricao"> Abrir formulário para novo lançamento </span> </button> </div> <!-- ===================================================== MENSAGEM ===================================================== --> <div id="mensagem" class="mensagem" ></div> <!-- ===================================================== RODAPÉ ===================================================== --> <div class="rodape"> <span> Controle Financeiro </span> <span> GitHub Pages + Google Apps Script </span> </div> </div> </div> <script>
+<span class="menu-descricao"> Cadastrar novo lançamento </span> </button> </div> <!-- ===================================================== MENSAGEM ===================================================== --> <div id="mensagem" class="mensagem" ></div> <!-- ===================================================== RODAPÉ ===================================================== --> <div class="rodape"> <span> Controle Financeiro </span> <span> GitHub Pages + Google Apps Script </span> </div> </div> </div> <script>
 /* =========================================================
 CONFIGURAÇÃO
 ========================================================= */
@@ -496,7 +491,7 @@ return ano + '-' + mes;
 }
 
 /* =========================================================
-DEFINIR COMPETÊNCIA INICIAL
+DEFINIR COMPETÊNCIA
 ========================================================= */
 
 competenciaEl.value =
@@ -933,10 +928,10 @@ cards.forEach(
 }
 
 /* =========================================================
-MONTAR URL DE UMA ROTINA
+CONSTRUIR URL DA ROTINA
 ========================================================= */
 
-function montarUrlRotina(
+function construirUrl(
 arquivo
 ) {
 
@@ -964,7 +959,7 @@ return url;
 }
 
 /* =========================================================
-ABRIR ROTINAS
+ABRIR ROTINA NORMAL
 ========================================================= */
 
 function abrirPagina(
@@ -1007,17 +1002,19 @@ return;
 try {
 
 const url =
-  montarUrlRotina(
+  construirUrl(
     arquivo
   );
 
 /*
- * Abre a rotina normal de lançamentos.
- *
- * Sem parâmetro "novo".
- * Portanto, a tela deve mostrar
- * os lançamentos existentes.
+ * Modo normal:
+ * abre a consulta/listagem.
  */
+
+url.searchParams.set(
+  'modo',
+  'lista'
+);
 
 window.location.assign(
   url.href
@@ -1026,8 +1023,7 @@ window.location.assign(
 } catch (erro) {
 
 mostrarMensagem(
-  erro.message ||
-  'Não foi possível abrir a rotina.',
+  erro.message,
   'erro'
 );
 
@@ -1036,34 +1032,50 @@ mostrarMensagem(
 }
 
 /* =========================================================
-NOVO LANÇAMENTO
-ESTA É A DIFERENÇA PRINCIPAL.
+ABRIR NOVO LANÇAMENTO
+ESTA É A CORREÇÃO PRINCIPAL.
 
-O botão "Lançamentos" abre:
+O botão "Novo Lançamento" NÃO chama:
 
-   Lancamentos.html?competencia=2026-08
+   abrirPagina('lancamentos')
 
-O botão "Novo Lançamento" abre:
+porque isso abre a lista.
 
-   Lancamentos.html?competencia=2026-08&novo=1
+Ele chama esta função e envia:
 
-A página Lancamentos.html deve verificar o parâmetro
-"novo" e abrir o formulário de inclusão.
+   modo=novo
+
+para Lancamentos.html.
+
+A página Lancamentos.html deve verificar
+esse parâmetro e abrir o formulário de inclusão.
+
+A competência selecionada no index também
+é enviada para o formulário.
 ========================================================= */
 
-function novoLancamento() {
+function abrirNovoLancamento() {
 
 try {
 
 const url =
-  montarUrlRotina(
+  construirUrl(
     'Lancamentos.html'
   );
 
 /*
- * Indica para Lancamentos.html
- * que a intenção é cadastrar um
- * novo lançamento.
+ * Indica explicitamente que a tela
+ * deve abrir para NOVO lançamento.
+ */
+
+url.searchParams.set(
+  'modo',
+  'novo'
+);
+
+/*
+ * Também envia uma indicação clara
+ * para a rotina de lançamentos.
  */
 
 url.searchParams.set(
@@ -1072,14 +1084,9 @@ url.searchParams.set(
 );
 
 /*
- * Também informa explicitamente
- * a origem da navegação.
+ * Abre diretamente Lancamentos.html
+ * já preparado para inclusão.
  */
-
-url.searchParams.set(
-  'origem',
-  'novo-lancamento'
-);
 
 window.location.assign(
   url.href
@@ -1088,8 +1095,7 @@ window.location.assign(
 } catch (erro) {
 
 mostrarMensagem(
-  erro.message ||
-  'Não foi possível abrir o formulário de novo lançamento.',
+  erro.message,
   'erro'
 );
 
@@ -1111,7 +1117,7 @@ carregarResumo();
 );
 
 /* =========================================================
-ENTER NO CAMPO DE COMPETÊNCIA
+ENTER
 ========================================================= */
 
 competenciaEl.addEventListener(
@@ -1146,8 +1152,7 @@ statusEl.className =
 /*
  * O resumo é carregado em segundo plano.
  *
- * Mesmo se a API estiver indisponível,
- * os botões continuam funcionando.
+ * Isso não interfere nas rotinas.
  */
 
 carregarResumo();
@@ -1156,15 +1161,3 @@ carregarResumo();
 );
 
 </script> </body> </html>
-Importante: esse index.html agora envia novo=1, mas há uma segunda parte necessária: o Lancamentos.html precisa ler esse parâmetro. Caso contrário, ele continuará mostrando a lista de lançamentos, porque quem decide qual tela exibir é o próprio Lancamentos.html.
-
-No Lancamentos.html, a lógica deve ser aproximadamente:
-
-const params = new URLSearchParams(window.location.search);
-const modoNovo = params.get('novo') === '1';
-
-if (modoNovo) {
-    // abrir formulário de novo lançamento
-} else {
-    // abrir lista de lançamentos
-}
