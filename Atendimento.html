@@ -1,428 +1,395 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>Atendimento - Controle Financeiro</title>
-
-<style>
-
+<title>Atendimento - Controle Financeiro</title> <style>
 *{
-  box-sizing:border-box;
+box-sizing:border-box;
 }
 
 body{
-  margin:0;
-  padding:20px;
-  font-family:"Segoe UI",Arial,sans-serif;
-  background:linear-gradient(135deg,#e8eef5,#ffffff);
-  color:#333;
+margin:0;
+padding:20px;
+font-family:"Segoe UI",Arial,sans-serif;
+background:linear-gradient(135deg,#e8eef5,#ffffff);
+color:#333;
 }
 
 .container{
-  max-width:1100px;
-  margin:auto;
-  background:#fff;
-  padding:25px;
-  border-radius:18px;
-  box-shadow:0 8px 25px rgba(0,0,0,.15);
+max-width:1100px;
+margin:auto;
+background:#fff;
+padding:25px;
+border-radius:18px;
+box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
 
 /* =====================================================
-   TOPO
+TOPO
 ===================================================== */
 
 .topo{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  margin-bottom:25px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+margin-bottom:25px;
 }
 
 .topo h1{
-  margin:0;
-  color:#0d47a1;
-  font-size:28px;
+margin:0;
+color:#0d47a1;
+font-size:28px;
 }
 
 .btn-voltar{
-  border:none;
-  padding:12px 24px;
-  border-radius:10px;
-  background:linear-gradient(135deg,#455a64,#78909c);
-  color:#fff;
-  font-weight:bold;
-  font-size:15px;
-  cursor:pointer;
+border:none;
+padding:12px 24px;
+border-radius:10px;
+background:linear-gradient(135deg,#455a64,#78909c);
+color:#fff;
+font-weight:bold;
+font-size:15px;
+cursor:pointer;
 }
 
 .btn-voltar:hover{
-  transform:translateY(-2px);
-  filter:brightness(1.08);
+transform:translateY(-2px);
+filter:brightness(1.08);
 }
 
 /* =====================================================
-   PESQUISA
+PESQUISA
 ===================================================== */
 
 .pesquisa{
-  background:#f5f7fa;
-  border:1px solid #e0e6ed;
-  border-radius:14px;
-  padding:20px;
-  margin-bottom:20px;
+background:#f5f7fa;
+border:1px solid #e0e6ed;
+border-radius:14px;
+padding:20px;
+margin-bottom:20px;
 }
 
 .pesquisa h2{
-  margin:0 0 15px 0;
-  color:#1976d2;
-  font-size:19px;
+margin:0 0 15px 0;
+color:#1976d2;
+font-size:19px;
 }
 
 .linha-pesquisa{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:12px;
+display:grid;
+grid-template-columns:1fr auto;
+gap:12px;
 }
 
 input{
-  width:100%;
-  height:46px;
-  padding:0 14px;
-  border:1px solid #cbd5e1;
-  border-radius:9px;
-  font-size:15px;
-  outline:none;
+width:100%;
+height:46px;
+padding:0 14px;
+border:1px solid #cbd5e1;
+border-radius:9px;
+font-size:15px;
+outline:none;
 }
 
 input:focus{
-  border-color:#1976d2;
-  box-shadow:0 0 0 3px rgba(25,118,210,.12);
+border-color:#1976d2;
+box-shadow:0 0 0 3px rgba(25,118,210,.12);
 }
 
 .btn-pesquisar{
-  height:46px;
-  padding:0 25px;
-  border:none;
-  border-radius:9px;
-  background:linear-gradient(135deg,#1976d2,#2196f3);
-  color:#fff;
-  font-size:15px;
-  font-weight:bold;
-  cursor:pointer;
+height:46px;
+padding:0 25px;
+border:none;
+border-radius:9px;
+background:linear-gradient(135deg,#1976d2,#2196f3);
+color:#fff;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
 }
 
 .btn-pesquisar:hover{
-  filter:brightness(1.08);
-  transform:translateY(-2px);
+filter:brightness(1.08);
+transform:translateY(-2px);
 }
 
 .btn-pesquisar:disabled{
-  opacity:.6;
-  cursor:not-allowed;
-  transform:none;
+opacity:.6;
+cursor:not-allowed;
+transform:none;
 }
 
 /* =====================================================
-   MENSAGENS
+MENSAGENS
 ===================================================== */
 
 .mensagem{
-  display:none;
-  margin:15px 0;
-  padding:13px;
-  border-radius:8px;
+display:none;
+margin:15px 0;
+padding:13px;
+border-radius:8px;
 }
 
 .mensagem.info{
-  display:block;
-  background:#e3f2fd;
-  color:#1565c0;
+display:block;
+background:#e3f2fd;
+color:#1565c0;
 }
 
 .mensagem.erro{
-  display:block;
-  background:#ffebee;
-  color:#c62828;
-  border-left:5px solid #c62828;
-  font-weight:bold;
+display:block;
+background:#ffebee;
+color:#c62828;
+border-left:5px solid #c62828;
+font-weight:bold;
 }
 
 .mensagem.sucesso{
-  display:block;
-  background:#e8f5e9;
-  color:#2e7d32;
+display:block;
+background:#e8f5e9;
+color:#2e7d32;
 }
 
 /* =====================================================
-   RESULTADO
+RESULTADO
 ===================================================== */
 
 .resultado{
-  margin-top:20px;
+margin-top:20px;
 }
 
 .tabela-container{
-  width:100%;
-  overflow-x:auto;
-  border:1px solid #dfe5eb;
-  border-radius:12px;
+width:100%;
+overflow-x:auto;
+border:1px solid #dfe5eb;
+border-radius:12px;
 }
 
 table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:650px;
+width:100%;
+border-collapse:collapse;
+min-width:650px;
 }
 
 th{
-  background:linear-gradient(135deg,#0d47a1,#1976d2);
-  color:white;
-  padding:14px 12px;
-  text-align:left;
-  font-size:14px;
+background:linear-gradient(135deg,#0d47a1,#1976d2);
+color:white;
+padding:14px 12px;
+text-align:left;
+font-size:14px;
 }
 
 td{
-  padding:13px 12px;
-  border-bottom:1px solid #e5e7eb;
-  vertical-align:top;
-  font-size:14px;
+padding:13px 12px;
+border-bottom:1px solid #e5e7eb;
+vertical-align:top;
+font-size:14px;
 }
 
 tr:nth-child(even){
-  background:#f8f9fc;
+background:#f8f9fc;
 }
 
 tr:hover{
-  background:#eef5ff;
+background:#eef5ff;
 }
 
 .col-id{
-  width:100px;
-  text-align:center;
-  font-weight:bold;
-  color:#0d47a1;
+width:100px;
+text-align:center;
+font-weight:bold;
+color:#0d47a1;
 }
 
 .col-problema{
-  width:40%;
+width:40%;
 }
 
 .col-solucao{
-  width:50%;
+width:50%;
 }
 
 .nenhum{
-  text-align:center;
-  padding:35px;
-  color:#777;
-  background:#fafafa;
-  border-radius:10px;
+text-align:center;
+padding:35px;
+color:#777;
+background:#fafafa;
+border-radius:10px;
 }
 
 .carregando{
-  text-align:center;
-  padding:30px;
-  color:#777;
+text-align:center;
+padding:30px;
+color:#777;
 }
 
 /* =====================================================
-   RESPONSIVO
+RESPONSIVO
 ===================================================== */
 
 @media(max-width:700px){
 
-  body{
-    padding:10px;
-  }
+body{
+padding:10px;
+}
 
-  .container{
-    padding:15px;
-    border-radius:12px;
-  }
+.container{
+padding:15px;
+border-radius:12px;
+}
 
-  .topo{
-    flex-direction:column;
-    align-items:stretch;
-  }
+.topo{
+flex-direction:column;
+align-items:stretch;
+}
 
-  .topo h1{
-    font-size:23px;
-  }
+.topo h1{
+font-size:23px;
+}
 
-  .btn-voltar{
-    width:100%;
-  }
+.btn-voltar{
+width:100%;
+}
 
-  .linha-pesquisa{
-    grid-template-columns:1fr;
-  }
+.linha-pesquisa{
+grid-template-columns:1fr;
+}
 
-  .btn-pesquisar{
-    width:100%;
-  }
+.btn-pesquisar{
+width:100%;
+}
 
-  table{
-    min-width:600px;
-  }
+table{
+min-width:600px;
+}
 
 }
 
-</style>
+</style> </head> <body> <div class="container"> <!-- ================================================= TOPO ================================================== --> <div class="topo">
+<h1>
+  🔎 Atendimento
+</h1>
 
-</head>
+<button
+  type="button"
+  class="btn-voltar"
+  onclick="voltar()">
 
-<body>
+  ⬅ Voltar
 
-<div class="container">
+</button>
 
-  <!-- =================================================
-       TOPO
-  ================================================== -->
+</div> <!-- ================================================= PESQUISA ================================================== --> <div class="pesquisa">
+<h2>
+  Pesquisar atendimento
+</h2>
 
-  <div class="topo">
+<div class="linha-pesquisa">
 
-    <h1>
-      🔎 Atendimento
-    </h1>
+  <input
+    id="campoPesquisa"
+    type="text"
+    placeholder="Digite o problema ou palavra-chave..."
+    autocomplete="off">
 
-    <button
-      class="btn-voltar"
-      onclick="voltar()">
+  <button
+    type="button"
+    id="btnPesquisar"
+    class="btn-pesquisar"
+    onclick="pesquisar()">
 
-      ⬅ Voltar
+    🔎 Pesquisar
 
-    </button>
-
-  </div>
-
-
-  <!-- =================================================
-       PESQUISA
-  ================================================== -->
-
-  <div class="pesquisa">
-
-    <h2>
-      Pesquisar atendimento
-    </h2>
-
-    <div class="linha-pesquisa">
-
-      <input
-        id="campoPesquisa"
-        type="text"
-        placeholder="Digite o problema ou palavra-chave..."
-        autocomplete="off">
-
-      <button
-        id="btnPesquisar"
-        class="btn-pesquisar"
-        onclick="pesquisar()">
-
-        🔎 Pesquisar
-
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- =================================================
-       MENSAGEM
-  ================================================== -->
-
-  <div
-    id="mensagem"
-    class="mensagem">
-  </div>
-
-
-  <!-- =================================================
-       RESULTADO
-  ================================================== -->
-
-  <div
-    id="resultado"
-    class="resultado">
-
-    <div class="nenhum">
-
-      Digite um problema ou palavra-chave
-      para pesquisar na base de Atendimento.
-
-    </div>
-
-  </div>
+  </button>
 
 </div>
 
+</div> <!-- ================================================= MENSAGEM ================================================== --> <div id="mensagem" class="mensagem"> </div> <!-- ================================================= RESULTADO ================================================= --> <div id="resultado" class="resultado">
+<div class="nenhum">
 
-<script>
+  Digite um problema ou palavra-chave
+  para pesquisar na base de Atendimento.
 
+</div>
+
+</div> </div> <script>
 /* =====================================================
-   CONFIGURAÇÃO DA API
+CONFIGURAÇÃO
 ===================================================== */
 
 const URL_API =
 "https://script.google.com/macros/s/AKfycbwlkjtWnOcvglZS2Ft6ydraSh4-JbTXH6C7irb6O5hYPvxYxqN0tYWQs2Ybi6mVWThN/exec";
 
-
 const URL_INDEX =
 "https://joeldisousa-dot.github.io/gestaofinanceira/";
 
-
-/* =====================================================
-   CONTROLE JSONP
-===================================================== */
-
 let contadorJSONP = 0;
 
-
 /* =====================================================
-   CHAMAR API
+CHAMAR API
 ===================================================== */
 
-function chamarAPI(acao,parametros){
+function chamarAPI(
+acao,
+parametros
+){
 
-  return new Promise(function(resolve,reject){
+return new Promise(
+function(resolve,reject){
 
-    const callback =
-      "callbackAtendimento_" +
-      Date.now() +
-      "_" +
-      (++contadorJSONP);
-
-
-    const script =
-      document.createElement("script");
-
-
-    const dados =
-      Object.assign({},parametros || {});
+  const callback =
+    "callbackAtendimento_" +
+    Date.now() +
+    "_" +
+    (++contadorJSONP);
 
 
-    dados.action =
-      acao;
+  const script =
+    document.createElement(
+      "script"
+    );
 
-    dados.callback =
-      callback;
+
+  /*
+   * Cria uma cópia dos parâmetros.
+   */
+
+  const dados =
+    Object.assign(
+      {},
+      parametros || {}
+    );
 
 
-    const query =
-      Object.keys(dados)
-        .map(function(chave){
+  /*
+   * Ação da API.
+   */
+
+  dados.action =
+    acao;
+
+
+  /*
+   * Callback JSONP.
+   */
+
+  dados.callback =
+    callback;
+
+
+  /*
+   * Monta query string.
+   */
+
+  const query =
+    Object.keys(dados)
+      .map(
+        function(chave){
 
           return (
-            encodeURIComponent(chave) +
+            encodeURIComponent(
+              chave
+            ) +
             "=" +
             encodeURIComponent(
               dados[chave] === undefined ||
@@ -432,29 +399,36 @@ function chamarAPI(acao,parametros){
             )
           );
 
-        })
-        .join("&");
+        }
+      )
+      .join("&");
 
 
-    const url =
-      URL_API + "?" + query;
+  const url =
+    URL_API +
+    "?" +
+    query;
 
 
-    let finalizado =
-      false;
+  let finalizado =
+    false;
 
 
-    const timeout =
-      setTimeout(function(){
+  const timeout =
+    setTimeout(
+      function(){
 
         if(finalizado){
           return;
         }
 
+
         finalizado =
           true;
 
+
         cleanup();
+
 
         reject(
           new Error(
@@ -462,803 +436,955 @@ function chamarAPI(acao,parametros){
           )
         );
 
-      },30000);
-
-
-    window[callback] =
-      function(resposta){
-
-        if(finalizado){
-          return;
-        }
-
-        finalizado =
-          true;
-
-        clearTimeout(timeout);
-
-        cleanup();
-
-        resolve(resposta);
-
-      };
-
-
-    script.onerror =
-      function(){
-
-        if(finalizado){
-          return;
-        }
-
-        finalizado =
-          true;
-
-        clearTimeout(timeout);
-
-        cleanup();
-
-        reject(
-          new Error(
-            "Não foi possível conectar ao Google Apps Script."
-          )
-        );
-
-      };
-
-
-    script.src =
-      url;
-
-
-    document.body.appendChild(
-      script
+      },
+      30000
     );
 
 
-    function cleanup(){
+  /*
+   * Callback recebido do Apps Script.
+   */
+
+  window[callback] =
+    function(resposta){
+
+      if(finalizado){
+        return;
+      }
+
+
+      finalizado =
+        true;
+
+
+      clearTimeout(
+        timeout
+      );
+
+
+      cleanup();
+
+
+      resolve(
+        resposta
+      );
+
+    };
+
+
+  /*
+   * Erro de conexão.
+   */
+
+  script.onerror =
+    function(){
+
+      if(finalizado){
+        return;
+      }
+
+
+      finalizado =
+        true;
+
+
+      clearTimeout(
+        timeout
+      );
+
+
+      cleanup();
+
+
+      reject(
+        new Error(
+          "Não foi possível conectar ao Google Apps Script."
+        )
+      );
+
+    };
+
+
+  script.src =
+    url;
+
+
+  document.body.appendChild(
+    script
+  );
+
+
+  function cleanup(){
+
+    try{
 
       delete window[callback];
 
-      if(script.parentNode){
+    }
+    catch(e){}
 
-        script.parentNode.removeChild(
-          script
-        );
 
-      }
+    if(
+      script.parentNode
+    ){
+
+      script.parentNode.removeChild(
+        script
+      );
 
     }
 
-  });
+  }
 
 }
 
+);
+
+}
 
 /* =====================================================
-   PESQUISAR
+PESQUISAR
 ===================================================== */
 
 async function pesquisar(){
 
-  const campo =
-    document.getElementById(
-      "campoPesquisa"
-    );
+const campo =
+document.getElementById(
+"campoPesquisa"
+);
+
+const botao =
+document.getElementById(
+"btnPesquisar"
+);
+
+const resultado =
+document.getElementById(
+"resultado"
+);
+
+/*
+
+Pega exatamente o texto digitado.
+*/
+const termo =
+String(
+campo.value || ""
+).trim();
+
+/*
+
+Não permite pesquisa vazia.
+*/
+if(!termo){
+
+mostrarErro(
+  "Digite o problema ou uma palavra-chave."
+);
 
 
-  const botao =
-    document.getElementById(
-      "btnPesquisar"
-    );
+resultado.innerHTML =
+  `
+  <div class="nenhum">
+
+    Digite uma palavra-chave
+    para realizar a pesquisa.
+
+  </div>
+  `;
 
 
-  const resultado =
-    document.getElementById(
-      "resultado"
-    );
+campo.focus();
 
 
-  const texto =
-    String(
-      campo.value || ""
-    ).trim();
+return;
 
+}
 
-  if(!texto){
+botao.disabled =
+true;
 
-    mostrarErro(
-      "Digite o problema ou uma palavra-chave."
-    );
+mostrarMensagem(
+'Pesquisando por "' +
+termo +
+'"...',
+"info"
+);
 
-    campo.focus();
+resultado.innerHTML =
+`
+<div class="carregando">
 
-    return;
+  🔎 Pesquisando por:
 
-  }
+  <strong>
+    ${escaparHTML(termo)}
+  </strong>
 
+</div>
+`;
 
-  botao.disabled =
-    true;
+try{
 
+/*
+ * =================================================
+ * CORREÇÃO PRINCIPAL
+ * =================================================
+ *
+ * Antes estava:
+ *
+ * texto:texto
+ *
+ * Agora está:
+ *
+ * termo:termo
+ *
+ * que corresponde ao Código.gs.
+ */
 
-  mostrarMensagem(
-    "Pesquisando na aba Atendimento...",
-    "info"
+const resposta =
+  await chamarAPI(
+    "pesquisarAtendimento",
+    {
+      termo: termo
+    }
   );
 
 
+console.log(
+  "Termo enviado:",
+  termo
+);
+
+
+console.log(
+  "Resposta da API:",
+  resposta
+);
+
+
+if(!resposta){
+
+  throw new Error(
+    "A API não retornou resposta."
+  );
+
+}
+
+
+if(
+  resposta.sucesso === false
+){
+
+  throw new Error(
+    resposta.erro ||
+    resposta.mensagem ||
+    "Erro retornado pelo servidor."
+  );
+
+}
+
+
+/*
+ * Obtém somente a lista retornada
+ * pela API.
+ */
+
+const lista =
+  obterListaResposta(
+    resposta
+  );
+
+
+console.log(
+  "Registros encontrados:",
+  lista.length
+);
+
+
+/*
+ * =================================================
+ * NENHUM RESULTADO
+ * =================================================
+ */
+
+if(
+  lista.length === 0
+){
+
   resultado.innerHTML =
     `
-    <div class="carregando">
+    <div class="nenhum">
 
-      🔎 Pesquisando...
+      Nenhum atendimento encontrado
+      para:
+
+      <strong>
+        ${escaparHTML(termo)}
+      </strong>
 
     </div>
     `;
 
 
-  try{
-
-    const resposta =
-      await chamarAPI(
-        "pesquisarAtendimento",
-        {
-          texto:texto
-        }
-      );
+  mostrarMensagem(
+    'Nenhum registro encontrado para "' +
+    termo +
+    '".',
+    "info"
+  );
 
 
-    console.log(
-      "Resposta da API Atendimento:",
-      resposta
-    );
-
-
-    if(!resposta){
-
-      throw new Error(
-        "A API não retornou resposta."
-      );
-
-    }
-
-
-    if(
-      resposta.sucesso === false
-    ){
-
-      throw new Error(
-        resposta.erro ||
-        resposta.mensagem ||
-        "Erro retornado pelo servidor."
-      );
-
-    }
-
-
-    const lista =
-      obterListaResposta(
-        resposta
-      );
-
-
-    console.log(
-      "Lista de Atendimento:",
-      lista
-    );
-
-
-    if(
-      lista.length === 0
-    ){
-
-      resultado.innerHTML =
-        `
-        <div class="nenhum">
-
-          Nenhum atendimento encontrado
-          para:
-
-          <strong>
-            ${escaparHTML(texto)}
-          </strong>
-
-        </div>
-        `;
-
-
-      mostrarMensagem(
-        "Nenhum registro encontrado.",
-        "info"
-      );
-
-
-      return;
-
-    }
-
-
-    montarTabela(
-      lista
-    );
-
-
-    mostrarMensagem(
-      lista.length +
-      (
-        lista.length === 1
-          ? " registro encontrado."
-          : " registros encontrados."
-      ),
-      "sucesso"
-    );
-
-  }
-  catch(e){
-
-    console.error(
-      "Erro ao pesquisar Atendimento:",
-      e
-    );
-
-
-    resultado.innerHTML =
-      `
-      <div class="mensagem erro"
-           style="display:block">
-
-        ❌ Erro ao pesquisar:
-
-        <br>
-
-        ${escaparHTML(e.message)}
-
-      </div>
-      `;
-
-
-    mostrarErro(
-      e.message
-    );
-
-  }
-  finally{
-
-    botao.disabled =
-      false;
-
-  }
+  return;
 
 }
 
 
-/* =====================================================
-   NORMALIZAR RESPOSTA
-===================================================== */
+/*
+ * =================================================
+ * MOSTRAR RESULTADOS
+ * =================================================
+ */
 
-function obterListaResposta(
-  resposta
-){
-
-  if(
-    Array.isArray(resposta)
-  ){
-
-    return resposta;
-
-  }
-
-
-  if(
-    resposta &&
-    Array.isArray(resposta.lista)
-  ){
-
-    return resposta.lista;
-
-  }
-
-
-  if(
-    resposta &&
-    Array.isArray(resposta.dados)
-  ){
-
-    return resposta.dados;
-
-  }
-
-
-  if(
-    resposta &&
-    Array.isArray(resposta.resultado)
-  ){
-
-    return resposta.resultado;
-
-  }
-
-
-  /*
-     Algumas versões da API podem retornar:
-     
-     {
-       sucesso:true,
-       registro:{...}
-     }
-  */
-
-  if(
-    resposta &&
-    resposta.registro &&
-    typeof resposta.registro === "object"
-  ){
-
-    return [
-      resposta.registro
-    ];
-
-  }
-
-
-  /*
-     Caso retorne um único registro.
-  */
-
-  if(
-    resposta &&
-    typeof resposta === "object" &&
-    (
-      obterCampo(
-        resposta,
-        "id"
-      ) ||
-      obterCampo(
-        resposta,
-        "problema"
-      ) ||
-      obterCampo(
-        resposta,
-        "solucao"
-      )
-    )
-  ){
-
-    return [
-      resposta
-    ];
-
-  }
-
-
-  return [];
-
-}
-
-
-/* =====================================================
-   MONTAR TABELA
-===================================================== */
-
-function montarTabela(
+montarTabela(
   lista
-){
-
-  const resultado =
-    document.getElementById(
-      "resultado"
-    );
+);
 
 
-  let html = `
+mostrarMensagem(
+  lista.length +
+  (
+    lista.length === 1
+      ? " registro encontrado."
+      : " registros encontrados."
+  ),
+  "sucesso"
+);
 
-    <div class="tabela-container">
+}
+catch(erro){
 
-      <table>
+console.error(
+  "Erro ao pesquisar Atendimento:",
+  erro
+);
 
-        <thead>
 
-          <tr>
+resultado.innerHTML =
+  `
+  <div
+    class="mensagem erro"
+    style="display:block">
 
-            <th class="col-id">
-              ID
-            </th>
+    ❌ Erro ao pesquisar:
 
-            <th class="col-problema">
-              Problema
-            </th>
+    <br><br>
 
-            <th class="col-solucao">
-              Solução
-            </th>
+    ${escaparHTML(
+      erro.message ||
+      String(erro)
+    )}
 
-          </tr>
-
-        </thead>
-
-        <tbody>
-
+  </div>
   `;
 
 
-  lista.forEach(
-    function(item){
+mostrarErro(
+  erro.message ||
+  String(erro)
+);
 
-      const id =
-        obterCampo(
-          item,
-          "id"
-        );
+}
+finally{
+
+botao.disabled =
+  false;
+
+}
+
+}
+
+/* =====================================================
+OBTER LISTA DA RESPOSTA
+===================================================== */
+
+function obterListaResposta(
+resposta
+){
+
+/*
+
+API retornou diretamente um array.
+*/
+if(
+Array.isArray(
+resposta
+)
+){
+
+return resposta;
+
+}
+
+/*
+
+Formato padrão:
+{
+sucesso:true,
+lista:[...]
+}
+*/
+if(
+resposta &&
+Array.isArray(
+resposta.lista
+)
+){
+
+return resposta.lista;
+
+}
+
+/*
+
+Compatibilidade.
+*/
+if(
+resposta &&
+Array.isArray(
+resposta.dados
+)
+){
+
+return resposta.dados;
+
+}
+
+if(
+resposta &&
+Array.isArray(
+resposta.resultado
+)
+){
+
+return resposta.resultado;
+
+}
+
+/*
+
+Um único registro.
+*/
+if(
+resposta &&
+resposta.registro &&
+typeof resposta.registro ===
+"object"
+){
+
+return [
+  resposta.registro
+];
+
+}
+
+return [];
+
+}
+
+/* =====================================================
+MONTAR TABELA
+===================================================== */
+
+function montarTabela(
+lista
+){
+
+const resultado =
+document.getElementById(
+"resultado"
+);
+
+let html = `
+
+<div class="tabela-container">
+
+  <table>
+
+    <thead>
+
+      <tr>
+
+        <th class="col-id">
+          ID
+        </th>
+
+        <th class="col-problema">
+          Problema
+        </th>
+
+        <th class="col-solucao">
+          Solução
+        </th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+`;
+
+lista.forEach(
+function(item){
+
+  /*
+   * Compatibilidade com diferentes
+   * nomes de coluna.
+   */
+
+  const id =
+    obterCampo(
+      item,
+      [
+        "id",
+        "codigo",
+        "numero"
+      ]
+    );
 
 
-      const problema =
-        obterCampo(
-          item,
-          "problema"
-        );
+  const problema =
+    obterCampo(
+      item,
+      [
+        "problema",
+        "descricao",
+        "assunto",
+        "pergunta",
+        "duvida",
+        "questao"
+      ]
+    );
 
 
-      const solucao =
-        obterCampo(
-          item,
-          "solucao"
-        );
+  const solucao =
+    obterCampo(
+      item,
+      [
+        "solucao",
+        "solução",
+        "resposta",
+        "orientacao",
+        "orientação"
+      ]
+    );
 
 
-      html += `
+  /*
+   * Caso a planilha tenha outras
+   * colunas e não possua exatamente
+   * Problema/Solução, tenta exibir
+   * o conteúdo completo.
+   */
 
-        <tr>
+  let problemaFinal =
+    problema;
 
-          <td class="col-id">
 
-            ${escaparHTML(
-              id || "-"
-            )}
+  let solucaoFinal =
+    solucao;
 
-          </td>
 
-          <td class="col-problema">
+  if(
+    !problemaFinal &&
+    item.dados
+  ){
 
-            ${formatarTexto(
-              problema
-            )}
+    problemaFinal =
+      item.dados
+        .filter(
+          function(valor){
+            return String(
+              valor || ""
+            ).trim() !== "";
+          }
+        )
+        .join(" | ");
 
-          </td>
-
-          <td class="col-solucao">
-
-            ${formatarTexto(
-              solucao
-            )}
-
-          </td>
-
-        </tr>
-
-      `;
-
-    }
-  );
+  }
 
 
   html += `
 
-        </tbody>
+    <tr>
 
-      </table>
+      <td class="col-id">
 
-    </div>
+        ${escaparHTML(
+          id || "-"
+        )}
+
+      </td>
+
+      <td class="col-problema">
+
+        ${formatarTexto(
+          problemaFinal
+        )}
+
+      </td>
+
+      <td class="col-solucao">
+
+        ${formatarTexto(
+          solucaoFinal
+        )}
+
+      </td>
+
+    </tr>
 
   `;
 
+}
 
-  resultado.innerHTML =
-    html;
+);
+
+html += `
+
+    </tbody>
+
+  </table>
+
+</div>
+
+`;
+
+resultado.innerHTML =
+html;
 
 }
 
-
 /* =====================================================
-   OBTER CAMPO
+OBTER CAMPO
 ===================================================== */
 
 function obterCampo(
-  objeto,
-  campoProcurado
+objeto,
+campos
 ){
 
-  if(
-    !objeto ||
-    typeof objeto !== "object"
-  ){
+if(
+!objeto ||
+typeof objeto !== "object"
+){
 
-    return "";
+return "";
 
-  }
+}
+
+if(
+!Array.isArray(campos)
+){
+
+campos =
+  [campos];
+
+}
+
+/*
+
+Primeiro procura diretamente.
+*/
+for(
+let i = 0;
+i < campos.length;
+i++
+){
+
+const campo =
+  campos[i];
 
 
-  /*
-     Primeiro tenta o nome exato.
-  */
+if(
+  objeto[campo] !== undefined &&
+  objeto[campo] !== null
+){
 
-  if(
-    objeto[campoProcurado] !== undefined &&
-    objeto[campoProcurado] !== null
-  ){
-
-    return String(
-      objeto[campoProcurado]
+  const valor =
+    String(
+      objeto[campo]
     ).trim();
 
+
+  if(valor){
+
+    return valor;
+
   }
 
+}
 
-  /*
-     Depois compara ignorando:
-     - maiúsculas/minúsculas
-     - acentos
-     - espaços
-     - _
-     - -
-  */
+}
 
-  const procurado =
+/*
+
+Depois procura ignorando
+acentos, espaços e diferenças
+de maiúsculas/minúsculas.
+*/
+const chaves =
+Object.keys(
+objeto
+);
+
+for(
+let i = 0;
+i < campos.length;
+i++
+){
+
+const procurado =
+  normalizarNomeCampo(
+    campos[i]
+  );
+
+for(
+  let j = 0;
+  j < chaves.length;
+  j++
+){
+
+  const chave =
+    chaves[j];
+
+  if(
     normalizarNomeCampo(
-      campoProcurado
-    );
-
-
-  const chaves =
-    Object.keys(
-      objeto
-    );
-
-
-  for(
-    let i=0;
-    i<chaves.length;
-    i++
+      chave
+    ) === procurado
   ){
 
-    const chave =
-      chaves[i];
-
+    const valor =
+      objeto[chave];
 
     if(
-      normalizarNomeCampo(
-        chave
-      ) === procurado
+      valor !== undefined &&
+      valor !== null
     ){
 
-      const valor =
-        objeto[chave];
-
-
-      if(
-        valor !== undefined &&
-        valor !== null
-      ){
-
-        return String(
+      const texto =
+        String(
           valor
         ).trim();
 
+      if(texto){
+
+        return texto;
+
       }
 
     }
 
   }
 
-
-  return "";
+}
 
 }
 
+return "";
+
+}
 
 /* =====================================================
-   NORMALIZAR NOME DE CAMPO
+NORMALIZAR NOME DE CAMPO
 ===================================================== */
 
 function normalizarNomeCampo(
-  texto
+texto
 ){
 
-  return String(
-    texto || ""
-  )
-  .normalize("NFD")
-  .replace(
-    /[\u0300-\u036f]/g,
-    ""
-  )
-  .toLowerCase()
-  .replace(
-    /[\s_\-]/g,
-    ""
-  );
+return String(
+texto || ""
+)
+.normalize("NFD")
+.replace(
+/[\u0300-\u036f]/g,
+""
+)
+.toLowerCase()
+.replace(
+/[^a-z0-9]/g,
+""
+);
 
 }
 
-
 /* =====================================================
-   FORMATAR TEXTO
+FORMATAR TEXTO
 ===================================================== */
 
 function formatarTexto(
-  texto
+texto
 ){
 
-  if(
-    texto === null ||
-    texto === undefined ||
-    String(texto).trim() === ""
-  ){
+if(
+texto === null ||
+texto === undefined ||
+String(texto).trim() === ""
+){
 
-    return "-";
-
-  }
-
-
-  return escaparHTML(
-    texto
-  )
-  .replace(
-    /\r?\n/g,
-    "<br>"
-  );
+return "-";
 
 }
 
+return escaparHTML(
+texto
+).replace(
+/\r?\n/g,
+"<br>"
+);
+
+}
 
 /* =====================================================
-   ESCAPAR HTML
+ESCAPAR HTML
 ===================================================== */
 
 function escaparHTML(
-  valor
+valor
 ){
 
-  if(
-    valor === null ||
-    valor === undefined
-  ){
+if(
+valor === null ||
+valor === undefined
+){
 
-    return "";
-
-  }
-
-
-  return String(valor)
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
-    );
+return "";
 
 }
 
+return String(
+valor
+)
 
-/* =====================================================
-   NORMALIZAR TEXTO DE PESQUISA
-===================================================== */
+.replace(
+  /&/g,
+  "&amp;"
+)
 
-function normalizarTexto(
-  texto
-){
+.replace(
+  /</g,
+  "&lt;"
+)
 
-  return String(
-    texto || ""
-  )
-  .normalize("NFD")
-  .replace(
-    /[\u0300-\u036f]/g,
-    ""
-  )
-  .toLowerCase()
-  .trim();
+.replace(
+  />/g,
+  "&gt;"
+)
+
+.replace(
+  /"/g,
+  "&quot;"
+)
+
+.replace(
+  /'/g,
+  "&#039;"
+);
 
 }
 
-
 /* =====================================================
-   MENSAGENS
+MENSAGEM
 ===================================================== */
 
 function mostrarMensagem(
-  texto,
-  tipo
+texto,
+tipo
 ){
 
-  const div =
-    document.getElementById(
-      "mensagem"
-    );
+const div =
+document.getElementById(
+"mensagem"
+);
 
+div.textContent =
+texto;
 
-  div.textContent =
-    texto;
-
-
-  div.className =
-    "mensagem " +
-    tipo;
+div.className =
+"mensagem " +
+tipo;
 
 }
-
 
 function mostrarErro(
-  texto
+texto
 ){
 
-  mostrarMensagem(
-    "❌ " + texto,
-    "erro"
-  );
+mostrarMensagem(
+"❌ " +
+texto,
+"erro"
+);
 
 }
 
-
 /* =====================================================
-   ENTER
+ENTER
 ===================================================== */
 
 document
-  .getElementById(
-    "campoPesquisa"
-  )
-  .addEventListener(
-    "keydown",
-    function(event){
+.getElementById(
+"campoPesquisa"
+)
+.addEventListener(
+"keydown",
+function(event){
 
-      if(
-        event.key === "Enter"
-      ){
+  if(
+    event.key === "Enter"
+  ){
 
-        event.preventDefault();
+    event.preventDefault();
 
-        pesquisar();
+    pesquisar();
 
-      }
+  }
 
-    }
-  );
+}
 
+);
 
 /* =====================================================
-   VOLTAR
+VOLTAR
 ===================================================== */
 
 function voltar(){
 
-  window.location.href =
-    URL_INDEX;
+window.location.href =
+URL_INDEX;
 
 }
 
-</script>
+</script> </body> </html>
+O ponto que estava causando o problema
+No seu HTML original você tinha:
 
-</body>
+const resposta =
+  await chamarAPI(
+    "pesquisarAtendimento",
+    {
+      texto:texto
+    }
+  );
 
-</html>
+Isso precisa ser:
 
+const resposta =
+  await chamarAPI(
+    "pesquisarAtendimento",
+    {
+      termo: termo
+    }
+  );
