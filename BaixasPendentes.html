@@ -915,83 +915,61 @@ function chamarAPI(
 }
 
 
-/* =====================================================
-   CARREGAR
-===================================================== */
-
 async function carregar(){
 
     const corpo =
-        document.getElementById(
-            "lista"
-        );
-
+        document.getElementById("lista");
 
     const filtro =
-        document.getElementById(
-            "competenciaFiltro"
-        );
-
+        document.getElementById("competenciaFiltro");
 
     /*
-     * Aqui está a principal correção.
+     * Se houver competência selecionada,
+     * filtra somente por ela.
      *
-     * Se o campo estiver vazio,
-     * parametros fica vazio.
-     *
-     * A API então retorna TODOS os meses.
+     * Se estiver vazia,
+     * busca TODOS os lançamentos sem baixa,
+     * independente da competência.
      */
 
     const competencia =
         filtro.value
-        ?
-        converterCompetencia(
-            filtro.value
-        )
-        :
-        "";
+            ? converterCompetencia(filtro.value)
+            : "";
 
-
-    atualizarTitulo(
-        competencia
-    );
-
+    atualizarTitulo(competencia);
 
     corpo.innerHTML = `
         <tr>
-            <td
-                colspan="7"
-                class="loading"
-            >
+            <td colspan="7" class="loading">
                 <span class="spinner"></span>
                 Carregando baixas pendentes...
             </td>
         </tr>
     `;
 
-
     limparMensagem();
 
+    try {
 
-    try{
+        let parametros = {};
 
-        const parametros = {};
+        /*
+         * SOMENTE envia competência para a API
+         * quando o usuário selecionou uma.
+         */
+        if (competencia) {
 
-
-        if(competencia){
-
-            parametros.competencia =
-                competencia;
+            parametros.competencia = competencia;
 
         }
 
-
         console.log(
-            "Filtro enviado para API:",
-            competencia ||
-            "TODAS AS COMPETÊNCIAS"
+            "Consulta:",
+            competencia
+                ? "Competência " + competencia
+                : "TODAS AS COMPETÊNCIAS"
         );
-
 
         const resposta =
             await chamarAPI(
@@ -999,17 +977,15 @@ async function carregar(){
                 parametros
             );
 
-
         console.log(
-            "listarBaixasPendentes:",
+            "Resposta da API:",
             resposta
         );
 
-
-        if(
+        if (
             !resposta ||
             resposta.sucesso !== true
-        ){
+        ) {
 
             throw new Error(
                 resposta &&
@@ -1017,68 +993,69 @@ async function carregar(){
                     resposta.erro ||
                     resposta.mensagem
                 )
-                ?
-                (
-                    resposta.erro ||
-                    resposta.mensagem
-                )
-                :
-                "A API retornou um erro."
+                    ? (
+                        resposta.erro ||
+                        resposta.mensagem
+                    )
+                    : "A API retornou um erro."
             );
 
         }
 
+        let lista =
+            obterLista(resposta);
 
-        const lista =
-            obterLista(
-                resposta
-            );
+        /*
+         * Segurança adicional:
+         *
+         * Quando NÃO houver competência selecionada,
+         * mostramos todos os registros retornados pela API.
+         *
+         * Quando houver competência selecionada,
+         * filtramos no navegador também.
+         */
+        if (competencia) {
 
+            lista =
+                lista.filter(function(item) {
 
-        mostrarLista(
-            lista
-        );
+                    return converterCompetencia(
+                        item.competencia
+                    ) === competencia;
 
+                });
 
-        atualizarResumo(
-            lista
-        );
+        }
 
+        mostrarLista(lista);
+
+        atualizarResumo(lista);
 
     }
-    catch(erro){
+    catch(erro) {
 
         console.error(
             "Erro ao carregar baixas pendentes:",
             erro
         );
 
-
         corpo.innerHTML = `
             <tr>
-                <td
-                    colspan="7"
-                    class="erro"
-                >
+                <td colspan="7" class="erro">
                     ⚠ ${escapeHtml(
-                        obterMensagemErro(
-                            erro
-                        )
+                        obterMensagemErro(erro)
                     )}
                 </td>
             </tr>
         `;
 
-
         document.getElementById(
             "totalPendentes"
         ).textContent = "0";
 
-
         document.getElementById(
             "totalReceber"
         ).textContent = "R$ 0,00";
-
 
         document.getElementById(
             "totalPagar"
@@ -1087,6 +1064,7 @@ async function carregar(){
     }
 
 }
+
 
 
 /* =====================================================
