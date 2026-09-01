@@ -84,36 +84,7 @@ h2{
     background:#0d47a1;
 }
 
-.btn-todos{
-    background:#2e7d32;
-    color:#fff;
-}
 
-.btn-todos:hover{
-    background:#1b5e20;
-}
-
-.filtro{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-bottom:20px;
-    padding:15px;
-    background:#f7f9fb;
-    border-radius:10px;
-}
-
-.filtro label{
-    font-weight:bold;
-}
-
-.filtro input{
-    padding:9px 12px;
-    border:1px solid #cbd5e1;
-    border-radius:7px;
-    font-size:14px;
-}
 
 .area-tabela{
     width:100%;
@@ -264,10 +235,7 @@ tbody tr:hover{
         grid-template-columns:1fr;
     }
 
-    .filtro{
-        align-items:flex-start;
-        flex-direction:column;
-    }
+   
 
 }
 
@@ -300,24 +268,7 @@ tbody tr:hover{
 </h3>
 
 
-<div class="filtro">
-
-    <label for="competenciaFiltro">
-        Filtrar competência:
-    </label>
-
-    <input
-        type="month"
-        id="competenciaFiltro"
-    >
-
-    <button
-        type="button"
-        class="btn btn-todos"
-        onclick="carregarTodas()"
-    >
-        Todas
-    </button>
+<div class="acoes">
 
     <button
         type="button"
@@ -466,44 +417,6 @@ document.addEventListener(
 
 function inicializar(){
 
-    const competenciaURL =
-        obterParametroURL("competencia");
-
-    const filtro =
-        document.getElementById(
-            "competenciaFiltro"
-        );
-
-
-    /*
-     * IMPORTANTE:
-     *
-     * Se a página vier sem competência,
-     * NÃO enviaremos competência para a API.
-     *
-     * Assim serão carregados TODOS os meses.
-     */
-
-    if(
-        competenciaURL &&
-        converterCompetencia(
-            competenciaURL
-        )
-    ){
-
-        filtro.value =
-            converterCompetencia(
-                competenciaURL
-            );
-
-    }
-    else{
-
-        filtro.value = "";
-
-    }
-
-
     carregar();
 
 }
@@ -650,27 +563,15 @@ function converterCompetencia(valor){
    TÍTULO
 ===================================================== */
 
-function atualizarTitulo(competencia){
+function atualizarTitulo(){
 
     const titulo =
         document.getElementById(
             "tituloCompetencia"
         );
 
-
-    if(competencia){
-
-        titulo.textContent =
-            "Competência: " +
-            competencia;
-
-    }
-    else{
-
-        titulo.textContent =
-            "Todas as competências";
-
-    }
+    titulo.textContent =
+        "Todas as competências";
 
 }
 
@@ -920,22 +821,108 @@ async function carregar(){
     const corpo =
         document.getElementById("lista");
 
-    const filtro =
-        document.getElementById("competenciaFiltro");
+  async function carregar(){
 
-    /*
-     * Se houver competência selecionada,
-     * filtra somente por ela.
-     *
-     * Se estiver vazia,
-     * busca TODOS os lançamentos sem baixa,
-     * independente da competência.
-     */
+    const corpo =
+        document.getElementById("lista");
 
-    const competencia =
-        filtro.value
-            ? converterCompetencia(filtro.value)
-            : "";
+    atualizarTitulo();
+
+    corpo.innerHTML = `
+        <tr>
+            <td colspan="7" class="loading">
+                <span class="spinner"></span>
+                Carregando baixas pendentes...
+            </td>
+        </tr>
+    `;
+
+    limparMensagem();
+
+    try {
+
+        console.log(
+            "Consulta: TODAS AS COMPETÊNCIAS"
+        );
+
+        /*
+         * Não envia competência.
+         * A API deverá retornar todas
+         * as baixas pendentes.
+         */
+
+        const resposta =
+            await chamarAPI(
+                "listarBaixasPendentes",
+                {}
+            );
+
+        console.log(
+            "Resposta da API:",
+            resposta
+        );
+
+        if (
+            !resposta ||
+            resposta.sucesso !== true
+        ) {
+
+            throw new Error(
+                resposta &&
+                (
+                    resposta.erro ||
+                    resposta.mensagem
+                )
+                    ? (
+                        resposta.erro ||
+                        resposta.mensagem
+                    )
+                    : "A API retornou um erro."
+            );
+
+        }
+
+        const lista =
+            obterLista(resposta);
+
+        mostrarLista(lista);
+
+        atualizarResumo(lista);
+
+    }
+    catch(erro) {
+
+        console.error(
+            "Erro ao carregar baixas pendentes:",
+            erro
+        );
+
+        corpo.innerHTML = `
+            <tr>
+                <td colspan="7" class="erro">
+                    ⚠ ${escapeHtml(
+                        obterMensagemErro(erro)
+                    )}
+                </td>
+            </tr>
+        `;
+
+        document.getElementById(
+            "totalPendentes"
+        ).textContent = "0";
+
+        document.getElementById(
+            "totalReceber"
+        ).textContent = "R$ 0,00";
+
+        document.getElementById(
+            "totalPagar"
+        ).textContent = "R$ 0,00";
+
+    }
+
+}
+
 
     atualizarTitulo(competencia);
 
@@ -1067,33 +1054,6 @@ async function carregar(){
 
 
 
-/* =====================================================
-   CARREGAR TODAS
-===================================================== */
-
-function carregarTodas(){
-
-    const filtro =
-        document.getElementById(
-            "competenciaFiltro"
-        );
-
-
-    filtro.value = "";
-
-
-    /*
-     * Remove também a competência da URL.
-     */
-
-    atualizarTitulo(
-        ""
-    );
-
-
-    carregar();
-
-}
 
 
 /* =====================================================
