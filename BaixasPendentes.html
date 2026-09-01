@@ -23,7 +23,7 @@ body{
 }
 
 .container{
-    max-width:1200px;
+    max-width:1250px;
     margin:auto;
     background:#fff;
     padding:25px;
@@ -45,7 +45,7 @@ h2{
     color:#c62828;
 }
 
-#tituloCompetencia{
+.subtitulo{
     margin:0 0 20px;
     color:#555;
 }
@@ -63,6 +63,18 @@ h2{
     border-radius:8px;
     cursor:pointer;
     font-weight:bold;
+    transition:.2s;
+}
+
+.btn:hover{
+    opacity:.9;
+    transform:translateY(-1px);
+}
+
+.btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
 }
 
 .btn-voltar{
@@ -70,86 +82,20 @@ h2{
     color:#fff;
 }
 
-.btn-voltar:hover{
-    background:#455a64;
-}
-
 .btn-atualizar{
     background:#1565c0;
     color:#fff;
 }
 
-.btn-atualizar:hover{
-    background:#0d47a1;
-}
-
-.area-tabela{
-    width:100%;
-    overflow-x:auto;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:850px;
-}
-
-th{
-    background:#c62828;
+.btn-baixar{
+    background:#2e7d32;
     color:#fff;
-    padding:12px;
-    text-align:center;
-    white-space:nowrap;
+    padding:7px 13px;
+    font-size:13px;
 }
 
-td{
-    padding:10px;
-    border-bottom:1px solid #ddd;
-    text-align:center;
-}
-
-tbody tr:hover{
-    background:#f8f9fa;
-}
-
-.valor{
-    text-align:right;
-    font-weight:bold;
-    white-space:nowrap;
-}
-
-.loading{
-    text-align:center;
-    padding:30px;
-    color:#64748b;
-    font-weight:bold;
-}
-
-.vazio{
-    text-align:center;
-    padding:30px;
-    color:#64748b;
-}
-
-.erro{
-    background:#ffebee;
-    color:#c62828;
-    font-weight:bold;
-    text-align:center;
-    padding:20px;
-}
-
-.badge{
-    display:inline-block;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.badge-pendente{
-    background:#fff3e0;
-    color:#e65100;
+.btn-baixar:hover{
+    background:#1b5e20;
 }
 
 .mensagem{
@@ -198,6 +144,107 @@ tbody tr:hover{
     text-align:center;
     font-size:20px;
     color:#c62828;
+    font-weight:bold;
+}
+
+.area-tabela{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:1050px;
+}
+
+th{
+    background:#c62828;
+    color:#fff;
+    padding:12px;
+    text-align:center;
+    white-space:nowrap;
+}
+
+td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+    vertical-align:middle;
+}
+
+tbody tr:hover{
+    background:#f8f9fa;
+}
+
+.valor{
+    text-align:right !important;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.loading{
+    text-align:center;
+    padding:30px;
+    color:#64748b;
+    font-weight:bold;
+}
+
+.vazio{
+    text-align:center;
+    padding:30px;
+    color:#64748b;
+}
+
+.erro-tabela{
+    background:#ffebee;
+    color:#c62828;
+    font-weight:bold;
+    text-align:center;
+    padding:20px;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.badge-pendente{
+    background:#fff3e0;
+    color:#e65100;
+}
+
+.tipo{
+    display:inline-block;
+    min-width:130px;
+    padding:7px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.tipo-receber{
+    background:#e8f5e9;
+    color:#2e7d32;
+}
+
+.tipo-pagar{
+    background:#ffebee;
+    color:#c62828;
+}
+
+.tipo-outro{
+    background:#eceff1;
+    color:#455a64;
+}
+
+.acoes-linha{
+    white-space:nowrap;
 }
 
 .spinner{
@@ -212,10 +259,24 @@ tbody tr:hover{
     margin-right:8px;
 }
 
+.spinner-pequeno{
+    display:inline-block;
+    width:13px;
+    height:13px;
+    border:2px solid rgba(255,255,255,.4);
+    border-top-color:#fff;
+    border-radius:50%;
+    animation:girar .8s linear infinite;
+    vertical-align:middle;
+    margin-right:5px;
+}
+
 @keyframes girar{
+
     to{
         transform:rotate(360deg);
     }
+
 }
 
 @media(max-width:700px){
@@ -230,6 +291,11 @@ tbody tr:hover{
 
     .resumo{
         grid-template-columns:1fr;
+    }
+
+    .topo{
+        align-items:flex-start;
+        flex-direction:column;
     }
 
 }
@@ -257,8 +323,8 @@ tbody tr:hover{
     </div>
 
 
-    <h3 id="tituloCompetencia">
-        Todas as competências
+    <h3 class="subtitulo">
+        Todos os lançamentos pendentes
     </h3>
 
 
@@ -266,6 +332,7 @@ tbody tr:hover{
 
         <button
             type="button"
+            id="btnAtualizar"
             class="btn btn-atualizar"
             onclick="carregar()"
         >
@@ -348,6 +415,7 @@ tbody tr:hover{
                     <th>Valor</th>
                     <th>Vencimento</th>
                     <th>Baixado</th>
+                    <th>Ação</th>
 
                 </tr>
 
@@ -359,7 +427,7 @@ tbody tr:hover{
                 <tr>
 
                     <td
-                        colspan="7"
+                        colspan="8"
                         class="loading"
                     >
 
@@ -390,6 +458,17 @@ const URL_API =
 "https://script.google.com/macros/s/AKfycbwlkjtWnOcvglZS2Ft6ydraSh4-JbTXH6C7irb6O5hYPvxYxqN0tYWQs2Ybi6mVWThN/exec";
 
 
+/*
+ * Nome da ação usada pelo botão BAIXAR.
+ *
+ * Se no seu Apps Script a função tiver outro nome,
+ * altere somente esta constante.
+ */
+
+const ACAO_BAIXAR =
+"baixarLancamento";
+
+
 let contadorCallback = 0;
 
 
@@ -408,7 +487,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   CARREGAR BAIXAS PENDENTES
+   CARREGAR TODAS AS PENDÊNCIAS
 ===================================================== */
 
 async function carregar(){
@@ -416,22 +495,34 @@ async function carregar(){
     const corpo =
         document.getElementById("lista");
 
-    const titulo =
-        document.getElementById("tituloCompetencia");
+    const botao =
+        document.getElementById("btnAtualizar");
 
 
-    titulo.textContent =
-        "Todas as competências";
+    /*
+     * Impede duas consultas simultâneas.
+     */
+
+    if(
+        botao.disabled
+    ){
+
+        return;
+
+    }
+
+
+    botao.disabled = true;
+
+    botao.textContent =
+        "⏳ Carregando...";
 
 
     corpo.innerHTML = `
         <tr>
-            <td colspan="7" class="loading">
-
+            <td colspan="8" class="loading">
                 <span class="spinner"></span>
-
                 Carregando baixas pendentes...
-
             </td>
         </tr>
     `;
@@ -440,25 +531,26 @@ async function carregar(){
     limparMensagem();
 
 
-    /*
-     * IMPORTANTE:
-     *
-     * NÃO enviamos competência.
-     *
-     * A API recebe somente:
-     *
-     * action=listarBaixasPendentes
-     *
-     * Portanto deve retornar todas
-     * as baixas pendentes.
-     */
-
-    console.log(
-        "Iniciando consulta de TODAS as baixas pendentes..."
-    );
+    zerarResumo();
 
 
     try{
+
+        console.log(
+            "Consultando todas as baixas pendentes..."
+        );
+
+
+        /*
+         * IMPORTANTE:
+         *
+         * Não enviamos competência.
+         *
+         * A API recebe somente:
+         *
+         * action=listarBaixasPendentes
+         *
+         */
 
         const resposta =
             await chamarAPI(
@@ -498,9 +590,7 @@ async function carregar(){
 
 
         const lista =
-            obterLista(
-                resposta
-            );
+            obterLista(resposta);
 
 
         console.log(
@@ -509,44 +599,45 @@ async function carregar(){
         );
 
 
-        mostrarLista(
-            lista
-        );
+        mostrarLista(lista);
+
+        atualizarResumo(lista);
 
 
-        atualizarResumo(
-            lista
-        );
+        if(
+            lista.length > 0
+        ){
+
+            mostrarMensagem(
+                lista.length +
+                " lançamento(s) pendente(s) encontrado(s).",
+                "sucesso"
+            );
+
+        }
 
 
     }
     catch(erro){
 
         console.error(
-            "ERRO:",
+            "Erro ao carregar:",
             erro
         );
 
 
         corpo.innerHTML = `
             <tr>
-
                 <td
-                    colspan="7"
-                    class="erro"
+                    colspan="8"
+                    class="erro-tabela"
                 >
-
-                    ⚠️ ${escapeHtml(
+                    ⚠ ${escapeHtml(
                         obterMensagemErro(erro)
                     )}
-
                 </td>
-
             </tr>
         `;
-
-
-        atualizarResumo([]);
 
 
         mostrarMensagem(
@@ -554,13 +645,24 @@ async function carregar(){
             "erro"
         );
 
+
+        zerarResumo();
+
+    }
+    finally{
+
+        botao.disabled = false;
+
+        botao.textContent =
+            "🔄 Atualizar";
+
     }
 
 }
 
 
 /* =====================================================
-   CHAMAR API - JSONP
+   JSONP
 ===================================================== */
 
 function chamarAPI(
@@ -591,17 +693,10 @@ function chamarAPI(
                 );
 
 
-            let finalizado =
-                false;
+            let finalizado = false;
 
+            let timeout = null;
 
-            let timeout =
-                null;
-
-
-            /*
-             * LIMPAR
-             */
 
             function limpar(){
 
@@ -645,45 +740,28 @@ function chamarAPI(
             }
 
 
-            /*
-             * FINALIZAR
-             */
-
             function finalizar(
-                funcao,
+                fn,
                 valor
             ){
 
-                if(
-                    finalizado
-                ){
+                if(finalizado){
 
                     return;
 
                 }
 
 
-                finalizado =
-                    true;
-
+                finalizado = true;
 
                 limpar();
 
-
-                funcao(
-                    valor
-                );
+                fn(valor);
 
             }
 
 
-            /*
-             * CALLBACK GLOBAL
-             */
-
-            window[
-                callback
-            ] =
+            window[callback] =
                 function(resposta){
 
                     console.log(
@@ -700,10 +778,6 @@ function chamarAPI(
                 };
 
 
-            /*
-             * MONTAR PARÂMETROS
-             */
-
             const params =
                 new URLSearchParams();
 
@@ -719,11 +793,6 @@ function chamarAPI(
                 callback
             );
 
-
-            /*
-             * Adiciona parâmetros extras,
-             * se existirem.
-             */
 
             Object.keys(
                 parametros
@@ -756,8 +825,8 @@ function chamarAPI(
 
             const separador =
                 URL_API.indexOf("?") >= 0
-                    ? "&"
-                    : "?";
+                ? "&"
+                : "?";
 
 
             const url =
@@ -772,21 +841,10 @@ function chamarAPI(
             );
 
 
-            /*
-             * SCRIPT JSONP
-             */
+            script.async = true;
 
-            script.async =
-                true;
+            script.src = url;
 
-
-            script.src =
-                url;
-
-
-            /*
-             * ERRO DE CARREGAMENTO
-             */
 
             script.onerror =
                 function(){
@@ -801,12 +859,6 @@ function chamarAPI(
                 };
 
 
-            /*
-             * TIMEOUT
-             *
-             * 60 segundos.
-             */
-
             timeout =
                 setTimeout(
                     function(){
@@ -814,12 +866,12 @@ function chamarAPI(
                         finalizar(
                             reject,
                             new Error(
-                                "A API demorou mais de 60 segundos para responder. Verifique o Apps Script."
+                                "A API demorou mais de 20 segundos para responder."
                             )
                         );
 
                     },
-                    60000
+                    20000
                 );
 
 
@@ -834,21 +886,13 @@ function chamarAPI(
 
 
 /* =====================================================
-   OBTER LISTA DA RESPOSTA
+   OBTER LISTA
 ===================================================== */
 
-function obterLista(
-    resposta
-){
-
-    /*
-     * Caso a API retorne diretamente um array.
-     */
+function obterLista(resposta){
 
     if(
-        Array.isArray(
-            resposta
-        )
+        Array.isArray(resposta)
     ){
 
         return resposta;
@@ -856,23 +900,13 @@ function obterLista(
     }
 
 
-    /*
-     * Possíveis nomes utilizados
-     * pelo Apps Script.
-     */
-
     const propriedades = [
 
         "lista",
-
         "baixasPendentes",
-
         "baixas",
-
         "lancamentos",
-
         "dados",
-
         "resultado"
 
     ];
@@ -906,17 +940,6 @@ function obterLista(
     }
 
 
-    /*
-     * Se não encontrou array,
-     * retorna vazio.
-     */
-
-    console.warn(
-        "Nenhuma lista encontrada na resposta:",
-        resposta
-    );
-
-
     return [];
 
 }
@@ -926,9 +949,7 @@ function obterLista(
    MOSTRAR LISTA
 ===================================================== */
 
-function mostrarLista(
-    lista
-){
+function mostrarLista(lista){
 
     const corpo =
         document.getElementById(
@@ -936,8 +957,7 @@ function mostrarLista(
         );
 
 
-    corpo.innerHTML =
-        "";
+    corpo.innerHTML = "";
 
 
     if(
@@ -947,19 +967,14 @@ function mostrarLista(
 
         corpo.innerHTML = `
             <tr>
-
                 <td
-                    colspan="7"
+                    colspan="8"
                     class="vazio"
                 >
-
                     ✅ Nenhum lançamento pendente.
-
                 </td>
-
             </tr>
         `;
-
 
         return;
 
@@ -967,30 +982,23 @@ function mostrarLista(
 
 
     /*
-     * Faz uma cópia antes de ordenar.
+     * Ordenação:
+     *
+     * 1. Competência
+     * 2. Vencimento
      */
 
-    const registros =
-        [...lista];
-
-
-    /*
-     * Ordena por competência
-     * e depois vencimento.
-     */
-
-    registros.sort(
+    lista.sort(
         function(a,b){
 
             const compA =
                 String(
-                    a.competencia ?? ""
+                    a.competencia || ""
                 );
-
 
             const compB =
                 String(
-                    b.competencia ?? ""
+                    b.competencia || ""
                 );
 
 
@@ -1005,31 +1013,26 @@ function mostrarLista(
             }
 
 
-            const vencA =
+            const dataA =
                 String(
-                    a.vencimento ?? ""
+                    a.vencimento || ""
+                );
+
+            const dataB =
+                String(
+                    b.vencimento || ""
                 );
 
 
-            const vencB =
-                String(
-                    b.vencimento ?? ""
-                );
-
-
-            return vencA.localeCompare(
-                vencB
+            return dataA.localeCompare(
+                dataB
             );
 
         }
     );
 
 
-    /*
-     * Criar linhas.
-     */
-
-    registros.forEach(
+    lista.forEach(
         function(item){
 
             const valor =
@@ -1041,6 +1044,12 @@ function mostrarLista(
             const linha =
                 document.createElement(
                     "tr"
+                );
+
+
+            const tipo =
+                classificarTipo(
+                    item.tipo
                 );
 
 
@@ -1061,9 +1070,16 @@ function mostrarLista(
 
 
                 <td>
-                    ${escapeHtml(
-                        item.tipo
-                    )}
+
+                    <span
+                        class="tipo ${tipo.classe}"
+                    >
+                        ${tipo.icone}
+                        ${escapeHtml(
+                            tipo.nome
+                        )}
+                    </span>
+
                 </td>
 
 
@@ -1075,18 +1091,22 @@ function mostrarLista(
 
 
                 <td class="valor">
+
                     ${formatarMoeda(
                         valor
                     )}
+
                 </td>
 
 
                 <td>
+
                     ${escapeHtml(
                         formatarData(
                             item.vencimento
                         )
                     )}
+
                 </td>
 
 
@@ -1095,13 +1115,24 @@ function mostrarLista(
                     <span
                         class="badge badge-pendente"
                     >
-
                         ${escapeHtml(
                             item.baixado ||
                             "Não"
                         )}
-
                     </span>
+
+                </td>
+
+
+                <td class="acoes-linha">
+
+                    <button
+                        type="button"
+                        class="btn btn-baixar"
+                        onclick="baixarLancamento(this, '${escapeHtmlAttr(item.id)}')"
+                    >
+                        ✓ Baixar
+                    </button>
 
                 </td>
 
@@ -1119,29 +1150,380 @@ function mostrarLista(
 
 
 /* =====================================================
-   RESUMO
+   CLASSIFICAR TIPO
 ===================================================== */
 
-function atualizarResumo(
-    lista
+function classificarTipo(tipo){
+
+    const texto =
+        normalizarTexto(
+            tipo
+        );
+
+
+    /*
+     * CONTAS A RECEBER
+     */
+
+    if(
+        texto.includes(
+            "receber"
+        )
+    ){
+
+        return {
+
+            nome:
+                "Contas a Receber",
+
+            classe:
+                "tipo-receber",
+
+            icone:
+                "🟢"
+
+        };
+
+    }
+
+
+    /*
+     * CONTAS A PAGAR
+     */
+
+    if(
+        texto.includes(
+            "pagar"
+        )
+    ){
+
+        return {
+
+            nome:
+                "Contas a Pagar",
+
+            classe:
+                "tipo-pagar",
+
+            icone:
+                "🔴"
+
+        };
+
+    }
+
+
+    /*
+     * OUTROS TIPOS
+     */
+
+    return {
+
+        nome:
+            tipo ||
+            "Não informado",
+
+        classe:
+            "tipo-outro",
+
+        icone:
+            "⚪"
+
+    };
+
+}
+
+
+/* =====================================================
+   BAIXAR LANÇAMENTO
+===================================================== */
+
+async function baixarLancamento(
+    botao,
+    id
 ){
 
-    let receber =
-        0;
+    if(
+        !id
+    ){
+
+        alert(
+            "Não foi possível identificar o lançamento."
+        );
+
+        return;
+
+    }
 
 
-    let pagar =
-        0;
+    const confirmou =
+        confirm(
+            "Deseja realmente baixar este lançamento?"
+        );
 
 
     if(
-        !Array.isArray(lista)
+        !confirmou
     ){
 
-        lista =
-            [];
+        return;
 
     }
+
+
+    const textoOriginal =
+        botao.innerHTML;
+
+
+    botao.disabled = true;
+
+    botao.innerHTML = `
+        <span class="spinner-pequeno"></span>
+        Baixando...
+    `;
+
+
+    try{
+
+        console.log(
+            "Baixando lançamento:",
+            id
+        );
+
+
+        const resposta =
+            await chamarAPI(
+                ACAO_BAIXAR,
+                {
+                    id:id
+                }
+            );
+
+
+        console.log(
+            "Resposta da baixa:",
+            resposta
+        );
+
+
+        if(
+            !resposta ||
+            resposta.sucesso !== true
+        ){
+
+            throw new Error(
+                resposta &&
+                (
+                    resposta.erro ||
+                    resposta.mensagem
+                )
+                    ? (
+                        resposta.erro ||
+                        resposta.mensagem
+                    )
+                    : "Não foi possível baixar o lançamento."
+            );
+
+        }
+
+
+        mostrarMensagem(
+            "Lançamento baixado com sucesso.",
+            "sucesso"
+        );
+
+
+        /*
+         * Remove a linha imediatamente.
+         */
+
+        const linha =
+            botao.closest("tr");
+
+
+        if(linha){
+
+            linha.remove();
+
+        }
+
+
+        /*
+         * Atualiza os totais
+         * sem precisar esperar a API
+         * novamente.
+         */
+
+        atualizarResumoTabela();
+
+
+        /*
+         * Se não houver mais linhas,
+         * mostra mensagem de vazio.
+         */
+
+        const corpo =
+            document.getElementById(
+                "lista"
+            );
+
+
+        if(
+            corpo.children.length === 0
+        ){
+
+            corpo.innerHTML = `
+                <tr>
+                    <td
+                        colspan="8"
+                        class="vazio"
+                    >
+                        ✅ Nenhum lançamento pendente.
+                    </td>
+                </tr>
+            `;
+
+        }
+
+    }
+    catch(erro){
+
+        console.error(
+            "Erro ao baixar:",
+            erro
+        );
+
+
+        mostrarMensagem(
+            obterMensagemErro(erro),
+            "erro"
+        );
+
+
+        botao.disabled = false;
+
+        botao.innerHTML =
+            textoOriginal;
+
+    }
+
+}
+
+
+/* =====================================================
+   ATUALIZAR RESUMO APÓS BAIXA
+===================================================== */
+
+function atualizarResumoTabela(){
+
+    const linhas =
+        document.querySelectorAll(
+            "#lista tr"
+        );
+
+
+    let quantidade = 0;
+
+    let receber = 0;
+
+    let pagar = 0;
+
+
+    linhas.forEach(
+        function(linha){
+
+            /*
+             * Ignora a linha de vazio.
+             */
+
+            const celulas =
+                linha.querySelectorAll(
+                    "td"
+                );
+
+
+            if(
+                celulas.length < 8
+            ){
+
+                return;
+
+            }
+
+
+            quantidade++;
+
+
+            const tipo =
+                normalizarTexto(
+                    celulas[2].textContent
+                );
+
+
+            const valor =
+                converterNumero(
+                    celulas[4].textContent
+                );
+
+
+            if(
+                tipo.includes(
+                    "receber"
+                )
+            ){
+
+                receber += valor;
+
+            }
+
+
+            else if(
+                tipo.includes(
+                    "pagar"
+                )
+            ){
+
+                pagar += valor;
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "totalPendentes"
+    ).textContent =
+        quantidade;
+
+
+    document.getElementById(
+        "totalReceber"
+    ).textContent =
+        formatarMoeda(
+            receber
+        );
+
+
+    document.getElementById(
+        "totalPagar"
+    ).textContent =
+        formatarMoeda(
+            pagar
+        );
+
+}
+
+
+/* =====================================================
+   RESUMO
+===================================================== */
+
+function atualizarResumo(lista){
+
+    let receber = 0;
+
+    let pagar = 0;
 
 
     lista.forEach(
@@ -1160,23 +1542,23 @@ function atualizarResumo(
 
 
             if(
-                tipo ===
-                "contas a receber"
+                tipo.includes(
+                    "receber"
+                )
             ){
 
-                receber +=
-                    valor;
+                receber += valor;
 
             }
 
 
             else if(
-                tipo ===
-                "contas a pagar"
+                tipo.includes(
+                    "pagar"
+                )
             ){
 
-                pagar +=
-                    valor;
+                pagar += valor;
 
             }
 
@@ -1209,12 +1591,36 @@ function atualizarResumo(
 
 
 /* =====================================================
+   ZERAR RESUMO
+===================================================== */
+
+function zerarResumo(){
+
+    document.getElementById(
+        "totalPendentes"
+    ).textContent =
+        "0";
+
+
+    document.getElementById(
+        "totalReceber"
+    ).textContent =
+        "R$ 0,00";
+
+
+    document.getElementById(
+        "totalPagar"
+    ).textContent =
+        "R$ 0,00";
+
+}
+
+
+/* =====================================================
    CONVERTER NÚMERO
 ===================================================== */
 
-function converterNumero(
-    valor
-){
+function converterNumero(valor){
 
     if(
         valor === null ||
@@ -1231,9 +1637,7 @@ function converterNumero(
         typeof valor === "number"
     ){
 
-        return isFinite(
-            valor
-        )
+        return isFinite(valor)
             ? valor
             : 0;
 
@@ -1241,9 +1645,7 @@ function converterNumero(
 
 
     let texto =
-        String(
-            valor
-        )
+        String(valor)
         .trim()
         .replace(
             /R\$/gi,
@@ -1254,6 +1656,11 @@ function converterNumero(
             ""
         );
 
+
+    /*
+     * Formato brasileiro:
+     * 1.234,56
+     */
 
     if(
         texto.indexOf(",") >= 0
@@ -1281,9 +1688,7 @@ function converterNumero(
         );
 
 
-    return isFinite(
-        numero
-    )
+    return isFinite(numero)
         ? numero
         : 0;
 
@@ -1294,9 +1699,7 @@ function converterNumero(
    FORMATAR MOEDA
 ===================================================== */
 
-function formatarMoeda(
-    valor
-){
+function formatarMoeda(valor){
 
     return Number(
         valor || 0
@@ -1315,9 +1718,7 @@ function formatarMoeda(
    FORMATAR DATA
 ===================================================== */
 
-function formatarData(
-    data
-){
+function formatarData(data){
 
     if(
         !data
@@ -1329,14 +1730,8 @@ function formatarData(
 
 
     const texto =
-        String(
-            data
-        ).trim();
+        String(data).trim();
 
-
-    /*
-     * DD/MM/AAAA
-     */
 
     if(
         /^\d{2}\/\d{2}\/\d{4}$/.test(
@@ -1348,10 +1743,6 @@ function formatarData(
 
     }
 
-
-    /*
-     * AAAA-MM-DD
-     */
 
     if(
         /^\d{4}-\d{2}-\d{2}$/.test(
@@ -1383,9 +1774,7 @@ function formatarData(
    NORMALIZAR TEXTO
 ===================================================== */
 
-function normalizarTexto(
-    valor
-){
+function normalizarTexto(valor){
 
     return String(
         valor ?? ""
@@ -1405,9 +1794,7 @@ function normalizarTexto(
    ESCAPAR HTML
 ===================================================== */
 
-function escapeHtml(
-    valor
-){
+function escapeHtml(valor){
 
     return String(
         valor ?? ""
@@ -1431,6 +1818,31 @@ function escapeHtml(
     .replace(
         /'/g,
         "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   ESCAPAR ATRIBUTO
+===================================================== */
+
+function escapeHtmlAttr(valor){
+
+    return String(
+        valor ?? ""
+    )
+    .replace(
+        /\\/g,
+        "\\\\"
+    )
+    .replace(
+        /'/g,
+        "\\'"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
     );
 
 }
@@ -1487,9 +1899,7 @@ function limparMensagem(){
    ERRO
 ===================================================== */
 
-function obterMensagemErro(
-    erro
-){
+function obterMensagemErro(erro){
 
     if(
         erro &&
