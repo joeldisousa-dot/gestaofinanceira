@@ -1368,23 +1368,4 @@ URL_INDEX;
 }
 
 </script> </body> </html>
-O ponto que estava causando o problema
-No seu HTML original você tinha:
 
-const resposta =
-  await chamarAPI(
-    "pesquisarAtendimento",
-    {
-      texto:texto
-    }
-  );
-
-Isso precisa ser:
-
-const resposta =
-  await chamarAPI(
-    "pesquisarAtendimento",
-    {
-      termo: termo
-    }
-  );
