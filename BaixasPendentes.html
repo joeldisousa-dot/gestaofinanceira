@@ -1,502 +1,235 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
 
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Baixas Pendentes - Controle Financeiro</title>
 
-
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
 
 *{
     box-sizing:border-box;
 }
 
-
-/* =====================================================
-   BODY
-===================================================== */
-
 body{
-
     margin:0;
-
     padding:20px;
-
-    font-family:
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
+    font-family:"Segoe UI",Arial,sans-serif;
     background:#f4f6f8;
-
     color:#333;
-
 }
-
-
-/* =====================================================
-   CONTAINER
-===================================================== */
 
 .container{
-
     max-width:1200px;
-
     margin:auto;
-
     background:#fff;
-
     padding:25px;
-
     border-radius:15px;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.10);
-
+    box-shadow:0 5px 20px rgba(0,0,0,.10);
 }
-
-
-/* =====================================================
-   TOPO
-===================================================== */
 
 .topo{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     gap:15px;
-
     margin-bottom:20px;
-
     flex-wrap:wrap;
-
 }
-
 
 h2{
-
     margin:0;
-
     color:#c62828;
-
 }
-
 
 #tituloCompetencia{
-
     margin:0 0 20px;
-
     color:#555;
-
 }
-
-
-/* =====================================================
-   AÇÕES
-===================================================== */
 
 .acoes{
-
     display:flex;
-
     gap:10px;
-
     flex-wrap:wrap;
-
     margin-bottom:20px;
-
 }
-
 
 .btn{
-
     border:0;
-
     padding:10px 18px;
-
     border-radius:8px;
-
     cursor:pointer;
-
     font-weight:bold;
-
-    font-size:14px;
-
 }
-
-
-/* =====================================================
-   BOTÃO VOLTAR
-===================================================== */
 
 .btn-voltar{
-
     background:#546e7a;
-
     color:#fff;
-
 }
-
 
 .btn-voltar:hover{
-
     background:#455a64;
-
 }
-
-
-/* =====================================================
-   BOTÃO ATUALIZAR
-===================================================== */
 
 .btn-atualizar{
-
     background:#1565c0;
-
     color:#fff;
-
 }
-
 
 .btn-atualizar:hover{
-
     background:#0d47a1;
-
 }
-
-
-/* =====================================================
-   MENSAGEM
-===================================================== */
-
-.mensagem{
-
-    display:none;
-
-    padding:12px 15px;
-
-    margin-bottom:15px;
-
-    border-radius:8px;
-
-    font-weight:bold;
-
-}
-
-
-.mensagem.erro{
-
-    display:block;
-
-    background:#ffebee;
-
-    color:#c62828;
-
-}
-
-
-.mensagem.sucesso{
-
-    display:block;
-
-    background:#e8f5e9;
-
-    color:#2e7d32;
-
-}
-
-
-/* =====================================================
-   RESUMO
-===================================================== */
-
-.resumo{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:12px;
-
-    margin-bottom:20px;
-
-}
-
-
-.card-resumo{
-
-    background:#f8fafc;
-
-    border:1px solid #e2e8f0;
-
-    border-radius:10px;
-
-    padding:15px;
-
-    text-align:center;
-
-}
-
-
-.card-resumo .titulo{
-
-    font-size:13px;
-
-    color:#64748b;
-
-}
-
-
-.card-resumo .valor{
-
-    display:block;
-
-    margin-top:5px;
-
-    text-align:center;
-
-    font-size:20px;
-
-    color:#c62828;
-
-}
-
-
-/* =====================================================
-   TABELA
-===================================================== */
 
 .area-tabela{
-
     width:100%;
-
     overflow-x:auto;
-
 }
-
 
 table{
-
     width:100%;
-
     border-collapse:collapse;
-
     min-width:850px;
-
 }
-
 
 th{
-
     background:#c62828;
-
     color:#fff;
-
     padding:12px;
-
     text-align:center;
-
     white-space:nowrap;
-
 }
-
 
 td{
-
     padding:10px;
-
     border-bottom:1px solid #ddd;
-
     text-align:center;
-
 }
-
 
 tbody tr:hover{
-
     background:#f8f9fa;
-
 }
-
 
 .valor{
-
     text-align:right;
-
     font-weight:bold;
-
     white-space:nowrap;
-
 }
-
-
-/* =====================================================
-   LOADING
-===================================================== */
 
 .loading{
-
     text-align:center;
-
     padding:30px;
-
     color:#64748b;
-
     font-weight:bold;
-
 }
-
-
-/* =====================================================
-   VAZIO
-===================================================== */
 
 .vazio{
-
     text-align:center;
-
     padding:30px;
-
     color:#64748b;
-
 }
-
-
-/* =====================================================
-   ERRO
-===================================================== */
 
 .erro{
-
     background:#ffebee;
-
     color:#c62828;
-
     font-weight:bold;
-
     text-align:center;
-
     padding:20px;
-
 }
-
-
-/* =====================================================
-   BADGE
-===================================================== */
 
 .badge{
-
     display:inline-block;
-
     padding:5px 10px;
-
     border-radius:20px;
-
     font-size:12px;
-
     font-weight:bold;
-
 }
-
 
 .badge-pendente{
-
     background:#fff3e0;
-
     color:#e65100;
-
 }
 
+.mensagem{
+    display:none;
+    padding:12px 15px;
+    margin-bottom:15px;
+    border-radius:8px;
+    font-weight:bold;
+}
 
-/* =====================================================
-   SPINNER
-===================================================== */
+.mensagem.erro{
+    display:block;
+    background:#ffebee;
+    color:#c62828;
+}
+
+.mensagem.sucesso{
+    display:block;
+    background:#e8f5e9;
+    color:#2e7d32;
+}
+
+.resumo{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.card-resumo{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    padding:15px;
+    text-align:center;
+}
+
+.card-resumo .titulo{
+    font-size:13px;
+    color:#64748b;
+}
+
+.card-resumo .valor{
+    display:block;
+    margin-top:5px;
+    text-align:center;
+    font-size:20px;
+    color:#c62828;
+}
 
 .spinner{
-
     display:inline-block;
-
     width:22px;
-
     height:22px;
-
     border:3px solid #ddd;
-
     border-top-color:#c62828;
-
     border-radius:50%;
-
-    animation:
-        girar .8s linear infinite;
-
+    animation:girar .8s linear infinite;
     vertical-align:middle;
-
     margin-right:8px;
-
 }
-
 
 @keyframes girar{
-
     to{
-
         transform:rotate(360deg);
-
     }
-
 }
-
-
-/* =====================================================
-   RESPONSIVO
-===================================================== */
 
 @media(max-width:700px){
 
     body{
-
         padding:10px;
-
     }
-
 
     .container{
-
         padding:15px;
-
     }
-
 
     .resumo{
-
         grid-template-columns:1fr;
-
-    }
-
-
-    .topo{
-
-        align-items:flex-start;
-
     }
 
 }
@@ -505,23 +238,13 @@ tbody tr:hover{
 
 </head>
 
-
 <body>
-
 
 <div class="container">
 
-
-    <!-- =================================================
-         TOPO
-    ================================================= -->
-
     <div class="topo">
 
-        <h2>
-            ⚠️ Baixas Pendentes
-        </h2>
-
+        <h2>⚠️ Baixas Pendentes</h2>
 
         <button
             type="button"
@@ -534,18 +257,10 @@ tbody tr:hover{
     </div>
 
 
-    <!-- =================================================
-         TÍTULO
-    ================================================= -->
-
     <h3 id="tituloCompetencia">
-        Todos os lançamentos pendentes
+        Todas as competências
     </h3>
 
-
-    <!-- =================================================
-         AÇÕES
-    ================================================= -->
 
     <div class="acoes">
 
@@ -560,29 +275,19 @@ tbody tr:hover{
     </div>
 
 
-    <!-- =================================================
-         MENSAGEM
-    ================================================= -->
-
     <div
         id="mensagem"
         class="mensagem"
     ></div>
 
 
-    <!-- =================================================
-         RESUMO
-    ================================================= -->
-
     <div class="resumo">
-
 
         <div class="card-resumo">
 
             <span class="titulo">
                 Pendências
             </span>
-
 
             <span
                 class="valor"
@@ -594,13 +299,11 @@ tbody tr:hover{
         </div>
 
 
-
         <div class="card-resumo">
 
             <span class="titulo">
                 Contas a Receber
             </span>
-
 
             <span
                 class="valor"
@@ -612,13 +315,11 @@ tbody tr:hover{
         </div>
 
 
-
         <div class="card-resumo">
 
             <span class="titulo">
                 Contas a Pagar
             </span>
-
 
             <span
                 class="valor"
@@ -629,36 +330,23 @@ tbody tr:hover{
 
         </div>
 
-
     </div>
 
 
-    <!-- =================================================
-         TABELA
-    ================================================= -->
-
     <div class="area-tabela">
 
-
         <table>
-
 
             <thead>
 
                 <tr>
 
                     <th>ID</th>
-
                     <th>Competência</th>
-
                     <th>Tipo</th>
-
                     <th>Descrição</th>
-
                     <th>Valor</th>
-
                     <th>Vencimento</th>
-
                     <th>Baixado</th>
 
                 </tr>
@@ -666,9 +354,7 @@ tbody tr:hover{
             </thead>
 
 
-
             <tbody id="lista">
-
 
                 <tr>
 
@@ -685,24 +371,19 @@ tbody tr:hover{
 
                 </tr>
 
-
             </tbody>
-
 
         </table>
 
-
     </div>
 
-
 </div>
-
 
 
 <script>
 
 /* =====================================================
-   CONFIGURAÇÃO DA API
+   CONFIGURAÇÃO
 ===================================================== */
 
 const URL_API =
@@ -720,39 +401,160 @@ document.addEventListener(
     "DOMContentLoaded",
     function(){
 
-        inicializar();
+        carregar();
 
     }
 );
 
 
 /* =====================================================
-   INICIALIZAR
+   CARREGAR BAIXAS PENDENTES
 ===================================================== */
 
-function inicializar(){
+async function carregar(){
 
-    atualizarTitulo();
-
-    carregar();
-
-}
-
-
-/* =====================================================
-   TÍTULO
-===================================================== */
-
-function atualizarTitulo(){
+    const corpo =
+        document.getElementById("lista");
 
     const titulo =
-        document.getElementById(
-            "tituloCompetencia"
-        );
+        document.getElementById("tituloCompetencia");
 
 
     titulo.textContent =
-        "Todos os lançamentos pendentes";
+        "Todas as competências";
+
+
+    corpo.innerHTML = `
+        <tr>
+            <td colspan="7" class="loading">
+
+                <span class="spinner"></span>
+
+                Carregando baixas pendentes...
+
+            </td>
+        </tr>
+    `;
+
+
+    limparMensagem();
+
+
+    /*
+     * IMPORTANTE:
+     *
+     * NÃO enviamos competência.
+     *
+     * A API recebe somente:
+     *
+     * action=listarBaixasPendentes
+     *
+     * Portanto deve retornar todas
+     * as baixas pendentes.
+     */
+
+    console.log(
+        "Iniciando consulta de TODAS as baixas pendentes..."
+    );
+
+
+    try{
+
+        const resposta =
+            await chamarAPI(
+                "listarBaixasPendentes",
+                {}
+            );
+
+
+        console.log(
+            "Resposta recebida:",
+            resposta
+        );
+
+
+        if(
+            !resposta
+        ){
+
+            throw new Error(
+                "A API não retornou nenhuma resposta."
+            );
+
+        }
+
+
+        if(
+            resposta.sucesso !== true
+        ){
+
+            throw new Error(
+                resposta.erro ||
+                resposta.mensagem ||
+                "A API retornou um erro."
+            );
+
+        }
+
+
+        const lista =
+            obterLista(
+                resposta
+            );
+
+
+        console.log(
+            "Quantidade de pendências:",
+            lista.length
+        );
+
+
+        mostrarLista(
+            lista
+        );
+
+
+        atualizarResumo(
+            lista
+        );
+
+
+    }
+    catch(erro){
+
+        console.error(
+            "ERRO:",
+            erro
+        );
+
+
+        corpo.innerHTML = `
+            <tr>
+
+                <td
+                    colspan="7"
+                    class="erro"
+                >
+
+                    ⚠️ ${escapeHtml(
+                        obterMensagemErro(erro)
+                    )}
+
+                </td>
+
+            </tr>
+        `;
+
+
+        atualizarResumo([]);
+
+
+        mostrarMensagem(
+            obterMensagemErro(erro),
+            "erro"
+        );
+
+    }
 
 }
 
@@ -773,7 +575,6 @@ function chamarAPI(
     return new Promise(
         function(resolve,reject){
 
-
             contadorCallback++;
 
 
@@ -790,14 +591,17 @@ function chamarAPI(
                 );
 
 
-            let finalizado = false;
+            let finalizado =
+                false;
 
-            let timeout = null;
+
+            let timeout =
+                null;
 
 
-            /* -----------------------------------------
-               LIMPAR
-            ----------------------------------------- */
+            /*
+             * LIMPAR
+             */
 
             function limpar(){
 
@@ -841,58 +645,51 @@ function chamarAPI(
             }
 
 
-            /* -----------------------------------------
-               FINALIZAR
-            ----------------------------------------- */
+            /*
+             * FINALIZAR
+             */
 
             function finalizar(
-                fn,
+                funcao,
                 valor
             ){
 
-                if(finalizado){
+                if(
+                    finalizado
+                ){
 
                     return;
 
                 }
 
 
-                finalizado = true;
+                finalizado =
+                    true;
 
 
                 limpar();
 
 
-                fn(valor);
+                funcao(
+                    valor
+                );
 
             }
 
 
-            /* -----------------------------------------
-               CALLBACK
-            ----------------------------------------- */
+            /*
+             * CALLBACK GLOBAL
+             */
 
-            window[callback] =
+            window[
+                callback
+            ] =
                 function(resposta){
 
                     console.log(
-                        "Resposta da API:",
+                        "JSONP recebido:",
                         resposta
                     );
-
-
-                    if(!resposta){
-
-                        finalizar(
-                            reject,
-                            new Error(
-                                "A API retornou uma resposta vazia."
-                            )
-                        );
-
-                        return;
-
-                    }
 
 
                     finalizar(
@@ -903,9 +700,9 @@ function chamarAPI(
                 };
 
 
-            /* -----------------------------------------
-               PARÂMETROS
-            ----------------------------------------- */
+            /*
+             * MONTAR PARÂMETROS
+             */
 
             const params =
                 new URLSearchParams();
@@ -922,6 +719,11 @@ function chamarAPI(
                 callback
             );
 
+
+            /*
+             * Adiciona parâmetros extras,
+             * se existirem.
+             */
 
             Object.keys(
                 parametros
@@ -952,14 +754,10 @@ function chamarAPI(
             );
 
 
-            /* -----------------------------------------
-               URL
-            ----------------------------------------- */
-
             const separador =
                 URL_API.indexOf("?") >= 0
-                ? "&"
-                : "?";
+                    ? "&"
+                    : "?";
 
 
             const url =
@@ -969,24 +767,26 @@ function chamarAPI(
 
 
             console.log(
-                "URL da API:",
+                "Chamando API:",
                 url
             );
 
 
-            /* -----------------------------------------
-               SCRIPT
-            ----------------------------------------- */
+            /*
+             * SCRIPT JSONP
+             */
 
-            script.async = true;
-
-
-            script.src = url;
+            script.async =
+                true;
 
 
-            /* -----------------------------------------
-               ERRO
-            ----------------------------------------- */
+            script.src =
+                url;
+
+
+            /*
+             * ERRO DE CARREGAMENTO
+             */
 
             script.onerror =
                 function(){
@@ -1001,9 +801,11 @@ function chamarAPI(
                 };
 
 
-            /* -----------------------------------------
-               TIMEOUT
-            ----------------------------------------- */
+            /*
+             * TIMEOUT
+             *
+             * 60 segundos.
+             */
 
             timeout =
                 setTimeout(
@@ -1012,19 +814,18 @@ function chamarAPI(
                         finalizar(
                             reject,
                             new Error(
-                                "Tempo limite excedido ao conectar ao Google Apps Script."
+                                "A API demorou mais de 60 segundos para responder. Verifique o Apps Script."
                             )
                         );
 
                     },
-                    20000
+                    60000
                 );
 
 
             document.head.appendChild(
                 script
             );
-
 
         }
     );
@@ -1033,216 +834,16 @@ function chamarAPI(
 
 
 /* =====================================================
-   CARREGAR TODAS AS BAIXAS PENDENTES
-===================================================== */
-
-async function carregar(){
-
-
-    const corpo =
-        document.getElementById(
-            "lista"
-        );
-
-
-    atualizarTitulo();
-
-
-    /* -----------------------------------------
-       LOADING
-    ----------------------------------------- */
-
-    corpo.innerHTML = `
-
-        <tr>
-
-            <td
-                colspan="7"
-                class="loading"
-            >
-
-                <span class="spinner"></span>
-
-                Carregando baixas pendentes...
-
-            </td>
-
-        </tr>
-
-    `;
-
-
-    limparMensagem();
-
-
-    try{
-
-
-        console.log(
-            "Consultando todas as competências..."
-        );
-
-
-        /*
-         * IMPORTANTE:
-         *
-         * Nenhuma competência é enviada.
-         *
-         * A API deve retornar todas as
-         * baixas pendentes.
-         */
-
-        const resposta =
-            await chamarAPI(
-                "listarBaixasPendentes",
-                {}
-            );
-
-
-        console.log(
-            "Resposta recebida:",
-            resposta
-        );
-
-
-        /* -----------------------------------------
-           VALIDAR RESPOSTA
-        ----------------------------------------- */
-
-        if(
-            !resposta ||
-            resposta.sucesso !== true
-        ){
-
-            throw new Error(
-
-                resposta &&
-                (
-                    resposta.erro ||
-                    resposta.mensagem
-                )
-
-                ?
-
-                (
-                    resposta.erro ||
-                    resposta.mensagem
-                )
-
-                :
-
-                "A API não retornou uma resposta válida."
-
-            );
-
-        }
-
-
-        /* -----------------------------------------
-           OBTER LISTA
-        ----------------------------------------- */
-
-        const lista =
-            obterLista(
-                resposta
-            );
-
-
-        console.log(
-            "Quantidade de pendências:",
-            lista.length
-        );
-
-
-        /* -----------------------------------------
-           MOSTRAR
-        ----------------------------------------- */
-
-        mostrarLista(
-            lista
-        );
-
-
-        /* -----------------------------------------
-           RESUMO
-        ----------------------------------------- */
-
-        atualizarResumo(
-            lista
-        );
-
-
-    }
-    catch(erro){
-
-
-        console.error(
-            "Erro ao carregar baixas pendentes:",
-            erro
-        );
-
-
-        corpo.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="7"
-                    class="erro"
-                >
-
-                    ⚠ ${escapeHtml(
-                        obterMensagemErro(
-                            erro
-                        )
-                    )}
-
-                </td>
-
-            </tr>
-
-        `;
-
-
-        /* -----------------------------------------
-           ZERAR RESUMO
-        ----------------------------------------- */
-
-        document.getElementById(
-            "totalPendentes"
-        ).textContent =
-            "0";
-
-
-        document.getElementById(
-            "totalReceber"
-        ).textContent =
-            "R$ 0,00";
-
-
-        document.getElementById(
-            "totalPagar"
-        ).textContent =
-            "R$ 0,00";
-
-
-    }
-
-}
-
-
-/* =====================================================
-   OBTER LISTA
+   OBTER LISTA DA RESPOSTA
 ===================================================== */
 
 function obterLista(
     resposta
 ){
 
-
-    /* -----------------------------------------
-       SE A RESPOSTA FOR ARRAY
-    ----------------------------------------- */
+    /*
+     * Caso a API retorne diretamente um array.
+     */
 
     if(
         Array.isArray(
@@ -1255,9 +856,10 @@ function obterLista(
     }
 
 
-    /* -----------------------------------------
-       PROPRIEDADES POSSÍVEIS
-    ----------------------------------------- */
+    /*
+     * Possíveis nomes utilizados
+     * pelo Apps Script.
+     */
 
     const propriedades = [
 
@@ -1282,7 +884,6 @@ function obterLista(
         i++
     ){
 
-
         const propriedade =
             propriedades[i];
 
@@ -1305,6 +906,17 @@ function obterLista(
     }
 
 
+    /*
+     * Se não encontrou array,
+     * retorna vazio.
+     */
+
+    console.warn(
+        "Nenhuma lista encontrada na resposta:",
+        resposta
+    );
+
+
     return [];
 
 }
@@ -1318,28 +930,22 @@ function mostrarLista(
     lista
 ){
 
-
     const corpo =
         document.getElementById(
             "lista"
         );
 
 
-    corpo.innerHTML = "";
+    corpo.innerHTML =
+        "";
 
-
-    /* -----------------------------------------
-       NENHUM REGISTRO
-    ----------------------------------------- */
 
     if(
         !Array.isArray(lista) ||
         lista.length === 0
     ){
 
-
         corpo.innerHTML = `
-
             <tr>
 
                 <td
@@ -1352,7 +958,6 @@ function mostrarLista(
                 </td>
 
             </tr>
-
         `;
 
 
@@ -1361,24 +966,31 @@ function mostrarLista(
     }
 
 
-    /* -----------------------------------------
-       ORDENAR
-       COMPETÊNCIA + VENCIMENTO
-    ----------------------------------------- */
+    /*
+     * Faz uma cópia antes de ordenar.
+     */
 
-    lista.sort(
+    const registros =
+        [...lista];
+
+
+    /*
+     * Ordena por competência
+     * e depois vencimento.
+     */
+
+    registros.sort(
         function(a,b){
-
 
             const compA =
                 String(
-                    a.competencia || ""
+                    a.competencia ?? ""
                 );
 
 
             const compB =
                 String(
-                    b.competencia || ""
+                    b.competencia ?? ""
                 );
 
 
@@ -1393,33 +1005,32 @@ function mostrarLista(
             }
 
 
-            const dataA =
+            const vencA =
                 String(
-                    a.vencimento || ""
+                    a.vencimento ?? ""
                 );
 
 
-            const dataB =
+            const vencB =
                 String(
-                    b.vencimento || ""
+                    b.vencimento ?? ""
                 );
 
 
-            return dataA.localeCompare(
-                dataB
+            return vencA.localeCompare(
+                vencB
             );
 
         }
     );
 
 
-    /* -----------------------------------------
-       CRIAR LINHAS
-    ----------------------------------------- */
+    /*
+     * Criar linhas.
+     */
 
-    lista.forEach(
+    registros.forEach(
         function(item){
-
 
             const valor =
                 converterNumero(
@@ -1435,60 +1046,47 @@ function mostrarLista(
 
             linha.innerHTML = `
 
-
                 <td>
-
                     ${escapeHtml(
                         item.id
                     )}
-
                 </td>
 
 
                 <td>
-
                     ${escapeHtml(
                         item.competencia
                     )}
-
                 </td>
 
 
                 <td>
-
                     ${escapeHtml(
                         item.tipo
                     )}
-
                 </td>
 
 
                 <td>
-
                     ${escapeHtml(
                         item.descricao
                     )}
-
                 </td>
 
 
                 <td class="valor">
-
                     ${formatarMoeda(
                         valor
                     )}
-
                 </td>
 
 
                 <td>
-
                     ${escapeHtml(
                         formatarData(
                             item.vencimento
                         )
                     )}
-
                 </td>
 
 
@@ -1507,14 +1105,12 @@ function mostrarLista(
 
                 </td>
 
-
             `;
 
 
             corpo.appendChild(
                 linha
             );
-
 
         }
     );
@@ -1523,22 +1119,33 @@ function mostrarLista(
 
 
 /* =====================================================
-   ATUALIZAR RESUMO
+   RESUMO
 ===================================================== */
 
 function atualizarResumo(
     lista
 ){
 
+    let receber =
+        0;
 
-    let receber = 0;
 
-    let pagar = 0;
+    let pagar =
+        0;
+
+
+    if(
+        !Array.isArray(lista)
+    ){
+
+        lista =
+            [];
+
+    }
 
 
     lista.forEach(
         function(item){
-
 
             const valor =
                 converterNumero(
@@ -1552,33 +1159,26 @@ function atualizarResumo(
                 );
 
 
-            /* -----------------------------------------
-               CONTAS A RECEBER
-            ----------------------------------------- */
-
             if(
                 tipo ===
                 "contas a receber"
             ){
 
-                receber += valor;
+                receber +=
+                    valor;
 
             }
 
-
-            /* -----------------------------------------
-               CONTAS A PAGAR
-            ----------------------------------------- */
 
             else if(
                 tipo ===
                 "contas a pagar"
             ){
 
-                pagar += valor;
+                pagar +=
+                    valor;
 
             }
-
 
         }
     );
@@ -1616,7 +1216,6 @@ function converterNumero(
     valor
 ){
 
-
     if(
         valor === null ||
         valor === undefined ||
@@ -1635,14 +1234,8 @@ function converterNumero(
         return isFinite(
             valor
         )
-
-        ?
-
-        valor
-
-        :
-
-        0;
+            ? valor
+            : 0;
 
     }
 
@@ -1691,14 +1284,8 @@ function converterNumero(
     return isFinite(
         numero
     )
-
-    ?
-
-    numero
-
-    :
-
-    0;
+        ? numero
+        : 0;
 
 }
 
@@ -1711,17 +1298,13 @@ function formatarMoeda(
     valor
 ){
 
-
     return Number(
         valor || 0
     ).toLocaleString(
         "pt-BR",
         {
-
             style:"currency",
-
             currency:"BRL"
-
         }
     );
 
@@ -1736,8 +1319,9 @@ function formatarData(
     data
 ){
 
-
-    if(!data){
+    if(
+        !data
+    ){
 
         return "";
 
@@ -1750,9 +1334,9 @@ function formatarData(
         ).trim();
 
 
-    /* -----------------------------------------
-       DD/MM/AAAA
-    ----------------------------------------- */
+    /*
+     * DD/MM/AAAA
+     */
 
     if(
         /^\d{2}\/\d{2}\/\d{4}$/.test(
@@ -1765,9 +1349,9 @@ function formatarData(
     }
 
 
-    /* -----------------------------------------
-       AAAA-MM-DD
-    ----------------------------------------- */
+    /*
+     * AAAA-MM-DD
+     */
 
     if(
         /^\d{4}-\d{2}-\d{2}$/.test(
@@ -1775,19 +1359,16 @@ function formatarData(
         )
     ){
 
-
         const partes =
             texto.split("-");
 
 
         return (
-
             partes[2] +
             "/" +
             partes[1] +
             "/" +
             partes[0]
-
         );
 
     }
@@ -1806,22 +1387,15 @@ function normalizarTexto(
     valor
 ){
 
-
     return String(
         valor ?? ""
     )
-
-    .normalize(
-        "NFD"
-    )
-
+    .normalize("NFD")
     .replace(
         /[\u0300-\u036f]/g,
         ""
     )
-
     .trim()
-
     .toLowerCase();
 
 }
@@ -1835,31 +1409,25 @@ function escapeHtml(
     valor
 ){
 
-
     return String(
         valor ?? ""
     )
-
     .replace(
         /&/g,
         "&amp;"
     )
-
     .replace(
         /</g,
         "&lt;"
     )
-
     .replace(
         />/g,
         "&gt;"
     )
-
     .replace(
         /"/g,
         "&quot;"
     )
-
     .replace(
         /'/g,
         "&#039;"
@@ -1876,7 +1444,6 @@ function mostrarMensagem(
     texto,
     tipo
 ){
-
 
     const elemento =
         document.getElementById(
@@ -1898,12 +1465,7 @@ function mostrarMensagem(
 }
 
 
-/* =====================================================
-   LIMPAR MENSAGEM
-===================================================== */
-
 function limparMensagem(){
-
 
     const elemento =
         document.getElementById(
@@ -1922,13 +1484,12 @@ function limparMensagem(){
 
 
 /* =====================================================
-   MENSAGEM DE ERRO
+   ERRO
 ===================================================== */
 
 function obterMensagemErro(
     erro
 ){
-
 
     if(
         erro &&
@@ -1949,11 +1510,10 @@ function obterMensagemErro(
 
 
 /* =====================================================
-   VOLTAR PARA INDEX
+   VOLTAR
 ===================================================== */
 
 function voltarIndex(){
-
 
     window.location.href =
         "./index.html";
@@ -1961,7 +1521,6 @@ function voltarIndex(){
 }
 
 </script>
-
 
 </body>
 
