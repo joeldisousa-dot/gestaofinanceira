@@ -1,225 +1,1143 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
 
-  <title>Pesquisa de Campos</title>
+<title>Atendimento - Controle Financeiro</title> <style>
+* {
+  box-sizing: border-box;
+}
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background: #f5f5f5;
-    }
+body {
+  margin: 0;
+  padding: 0;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+  background: #f4f6f9;
+  color: #1f2937;
+}
 
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
-    h2 {
-      margin-top: 0;
-    }
+.cabecalho {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.08);
+}
 
-    .pesquisa {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+.cabecalho h1 {
+  margin: 0 0 6px 0;
+  font-size: 26px;
+  color: #111827;
+}
 
-    .pesquisa input {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 15px;
-    }
+.cabecalho p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
 
-    .pesquisa button {
-      padding: 10px 20px;
-      border: none;
-      background: #1976d2;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+.painel-pesquisa {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.08);
+}
 
-    .pesquisa button:hover {
-      background: #125ca8;
-    }
+.campo-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
+.campo-grupo label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
 
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
+.linha-pesquisa {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
 
-    th {
-      background: #eee;
-    }
+#campoPesquisa {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0 14px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s;
+}
 
-    .mensagem {
-      margin-top: 15px;
-      color: #666;
-    }
+#campoPesquisa:focus {
+  border-color: #2563eb;
+  box-shadow:
+    0 0 0 3px rgba(37,99,235,0.12);
+}
 
-    .destaque {
-      background: #fff3cd;
-      font-weight: bold;
-    }
-  </style>
-</head>
+button {
+  height: 44px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s;
+}
 
-<body>
+.btn-pesquisar {
+  background: #2563eb;
+  color: #ffffff;
+}
 
-<div class="container">
+.btn-pesquisar:hover {
+  background: #1d4ed8;
+}
 
-  <h2>Pesquisa de Campos</h2>
+.btn-limpar {
+  background: #e5e7eb;
+  color: #374151;
+}
 
-  <div class="pesquisa">
+.btn-limpar:hover {
+  background: #d1d5db;
+}
 
-    <input
-      type="text"
-      id="campoPesquisa"
-      placeholder="Digite tabela ou campo..."
-      onkeydown="if(event.key === 'Enter') pesquisar()"
-    >
+.status {
+  display: none;
+  margin-top: 15px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+}
 
-    <button onclick="pesquisar()">
-      Pesquisar
-    </button>
+.status.info {
+  display: block;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
 
-  </div>
+.status.sucesso {
+  display: block;
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
 
-  <div id="mensagem" class="mensagem">
-    Digite uma palavra para pesquisar.
-  </div>
+.status.erro {
+  display: block;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
 
-  <table id="resultado" style="display:none;">
+.resultado {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.08);
+}
 
-    <thead>
-      <tr>
-        <th>Tabela</th>
-        <th>Campo</th>
-      </tr>
-    </thead>
+.resultado-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
 
-    <tbody id="resultadoBody"></tbody>
+.resultado-topo h2 {
+  margin: 0;
+  font-size: 19px;
+  color: #111827;
+}
 
-  </table>
+.contador {
+  color: #6b7280;
+  font-size: 14px;
+}
 
-</div>
+.tabela-container {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
 
-<script>
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
 
-function pesquisar() {
+thead {
+  background: #f3f4f6;
+}
 
-  const palavra =
-    document.getElementById("campoPesquisa").value.trim();
+th {
+  padding: 12px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 700;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
 
-  const mensagem =
-    document.getElementById("mensagem");
+td {
+  padding: 11px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+  color: #4b5563;
+  vertical-align: top;
+}
 
-  const tabela =
-    document.getElementById("resultado");
+tbody tr:hover {
+  background: #f9fafb;
+}
 
-  const tbody =
-    document.getElementById("resultadoBody");
+tbody tr:last-child td {
+  border-bottom: 0;
+}
 
+.vazio {
+  text-align: center;
+  padding: 45px 20px;
+  color: #6b7280;
+}
 
-  if (!palavra) {
+.vazio strong {
+  display: block;
+  color: #374151;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
 
-    mensagem.textContent =
-      "Digite uma palavra para pesquisar.";
+.carregando {
+  text-align: center;
+  padding: 35px;
+  color: #6b7280;
+}
 
-    tabela.style.display = "none";
+.spinner {
+  width: 25px;
+  height: 25px;
+  margin: 0 auto 10px auto;
+  border: 3px solid #e5e7eb;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation:
+    girar 0.8s linear infinite;
+}
 
-    return;
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+
+  .container {
+    padding: 12px;
   }
 
+  .cabecalho,
+  .painel-pesquisa,
+  .resultado {
+    padding: 15px;
+  }
 
-  mensagem.textContent = "Pesquisando...";
+  .linha-pesquisa {
+    flex-direction: column;
+  }
 
-  tabela.style.display = "none";
+  .linha-pesquisa button {
+    width: 100%;
+  }
 
-  tbody.innerHTML = "";
-
-
-  google.script.run
-
-    .withSuccessHandler(function(resultados) {
-
-      if (!resultados || resultados.length === 0) {
-
-        mensagem.textContent =
-          "Nenhum registro encontrado.";
-
-        tabela.style.display = "none";
-
-        return;
-      }
-
-
-      resultados.forEach(function(linha) {
-
-        const tr = document.createElement("tr");
-
-        const tdTabela =
-          document.createElement("td");
-
-        const tdCampo =
-          document.createElement("td");
-
-
-        tdTabela.textContent =
-          linha.tabela;
-
-        tdCampo.textContent =
-          linha.campo;
-
-
-        tr.appendChild(tdTabela);
-
-        tr.appendChild(tdCampo);
-
-        tbody.appendChild(tr);
-
-      });
-
-
-      mensagem.textContent =
-        resultados.length +
-        " registro(s) encontrado(s).";
-
-
-      tabela.style.display = "table";
-
-    })
-
-    .withFailureHandler(function(erro) {
-
-      mensagem.textContent =
-        "Erro ao realizar a pesquisa: " +
-        erro.message;
-
-    })
-
-    .pesquisarTabelaCampo(palavra);
+  .cabecalho h1 {
+    font-size: 22px;
+  }
 
 }
 
-</script>
+</style> </head> <body> <div class="container">
+<section class="cabecalho">
 
-</body>
-</html>
+  <h1>Atendimento</h1>
+
+  <p>
+    Pesquise informações cadastradas na aba
+    Atendimento da planilha.
+  </p>
+
+</section>
+
+<section class="painel-pesquisa">
+
+  <div class="campo-grupo">
+
+    <label for="campoPesquisa">
+      Pesquisa
+    </label>
+
+    <div class="linha-pesquisa">
+
+      <input
+        type="text"
+        id="campoPesquisa"
+        placeholder="Digite nome, CPF, telefone, endereço ou outra informação..."
+        autocomplete="off"
+      >
+
+      <button
+        type="button"
+        class="btn-pesquisar"
+        id="btnPesquisar"
+      >
+        Pesquisar
+      </button>
+
+      <button
+        type="button"
+        class="btn-limpar"
+        id="btnLimpar"
+      >
+        Limpar
+      </button>
+
+    </div>
+
+  </div>
+
+  <div
+    id="status"
+    class="status"
+  ></div>
+
+</section>
+
+<section class="resultado">
+
+  <div class="resultado-topo">
+
+    <h2>
+      Resultado da pesquisa
+    </h2>
+
+    <div
+      id="contador"
+      class="contador"
+    >
+      Nenhuma pesquisa realizada.
+    </div>
+
+  </div>
+
+  <div
+    id="areaResultado"
+  >
+
+    <div class="vazio">
+
+      <strong>
+        Pesquise um atendimento
+      </strong>
+
+      Digite algum termo no campo acima
+      para localizar registros.
+
+    </div>
+
+  </div>
+
+</section>
+
+</div> <script>
+/* =====================================================
+   CONFIGURAÇÃO DA API
+   ===================================================== */
+
+const URL_API =
+  "https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec";
+
+/* =====================================================
+   ELEMENTOS
+   ===================================================== */
+
+const campoPesquisa =
+  document.getElementById(
+    "campoPesquisa"
+  );
+
+const btnPesquisar =
+  document.getElementById(
+    "btnPesquisar"
+  );
+
+const btnLimpar =
+  document.getElementById(
+    "btnLimpar"
+  );
+
+const areaResultado =
+  document.getElementById(
+    "areaResultado"
+  );
+
+const contador =
+  document.getElementById(
+    "contador"
+  );
+
+const status =
+  document.getElementById(
+    "status"
+  );
+
+/* =====================================================
+   STATUS
+   ===================================================== */
+
+function mostrarStatus(
+  mensagem,
+  tipo
+) {
+
+  status.textContent =
+    mensagem;
+
+  status.className =
+    "status " +
+    (tipo || "info");
+
+}
+
+function ocultarStatus() {
+
+  status.textContent = "";
+
+  status.className =
+    "status";
+
+}
+
+/* =====================================================
+   ESCAPAR HTML
+   ===================================================== */
+
+function escaparHTML(
+  valor
+) {
+
+  if (
+    valor === null ||
+    valor === undefined
+  ) {
+
+    return "";
+
+  }
+
+  return String(valor)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+/* =====================================================
+   FORMATAR VALOR
+   ===================================================== */
+
+function formatarValor(
+  valor
+) {
+
+  if (
+    valor === null ||
+    valor === undefined ||
+    valor === ""
+  ) {
+
+    return "";
+
+  }
+
+  return escaparHTML(
+    valor
+  );
+
+}
+
+/* =====================================================
+   JSONP
+   ===================================================== */
+
+let contadorJSONP = 0;
+
+function chamarAPI(
+  acao,
+  parametros
+) {
+
+  parametros =
+    parametros || {};
+
+  return new Promise(
+    function(resolve, reject) {
+
+      contadorJSONP++;
+
+      const nomeCallback =
+        "__controleFinanceiroCallback_" +
+        Date.now() +
+        "_" +
+        contadorJSONP;
+
+      const script =
+        document.createElement(
+          "script"
+        );
+
+      let finalizado = false;
+
+      /*
+       * Timeout para evitar que a
+       * tela fique carregando
+       * indefinidamente.
+       */
+
+      const timeout =
+        setTimeout(
+          function() {
+
+            if (finalizado) {
+              return;
+            }
+
+            finalizado = true;
+
+            delete window[
+              nomeCallback
+            ];
+
+            if (
+              script.parentNode
+            ) {
+
+              script.parentNode
+                .removeChild(
+                  script
+                );
+
+            }
+
+            reject(
+              new Error(
+                "Tempo limite excedido ao consultar a API."
+              )
+            );
+
+          },
+          30000
+        );
+
+      window[
+        nomeCallback
+      ] =
+        function(resposta) {
+
+          if (finalizado) {
+            return;
+          }
+
+          finalizado = true;
+
+          clearTimeout(
+            timeout
+          );
+
+          delete window[
+            nomeCallback
+          ];
+
+          if (
+            script.parentNode
+          ) {
+
+            script.parentNode
+              .removeChild(
+                script
+              );
+
+          }
+
+          resolve(
+            resposta
+          );
+
+        };
+
+      const consulta =
+        Object.assign(
+          {},
+          parametros
+        );
+
+      consulta.action =
+        acao;
+
+      consulta.callback =
+        nomeCallback;
+
+      const query =
+        Object.keys(
+          consulta
+        )
+
+          .map(
+            function(chave) {
+
+              return (
+                encodeURIComponent(
+                  chave
+                ) +
+                "=" +
+                encodeURIComponent(
+                  consulta[chave]
+                )
+              );
+
+            }
+          )
+
+          .join("&");
+
+      const url =
+        URL_API +
+        "?" +
+        query;
+
+      console.log(
+        "Chamando API:",
+        url
+      );
+
+      script.src =
+        url;
+
+      script.async =
+        true;
+
+      script.onerror =
+        function() {
+
+          if (finalizado) {
+            return;
+          }
+
+          finalizado = true;
+
+          clearTimeout(
+            timeout
+          );
+
+          delete window[
+            nomeCallback
+          ];
+
+          if (
+            script.parentNode
+          ) {
+
+            script.parentNode
+              .removeChild(
+                script
+              );
+
+          }
+
+          reject(
+            new Error(
+              "Não foi possível conectar à API."
+            )
+          );
+
+        };
+
+      document
+        .head
+        .appendChild(
+          script
+        );
+
+    }
+  );
+
+}
+
+/* =====================================================
+   PESQUISAR
+   ===================================================== */
+
+async function pesquisar() {
+
+  const termo =
+    campoPesquisa
+      .value
+      .trim();
+
+  if (!termo) {
+
+    mostrarStatus(
+      "Digite um termo para pesquisar.",
+      "info"
+    );
+
+    campoPesquisa.focus();
+
+    return;
+
+  }
+
+  mostrarStatus(
+    "Pesquisando...",
+    "info"
+  );
+
+  areaResultado.innerHTML =
+
+    '<div class="carregando">' +
+
+      '<div class="spinner"></div>' +
+
+      '<div>Consultando atendimento...</div>' +
+
+    '</div>';
+
+  contador.textContent =
+    "Consultando...";
+
+  try {
+
+    const resposta =
+      await chamarAPI(
+        "pesquisarAtendimento",
+        {
+          termo: termo
+        }
+      );
+
+    console.log(
+      "Resposta da API:",
+      resposta
+    );
+
+    if (
+      !resposta
+    ) {
+
+      throw new Error(
+        "A API não retornou uma resposta."
+      );
+
+    }
+
+    if (
+      resposta.sucesso === false
+    ) {
+
+      throw new Error(
+        resposta.mensagem ||
+        "Erro retornado pela API."
+      );
+
+    }
+
+    const dados =
+      Array.isArray(
+        resposta.dados
+      )
+
+        ? resposta.dados
+
+        : (
+            Array.isArray(
+              resposta.lista
+            )
+              ? resposta.lista
+              : []
+          );
+
+    renderizarResultados(
+      dados
+    );
+
+    mostrarStatus(
+      dados.length +
+      (
+        dados.length === 1
+          ? " registro encontrado."
+          : " registros encontrados."
+      ),
+      "sucesso"
+    );
+
+  } catch (erro) {
+
+    console.error(
+      "Erro ao pesquisar atendimento:",
+      erro
+    );
+
+    areaResultado.innerHTML =
+
+      '<div class="vazio">' +
+
+        '<strong>Erro na pesquisa</strong>' +
+
+        escaparHTML(
+          erro.message ||
+          String(erro)
+        ) +
+
+      '</div>';
+
+    contador.textContent =
+      "Erro";
+
+    mostrarStatus(
+      erro.message ||
+      "Não foi possível realizar a pesquisa.",
+      "erro"
+    );
+
+  }
+
+}
+
+/* =====================================================
+   RENDERIZAR RESULTADOS
+   ===================================================== */
+
+function renderizarResultados(
+  dados
+) {
+
+  if (
+    !Array.isArray(dados) ||
+    dados.length === 0
+  ) {
+
+    areaResultado.innerHTML =
+
+      '<div class="vazio">' +
+
+        '<strong>Nenhum registro encontrado</strong>' +
+
+        'Nenhum atendimento corresponde ao termo pesquisado.' +
+
+      '</div>';
+
+    contador.textContent =
+      "0 registros";
+
+    return;
+
+  }
+
+  contador.textContent =
+    dados.length +
+    (
+      dados.length === 1
+        ? " registro"
+        : " registros"
+    );
+
+  /*
+   * Descobre todas as colunas existentes
+   * nos registros retornados.
+   */
+
+  const colunas = [];
+
+  dados.forEach(
+    function(registro) {
+
+      if (
+        !registro ||
+        typeof registro !== "object"
+      ) {
+
+        return;
+
+      }
+
+      Object.keys(
+        registro
+      ).forEach(
+        function(campo) {
+
+          if (
+            colunas.indexOf(
+              campo
+            ) === -1
+          ) {
+
+            colunas.push(
+              campo
+            );
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+  if (
+    colunas.length === 0
+  ) {
+
+    areaResultado.innerHTML =
+
+      '<div class="vazio">' +
+
+        '<strong>Dados inválidos</strong>' +
+
+        'A API retornou registros sem campos.' +
+
+      '</div>';
+
+    return;
+
+  }
+
+  let html =
+
+    '<div class="tabela-container">' +
+
+      '<table>' +
+
+        '<thead>' +
+
+          '<tr>';
+
+  colunas.forEach(
+    function(campo) {
+
+      html +=
+        "<th>" +
+        escaparHTML(
+          campo
+        ) +
+        "</th>";
+
+    }
+  );
+
+  html +=
+
+          "</tr>" +
+
+        "</thead>" +
+
+        "<tbody>";
+
+  dados.forEach(
+    function(registro) {
+
+      html +=
+        "<tr>";
+
+      colunas.forEach(
+        function(campo) {
+
+          const valor =
+            registro[campo];
+
+          html +=
+            "<td>" +
+            formatarValor(
+              valor
+            ) +
+            "</td>";
+
+        }
+      );
+
+      html +=
+        "</tr>";
+
+    }
+  );
+
+  html +=
+
+        "</tbody>" +
+
+      "</table>" +
+
+    "</div>";
+
+  areaResultado.innerHTML =
+    html;
+
+}
+
+/* =====================================================
+   LIMPAR
+   ===================================================== */
+
+function limparPesquisa() {
+
+  campoPesquisa.value =
+    "";
+
+  areaResultado.innerHTML =
+
+    '<div class="vazio">' +
+
+      '<strong>Pesquise um atendimento</strong>' +
+
+      'Digite algum termo no campo acima para localizar registros.' +
+
+    '</div>';
+
+  contador.textContent =
+    "Nenhuma pesquisa realizada.";
+
+  ocultarStatus();
+
+  campoPesquisa.focus();
+
+}
+
+/* =====================================================
+   EVENTOS
+   ===================================================== */
+
+btnPesquisar.addEventListener(
+  "click",
+  pesquisar
+);
+
+btnLimpar.addEventListener(
+  "click",
+  limparPesquisa
+);
+
+campoPesquisa.addEventListener(
+  "keydown",
+  function(evento) {
+
+    if (
+      evento.key === "Enter"
+    ) {
+
+      evento.preventDefault();
+
+      pesquisar();
+
+    }
+
+  }
+);
+
+/* =====================================================
+   INICIALIZAÇÃO
+   ===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    console.log(
+      "Atendimento carregado."
+    );
+
+    console.log(
+      "API:",
+      URL_API
+    );
+
+  }
+);
+
+</script> </body> </html>
+O que foi corrigido
+O ponto principal é que removi completamente qualquer dependência de:
+
+google.script.run
+
+Agora a pesquisa chama diretamente:
+
+?action=pesquisarAtendimento
+
+através de JSONP, que é compatível com o seu GitHub Pages e com o doGet() do Apps Script.
+
+Também mantive exatamente a ação que seu Apps Script já possui:
+
+case "pesquisarAtendimento":
+  return pesquisarAtendimento(
+    parametros.termo ||
+    parametros.valor ||
+    parametros.campo ||
+    ""
+  );
