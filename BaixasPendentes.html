@@ -988,48 +988,133 @@ function mostrarLista(lista){
      * 2. Vencimento
      */
 
-    lista.sort(
-        function(a,b){
+    /*
+ * Ordenação:
+ *
+ * 1. Tipo
+ *    - Contas a Receber
+ *    - Contas a Pagar
+ *    - Outros
+ *
+ * 2. Competência
+ *
+ * 3. Vencimento
+ */
 
-            const compA =
-                String(
-                    a.competencia || ""
-                );
+lista.sort(
+    function(a, b){
 
-            const compB =
-                String(
-                    b.competencia || ""
-                );
+        const tipoA =
+            normalizarTexto(
+                a.tipo
+            );
 
+        const tipoB =
+            normalizarTexto(
+                b.tipo
+            );
+
+
+        /*
+         * Define a ordem dos tipos
+         */
+
+        function ordemTipo(tipo){
 
             if(
-                compA !== compB
+                tipo.includes("receber")
             ){
 
-                return compA.localeCompare(
-                    compB
-                );
+                return 1;
 
             }
 
 
-            const dataA =
-                String(
-                    a.vencimento || ""
-                );
+            if(
+                tipo.includes("pagar")
+            ){
 
-            const dataB =
-                String(
-                    b.vencimento || ""
-                );
+                return 2;
+
+            }
 
 
-            return dataA.localeCompare(
-                dataB
+            return 3;
+
+        }
+
+
+        const ordemA =
+            ordemTipo(
+                tipoA
+            );
+
+        const ordemB =
+            ordemTipo(
+                tipoB
+            );
+
+
+        /*
+         * Primeiro: Tipo
+         */
+
+        if(
+            ordemA !== ordemB
+        ){
+
+            return ordemA - ordemB;
+
+        }
+
+
+        /*
+         * Segundo: Competência
+         */
+
+        const compA =
+            String(
+                a.competencia || ""
+            );
+
+        const compB =
+            String(
+                b.competencia || ""
+            );
+
+
+        if(
+            compA !== compB
+        ){
+
+            return compA.localeCompare(
+                compB
             );
 
         }
-    );
+
+
+        /*
+         * Terceiro: Vencimento
+         */
+
+        const dataA =
+            String(
+                a.vencimento || ""
+            );
+
+        const dataB =
+            String(
+                b.vencimento || ""
+            );
+
+
+        return dataA.localeCompare(
+            dataB
+        );
+
+    }
+);
 
 
     lista.forEach(
