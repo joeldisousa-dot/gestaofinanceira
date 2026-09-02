@@ -1,332 +1,655 @@
-<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Atendimento - Controle Financeiro</title> <style>
+<title>Atendimento - Controle Financeiro</title>
+
+<style>
+
 *{
 box-sizing:border-box;
 }
 
 body{
+
 margin:0;
+
 padding:20px;
+
 font-family:"Segoe UI",Arial,sans-serif;
+
 background:linear-gradient(135deg,#e8eef5,#ffffff);
+
 color:#333;
+
 }
 
 .container{
+
 max-width:1100px;
+
 margin:auto;
+
 background:#fff;
+
 padding:25px;
+
 border-radius:18px;
+
 box-shadow:0 8px 25px rgba(0,0,0,.15);
+
 }
 
+
 /* =====================================================
-TOPO
+   TOPO
 ===================================================== */
 
 .topo{
+
 display:flex;
+
 justify-content:space-between;
+
 align-items:center;
+
 gap:15px;
+
 margin-bottom:25px;
+
 }
 
 .topo h1{
+
 margin:0;
+
 color:#0d47a1;
+
 font-size:28px;
+
 }
 
 .btn-voltar{
+
 border:none;
+
 padding:12px 24px;
+
 border-radius:10px;
+
 background:linear-gradient(135deg,#455a64,#78909c);
+
 color:#fff;
+
 font-weight:bold;
+
 font-size:15px;
+
 cursor:pointer;
+
 }
 
 .btn-voltar:hover{
+
 transform:translateY(-2px);
+
 filter:brightness(1.08);
+
 }
 
+
 /* =====================================================
-PESQUISA
+   PESQUISA
 ===================================================== */
 
 .pesquisa{
+
 background:#f5f7fa;
+
 border:1px solid #e0e6ed;
+
 border-radius:14px;
+
 padding:20px;
+
 margin-bottom:20px;
+
 }
 
 .pesquisa h2{
+
 margin:0 0 15px 0;
+
 color:#1976d2;
+
 font-size:19px;
+
 }
 
 .linha-pesquisa{
+
 display:grid;
+
 grid-template-columns:1fr auto;
+
 gap:12px;
+
 }
 
 input{
+
 width:100%;
+
 height:46px;
+
 padding:0 14px;
+
 border:1px solid #cbd5e1;
+
 border-radius:9px;
+
 font-size:15px;
+
 outline:none;
+
 }
 
 input:focus{
+
 border-color:#1976d2;
+
 box-shadow:0 0 0 3px rgba(25,118,210,.12);
+
 }
 
 .btn-pesquisar{
+
 height:46px;
+
 padding:0 25px;
+
 border:none;
+
 border-radius:9px;
+
 background:linear-gradient(135deg,#1976d2,#2196f3);
+
 color:#fff;
+
 font-size:15px;
+
 font-weight:bold;
+
 cursor:pointer;
+
 }
 
 .btn-pesquisar:hover{
+
 filter:brightness(1.08);
+
 transform:translateY(-2px);
+
 }
 
 .btn-pesquisar:disabled{
+
 opacity:.6;
+
 cursor:not-allowed;
+
 transform:none;
+
 }
 
+
 /* =====================================================
-MENSAGENS
+   MENSAGENS
 ===================================================== */
 
 .mensagem{
+
 display:none;
+
 margin:15px 0;
+
 padding:13px;
+
 border-radius:8px;
+
 }
 
 .mensagem.info{
+
 display:block;
+
 background:#e3f2fd;
+
 color:#1565c0;
+
 }
 
 .mensagem.erro{
+
 display:block;
+
 background:#ffebee;
+
 color:#c62828;
+
 border-left:5px solid #c62828;
+
 font-weight:bold;
+
 }
 
 .mensagem.sucesso{
+
 display:block;
+
 background:#e8f5e9;
+
 color:#2e7d32;
+
 }
 
+
 /* =====================================================
-RESULTADO
+   RESULTADO
 ===================================================== */
 
 .resultado{
+
 margin-top:20px;
+
 }
 
 .tabela-container{
+
 width:100%;
+
 overflow-x:auto;
+
 border:1px solid #dfe5eb;
+
 border-radius:12px;
+
 }
 
 table{
+
 width:100%;
+
 border-collapse:collapse;
+
 min-width:650px;
+
 }
 
 th{
+
 background:linear-gradient(135deg,#0d47a1,#1976d2);
+
 color:white;
+
 padding:14px 12px;
+
 text-align:left;
+
 font-size:14px;
+
 }
 
 td{
+
 padding:13px 12px;
+
 border-bottom:1px solid #e5e7eb;
+
 vertical-align:top;
+
 font-size:14px;
+
 }
 
 tr:nth-child(even){
+
 background:#f8f9fc;
+
 }
 
 tr:hover{
+
 background:#eef5ff;
+
 }
 
 .col-id{
+
 width:100px;
+
 text-align:center;
+
 font-weight:bold;
+
 color:#0d47a1;
+
 }
 
 .col-problema{
+
 width:40%;
+
 }
 
 .col-solucao{
+
 width:50%;
+
 }
 
 .nenhum{
+
 text-align:center;
+
 padding:35px;
+
 color:#777;
+
 background:#fafafa;
+
 border-radius:10px;
+
 }
 
 .carregando{
+
 text-align:center;
+
 padding:30px;
+
 color:#777;
+
 }
 
+
 /* =====================================================
-RESPONSIVO
+   SEPARADOR
+===================================================== */
+
+.separador{
+
+height:1px;
+
+background:#e0e6ed;
+
+margin:30px 0;
+
+}
+
+
+/* =====================================================
+   TÍTULO DOS RESULTADOS
+===================================================== */
+
+.titulo-resultados{
+
+margin:20px 0 10px 0;
+
+font-size:16px;
+
+font-weight:bold;
+
+color:#455a64;
+
+}
+
+
+/* =====================================================
+   RESPONSIVO
 ===================================================== */
 
 @media(max-width:700px){
 
 body{
+
 padding:10px;
+
 }
 
 .container{
+
 padding:15px;
+
 border-radius:12px;
+
 }
 
 .topo{
+
 flex-direction:column;
+
 align-items:stretch;
+
 }
 
 .topo h1{
+
 font-size:23px;
+
 }
 
 .btn-voltar{
+
 width:100%;
+
 }
 
 .linha-pesquisa{
+
 grid-template-columns:1fr;
+
 }
 
 .btn-pesquisar{
+
 width:100%;
+
 }
 
 table{
+
 min-width:600px;
-}
 
 }
 
-</style> </head> <body> <div class="container"> <!-- ================================================= TOPO ================================================== --> <div class="topo">
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     TOPO
+===================================================== -->
+
+<div class="topo">
+
 <h1>
-  🔎 Atendimento
+🔎 Atendimento
 </h1>
 
-<button
-  type="button"
-  class="btn-voltar"
-  onclick="voltar()">
 
-  ⬅ Voltar
+<button
+type="button"
+class="btn-voltar"
+onclick="voltar()">
+
+⬅ Voltar
 
 </button>
 
-</div> <!-- ================================================= PESQUISA ================================================== --> <div class="pesquisa">
+</div>
+
+
+
+<!-- =====================================================
+     PESQUISA DE ATENDIMENTO
+===================================================== -->
+
+<div class="pesquisa">
+
 <h2>
-  Pesquisar atendimento
+Pesquisar atendimento
 </h2>
+
 
 <div class="linha-pesquisa">
 
-  <input
-    id="campoPesquisa"
-    type="text"
-    placeholder="Digite o problema ou palavra-chave..."
-    autocomplete="off">
+<input
+id="campoPesquisa"
+type="text"
+placeholder="Digite o problema ou palavra-chave..."
+autocomplete="off">
 
-  <button
-    type="button"
-    id="btnPesquisar"
-    class="btn-pesquisar"
-    onclick="pesquisar()">
 
-    🔎 Pesquisar
+<button
+type="button"
+id="btnPesquisar"
+class="btn-pesquisar"
+onclick="pesquisar()">
 
-  </button>
+🔎 Pesquisar
+
+</button>
 
 </div>
 
-</div> <!-- ================================================= MENSAGEM ================================================== --> <div id="mensagem" class="mensagem"> </div> <!-- ================================================= RESULTADO ================================================= --> <div id="resultado" class="resultado">
+</div>
+
+
+
+<!-- =====================================================
+     RESULTADO ATENDIMENTO
+===================================================== -->
+
+<div id="mensagem" class="mensagem">
+</div>
+
+
+<div id="resultado" class="resultado">
+
 <div class="nenhum">
 
-  Digite um problema ou palavra-chave
-  para pesquisar na base de Atendimento.
+Digite um problema ou palavra-chave
+para pesquisar na base de Atendimento.
 
 </div>
 
-</div> </div> <script>
+</div>
+
+
+
+<!-- =====================================================
+     SEPARADOR
+===================================================== -->
+
+<div class="separador">
+</div>
+
+
+
+<!-- =====================================================
+     PESQUISA TABELA / CAMPO
+===================================================== -->
+
+<div class="pesquisa">
+
+<h2>
+🗄️ Pesquisar Tabela / Campo
+</h2>
+
+
+<div class="linha-pesquisa">
+
+<input
+id="campoTabelaCampo"
+type="text"
+placeholder="Digite o nome da tabela ou campo..."
+autocomplete="off">
+
+
+<button
+type="button"
+id="btnTabelaCampo"
+class="btn-pesquisar"
+onclick="pesquisarTabelaCampo()">
+
+🔎 Pesquisar
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     RESULTADO TABELA / CAMPO
+===================================================== -->
+
+<div
+id="resultadoTabelaCampo"
+class="resultado">
+
+<div class="nenhum">
+
+Digite uma tabela ou campo
+para realizar a pesquisa.
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
 /* =====================================================
-CONFIGURAÇÃO
+   CONFIGURAÇÃO
 ===================================================== */
 
 const URL_API =
 "https://script.google.com/macros/s/AKfycbwlkjtWnOcvglZS2Ft6ydraSh4-JbTXH6C7irb6O5hYPvxYxqN0tYWQs2Ybi6mVWThN/exec";
 
+
 const URL_INDEX =
 "https://joeldisousa-dot.github.io/gestaofinanceira/";
 
+
 let contadorJSONP = 0;
 
+
+
 /* =====================================================
-CHAMAR API
+   CHAMAR API
 ===================================================== */
 
 function chamarAPI(
@@ -337,204 +660,209 @@ parametros
 return new Promise(
 function(resolve,reject){
 
-  const callback =
-    "callbackAtendimento_" +
-    Date.now() +
-    "_" +
-    (++contadorJSONP);
+const callback =
+"callbackAtendimento_" +
+Date.now() +
+"_" +
+(++contadorJSONP);
 
 
-  const script =
-    document.createElement(
-      "script"
-    );
+const script =
+document.createElement(
+"script"
+);
 
 
-  /*
-   * Cria uma cópia dos parâmetros.
-   */
+const dados =
+Object.assign(
+{},
+parametros || {}
+);
 
-  const dados =
-    Object.assign(
-      {},
-      parametros || {}
-    );
 
+dados.action =
+acao;
 
-  /*
-   * Ação da API.
-   */
 
-  dados.action =
-    acao;
+dados.callback =
+callback;
 
 
-  /*
-   * Callback JSONP.
-   */
+const query =
+Object.keys(dados)
 
-  dados.callback =
-    callback;
+.map(
+function(chave){
 
+return (
 
-  /*
-   * Monta query string.
-   */
+encodeURIComponent(
+chave
+)
 
-  const query =
-    Object.keys(dados)
-      .map(
-        function(chave){
++
 
-          return (
-            encodeURIComponent(
-              chave
-            ) +
-            "=" +
-            encodeURIComponent(
-              dados[chave] === undefined ||
-              dados[chave] === null
-                ? ""
-                : dados[chave]
-            )
-          );
+"="
 
-        }
-      )
-      .join("&");
++
 
+encodeURIComponent(
 
-  const url =
-    URL_API +
-    "?" +
-    query;
+dados[chave] === undefined ||
+dados[chave] === null
 
+?
 
-  let finalizado =
-    false;
+""
 
+:
 
-  const timeout =
-    setTimeout(
-      function(){
+dados[chave]
 
-        if(finalizado){
-          return;
-        }
+)
 
+);
 
-        finalizado =
-          true;
+}
+)
 
+.join("&");
 
-        cleanup();
 
+const url =
+URL_API +
+"?" +
+query;
 
-        reject(
-          new Error(
-            "Tempo limite excedido ao consultar a API."
-          )
-        );
 
-      },
-      30000
-    );
+let finalizado =
+false;
 
 
-  /*
-   * Callback recebido do Apps Script.
-   */
+const timeout =
+setTimeout(
+function(){
 
-  window[callback] =
-    function(resposta){
+if(finalizado){
 
-      if(finalizado){
-        return;
-      }
+return;
 
+}
 
-      finalizado =
-        true;
 
+finalizado =
+true;
 
-      clearTimeout(
-        timeout
-      );
 
+cleanup();
 
-      cleanup();
 
+reject(
+new Error(
+"Tempo limite excedido ao consultar a API."
+)
+);
 
-      resolve(
-        resposta
-      );
 
-    };
+},
+30000
+);
 
 
-  /*
-   * Erro de conexão.
-   */
 
-  script.onerror =
-    function(){
+window[callback] =
+function(resposta){
 
-      if(finalizado){
-        return;
-      }
+if(finalizado){
 
+return;
 
-      finalizado =
-        true;
+}
 
 
-      clearTimeout(
-        timeout
-      );
+finalizado =
+true;
 
 
-      cleanup();
+clearTimeout(
+timeout
+);
 
 
-      reject(
-        new Error(
-          "Não foi possível conectar ao Google Apps Script."
-        )
-      );
+cleanup();
 
-    };
 
+resolve(
+resposta
+);
 
-  script.src =
-    url;
+};
 
 
-  document.body.appendChild(
-    script
-  );
 
+script.onerror =
+function(){
 
-  function cleanup(){
+if(finalizado){
 
-    try{
+return;
 
-      delete window[callback];
+}
 
-    }
-    catch(e){}
 
+finalizado =
+true;
 
-    if(
-      script.parentNode
-    ){
 
-      script.parentNode.removeChild(
-        script
-      );
+clearTimeout(
+timeout
+);
 
-    }
 
-  }
+cleanup();
+
+
+reject(
+new Error(
+"Não foi possível conectar ao Google Apps Script."
+)
+);
+
+};
+
+
+
+script.src =
+url;
+
+
+document.body.appendChild(
+script
+);
+
+
+
+function cleanup(){
+
+try{
+
+delete window[callback];
+
+}
+catch(e){}
+
+
+if(
+script.parentNode
+){
+
+script.parentNode.removeChild(
+script
+);
+
+}
+
+}
 
 }
 
@@ -542,8 +870,10 @@ function(resolve,reject){
 
 }
 
+
+
 /* =====================================================
-PESQUISAR
+   PESQUISAR ATENDIMENTO
 ===================================================== */
 
 async function pesquisar(){
@@ -553,45 +883,43 @@ document.getElementById(
 "campoPesquisa"
 );
 
+
 const botao =
 document.getElementById(
 "btnPesquisar"
 );
+
 
 const resultado =
 document.getElementById(
 "resultado"
 );
 
-/*
 
-Pega exatamente o texto digitado.
-*/
 const termo =
 String(
 campo.value || ""
 ).trim();
 
-/*
 
-Não permite pesquisa vazia.
-*/
 if(!termo){
 
 mostrarErro(
-  "Digite o problema ou uma palavra-chave."
+"Digite o problema ou uma palavra-chave."
 );
 
 
 resultado.innerHTML =
-  `
-  <div class="nenhum">
+`
 
-    Digite uma palavra-chave
-    para realizar a pesquisa.
+<div class="nenhum">
 
-  </div>
-  `;
+Digite uma palavra-chave
+para realizar a pesquisa.
+
+</div>
+
+`;
 
 
 campo.focus();
@@ -601,8 +929,10 @@ return;
 
 }
 
+
 botao.disabled =
 true;
+
 
 mostrarMensagem(
 'Pesquisando por "' +
@@ -611,211 +941,393 @@ termo +
 "info"
 );
 
+
 resultado.innerHTML =
 `
+
 <div class="carregando">
 
-  🔎 Pesquisando por:
+🔎 Pesquisando por:
 
-  <strong>
-    ${escaparHTML(termo)}
-  </strong>
+<strong>
+${escaparHTML(termo)}
+</strong>
 
 </div>
+
 `;
+
 
 try{
 
-/*
- * =================================================
- * CORREÇÃO PRINCIPAL
- * =================================================
- *
- * Antes estava:
- *
- * texto:texto
- *
- * Agora está:
- *
- * termo:termo
- *
- * que corresponde ao Código.gs.
- */
 
 const resposta =
-  await chamarAPI(
-    "pesquisarAtendimento",
-    {
-      termo: termo
-    }
-  );
-
-
-console.log(
-  "Termo enviado:",
-  termo
+await chamarAPI(
+"pesquisarAtendimento",
+{
+termo: termo
+}
 );
 
 
 console.log(
-  "Resposta da API:",
-  resposta
+"Termo enviado:",
+termo
+);
+
+
+console.log(
+"Resposta da API:",
+resposta
 );
 
 
 if(!resposta){
 
-  throw new Error(
-    "A API não retornou resposta."
-  );
+throw new Error(
+"A API não retornou resposta."
+);
 
 }
 
 
 if(
-  resposta.sucesso === false
+resposta.sucesso === false
 ){
 
-  throw new Error(
-    resposta.erro ||
-    resposta.mensagem ||
-    "Erro retornado pelo servidor."
-  );
+throw new Error(
+resposta.erro ||
+resposta.mensagem ||
+"Erro retornado pelo servidor."
+);
 
 }
 
 
-/*
- * Obtém somente a lista retornada
- * pela API.
- */
-
 const lista =
-  obterListaResposta(
-    resposta
-  );
-
-
-console.log(
-  "Registros encontrados:",
-  lista.length
+obterListaResposta(
+resposta
 );
 
 
-/*
- * =================================================
- * NENHUM RESULTADO
- * =================================================
- */
+console.log(
+"Registros encontrados:",
+lista.length
+);
+
+
 
 if(
-  lista.length === 0
+lista.length === 0
 ){
 
-  resultado.innerHTML =
-    `
-    <div class="nenhum">
+resultado.innerHTML =
+`
 
-      Nenhum atendimento encontrado
-      para:
+<div class="nenhum">
 
-      <strong>
-        ${escaparHTML(termo)}
-      </strong>
+Nenhum atendimento encontrado
+para:
 
-    </div>
-    `;
+<strong>
+${escaparHTML(termo)}
+</strong>
 
+</div>
 
-  mostrarMensagem(
-    'Nenhum registro encontrado para "' +
-    termo +
-    '".',
-    "info"
-  );
+`;
 
 
-  return;
+mostrarMensagem(
+'Nenhum registro encontrado para "' +
+termo +
+'".',
+"info"
+);
+
+
+return;
 
 }
 
 
-/*
- * =================================================
- * MOSTRAR RESULTADOS
- * =================================================
- */
 
 montarTabela(
-  lista
+lista
 );
 
 
 mostrarMensagem(
-  lista.length +
-  (
-    lista.length === 1
-      ? " registro encontrado."
-      : " registros encontrados."
-  ),
-  "sucesso"
+lista.length +
+(
+lista.length === 1
+?
+" registro encontrado."
+:
+" registros encontrados."
+),
+"sucesso"
 );
+
 
 }
 catch(erro){
 
 console.error(
-  "Erro ao pesquisar Atendimento:",
-  erro
+"Erro ao pesquisar Atendimento:",
+erro
 );
 
 
 resultado.innerHTML =
-  `
-  <div
-    class="mensagem erro"
-    style="display:block">
+`
 
-    ❌ Erro ao pesquisar:
+<div
+class="mensagem erro"
+style="display:block">
 
-    <br><br>
+❌ Erro ao pesquisar:
 
-    ${escaparHTML(
-      erro.message ||
-      String(erro)
-    )}
+<br><br>
 
-  </div>
-  `;
+${escaparHTML(
+erro.message ||
+String(erro)
+)}
+
+</div>
+
+`;
 
 
 mostrarErro(
-  erro.message ||
-  String(erro)
+erro.message ||
+String(erro)
 );
 
 }
 finally{
 
 botao.disabled =
-  false;
+false;
 
 }
 
 }
+
+
 
 /* =====================================================
-OBTER LISTA DA RESPOSTA
+   PESQUISAR TABELA / CAMPO
+===================================================== */
+
+async function pesquisarTabelaCampo(){
+
+const campo =
+document.getElementById(
+"campoTabelaCampo"
+);
+
+
+const botao =
+document.getElementById(
+"btnTabelaCampo"
+);
+
+
+const resultado =
+document.getElementById(
+"resultadoTabelaCampo"
+);
+
+
+const termo =
+String(
+campo.value || ""
+).trim();
+
+
+if(!termo){
+
+resultado.innerHTML =
+`
+
+<div class="nenhum">
+
+Digite uma tabela ou campo
+para realizar a pesquisa.
+
+</div>
+
+`;
+
+
+campo.focus();
+
+
+return;
+
+}
+
+
+botao.disabled =
+true;
+
+
+resultado.innerHTML =
+`
+
+<div class="carregando">
+
+🔎 Pesquisando por:
+
+<strong>
+${escaparHTML(termo)}
+</strong>
+
+</div>
+
+`;
+
+
+try{
+
+
+const resposta =
+await chamarAPI(
+"pesquisarTabelaCampo",
+{
+termo: termo
+}
+);
+
+
+console.log(
+"Pesquisa Tabela/Campo:",
+termo
+);
+
+
+console.log(
+"Resposta:",
+resposta
+);
+
+
+if(!resposta){
+
+throw new Error(
+"A API não retornou resposta."
+);
+
+}
+
+
+if(
+resposta.sucesso === false
+){
+
+throw new Error(
+resposta.erro ||
+resposta.mensagem ||
+"Erro retornado pelo servidor."
+);
+
+}
+
+
+const lista =
+obterListaResposta(
+resposta
+);
+
+
+console.log(
+"Registros Tabela/Campo:",
+lista.length
+);
+
+
+
+if(
+lista.length === 0
+){
+
+resultado.innerHTML =
+`
+
+<div class="nenhum">
+
+Nenhum registro encontrado para:
+
+<strong>
+${escaparHTML(termo)}
+</strong>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+
+montarTabelaCampo(
+lista
+);
+
+
+}
+catch(erro){
+
+console.error(
+"Erro ao pesquisar Tabela/Campo:",
+erro
+);
+
+
+resultado.innerHTML =
+`
+
+<div
+class="mensagem erro"
+style="display:block">
+
+❌ Erro ao pesquisar:
+
+<br><br>
+
+${escaparHTML(
+erro.message ||
+String(erro)
+)}
+
+</div>
+
+`;
+
+}
+finally{
+
+botao.disabled =
+false;
+
+}
+
+}
+
+
+
+/* =====================================================
+   OBTER LISTA DA RESPOSTA
 ===================================================== */
 
 function obterListaResposta(
 resposta
 ){
 
-/*
-
-API retornou diretamente um array.
-*/
 if(
 Array.isArray(
 resposta
@@ -826,14 +1338,7 @@ return resposta;
 
 }
 
-/*
 
-Formato padrão:
-{
-sucesso:true,
-lista:[...]
-}
-*/
 if(
 resposta &&
 Array.isArray(
@@ -845,10 +1350,7 @@ return resposta.lista;
 
 }
 
-/*
 
-Compatibilidade.
-*/
 if(
 resposta &&
 Array.isArray(
@@ -859,6 +1361,7 @@ resposta.dados
 return resposta.dados;
 
 }
+
 
 if(
 resposta &&
@@ -871,10 +1374,7 @@ return resposta.resultado;
 
 }
 
-/*
 
-Um único registro.
-*/
 if(
 resposta &&
 resposta.registro &&
@@ -883,17 +1383,20 @@ typeof resposta.registro ===
 ){
 
 return [
-  resposta.registro
+resposta.registro
 ];
 
 }
+
 
 return [];
 
 }
 
+
+
 /* =====================================================
-MONTAR TABELA
+   MONTAR TABELA DE ATENDIMENTO
 ===================================================== */
 
 function montarTabela(
@@ -905,169 +1408,274 @@ document.getElementById(
 "resultado"
 );
 
+
 let html = `
 
 <div class="tabela-container">
 
-  <table>
+<table>
 
-    <thead>
+<thead>
 
-      <tr>
+<tr>
 
-        <th class="col-id">
-          ID
-        </th>
+<th class="col-id">
+ID
+</th>
 
-        <th class="col-problema">
-          Problema
-        </th>
+<th class="col-problema">
+Problema
+</th>
 
-        <th class="col-solucao">
-          Solução
-        </th>
+<th class="col-solucao">
+Solução
+</th>
 
-      </tr>
+</tr>
 
-    </thead>
+</thead>
 
-    <tbody>
+<tbody>
 
 `;
+
 
 lista.forEach(
 function(item){
 
-  /*
-   * Compatibilidade com diferentes
-   * nomes de coluna.
-   */
-
-  const id =
-    obterCampo(
-      item,
-      [
-        "id",
-        "codigo",
-        "numero"
-      ]
-    );
+const id =
+obterCampo(
+item,
+[
+"id",
+"codigo",
+"numero"
+]
+);
 
 
-  const problema =
-    obterCampo(
-      item,
-      [
-        "problema",
-        "descricao",
-        "assunto",
-        "pergunta",
-        "duvida",
-        "questao"
-      ]
-    );
+const problema =
+obterCampo(
+item,
+[
+"problema",
+"descricao",
+"assunto",
+"pergunta",
+"duvida",
+"questao"
+]
+);
 
 
-  const solucao =
-    obterCampo(
-      item,
-      [
-        "solucao",
-        "solução",
-        "resposta",
-        "orientacao",
-        "orientação"
-      ]
-    );
+const solucao =
+obterCampo(
+item,
+[
+"solucao",
+"solução",
+"resposta",
+"orientacao",
+"orientação"
+]
+);
 
 
-  /*
-   * Caso a planilha tenha outras
-   * colunas e não possua exatamente
-   * Problema/Solução, tenta exibir
-   * o conteúdo completo.
-   */
-
-  let problemaFinal =
-    problema;
+let problemaFinal =
+problema;
 
 
-  let solucaoFinal =
-    solucao;
+let solucaoFinal =
+solucao;
 
 
-  if(
-    !problemaFinal &&
-    item.dados
-  ){
+if(
+!problemaFinal &&
+item.dados
+){
 
-    problemaFinal =
-      item.dados
-        .filter(
-          function(valor){
-            return String(
-              valor || ""
-            ).trim() !== "";
-          }
-        )
-        .join(" | ");
+problemaFinal =
+item.dados
+.filter(
+function(valor){
 
-  }
+return String(
+valor || ""
+).trim() !== "";
 
-
-  html += `
-
-    <tr>
-
-      <td class="col-id">
-
-        ${escaparHTML(
-          id || "-"
-        )}
-
-      </td>
-
-      <td class="col-problema">
-
-        ${formatarTexto(
-          problemaFinal
-        )}
-
-      </td>
-
-      <td class="col-solucao">
-
-        ${formatarTexto(
-          solucaoFinal
-        )}
-
-      </td>
-
-    </tr>
-
-  `;
+}
+)
+.join(" | ");
 
 }
 
-);
 
 html += `
 
-    </tbody>
+<tr>
 
-  </table>
+<td class="col-id">
+
+${escaparHTML(
+id || "-"
+)}
+
+</td>
+
+<td class="col-problema">
+
+${formatarTexto(
+problemaFinal
+)}
+
+</td>
+
+<td class="col-solucao">
+
+${formatarTexto(
+solucaoFinal
+)}
+
+</td>
+
+</tr>
+
+`;
+
+}
+);
+
+
+html += `
+
+</tbody>
+
+</table>
 
 </div>
 
 `;
+
 
 resultado.innerHTML =
 html;
 
 }
 
+
+
 /* =====================================================
-OBTER CAMPO
+   MONTAR TABELA TABELA / CAMPO
+===================================================== */
+
+function montarTabelaCampo(
+lista
+){
+
+const resultado =
+document.getElementById(
+"resultadoTabelaCampo"
+);
+
+
+let html = `
+
+<div class="tabela-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Tabela
+</th>
+
+<th>
+Campo
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+`;
+
+
+lista.forEach(
+function(item){
+
+const tabela =
+obterCampo(
+item,
+[
+"Tabela",
+"tabela"
+]
+);
+
+
+const campo =
+obterCampo(
+item,
+[
+"Campo",
+"campo"
+]
+);
+
+
+html += `
+
+<tr>
+
+<td>
+
+${escaparHTML(
+tabela || "-"
+)}
+
+</td>
+
+<td>
+
+${escaparHTML(
+campo || "-"
+)}
+
+</td>
+
+</tr>
+
+`;
+
+}
+);
+
+
+html += `
+
+</tbody>
+
+</table>
+
+</div>
+
+`;
+
+
+resultado.innerHTML =
+html;
+
+}
+
+
+
+/* =====================================================
+   OBTER CAMPO
 ===================================================== */
 
 function obterCampo(
@@ -1084,19 +1692,19 @@ return "";
 
 }
 
+
 if(
 !Array.isArray(campos)
 ){
 
 campos =
-  [campos];
+[campos];
 
 }
 
-/*
 
-Primeiro procura diretamente.
-*/
+/* Procura diretamente */
+
 for(
 let i = 0;
 i < campos.length;
@@ -1104,40 +1712,38 @@ i++
 ){
 
 const campo =
-  campos[i];
+campos[i];
 
 
 if(
-  objeto[campo] !== undefined &&
-  objeto[campo] !== null
+objeto[campo] !== undefined &&
+objeto[campo] !== null
 ){
 
-  const valor =
-    String(
-      objeto[campo]
-    ).trim();
+const valor =
+String(
+objeto[campo]
+).trim();
 
 
-  if(valor){
+if(valor){
 
-    return valor;
-
-  }
+return valor;
 
 }
 
 }
 
-/*
+}
 
-Depois procura ignorando
-acentos, espaços e diferenças
-de maiúsculas/minúsculas.
-*/
+
+/* Procura ignorando acentos */
+
 const chaves =
 Object.keys(
 objeto
 );
+
 
 for(
 let i = 0;
@@ -1146,58 +1752,65 @@ i++
 ){
 
 const procurado =
-  normalizarNomeCampo(
-    campos[i]
-  );
+normalizarNomeCampo(
+campos[i]
+);
+
 
 for(
-  let j = 0;
-  j < chaves.length;
-  j++
+let j = 0;
+j < chaves.length;
+j++
 ){
 
-  const chave =
-    chaves[j];
+const chave =
+chaves[j];
 
-  if(
-    normalizarNomeCampo(
-      chave
-    ) === procurado
-  ){
 
-    const valor =
-      objeto[chave];
+if(
+normalizarNomeCampo(
+chave
+) === procurado
+){
 
-    if(
-      valor !== undefined &&
-      valor !== null
-    ){
+const valor =
+objeto[chave];
 
-      const texto =
-        String(
-          valor
-        ).trim();
 
-      if(texto){
+if(
+valor !== undefined &&
+valor !== null
+){
 
-        return texto;
+const texto =
+String(
+valor
+).trim();
 
-      }
 
-    }
+if(texto){
 
-  }
+return texto;
 
 }
 
 }
+
+}
+
+}
+
+}
+
 
 return "";
 
 }
 
+
+
 /* =====================================================
-NORMALIZAR NOME DE CAMPO
+   NORMALIZAR NOME
 ===================================================== */
 
 function normalizarNomeCampo(
@@ -1207,12 +1820,18 @@ texto
 return String(
 texto || ""
 )
-.normalize("NFD")
+
+.normalize(
+"NFD"
+)
+
 .replace(
 /[\u0300-\u036f]/g,
 ""
 )
+
 .toLowerCase()
+
 .replace(
 /[^a-z0-9]/g,
 ""
@@ -1220,8 +1839,10 @@ texto || ""
 
 }
 
+
+
 /* =====================================================
-FORMATAR TEXTO
+   FORMATAR TEXTO
 ===================================================== */
 
 function formatarTexto(
@@ -1238,17 +1859,22 @@ return "-";
 
 }
 
+
 return escaparHTML(
 texto
-).replace(
+)
+
+.replace(
 /\r?\n/g,
 "<br>"
 );
 
 }
 
+
+
 /* =====================================================
-ESCAPAR HTML
+   ESCAPAR HTML
 ===================================================== */
 
 function escaparHTML(
@@ -1264,39 +1890,42 @@ return "";
 
 }
 
+
 return String(
 valor
 )
 
 .replace(
-  /&/g,
-  "&amp;"
+/&/g,
+"&amp;"
 )
 
 .replace(
-  /</g,
-  "&lt;"
+/</g,
+"&lt;"
 )
 
 .replace(
-  />/g,
-  "&gt;"
+/>/g,
+"&gt;"
 )
 
 .replace(
-  /"/g,
-  "&quot;"
+/"/g,
+"&quot;"
 )
 
 .replace(
-  /'/g,
-  "&#039;"
+/'/g,
+"&#039;"
 );
 
 }
 
+
+
 /* =====================================================
-MENSAGEM
+   MENSAGEM
 ===================================================== */
 
 function mostrarMensagem(
@@ -1309,14 +1938,17 @@ document.getElementById(
 "mensagem"
 );
 
+
 div.textContent =
 texto;
+
 
 div.className =
 "mensagem " +
 tipo;
 
 }
+
 
 function mostrarErro(
 texto
@@ -1330,8 +1962,10 @@ texto,
 
 }
 
+
+
 /* =====================================================
-ENTER
+   ENTER - ATENDIMENTO
 ===================================================== */
 
 document
@@ -1342,22 +1976,50 @@ document
 "keydown",
 function(event){
 
-  if(
-    event.key === "Enter"
-  ){
+if(
+event.key === "Enter"
+){
 
-    event.preventDefault();
+event.preventDefault();
 
-    pesquisar();
-
-  }
+pesquisar();
 
 }
 
+}
 );
 
+
+
 /* =====================================================
-VOLTAR
+   ENTER - TABELA / CAMPO
+===================================================== */
+
+document
+.getElementById(
+"campoTabelaCampo"
+)
+.addEventListener(
+"keydown",
+function(event){
+
+if(
+event.key === "Enter"
+){
+
+event.preventDefault();
+
+pesquisarTabelaCampo();
+
+}
+
+}
+);
+
+
+
+/* =====================================================
+   VOLTAR
 ===================================================== */
 
 function voltar(){
@@ -1367,5 +2029,8 @@ URL_INDEX;
 
 }
 
-</script> </body> </html>
+</script>
 
+</body>
+
+</html>
