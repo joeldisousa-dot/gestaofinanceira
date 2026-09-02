@@ -1121,23 +1121,5 @@ document.addEventListener(
 );
 
 </script> </body> </html>
-O que foi corrigido
-O ponto principal é que removi completamente qualquer dependência de:
 
-google.script.run
-
-Agora a pesquisa chama diretamente:
-
-?action=pesquisarAtendimento
-
-através de JSONP, que é compatível com o seu GitHub Pages e com o doGet() do Apps Script.
-
-Também mantive exatamente a ação que seu Apps Script já possui:
-
-case "pesquisarAtendimento":
-  return pesquisarAtendimento(
-    parametros.termo ||
-    parametros.valor ||
-    parametros.campo ||
-    ""
   );
