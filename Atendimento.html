@@ -408,7 +408,71 @@ font-weight:bold;
 color:#455a64;
 
 }
+/* =====================================================
+   STATUS DA API
+===================================================== */
 
+.status-api{
+
+    margin-top:15px;
+
+    padding:14px 16px;
+
+    border-radius:10px;
+
+    border:1px solid #dbe3ec;
+
+    background:#f8fafc;
+
+    font-size:13px;
+
+}
+
+.status-api-titulo{
+
+    font-weight:bold;
+
+    color:#455a64;
+
+    margin-bottom:7px;
+
+}
+
+.status-api-detalhes{
+
+    color:#607d8b;
+
+    line-height:1.7;
+
+}
+
+.status-api.ok{
+
+    background:#e8f5e9;
+
+    border-color:#a5d6a7;
+
+}
+
+.status-api.erro{
+
+    background:#ffebee;
+
+    border-color:#ef9a9a;
+
+}
+
+.status-api strong{
+
+    color:#263238;
+
+}
+
+.status-api-url{
+
+    word-break:break-all;
+
+}
 
 /* =====================================================
    RESPONSIVO
@@ -854,7 +918,137 @@ document.body.appendChild(
 script
 );
 
+/* =====================================================
+   VERIFICAR STATUS DA API
+===================================================== */
 
+async function verificarStatusAPI(){
+
+    const painel =
+        document.getElementById(
+            "statusAPI"
+        );
+
+    const detalhes =
+        document.getElementById(
+            "statusAPIDetalhes"
+        );
+
+    try{
+
+        detalhes.innerHTML =
+            "🟡 Verificando conexão com a API...";
+
+        const resposta =
+            await chamarAPI(
+                "versao",
+                {}
+            );
+
+        console.log(
+            "Resposta da versão da API:",
+            resposta
+        );
+
+        if(
+            !resposta ||
+            resposta.sucesso === false
+        ){
+
+            throw new Error(
+                resposta &&
+                (
+                    resposta.erro ||
+                    resposta.mensagem
+                )
+                ||
+                "A API não retornou informações de versão."
+            );
+
+        }
+
+        const versao =
+            resposta.versao ||
+            "Não informada";
+
+        const implantacao =
+            resposta.implantacao ||
+            resposta.deployment ||
+            "Não informada";
+
+        const projeto =
+            resposta.projeto ||
+            "Controle Financeiro";
+
+        const dataHora =
+            resposta.dataHora ||
+            new Date().toLocaleString(
+                "pt-BR"
+            );
+
+        detalhes.innerHTML = `
+
+            🟢 <strong>API conectada</strong><br>
+
+            <strong>Versão:</strong>
+            ${escaparHTML(versao)}
+            <br>
+
+            <strong>Implantação:</strong>
+            ${escaparHTML(implantacao)}
+            <br>
+
+            <strong>Projeto:</strong>
+            ${escaparHTML(projeto)}
+            <br>
+
+            <strong>Última resposta:</strong>
+            ${escaparHTML(dataHora)}
+            <br>
+
+            <strong>API:</strong>
+            <span class="status-api-url">
+                ${escaparHTML(URL_API)}
+            </span>
+
+        `;
+
+        painel.className =
+            "status-api ok";
+
+    }
+    catch(erro){
+
+        console.error(
+            "Erro ao verificar API:",
+            erro
+        );
+
+        detalhes.innerHTML = `
+
+            🔴 <strong>API indisponível</strong><br>
+
+            ${escaparHTML(
+                erro.message ||
+                String(erro)
+            )}
+
+            <br><br>
+
+            <strong>URL configurada:</strong><br>
+
+            <span class="status-api-url">
+                ${escaparHTML(URL_API)}
+            </span>
+
+        `;
+
+        painel.className =
+            "status-api erro";
+
+    }
+
+}
 
 function cleanup(){
 
