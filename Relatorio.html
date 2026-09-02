@@ -68,6 +68,49 @@ body{
 }
 
 /* =====================================================
+   SELETOR DE COMPETÊNCIA
+===================================================== */
+
+.seletor-competencia{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:#f5f8fc;
+  border:1px solid #d9e2ec;
+  padding:15px 18px;
+  border-radius:12px;
+  margin-bottom:20px;
+}
+
+.seletor-competencia label{
+  font-weight:bold;
+  color:#37474f;
+}
+
+.seletor-competencia select{
+  min-width:180px;
+  padding:11px 14px;
+  border:1px solid #b0bec5;
+  border-radius:8px;
+  background:white;
+  color:#333;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+  outline:none;
+}
+
+.seletor-competencia select:focus{
+  border-color:#1976d2;
+  box-shadow:0 0 0 2px rgba(25,118,210,.15);
+}
+
+.btn-atualizar{
+  padding:11px 18px;
+  font-size:14px;
+}
+
+/* =====================================================
    CABEÇALHO
 ===================================================== */
 
@@ -286,7 +329,8 @@ button:disabled{
   }
 
   button,
-  .voltar{
+  .voltar,
+  .seletor-competencia{
     display:none;
   }
 
@@ -338,6 +382,16 @@ button:disabled{
     width:100%;
   }
 
+  .seletor-competencia{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .seletor-competencia select,
+  .btn-atualizar{
+    width:100%;
+  }
+
   .cabecalho{
     flex-direction:column;
     align-items:flex-start;
@@ -384,6 +438,28 @@ onclick="voltar()">
 </div>
 
 <!-- =====================================================
+     SELEÇÃO DA COMPETÊNCIA
+===================================================== -->
+
+<div class="seletor-competencia">
+
+<label for="selectCompetencia">
+📅 Competência:
+</label>
+
+<select
+id="selectCompetencia"
+onchange="alterarCompetencia()"> </select>
+
+<button
+class="btn-atualizar"
+id="btnAtualizar"
+onclick="carregarRelatorio()">
+🔄 Atualizar </button>
+
+</div>
+
+<!-- =====================================================
      CABEÇALHO
 ===================================================== -->
 
@@ -425,7 +501,7 @@ Emitido: <span id="data">-</span>
 id="receber"
 class="carregando">
 
-Carregando receitas...
+Selecione uma competência para carregar as receitas...
 
 </div>
 
@@ -441,7 +517,7 @@ Carregando receitas...
 id="pagar"
 class="carregando">
 
-Carregando despesas...
+Selecione uma competência para carregar as despesas...
 
 </div>
 
@@ -453,7 +529,7 @@ Carregando despesas...
 class="resultado-final"
 id="resumoFinal">
 
-Calculando resultado...
+Selecione uma competência para calcular o resultado.
 
 </div>
 
@@ -490,17 +566,21 @@ const URL_API =
 
 
 /* =====================================================
-   CONTROLE JSONP
+   CONTROLE
 ===================================================== */
 
 let contadorJSONP = 0;
 
+let competenciaSelecionada = "";
+
 
 /* =====================================================
-   COMPETÊNCIA
+   OBTER COMPETÊNCIA DA URL
+   Usada somente como valor inicial.
+   Depois disso, o relatório funciona pelo SELECT.
 ===================================================== */
 
-function obterCompetencia(){
+function obterCompetenciaInicial(){
 
   const parametros =
     new URLSearchParams(
@@ -511,20 +591,23 @@ function obterCompetencia(){
     parametros.get("competencia") ||
     parametros.get("comp");
 
-  if(!comp){
+  if(comp){
 
-    const agora = new Date();
-
-    comp =
-      agora.getFullYear() +
-      "-" +
-      String(
-        agora.getMonth() + 1
-      ).padStart(2,"0");
+    return converterCompetencia(comp);
 
   }
 
-  return converterCompetencia(comp);
+
+  const agora =
+    new Date();
+
+  return (
+    agora.getFullYear() +
+    "-" +
+    String(
+      agora.getMonth() + 1
+    ).padStart(2,"0")
+  );
 
 }
 
@@ -607,31 +690,164 @@ function converterCompetencia(valor){
 
 
 /* =====================================================
-   COMPETÊNCIA ATUAL
+   CRIAR LISTA DE COMPETÊNCIAS
 ===================================================== */
 
-const competencia =
-  obterCompetencia();
+function criarCompetencias(){
+
+  const select =
+    document.getElementById(
+      "selectCompetencia"
+    );
+
+  select.innerHTML = "";
 
 
-document.getElementById(
-  "competencia"
-).textContent =
-  formatarCompetencia(
-    competencia
-  );
+  const inicial =
+    obterCompetenciaInicial();
+
+
+  competenciaSelecionada =
+    inicial;
+
+
+  /*
+   * Gera as últimas 36 competências.
+   * A competência atual aparece primeiro.
+   */
+
+  const agora =
+    new Date();
+
+  const anoAtual =
+    agora.getFullYear();
+
+  const mesAtual =
+    agora.getMonth();
+
+
+  for(
+    let i = 0;
+    i < 36;
+    i++
+  ){
+
+    const data =
+      new Date(
+        anoAtual,
+        mesAtual - i,
+        1
+      );
+
+
+    const ano =
+      data.getFullYear();
+
+    const mes =
+      String(
+        data.getMonth() + 1
+      ).padStart(2,"0");
+
+
+    const valor =
+      ano + "-" + mes;
+
+
+    const option =
+      document.createElement(
+        "option"
+      );
+
+
+    option.value =
+      valor;
+
+
+    option.textContent =
+      mes + "/" + ano;
+
+
+    if(
+      valor === inicial
+    ){
+
+      option.selected =
+        true;
+
+    }
+
+
+    select.appendChild(
+      option
+    );
+
+  }
+
+
+  atualizarCabecalho();
+
+}
 
 
 /* =====================================================
-   DATA
+   ALTERAR COMPETÊNCIA
 ===================================================== */
 
-document.getElementById(
-  "data"
-).textContent =
-  new Date().toLocaleString(
-    "pt-BR"
-  );
+function alterarCompetencia(){
+
+  const select =
+    document.getElementById(
+      "selectCompetencia"
+    );
+
+
+  competenciaSelecionada =
+    select.value;
+
+
+  atualizarCabecalho();
+
+
+  /*
+   * Carrega imediatamente o relatório
+   * da competência selecionada.
+   */
+
+  carregarRelatorio();
+
+}
+
+
+/* =====================================================
+   ATUALIZAR CABEÇALHO
+===================================================== */
+
+function atualizarCabecalho(){
+
+  document.getElementById(
+    "competencia"
+  ).textContent =
+    formatarCompetencia(
+      competenciaSelecionada
+    );
+
+}
+
+
+/* =====================================================
+   DATA DE EMISSÃO
+===================================================== */
+
+function atualizarData(){
+
+  document.getElementById(
+    "data"
+  ).textContent =
+    new Date().toLocaleString(
+      "pt-BR"
+    );
+
+}
 
 
 /* =====================================================
@@ -825,18 +1041,40 @@ async function carregarRelatorio(){
       "resumoFinal"
     );
 
+  const botao =
+    document.getElementById(
+      "btnAtualizar"
+    );
+
 
   receber.innerHTML =
     '<div class="carregando">Carregando receitas...</div>';
 
+
   pagar.innerHTML =
     '<div class="carregando">Carregando despesas...</div>';
+
 
   resumo.textContent =
     "Calculando resultado...";
 
 
+  if(botao){
+
+    botao.disabled =
+      true;
+
+    botao.textContent =
+      "⏳ Carregando...";
+
+  }
+
+
   try{
+
+    const competencia =
+      competenciaSelecionada;
+
 
     if(
       !competencia ||
@@ -846,25 +1084,20 @@ async function carregarRelatorio(){
     ){
 
       throw new Error(
-        "Competência inválida. Use AAAA-MM."
+        "Competência inválida."
       );
 
     }
 
 
-    console.log(
-      "Consultando API:"
-    );
-
-    console.log(
-      URL_API
-    );
-
-    console.log(
-      "Competência:",
-      competencia
-    );
-
+    /*
+     * IMPORTANTE:
+     *
+     * A API recebe diretamente a competência
+     * selecionada no SELECT.
+     *
+     * Não existe mais filtro por index.
+     */
 
     const resposta =
       await chamarAPI(
@@ -874,12 +1107,6 @@ async function carregarRelatorio(){
             competencia
         }
       );
-
-
-    console.log(
-      "Resposta recebida:",
-      resposta
-    );
 
 
     if(
@@ -944,15 +1171,12 @@ async function carregarRelatorio(){
     }
 
 
-    console.log(
-      "Lançamentos:",
-      lista
-    );
-
-
     processarRelatorio(
       lista
     );
+
+
+    atualizarData();
 
 
   }
@@ -990,6 +1214,19 @@ async function carregarRelatorio(){
       '<span style="color:#c62828;">' +
       'Não foi possível gerar o relatório.' +
       '</span>';
+
+  }
+  finally{
+
+    if(botao){
+
+      botao.disabled =
+        false;
+
+      botao.textContent =
+        "🔄 Atualizar";
+
+    }
 
   }
 
@@ -1070,7 +1307,7 @@ function processarRelatorio(lista){
 
         if(
           descricaoNormalizada ===
-            "repasse aluguel" &&
+          "repasse aluguel" &&
           baixado
         ){
 
@@ -1096,9 +1333,7 @@ function processarRelatorio(lista){
 
 
   /*
-   * Regra existente do sistema:
-   * Repasse aluguel baixado é abatido
-   * das receitas e despesas.
+   * Repasse aluguel baixado
    */
 
   totalReceitas -=
@@ -1536,6 +1771,8 @@ function voltar(){
 window.addEventListener(
   "load",
   function(){
+
+    criarCompetencias();
 
     carregarRelatorio();
 
