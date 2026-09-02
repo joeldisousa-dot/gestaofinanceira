@@ -1,9 +1,4 @@
-<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8">
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1"
-
-<title>Relatório Financeiro</title> <style>
+<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>Relatório Financeiro</title> <style>
 *{
 box-sizing:border-box;
 }
@@ -281,7 +276,7 @@ border-radius:8px;
 }
 
 /* =====================================================
-CARREGAMENTO
+ESTADOS
 ===================================================== */
 
 .carregando{
@@ -419,28 +414,19 @@ padding:7px 5px;
 }
 
 </style> </head> <body> <div class="container"> <!-- ===================================================== TOPO ===================================================== --> <div class="topo"> <h1>📄 Relatório Financeiro</h1>
-<button
-type="button"
-class="voltar"
-onclick="voltar()"
-
+<button type="button" class="voltar" onclick="voltar()">
 ⬅ Voltar
+</button>
 
-</button> </div> <!-- ===================================================== SELETOR DE COMPETÊNCIA ===================================================== --> <div class="seletor-competencia"> <label for="selectCompetencia"> 📅 Competência: </label> <!-- CORREÇÃO IMPORTANTE: agora o select chama alterarCompetencia() quando o usuário muda a competência. -->
-<select
-id="selectCompetencia"
-onchange="alterarCompetencia()"
-
+</div> <!-- ===================================================== SELETOR DE COMPETÊNCIA ===================================================== --> <div class="seletor-competencia"> <label for="selectCompetencia"> 📅 Competência: </label>
+<select id="selectCompetencia" onchange="alterarCompetencia()">
 </select>
-<button
-type="button"
-class="btn-atualizar"
-id="btnAtualizar"
-onclick="carregarRelatorio()"
 
+<button type="button" class="btn-atualizar" id="btnAtualizar" onclick="carregarRelatorio()">
 🔄 Atualizar
+</button>
 
-</button> </div> <!-- ===================================================== CABEÇALHO DO RELATÓRIO ===================================================== --> <div class="cabecalho"> <div>
+</div> <!-- ===================================================== CABEÇALHO ===================================================== --> <div class="cabecalho"> <div>
 <h1>💰 Controle Financeiro</h1>
 
 <p>Relatório Financeiro Pessoal</p>
@@ -454,14 +440,21 @@ Competência:
 Emitido:
 <span id="data">-</span>
 
-</div> </div> <!-- ===================================================== RECEITAS ===================================================== --> <h2>📥 Receitas</h2> <div id="receber" class="carregando" > Selecione uma competência para carregar as receitas... </div> <!-- ===================================================== DESPESAS ===================================================== --> <h2>📤 Despesas</h2> <div id="pagar" class="carregando" > Selecione uma competência para carregar as despesas... </div> <!-- ===================================================== RESULTADO ===================================================== --> <div class="resultado-final" id="resumoFinal" > Selecione uma competência para calcular o resultado. </div> <br> <div style="text-align:right">
-<button
-type="button"
-onclick="window.print()"
+</div> </div> <!-- ===================================================== RECEITAS ===================================================== --> <h2>📥 Receitas</h2> <div id="receber" class="carregando">
+Selecione uma competência para carregar as receitas...
 
+</div> <!-- ===================================================== DESPESAS ===================================================== --> <h2>📤 Despesas</h2> <div id="pagar" class="carregando">
+Selecione uma competência para carregar as despesas...
+
+</div> <!-- ===================================================== RESULTADO ===================================================== --> <div class="resultado-final" id="resumoFinal">
+Selecione uma competência para calcular o resultado.
+
+</div> <br> <div style="text-align:right">
+<button type="button" onclick="window.print()">
 🖨 Imprimir / Salvar PDF
+</button>
 
-</button> </div> <div class="rodape">
+</div> <div class="rodape">
 Relatório gerado automaticamente
 
 <br>
@@ -469,7 +462,7 @@ Controle Financeiro Pessoal
 
 </div> </div> <script>
 /* =====================================================
-CONFIGURAÇÃO
+CONFIGURAÇÃO DA API
 ===================================================== */
 
 const URL_API =
@@ -482,46 +475,81 @@ let competenciaSelecionada = "";
 let requisicaoAtual = 0;
 
 /* =====================================================
-COMPETÊNCIA INICIAL
+OBTER COMPETÊNCIA DA URL
 ===================================================== */
 
-function obterCompetenciaInicial(){
+function obterCompetenciaDaURL(){
+
+try{
 
 const parametros =
-new URLSearchParams(
-window.location.search
-);
+  new URLSearchParams(
+    window.location.search
+  );
 
-const comp =
-parametros.get("competencia") ||
-parametros.get("comp");
+const valor =
+  parametros.get("competencia") ||
+  parametros.get("comp");
 
-if(comp){
+if(valor){
 
-const convertida =
-  converterCompetencia(comp);
+  const competencia =
+    converterCompetencia(valor);
 
+  if(
+    /^\d{4}-\d{2}$/.test(competencia)
+  ){
 
-if(
-  /^\d{4}-\d{2}$/.test(convertida)
-){
+    return competencia;
 
-  return convertida;
+  }
 
 }
+
+}
+catch(erro){
+
+console.warn(
+  "Não foi possível ler a competência da URL:",
+  erro
+);
+
+}
+
+return "";
+
+}
+
+/* =====================================================
+COMPETÊNCIA ATUAL
+===================================================== */
+
+function obterCompetenciaAtual(){
+
+const competenciaURL =
+obterCompetenciaDaURL();
+
+if(competenciaURL){
+
+return competenciaURL;
 
 }
 
 const agora =
 new Date();
 
-return (
-agora.getFullYear() +
-"-" +
+const ano =
+agora.getFullYear();
+
+const mes =
 String(
 agora.getMonth() + 1
-).padStart(2,"0")
+).padStart(
+2,
+"0"
 );
+
+return ano + "-" + mes;
 
 }
 
@@ -533,8 +561,7 @@ function converterCompetencia(valor){
 
 if(
 valor === null ||
-valor === undefined ||
-valor === ""
+valor === undefined
 ){
 
 return "";
@@ -542,26 +569,21 @@ return "";
 }
 
 const texto =
-String(valor)
-.trim();
+String(valor).trim();
+
+if(texto === ""){
+
+return "";
+
+}
 
 /* AAAA-MM */
 
 if(
-/^\d{4}-\d{1,2}$/.test(texto)
+/^\d{4}-\d{2}$/.test(texto)
 ){
 
-const partes =
-  texto.split("-");
-
-
-return (
-  partes[0] +
-  "-" +
-  String(
-    partes[1]
-  ).padStart(2,"0")
-);
+return texto;
 
 }
 
@@ -574,13 +596,15 @@ if(
 const partes =
   texto.split("/");
 
-
 return (
   partes[1] +
   "-" +
   String(
     partes[0]
-  ).padStart(2,"0")
+  ).padStart(
+    2,
+    "0"
+  )
 );
 
 }
@@ -594,13 +618,15 @@ if(
 const partes =
   texto.split("-");
 
-
 return (
   partes[1] +
   "-" +
   String(
     partes[0]
-  ).padStart(2,"0")
+  ).padStart(
+    2,
+    "0"
+  )
 );
 
 }
@@ -614,13 +640,15 @@ if(
 const partes =
   texto.split("/");
 
-
 return (
   partes[0] +
   "-" +
   String(
     partes[1]
-  ).padStart(2,"0")
+  ).padStart(
+    2,
+    "0"
+  )
 );
 
 }
@@ -634,13 +662,15 @@ if(
 const partes =
   texto.split("/");
 
-
 return (
   partes[2] +
   "-" +
   String(
     partes[1]
-  ).padStart(2,"0")
+  ).padStart(
+    2,
+    "0"
+  )
 );
 
 }
@@ -682,11 +712,18 @@ return;
 select.innerHTML = "";
 
 const inicial =
-obterCompetenciaInicial();
+obterCompetenciaAtual();
 
 competenciaSelecionada =
 inicial;
 
+const partesInicial =
+inicial.split("-");
+
+/*
+
+Cria os últimos 36 meses.
+*/
 const agora =
 new Date();
 
@@ -696,10 +733,9 @@ agora.getFullYear();
 const mesAtual =
 agora.getMonth();
 
-/*
+const competencias =
+[];
 
-Cria 36 meses.
-*/
 for(
 let i = 0;
 i < 36;
@@ -717,7 +753,6 @@ const data =
 const ano =
   data.getFullYear();
 
-
 const mes =
   String(
     data.getMonth() + 1
@@ -731,97 +766,64 @@ const valor =
   ano + "-" + mes;
 
 
-const option =
-  document.createElement(
-    "option"
-  );
-
-
-option.value =
-  valor;
-
-
-option.textContent =
-  mes + "/" + ano;
-
-
-if(
-  valor === inicial
-){
-
-  option.selected =
-    true;
-
-}
-
-
-select.appendChild(
-  option
+competencias.push(
+  valor
 );
 
 }
 
 /*
 
-Se a competência recebida pela URL
-estiver fora dos 36 meses,
-adiciona-a.
+Se a competência veio da URL
+e não está nos últimos 36 meses,
+acrescenta.
 */
-const existe =
-Array.from(
-select.options
-).some(
-function(option){
+if(
+/^\d{4}-\d{2}$/.test(inicial) &&
+competencias.indexOf(inicial) === -1
+){
 
-    return (
-      option.value ===
-      inicial
+competencias.unshift(
+  inicial
+);
+
+}
+
+competencias.forEach(
+function(valor){
+
+  const partes =
+    valor.split("-");
+
+  const option =
+    document.createElement(
+      "option"
     );
 
+  option.value =
+    valor;
+
+  option.textContent =
+    partes[1] +
+    "/" +
+    partes[0];
+
+  if(
+    valor === inicial
+  ){
+
+    option.selected =
+      true;
+
   }
-);
 
-if(
-!existe &&
-/^\d{4}-\d{2}$/.test(
-inicial
-)
-){
-
-const partes =
-  inicial.split("-");
-
-
-const option =
-  document.createElement(
-    "option"
+  select.appendChild(
+    option
   );
-
-
-option.value =
-  inicial;
-
-
-option.textContent =
-  partes[1] +
-  "/" +
-  partes[0];
-
-
-select.insertBefore(
-  option,
-  select.firstChild
-);
 
 }
 
-/*
-
-Garante que o select realmente
-fique na competência selecionada.
-*/
-select.value =
-competenciaSelecionada;
+);
 
 atualizarCabecalho();
 
@@ -855,37 +857,27 @@ novaCompetencia
 )
 ){
 
-console.error(
-  "Competência selecionada inválida:",
-  select.value
-);
-
 return;
 
 }
 
 /*
 
-Atualiza imediatamente
-a competência usada pelo relatório.
+ESTA É A PARTE IMPORTANTE:
+a competência escolhida no próprio
+Relatório passa a controlar a consulta.
 */
 competenciaSelecionada =
 novaCompetencia;
 
 atualizarCabecalho();
 
-/*
-
-Agora consulta a API novamente
-usando EXATAMENTE a competência
-escolhida no select.
-*/
 carregarRelatorio();
 
 }
 
 /* =====================================================
-CABEÇALHO
+ATUALIZAR CABEÇALHO
 ===================================================== */
 
 function atualizarCabecalho(){
@@ -909,7 +901,7 @@ competenciaSelecionada
 }
 
 /* =====================================================
-DATA
+DATA DE EMISSÃO
 ===================================================== */
 
 function atualizarData(){
@@ -933,7 +925,7 @@ new Date().toLocaleString(
 }
 
 /* =====================================================
-API JSONP
+JSONP
 ===================================================== */
 
 function chamarAPI(
@@ -962,8 +954,8 @@ function(resolve,reject){
       {},
       parametros || {},
       {
-        action:acao,
-        callback:callback
+        action: acao,
+        callback: callback
       }
     );
 
@@ -973,17 +965,19 @@ function(resolve,reject){
       .map(
         function(chave){
 
+          const valor =
+            dados[chave];
+
           return (
             encodeURIComponent(
               chave
             ) +
             "=" +
             encodeURIComponent(
-              dados[chave] == null
+              valor === null ||
+              valor === undefined
                 ? ""
-                : String(
-                    dados[chave]
-                  )
+                : String(valor)
             )
           );
 
@@ -1007,15 +1001,12 @@ function(resolve,reject){
   let finalizado =
     false;
 
-
   let temporizador;
 
 
   function limpar(){
 
-    if(
-      temporizador
-    ){
+    if(temporizador){
 
       clearTimeout(
         temporizador
@@ -1031,7 +1022,13 @@ function(resolve,reject){
       ];
 
     }
-    catch(e){}
+    catch(e){
+
+      window[
+        callback
+      ] = undefined;
+
+    }
 
 
     if(
@@ -1096,7 +1093,7 @@ function(resolve,reject){
 
       reject(
         new Error(
-          "Não foi possível conectar à API do Google Apps Script."
+          "Não foi possível conectar à API."
         )
       );
 
@@ -1132,12 +1129,11 @@ function(resolve,reject){
     );
 
 
-  script.src =
-    url;
-
-
   script.async =
     true;
+
+  script.src =
+    url;
 
 
   document.head.appendChild(
@@ -1178,11 +1174,23 @@ document.getElementById(
 
 /*
 
-IMPORTANTE:
-Aqui NÃO usamos novamente a competência
-da URL.
-Usamos a variável atualizada pelo SELECT.
+Sempre pega o valor atualmente
+selecionado no select.
 */
+const select =
+document.getElementById(
+"selectCompetencia"
+);
+
+if(select && select.value){
+
+competenciaSelecionada =
+  converterCompetencia(
+    select.value
+  );
+
+}
+
 const competencia =
 converterCompetencia(
 competenciaSelecionada
@@ -1199,38 +1207,30 @@ receber.innerHTML =
   '⚠ Competência inválida.' +
   '</div>';
 
-
-pagar.innerHTML =
-  "";
-
+pagar.innerHTML = "";
 
 resumo.textContent =
   "Não foi possível calcular o resultado.";
-
 
 return;
 
 }
 
-/*
-
-Controla respostas concorrentes.
-*/
 const numeroRequisicao =
 ++requisicaoAtual;
 
 receber.innerHTML =
 '<div class="carregando">' +
-'Carregando receitas...' +
+'⏳ Carregando receitas...' +
 '</div>';
 
 pagar.innerHTML =
 '<div class="carregando">' +
-'Carregando despesas...' +
+'⏳ Carregando despesas...' +
 '</div>';
 
 resumo.textContent =
-"Calculando resultado...";
+"⏳ Calculando resultado...";
 
 if(botao){
 
@@ -1246,22 +1246,9 @@ atualizarCabecalho();
 
 try{
 
-console.log(
-  "Relatório selecionado:",
-  competencia
-);
-
-
 /*
- * CONSULTA DIRETA À COMPETÊNCIA SELECIONADA.
- *
- * Exemplo:
- *
- * 2026-09
- *
- * ou
- *
- * 2026-08
+ * Consulta DIRETAMENTE a competência
+ * selecionada no Relatório.
  */
 
 const resposta =
@@ -1275,7 +1262,8 @@ const resposta =
 
 
 /*
- * Ignora respostas antigas.
+ * Evita que uma consulta antiga
+ * sobrescreva uma nova.
  */
 
 if(
@@ -1288,9 +1276,7 @@ if(
 }
 
 
-if(
-  !resposta
-){
+if(!resposta){
 
   throw new Error(
     "A API não retornou resposta."
@@ -1317,22 +1303,22 @@ let lista = [];
 
 if(
   Array.isArray(
-    resposta.lista
-  )
-){
-
-  lista =
-    resposta.lista;
-
-}
-else if(
-  Array.isArray(
     resposta.dados
   )
 ){
 
   lista =
     resposta.dados;
+
+}
+else if(
+  Array.isArray(
+    resposta.lista
+  )
+){
+
+  lista =
+    resposta.lista;
 
 }
 else if(
@@ -1348,10 +1334,10 @@ else if(
 
 
 /*
- * FILTRO DE SEGURANÇA.
+ * Filtra novamente pelo campo
+ * de competência, caso exista.
  *
- * O Apps Script já filtra.
- * Porém o HTML confere novamente.
+ * Isso é uma proteção adicional.
  */
 
 lista =
@@ -1366,28 +1352,17 @@ lista =
 
 
       const valorCompetencia =
-        item.Competência ??
-        item.Competencia ??
-        item.competencia ??
-        item.COMPETENCIA ??
+        item["Competência"] ||
+        item.competencia ||
+        item.Competencia ||
+        item.comp ||
         "";
 
 
       /*
-       * Se o servidor não informou competência,
-       * mantém por compatibilidade.
+       * Alguns registros podem retornar
+       * a competência como 01/08/2026.
        */
-
-      if(
-        valorCompetencia === "" ||
-        valorCompetencia === null ||
-        valorCompetencia === undefined
-      ){
-
-        return true;
-
-      }
-
 
       const compItem =
         converterCompetencia(
@@ -1395,19 +1370,32 @@ lista =
         );
 
 
-      return (
-        compItem ===
-        competencia
-      );
+      /*
+       * Se o registro tiver competência
+       * identificável, ela deve ser igual
+       * à competência selecionada.
+       */
+
+      if(compItem){
+
+        return (
+          compItem ===
+          competencia
+        );
+
+      }
+
+
+      /*
+       * Mantém registros sem competência
+       * apenas por compatibilidade.
+       */
+
+      return true;
 
     }
   );
 
-
-/*
- * Guarda a competência atualmente
- * selecionada.
- */
 
 competenciaSelecionada =
   competencia;
@@ -1415,10 +1403,6 @@ competenciaSelecionada =
 
 atualizarCabecalho();
 
-
-/*
- * Monta o relatório.
- */
 
 processarRelatorio(
   lista
@@ -1464,7 +1448,7 @@ receber.innerHTML =
 
 pagar.innerHTML =
   '<div class="erro">' +
-  '⚠ Não foi possível carregar as despesas.' +
+  '⚠ Erro ao carregar despesas.' +
   '</div>';
 
 
@@ -1530,9 +1514,8 @@ function(item){
 
   const descricao =
     String(
-      item.Descricao ??
-      item.descricao ??
-      item.DESCRICAO ??
+      item.Descricao ||
+      item.descricao ||
       ""
     ).trim();
 
@@ -1543,54 +1526,37 @@ function(item){
     );
 
 
-  const baixado =
-    ehBaixado(
-      item.Baixado ??
-      item.baixado ??
-      item.BAIXADO ??
+  const tipo =
+    String(
+      item.Tipo ||
+      item.tipo ||
+      item.TIPO ||
       ""
-    );
+    ).trim();
 
 
   const valor =
     converterNumero(
-      item.Valor ??
-      item.valor ??
-      item.VALOR ??
-      0
+      item.Valor !== undefined
+        ? item.Valor
+        : item.valor
     );
 
 
-  const tipo =
-    item.Tipo ??
-    item.tipo ??
-    item.TIPO ??
-    "";
-
-
-  const tipoNormalizado =
-    normalizarTexto(
-      tipo
+  const baixado =
+    ehBaixado(
+      item.Baixado !== undefined
+        ? item.Baixado
+        : item.baixado
     );
 
 
   /*
-   * CONTAS A RECEBER
+   * RECEITAS
    */
 
   if(
-    tipoNormalizado.includes(
-      "contas a receber"
-    ) ||
-    tipoNormalizado.includes(
-      "conta a receber"
-    ) ||
-    tipoNormalizado.includes(
-      "receita"
-    ) ||
-    tipoNormalizado.includes(
-      "entrada"
-    )
+    tipoEhReceita(tipo)
   ){
 
     receitas.push(
@@ -1608,27 +1574,17 @@ function(item){
 
 
   /*
-   * CONTAS A PAGAR
+   * DESPESAS
    */
 
   if(
-    tipoNormalizado.includes(
-      "contas a pagar"
-    ) ||
-    tipoNormalizado.includes(
-      "conta a pagar"
-    ) ||
-    tipoNormalizado.includes(
-      "despesa"
-    ) ||
-    tipoNormalizado.includes(
-      "saida"
-    )
+    tipoEhDespesa(tipo)
   ){
 
     /*
-     * Repasse aluguel baixado
-     * não aparece na tabela.
+     * Repasse aluguel baixado:
+     * não aparece na tabela e é abatido
+     * dos dois totais.
      */
 
     if(
@@ -1663,34 +1619,13 @@ function(item){
 
 Abate o repasse dos dois lados.
 */
-totalReceitas -=
+totalReceitas =
+totalReceitas -
 totalRepasse;
 
-totalDespesas -=
+totalDespesas =
+totalDespesas -
 totalRepasse;
-
-/*
-
-Nunca permite total negativo
-causado somente pelo abatimento.
-*/
-if(
-totalReceitas < 0 &&
-totalReceitas > -0.001
-){
-
-totalReceitas = 0;
-
-}
-
-if(
-totalDespesas < 0 &&
-totalDespesas > -0.001
-){
-
-totalDespesas = 0;
-
-}
 
 montarTabela(
 "receber",
@@ -1734,6 +1669,64 @@ formatar(
 }
 
 /* =====================================================
+IDENTIFICAR RECEITA
+===================================================== */
+
+function tipoEhReceita(tipo){
+
+const texto =
+normalizarTexto(
+tipo
+);
+
+return (
+texto.indexOf(
+"contas a receber"
+) !== -1 ||
+
+texto.indexOf(
+  "conta a receber"
+) !== -1 ||
+
+texto === "receita" ||
+
+texto === "entrada"
+
+);
+
+}
+
+/* =====================================================
+IDENTIFICAR DESPESA
+===================================================== */
+
+function tipoEhDespesa(tipo){
+
+const texto =
+normalizarTexto(
+tipo
+);
+
+return (
+texto.indexOf(
+"contas a pagar"
+) !== -1 ||
+
+texto.indexOf(
+  "conta a pagar"
+) !== -1 ||
+
+texto === "despesa" ||
+
+texto === "saida" ||
+
+texto === "saída"
+
+);
+
+}
+
+/* =====================================================
 MONTAR TABELA
 ===================================================== */
 
@@ -1750,7 +1743,15 @@ id
 );
 
 if(
-!lista ||
+!elemento
+){
+
+return;
+
+}
+
+if(
+!Array.isArray(lista) ||
 lista.length === 0
 ){
 
@@ -1764,12 +1765,11 @@ return;
 }
 
 const total =
-Number(
-totalPersonalizado || 0
+converterNumero(
+totalPersonalizado
 );
 
 let html =
-
 '<div class="tabela-container">' +
 
 '<table>' +
@@ -1796,61 +1796,52 @@ lista.forEach(
 function(item){
 
   const descricao =
-    item.Descricao ??
-    item.descricao ??
+    item.Descricao ||
+    item.descricao ||
     "";
 
 
   const valor =
     converterNumero(
-      item.Valor ??
-      item.valor ??
-      0
+      item.Valor !== undefined
+        ? item.Valor
+        : item.valor
     );
 
 
   const vencimento =
-    item.Vencimento ??
-    item.vencimento ??
+    item.Vencimento ||
+    item.vencimento ||
     "";
 
 
   const baixado =
     ehBaixado(
-      item.Baixado ??
-      item.baixado ??
-      ""
+      item.Baixado !== undefined
+        ? item.Baixado
+        : item.baixado
     );
 
 
   html +=
-
     '<tr>' +
 
     '<td>' +
-
     escaparHTML(
       descricao
     ) +
-
     '</td>' +
 
     '<td class="valor">' +
-
     formatar(
       valor
     ) +
-
     '</td>' +
 
     '<td>' +
-
-    escaparHTML(
-      formatarData(
-        vencimento
-      )
+    formatarData(
+      vencimento
     ) +
-
     '</td>' +
 
     '<td>' +
@@ -1872,11 +1863,8 @@ function(item){
 );
 
 html +=
-
 '</tbody>' +
-
 '</table>' +
-
 '</div>';
 
 if(
@@ -1884,7 +1872,6 @@ tipo === "receita"
 ){
 
 html +=
-
   '<div class="total-receita">' +
 
   'Total de Receitas:' +
@@ -1910,7 +1897,6 @@ tipo === "despesa"
 ){
 
 html +=
-
   '<div class="total-despesa">' +
 
   'Total de Despesas:' +
@@ -1963,8 +1949,7 @@ return isFinite(valor)
 }
 
 let texto =
-String(valor)
-.trim();
+String(valor).trim();
 
 texto =
 texto
@@ -1977,8 +1962,13 @@ texto
 ""
 );
 
+/*
+
+Número brasileiro:
+1.234,56
+*/
 if(
-texto.includes(",")
+texto.indexOf(",") !== -1
 ){
 
 texto =
@@ -1995,9 +1985,7 @@ texto =
 }
 
 const numero =
-Number(
-texto
-);
+Number(texto);
 
 return isFinite(numero)
 ? numero
@@ -2070,7 +2058,7 @@ competencia
 )
 ){
 
-return comp || "-";
+return "-";
 
 }
 
@@ -2091,10 +2079,8 @@ FORMATAR MOEDA
 
 function formatar(valor){
 
-return Number(
-converterNumero(
+return converterNumero(
 valor
-)
 ).toLocaleString(
 "pt-BR",
 {
@@ -2121,31 +2107,8 @@ return "";
 
 }
 
-if(
-data instanceof Date
-){
-
-if(
-  isNaN(
-    data.getTime()
-  )
-){
-
-  return "";
-
-}
-
-
-return data.toLocaleDateString(
-  "pt-BR"
-);
-
-}
-
 const texto =
-String(
-data
-).trim();
+String(data).trim();
 
 /*
 
@@ -2187,35 +2150,11 @@ return (
 
 /*
 
-AAAA-MM-DDTHH...
+Tenta converter datas
+retornadas pelo Apps Script.
 */
-if(
-/^\d{4}-\d{2}-\d{2}T/.test(
-texto
-)
-){
-
-const partes =
-  texto.substring(
-    0,
-    10
-  ).split("-");
-
-
-return (
-  partes[2] +
-  "/" +
-  partes[1] +
-  "/" +
-  partes[0]
-);
-
-}
-
 const objeto =
-new Date(
-data
-);
+new Date(data);
 
 if(
 !isNaN(
@@ -2283,10 +2222,6 @@ VOLTAR
 
 function voltar(){
 
-/*
-
-Volta para o index.
-*/
 window.location.href =
 "./index.html";
 
@@ -2296,20 +2231,11 @@ window.location.href =
 INICIALIZAÇÃO
 ===================================================== */
 
-window.addEventListener(
-"load",
+document.addEventListener(
+"DOMContentLoaded",
 function(){
 
-/*
- * 1. Cria as opções.
- */
-
 criarCompetencias();
-
-/*
- * 2. Carrega imediatamente
- * a competência selecionada.
- */
 
 carregarRelatorio();
 
