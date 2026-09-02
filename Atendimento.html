@@ -5,532 +5,728 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
 
-<title>Atendimento - Controle Financeiro</title>
+<base target="_top">
+
+<title>Atendimento</title>
 
 <style>
 
+/* =========================================================
+   CONFIGURAÇÕES GERAIS
+========================================================= */
+
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
 }
 
 body{
-
-margin:0;
-
-padding:20px;
-
-font-family:"Segoe UI",Arial,sans-serif;
-
-background:linear-gradient(135deg,#e8eef5,#ffffff);
-
-color:#333;
-
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:linear-gradient(135deg,#e8eef5,#ffffff);
+    color:#263238;
 }
+
+/* =========================================================
+   CONTAINER
+========================================================= */
 
 .container{
-
-max-width:1100px;
-
-margin:auto;
-
-background:#fff;
-
-padding:25px;
-
-border-radius:18px;
-
-box-shadow:0 8px 25px rgba(0,0,0,.15);
-
+    width:100%;
+    max-width:1400px;
+    margin:0 auto;
+    padding:20px;
 }
 
+/* =========================================================
+   CABEÇALHO
+========================================================= */
 
-/* =====================================================
-   TOPO
-===================================================== */
+.header{
+    background:#ffffff;
+    border-radius:16px;
+    padding:20px 24px;
+    margin-bottom:18px;
+    box-shadow:0 4px 18px rgba(0,0,0,.08);
 
-.topo{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-gap:15px;
-
-margin-bottom:25px;
-
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
 }
 
-.topo h1{
-
-margin:0;
-
-color:#0d47a1;
-
-font-size:28px;
-
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
 
-.btn-voltar{
+.header-icon{
+    width:48px;
+    height:48px;
+    border-radius:12px;
 
-border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-padding:12px 24px;
+    background:#1976d2;
+    color:#ffffff;
 
-border-radius:10px;
-
-background:linear-gradient(135deg,#455a64,#78909c);
-
-color:#fff;
-
-font-weight:bold;
-
-font-size:15px;
-
-cursor:pointer;
-
+    font-size:24px;
 }
 
-.btn-voltar:hover{
-
-transform:translateY(-2px);
-
-filter:brightness(1.08);
-
+.header h1{
+    margin:0;
+    font-size:24px;
+    font-weight:700;
 }
 
-
-/* =====================================================
-   PESQUISA
-===================================================== */
-
-.pesquisa{
-
-background:#f5f7fa;
-
-border:1px solid #e0e6ed;
-
-border-radius:14px;
-
-padding:20px;
-
-margin-bottom:20px;
-
+.header p{
+    margin:4px 0 0;
+    color:#78909c;
+    font-size:14px;
 }
 
-.pesquisa h2{
+/* =========================================================
+   BOTÕES
+========================================================= */
 
-margin:0 0 15px 0;
-
-color:#1976d2;
-
-font-size:19px;
-
+button{
+    border:0;
+    cursor:pointer;
+    font-family:inherit;
 }
 
-.linha-pesquisa{
+.btn{
+    min-height:42px;
+    padding:0 18px;
 
-display:grid;
+    border-radius:9px;
 
-grid-template-columns:1fr auto;
+    font-size:14px;
+    font-weight:600;
 
-gap:12px;
-
+    transition:.2s;
 }
 
-input{
-
-width:100%;
-
-height:46px;
-
-padding:0 14px;
-
-border:1px solid #cbd5e1;
-
-border-radius:9px;
-
-font-size:15px;
-
-outline:none;
-
+.btn:hover{
+    transform:translateY(-1px);
 }
 
-input:focus{
-
-border-color:#1976d2;
-
-box-shadow:0 0 0 3px rgba(25,118,210,.12);
-
+.btn-primary{
+    background:#1976d2;
+    color:#ffffff;
 }
 
-.btn-pesquisar{
-
-height:46px;
-
-padding:0 25px;
-
-border:none;
-
-border-radius:9px;
-
-background:linear-gradient(135deg,#1976d2,#2196f3);
-
-color:#fff;
-
-font-size:15px;
-
-font-weight:bold;
-
-cursor:pointer;
-
+.btn-primary:hover{
+    background:#1565c0;
 }
 
-.btn-pesquisar:hover{
-
-filter:brightness(1.08);
-
-transform:translateY(-2px);
-
+.btn-secondary{
+    background:#eceff1;
+    color:#37474f;
 }
 
-.btn-pesquisar:disabled{
-
-opacity:.6;
-
-cursor:not-allowed;
-
-transform:none;
-
+.btn-secondary:hover{
+    background:#dfe4e7;
 }
 
-
-/* =====================================================
-   MENSAGENS
-===================================================== */
-
-.mensagem{
-
-display:none;
-
-margin:15px 0;
-
-padding:13px;
-
-border-radius:8px;
-
+.btn-danger{
+    background:#d32f2f;
+    color:#ffffff;
 }
 
-.mensagem.info{
+/* =========================================================
+   ÁREA DE PESQUISA
+========================================================= */
 
-display:block;
+.search-card{
+    background:#ffffff;
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:18px;
 
-background:#e3f2fd;
-
-color:#1565c0;
-
+    box-shadow:0 4px 18px rgba(0,0,0,.08);
 }
 
-.mensagem.erro{
+.search-title{
+    margin:0 0 14px;
 
-display:block;
-
-background:#ffebee;
-
-color:#c62828;
-
-border-left:5px solid #c62828;
-
-font-weight:bold;
-
+    font-size:17px;
+    font-weight:700;
 }
 
-.mensagem.sucesso{
-
-display:block;
-
-background:#e8f5e9;
-
-color:#2e7d32;
-
+.search-area{
+    display:flex;
+    gap:10px;
+    align-items:center;
 }
 
+.search-input{
+    flex:1;
 
-/* =====================================================
-   RESULTADO
-===================================================== */
+    height:46px;
 
-.resultado{
+    padding:0 15px;
 
-margin-top:20px;
+    border:1px solid #cfd8dc;
+    border-radius:9px;
 
+    font-size:15px;
+    outline:none;
+
+    transition:.2s;
 }
 
-.tabela-container{
+.search-input:focus{
+    border-color:#1976d2;
+    box-shadow:0 0 0 3px rgba(25,118,210,.10);
+}
 
-width:100%;
+.search-help{
+    margin-top:10px;
 
-overflow-x:auto;
+    font-size:12px;
+    color:#78909c;
+}
 
-border:1px solid #dfe5eb;
+/* =========================================================
+   STATUS
+========================================================= */
 
-border-radius:12px;
+.status{
+    display:none;
 
+    background:#ffffff;
+
+    border-radius:12px;
+
+    padding:12px 16px;
+
+    margin-bottom:15px;
+
+    font-size:14px;
+}
+
+.status.show{
+    display:block;
+}
+
+.status.loading{
+    color:#1565c0;
+    background:#e3f2fd;
+}
+
+.status.success{
+    color:#2e7d32;
+    background:#e8f5e9;
+}
+
+.status.error{
+    color:#c62828;
+    background:#ffebee;
+}
+
+/* =========================================================
+   RESULTADOS
+========================================================= */
+
+.result-card{
+    background:#ffffff;
+
+    border-radius:16px;
+
+    box-shadow:0 4px 18px rgba(0,0,0,.08);
+
+    overflow:hidden;
+}
+
+.result-header{
+    padding:18px 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    border-bottom:1px solid #eceff1;
+}
+
+.result-title{
+    margin:0;
+
+    font-size:17px;
+    font-weight:700;
+}
+
+.result-count{
+    background:#e3f2fd;
+    color:#1565c0;
+
+    padding:6px 11px;
+
+    border-radius:20px;
+
+    font-size:12px;
+    font-weight:700;
+}
+
+/* =========================================================
+   TABELA
+========================================================= */
+
+.table-container{
+    width:100%;
+    overflow-x:auto;
 }
 
 table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:750px;
+}
 
-width:100%;
-
-border-collapse:collapse;
-
-min-width:650px;
-
+thead{
+    background:#f5f7f9;
 }
 
 th{
+    padding:13px 14px;
 
-background:linear-gradient(135deg,#0d47a1,#1976d2);
+    text-align:left;
 
-color:white;
+    font-size:12px;
+    font-weight:700;
 
-padding:14px 12px;
+    color:#546e7a;
 
-text-align:left;
+    border-bottom:1px solid #e0e0e0;
 
-font-size:14px;
-
+    white-space:nowrap;
 }
 
 td{
-
-padding:13px 12px;
-
-border-bottom:1px solid #e5e7eb;
-
-vertical-align:top;
-
-font-size:14px;
-
-}
-
-tr:nth-child(even){
-
-background:#f8f9fc;
-
-}
-
-tr:hover{
-
-background:#eef5ff;
-
-}
-
-.col-id{
-
-width:100px;
-
-text-align:center;
-
-font-weight:bold;
-
-color:#0d47a1;
-
-}
-
-.col-problema{
-
-width:40%;
-
-}
-
-.col-solucao{
-
-width:50%;
-
-}
-
-.nenhum{
-
-text-align:center;
-
-padding:35px;
-
-color:#777;
-
-background:#fafafa;
-
-border-radius:10px;
-
-}
-
-.carregando{
-
-text-align:center;
-
-padding:30px;
-
-color:#777;
-
-}
-
-
-/* =====================================================
-   SEPARADOR
-===================================================== */
-
-.separador{
-
-height:1px;
-
-background:#e0e6ed;
-
-margin:30px 0;
-
-}
-
-
-/* =====================================================
-   TÍTULO DOS RESULTADOS
-===================================================== */
-
-.titulo-resultados{
-
-margin:20px 0 10px 0;
-
-font-size:16px;
-
-font-weight:bold;
-
-color:#455a64;
-
-}
-/* =====================================================
-   STATUS DA API
-===================================================== */
-
-.status-api{
-
-    margin-top:15px;
-
-    padding:14px 16px;
-
-    border-radius:10px;
-
-    border:1px solid #dbe3ec;
-
-    background:#f8fafc;
+    padding:13px 14px;
 
     font-size:13px;
 
+    border-bottom:1px solid #eceff1;
+
+    vertical-align:middle;
 }
 
-.status-api-titulo{
+tbody tr{
+    transition:.15s;
+}
 
-    font-weight:bold;
+tbody tr:hover{
+    background:#f8fafc;
+}
+
+/* =========================================================
+   CÉLULAS
+========================================================= */
+
+.col-id{
+    width:90px;
+    color:#78909c;
+    white-space:nowrap;
+}
+
+.col-data{
+    width:120px;
+    white-space:nowrap;
+}
+
+.col-acoes{
+    width:100px;
+    text-align:center;
+}
+
+.descricao{
+    font-weight:600;
+    color:#263238;
+}
+
+.valor{
+    font-weight:700;
+    white-space:nowrap;
+}
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.badge{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    min-height:25px;
+
+    padding:4px 9px;
+
+    border-radius:20px;
+
+    font-size:11px;
+    font-weight:700;
+
+    white-space:nowrap;
+}
+
+.badge-success{
+    background:#e8f5e9;
+    color:#2e7d32;
+}
+
+.badge-warning{
+    background:#fff8e1;
+    color:#ef6c00;
+}
+
+.badge-info{
+    background:#e3f2fd;
+    color:#1565c0;
+}
+
+.badge-neutral{
+    background:#eceff1;
+    color:#546e7a;
+}
+
+/* =========================================================
+   BOTÃO DETALHES
+========================================================= */
+
+.btn-view{
+    min-height:32px;
+
+    padding:0 10px;
+
+    border-radius:7px;
+
+    background:#eceff1;
+
+    color:#37474f;
+
+    font-size:12px;
+    font-weight:600;
+}
+
+.btn-view:hover{
+    background:#dfe4e7;
+}
+
+/* =========================================================
+   ESTADO VAZIO
+========================================================= */
+
+.empty{
+    padding:55px 20px;
+
+    text-align:center;
+}
+
+.empty-icon{
+    font-size:42px;
+
+    margin-bottom:10px;
+}
+
+.empty-title{
+    font-size:17px;
+    font-weight:700;
+
+    color:#455a64;
+}
+
+.empty-text{
+    margin-top:6px;
+
+    font-size:13px;
+
+    color:#90a4ae;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:1000;
+
+    background:rgba(0,0,0,.45);
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-content{
+    width:100%;
+    max-width:700px;
+    max-height:90vh;
+
+    background:#ffffff;
+
+    border-radius:16px;
+
+    box-shadow:0 15px 50px rgba(0,0,0,.25);
+
+    overflow:hidden;
+
+    animation:modalEntrada .18s ease;
+}
+
+@keyframes modalEntrada{
+
+    from{
+        opacity:0;
+        transform:translateY(10px) scale(.98);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
+}
+
+.modal-header{
+    padding:18px 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    border-bottom:1px solid #eceff1;
+}
+
+.modal-title{
+    margin:0;
+
+    font-size:18px;
+    font-weight:700;
+}
+
+.modal-close{
+    width:34px;
+    height:34px;
+
+    border-radius:8px;
+
+    background:#eceff1;
 
     color:#455a64;
 
-    margin-bottom:7px;
-
+    font-size:20px;
 }
 
-.status-api-detalhes{
-
-    color:#607d8b;
-
-    line-height:1.7;
-
+.modal-close:hover{
+    background:#dfe4e7;
 }
 
-.status-api.ok{
+.modal-body{
+    padding:20px;
 
-    background:#e8f5e9;
+    overflow:auto;
 
-    border-color:#a5d6a7;
-
+    max-height:calc(90vh - 75px);
 }
 
-.status-api.erro{
+/* =========================================================
+   DETALHES
+========================================================= */
 
-    background:#ffebee;
+.detail-grid{
+    display:grid;
 
-    border-color:#ef9a9a;
+    grid-template-columns:repeat(2,1fr);
 
+    gap:14px;
 }
 
-.status-api strong{
+.detail-item{
+    padding:13px;
+
+    background:#f8fafc;
+
+    border-radius:9px;
+
+    border:1px solid #eceff1;
+}
+
+.detail-label{
+    display:block;
+
+    margin-bottom:5px;
+
+    font-size:11px;
+
+    color:#78909c;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+}
+
+.detail-value{
+    display:block;
+
+    font-size:14px;
 
     color:#263238;
 
+    word-break:break-word;
 }
 
-.status-api-url{
+/* =========================================================
+   LOADING
+========================================================= */
 
-    word-break:break-all;
+.loading-overlay{
+    position:fixed;
+
+    inset:0;
+
+    z-index:2000;
+
+    background:rgba(255,255,255,.75);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+}
+
+.loading-overlay.show{
+    display:flex;
+}
+
+.loading-box{
+    background:#ffffff;
+
+    border-radius:14px;
+
+    padding:25px 35px;
+
+    box-shadow:0 8px 30px rgba(0,0,0,.15);
+
+    text-align:center;
+}
+
+.spinner{
+    width:34px;
+    height:34px;
+
+    margin:0 auto 12px;
+
+    border:4px solid #e3f2fd;
+
+    border-top-color:#1976d2;
+
+    border-radius:50%;
+
+    animation:girar .8s linear infinite;
+}
+
+@keyframes girar{
+
+    to{
+        transform:rotate(360deg);
+    }
 
 }
 
-/* =====================================================
+.loading-text{
+    font-size:13px;
+    color:#546e7a;
+}
+
+/* =========================================================
+   RODAPÉ
+========================================================= */
+
+.footer{
+    padding:18px 5px;
+
+    text-align:center;
+
+    color:#90a4ae;
+
+    font-size:11px;
+}
+
+/* =========================================================
    RESPONSIVO
-===================================================== */
+========================================================= */
 
-@media(max-width:700px){
+@media(max-width:800px){
 
-body{
+    .container{
+        padding:12px;
+    }
 
-padding:10px;
+    .header{
+        padding:16px;
 
-}
+        flex-direction:column;
+        align-items:stretch;
+    }
 
-.container{
+    .header-left{
+        width:100%;
+    }
 
-padding:15px;
+    .search-area{
+        flex-direction:column;
+    }
 
-border-radius:12px;
+    .search-input,
+    .search-area .btn{
+        width:100%;
+    }
 
-}
-
-.topo{
-
-flex-direction:column;
-
-align-items:stretch;
-
-}
-
-.topo h1{
-
-font-size:23px;
-
-}
-
-.btn-voltar{
-
-width:100%;
+    .detail-grid{
+        grid-template-columns:1fr;
+    }
 
 }
 
-.linha-pesquisa{
+@media(max-width:500px){
 
-grid-template-columns:1fr;
+    .header h1{
+        font-size:20px;
+    }
 
-}
+    .header p{
+        font-size:12px;
+    }
 
-.btn-pesquisar{
-
-width:100%;
-
-}
-
-table{
-
-min-width:600px;
-
-}
+    .result-header{
+        padding:15px;
+    }
 
 }
 
@@ -541,1701 +737,1582 @@ min-width:600px;
 
 <body>
 
-
 <div class="container">
 
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
 
-<!-- =====================================================
-     TOPO
-===================================================== -->
+    <header class="header">
 
-<div class="topo">
+        <div class="header-left">
 
-<h1>
-🔎 Atendimento
-</h1>
-<!-- =====================================================
-     STATUS DA API
-===================================================== -->
+            <div class="header-icon">
+                👥
+            </div>
 
-<div id="statusAPI" class="status-api">
+            <div>
 
-    <div class="status-api-titulo">
-        🔌 Status da API
+                <h1>
+                    Atendimento
+                </h1>
+
+                <p>
+                    Pesquisa e consulta de atendimentos
+                </p>
+
+            </div>
+
+        </div>
+
+        <button
+            class="btn btn-secondary"
+            onclick="voltar()">
+
+            ← Voltar
+
+        </button>
+
+    </header>
+
+
+    <!-- =====================================================
+         PESQUISA
+    ====================================================== -->
+
+    <section class="search-card">
+
+        <h2 class="search-title">
+            Pesquisar atendimento
+        </h2>
+
+        <div class="search-area">
+
+            <input
+                type="text"
+                id="campoPesquisa"
+                class="search-input"
+                autocomplete="off"
+                placeholder="Digite nome, código, CPF, CNPJ ou outra informação...">
+
+            <button
+                class="btn btn-primary"
+                id="btnPesquisar"
+                onclick="pesquisar()">
+
+                🔎 Pesquisar
+
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                onclick="limparPesquisa()">
+
+                Limpar
+
+            </button>
+
+        </div>
+
+        <div class="search-help">
+
+            Informe um termo para localizar os registros de atendimento.
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         STATUS
+    ====================================================== -->
+
+    <div
+        id="status"
+        class="status">
     </div>
 
-    <div id="statusAPIDetalhes" class="status-api-detalhes">
-        🟡 Verificando conexão...
-    </div>
 
-</div>
+    <!-- =====================================================
+         RESULTADOS
+    ====================================================== -->
 
-<button
-type="button"
-class="btn-voltar"
-onclick="voltar()">
+    <section class="result-card">
 
-⬅ Voltar
+        <div class="result-header">
 
-</button>
+            <h2 class="result-title">
+                Resultados
+            </h2>
 
-</div>
+            <span
+                id="contador"
+                class="result-count">
 
+                0 registros
 
+            </span>
 
-<!-- =====================================================
-     PESQUISA DE ATENDIMENTO
-===================================================== -->
-
-<div class="pesquisa">
-
-<h2>
-Pesquisar atendimento
-</h2>
+        </div>
 
 
-<div class="linha-pesquisa">
+        <div
+            id="resultado">
 
-<input
-id="campoPesquisa"
-type="text"
-placeholder="Digite o problema ou palavra-chave..."
-autocomplete="off">
+            <div class="empty">
 
+                <div class="empty-icon">
+                    🔎
+                </div>
 
-<button
-type="button"
-id="btnPesquisar"
-class="btn-pesquisar"
-onclick="pesquisar()">
+                <div class="empty-title">
+                    Nenhuma pesquisa realizada
+                </div>
 
-🔎 Pesquisar
+                <div class="empty-text">
+                    Digite um termo acima para iniciar a pesquisa.
+                </div>
 
-</button>
+            </div>
 
-</div>
+        </div>
 
-</div>
-
-
-
-<!-- =====================================================
-     RESULTADO ATENDIMENTO
-===================================================== -->
-
-<div id="mensagem" class="mensagem">
-</div>
+    </section>
 
 
-<div id="resultado" class="resultado">
+    <footer class="footer">
 
-<div class="nenhum">
+        Controle Financeiro • Atendimento
 
-Digite um problema ou palavra-chave
-para pesquisar na base de Atendimento.
-
-</div>
+    </footer>
 
 </div>
 
 
-
-<!-- =====================================================
-     SEPARADOR
-===================================================== -->
-
-<div class="separador">
-</div>
-
-
-
-<!-- =====================================================
-     PESQUISA TABELA / CAMPO
-===================================================== -->
-
-<div class="pesquisa">
-
-<h2>
-🗄️ Pesquisar Tabela / Campo
-</h2>
-
-
-<div class="linha-pesquisa">
-
-<input
-id="campoTabelaCampo"
-type="text"
-placeholder="Digite o nome da tabela ou campo..."
-autocomplete="off">
-
-
-<button
-type="button"
-id="btnTabelaCampo"
-class="btn-pesquisar"
-onclick="pesquisarTabelaCampo()">
-
-🔎 Pesquisar
-
-</button>
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     RESULTADO TABELA / CAMPO
-===================================================== -->
+<!-- =========================================================
+     MODAL DE DETALHES
+========================================================== -->
 
 <div
-id="resultadoTabelaCampo"
-class="resultado">
+    id="modal"
+    class="modal"
+    onclick="fecharModalFora(event)">
 
-<div class="nenhum">
+    <div class="modal-content">
 
-Digite uma tabela ou campo
-para realizar a pesquisa.
+        <div class="modal-header">
+
+            <h2
+                id="modalTitulo"
+                class="modal-title">
+
+                Detalhes
+
+            </h2>
+
+            <button
+                class="modal-close"
+                onclick="fecharModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+        <div
+            id="modalBody"
+            class="modal-body">
+        </div>
+
+    </div>
 
 </div>
 
+
+<!-- =========================================================
+     LOADING
+========================================================== -->
+
+<div
+    id="loading"
+    class="loading-overlay">
+
+    <div class="loading-box">
+
+        <div class="spinner"></div>
+
+        <div class="loading-text">
+            Pesquisando...
+        </div>
+
+    </div>
+
 </div>
-
-
-</div>
-
 
 
 <script>
 
+/* =========================================================
+   CONFIGURAÇÕES
+========================================================= */
 
-/* =====================================================
-   CONFIGURAÇÃO
-===================================================== */
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbyaMJlpmVPnTqvCTosvINN4tNEHZygapcHtjhb03s0Ak_a2BOrX79knXWvKgWdyi4Us/exec";
 
-const URL_API =
-"https://script.google.com/macros/s/AKfycbyaMJlpmVPnTqvCTosvINN4tNEHZygapcHtjhb03s0Ak_a2BOrX79knXWvKgWdyi4Us/exec";
 
+let resultadosAtuais = [];
 
-const URL_INDEX =
-"https://joeldisousa-dot.github.io/gestaofinanceira/";
+let requisicaoAtual = 0;
 
 
-let contadorJSONP = 0;
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
 
+document.addEventListener("DOMContentLoaded", function(){
 
+    const campo =
+        document.getElementById("campoPesquisa");
 
-/* =====================================================
-   CHAMAR API
-===================================================== */
+    if(campo){
 
-function chamarAPI(
-acao,
-parametros
-){
+        campo.addEventListener("keydown", function(event){
 
-return new Promise(
-function(resolve,reject){
+            if(event.key === "Enter"){
 
-const callback =
-"callbackAtendimento_" +
-Date.now() +
-"_" +
-(++contadorJSONP);
+                event.preventDefault();
 
+                pesquisar();
 
-const script =
-document.createElement(
-"script"
-);
+            }
 
+        });
 
-const dados =
-Object.assign(
-{},
-parametros || {}
-);
+        campo.focus();
 
+    }
 
-dados.action =
-acao;
+});
 
 
-dados.callback =
-callback;
+/* =========================================================
+   PESQUISA
+========================================================= */
 
+function pesquisar(){
 
-const query =
-Object.keys(dados)
+    const campo =
+        document.getElementById("campoPesquisa");
 
-.map(
-function(chave){
+    const termo =
+        campo.value.trim();
 
-return (
+    if(!termo){
 
-encodeURIComponent(
-chave
-)
-
-+
-
-"="
-
-+
-
-encodeURIComponent(
-
-dados[chave] === undefined ||
-dados[chave] === null
-
-?
-
-""
-
-:
-
-dados[chave]
-
-)
-
-);
-
-}
-)
-
-.join("&");
-
-
-const url =
-URL_API +
-"?" +
-query;
-
-
-let finalizado =
-false;
-
-
-const timeout =
-setTimeout(
-function(){
-
-if(finalizado){
-
-return;
-
-}
-
-
-finalizado =
-true;
-
-
-cleanup();
-
-
-reject(
-new Error(
-"Tempo limite excedido ao consultar a API."
-)
-);
-
-
-},
-30000
-);
-
-
-
-window[callback] =
-function(resposta){
-
-if(finalizado){
-
-return;
-
-}
-
-
-finalizado =
-true;
-
-
-clearTimeout(
-timeout
-);
-
-
-cleanup();
-
-
-resolve(
-resposta
-);
-
-};
-
-
-
-script.onerror =
-function(){
-
-if(finalizado){
-
-return;
-
-}
-
-
-finalizado =
-true;
-
-
-clearTimeout(
-timeout
-);
-
-
-cleanup();
-
-
-reject(
-new Error(
-"Não foi possível conectar ao Google Apps Script."
-)
-);
-
-};
-
-
-
-script.src =
-url;
-
-
-document.body.appendChild(
-script
-);
-
-/* =====================================================
-   VERIFICAR STATUS DA API
-===================================================== */
-
-async function verificarStatusAPI(){
-
-    const painel =
-        document.getElementById(
-            "statusAPI"
+        mostrarStatus(
+            "Digite um termo para realizar a pesquisa.",
+            "error"
         );
 
-    const detalhes =
-        document.getElementById(
-            "statusAPIDetalhes"
+        campo.focus();
+
+        return;
+
+    }
+
+    const numeroRequisicao =
+        ++requisicaoAtual;
+
+    mostrarLoading(true);
+
+    mostrarStatus(
+        "Pesquisando atendimento...",
+        "loading"
+    );
+
+    document.getElementById("btnPesquisar").disabled = true;
+
+
+    chamarAPI(
+        "pesquisarAtendimento",
+        {
+            termo: termo
+        }
+    )
+
+    .then(function(resposta){
+
+        if(numeroRequisicao !== requisicaoAtual){
+            return;
+        }
+
+        processarResposta(resposta);
+
+    })
+
+    .catch(function(erro){
+
+        if(numeroRequisicao !== requisicaoAtual){
+            return;
+        }
+
+        console.error(erro);
+
+        resultadosAtuais = [];
+
+        renderizarResultados([]);
+
+        mostrarStatus(
+            "Não foi possível realizar a pesquisa.",
+            "error"
         );
 
-    try{
+    })
 
-        detalhes.innerHTML =
-            "🟡 Verificando conexão com a API...";
+    .finally(function(){
 
-        const resposta =
-            await chamarAPI(
-                "versao",
-                {}
+        if(numeroRequisicao === requisicaoAtual){
+
+            mostrarLoading(false);
+
+            document.getElementById(
+                "btnPesquisar"
+            ).disabled = false;
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   PROCESSAR RESPOSTA
+========================================================= */
+
+function processarResposta(resposta){
+
+    if(!resposta){
+
+        renderizarResultados([]);
+
+        mostrarStatus(
+            "Nenhum dado foi retornado.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(resposta.sucesso === false){
+
+        renderizarResultados([]);
+
+        mostrarStatus(
+            resposta.mensagem ||
+            "Ocorreu um erro na pesquisa.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    let dados = [];
+
+
+    if(Array.isArray(resposta)){
+        dados = resposta;
+    }
+
+    else if(Array.isArray(resposta.dados)){
+        dados = resposta.dados;
+    }
+
+    else if(Array.isArray(resposta.lista)){
+        dados = resposta.lista;
+    }
+
+    else if(Array.isArray(resposta.resultados)){
+        dados = resposta.resultados;
+    }
+
+    else if(Array.isArray(resposta.atendimentos)){
+        dados = resposta.atendimentos;
+    }
+
+
+    resultadosAtuais = dados;
+
+    renderizarResultados(dados);
+
+
+    if(dados.length){
+
+        mostrarStatus(
+            dados.length +
+            " registro(s) encontrado(s).",
+            "success"
+        );
+
+    }else{
+
+        mostrarStatus(
+            "Nenhum registro encontrado.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDERIZAR RESULTADOS
+========================================================= */
+
+function renderizarResultados(dados){
+
+    const container =
+        document.getElementById("resultado");
+
+    const contador =
+        document.getElementById("contador");
+
+
+    contador.textContent =
+        dados.length +
+        (dados.length === 1
+            ? " registro"
+            : " registros");
+
+
+    if(!dados.length){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📭
+                </div>
+
+                <div class="empty-title">
+                    Nenhum resultado encontrado
+                </div>
+
+                <div class="empty-text">
+                    Tente utilizar outro termo de pesquisa.
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /*
+     * Descobre automaticamente as colunas
+     * retornadas pelo Código.gs.
+     */
+
+    const colunas =
+        obterColunas(dados);
+
+
+    let html = `
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+    `;
+
+
+    colunas.forEach(function(coluna){
+
+        html += `
+
+            <th>
+                ${escaparHTML(formatarCabecalho(coluna))}
+            </th>
+
+        `;
+
+    });
+
+
+    html += `
+
+                        <th class="col-acoes">
+                            Ações
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+    `;
+
+
+    dados.forEach(function(item,index){
+
+        html += "<tr>";
+
+
+        colunas.forEach(function(coluna){
+
+            html += "<td>";
+
+            html += formatarValorTabela(
+                item[coluna],
+                coluna
             );
 
-        console.log(
-            "Resposta da versão da API:",
-            resposta
-        );
+            html += "</td>";
+
+        });
+
+
+        html += `
+
+            <td class="col-acoes">
+
+                <button
+                    class="btn-view"
+                    onclick="abrirDetalhes(${index})">
+
+                    Ver
+
+                </button>
+
+            </td>
+
+        `;
+
+
+        html += "</tr>";
+
+    });
+
+
+    html += `
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    `;
+
+
+    container.innerHTML = html;
+
+}
+
+
+/* =========================================================
+   OBTER COLUNAS
+========================================================= */
+
+function obterColunas(dados){
+
+    const mapa = {};
+    const resultado = [];
+
+
+    dados.forEach(function(item){
+
+        if(!item || typeof item !== "object"){
+            return;
+        }
+
+
+        Object.keys(item).forEach(function(chave){
+
+            if(
+                chave === "success" ||
+                chave === "sucesso"
+            ){
+
+                return;
+
+            }
+
+
+            if(!mapa[chave]){
+
+                mapa[chave] = true;
+
+                resultado.push(chave);
+
+            }
+
+        });
+
+    });
+
+
+    return resultado;
+
+}
+
+
+/* =========================================================
+   FORMATAR CABEÇALHO
+========================================================= */
+
+function formatarCabecalho(nome){
+
+    if(!nome){
+        return "";
+    }
+
+
+    const mapa = {
+
+        id: "ID",
+
+        nome: "Nome",
+
+        cpf: "CPF",
+
+        cnpj: "CNPJ",
+
+        telefone: "Telefone",
+
+        celular: "Celular",
+
+        email: "E-mail",
+
+        data: "Data",
+
+        dataatendimento: "Data do Atendimento",
+
+        competencia: "Competência",
+
+        descricao: "Descrição",
+
+        assunto: "Assunto",
+
+        observacao: "Observação",
+
+        observacoes: "Observações",
+
+        status: "Status"
+
+    };
+
+
+    const chave =
+        String(nome)
+        .toLowerCase()
+        .replace(/\s+/g,"")
+        .replace(/_/g,"");
+
+
+    if(mapa[chave]){
+        return mapa[chave];
+    }
+
+
+    return String(nome)
+        .replace(/_/g," ")
+        .replace(/\b\w/g,function(letra){
+            return letra.toUpperCase();
+        });
+
+}
+
+
+/* =========================================================
+   FORMATAR VALOR DA TABELA
+========================================================= */
+
+function formatarValorTabela(valor,chave){
+
+    if(
+        valor === null ||
+        valor === undefined ||
+        valor === ""
+    ){
+
+        return `
+            <span class="badge badge-neutral">
+                —
+            </span>
+        `;
+
+    }
+
+
+    const nome =
+        String(chave)
+        .toLowerCase()
+        .replace(/\s+/g,"")
+        .replace(/_/g,"");
+
+
+    /* ---------------------------------------------
+       STATUS
+    --------------------------------------------- */
+
+    if(nome === "status"){
+
+        const texto =
+            String(valor);
+
+        const normalizado =
+            normalizarTexto(texto);
+
+
+        let classe =
+            "badge-neutral";
+
 
         if(
-            !resposta ||
-            resposta.sucesso === false
+            normalizado.includes("conclu") ||
+            normalizado.includes("resol") ||
+            normalizado.includes("final")
         ){
 
-            throw new Error(
-                resposta &&
-                (
-                    resposta.erro ||
-                    resposta.mensagem
-                )
-                ||
-                "A API não retornou informações de versão."
+            classe =
+                "badge-success";
+
+        }
+
+        else if(
+            normalizado.includes("pend") ||
+            normalizado.includes("aguard")
+        ){
+
+            classe =
+                "badge-warning";
+
+        }
+
+        else if(
+            normalizado.includes("andamento")
+        ){
+
+            classe =
+                "badge-info";
+
+        }
+
+
+        return `
+
+            <span class="badge ${classe}">
+                ${escaparHTML(texto)}
+            </span>
+
+        `;
+
+    }
+
+
+    /* ---------------------------------------------
+       VALORES MONETÁRIOS
+    --------------------------------------------- */
+
+    if(
+        nome.includes("valor") ||
+        nome.includes("preco") ||
+        nome.includes("preço")
+    ){
+
+        const numero =
+            converterNumero(valor);
+
+
+        if(numero !== null){
+
+            return `
+
+                <span class="valor">
+                    ${formatarMoeda(numero)}
+                </span>
+
+            `;
+
+        }
+
+    }
+
+
+    /* ---------------------------------------------
+       DATAS
+    --------------------------------------------- */
+
+    if(
+        nome.includes("data") ||
+        nome.includes("vencimento")
+    ){
+
+        const data =
+            converterData(valor);
+
+
+        if(data){
+
+            return `
+                <span class="col-data">
+                    ${formatarData(data)}
+                </span>
+            `;
+
+        }
+
+    }
+
+
+    return escaparHTML(String(valor));
+
+}
+
+
+/* =========================================================
+   ABRIR DETALHES
+========================================================= */
+
+function abrirDetalhes(index){
+
+    const item =
+        resultadosAtuais[index];
+
+
+    if(!item){
+        return;
+    }
+
+
+    const modal =
+        document.getElementById("modal");
+
+    const titulo =
+        document.getElementById("modalTitulo");
+
+    const body =
+        document.getElementById("modalBody");
+
+
+    titulo.textContent =
+        obterTituloDetalhe(item);
+
+
+    const colunas =
+        Object.keys(item);
+
+
+    let html = `
+
+        <div class="detail-grid">
+
+    `;
+
+
+    colunas.forEach(function(chave){
+
+        if(
+            chave === "success" ||
+            chave === "sucesso"
+        ){
+
+            return;
+
+        }
+
+
+        const valor =
+            item[chave];
+
+
+        html += `
+
+            <div class="detail-item">
+
+                <span class="detail-label">
+
+                    ${escaparHTML(
+                        formatarCabecalho(chave)
+                    )}
+
+                </span>
+
+                <span class="detail-value">
+
+                    ${formatarValorDetalhe(valor,chave)}
+
+                </span>
+
+            </div>
+
+        `;
+
+    });
+
+
+    html += `
+
+        </div>
+
+    `;
+
+
+    body.innerHTML = html;
+
+    modal.classList.add("show");
+
+}
+
+
+/* =========================================================
+   TÍTULO DO DETALHE
+========================================================= */
+
+function obterTituloDetalhe(item){
+
+    const camposNome = [
+        "nome",
+        "Nome",
+        "cliente",
+        "Cliente",
+        "razao_social",
+        "Razao Social"
+    ];
+
+
+    for(let i=0;i<camposNome.length;i++){
+
+        const chave =
+            camposNome[i];
+
+
+        if(
+            item[chave] !== undefined &&
+            item[chave] !== null &&
+            String(item[chave]).trim()
+        ){
+
+            return String(item[chave]);
+
+        }
+
+    }
+
+
+    return "Detalhes do atendimento";
+
+}
+
+
+/* =========================================================
+   FORMATAR VALOR DO DETALHE
+========================================================= */
+
+function formatarValorDetalhe(valor,chave){
+
+    if(
+        valor === null ||
+        valor === undefined ||
+        valor === ""
+    ){
+
+        return "—";
+
+    }
+
+
+    const nome =
+        String(chave)
+        .toLowerCase()
+        .replace(/\s+/g,"")
+        .replace(/_/g,"");
+
+
+    if(
+        nome.includes("data") ||
+        nome.includes("vencimento")
+    ){
+
+        const data =
+            converterData(valor);
+
+
+        if(data){
+            return escaparHTML(
+                formatarData(data)
+            );
+        }
+
+    }
+
+
+    if(
+        nome.includes("valor") ||
+        nome.includes("preco") ||
+        nome.includes("preço")
+    ){
+
+        const numero =
+            converterNumero(valor);
+
+
+        if(numero !== null){
+
+            return escaparHTML(
+                formatarMoeda(numero)
             );
 
         }
 
-        const versao =
-            resposta.versao ||
-            "Não informada";
+    }
 
-        const implantacao =
-            resposta.implantacao ||
-            resposta.deployment ||
-            "Não informada";
 
-        const projeto =
-            resposta.projeto ||
-            "Controle Financeiro";
+    return escaparHTML(String(valor));
 
-        const dataHora =
-            resposta.dataHora ||
-            new Date().toLocaleString(
-                "pt-BR"
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function fecharModal(){
+
+    document
+        .getElementById("modal")
+        .classList.remove("show");
+
+}
+
+
+function fecharModalFora(event){
+
+    if(event.target.id === "modal"){
+
+        fecharModal();
+
+    }
+
+}
+
+
+/* =========================================================
+   ESC
+========================================================= */
+
+document.addEventListener("keydown",function(event){
+
+    if(event.key === "Escape"){
+
+        fecharModal();
+
+    }
+
+});
+
+
+/* =========================================================
+   LIMPAR PESQUISA
+========================================================= */
+
+function limparPesquisa(){
+
+    requisicaoAtual++;
+
+    resultadosAtuais = [];
+
+    document.getElementById(
+        "campoPesquisa"
+    ).value = "";
+
+    document.getElementById(
+        "btnPesquisar"
+    ).disabled = false;
+
+    renderizarResultados([]);
+
+    mostrarStatus(
+        "Pesquisa limpa.",
+        "success"
+    );
+
+    document.getElementById(
+        "campoPesquisa"
+    ).focus();
+
+}
+
+
+/* =========================================================
+   CHAMADA DA API JSONP
+========================================================= */
+
+function chamarAPI(acao,parametros){
+
+    return new Promise(function(resolve,reject){
+
+        const callback =
+            "callbackAtendimento_" +
+            Date.now() +
+            "_" +
+            Math.floor(Math.random()*100000);
+
+
+        const script =
+            document.createElement("script");
+
+
+        const timeout =
+            setTimeout(function(){
+
+                limpar();
+
+                reject(
+                    new Error(
+                        "Tempo limite excedido."
+                    )
+                );
+
+            },20000);
+
+
+        function limpar(){
+
+            clearTimeout(timeout);
+
+            if(script.parentNode){
+
+                script.parentNode.removeChild(script);
+
+            }
+
+            try{
+
+                delete window[callback];
+
+            }catch(e){
+
+                window[callback] =
+                    undefined;
+
+            }
+
+        }
+
+
+        window[callback] =
+            function(dados){
+
+                limpar();
+
+                resolve(dados);
+
+            };
+
+
+        const params =
+            Object.assign(
+                {},
+                parametros || {}
             );
 
-        detalhes.innerHTML = `
 
-            🟢 <strong>API conectada</strong><br>
+        params.action =
+            acao;
 
-            <strong>Versão:</strong>
-            ${escaparHTML(versao)}
-            <br>
+        params.callback =
+            callback;
 
-            <strong>Implantação:</strong>
-            ${escaparHTML(implantacao)}
-            <br>
 
-            <strong>Projeto:</strong>
-            ${escaparHTML(projeto)}
-            <br>
+        const query =
+            Object.keys(params)
 
-            <strong>Última resposta:</strong>
-            ${escaparHTML(dataHora)}
-            <br>
+            .map(function(chave){
 
-            <strong>API:</strong>
-            <span class="status-api-url">
-                ${escaparHTML(URL_API)}
-            </span>
+                return encodeURIComponent(chave) +
+                    "=" +
+                    encodeURIComponent(
+                        params[chave] === null ||
+                        params[chave] === undefined
+                            ? ""
+                            : params[chave]
+                    );
 
-        `;
+            })
 
-        painel.className =
-            "status-api ok";
+            .join("&");
+
+
+        script.src =
+            API_URL +
+            "?" +
+            query;
+
+
+        script.async = true;
+
+
+        script.onerror =
+            function(){
+
+                limpar();
+
+                reject(
+                    new Error(
+                        "Erro ao acessar a API."
+                    )
+                );
+
+            };
+
+
+        document
+            .head
+            .appendChild(script);
+
+    });
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function mostrarStatus(mensagem,tipo){
+
+    const status =
+        document.getElementById("status");
+
+
+    status.textContent =
+        mensagem;
+
+
+    status.className =
+        "status show " +
+        tipo;
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+function mostrarLoading(exibir){
+
+    const loading =
+        document.getElementById("loading");
+
+
+    if(exibir){
+
+        loading.classList.add("show");
+
+    }else{
+
+        loading.classList.remove("show");
 
     }
-    catch(erro){
 
-        console.error(
-            "Erro ao verificar API:",
-            erro
+}
+
+
+/* =========================================================
+   CONVERTER NÚMERO
+========================================================= */
+
+function converterNumero(valor){
+
+    if(
+        valor === null ||
+        valor === undefined ||
+        valor === ""
+    ){
+
+        return null;
+
+    }
+
+
+    if(typeof valor === "number"){
+
+        return Number.isFinite(valor)
+            ? valor
+            : null;
+
+    }
+
+
+    let texto =
+        String(valor)
+        .trim();
+
+
+    if(!texto){
+        return null;
+    }
+
+
+    texto =
+        texto.replace(/[R$\s]/g,"");
+
+
+    if(
+        texto.includes(",") &&
+        texto.includes(".")
+    ){
+
+        texto =
+            texto.replace(/\./g,"")
+                 .replace(",", ".");
+
+    }
+
+    else if(texto.includes(",")){
+
+        texto =
+            texto.replace(",", ".");
+
+    }
+
+
+    const numero =
+        Number(texto);
+
+
+    return Number.isFinite(numero)
+        ? numero
+        : null;
+
+}
+
+
+/* =========================================================
+   MOEDA
+========================================================= */
+
+function formatarMoeda(valor){
+
+    const numero =
+        converterNumero(valor);
+
+
+    if(numero === null){
+        return "R$ 0,00";
+    }
+
+
+    return numero.toLocaleString(
+        "pt-BR",
+        {
+            style:"currency",
+            currency:"BRL"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+function converterData(valor){
+
+    if(!valor){
+        return null;
+    }
+
+
+    if(valor instanceof Date){
+
+        if(!isNaN(valor.getTime())){
+            return valor;
+        }
+
+    }
+
+
+    const texto =
+        String(valor).trim();
+
+
+    let match;
+
+
+    match =
+        texto.match(
+            /^(\d{2})\/(\d{2})\/(\d{4})$/
         );
 
-        detalhes.innerHTML = `
 
-            🔴 <strong>API indisponível</strong><br>
+    if(match){
 
-            ${escaparHTML(
-                erro.message ||
-                String(erro)
-            )}
+        const data =
+            new Date(
+                Number(match[3]),
+                Number(match[2])-1,
+                Number(match[1])
+            );
 
-            <br><br>
 
-            <strong>URL configurada:</strong><br>
-
-            <span class="status-api-url">
-                ${escaparHTML(URL_API)}
-            </span>
-
-        `;
-
-        painel.className =
-            "status-api erro";
+        if(!isNaN(data.getTime())){
+            return data;
+        }
 
     }
 
-}
 
-function cleanup(){
-
-try{
-
-delete window[callback];
-
-}
-catch(e){}
+    match =
+        texto.match(
+            /^(\d{4})-(\d{2})-(\d{2})$/
+        );
 
 
-if(
-script.parentNode
-){
+    if(match){
 
-script.parentNode.removeChild(
-script
-);
-
-}
-
-}
-
-}
-
-);
-
-}
+        const data =
+            new Date(
+                Number(match[1]),
+                Number(match[2])-1,
+                Number(match[3])
+            );
 
 
+        if(!isNaN(data.getTime())){
+            return data;
+        }
 
-/* =====================================================
-   PESQUISAR ATENDIMENTO
-===================================================== */
-
-async function pesquisar(){
-
-const campo =
-document.getElementById(
-"campoPesquisa"
-);
+    }
 
 
-const botao =
-document.getElementById(
-"btnPesquisar"
-);
+    const data =
+        new Date(texto);
 
 
-const resultado =
-document.getElementById(
-"resultado"
-);
+    if(!isNaN(data.getTime())){
+        return data;
+    }
 
 
-const termo =
-String(
-campo.value || ""
-).trim();
-
-
-if(!termo){
-
-mostrarErro(
-"Digite o problema ou uma palavra-chave."
-);
-
-
-resultado.innerHTML =
-`
-
-<div class="nenhum">
-
-Digite uma palavra-chave
-para realizar a pesquisa.
-
-</div>
-
-`;
-
-
-campo.focus();
-
-
-return;
+    return null;
 
 }
 
 
-botao.disabled =
-true;
+/* =========================================================
+   FORMATAR DATA
+========================================================= */
+
+function formatarData(data){
+
+    if(!data){
+        return "";
+    }
 
 
-mostrarMensagem(
-'Pesquisando por "' +
-termo +
-'"...',
-"info"
-);
+    const dia =
+        String(data.getDate())
+        .padStart(2,"0");
 
 
-resultado.innerHTML =
-`
-
-<div class="carregando">
-
-🔎 Pesquisando por:
-
-<strong>
-${escaparHTML(termo)}
-</strong>
-
-</div>
-
-`;
+    const mes =
+        String(data.getMonth()+1)
+        .padStart(2,"0");
 
 
-try{
+    const ano =
+        data.getFullYear();
 
 
-const resposta =
-await chamarAPI(
-"pesquisarAtendimento",
-{
-termo: termo
-}
-);
-
-
-console.log(
-"Termo enviado:",
-termo
-);
-
-
-console.log(
-"Resposta da API:",
-resposta
-);
-
-
-if(!resposta){
-
-throw new Error(
-"A API não retornou resposta."
-);
+    return dia +
+        "/" +
+        mes +
+        "/" +
+        ano;
 
 }
 
 
-if(
-resposta.sucesso === false
-){
+/* =========================================================
+   NORMALIZAR TEXTO
+========================================================= */
 
-throw new Error(
-resposta.erro ||
-resposta.mensagem ||
-"Erro retornado pelo servidor."
-);
+function normalizarTexto(texto){
 
-}
-
-
-const lista =
-obterListaResposta(
-resposta
-);
-
-
-console.log(
-"Registros encontrados:",
-lista.length
-);
-
-
-
-if(
-lista.length === 0
-){
-
-resultado.innerHTML =
-`
-
-<div class="nenhum">
-
-Nenhum atendimento encontrado
-para:
-
-<strong>
-${escaparHTML(termo)}
-</strong>
-
-</div>
-
-`;
-
-
-mostrarMensagem(
-'Nenhum registro encontrado para "' +
-termo +
-'".',
-"info"
-);
-
-
-return;
+    return String(texto || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .toLowerCase()
+        .trim();
 
 }
 
 
-
-montarTabela(
-lista
-);
-
-
-mostrarMensagem(
-lista.length +
-(
-lista.length === 1
-?
-" registro encontrado."
-:
-" registros encontrados."
-),
-"sucesso"
-);
-
-
-}
-catch(erro){
-
-console.error(
-"Erro ao pesquisar Atendimento:",
-erro
-);
-
-
-resultado.innerHTML =
-`
-
-<div
-class="mensagem erro"
-style="display:block">
-
-❌ Erro ao pesquisar:
-
-<br><br>
-
-${escaparHTML(
-erro.message ||
-String(erro)
-)}
-
-</div>
-
-`;
-
-
-mostrarErro(
-erro.message ||
-String(erro)
-);
-
-}
-finally{
-
-botao.disabled =
-false;
-
-}
-
-}
-
-
-
-/* =====================================================
-   PESQUISAR TABELA / CAMPO
-===================================================== */
-
-async function pesquisarTabelaCampo(){
-
-const campo =
-document.getElementById(
-"campoTabelaCampo"
-);
-
-
-const botao =
-document.getElementById(
-"btnTabelaCampo"
-);
-
-
-const resultado =
-document.getElementById(
-"resultadoTabelaCampo"
-);
-
-
-const termo =
-String(
-campo.value || ""
-).trim();
-
-
-if(!termo){
-
-resultado.innerHTML =
-`
-
-<div class="nenhum">
-
-Digite uma tabela ou campo
-para realizar a pesquisa.
-
-</div>
-
-`;
-
-
-campo.focus();
-
-
-return;
-
-}
-
-
-botao.disabled =
-true;
-
-
-resultado.innerHTML =
-`
-
-<div class="carregando">
-
-🔎 Pesquisando por:
-
-<strong>
-${escaparHTML(termo)}
-</strong>
-
-</div>
-
-`;
-
-
-try{
-
-
-const resposta =
-await chamarAPI(
-"pesquisarTabelaCampo",
-{
-termo: termo
-}
-);
-
-
-console.log(
-"Pesquisa Tabela/Campo:",
-termo
-);
-
-
-console.log(
-"Resposta:",
-resposta
-);
-
-
-if(!resposta){
-
-throw new Error(
-"A API não retornou resposta."
-);
-
-}
-
-
-if(
-resposta.sucesso === false
-){
-
-throw new Error(
-resposta.erro ||
-resposta.mensagem ||
-"Erro retornado pelo servidor."
-);
-
-}
-
-
-const lista =
-obterListaResposta(
-resposta
-);
-
-
-console.log(
-"Registros Tabela/Campo:",
-lista.length
-);
-
-
-
-if(
-lista.length === 0
-){
-
-resultado.innerHTML =
-`
-
-<div class="nenhum">
-
-Nenhum registro encontrado para:
-
-<strong>
-${escaparHTML(termo)}
-</strong>
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-
-montarTabelaCampo(
-lista
-);
-
-
-}
-catch(erro){
-
-console.error(
-"Erro ao pesquisar Tabela/Campo:",
-erro
-);
-
-
-resultado.innerHTML =
-`
-
-<div
-class="mensagem erro"
-style="display:block">
-
-❌ Erro ao pesquisar:
-
-<br><br>
-
-${escaparHTML(
-erro.message ||
-String(erro)
-)}
-
-</div>
-
-`;
-
-}
-finally{
-
-botao.disabled =
-false;
-
-}
-
-}
-
-
-
-/* =====================================================
-   OBTER LISTA DA RESPOSTA
-===================================================== */
-
-function obterListaResposta(
-resposta
-){
-
-if(
-Array.isArray(
-resposta
-)
-){
-
-return resposta;
-
-}
-
-
-if(
-resposta &&
-Array.isArray(
-resposta.lista
-)
-){
-
-return resposta.lista;
-
-}
-
-
-if(
-resposta &&
-Array.isArray(
-resposta.dados
-)
-){
-
-return resposta.dados;
-
-}
-
-
-if(
-resposta &&
-Array.isArray(
-resposta.resultado
-)
-){
-
-return resposta.resultado;
-
-}
-
-
-if(
-resposta &&
-resposta.registro &&
-typeof resposta.registro ===
-"object"
-){
-
-return [
-resposta.registro
-];
-
-}
-
-
-return [];
-
-}
-
-
-
-/* =====================================================
-   MONTAR TABELA DE ATENDIMENTO
-===================================================== */
-
-function montarTabela(
-lista
-){
-
-const resultado =
-document.getElementById(
-"resultado"
-);
-
-
-let html = `
-
-<div class="tabela-container">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th class="col-id">
-ID
-</th>
-
-<th class="col-problema">
-Problema
-</th>
-
-<th class="col-solucao">
-Solução
-</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-`;
-
-
-lista.forEach(
-function(item){
-
-const id =
-obterCampo(
-item,
-[
-"id",
-"codigo",
-"numero"
-]
-);
-
-
-const problema =
-obterCampo(
-item,
-[
-"problema",
-"descricao",
-"assunto",
-"pergunta",
-"duvida",
-"questao"
-]
-);
-
-
-const solucao =
-obterCampo(
-item,
-[
-"solucao",
-"solução",
-"resposta",
-"orientacao",
-"orientação"
-]
-);
-
-
-let problemaFinal =
-problema;
-
-
-let solucaoFinal =
-solucao;
-
-
-if(
-!problemaFinal &&
-item.dados
-){
-
-problemaFinal =
-item.dados
-.filter(
-function(valor){
-
-return String(
-valor || ""
-).trim() !== "";
-
-}
-)
-.join(" | ");
-
-}
-
-
-html += `
-
-<tr>
-
-<td class="col-id">
-
-${escaparHTML(
-id || "-"
-)}
-
-</td>
-
-<td class="col-problema">
-
-${formatarTexto(
-problemaFinal
-)}
-
-</td>
-
-<td class="col-solucao">
-
-${formatarTexto(
-solucaoFinal
-)}
-
-</td>
-
-</tr>
-
-`;
-
-}
-);
-
-
-html += `
-
-</tbody>
-
-</table>
-
-</div>
-
-`;
-
-
-resultado.innerHTML =
-html;
-
-}
-
-
-
-/* =====================================================
-   MONTAR TABELA TABELA / CAMPO
-===================================================== */
-
-function montarTabelaCampo(
-lista
-){
-
-const resultado =
-document.getElementById(
-"resultadoTabelaCampo"
-);
-
-
-let html = `
-
-<div class="tabela-container">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>
-Tabela
-</th>
-
-<th>
-Campo
-</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-`;
-
-
-lista.forEach(
-function(item){
-
-const tabela =
-obterCampo(
-item,
-[
-"Tabela",
-"tabela"
-]
-);
-
-
-const campo =
-obterCampo(
-item,
-[
-"Campo",
-"campo"
-]
-);
-
-
-html += `
-
-<tr>
-
-<td>
-
-${escaparHTML(
-tabela || "-"
-)}
-
-</td>
-
-<td>
-
-${escaparHTML(
-campo || "-"
-)}
-
-</td>
-
-</tr>
-
-`;
-
-}
-);
-
-
-html += `
-
-</tbody>
-
-</table>
-
-</div>
-
-`;
-
-
-resultado.innerHTML =
-html;
-
-}
-
-
-
-/* =====================================================
-   OBTER CAMPO
-===================================================== */
-
-function obterCampo(
-objeto,
-campos
-){
-
-if(
-!objeto ||
-typeof objeto !== "object"
-){
-
-return "";
-
-}
-
-
-if(
-!Array.isArray(campos)
-){
-
-campos =
-[campos];
-
-}
-
-
-/* Procura diretamente */
-
-for(
-let i = 0;
-i < campos.length;
-i++
-){
-
-const campo =
-campos[i];
-
-
-if(
-objeto[campo] !== undefined &&
-objeto[campo] !== null
-){
-
-const valor =
-String(
-objeto[campo]
-).trim();
-
-
-if(valor){
-
-return valor;
-
-}
-
-}
-
-}
-
-
-/* Procura ignorando acentos */
-
-const chaves =
-Object.keys(
-objeto
-);
-
-
-for(
-let i = 0;
-i < campos.length;
-i++
-){
-
-const procurado =
-normalizarNomeCampo(
-campos[i]
-);
-
-
-for(
-let j = 0;
-j < chaves.length;
-j++
-){
-
-const chave =
-chaves[j];
-
-
-if(
-normalizarNomeCampo(
-chave
-) === procurado
-){
-
-const valor =
-objeto[chave];
-
-
-if(
-valor !== undefined &&
-valor !== null
-){
-
-const texto =
-String(
-valor
-).trim();
-
-
-if(texto){
-
-return texto;
-
-}
-
-}
-
-}
-
-}
-
-}
-
-
-return "";
-
-}
-
-
-
-/* =====================================================
-   NORMALIZAR NOME
-===================================================== */
-
-function normalizarNomeCampo(
-texto
-){
-
-return String(
-texto || ""
-)
-
-.normalize(
-"NFD"
-)
-
-.replace(
-/[\u0300-\u036f]/g,
-""
-)
-
-.toLowerCase()
-
-.replace(
-/[^a-z0-9]/g,
-""
-);
-
-}
-
-
-
-/* =====================================================
-   FORMATAR TEXTO
-===================================================== */
-
-function formatarTexto(
-texto
-){
-
-if(
-texto === null ||
-texto === undefined ||
-String(texto).trim() === ""
-){
-
-return "-";
-
-}
-
-
-return escaparHTML(
-texto
-)
-
-.replace(
-/\r?\n/g,
-"<br>"
-);
-
-}
-
-
-
-/* =====================================================
+/* =========================================================
    ESCAPAR HTML
-===================================================== */
+========================================================= */
 
-function escaparHTML(
-valor
-){
+function escaparHTML(valor){
 
-if(
-valor === null ||
-valor === undefined
-){
-
-return "";
+    return String(valor ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
 
-return String(
-valor
-)
-
-.replace(
-/&/g,
-"&amp;"
-)
-
-.replace(
-/</g,
-"&lt;"
-)
-
-.replace(
-/>/g,
-"&gt;"
-)
-
-.replace(
-/"/g,
-"&quot;"
-)
-
-.replace(
-/'/g,
-"&#039;"
-);
-
-}
-
-
-
-/* =====================================================
-   MENSAGEM
-===================================================== */
-
-function mostrarMensagem(
-texto,
-tipo
-){
-
-const div =
-document.getElementById(
-"mensagem"
-);
-
-
-div.textContent =
-texto;
-
-
-div.className =
-"mensagem " +
-tipo;
-
-}
-
-
-function mostrarErro(
-texto
-){
-
-mostrarMensagem(
-"❌ " +
-texto,
-"erro"
-);
-
-}
-
-
-
-/* =====================================================
-   ENTER - ATENDIMENTO
-===================================================== */
-
-document
-.getElementById(
-"campoPesquisa"
-)
-.addEventListener(
-"keydown",
-function(event){
-
-if(
-event.key === "Enter"
-){
-
-event.preventDefault();
-
-pesquisar();
-
-}
-
-}
-);
-
-
-
-/* =====================================================
-   ENTER - TABELA / CAMPO
-===================================================== */
-
-document
-.getElementById(
-"campoTabelaCampo"
-)
-.addEventListener(
-"keydown",
-function(event){
-
-if(
-event.key === "Enter"
-){
-
-event.preventDefault();
-
-pesquisarTabelaCampo();
-
-}
-
-}
-);
-
-
-
-/* =====================================================
+/* =========================================================
    VOLTAR
-===================================================== */
+========================================================= */
 
 function voltar(){
 
-window.location.href =
-URL_INDEX;
+    window.location.href =
+        "./index.html";
 
 }
+
+
+/* =========================================================
+   EXPORTAÇÃO GLOBAL
+========================================================= */
+
+window.pesquisar =
+    pesquisar;
+
+window.limparPesquisa =
+    limparPesquisa;
+
+window.abrirDetalhes =
+    abrirDetalhes;
+
+window.fecharModal =
+    fecharModal;
+
+window.voltar =
+    voltar;
 
 </script>
 
