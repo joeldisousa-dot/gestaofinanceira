@@ -3,6 +3,7 @@
 <html lang="pt-BR">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -15,17 +16,17 @@
 }
 
 body{
+  margin:0;
+  padding:20px;
   font-family:"Segoe UI",Arial,sans-serif;
   background:linear-gradient(135deg,#e8eef5,#ffffff);
-  padding:20px;
   color:#333;
-  margin:0;
 }
 
 .container{
   max-width:1100px;
   margin:auto;
-  background:white;
+  background:#fff;
   padding:25px;
   border-radius:18px;
   box-shadow:0 8px 25px rgba(0,0,0,.15);
@@ -39,8 +40,8 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:25px;
   gap:15px;
+  margin-bottom:25px;
 }
 
 .topo h1{
@@ -63,8 +64,7 @@ body{
 }
 
 .voltar:hover{
-  transform:translateY(-3px);
-  filter:brightness(1.1);
+  transform:translateY(-2px);
 }
 
 /* =====================================================
@@ -92,7 +92,7 @@ body{
   padding:11px 14px;
   border:1px solid #b0bec5;
   border-radius:8px;
-  background:white;
+  background:#fff;
   color:#333;
   font-size:15px;
   font-weight:bold;
@@ -103,6 +103,33 @@ body{
 .seletor-competencia select:focus{
   border-color:#1976d2;
   box-shadow:0 0 0 2px rgba(25,118,210,.15);
+}
+
+/* =====================================================
+   BOTÕES
+===================================================== */
+
+button{
+  border:none;
+  background:linear-gradient(135deg,#1976d2,#2196f3);
+  color:white;
+  padding:12px 25px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:15px;
+  transition:.2s;
+}
+
+button:hover{
+  filter:brightness(1.08);
+  transform:translateY(-2px);
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+  transform:none;
 }
 
 .btn-atualizar{
@@ -118,17 +145,21 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:20px;
   background:linear-gradient(135deg,#0d47a1,#1976d2);
-  color:white;
+  color:#fff;
   padding:20px;
   border-radius:12px;
   margin-bottom:25px;
-  gap:20px;
 }
 
 .cabecalho h1{
   margin:0;
   font-size:26px;
+}
+
+.cabecalho p{
+  margin:7px 0 0;
 }
 
 .info{
@@ -153,6 +184,11 @@ h2{
    TABELAS
 ===================================================== */
 
+.tabela-container{
+  overflow-x:auto;
+  width:100%;
+}
+
 table{
   width:100%;
   border-collapse:collapse;
@@ -162,7 +198,7 @@ table{
 
 th{
   background:#1976d2;
-  color:white;
+  color:#fff;
   padding:10px;
   text-align:center;
 }
@@ -191,6 +227,7 @@ tr:nth-child(even){
 ===================================================== */
 
 .pago{
+  display:inline-block;
   background:#c8e6c9;
   color:#256029;
   padding:4px 10px;
@@ -200,6 +237,7 @@ tr:nth-child(even){
 }
 
 .pendente{
+  display:inline-block;
   background:#fff3cd;
   color:#856404;
   padding:4px 10px;
@@ -250,32 +288,6 @@ tr:nth-child(even){
 }
 
 /* =====================================================
-   BOTÕES
-===================================================== */
-
-button{
-  border:none;
-  background:linear-gradient(135deg,#1976d2,#2196f3);
-  color:white;
-  padding:12px 25px;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:bold;
-  font-size:15px;
-}
-
-button:hover{
-  filter:brightness(1.1);
-  transform:translateY(-2px);
-}
-
-button:disabled{
-  opacity:.6;
-  cursor:not-allowed;
-  transform:none;
-}
-
-/* =====================================================
    CARREGAMENTO
 ===================================================== */
 
@@ -317,7 +329,7 @@ button:disabled{
   }
 
   body{
-    background:white;
+    background:#fff;
     padding:0;
   }
 
@@ -331,11 +343,11 @@ button:disabled{
   button,
   .voltar,
   .seletor-competencia{
-    display:none;
+    display:none !important;
   }
 
   .cabecalho{
-    background:white !important;
+    background:#fff !important;
     color:#000;
     border:1px solid #ddd;
   }
@@ -426,66 +438,66 @@ button:disabled{
 
 <div class="topo">
 
-<h1>
-📄 Relatório Financeiro
-</h1>
+  <h1>📄 Relatório Financeiro</h1>
 
 <button
-class="voltar"
-onclick="voltar()">
+ type="button"
+ class="voltar"
+ onclick="voltar()">
 ⬅ Voltar </button>
 
 </div>
 
 <!-- =====================================================
-     SELEÇÃO DA COMPETÊNCIA
+     COMPETÊNCIA
 ===================================================== -->
 
 <div class="seletor-competencia">
 
-<label for="selectCompetencia">
-📅 Competência:
-</label>
+  <label for="selectCompetencia">
+    📅 Competência:
+  </label>
 
-<select
-id="selectCompetencia"
-onchange="alterarCompetencia()"> </select>
+<select id="selectCompetencia"></select>
 
 <button
-class="btn-atualizar"
-id="btnAtualizar"
-onclick="carregarRelatorio()">
+ type="button"
+ class="btn-atualizar"
+ id="btnAtualizar"
+ onclick="carregarRelatorio()">
 🔄 Atualizar </button>
 
 </div>
 
 <!-- =====================================================
-     CABEÇALHO
+     CABEÇALHO DO RELATÓRIO
 ===================================================== -->
 
 <div class="cabecalho">
 
-<div>
+  <div>
 
-<h1>
-💰 Controle Financeiro
-</h1>
+```
+<h1>💰 Controle Financeiro</h1>
 
-<p>
-Relatório Financeiro Pessoal
-</p>
+<p>Relatório Financeiro Pessoal</p>
+```
 
-</div>
+  </div>
 
-<div class="info">
+  <div class="info">
 
-Competência: <b id="competencia">-</b>
+```
+Competência:
+<b id="competencia">-</b>
 
 <br>
 
-Emitido: <span id="data">-</span>
+Emitido:
+<span id="data">-</span>
+```
 
-</div>
+  </div>
 
 </div>
 
@@ -493,13 +505,11 @@ Emitido: <span id="data">-</span>
      RECEITAS
 ===================================================== -->
 
-<h2>
-📥 Receitas
-</h2>
+<h2>📥 Receitas</h2>
 
 <div
-id="receber"
-class="carregando">
+  id="receber"
+  class="carregando">
 
 Selecione uma competência para carregar as receitas...
 
@@ -509,13 +519,11 @@ Selecione uma competência para carregar as receitas...
      DESPESAS
 ===================================================== -->
 
-<h2>
-📤 Despesas
-</h2>
+<h2>📤 Despesas</h2>
 
 <div
-id="pagar"
-class="carregando">
+  id="pagar"
+  class="carregando">
 
 Selecione uma competência para carregar as despesas...
 
@@ -526,8 +534,8 @@ Selecione uma competência para carregar as despesas...
 ===================================================== -->
 
 <div
-class="resultado-final"
-id="resumoFinal">
+  class="resultado-final"
+  id="resumoFinal">
 
 Selecione uma competência para calcular o resultado.
 
@@ -537,9 +545,10 @@ Selecione uma competência para calcular o resultado.
 
 <div style="text-align:right">
 
-<button onclick="window.print()">
-🖨 Imprimir / Salvar PDF
-</button>
+<button
+ type="button"
+ onclick="window.print()">
+🖨 Imprimir / Salvar PDF </button>
 
 </div>
 
@@ -547,7 +556,7 @@ Selecione uma competência para calcular o resultado.
 
 Relatório gerado automaticamente
 
-<br>
+  <br>
 
 Controle Financeiro Pessoal
 
@@ -558,26 +567,22 @@ Controle Financeiro Pessoal
 <script>
 
 /* =====================================================
-   CONFIGURAÇÃO DA API
+   CONFIGURAÇÃO
 ===================================================== */
 
 const URL_API =
 "https://script.google.com/macros/s/AKfycbyaMJlpmVPnTqvCTosvINN4tNEHZygapcHtjhb03s0Ak_a2BOrX79knXWvKgWdyi4Us/exec";
 
 
-/* =====================================================
-   CONTROLE
-===================================================== */
-
 let contadorJSONP = 0;
 
 let competenciaSelecionada = "";
 
+let requisicaoAtual = 0;
+
 
 /* =====================================================
-   OBTER COMPETÊNCIA DA URL
-   Usada somente como valor inicial.
-   Depois disso, o relatório funciona pelo SELECT.
+   COMPETÊNCIA INICIAL
 ===================================================== */
 
 function obterCompetenciaInicial(){
@@ -587,19 +592,27 @@ function obterCompetenciaInicial(){
       window.location.search
     );
 
-  let comp =
+  const comp =
     parametros.get("competencia") ||
     parametros.get("comp");
 
   if(comp){
 
-    return converterCompetencia(comp);
+    const convertida =
+      converterCompetencia(comp);
+
+    if(
+      /^\d{4}-\d{2}$/.test(convertida)
+    ){
+
+      return convertida;
+
+    }
 
   }
 
 
-  const agora =
-    new Date();
+  const agora = new Date();
 
   return (
     agora.getFullYear() +
@@ -618,9 +631,16 @@ function obterCompetenciaInicial(){
 
 function converterCompetencia(valor){
 
-  if(!valor){
+  if(
+    valor === null ||
+    valor === undefined ||
+    valor === ""
+  ){
+
     return "";
+
   }
+
 
   const texto =
     String(valor).trim();
@@ -649,7 +669,49 @@ function converterCompetencia(valor){
     return (
       partes[1] +
       "-" +
-      String(partes[0]).padStart(2,"0")
+      String(
+        partes[0]
+      ).padStart(2,"0")
+    );
+
+  }
+
+
+  /* MM-AAAA */
+
+  if(
+    /^\d{1,2}-\d{4}$/.test(texto)
+  ){
+
+    const partes =
+      texto.split("-");
+
+    return (
+      partes[1] +
+      "-" +
+      String(
+        partes[0]
+      ).padStart(2,"0")
+    );
+
+  }
+
+
+  /* AAAA/MM */
+
+  if(
+    /^\d{4}\/\d{1,2}$/.test(texto)
+  ){
+
+    const partes =
+      texto.split("/");
+
+    return (
+      partes[0] +
+      "-" +
+      String(
+        partes[1]
+      ).padStart(2,"0")
     );
 
   }
@@ -667,7 +729,9 @@ function converterCompetencia(valor){
     return (
       partes[2] +
       "-" +
-      String(partes[1]).padStart(2,"0")
+      String(
+        partes[1]
+      ).padStart(2,"0")
     );
 
   }
@@ -679,18 +743,21 @@ function converterCompetencia(valor){
     /^\d{4}-\d{2}-\d{2}$/.test(texto)
   ){
 
-    return texto.substring(0,7);
+    return texto.substring(
+      0,
+      7
+    );
 
   }
 
 
-  return texto;
+  return "";
 
 }
 
 
 /* =====================================================
-   CRIAR LISTA DE COMPETÊNCIAS
+   CRIAR COMPETÊNCIAS
 ===================================================== */
 
 function criarCompetencias(){
@@ -699,6 +766,7 @@ function criarCompetencias(){
     document.getElementById(
       "selectCompetencia"
     );
+
 
   select.innerHTML = "";
 
@@ -711,20 +779,25 @@ function criarCompetencias(){
     inicial;
 
 
-  /*
-   * Gera as últimas 36 competências.
-   * A competência atual aparece primeiro.
-   */
-
   const agora =
     new Date();
+
 
   const anoAtual =
     agora.getFullYear();
 
+
   const mesAtual =
     agora.getMonth();
 
+
+  /*
+   * Últimas 36 competências.
+   *
+   * Não consulta todas as movimentações.
+   * O servidor somente será chamado quando
+   * uma competência for selecionada.
+   */
 
   for(
     let i = 0;
@@ -743,10 +816,14 @@ function criarCompetencias(){
     const ano =
       data.getFullYear();
 
+
     const mes =
       String(
         data.getMonth() + 1
-      ).padStart(2,"0");
+      ).padStart(
+        2,
+        "0"
+      );
 
 
     const valor =
@@ -784,6 +861,57 @@ function criarCompetencias(){
   }
 
 
+  /*
+   * Caso a competência da URL não
+   * esteja entre as 36 geradas,
+   * adiciona-a no início.
+   */
+
+  const existe =
+    Array.from(
+      select.options
+    ).some(
+      function(option){
+
+        return option.value === inicial;
+
+      }
+    );
+
+
+  if(
+    !existe &&
+    /^\d{4}-\d{2}$/.test(inicial)
+  ){
+
+    const partes =
+      inicial.split("-");
+
+
+    const option =
+      document.createElement(
+        "option"
+      );
+
+
+    option.value =
+      inicial;
+
+
+    option.textContent =
+      partes[1] +
+      "/" +
+      partes[0];
+
+
+    select.insertBefore(
+      option,
+      select.firstChild
+    );
+
+  }
+
+
   atualizarCabecalho();
 
 }
@@ -802,16 +930,13 @@ function alterarCompetencia(){
 
 
   competenciaSelecionada =
-    select.value;
+    converterCompetencia(
+      select.value
+    );
 
 
   atualizarCabecalho();
 
-
-  /*
-   * Carrega imediatamente o relatório
-   * da competência selecionada.
-   */
 
   carregarRelatorio();
 
@@ -819,7 +944,7 @@ function alterarCompetencia(){
 
 
 /* =====================================================
-   ATUALIZAR CABEÇALHO
+   CABEÇALHO
 ===================================================== */
 
 function atualizarCabecalho(){
@@ -851,7 +976,7 @@ function atualizarData(){
 
 
 /* =====================================================
-   CHAMADA À API
+   API JSONP
 ===================================================== */
 
 function chamarAPI(
@@ -880,8 +1005,8 @@ function chamarAPI(
           {},
           parametros || {},
           {
-            action: acao,
-            callback: callback
+            action:acao,
+            callback:callback
           }
         );
 
@@ -892,12 +1017,16 @@ function chamarAPI(
             function(chave){
 
               return (
-                encodeURIComponent(chave) +
+                encodeURIComponent(
+                  chave
+                ) +
                 "=" +
                 encodeURIComponent(
                   dados[chave] == null
                     ? ""
-                    : String(dados[chave])
+                    : String(
+                        dados[chave]
+                      )
                 )
               );
 
@@ -916,16 +1045,30 @@ function chamarAPI(
         false;
 
 
+      let temporizador;
+
+
       function limpar(){
 
-        clearTimeout(
+        if(
           temporizador
-        );
+        ){
+
+          clearTimeout(
+            temporizador
+          );
+
+        }
 
 
-        delete window[
-          callback
-        ];
+        try{
+
+          delete window[
+            callback
+          ];
+
+        }
+        catch(e){}
 
 
         if(
@@ -941,39 +1084,22 @@ function chamarAPI(
       }
 
 
-      const temporizador =
-        setTimeout(
-          function(){
-
-            if(finalizado){
-              return;
-            }
-
-            finalizado = true;
-
-            limpar();
-
-            reject(
-              new Error(
-                "Tempo limite excedido ao consultar a API."
-              )
-            );
-
-          },
-          30000
-        );
-
-
       window[callback] =
         function(resposta){
 
           if(finalizado){
+
             return;
+
           }
 
-          finalizado = true;
+
+          finalizado =
+            true;
+
 
           limpar();
+
 
           resolve(
             resposta
@@ -986,12 +1112,18 @@ function chamarAPI(
         function(){
 
           if(finalizado){
+
             return;
+
           }
 
-          finalizado = true;
+
+          finalizado =
+            true;
+
 
           limpar();
+
 
           reject(
             new Error(
@@ -1000,6 +1132,35 @@ function chamarAPI(
           );
 
         };
+
+
+      temporizador =
+        setTimeout(
+          function(){
+
+            if(finalizado){
+
+              return;
+
+            }
+
+
+            finalizado =
+              true;
+
+
+            limpar();
+
+
+            reject(
+              new Error(
+                "Tempo limite excedido ao consultar a API."
+              )
+            );
+
+          },
+          30000
+        );
 
 
       script.src =
@@ -1031,15 +1192,18 @@ async function carregarRelatorio(){
       "receber"
     );
 
+
   const pagar =
     document.getElementById(
       "pagar"
     );
 
+
   const resumo =
     document.getElementById(
       "resumoFinal"
     );
+
 
   const botao =
     document.getElementById(
@@ -1047,12 +1211,59 @@ async function carregarRelatorio(){
     );
 
 
+  const competencia =
+    converterCompetencia(
+      competenciaSelecionada
+    );
+
+
+  if(
+    !/^\d{4}-\d{2}$/.test(
+      competencia
+    )
+  ){
+
+    receber.innerHTML =
+      '<div class="erro">' +
+      '⚠ Competência inválida.' +
+      '</div>';
+
+
+    pagar.innerHTML =
+      "";
+
+
+    resumo.textContent =
+      "Não foi possível calcular o resultado.";
+
+
+    return;
+
+  }
+
+
+  /*
+   * Número da requisição.
+   *
+   * Se o usuário mudar rapidamente
+   * de competência, uma resposta antiga
+   * não poderá sobrescrever a nova.
+   */
+
+  const numeroRequisicao =
+    ++requisicaoAtual;
+
+
   receber.innerHTML =
-    '<div class="carregando">Carregando receitas...</div>';
+    '<div class="carregando">' +
+    'Carregando receitas...' +
+    '</div>';
 
 
   pagar.innerHTML =
-    '<div class="carregando">Carregando despesas...</div>';
+    '<div class="carregando">' +
+    'Carregando despesas...' +
+    '</div>';
 
 
   resumo.textContent =
@@ -1072,31 +1283,13 @@ async function carregarRelatorio(){
 
   try{
 
-    const competencia =
-      competenciaSelecionada;
-
-
-    if(
-      !competencia ||
-      !/^\d{4}-\d{2}$/.test(
-        competencia
-      )
-    ){
-
-      throw new Error(
-        "Competência inválida."
-      );
-
-    }
-
-
     /*
-     * IMPORTANTE:
+     * A competência é enviada diretamente
+     * para o Apps Script.
      *
-     * A API recebe diretamente a competência
-     * selecionada no SELECT.
+     * Exemplo:
      *
-     * Não existe mais filtro por index.
+     * 2026-09
      */
 
     const resposta =
@@ -1107,6 +1300,20 @@ async function carregarRelatorio(){
             competencia
         }
       );
+
+
+    /*
+     * Ignora respostas antigas.
+     */
+
+    if(
+      numeroRequisicao !==
+      requisicaoAtual
+    ){
+
+      return;
+
+    }
 
 
     if(
@@ -1137,6 +1344,11 @@ async function carregarRelatorio(){
       [];
 
 
+    /*
+     * Compatibilidade com os formatos
+     * utilizados pelo Código.gs.
+     */
+
     if(
       Array.isArray(
         resposta.lista
@@ -1147,7 +1359,16 @@ async function carregarRelatorio(){
         resposta.lista;
 
     }
+    else if(
+      Array.isArray(
+        resposta.dados
+      )
+    ){
 
+      lista =
+        resposta.dados;
+
+    }
     else if(
       Array.isArray(
         resposta.lancamentos
@@ -1159,16 +1380,58 @@ async function carregarRelatorio(){
 
     }
 
-    else if(
-      Array.isArray(
-        resposta.dados
-      )
-    ){
 
-      lista =
-        resposta.dados;
+    /*
+     * Proteção adicional:
+     *
+     * mesmo que o servidor retorne alguma
+     * inconsistência, o HTML não mistura
+     * registros de outra competência.
+     */
 
-    }
+    lista =
+      lista.filter(
+        function(item){
+
+          const compItem =
+            converterCompetencia(
+              item.competencia ||
+              item.Competência ||
+              item.comp ||
+              ""
+            );
+
+
+          /*
+           * Se o item possuir competência,
+           * ela precisa ser igual à selecionada.
+           *
+           * Se não possuir competência,
+           * mantém o item para preservar
+           * compatibilidade com respostas antigas.
+           */
+
+          if(compItem){
+
+            return (
+              compItem ===
+              competencia
+            );
+
+          }
+
+
+          return true;
+
+        }
+      );
+
+
+    competenciaSelecionada =
+      competencia;
+
+
+    atualizarCabecalho();
 
 
     processarRelatorio(
@@ -1178,7 +1441,6 @@ async function carregarRelatorio(){
 
     atualizarData();
 
-
   }
   catch(erro){
 
@@ -1186,6 +1448,16 @@ async function carregarRelatorio(){
       "Erro ao carregar relatório:",
       erro
     );
+
+
+    if(
+      numeroRequisicao !==
+      requisicaoAtual
+    ){
+
+      return;
+
+    }
 
 
     const mensagem =
@@ -1218,7 +1490,16 @@ async function carregarRelatorio(){
   }
   finally{
 
-    if(botao){
+    /*
+     * Só libera o botão se esta for
+     * a requisição mais recente.
+     */
+
+    if(
+      numeroRequisicao ===
+      requisicaoAtual &&
+      botao
+    ){
 
       botao.disabled =
         false;
@@ -1250,12 +1531,32 @@ function processarRelatorio(lista){
   let totalRepasse = 0;
 
 
+  if(
+    !Array.isArray(lista)
+  ){
+
+    lista = [];
+
+  }
+
+
   lista.forEach(
     function(item){
 
+      if(
+        !item
+      ){
+
+        return;
+
+      }
+
+
       const descricao =
         String(
-          item.descricao || ""
+          item.descricao ||
+          item.Descricao ||
+          ""
         ).trim();
 
 
@@ -1266,23 +1567,42 @@ function processarRelatorio(lista){
 
 
       const baixado =
-        normalizarTexto(
-          item.baixado
-        ) === "sim";
+        ehBaixado(
+          item.baixado ||
+          item.Baixado
+        );
 
 
       const valor =
-        Number(
-          item.valor || 0
-        ) || 0;
+        converterNumero(
+          item.valor ||
+          item.Valor ||
+          0
+        );
 
 
-      /* RECEITAS */
+      const tipo =
+        item.tipo ||
+        item.Tipo ||
+        "";
+
+
+      /*
+       * RECEITAS
+       */
 
       if(
         textoIgual(
-          item.tipo,
+          tipo,
           "Contas a Receber"
+        ) ||
+        textoIgual(
+          tipo,
+          "Receita"
+        ) ||
+        textoIgual(
+          tipo,
+          "Entrada"
         )
       ){
 
@@ -1290,20 +1610,43 @@ function processarRelatorio(lista){
           item
         );
 
+
         totalReceitas +=
           valor;
+
+
+        return;
 
       }
 
 
-      /* DESPESAS */
+      /*
+       * DESPESAS
+       */
 
-      else if(
+      if(
         textoIgual(
-          item.tipo,
+          tipo,
           "Contas a Pagar"
+        ) ||
+        textoIgual(
+          tipo,
+          "Despesa"
+        ) ||
+        textoIgual(
+          tipo,
+          "Saida"
+        ) ||
+        textoIgual(
+          tipo,
+          "Saída"
         )
       ){
+
+        /*
+         * Repasse aluguel baixado
+         * não aparece na tabela.
+         */
 
         if(
           descricaoNormalizada ===
@@ -1321,6 +1664,7 @@ function processarRelatorio(lista){
             item
           );
 
+
           totalDespesas +=
             valor;
 
@@ -1333,11 +1677,13 @@ function processarRelatorio(lista){
 
 
   /*
-   * Repasse aluguel baixado
+   * Abate o Repasse aluguel
+   * dos dois lados.
    */
 
   totalReceitas -=
     totalRepasse;
+
 
   totalDespesas -=
     totalRepasse;
@@ -1375,10 +1721,15 @@ function processarRelatorio(lista){
   ).innerHTML =
 
     "Resultado da competência: " +
+
     '<span style="color:' +
     cor +
     ';">' +
-    formatar(saldo) +
+
+    formatar(
+      saldo
+    ) +
+
     '</span>';
 
 }
@@ -1424,7 +1775,7 @@ function montarTabela(
 
   let html =
 
-    '<div style="overflow-x:auto">' +
+    '<div class="tabela-container">' +
 
     '<table>' +
 
@@ -1450,10 +1801,31 @@ function montarTabela(
   lista.forEach(
     function(item){
 
+      const descricao =
+        item.descricao ||
+        item.Descricao ||
+        "";
+
+
+      const valor =
+        converterNumero(
+          item.valor ||
+          item.Valor ||
+          0
+        );
+
+
+      const vencimento =
+        item.vencimento ||
+        item.Vencimento ||
+        "";
+
+
       const baixado =
-        normalizarTexto(
-          item.baixado
-        ) === "sim";
+        ehBaixado(
+          item.baixado ||
+          item.Baixado
+        );
 
 
       html +=
@@ -1461,28 +1833,36 @@ function montarTabela(
         '<tr>' +
 
         '<td>' +
+
         escaparHTML(
-          item.descricao
+          descricao
         ) +
+
         '</td>' +
 
         '<td class="valor">' +
+
         formatar(
-          item.valor
+          valor
         ) +
+
         '</td>' +
 
         '<td>' +
+
         formatarData(
-          item.vencimento
+          vencimento
         ) +
+
         '</td>' +
 
         '<td>' +
 
         (
           baixado
+
             ? '<span class="pago">✔ Pago</span>'
+
             : '<span class="pendente">⏳ Pendente</span>'
         ) +
 
@@ -1495,8 +1875,11 @@ function montarTabela(
 
 
   html +=
+
     '</tbody>' +
+
     '</table>' +
+
     '</div>';
 
 
@@ -1511,12 +1894,16 @@ function montarTabela(
       'Total de Receitas:' +
 
       '<span style="font-size:12px;font-weight:normal;">' +
+
       ' (já abatendo o Repasse aluguel)' +
+
       '</span>' +
 
       '<br>' +
 
-      formatar(total) +
+      formatar(
+        total
+      ) +
 
       '</div>';
 
@@ -1534,12 +1921,16 @@ function montarTabela(
       'Total de Despesas:' +
 
       '<span style="font-size:12px;font-weight:normal;">' +
+
       ' (já abatendo o Repasse aluguel)' +
+
       '</span>' +
 
       '<br>' +
 
-      formatar(total) +
+      formatar(
+        total
+      ) +
 
       '</div>';
 
@@ -1548,6 +1939,85 @@ function montarTabela(
 
   elemento.innerHTML =
     html;
+
+}
+
+
+/* =====================================================
+   CONVERTER NÚMERO
+===================================================== */
+
+function converterNumero(valor){
+
+  if(
+    valor === null ||
+    valor === undefined ||
+    valor === ""
+  ){
+
+    return 0;
+
+  }
+
+
+  if(
+    typeof valor === "number"
+  ){
+
+    return isFinite(valor)
+      ? valor
+      : 0;
+
+  }
+
+
+  let texto =
+    String(valor)
+      .trim();
+
+
+  /*
+   * R$ 1.234,56
+   */
+
+  texto =
+    texto.replace(
+      /R\$/gi,
+      ""
+    )
+    .replace(
+      /\s/g,
+      ""
+    );
+
+
+  if(
+    texto.indexOf(",") >= 0
+  ){
+
+    texto =
+      texto
+        .replace(
+          /\./g,
+          ""
+        )
+        .replace(
+          ",",
+          "."
+        );
+
+  }
+
+
+  const numero =
+    Number(
+      texto
+    );
+
+
+  return isFinite(numero)
+    ? numero
+    : 0;
 
 }
 
@@ -1595,14 +2065,45 @@ function textoIgual(a,b){
 
 
 /* =====================================================
+   STATUS BAIXADO
+===================================================== */
+
+function ehBaixado(valor){
+
+  const texto =
+    normalizarTexto(
+      valor
+    );
+
+
+  return (
+    texto === "sim" ||
+    texto === "s" ||
+    texto === "true" ||
+    texto === "1" ||
+    texto === "pago" ||
+    texto === "baixado"
+  );
+
+}
+
+
+/* =====================================================
    FORMATAR COMPETÊNCIA
 ===================================================== */
 
 function formatarCompetencia(comp){
 
+  const competencia =
+    converterCompetencia(
+      comp
+    );
+
+
   if(
-    !comp ||
-    !/^\d{4}-\d{2}$/.test(comp)
+    !/^\d{4}-\d{2}$/.test(
+      competencia
+    )
   ){
 
     return comp || "-";
@@ -1611,7 +2112,7 @@ function formatarCompetencia(comp){
 
 
   const partes =
-    comp.split("-");
+    competencia.split("-");
 
 
   return (
@@ -1630,7 +2131,9 @@ function formatarCompetencia(comp){
 function formatar(valor){
 
   return Number(
-    valor || 0
+    converterNumero(
+      valor
+    )
   ).toLocaleString(
     "pt-BR",
     {
@@ -1648,14 +2151,48 @@ function formatar(valor){
 
 function formatarData(data){
 
-  if(!data){
+  if(
+    data === null ||
+    data === undefined ||
+    data === ""
+  ){
+
     return "";
+
+  }
+
+
+  if(
+    data instanceof Date
+  ){
+
+    if(
+      isNaN(
+        data.getTime()
+      )
+    ){
+
+      return "";
+
+    }
+
+
+    return data.toLocaleDateString(
+      "pt-BR"
+    );
+
   }
 
 
   const texto =
-    String(data).trim();
+    String(
+      data
+    ).trim();
 
+
+  /*
+   * DD/MM/AAAA
+   */
 
   if(
     /^\d{2}\/\d{2}\/\d{4}$/.test(
@@ -1667,6 +2204,10 @@ function formatarData(data){
 
   }
 
+
+  /*
+   * AAAA-MM-DD
+   */
 
   if(
     /^\d{4}-\d{2}-\d{2}$/.test(
@@ -1689,8 +2230,15 @@ function formatarData(data){
   }
 
 
+  /*
+   * Tenta interpretar datas
+   * retornadas pelo Apps Script.
+   */
+
   const objeto =
-    new Date(data);
+    new Date(
+      data
+    );
 
 
   if(
@@ -1728,22 +2276,27 @@ function escaparHTML(valor){
 
 
   return String(valor)
+
     .replace(
       /&/g,
       "&amp;"
     )
+
     .replace(
       /</g,
       "&lt;"
     )
+
     .replace(
       />/g,
       "&gt;"
     )
+
     .replace(
       /"/g,
       "&quot;"
     )
+
     .replace(
       /'/g,
       "&#039;"
@@ -1765,7 +2318,7 @@ function voltar(){
 
 
 /* =====================================================
-   INICIAR
+   INICIALIZAÇÃO
 ===================================================== */
 
 window.addEventListener(
