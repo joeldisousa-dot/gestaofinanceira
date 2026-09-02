@@ -1,2962 +1,354 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Lançamentos - Controle Financeiro</title>
-
-  <style>
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f3f4f6;
-      color: #111827;
-    }
-
-    header {
-      background: #111827;
-      color: white;
-      padding: 18px 24px;
-    }
-
-    .header-conteudo {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .titulo {
-      flex: 1;
-      min-width: 220px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-
-    header p {
-      margin: 5px 0 0;
-      color: #d1d5db;
-      font-size: 14px;
-    }
-
-    .btn-voltar {
-      background: #4b5563;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: bold;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: .15s;
-    }
-
-    .btn-voltar:hover {
-      background: #374151;
-      transform: translateY(-1px);
-    }
-
-    .container {
-      max-width: 1400px;
-      margin: 20px auto;
-      padding: 0 16px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .toolbar-left,
-    .toolbar-right {
-      display: flex;
-      align-items: flex-end;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      font-size: 13px;
-      margin-bottom: 5px;
-      color: #374151;
-    }
-
-    input,
-    select {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      background: white;
-      font-size: 14px;
-    }
-
-    input:focus,
-    select:focus {
-      outline: none;
-      border-color: #2563eb;
-      box-shadow: 0 0 0 2px rgba(37, 99, 235, .12);
-    }
-
-    .filtro {
-      width: 150px;
-    }
-
-    button {
-      border: 0;
-      border-radius: 8px;
-      padding: 10px 14px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: bold;
-      transition: .15s;
-    }
-
-    button:hover {
-      opacity: .9;
-      transform: translateY(-1px);
-    }
-
-    button:disabled {
-      opacity: .5;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .btn-incluir {
-      background: #16a34a;
-      color: white;
-    }
-
-    .btn-editar {
-      background: #f59e0b;
-      color: white;
-    }
-
-    .btn-baixar {
-      background: #2563eb;
-      color: white;
-    }
-
-    .btn-excluir {
-      background: #dc2626;
-      color: white;
-    }
-
-    .btn-atualizar {
-      background: #374151;
-      color: white;
-    }
-
-    .btn-cancelar {
-      background: #6b7280;
-      color: white;
-    }
-
-    .btn-salvar {
-      background: #16a34a;
-      color: white;
-      min-width: 120px;
-    }
-
-    .mensagem {
-      display: none;
-      padding: 12px 15px;
-      border-radius: 8px;
-      margin-top: 15px;
-      font-size: 14px;
-    }
-
-    .mensagem.sucesso {
-      display: block;
-      background: #dcfce7;
-      color: #166534;
-      border: 1px solid #86efac;
-    }
-
-    .mensagem.erro {
-      display: block;
-      background: #fee2e2;
-      color: #991b1b;
-      border: 1px solid #fca5a5;
-    }
-
-    .mensagem.aviso {
-      display: block;
-      background: #fef3c7;
-      color: #92400e;
-      border: 1px solid #fcd34d;
-    }
-
-    .formulario {
-      display: none;
-      border: 1px solid #d1d5db;
-      border-radius: 10px;
-      padding: 18px;
-      margin-top: 20px;
-      background: #f9fafb;
-    }
-
-    .formulario.aberto {
-      display: block;
-    }
-
-    .formulario h2 {
-      margin-top: 0;
-      margin-bottom: 16px;
-      font-size: 20px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 14px;
-    }
-
-    .col-3 {
-      grid-column: span 3;
-    }
-
-    .col-4 {
-      grid-column: span 4;
-    }
-
-    .col-6 {
-      grid-column: span 6;
-    }
-
-    .col-12 {
-      grid-column: span 12;
-    }
-
-    .form-botoes {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-top: 18px;
-    }
-
-    .tabela-wrapper {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 950px;
-    }
-
-    th {
-      background: #1f2937;
-      color: white;
-      padding: 11px;
-      text-align: left;
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    td {
-      padding: 10px 11px;
-      border-bottom: 1px solid #e5e7eb;
-      font-size: 13px;
-    }
-
-    tbody tr:hover {
-      background: #f9fafb;
-    }
-
-    .descricao {
-      min-width: 220px;
-      color: #111827;
-      font-weight: 500;
-    }
-
-    .valor {
-      text-align: right;
-      white-space: nowrap;
-    }
-
-    .acoes {
-      display: flex;
-      gap: 5px;
-      flex-wrap: wrap;
-    }
-
-    .acoes button {
-      padding: 6px 9px;
-      font-size: 12px;
-    }
-
-    .status {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: bold;
-      white-space: nowrap;
-    }
-
-    .status-pendente {
-      background: #fef3c7;
-      color: #92400e;
-    }
-
-    .status-baixado {
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .vazio {
-      text-align: center;
-      padding: 35px;
-      color: #6b7280;
-    }
-
-    .resumo {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .resumo-box {
-      padding: 15px;
-      border-radius: 10px;
-      background: #f9fafb;
-      border: 1px solid #e5e7eb;
-    }
-
-    .resumo-box span {
-      display: block;
-      font-size: 12px;
-      color: #6b7280;
-      margin-bottom: 5px;
-    }
-
-    .resumo-box strong {
-      font-size: 18px;
-    }
-
-    .receber {
-      color: #16a34a;
-    }
-
-    .pagar {
-      color: #dc2626;
-    }
-
-    .saldo {
-      color: #2563eb;
-    }
-
-    .descricao-container {
-      position: relative;
-    }
-
-    .descricao-info {
-      margin-top: 4px;
-      font-size: 11px;
-      color: #6b7280;
-    }
-
-    .contador {
-      margin-top: 10px;
-      color: #6b7280;
-      font-size: 12px;
-    }
-
-    @media (max-width: 800px) {
-
-      .col-3,
-      .col-4,
-      .col-6 {
-        grid-column: span 12;
-      }
-
-      .resumo {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .toolbar {
-        align-items: stretch;
-      }
-
-      .toolbar-left,
-      .toolbar-right {
-        width: 100%;
-        align-items: stretch;
-      }
-
-      .filtro {
-        width: 100%;
-      }
-
-      .btn-voltar {
-        width: 100%;
-        justify-content: center;
-      }
-
-    }
-
-    @media (max-width: 500px) {
-
-      .resumo {
-        grid-template-columns: 1fr;
-      }
-
-      header {
-        padding: 15px;
-      }
-
-      header h1 {
-        font-size: 20px;
-      }
-
-      .container {
-        padding: 0 10px;
-      }
-
-      .card {
-        padding: 15px;
-      }
-
-    }
-
-  </style>
-
-</head>
-
-
-<body>
-
-
-<header>
-
-  <div class="header-conteudo">
-
-    <div class="titulo">
-
-      <h1>💰 Lançamentos</h1>
-
-      <p>
-        Controle Financeiro
-      </p>
-
-    </div>
-
-
-    <!-- BOTÃO VOLTAR PARA O INDEX -->
-
-    <a
-      href="index.html"
-      class="btn-voltar"
-    >
-      ← Voltar para o Index
-    </a>
-
-  </div>
-
-</header>
-
-
-<div class="container">
-
-
-  <!-- =====================================================
-       FILTRO
-  ====================================================== -->
-
-  <div class="card">
-
-    <div class="toolbar">
-
-      <div class="toolbar-left">
-
-        <div>
-
-          <label for="competencia">
-            Competência
-          </label>
-
-          <input
-            id="competencia"
-            class="filtro"
-            type="month"
-          >
-
-        </div>
-
-
-        <button
-          type="button"
-          class="btn-atualizar"
-          onclick="carregarLancamentos()"
-        >
-          🔄 Atualizar
-        </button>
-
-      </div>
-
-
-      <div class="toolbar-right">
-
-        <button
-          type="button"
-          class="btn-incluir"
-          onclick="abrirFormularioInclusao()"
-        >
-          ➕ Incluir
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- ===================================================
-         FORMULÁRIO
-    ==================================================== -->
-
-    <div
-      id="formulario"
-      class="formulario"
-    >
-
-      <h2 id="tituloFormulario">
-        ➕ Novo lançamento
-      </h2>
-
-
-      <input
-        type="hidden"
-        id="idLancamento"
-      >
-
-
-      <div class="grid">
-
-
-        <div class="col-3">
-
-          <label for="formCompetencia">
-            Competência
-          </label>
-
-          <input
-            id="formCompetencia"
-            type="month"
-          >
-
-        </div>
-
-
-        <div class="col-3">
-
-          <label for="formTipo">
-            Tipo
-          </label>
-
-          <select id="formTipo">
-
-            <option value="">
-              Selecione
-            </option>
-
-            <option value="Contas a Receber">
-              Contas a Receber
-            </option>
-
-            <option value="Contas a Pagar">
-              Contas a Pagar
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <div class="col-6">
-
-          <label for="formDescricao">
-            Descrição
-          </label>
-
-          <div class="descricao-container">
-
-            <input
-              id="formDescricao"
-              type="text"
-              list="listaDescricoes"
-              placeholder="Digite ou selecione uma descrição"
-              autocomplete="off"
-            >
-
-            <datalist
-              id="listaDescricoes"
-            ></datalist>
-
-          </div>
-
-          <div class="descricao-info">
-            As opções são carregadas da aba "Descricoes".
-          </div>
-
-        </div>
-
-
-        <div class="col-3">
-
-          <label for="formValor">
-            Valor
-          </label>
-
-          <input
-            id="formValor"
-            type="text"
-            inputmode="decimal"
-            placeholder="0,00"
-          >
-
-        </div>
-
-
-        <div class="col-3">
-
-          <label for="formVencimento">
-            Vencimento
-          </label>
-
-          <input
-            id="formVencimento"
-            type="date"
-          >
-
-        </div>
-
-      </div>
-
-
-      <div
-        id="mensagemFormulario"
-        class="mensagem"
-      ></div>
-
-
-      <div class="form-botoes">
-
-        <button
-          type="button"
-          class="btn-cancelar"
-          onclick="fecharFormulario()"
-        >
-          Cancelar
-        </button>
-
-
-        <button
-          type="button"
-          id="btnSalvar"
-          class="btn-salvar"
-          onclick="gravarLancamento()"
-        >
-          💾 Gravar
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- ===================================================
-         RESUMO
-    ==================================================== -->
-
-    <div class="resumo">
-
-      <div class="resumo-box">
-
-        <span>
-          Contas a Receber
-        </span>
-
-        <strong
-          id="resumoReceber"
-          class="receber"
-        >
-          R$ 0,00
-        </strong>
-
-      </div>
-
-
-      <div class="resumo-box">
-
-        <span>
-          Contas a Pagar
-        </span>
-
-        <strong
-          id="resumoPagar"
-          class="pagar"
-        >
-          R$ 0,00
-        </strong>
-
-      </div>
-
-
-      <div class="resumo-box">
-
-        <span>
-          Recebido / Pago
-        </span>
-
-        <strong id="resumoMovimentado">
-          R$ 0,00
-        </strong>
-
-      </div>
-
-
-      <div class="resumo-box">
-
-        <span>
-          Saldo
-        </span>
-
-        <strong
-          id="resumoSaldo"
-          class="saldo"
-        >
-          R$ 0,00
-        </strong>
-
-      </div>
-
-    </div>
-
-
-    <div
-      id="mensagem"
-      class="mensagem"
-    ></div>
-
-  </div>
-
-
-  <!-- =====================================================
-       TABELA
-  ====================================================== -->
-
-  <div class="card">
-
-    <div class="tabela-wrapper">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>ID</th>
-
-            <th>Competência</th>
-
-            <th>Tipo</th>
-
-            <th>Descrição</th>
-
-            <th>Valor</th>
-
-            <th>Vencimento</th>
-
-            <th>Baixado</th>
-
-            <th>Ações</th>
-
-          </tr>
-
-        </thead>
-
-
-        <tbody id="tabelaLancamentos">
-
-          <tr>
-
-            <td
-              colspan="8"
-              class="vazio"
-            >
-              Carregando...
-            </td>
-
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-
-    <div
-      id="contadorLancamentos"
-      class="contador"
-    ></div>
-
-  </div>
-
+<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+<title>Lançamentos - Controle Financeiro</title> <style> * { box-sizing: border-box; } body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f3f4f6; color: #111827; } header { background: #111827; color: white; padding: 18px 24px; } .header-conteudo { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap; } .titulo { flex: 1; min-width: 220px; } header h1 { margin: 0; font-size: 24px; } header p { margin: 5px 0 0; color: #d1d5db; font-size: 14px; } .btn-voltar { background: #4b5563; color: white; padding: 10px 16px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: bold; display: inline-flex; align-items: center; gap: 6px; transition: .15s; } .btn-voltar:hover { background: #374151; transform: translateY(-1px); } .container { max-width: 1400px; margin: 20px auto; padding: 0 16px; } .card { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0, 0, 0, .08); padding: 20px; margin-bottom: 20px; } .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; } .toolbar-left, .toolbar-right { display: flex; align-items: flex-end; gap: 8px; flex-wrap: wrap; } label { display: block; font-weight: bold; font-size: 13px; margin-bottom: 5px; color: #374151; } input, select { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; background: white; font-size: 14px; } input:focus, select:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37, 99, 235, .12); } .filtro { width: 150px; } button { border: 0; border-radius: 8px; padding: 10px 14px; cursor: pointer; font-size: 14px; font-weight: bold; transition: .15s; } button:hover { opacity: .9; transform: translateY(-1px); } button:disabled { opacity: .5; cursor: not-allowed; transform: none; } .btn-incluir { background: #16a34a; color: white; } .btn-editar { background: #f59e0b; color: white; } .btn-baixar { background: #2563eb; color: white; } .btn-excluir { background: #dc2626; color: white; } .btn-atualizar { background: #374151; color: white; } .btn-cancelar { background: #6b7280; color: white; } .btn-salvar { background: #16a34a; color: white; min-width: 120px; } .mensagem { display: none; padding: 12px 15px; border-radius: 8px; margin-top: 15px; font-size: 14px; } .mensagem.sucesso { display: block; background: #dcfce7; color: #166534; border: 1px solid #86efac; } .mensagem.erro { display: block; background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; } .mensagem.aviso { display: block; background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; } .formulario { display: none; border: 1px solid #d1d5db; border-radius: 10px; padding: 18px; margin-top: 20px; background: #f9fafb; } .formulario.aberto { display: block; } .formulario h2 { margin-top: 0; margin-bottom: 16px; font-size: 20px; } .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; } .col-3 { grid-column: span 3; } .col-4 { grid-column: span 4; } .col-6 { grid-column: span 6; } .col-12 { grid-column: span 12; } .form-botoes { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; } .tabela-wrapper { overflow-x: auto; } table { width: 100%; border-collapse: collapse; min-width: 950px; } th { background: #1f2937; color: white; padding: 11px; text-align: left; font-size: 13px; white-space: nowrap; } td { padding: 10px 11px; border-bottom: 1px solid #e5e7eb; font-size: 13px; vertical-align: middle; } tbody tr:hover { background: #f9fafb; } .descricao { min-width: 220px; color: #111827; font-weight: 500; } .valor { text-align: right; white-space: nowrap; font-weight: bold; } .acoes { display: flex; gap: 5px; flex-wrap: wrap; } .acoes button { padding: 6px 9px; font-size: 12px; } /* ===================================================== CLASSIFICAÇÃO DO TIPO ===================================================== */ .tipo { display: inline-block; min-width: 150px; padding: 6px 10px; border-radius: 999px; font-size: 11px; font-weight: bold; text-align: center; white-space: nowrap; } .tipo-receber { background: #dcfce7; color: #166534; border: 1px solid #86efac; } .tipo-pagar { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; } .tipo-outro { background: #e5e7eb; color: #374151; border: 1px solid #d1d5db; } /* ===================================================== STATUS ===================================================== */ .status { display: inline-block; padding: 4px 8px; border-radius: 999px; font-size: 11px; font-weight: bold; white-space: nowrap; } .status-pendente { background: #fef3c7; color: #92400e; } .status-baixado { background: #dcfce7; color: #166534; } .vazio { text-align: center; padding: 35px; color: #6b7280; } .resumo { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 18px; } .resumo-box { padding: 15px; border-radius: 10px; background: #f9fafb; border: 1px solid #e5e7eb; } .resumo-box span { display: block; font-size: 12px; color: #6b7280; margin-bottom: 5px; } .resumo-box strong { font-size: 18px; } .receber { color: #16a34a; } .pagar { color: #dc2626; } .saldo { color: #2563eb; } .descricao-container { position: relative; } .descricao-info { margin-top: 4px; font-size: 11px; color: #6b7280; } .contador { margin-top: 10px; color: #6b7280; font-size: 12px; } @media (max-width: 800px) { .col-3, .col-4, .col-6 { grid-column: span 12; } .resumo { grid-template-columns: repeat(2, 1fr); } .toolbar { align-items: stretch; } .toolbar-left, .toolbar-right { width: 100%; align-items: stretch; } .filtro { width: 100%; } .btn-voltar { width: 100%; justify-content: center; } } @media (max-width: 500px) { .resumo { grid-template-columns: 1fr; } header { padding: 15px; } header h1 { font-size: 20px; } .container { padding: 0 10px; } .card { padding: 15px; } } </style> </head> <body> <header> <div class="header-conteudo">
+<div class="titulo">
+
+  <h1>💰 Lançamentos</h1>
+
+  <p>
+    Controle Financeiro
+  </p>
 
 </div>
 
 
-<script>
+<a
+  href="index.html"
+  class="btn-voltar"
+>
+  ← Voltar para o Index
+</a>
 
+</div> </header> <div class="container"> <!-- ===================================================== FILTRO ====================================================== --> <div class="card">
+<div class="toolbar">
 
-/* =========================================================
-   CONFIGURAÇÃO
-========================================================= */
+  <div class="toolbar-left">
 
-const API_URL =
-  "https://script.google.com/macros/s/AKfycbwlkjtWnOcvglZS2Ft6ydraSh4-JbTXH6C7irb6O5hYPvxYxqN0tYWQs2Ybi6mVWThN/exec";
+    <div>
 
+      <label for="competencia">
+        Competência
+      </label>
 
-/*
- * IMPORTANTE:
- *
- * A aba Lancamentos possui somente:
- *
- * ID
- * Competência
- * Tipo
- * Descricao
- * Valor
- * Vencimento
- * Baixado
- *
- * Portanto o código NÃO utiliza:
- *
- * databaixa
- * status
- * NOME_ABA_LANCAMENTOS
- *
- */
+      <input
+        id="competencia"
+        class="filtro"
+        type="month"
+      >
 
+    </div>
 
-/* =========================================================
-   VARIÁVEL DOS LANÇAMENTOS ATUAIS
-========================================================= */
 
-let lancamentosAtuais = [];
+    <button
+      type="button"
+      class="btn-atualizar"
+      onclick="carregarLancamentos()"
+    >
+      🔄 Atualizar
+    </button>
 
+  </div>
 
-/* =========================================================
-   INICIALIZAÇÃO
-========================================================= */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  function() {
+  <div class="toolbar-right">
 
-    const hoje = new Date();
+    <button
+      type="button"
+      class="btn-incluir"
+      onclick="abrirFormularioInclusao()"
+    >
+      ➕ Incluir
+    </button>
 
-    const ano =
-      hoje.getFullYear();
+  </div>
 
-    const mes =
-      String(
-        hoje.getMonth() + 1
-      ).padStart(
-        2,
-        "0"
-      );
+</div>
 
-    const competencia =
-      ano + "-" + mes;
 
+<!-- ===================================================
+     FORMULÁRIO
+==================================================== -->
 
-    document
-      .getElementById("competencia")
-      .value =
-        competencia;
+<div
+  id="formulario"
+  class="formulario"
+>
 
+  <h2 id="tituloFormulario">
+    ➕ Novo lançamento
+  </h2>
 
-    document
-      .getElementById("formCompetencia")
-      .value =
-        competencia;
 
+  <input
+    type="hidden"
+    id="idLancamento"
+  >
 
-    carregarLancamentos();
 
-    carregarDescricoes();
+  <div class="grid">
 
-  }
-);
 
+    <div class="col-3">
 
-/* =========================================================
-   MENSAGENS
-========================================================= */
+      <label for="formCompetencia">
+        Competência
+      </label>
 
-function mostrarMensagem(
-  texto,
-  tipo = "sucesso"
-) {
+      <input
+        id="formCompetencia"
+        type="month"
+      >
 
-  const el =
-    document.getElementById(
-      "mensagem"
-    );
+    </div>
 
 
-  el.textContent =
-    texto;
+    <div class="col-3">
 
+      <label for="formTipo">
+        Tipo
+      </label>
 
-  el.className =
-    "mensagem " +
-    tipo;
+      <select id="formTipo">
 
-}
+        <option value="">
+          Selecione
+        </option>
 
+        <option value="Contas a Receber">
+          Contas a Receber
+        </option>
 
-function limparMensagem() {
+        <option value="Contas a Pagar">
+          Contas a Pagar
+        </option>
 
-  const el =
-    document.getElementById(
-      "mensagem"
-    );
+      </select>
 
+    </div>
 
-  el.textContent =
-    "";
 
+    <div class="col-6">
 
-  el.className =
-    "mensagem";
+      <label for="formDescricao">
+        Descrição
+      </label>
 
-}
+      <div class="descricao-container">
 
+        <input
+          id="formDescricao"
+          type="text"
+          list="listaDescricoes"
+          placeholder="Digite ou selecione uma descrição"
+          autocomplete="off"
+        >
 
-function mostrarMensagemFormulario(
-  texto,
-  tipo = "erro"
-) {
+        <datalist
+          id="listaDescricoes"
+        ></datalist>
 
-  const el =
-    document.getElementById(
-      "mensagemFormulario"
-    );
+      </div>
 
+      <div class="descricao-info">
+        As opções são carregadas da aba "Descricoes".
+      </div>
 
-  el.textContent =
-    texto;
+    </div>
 
 
-  el.className =
-    "mensagem " +
-    tipo;
+    <div class="col-3">
 
-}
+      <label for="formValor">
+        Valor
+      </label>
 
+      <input
+        id="formValor"
+        type="text"
+        inputmode="decimal"
+        placeholder="0,00"
+      >
 
-function limparMensagemFormulario() {
+    </div>
 
-  const el =
-    document.getElementById(
-      "mensagemFormulario"
-    );
 
+    <div class="col-3">
 
-  el.textContent =
-    "";
+      <label for="formVencimento">
+        Vencimento
+      </label>
 
+      <input
+        id="formVencimento"
+        type="date"
+      >
 
-  el.className =
-    "mensagem";
+    </div>
 
-}
+  </div>
 
 
-/* =========================================================
-   DINHEIRO
-========================================================= */
+  <div
+    id="mensagemFormulario"
+    class="mensagem"
+  ></div>
 
-function dinheiro(valor) {
 
-  const numero =
-    converterValor(
-      valor
-    );
+  <div class="form-botoes">
 
+    <button
+      type="button"
+      class="btn-cancelar"
+      onclick="fecharFormulario()"
+    >
+      Cancelar
+    </button>
 
-  return numero.toLocaleString(
-    "pt-BR",
-    {
-      style: "currency",
-      currency: "BRL"
-    }
-  );
 
-}
+    <button
+      type="button"
+      id="btnSalvar"
+      class="btn-salvar"
+      onclick="gravarLancamento()"
+    >
+      💾 Gravar
+    </button>
 
+  </div>
 
-/* =========================================================
-   ESCAPAR HTML
-========================================================= */
+</div>
 
-function escaparHtml(valor) {
 
-  return String(
-    valor === null ||
-    valor === undefined
-      ? ""
-      : valor
-  )
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
+<!-- ===================================================
+     RESUMO
+==================================================== -->
 
-}
+<div class="resumo">
 
+  <div class="resumo-box">
 
-/* =========================================================
-   ESCAPAR PARA ATRIBUTO JAVASCRIPT
-========================================================= */
+    <span>
+      Contas a Receber
+    </span>
 
-function escaparJs(valor) {
+    <strong
+      id="resumoReceber"
+      class="receber"
+    >
+      R$ 0,00
+    </strong>
 
-  return String(
-    valor === null ||
-    valor === undefined
-      ? ""
-      : valor
-  )
-    .replace(
-      /\\/g,
-      "\\\\"
-    )
-    .replace(
-      /'/g,
-      "\\'"
-    )
-    .replace(
-      /"/g,
-      '\\"'
-    )
-    .replace(
-      /\r/g,
-      "\\r"
-    )
-    .replace(
-      /\n/g,
-      "\\n"
-    );
+  </div>
 
-}
 
+  <div class="resumo-box">
 
-/* =========================================================
-   CONVERTER VALOR
-========================================================= */
+    <span>
+      Contas a Pagar
+    </span>
 
-function converterValor(valor) {
+    <strong
+      id="resumoPagar"
+      class="pagar"
+    >
+      R$ 0,00
+    </strong>
 
-  if (
-    valor === null ||
-    valor === undefined ||
-    valor === ""
-  ) {
+  </div>
 
-    return 0;
 
-  }
+  <div class="resumo-box">
 
+    <span>
+      Recebido / Pago
+    </span>
 
-  if (
-    typeof valor === "number"
-  ) {
+    <strong id="resumoMovimentado">
+      R$ 0,00
+    </strong>
 
-    return valor;
+  </div>
 
-  }
 
+  <div class="resumo-box">
 
-  let texto =
-    String(valor)
-      .trim()
-      .replace(
-        /R\$/gi,
-        ""
-      )
-      .replace(
-        /\s/g,
-        ""
-      );
+    <span>
+      Saldo
+    </span>
 
+    <strong
+      id="resumoSaldo"
+      class="saldo"
+    >
+      R$ 0,00
+    </strong>
 
-  /*
-   * Formato brasileiro:
-   *
-   * 1.234,56
-   */
+  </div>
 
-  if (
-    texto.indexOf(",") !== -1
-  ) {
+</div>
 
-    texto =
-      texto
-        .replace(
-          /\./g,
-          ""
-        )
-        .replace(
-          ",",
-          "."
-        );
 
-  }
+<div
+  id="mensagem"
+  class="mensagem"
+></div>
 
+</div> <!-- ===================================================== TABELA ====================================================== --> <div class="card">
+<div class="tabela-wrapper">
 
-  const numero =
-    Number(texto);
+  <table>
 
+    <thead>
 
-  return isNaN(numero)
-    ? 0
-    : numero;
-
-}
-
-
-/* =========================================================
-   VERIFICAR SE FOI BAIXADO
-========================================================= */
-
-function estaBaixado(item) {
-
-  const valor =
-    item &&
-    item.baixado !== undefined
-      ? item.baixado
-      : item &&
-        item.Baixado !== undefined
-          ? item.Baixado
-          : "";
-
-
-  const texto =
-    String(valor)
-      .trim()
-      .toLowerCase();
-
-
-  return (
-    texto === "sim" ||
-    texto === "baixado" ||
-    texto === "true" ||
-    texto === "1" ||
-    texto === "yes"
-  );
-
-}
-
-
-/* =========================================================
-   URL DA API
-========================================================= */
-
-function montarUrl(
-  acao,
-  parametros = {}
-) {
-
-  if (
-    !API_URL ||
-    API_URL.indexOf(
-      "COLE_AQUI"
-    ) !== -1
-  ) {
-
-    throw new Error(
-      "Configure a API_URL."
-    );
-
-  }
-
-
-  const params =
-    new URLSearchParams();
-
-
-  params.set(
-    "action",
-    acao
-  );
-
-
-  Object.keys(
-    parametros
-  ).forEach(
-    function(chave) {
-
-      const valor =
-        parametros[chave];
-
-
-      if (
-        valor !== undefined &&
-        valor !== null
-      ) {
-
-        params.set(
-          chave,
-          valor
-        );
-
-      }
-
-    }
-  );
-
-
-  return (
-    API_URL +
-    "?" +
-    params.toString()
-  );
-
-}
-
-
-/* =========================================================
-   CHAMAR API
-========================================================= */
-
-async function chamarApi(
-  acao,
-  parametros = {}
-) {
-
-  const url =
-    montarUrl(
-      acao,
-      parametros
-    );
-
-
-  console.log(
-    "Chamando API:",
-    url
-  );
-
-
-  const resposta =
-    await fetch(
-      url,
-      {
-        method: "GET",
-        cache: "no-store"
-      }
-    );
-
-
-  if (
-    !resposta.ok
-  ) {
-
-    throw new Error(
-      "Erro HTTP " +
-      resposta.status
-    );
-
-  }
-
-
-  const texto =
-    await resposta.text();
-
-
-  console.log(
-    "Resposta API:",
-    texto
-  );
-
-
-  if (
-    texto.trim().startsWith("<")
-  ) {
-
-    throw new Error(
-      "A API retornou HTML em vez de JSON. Verifique se a URL termina em /exec."
-    );
-
-  }
-
-
-  let dados;
-
-
-  try {
-
-    dados =
-      JSON.parse(
-        texto
-      );
-
-  }
-  catch (erro) {
-
-    throw new Error(
-      "Resposta inválida da API: " +
-      texto.substring(
-        0,
-        300
-      )
-    );
-
-  }
-
-
-  if (
-    dados.sucesso === false
-  ) {
-
-    throw new Error(
-      dados.erro ||
-      dados.mensagem ||
-      "Erro desconhecido na API."
-    );
-
-  }
-
-
-  return dados;
-
-}
-
-
-/* =========================================================
-   CARREGAR DESCRIÇÕES
-========================================================= */
-
-async function carregarDescricoes() {
-
-  const lista =
-    document.getElementById(
-      "listaDescricoes"
-    );
-
-
-  if (!lista) {
-    return;
-  }
-
-
-  try {
-
-    const resultado =
-      await chamarApi(
-        "listarDescricoes"
-      );
-
-
-    const descricoes =
-      resultado.lista ||
-      resultado.descricoes ||
-      [];
-
-
-    const unicas =
-      [
-        ...new Set(
-          descricoes
-            .map(
-              function(item) {
-
-                if (
-                  typeof item === "object"
-                ) {
-
-                  return String(
-                    item.descricao ||
-                    item.Descricao ||
-                    item.nome ||
-                    item.Nome ||
-                    ""
-                  ).trim();
-
-                }
-
-
-                return String(
-                  item
-                ).trim();
-
-              }
-            )
-            .filter(
-              function(item) {
-
-                return item !== "";
-
-              }
-            )
-        )
-      ];
-
-
-    unicas.sort(
-      function(a, b) {
-
-        return a.localeCompare(
-          b,
-          "pt-BR",
-          {
-            sensitivity:
-              "base"
-          }
-        );
-
-      }
-    );
-
-
-    lista.innerHTML =
-      unicas
-        .map(
-          function(descricao) {
-
-            return (
-              "<option value=\"" +
-              escaparHtml(
-                descricao
-              ) +
-              "\"></option>"
-            );
-
-          }
-        )
-        .join("");
-
-
-  }
-  catch (erro) {
-
-    console.error(
-      "Erro ao carregar descrições:",
-      erro
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   CARREGAR LANÇAMENTOS
-========================================================= */
-
-async function carregarLancamentos() {
-
-  const competencia =
-    document
-      .getElementById(
-        "competencia"
-      )
-      .value;
-
-
-  if (!competencia) {
-
-    mostrarMensagem(
-      "Informe a competência.",
-      "erro"
-    );
-
-    return;
-
-  }
-
-
-  const tabela =
-    document
-      .getElementById(
-        "tabelaLancamentos"
-      );
-
-
-  tabela.innerHTML =
-    `
       <tr>
+
+        <th>ID</th>
+
+        <th>Competência</th>
+
+        <th>Tipo</th>
+
+        <th>Descrição</th>
+
+        <th>Valor</th>
+
+        <th>Vencimento</th>
+
+        <th>Baixado</th>
+
+        <th>Ações</th>
+
+      </tr>
+
+    </thead>
+
+
+    <tbody id="tabelaLancamentos">
+
+      <tr>
+
         <td
           colspan="8"
           class="vazio"
         >
-          ⏳ Carregando lançamentos...
+          Carregando...
         </td>
+
       </tr>
-    `;
 
+    </tbody>
 
-  try {
+  </table>
 
-    const resultado =
-      await chamarApi(
-        "listarLancamentos",
-        {
-          competencia:
-            competencia
-        }
-      );
+</div>
 
 
-    lancamentosAtuais =
-  resultado.lista ||
-  resultado.lancamentos ||
-  [];
+<div
+  id="contadorLancamentos"
+  class="contador"
+></div>
 
-// Ordenar por Tipo
-lancamentosAtuais.sort(function(a, b) {
-
-  const tipoA =
-    String(
-      a.tipo !== undefined
-        ? a.tipo
-        : a.Tipo || ""
-    ).trim();
-
-  const tipoB =
-    String(
-      b.tipo !== undefined
-        ? b.tipo
-        : b.Tipo || ""
-    ).trim();
-
-  const ordem = {
-    "Contas a Receber": 1,
-    "Contas a Pagar": 2
-  };
-
-  const ordemTipo =
-    (ordem[tipoA] || 99) -
-    (ordem[tipoB] || 99);
-
-  if (ordemTipo !== 0) {
-    return ordemTipo;
-  }
-
-  const vencimentoA =
-    String(
-      a.vencimento !== undefined
-        ? a.vencimento
-        : a.Vencimento || ""
-    );
-
-  const vencimentoB =
-    String(
-      b.vencimento !== undefined
-        ? b.vencimento
-        : b.Vencimento || ""
-    );
-
-  return vencimentoA.localeCompare(
-    vencimentoB
-  );
-
-});
-
-
-renderizarLancamentos(
-  lancamentosAtuais
-);
-
-
-
-    calcularResumo(
-      lancamentosAtuais
-    );
-
-
-    mostrarMensagem(
-      "Lançamentos atualizados.",
-      "sucesso"
-    );
-
-  }
-  catch (erro) {
-
-    console.error(
-      "Erro ao carregar lançamentos:",
-      erro
-    );
-
-
-    lancamentosAtuais =
-      [];
-
-
-    tabela.innerHTML =
-      `
-        <tr>
-          <td
-            colspan="8"
-            class="vazio"
-          >
-            ⚠ Não foi possível carregar os lançamentos.
-          </td>
-        </tr>
-      `;
-
-
-    zerarResumo();
-
-
-    mostrarMensagem(
-      "⚠ " +
-      erro.message,
-      "erro"
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   RESUMO
-========================================================= */
-
-function calcularResumo(
-  lista
-) {
-
-  let receber =
-    0;
-
-  let pagar =
-    0;
-
-  let recebidoPago =
-    0;
-
-
-  lista.forEach(
-    function(item) {
-
-      const tipo =
-        String(
-          item.tipo ||
-          item.Tipo ||
-          ""
-        )
-          .trim()
-          .toLowerCase();
-
-
-      const valor =
-        converterValor(
-          item.valor ||
-          item.Valor
-        );
-
-
-      const baixado =
-        estaBaixado(
-          item
-        );
-
-
-      if (
-        tipo.indexOf(
-          "receber"
-        ) !== -1
-      ) {
-
-        receber +=
-          valor;
-
-
-        if (baixado) {
-
-          recebidoPago +=
-            valor;
-
-        }
-
-      }
-
-
-      else if (
-        tipo.indexOf(
-          "pagar"
-        ) !== -1
-      ) {
-
-        pagar +=
-          valor;
-
-
-        if (baixado) {
-
-          recebidoPago +=
-            valor;
-
-        }
-
-      }
-
-    }
-  );
-
-
-  /*
-   * Saldo = Receber - Pagar
-   */
-
-  const saldo =
-    receber -
-    pagar;
-
-
-  document
-    .getElementById(
-      "resumoReceber"
-    )
-    .textContent =
-      dinheiro(
-        receber
-      );
-
-
-  document
-    .getElementById(
-      "resumoPagar"
-    )
-    .textContent =
-      dinheiro(
-        pagar
-      );
-
-
-  document
-    .getElementById(
-      "resumoMovimentado"
-    )
-    .textContent =
-      dinheiro(
-        recebidoPago
-      );
-
-
-  document
-    .getElementById(
-      "resumoSaldo"
-    )
-    .textContent =
-      dinheiro(
-        saldo
-      );
-
-}
-
-
-/* =========================================================
-   ZERAR RESUMO
-========================================================= */
-
-function zerarResumo() {
-
-  document
-    .getElementById(
-      "resumoReceber"
-    )
-    .textContent =
-      "R$ 0,00";
-
-
-  document
-    .getElementById(
-      "resumoPagar"
-    )
-    .textContent =
-      "R$ 0,00";
-
-
-  document
-    .getElementById(
-      "resumoMovimentado"
-    )
-    .textContent =
-      "R$ 0,00";
-
-
-  document
-    .getElementById(
-      "resumoSaldo"
-    )
-    .textContent =
-      "R$ 0,00";
-
-}
-
-
-/* =========================================================
-   RENDERIZAR LANÇAMENTOS
-========================================================= */
-
-function renderizarLancamentos(
-  lista
-) {
-
-  const tabela =
-    document.getElementById(
-      "tabelaLancamentos"
-    );
-
-
-  const contador =
-    document.getElementById(
-      "contadorLancamentos"
-    );
-
-
-  if (
-    !lista ||
-    lista.length === 0
-  ) {
-
-    tabela.innerHTML =
-      `
-        <tr>
-
-          <td
-            colspan="8"
-            class="vazio"
-          >
-            Nenhum lançamento encontrado
-            para esta competência.
-          </td>
-
-        </tr>
-      `;
-
-
-    contador.textContent =
-      "0 lançamentos";
-
-
-    return;
-
-  }
-
-
-  tabela.innerHTML =
-    lista
-      .map(
-        function(item) {
-
-          const id =
-            item.id !== undefined
-              ? item.id
-              : item.ID;
-
-
-          const competencia =
-            item.competencia !== undefined
-              ? item.competencia
-              : item["Competência"];
-
-
-          const tipo =
-            item.tipo !== undefined
-              ? item.tipo
-              : item.Tipo;
-
-
-          const descricao =
-            item.descricao !== undefined
-              ? item.descricao
-              : item.Descricao;
-
-
-          const valor =
-            item.valor !== undefined
-              ? item.valor
-              : item.Valor;
-
-
-          const vencimento =
-            item.vencimento !== undefined
-              ? item.vencimento
-              : item.Vencimento;
-
-
-          const baixado =
-            estaBaixado(
-              item
-            );
-
-
-          return `
-            <tr>
-
-              <td>
-                ${escaparHtml(id)}
-              </td>
-
-              <td>
-                ${escaparHtml(
-                  competencia
-                )}
-              </td>
-
-              <td>
-                ${escaparHtml(
-                  tipo
-                )}
-              </td>
-
-              <td class="descricao">
-                ${escaparHtml(
-                  descricao || "—"
-                )}
-              </td>
-
-              <td class="valor">
-                ${dinheiro(
-                  valor
-                )}
-              </td>
-
-              <td>
-                ${escaparHtml(
-                  formatarDataExibicao(
-                    vencimento
-                  )
-                )}
-              </td>
-
-              <td>
-
-                <span
-                  class="status ${
-                    baixado
-                      ? "status-baixado"
-                      : "status-pendente"
-                  }"
-                >
-
-                  ${
-                    baixado
-                      ? "Baixado"
-                      : "Pendente"
-                  }
-
-                </span>
-
-              </td>
-
-              <td>
-
-                <div class="acoes">
-
-                  <button
-                    type="button"
-                    class="btn-editar"
-                    onclick="editarPeloIndice(${lista.indexOf(item)})"
-                  >
-                    ✏️ Editar
-                  </button>
-
-
-                  ${
-                    baixado
-                      ? ""
-                      : `
-                        <button
-                          type="button"
-                          class="btn-baixar"
-                          onclick="baixarLancamento('${escaparJs(id)}')"
-                        >
-                          ✔ Baixar
-                        </button>
-                      `
-                  }
-
-
-                  <button
-                    type="button"
-                    class="btn-excluir"
-                    onclick="excluirLancamento('${escaparJs(id)}')"
-                  >
-                    🗑 Excluir
-                  </button>
-
-                </div>
-
-              </td>
-
-            </tr>
-          `;
-
-        }
-      )
-      .join("");
-
-
-  contador.textContent =
-    lista.length +
-    (
-      lista.length === 1
-        ? " lançamento"
-        : " lançamentos"
-    );
-
-}
-
-
-/* =========================================================
-   FORMATAR DATA PARA EXIBIÇÃO
-========================================================= */
-
-function formatarDataExibicao(
-  valor
-) {
-
-  if (!valor) {
-    return "";
-  }
-
-
-  const texto =
-    String(
-      valor
-    ).trim();
-
-
-  /*
-   * YYYY-MM-DD
-   */
-
-  if (
-    /^\d{4}-\d{2}-\d{2}$/.test(
-      texto
-    )
-  ) {
-
-    const partes =
-      texto.split("-");
-
-
-    return (
-      partes[2] +
-      "/" +
-      partes[1] +
-      "/" +
-      partes[0]
-    );
-
-  }
-
-
-  /*
-   * DD/MM/YYYY
-   */
-
-  if (
-    /^\d{2}\/\d{2}\/\d{4}$/.test(
-      texto
-    )
-  ) {
-
-    return texto;
-
-  }
-
-
-  return texto;
-
-}
-
-
-/* =========================================================
-   ABRIR FORMULÁRIO DE INCLUSÃO
-========================================================= */
-
-function abrirFormularioInclusao() {
-
-  limparFormulario();
-
-
-  const competencia =
-    document
-      .getElementById(
-        "competencia"
-      )
-      .value;
-
-
-  document
-    .getElementById(
-      "formCompetencia"
-    )
-    .value =
-      competencia;
-
-
-  document
-    .getElementById(
-      "tituloFormulario"
-    )
-    .textContent =
-      "➕ Novo lançamento";
-
-
-  document
-    .getElementById(
-      "btnSalvar"
-    )
-    .textContent =
-      "💾 Gravar";
-
-
-  document
-    .getElementById(
-      "formulario"
-    )
-    .classList
-    .add(
-      "aberto"
-    );
-
-
-  limparMensagemFormulario();
-
-
-  document
-    .getElementById(
-      "formTipo"
-    )
-    .focus();
-
-}
-
-
-/* =========================================================
-   FECHAR FORMULÁRIO
-========================================================= */
-
-function fecharFormulario() {
-
-  document
-    .getElementById(
-      "formulario"
-    )
-    .classList
-    .remove(
-      "aberto"
-    );
-
-
-  limparFormulario();
-
-}
-
-
-/* =========================================================
-   LIMPAR FORMULÁRIO
-========================================================= */
-
-function limparFormulario() {
-
-  document
-    .getElementById(
-      "idLancamento"
-    )
-    .value =
-      "";
-
-
-  document
-    .getElementById(
-      "formTipo"
-    )
-    .value =
-      "";
-
-
-  document
-    .getElementById(
-      "formDescricao"
-    )
-    .value =
-      "";
-
-
-  document
-    .getElementById(
-      "formValor"
-    )
-    .value =
-      "";
-
-
-  document
-    .getElementById(
-      "formVencimento"
-    )
-    .value =
-      "";
-
-
-  limparMensagemFormulario();
-
-}
-
-
-/* =========================================================
-   EDITAR PELO ÍNDICE
-========================================================= */
-
-function editarPeloIndice(
-  indice
-) {
-
-  const item =
-    lancamentosAtuais[
-      indice
-    ];
-
-
-  if (!item) {
-
-    mostrarMensagem(
-      "Lançamento não encontrado.",
-      "erro"
-    );
-
-    return;
-
-  }
-
-
-  editarLancamento(
-    item
-  );
-
-}
-
-
-/* =========================================================
-   EDITAR
-========================================================= */
-
-function editarLancamento(
-  item
-) {
-
-  const id =
-    item.id !== undefined
-      ? item.id
-      : item.ID;
-
-
-  const competencia =
-    item.competencia !== undefined
-      ? item.competencia
-      : item["Competência"];
-
-
-  const tipo =
-    item.tipo !== undefined
-      ? item.tipo
-      : item.Tipo;
-
-
-  const descricao =
-    item.descricao !== undefined
-      ? item.descricao
-      : item.Descricao;
-
-
-  const valor =
-    item.valor !== undefined
-      ? item.valor
-      : item.Valor;
-
-
-  const vencimento =
-    item.vencimento !== undefined
-      ? item.vencimento
-      : item.Vencimento;
-
-
-  document
-    .getElementById(
-      "idLancamento"
-    )
-    .value =
-      id || "";
-
-
-  document
-    .getElementById(
-      "formCompetencia"
-    )
-    .value =
-      competencia || "";
-
-
-  document
-    .getElementById(
-      "formTipo"
-    )
-    .value =
-      tipo || "";
-
-
-  document
-    .getElementById(
-      "formDescricao"
-    )
-    .value =
-      descricao || "";
-
-
-  document
-    .getElementById(
-      "formValor"
-    )
-    .value =
-      converterValor(
-        valor
-      ).toLocaleString(
-        "pt-BR",
-        {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }
-      );
-
-
-  document
-    .getElementById(
-      "formVencimento"
-    )
-    .value =
-      converterDataInput(
-        vencimento
-      );
-
-
-  document
-    .getElementById(
-      "tituloFormulario"
-    )
-    .textContent =
-      "✏️ Editar lançamento #" +
-      id;
-
-
-  document
-    .getElementById(
-      "btnSalvar"
-    )
-    .textContent =
-      "💾 Salvar alteração";
-
-
-  document
-    .getElementById(
-      "formulario"
-    )
-    .classList
-    .add(
-      "aberto"
-    );
-
-
-  limparMensagemFormulario();
-
-}
-
-
-/* =========================================================
-   CONVERTER DATA PARA INPUT
-========================================================= */
-
-function converterDataInput(
-  valor
-) {
-
-  if (!valor) {
-    return "";
-  }
-
-
-  const texto =
-    String(
-      valor
-    ).trim();
-
-
-  /*
-   * Já está no formato correto
-   */
-
-  if (
-    /^\d{4}-\d{2}-\d{2}$/.test(
-      texto
-    )
-  ) {
-
-    return texto;
-
-  }
-
-
-  /*
-   * DD/MM/YYYY
-   *
-   * CORREÇÃO IMPORTANTE:
-   *
-   * /^\d{2}\/\d{2}\/\d{4}$/
-   */
-
-  if (
-    /^\d{2}\/\d{2}\/\d{4}$/.test(
-      texto
-    )
-  ) {
-
-    const partes =
-      texto.split("/");
-
-
-    return (
-      partes[2] +
-      "-" +
-      partes[1] +
-      "-" +
-      partes[0]
-    );
-
-  }
-
-
-  return "";
-
-}
-
-
-/* =========================================================
-   GRAVAR LANÇAMENTO
-========================================================= */
-
-async function gravarLancamento() {
-
-  const id =
-    document
-      .getElementById(
-        "idLancamento"
-      )
-      .value;
-
-
-  const competencia =
-    document
-      .getElementById(
-        "formCompetencia"
-      )
-      .value;
-
-
-  const tipo =
-    document
-      .getElementById(
-        "formTipo"
-      )
-      .value;
-
-
-  const descricao =
-    document
-      .getElementById(
-        "formDescricao"
-      )
-      .value
-      .trim();
-
-
-  const valorTexto =
-    document
-      .getElementById(
-        "formValor"
-      )
-      .value;
-
-
-  const vencimento =
-    document
-      .getElementById(
-        "formVencimento"
-      )
-      .value;
-
-
-  const valor =
-    converterValor(
-      valorTexto
-    );
-
-
-  if (!competencia) {
-
-    mostrarMensagemFormulario(
-      "Informe a competência."
-    );
-
-    return;
-
-  }
-
-
-  if (!tipo) {
-
-    mostrarMensagemFormulario(
-      "Selecione o tipo."
-    );
-
-    return;
-
-  }
-
-
-  if (!descricao) {
-
-    mostrarMensagemFormulario(
-      "Informe uma descrição."
-    );
-
-    return;
-
-  }
-
-
-  if (valor <= 0) {
-
-    mostrarMensagemFormulario(
-      "Informe um valor maior que zero."
-    );
-
-    return;
-
-  }
-
-
-  if (!vencimento) {
-
-    mostrarMensagemFormulario(
-      "Informe o vencimento."
-    );
-
-    return;
-
-  }
-
-
-  const botao =
-    document.getElementById(
-      "btnSalvar"
-    );
-
-
-  botao.disabled =
-    true;
-
-
-  botao.textContent =
-    "⏳ Gravando...";
-
-
-  limparMensagemFormulario();
-
-
-  try {
-
-    let resultado;
-
-
-    if (id) {
-
-      resultado =
-        await chamarApi(
-          "editarLancamento",
-          {
-            id:
-              id,
-
-            competencia:
-              competencia,
-
-            tipo:
-              tipo,
-
-            descricao:
-              descricao,
-
-            valor:
-              valor,
-
-            vencimento:
-              vencimento
-          }
-        );
-
-    }
-    else {
-
-      resultado =
-        await chamarApi(
-          "incluirLancamento",
-          {
-            competencia:
-              competencia,
-
-            tipo:
-              tipo,
-
-            descricao:
-              descricao,
-
-            valor:
-              valor,
-
-            vencimento:
-              vencimento
-          }
-        );
-
-    }
-
-
-    fecharFormulario();
-
-
-    document
-      .getElementById(
-        "competencia"
-      )
-      .value =
-        competencia;
-
-
-    mostrarMensagem(
-      resultado.mensagem ||
-      "Lançamento salvo com sucesso.",
-      "sucesso"
-    );
-
-
-    await carregarLancamentos();
-
-  }
-  catch (erro) {
-
-    console.error(
-      "Erro ao gravar:",
-      erro
-    );
-
-
-    mostrarMensagemFormulario(
-      "⚠ " +
-      erro.message,
-      "erro"
-    );
-
-  }
-  finally {
-
-    botao.disabled =
-      false;
-
-
-    botao.textContent =
-      id
-        ? "💾 Salvar alteração"
-        : "💾 Gravar";
-
-  }
-
-}
-
-
-/* =========================================================
-   BAIXAR
-========================================================= */
-
-async function baixarLancamento(
-  id
-) {
-
-  if (!id) {
-
-    mostrarMensagem(
-      "ID do lançamento não informado.",
-      "erro"
-    );
-
-    return;
-
-  }
-
-
-  const confirmar =
-    confirm(
-      "Deseja realmente baixar este lançamento?"
-    );
-
-
-  if (!confirmar) {
-    return;
-  }
-
-
-  try {
-
-    const resultado =
-      await chamarApi(
-        "baixarLancamento",
-        {
-          id:
-            id
-        }
-      );
-
-
-    mostrarMensagem(
-      resultado.mensagem ||
-      "Lançamento baixado com sucesso.",
-      "sucesso"
-    );
-
-
-    await carregarLancamentos();
-
-  }
-  catch (erro) {
-
-    console.error(
-      "Erro ao baixar:",
-      erro
-    );
-
-
-    mostrarMensagem(
-      "⚠ " +
-      erro.message,
-      "erro"
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   EXCLUIR
-========================================================= */
-
-async function excluirLancamento(
-  id
-) {
-
-  if (!id) {
-
-    mostrarMensagem(
-      "ID do lançamento não informado.",
-      "erro"
-    );
-
-    return;
-
-  }
-
-
-  const confirmar =
-    confirm(
-      "Deseja realmente excluir o lançamento #" +
-      id +
-      "?"
-    );
-
-
-  if (!confirmar) {
-    return;
-  }
-
-
-  try {
-
-    const resultado =
-      await chamarApi(
-        "excluirLancamento",
-        {
-          id:
-            id
-        }
-      );
-
-
-    mostrarMensagem(
-      resultado.mensagem ||
-      "Lançamento excluído com sucesso.",
-      "sucesso"
-    );
-
-
-    await carregarLancamentos();
-
-  }
-  catch (erro) {
-
-    console.error(
-      "Erro ao excluir:",
-      erro
-    );
-
-
-    mostrarMensagem(
-      "⚠ " +
-      erro.message,
-      "erro"
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   ALTERAÇÃO DA COMPETÊNCIA
-========================================================= */
-
-document
-  .getElementById(
-    "competencia"
-  )
-  .addEventListener(
-    "change",
-    function() {
-
-      const competencia =
-        this.value;
-
-
-      document
-        .getElementById(
-          "formCompetencia"
-        )
-        .value =
-          competencia;
-
-
-      carregarLancamentos();
-
-    }
-  );
-
-
-/* =========================================================
-   ENTER NO FORMULÁRIO
-========================================================= */
-
-document
-  .getElementById(
-    "formulario"
-  )
-  .addEventListener(
-    "keydown",
-    function(event) {
-
-      /*
-       * Não grava ao apertar Enter
-       * dentro do campo de descrição
-       * se o usuário estiver navegando
-       * no datalist.
-       */
-
-      if (
-        event.key === "Enter" &&
-        event.target.tagName !== "SELECT"
-      ) {
-
-        event.preventDefault();
-
-        gravarLancamento();
-
-      }
-
-    }
-  );
-
-
-</script>
-
-</body>
-
-</html>
+</div> </div> <script> /* ========================================================= CONFIGURAÇÃO ========================================================= */ const API_URL = "https://script.google.com/macros/s/AKfycbwlkjtWnOcvglZS2Ft6ydraSh4-JbTXH6C7irb6O5hYPvxYxqN0tYWQs2Ybi6mVWThN/exec"; /* ========================================================= VARIÁVEL DOS LANÇAMENTOS ATUAIS ========================================================= */ let lancamentosAtuais = []; /* ========================================================= INICIALIZAÇÃO ========================================================= */ document.addEventListener( "DOMContentLoaded", function() { const hoje = new Date(); const ano = hoje.getFullYear(); const mes = String( hoje.getMonth() + 1 ).padStart( 2, "0" ); const competencia = ano + "-" + mes; document .getElementById( "competencia" ) .value = competencia; document .getElementById( "formCompetencia" ) .value = competencia; carregarLancamentos(); carregarDescricoes(); } ); /* ========================================================= MENSAGENS ========================================================= */ function mostrarMensagem( texto, tipo = "sucesso" ) { const el = document.getElementById( "mensagem" ); el.textContent = texto; el.className = "mensagem " + tipo; } function limparMensagem() { const el = document.getElementById( "mensagem" ); el.textContent = ""; el.className = "mensagem"; } function mostrarMensagemFormulario( texto, tipo = "erro" ) { const el = document.getElementById( "mensagemFormulario" ); el.textContent = texto; el.className = "mensagem " + tipo; } function limparMensagemFormulario() { const el = document.getElementById( "mensagemFormulario" ); el.textContent = ""; el.className = "mensagem"; } /* ========================================================= DINHEIRO ========================================================= */ function dinheiro(valor) { const numero = converterValor( valor ); return numero.toLocaleString( "pt-BR", { style: "currency", currency: "BRL" } ); } /* ========================================================= ESCAPAR HTML ========================================================= */ function escaparHtml(valor) { return String( valor === null || valor === undefined ? "" : valor ) .replace( /&/g, "&amp;" ) .replace( /</g, "&lt;" ) .replace( />/g, "&gt;" ) .replace( /"/g, "&quot;" ) .replace( /'/g, "&#039;" ); } /* ========================================================= ESCAPAR PARA JAVASCRIPT ========================================================= */ function escaparJs(valor) { return String( valor === null || valor === undefined ? "" : valor ) .replace( /\\/g, "\\\\" ) .replace( /'/g, "\\'" ) .replace( /"/g, '\\"' ) .replace( /\r/g, "\\r" ) .replace( /\n/g, "\\n" ); } /* ========================================================= CONVERTER VALOR ========================================================= */ function converterValor(valor) { if ( valor === null || valor === undefined || valor === "" ) { return 0; } if ( typeof valor === "number" ) { return valor; } let texto = String(valor) .trim() .replace( /R\$/gi, "" ) .replace( /\s/g, "" ); if ( texto.indexOf(",") !== -1 ) { texto = texto .replace( /\./g, "" ) .replace( ",", "." ); } const numero = Number( texto ); return isNaN(numero) ? 0 : numero; } /* ========================================================= VERIFICAR SE FOI BAIXADO ========================================================= */ function estaBaixado(item) { const valor = item && item.baixado !== undefined ? item.baixado : item && item.Baixado !== undefined ? item.Baixado : ""; const texto = String(valor) .trim() .toLowerCase(); return ( texto === "sim" || texto === "baixado" || texto === "true" || texto === "1" || texto === "yes" ); } /* ========================================================= NORMALIZAR TEXTO ========================================================= */ function normalizarTexto(valor) { return String( valor === null || valor === undefined ? "" : valor ) .normalize("NFD") .replace( /[\u0300-\u036f]/g, "" ) .trim() .toLowerCase(); } /* ========================================================= CLASSIFICAR TIPO ========================================================= */ function classificarTipo(tipo) { const texto = normalizarTexto( tipo ); /* * CONTAS A RECEBER */ if ( texto.includes( "receber" ) ) { return { nome: "Contas a Receber", classe: "tipo-receber", icone: "🟢", ordem: 1 }; } /* * CONTAS A PAGAR */ if ( texto.includes( "pagar" ) ) { return { nome: "Contas a Pagar", classe: "tipo-pagar", icone: "🔴", ordem: 2 }; } /* * OUTROS */ return { nome: tipo || "Não informado", classe: "tipo-outro", icone: "⚪", ordem: 3 }; } /* ========================================================= URL DA API ========================================================= */ function montarUrl( acao, parametros = {} ) { if ( !API_URL || API_URL.indexOf( "COLE_AQUI" ) !== -1 ) { throw new Error( "Configure a API_URL." ); } const params = new URLSearchParams(); params.set( "action", acao ); Object.keys( parametros ).forEach( function(chave) { const valor = parametros[chave]; if ( valor !== undefined && valor !== null ) { params.set( chave, valor ); } } ); return ( API_URL + "?" + params.toString() ); } /* ========================================================= CHAMAR API ========================================================= */ async function chamarApi( acao, parametros = {} ) { const url = montarUrl( acao, parametros ); console.log( "Chamando API:", url ); const resposta = await fetch( url, { method: "GET", cache: "no-store" } ); if ( !resposta.ok ) { throw new Error( "Erro HTTP " + resposta.status ); } const texto = await resposta.text(); console.log( "Resposta API:", texto ); if ( texto.trim().startsWith("<") ) { throw new Error( "A API retornou HTML em vez de JSON. Verifique se a URL termina em /exec." ); } let dados; try { dados = JSON.parse( texto ); } catch (erro) { throw new Error( "Resposta inválida da API: " + texto.substring( 0, 300 ) ); } if ( dados.sucesso === false ) { throw new Error( dados.erro || dados.mensagem || "Erro desconhecido na API." ); } return dados; } /* ========================================================= CARREGAR DESCRIÇÕES ========================================================= */ async function carregarDescricoes() { const lista = document.getElementById( "listaDescricoes" ); if (!lista) { return; } try { const resultado = await chamarApi( "listarDescricoes" ); const descricoes = resultado.lista || resultado.descricoes || []; const unicas = [ ...new Set( descricoes .map( function(item) { if ( typeof item === "object" ) { return String( item.descricao || item.Descricao || item.nome || item.Nome || "" ).trim(); } return String( item ).trim(); } ) .filter( function(item) { return item !== ""; } ) ) ]; unicas.sort( function(a, b) { return a.localeCompare( b, "pt-BR", { sensitivity: "base" } ); } ); lista.innerHTML = unicas .map( function(descricao) { return ( "<option value=\"" + escaparHtml( descricao ) + "\"></option>" ); } ) .join(""); } catch (erro) { console.error( "Erro ao carregar descrições:", erro ); } } /* ========================================================= CARREGAR LANÇAMENTOS ========================================================= */ async function carregarLancamentos() { const competencia = document .getElementById( "competencia" ) .value; if (!competencia) { mostrarMensagem( "Informe a competência.", "erro" ); return; } const tabela = document .getElementById( "tabelaLancamentos" ); tabela.innerHTML = ` <tr> <td colspan="8" class="vazio" > ⏳ Carregando lançamentos... </td> </tr> `; limparMensagem(); try { const resultado = await chamarApi( "listarLancamentos", { competencia: competencia } ); lancamentosAtuais = resultado.lista || resultado.lancamentos || []; /* * ===================================================== * ORDENAÇÃO * * 1º Contas a Receber * 2º Contas a Pagar * 3º Outros * * Dentro de cada tipo: * Vencimento crescente * ===================================================== */ lancamentosAtuais.sort( function(a, b) { const tipoA = a.tipo !== undefined ? a.tipo : a.Tipo || ""; const tipoB = b.tipo !== undefined ? b.tipo : b.Tipo || ""; const classificacaoA = classificarTipo( tipoA ); const classificacaoB = classificarTipo( tipoB ); /* * Primeiro compara o tipo. */ if ( classificacaoA.ordem !== classificacaoB.ordem ) { return ( classificacaoA.ordem - classificacaoB.ordem ); } /* * Se o tipo for igual, * compara o vencimento. */ const vencimentoA = a.vencimento !== undefined ? a.vencimento : a.Vencimento || ""; const vencimentoB = b.vencimento !== undefined ? b.vencimento : b.Vencimento || ""; return compararDatas( vencimentoA, vencimentoB ); } ); renderizarLancamentos( lancamentosAtuais ); calcularResumo( lancamentosAtuais ); mostrarMensagem( "Lançamentos atualizados.", "sucesso" ); } catch (erro) { console.error( "Erro ao carregar lançamentos:", erro ); lancamentosAtuais = []; tabela.innerHTML = ` <tr> <td colspan="8" class="vazio" > ⚠ Não foi possível carregar os lançamentos. </td> </tr> `; zerarResumo(); mostrarMensagem( "⚠ " + erro.message, "erro" ); } } /* ========================================================= COMPARAR DATAS ========================================================= */ function compararDatas( dataA, dataB ) { const a = converterDataOrdenacao( dataA ); const b = converterDataOrdenacao( dataB ); return ( a.localeCompare( b ) ); } /* ========================================================= CONVERTER DATA PARA ORDENAÇÃO ========================================================= */ function converterDataOrdenacao( valor ) { if (!valor) { return "9999-12-31"; } const texto = String( valor ).trim(); /* * YYYY-MM-DD */ if ( /^\d{4}-\d{2}-\d{2}$/.test( texto ) ) { return texto; } /* * DD/MM/YYYY */ if ( /^\d{2}\/\d{2}\/\d{4}$/.test( texto ) ) { const partes = texto.split("/"); return ( partes[2] + "-" + partes[1] + "-" + partes[0] ); } /* * Caso venha uma data * em formato reconhecível */ const data = new Date( texto ); if ( !isNaN( data.getTime() ) ) { const ano = data.getFullYear(); const mes = String( data.getMonth() + 1 ).padStart( 2, "0" ); const dia = String( data.getDate() ).padStart( 2, "0" ); return ( ano + "-" + mes + "-" + dia ); } return "9999-12-31"; } /* ========================================================= RESUMO ========================================================= */ function calcularResumo( lista ) { let receber = 0; let pagar = 0; let recebidoPago = 0; lista.forEach( function(item) { const tipo = normalizarTexto( item.tipo || item.Tipo || "" ); const valor = converterValor( item.valor || item.Valor ); const baixado = estaBaixado( item ); if ( tipo.includes( "receber" ) ) { receber += valor; if (baixado) { recebidoPago += valor; } } else if ( tipo.includes( "pagar" ) ) { pagar += valor; if (baixado) { recebidoPago += valor; } } } ); const saldo = receber - pagar; document .getElementById( "resumoReceber" ) .textContent = dinheiro( receber ); document .getElementById( "resumoPagar" ) .textContent = dinheiro( pagar ); document .getElementById( "resumoMovimentado" ) .textContent = dinheiro( recebidoPago ); document .getElementById( "resumoSaldo" ) .textContent = dinheiro( saldo ); } /* ========================================================= ZERAR RESUMO ========================================================= */ function zerarResumo() { document .getElementById( "resumoReceber" ) .textContent = "R$ 0,00"; document .getElementById( "resumoPagar" ) .textContent = "R$ 0,00"; document .getElementById( "resumoMovimentado" ) .textContent = "R$ 0,00"; document .getElementById( "resumoSaldo" ) .textContent = "R$ 0,00"; } /* ========================================================= RENDERIZAR LANÇAMENTOS ========================================================= */ function renderizarLancamentos( lista ) { const tabela = document.getElementById( "tabelaLancamentos" ); const contador = document.getElementById( "contadorLancamentos" ); if ( !lista || lista.length === 0 ) { tabela.innerHTML = ` <tr> <td colspan="8" class="vazio" > Nenhum lançamento encontrado para esta competência. </td> </tr> `; contador.textContent = "0 lançamentos"; return; } tabela.innerHTML = lista .map( function(item, indice) { const id = item.id !== undefined ? item.id : item.ID; const competencia = item.competencia !== undefined ? item.competencia : item["Competência"]; const tipo = item.tipo !== undefined ? item.tipo : item.Tipo; const tipoClassificado = classificarTipo( tipo ); const descricao = item.descricao !== undefined ? item.descricao : item.Descricao; const valor = item.valor !== undefined ? item.valor : item.Valor; const vencimento = item.vencimento !== undefined ? item.vencimento : item.Vencimento; const baixado = estaBaixado( item ); return ` <tr> <td> ${escaparHtml(id)} </td> <td> ${escaparHtml( competencia )} </td> <td> <span class="tipo ${tipoClassificado.classe}" > ${tipoClassificado.icone} ${escaparHtml( tipoClassificado.nome )} </span> </td> <td class="descricao"> ${escaparHtml( descricao || "—" )} </td> <td class="valor"> ${dinheiro( valor )} </td> <td> ${escaparHtml( formatarDataExibicao( vencimento ) )} </td> <td> <span class="status ${ baixado ? "status-baixado" : "status-pendente" }" > ${ baixado ? "Baixado" : "Pendente" } </span> </td> <td> <div class="acoes"> <button type="button" class="btn-editar" onclick="editarPeloIndice(${indice})" > ✏️ Editar </button> ${ baixado ? "" : ` <button type="button" class="btn-baixar" onclick="baixarLancamento('${escaparJs(id)}')" > ✔ Baixar </button> ` } <button type="button" class="btn-excluir" onclick="excluirLancamento('${escaparJs(id)}')" > 🗑 Excluir </button> </div> </td> </tr> `; } ) .join(""); contador.textContent = lista.length + ( lista.length === 1 ? " lançamento" : " lançamentos" ); } /* ========================================================= FORMATAR DATA PARA EXIBIÇÃO ========================================================= */ function formatarDataExibicao( valor ) { if (!valor) { return ""; } const texto = String( valor ).trim(); if ( /^\d{4}-\d{2}-\d{2}$/.test( texto ) ) { const partes = texto.split("-"); return ( partes[2] + "/" + partes[1] + "/" + partes[0] ); } if ( /^\d{2}\/\d{2}\/\d{4}$/.test( texto ) ) { return texto; } return texto; } /* ========================================================= ABRIR FORMULÁRIO DE INCLUSÃO ========================================================= */ function abrirFormularioInclusao() { limparFormulario(); const competencia = document .getElementById( "competencia" ) .value; document .getElementById( "formCompetencia" ) .value = competencia; document .getElementById( "tituloFormulario" ) .textContent = "➕ Novo lançamento"; document .getElementById( "btnSalvar" ) .textContent = "💾 Gravar"; document .getElementById( "formulario" ) .classList .add( "aberto" ); limparMensagemFormulario(); document .getElementById( "formTipo" ) .focus(); } /* ========================================================= FECHAR FORMULÁRIO ========================================================= */ function fecharFormulario() { document .getElementById( "formulario" ) .classList .remove( "aberto" ); limparFormulario(); } /* ========================================================= LIMPAR FORMULÁRIO ========================================================= */ function limparFormulario() { document .getElementById( "idLancamento" ) .value = ""; document .getElementById( "formTipo" ) .value = ""; document .getElementById( "formDescricao" ) .value = ""; document .getElementById( "formValor" ) .value = ""; document .getElementById( "formVencimento" ) .value = ""; limparMensagemFormulario(); } /* ========================================================= EDITAR PELO ÍNDICE ========================================================= */ function editarPeloIndice( indice ) { const item = lancamentosAtuais[ indice ]; if (!item) { mostrarMensagem( "Lançamento não encontrado.", "erro" ); return; } editarLancamento( item ); } /* ========================================================= EDITAR ========================================================= */ function editarLancamento( item ) { const id = item.id !== undefined ? item.id : item.ID; const competencia = item.competencia !== undefined ? item.competencia : item["Competência"]; const tipo = item.tipo !== undefined ? item.tipo : item.Tipo; const descricao = item.descricao !== undefined ? item.descricao : item.Descricao; const valor = item.valor !== undefined ? item.valor : item.Valor; const vencimento = item.vencimento !== undefined ? item.vencimento : item.Vencimento; document .getElementById( "idLancamento" ) .value = id || ""; document .getElementById( "formCompetencia" ) .value = competencia || ""; /* * Mantém o valor correto * do SELECT. */ const tipoNormalizado = normalizarTexto( tipo ); if ( tipoNormalizado.includes( "receber" ) ) { document .getElementById( "formTipo" ) .value = "Contas a Receber"; } else if ( tipoNormalizado.includes( "pagar" ) ) { document .getElementById( "formTipo" ) .value = "Contas a Pagar"; } else { document .getElementById( "formTipo" ) .value = tipo || ""; } document .getElementById( "formDescricao" ) .value = descricao || ""; document .getElementById( "formValor" ) .value = converterValor( valor ).toLocaleString( "pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 } ); document .getElementById( "formVencimento" ) .value = converterDataInput( vencimento ); document .getElementById( "tituloFormulario" ) .textContent = "✏️ Editar lançamento #" + id; document .getElementById( "btnSalvar" ) .textContent = "💾 Salvar alteração"; document .getElementById( "formulario" ) .classList .add( "aberto" ); limparMensagemFormulario(); } /* ========================================================= CONVERTER DATA PARA INPUT ========================================================= */ function converterDataInput( valor ) { if (!valor) { return ""; } const texto = String( valor ).trim(); if ( /^\d{4}-\d{2}-\d{2}$/.test( texto ) ) { return texto; } if ( /^\d{2}\/\d{2}\/\d{4}$/.test( texto ) ) { const partes = texto.split("/"); return ( partes[2] + "-" + partes[1] + "-" + partes[0] ); } return ""; } /* ========================================================= GRAVAR LANÇAMENTO ========================================================= */ async function gravarLancamento() { const id = document .getElementById( "idLancamento" ) .value; const competencia = document .getElementById( "formCompetencia" ) .value; const tipo = document .getElementById( "formTipo" ) .value; const descricao = document .getElementById( "formDescricao" ) .value .trim(); const valorTexto = document .getElementById( "formValor" ) .value; const vencimento = document .getElementById( "formVencimento" ) .value; const valor = converterValor( valorTexto ); if (!competencia) { mostrarMensagemFormulario( "Informe a competência." ); return; } if (!tipo) { mostrarMensagemFormulario( "Selecione o tipo." ); return; } if (!descricao) { mostrarMensagemFormulario( "Informe uma descrição." ); return; } if (valor <= 0) { mostrarMensagemFormulario( "Informe um valor maior que zero." ); return; } if (!vencimento) { mostrarMensagemFormulario( "Informe o vencimento." ); return; } const botao = document.getElementById( "btnSalvar" ); botao.disabled = true; botao.textContent = "⏳ Gravando..."; limparMensagemFormulario(); try { let resultado; if (id) { resultado = await chamarApi( "editarLancamento", { id: id, competencia: competencia, tipo: tipo, descricao: descricao, valor: valor, vencimento: vencimento } ); } else { resultado = await chamarApi( "incluirLancamento", { competencia: competencia, tipo: tipo, descricao: descricao, valor: valor, vencimento: vencimento } ); } fecharFormulario(); document .getElementById( "competencia" ) .value = competencia; mostrarMensagem( resultado.mensagem || "Lançamento salvo com sucesso.", "sucesso" ); await carregarLancamentos(); } catch (erro) { console.error( "Erro ao gravar:", erro ); mostrarMensagemFormulario( "⚠ " + erro.message, "erro" ); } finally { botao.disabled = false; botao.textContent = id ? "💾 Salvar alteração" : "💾 Gravar"; } } /* ========================================================= BAIXAR ========================================================= */ async function baixarLancamento( id ) { if (!id) { mostrarMensagem( "ID do lançamento não informado.", "erro" ); return; } const confirmar = confirm( "Deseja realmente baixar este lançamento?" ); if (!confirmar) { return; } try { const resultado = await chamarApi( "baixarLancamento", { id: id } ); mostrarMensagem( resultado.mensagem || "Lançamento baixado com sucesso.", "sucesso" ); await carregarLancamentos(); } catch (erro) { console.error( "Erro ao baixar:", erro ); mostrarMensagem( "⚠ " + erro.message, "erro" ); } } /* ========================================================= EXCLUIR ========================================================= */ async function excluirLancamento( id ) { if (!id) { mostrarMensagem( "ID do lançamento não informado.", "erro" ); return; } const confirmar = confirm( "Deseja realmente excluir o lançamento #" + id + "?" ); if (!confirmar) { return; } try { const resultado = await chamarApi( "excluirLancamento", { id: id } ); mostrarMensagem( resultado.mensagem || "Lançamento excluído com sucesso.", "sucesso" ); await carregarLancamentos(); } catch (erro) { console.error( "Erro ao excluir:", erro ); mostrarMensagem( "⚠ " + erro.message, "erro" ); } } /* ========================================================= ALTERAÇÃO DA COMPETÊNCIA ========================================================= */ document .getElementById( "competencia" ) .addEventListener( "change", function() { const competencia = this.value; document .getElementById( "formCompetencia" ) .value = competencia; carregarLancamentos(); } ); /* ========================================================= ENTER NO FORMULÁRIO ========================================================= */ document .getElementById( "formulario" ) .addEventListener( "keydown", function(event) { if ( event.key === "Enter" && event.target.tagName !== "SELECT" ) { event.preventDefault(); gravarLancamento(); } } ); </script> </body> </html>
