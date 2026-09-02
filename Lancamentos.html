@@ -1564,14 +1564,65 @@ async function carregarLancamentos() {
 
 
     lancamentosAtuais =
-      resultado.lista ||
-      resultado.lancamentos ||
-      [];
+  resultado.lista ||
+  resultado.lancamentos ||
+  [];
 
+// Ordenar por Tipo
+lancamentosAtuais.sort(function(a, b) {
 
-    renderizarLancamentos(
-      lancamentosAtuais
+  const tipoA =
+    String(
+      a.tipo !== undefined
+        ? a.tipo
+        : a.Tipo || ""
+    ).trim();
+
+  const tipoB =
+    String(
+      b.tipo !== undefined
+        ? b.tipo
+        : b.Tipo || ""
+    ).trim();
+
+  const ordem = {
+    "Contas a Receber": 1,
+    "Contas a Pagar": 2
+  };
+
+  const ordemTipo =
+    (ordem[tipoA] || 99) -
+    (ordem[tipoB] || 99);
+
+  if (ordemTipo !== 0) {
+    return ordemTipo;
+  }
+
+  const vencimentoA =
+    String(
+      a.vencimento !== undefined
+        ? a.vencimento
+        : a.Vencimento || ""
     );
+
+  const vencimentoB =
+    String(
+      b.vencimento !== undefined
+        ? b.vencimento
+        : b.Vencimento || ""
+    );
+
+  return vencimentoA.localeCompare(
+    vencimentoB
+  );
+
+});
+
+
+renderizarLancamentos(
+  lancamentosAtuais
+);
+
 
 
     calcularResumo(
