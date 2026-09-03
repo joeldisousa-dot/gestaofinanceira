@@ -1,9 +1,20 @@
-<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8">
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
+html
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-<title></title> <style>
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Atendimento</title>
+
+<style>
+
 * {
   box-sizing: border-box;
 }
@@ -26,6 +37,10 @@ body {
   padding: 20px;
 }
 
+/* =====================================================
+   CABEÇALHO
+   ===================================================== */
+
 .cabecalho {
   background: #ffffff;
   border-radius: 12px;
@@ -35,8 +50,16 @@ body {
     0 2px 8px rgba(0,0,0,0.08);
 }
 
+.cabecalho-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 8px;
+}
+
 .cabecalho h1 {
-  margin: 0 0 6px 0;
+  margin: 0;
   font-size: 26px;
   color: #111827;
 }
@@ -46,6 +69,49 @@ body {
   color: #6b7280;
   font-size: 14px;
 }
+
+/* =====================================================
+   BOTÃO VOLTAR
+   ===================================================== */
+
+.btn-voltar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  height: 42px;
+
+  border: 0;
+  border-radius: 8px;
+
+  padding: 0 16px;
+
+  cursor: pointer;
+
+  background: #374151;
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: 0.2s;
+
+  white-space: nowrap;
+}
+
+.btn-voltar:hover {
+  background: #1f2937;
+  transform: translateX(-2px);
+}
+
+.btn-voltar:active {
+  transform: translateX(0);
+}
+
+/* =====================================================
+   PAINEL DE PESQUISA
+   ===================================================== */
 
 .painel-pesquisa {
   background: #ffffff;
@@ -78,28 +144,39 @@ body {
   flex: 1;
   min-width: 0;
   height: 44px;
+
   border: 1px solid #d1d5db;
   border-radius: 8px;
+
   padding: 0 14px;
+
   font-size: 15px;
+
   outline: none;
+
   transition: 0.2s;
 }
 
 #campoPesquisa:focus {
   border-color: #2563eb;
+
   box-shadow:
     0 0 0 3px rgba(37,99,235,0.12);
 }
 
 button {
   height: 44px;
+
   border: 0;
   border-radius: 8px;
+
   padding: 0 20px;
+
   cursor: pointer;
+
   font-size: 14px;
   font-weight: 600;
+
   transition: 0.2s;
 }
 
@@ -121,73 +198,108 @@ button {
   background: #d1d5db;
 }
 
+/* =====================================================
+   STATUS
+   ===================================================== */
+
 .status {
   display: none;
+
   margin-top: 15px;
+
   padding: 12px 14px;
+
   border-radius: 8px;
+
   font-size: 14px;
 }
 
 .status.info {
   display: block;
+
   background: #eff6ff;
   color: #1d4ed8;
+
   border: 1px solid #bfdbfe;
 }
 
 .status.sucesso {
   display: block;
+
   background: #ecfdf5;
   color: #047857;
+
   border: 1px solid #a7f3d0;
 }
 
 .status.erro {
   display: block;
+
   background: #fef2f2;
   color: #b91c1c;
+
   border: 1px solid #fecaca;
 }
+
+/* =====================================================
+   RESULTADO
+   ===================================================== */
 
 .resultado {
   background: #ffffff;
   border-radius: 12px;
   padding: 20px;
+
   box-shadow:
     0 2px 8px rgba(0,0,0,0.08);
 }
 
 .resultado-topo {
   display: flex;
+
   justify-content: space-between;
   align-items: center;
+
   gap: 10px;
+
   margin-bottom: 15px;
+
   flex-wrap: wrap;
 }
 
 .resultado-topo h2 {
   margin: 0;
+
   font-size: 19px;
+
   color: #111827;
 }
 
 .contador {
   color: #6b7280;
+
   font-size: 14px;
 }
 
+/* =====================================================
+   TABELA
+   ===================================================== */
+
 .tabela-container {
   width: 100%;
+
   overflow-x: auto;
+
   border: 1px solid #e5e7eb;
+
   border-radius: 8px;
 }
 
 table {
   width: 100%;
+
   border-collapse: collapse;
+
   min-width: 700px;
 }
 
@@ -197,19 +309,29 @@ thead {
 
 th {
   padding: 12px;
+
   text-align: left;
+
   font-size: 13px;
+
   font-weight: 700;
+
   color: #374151;
+
   border-bottom: 1px solid #e5e7eb;
+
   white-space: nowrap;
 }
 
 td {
   padding: 11px 12px;
+
   border-bottom: 1px solid #f0f0f0;
+
   font-size: 14px;
+
   color: #4b5563;
+
   vertical-align: top;
 }
 
@@ -221,51 +343,79 @@ tbody tr:last-child td {
   border-bottom: 0;
 }
 
+/* =====================================================
+   MENSAGENS
+   ===================================================== */
+
 .vazio {
   text-align: center;
+
   padding: 45px 20px;
+
   color: #6b7280;
 }
 
 .vazio strong {
   display: block;
+
   color: #374151;
+
   margin-bottom: 5px;
+
   font-size: 16px;
 }
 
 .carregando {
   text-align: center;
+
   padding: 35px;
+
   color: #6b7280;
 }
 
 .spinner {
   width: 25px;
   height: 25px;
+
   margin: 0 auto 10px auto;
+
   border: 3px solid #e5e7eb;
+
   border-top-color: #2563eb;
+
   border-radius: 50%;
+
   animation:
     girar 0.8s linear infinite;
 }
 
 @keyframes girar {
+
   to {
     transform: rotate(360deg);
   }
+
 }
 
 .tag {
   display: inline-block;
+
   padding: 4px 8px;
+
   border-radius: 999px;
+
   background: #eef2ff;
+
   color: #4338ca;
+
   font-size: 12px;
+
   font-weight: 600;
 }
+
+/* =====================================================
+   RESPONSIVO
+   ===================================================== */
 
 @media (max-width: 700px) {
 
@@ -277,6 +427,15 @@ tbody tr:last-child td {
   .painel-pesquisa,
   .resultado {
     padding: 15px;
+  }
+
+  .cabecalho-topo {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .btn-voltar {
+    width: 100%;
   }
 
   .linha-pesquisa {
@@ -293,10 +452,35 @@ tbody tr:last-child td {
 
 }
 
-</style> </head> <body> <div class="container">
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- =====================================================
+     CABEÇALHO
+     ===================================================== -->
+
 <section class="cabecalho">
 
-  <h1>Atendimento</h1>
+  <div class="cabecalho-topo">
+
+    <h1>
+      Atendimento
+    </h1>
+
+    <button
+      type="button"
+      class="btn-voltar"
+      id="btnVoltar"
+    >
+      ← Voltar
+    </button>
+
+  </div>
 
   <p>
     Pesquise informações cadastradas na aba
@@ -304,6 +488,10 @@ tbody tr:last-child td {
   </p>
 
 </section>
+
+<!-- =====================================================
+     PAINEL DE PESQUISA
+     ===================================================== -->
 
 <section class="painel-pesquisa">
 
@@ -349,6 +537,10 @@ tbody tr:last-child td {
 
 </section>
 
+<!-- =====================================================
+     RESULTADO
+     ===================================================== -->
+
 <section class="resultado">
 
   <div class="resultado-topo">
@@ -366,9 +558,7 @@ tbody tr:last-child td {
 
   </div>
 
-  <div
-    id="areaResultado"
-  >
+  <div id="areaResultado">
 
     <div class="vazio">
 
@@ -385,13 +575,17 @@ tbody tr:last-child td {
 
 </section>
 
-</div> <script>
+</div>
+
+<script>
+
 /* =====================================================
    CONFIGURAÇÃO DA API
    ===================================================== */
 
 const URL_API =
   "https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec";
+
 
 /* =====================================================
    ELEMENTOS
@@ -412,6 +606,11 @@ const btnLimpar =
     "btnLimpar"
   );
 
+const btnVoltar =
+  document.getElementById(
+    "btnVoltar"
+  );
+
 const areaResultado =
   document.getElementById(
     "areaResultado"
@@ -426,6 +625,41 @@ const status =
   document.getElementById(
     "status"
   );
+
+
+/* =====================================================
+   BOTÃO VOLTAR
+   ===================================================== */
+
+function voltar() {
+
+  /*
+   * Se esta página foi aberta a partir
+   * de outra página, volta para ela.
+   */
+
+  if (
+    window.history.length > 1
+  ) {
+
+    window.history.back();
+
+    return;
+
+  }
+
+  /*
+   * Caso não exista histórico,
+   * tenta retornar para a página inicial.
+   *
+   * Se o seu sistema utilizar outro
+   * arquivo inicial, altere abaixo.
+   */
+
+  window.location.href = "index.html";
+
+}
+
 
 /* =====================================================
    STATUS
@@ -445,6 +679,7 @@ function mostrarStatus(
 
 }
 
+
 function ocultarStatus() {
 
   status.textContent = "";
@@ -453,6 +688,7 @@ function ocultarStatus() {
     "status";
 
 }
+
 
 /* =====================================================
    ESCAPAR HTML
@@ -500,6 +736,7 @@ function escaparHTML(
 
 }
 
+
 /* =====================================================
    FORMATAR VALOR
    ===================================================== */
@@ -524,11 +761,13 @@ function formatarValor(
 
 }
 
+
 /* =====================================================
    JSONP
    ===================================================== */
 
 let contadorJSONP = 0;
+
 
 function chamarAPI(
   acao,
@@ -556,10 +795,9 @@ function chamarAPI(
 
       let finalizado = false;
 
+
       /*
-       * Timeout para evitar que a
-       * tela fique carregando
-       * indefinidamente.
+       * Timeout
        */
 
       const timeout =
@@ -597,6 +835,11 @@ function chamarAPI(
           30000
         );
 
+
+      /*
+       * Callback
+       */
+
       window[
         nomeCallback
       ] =
@@ -633,6 +876,11 @@ function chamarAPI(
 
         };
 
+
+      /*
+       * Montar consulta
+       */
+
       const consulta =
         Object.assign(
           {},
@@ -644,6 +892,7 @@ function chamarAPI(
 
       consulta.callback =
         nomeCallback;
+
 
       const query =
         Object.keys(
@@ -668,21 +917,29 @@ function chamarAPI(
 
           .join("&");
 
+
       const url =
         URL_API +
         "?" +
         query;
+
 
       console.log(
         "Chamando API:",
         url
       );
 
+
       script.src =
         url;
 
       script.async =
         true;
+
+
+      /*
+       * Erro
+       */
 
       script.onerror =
         function() {
@@ -720,6 +977,7 @@ function chamarAPI(
 
         };
 
+
       document
         .head
         .appendChild(
@@ -731,6 +989,7 @@ function chamarAPI(
 
 }
 
+
 /* =====================================================
    PESQUISAR
    ===================================================== */
@@ -741,6 +1000,7 @@ async function pesquisar() {
     campoPesquisa
       .value
       .trim();
+
 
   if (!termo) {
 
@@ -755,10 +1015,12 @@ async function pesquisar() {
 
   }
 
+
   mostrarStatus(
     "Pesquisando...",
     "info"
   );
+
 
   areaResultado.innerHTML =
 
@@ -770,8 +1032,10 @@ async function pesquisar() {
 
     '</div>';
 
+
   contador.textContent =
     "Consultando...";
+
 
   try {
 
@@ -783,20 +1047,21 @@ async function pesquisar() {
         }
       );
 
+
     console.log(
       "Resposta da API:",
       resposta
     );
 
-    if (
-      !resposta
-    ) {
+
+    if (!resposta) {
 
       throw new Error(
         "A API não retornou uma resposta."
       );
 
     }
+
 
     if (
       resposta.sucesso === false
@@ -808,6 +1073,7 @@ async function pesquisar() {
       );
 
     }
+
 
     const dados =
       Array.isArray(
@@ -824,9 +1090,11 @@ async function pesquisar() {
               : []
           );
 
+
     renderizarResultados(
       dados
     );
+
 
     mostrarStatus(
       dados.length +
@@ -838,12 +1106,14 @@ async function pesquisar() {
       "sucesso"
     );
 
+
   } catch (erro) {
 
     console.error(
       "Erro ao pesquisar atendimento:",
       erro
     );
+
 
     areaResultado.innerHTML =
 
@@ -858,8 +1128,10 @@ async function pesquisar() {
 
       '</div>';
 
+
     contador.textContent =
       "Erro";
+
 
     mostrarStatus(
       erro.message ||
@@ -870,6 +1142,7 @@ async function pesquisar() {
   }
 
 }
+
 
 /* =====================================================
    RENDERIZAR RESULTADOS
@@ -894,12 +1167,14 @@ function renderizarResultados(
 
       '</div>';
 
+
     contador.textContent =
       "0 registros";
 
     return;
 
   }
+
 
   contador.textContent =
     dados.length +
@@ -909,12 +1184,13 @@ function renderizarResultados(
         : " registros"
     );
 
+
   /*
-   * Descobre todas as colunas existentes
-   * nos registros retornados.
+   * Descobrir colunas
    */
 
   const colunas = [];
+
 
   dados.forEach(
     function(registro) {
@@ -927,6 +1203,7 @@ function renderizarResultados(
         return;
 
       }
+
 
       Object.keys(
         registro
@@ -951,6 +1228,7 @@ function renderizarResultados(
     }
   );
 
+
   if (
     colunas.length === 0
   ) {
@@ -969,6 +1247,11 @@ function renderizarResultados(
 
   }
 
+
+  /*
+   * Cabeçalho
+   */
+
   let html =
 
     '<div class="tabela-container">' +
@@ -978,6 +1261,7 @@ function renderizarResultados(
         '<thead>' +
 
           '<tr>';
+
 
   colunas.forEach(
     function(campo) {
@@ -992,6 +1276,7 @@ function renderizarResultados(
     }
   );
 
+
   html +=
 
           "</tr>" +
@@ -1000,17 +1285,24 @@ function renderizarResultados(
 
         "<tbody>";
 
+
+  /*
+   * Registros
+   */
+
   dados.forEach(
     function(registro) {
 
       html +=
         "<tr>";
 
+
       colunas.forEach(
         function(campo) {
 
           const valor =
             registro[campo];
+
 
           html +=
             "<td>" +
@@ -1022,11 +1314,13 @@ function renderizarResultados(
         }
       );
 
+
       html +=
         "</tr>";
 
     }
   );
+
 
   html +=
 
@@ -1036,10 +1330,12 @@ function renderizarResultados(
 
     "</div>";
 
+
   areaResultado.innerHTML =
     html;
 
 }
+
 
 /* =====================================================
    LIMPAR
@@ -1049,6 +1345,7 @@ function limparPesquisa() {
 
   campoPesquisa.value =
     "";
+
 
   areaResultado.innerHTML =
 
@@ -1060,14 +1357,18 @@ function limparPesquisa() {
 
     '</div>';
 
+
   contador.textContent =
     "Nenhuma pesquisa realizada.";
 
+
   ocultarStatus();
+
 
   campoPesquisa.focus();
 
 }
+
 
 /* =====================================================
    EVENTOS
@@ -1078,10 +1379,18 @@ btnPesquisar.addEventListener(
   pesquisar
 );
 
+
 btnLimpar.addEventListener(
   "click",
   limparPesquisa
 );
+
+
+btnVoltar.addEventListener(
+  "click",
+  voltar
+);
+
 
 campoPesquisa.addEventListener(
   "keydown",
@@ -1099,6 +1408,7 @@ campoPesquisa.addEventListener(
 
   }
 );
+
 
 /* =====================================================
    INICIALIZAÇÃO
@@ -1120,6 +1430,9 @@ document.addEventListener(
   }
 );
 
-</script> </body> </html>
+</script>
 
-  );
+</body>
+
+</html>
+
