@@ -846,7 +846,14 @@ body {
         title="Selecione a competência"
     >
 
-
+<button class="menu-item" onclick="fecharCompetencia()">
+  <span class="menu-icon">🔒</span>
+  <span>
+    <strong>Fechar competência</strong>
+    <small>Transferir saldo para o próximo mês</small>
+  </span>
+</button>
+   
     <button
         type="button"
         class="btn-atualizar"
@@ -1230,7 +1237,58 @@ const mensagemEl =
 const competenciaEl =
     document.getElementById("competencia");
 
+function fecharCompetencia() {
+  const competencia = document.getElementById('competencia')?.value;
 
+  if (!competencia) {
+    alert('Selecione uma competência antes de fechar.');
+    return;
+  }
+
+  const confirmar = confirm(
+    'Deseja fechar a competência ' + competencia + '?\n\n' +
+    'O saldo final será gravado como saldo inicial da próxima competência.'
+  );
+
+  if (!confirmar) return;
+
+  alterarStatus('Fechando competência...');
+
+  chamarAPI('fecharMes', {
+    competencia: competencia
+  })
+  .then(function(resultado) {
+
+    if (!resultado || !resultado.sucesso) {
+      throw new Error(
+        resultado?.mensagem || 'Não foi possível fechar a competência.'
+      );
+    }
+
+    alert(
+      'Competência fechada com sucesso!\n\n' +
+      'Competência: ' + resultado.competenciaAtual + '\n' +
+      'Saldo final: ' + resultado.saldoFinalFormatado + '\n\n' +
+      'Saldo inicial gravado para: ' +
+      resultado.proximaCompetencia
+    );
+
+    alterarStatus('Sistema online');
+
+    carregarResumo();
+
+  })
+  .catch(function(erro) {
+    console.error(erro);
+
+    alterarStatus('Sistema online');
+
+    alert(
+      'Erro ao fechar a competência:\n\n' +
+      erro.message
+    );
+  });
+}
 /* =========================================================
    COMPETÊNCIA ATUAL
 ========================================================= */
