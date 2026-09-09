@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -21,10 +22,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   background: #f4f6f9;
   color: #1f2937;
 }
@@ -45,8 +43,7 @@ body {
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow:
-    0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .cabecalho-topo {
@@ -54,7 +51,6 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 15px;
-  margin-bottom: 8px;
 }
 
 .cabecalho h1 {
@@ -64,39 +60,33 @@ body {
 }
 
 .cabecalho p {
-  margin: 0;
+  margin: 8px 0 0;
   color: #6b7280;
   font-size: 14px;
 }
 
 /* =====================================================
-   BOTÃO VOLTAR
+   BOTÕES
    ===================================================== */
+
+button {
+  height: 44px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s;
+}
 
 .btn-voltar {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-
-  height: 42px;
-
-  border: 0;
-  border-radius: 8px;
-
-  padding: 0 16px;
-
-  cursor: pointer;
-
   background: #374151;
   color: #ffffff;
-
-  font-size: 14px;
-  font-weight: 600;
-
-  transition: 0.2s;
-
-  white-space: nowrap;
 }
 
 .btn-voltar:hover {
@@ -104,22 +94,88 @@ body {
   transform: translateX(-2px);
 }
 
-.btn-voltar:active {
-  transform: translateX(0);
+.btn-novo {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.btn-novo:hover {
+  background: #15803d;
+}
+
+.btn-pesquisar {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.btn-pesquisar:hover {
+  background: #1d4ed8;
+}
+
+.btn-limpar {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.btn-limpar:hover {
+  background: #d1d5db;
+}
+
+.btn-cancelar {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.btn-cancelar:hover {
+  background: #d1d5db;
+}
+
+.btn-salvar {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.btn-salvar:hover {
+  background: #1d4ed8;
 }
 
 /* =====================================================
-   PAINEL DE PESQUISA
+   BARRA DE AÇÕES
    ===================================================== */
 
-.painel-pesquisa {
+.barra-acoes {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* =====================================================
+   PAINEL
+   ===================================================== */
+
+.painel {
   background: #ffffff;
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow:
-    0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
+
+.painel h2 {
+  margin: 0 0 18px;
+  font-size: 19px;
+  color: #111827;
+}
+
+/* =====================================================
+   PESQUISA
+   ===================================================== */
 
 .campo-grupo {
   display: flex;
@@ -150,51 +206,82 @@ body {
   padding: 0 14px;
 
   font-size: 15px;
-
   outline: none;
-
-  transition: 0.2s;
 }
 
-#campoPesquisa:focus {
+#campoPesquisa:focus,
+.formulario input:focus,
+.formulario select:focus,
+.formulario textarea:focus {
   border-color: #2563eb;
 
   box-shadow:
     0 0 0 3px rgba(37,99,235,0.12);
 }
 
-button {
-  height: 44px;
+/* =====================================================
+   FORMULÁRIO
+   ===================================================== */
 
-  border: 0;
-  border-radius: 8px;
+#painelInclusao {
+  display: none;
+}
 
-  padding: 0 20px;
+.formulario {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
 
-  cursor: pointer;
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
 
+.campo-completo {
+  grid-column: 1 / -1;
+}
+
+.campo label {
   font-size: 14px;
   font-weight: 600;
-
-  transition: 0.2s;
-}
-
-.btn-pesquisar {
-  background: #2563eb;
-  color: #ffffff;
-}
-
-.btn-pesquisar:hover {
-  background: #1d4ed8;
-}
-
-.btn-limpar {
-  background: #e5e7eb;
   color: #374151;
 }
 
-.btn-limpar:hover {
-  background: #d1d5db;
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+
+  min-height: 44px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  padding: 10px 12px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+
+  outline: none;
+
+  background: #ffffff;
+}
+
+.campo textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.acoes-formulario {
+  grid-column: 1 / -1;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  padding-top: 5px;
 }
 
 /* =====================================================
@@ -203,40 +290,30 @@ button {
 
 .status {
   display: none;
-
   margin-top: 15px;
-
   padding: 12px 14px;
-
   border-radius: 8px;
-
   font-size: 14px;
 }
 
 .status.info {
   display: block;
-
   background: #eff6ff;
   color: #1d4ed8;
-
   border: 1px solid #bfdbfe;
 }
 
 .status.sucesso {
   display: block;
-
   background: #ecfdf5;
   color: #047857;
-
   border: 1px solid #a7f3d0;
 }
 
 .status.erro {
   display: block;
-
   background: #fef2f2;
   color: #b91c1c;
-
   border: 1px solid #fecaca;
 }
 
@@ -248,35 +325,26 @@ button {
   background: #ffffff;
   border-radius: 12px;
   padding: 20px;
-
-  box-shadow:
-    0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .resultado-topo {
   display: flex;
-
   justify-content: space-between;
   align-items: center;
-
   gap: 10px;
-
   margin-bottom: 15px;
-
   flex-wrap: wrap;
 }
 
 .resultado-topo h2 {
   margin: 0;
-
   font-size: 19px;
-
   color: #111827;
 }
 
 .contador {
   color: #6b7280;
-
   font-size: 14px;
 }
 
@@ -286,19 +354,14 @@ button {
 
 .tabela-container {
   width: 100%;
-
   overflow-x: auto;
-
   border: 1px solid #e5e7eb;
-
   border-radius: 8px;
 }
 
 table {
   width: 100%;
-
   border-collapse: collapse;
-
   min-width: 700px;
 }
 
@@ -308,29 +371,19 @@ thead {
 
 th {
   padding: 12px;
-
   text-align: left;
-
   font-size: 13px;
-
   font-weight: 700;
-
   color: #374151;
-
   border-bottom: 1px solid #e5e7eb;
-
   white-space: nowrap;
 }
 
 td {
   padding: 11px 12px;
-
   border-bottom: 1px solid #f0f0f0;
-
   font-size: 14px;
-
   color: #4b5563;
-
   vertical-align: top;
 }
 
@@ -348,68 +401,39 @@ tbody tr:last-child td {
 
 .vazio {
   text-align: center;
-
   padding: 45px 20px;
-
   color: #6b7280;
 }
 
 .vazio strong {
   display: block;
-
   color: #374151;
-
   margin-bottom: 5px;
-
   font-size: 16px;
 }
 
 .carregando {
   text-align: center;
-
   padding: 35px;
-
   color: #6b7280;
 }
 
 .spinner {
   width: 25px;
   height: 25px;
-
   margin: 0 auto 10px auto;
 
   border: 3px solid #e5e7eb;
-
   border-top-color: #2563eb;
-
   border-radius: 50%;
 
-  animation:
-    girar 0.8s linear infinite;
+  animation: girar 0.8s linear infinite;
 }
 
 @keyframes girar {
-
   to {
     transform: rotate(360deg);
   }
-
-}
-
-.tag {
-  display: inline-block;
-
-  padding: 4px 8px;
-
-  border-radius: 999px;
-
-  background: #eef2ff;
-
-  color: #4338ca;
-
-  font-size: 12px;
-
-  font-weight: 600;
 }
 
 /* =====================================================
@@ -423,7 +447,7 @@ tbody tr:last-child td {
   }
 
   .cabecalho,
-  .painel-pesquisa,
+  .painel,
   .resultado {
     padding: 15px;
   }
@@ -437,11 +461,36 @@ tbody tr:last-child td {
     width: 100%;
   }
 
+  .barra-acoes {
+    flex-direction: column;
+  }
+
+  .barra-acoes button {
+    width: 100%;
+  }
+
   .linha-pesquisa {
     flex-direction: column;
   }
 
   .linha-pesquisa button {
+    width: 100%;
+  }
+
+  .formulario {
+    grid-template-columns: 1fr;
+  }
+
+  .campo-completo {
+    grid-column: auto;
+  }
+
+  .acoes-formulario {
+    grid-column: auto;
+    flex-direction: column;
+  }
+
+  .acoes-formulario button {
     width: 100%;
   }
 
@@ -467,9 +516,7 @@ tbody tr:last-child td {
 
   <div class="cabecalho-topo">
 
-    <h1>
-      Atendimento
-    </h1>
+    <h1>Atendimento</h1>
 
     <button
       type="button"
@@ -482,16 +529,248 @@ tbody tr:last-child td {
   </div>
 
   <p>
-   
+    Pesquisa e registro de atendimentos.
   </p>
 
 </section>
+
+
+<!-- =====================================================
+     BARRA DE AÇÕES
+     ===================================================== -->
+
+<section class="barra-acoes">
+
+  <button
+    type="button"
+    class="btn-novo"
+    id="btnNovoAtendimento"
+  >
+    + Incluir Atendimento
+  </button>
+
+</section>
+
+
+<!-- =====================================================
+     PAINEL DE INCLUSÃO
+     ===================================================== -->
+
+<section
+  class="painel"
+  id="painelInclusao"
+>
+
+  <h2>
+    Novo Atendimento
+  </h2>
+
+  <form
+    id="formAtendimento"
+    class="formulario"
+  >
+
+    <div class="campo">
+
+      <label for="nome">
+        Nome
+      </label>
+
+      <input
+        type="text"
+        id="nome"
+        name="nome"
+        placeholder="Nome do cliente"
+      >
+
+    </div>
+
+
+    <div class="campo">
+
+      <label for="cpf">
+        CPF
+      </label>
+
+      <input
+        type="text"
+        id="cpf"
+        name="cpf"
+        placeholder="CPF"
+      >
+
+    </div>
+
+
+    <div class="campo">
+
+      <label for="telefone">
+        Telefone
+      </label>
+
+      <input
+        type="text"
+        id="telefone"
+        name="telefone"
+        placeholder="Telefone"
+      >
+
+    </div>
+
+
+    <div class="campo">
+
+      <label for="tipo">
+        Tipo de atendimento
+      </label>
+
+      <select
+        id="tipo"
+        name="tipo"
+      >
+
+        <option value="">
+          Selecione
+        </option>
+
+        <option value="Dúvida">
+          Dúvida
+        </option>
+
+        <option value="Solicitação">
+          Solicitação
+        </option>
+
+        <option value="Reclamação">
+          Reclamação
+        </option>
+
+        <option value="Orientação">
+          Orientação
+        </option>
+
+        <option value="Retorno">
+          Retorno
+        </option>
+
+        <option value="Outros">
+          Outros
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="campo campo-completo">
+
+      <label for="assunto">
+        Assunto
+      </label>
+
+      <input
+        type="text"
+        id="assunto"
+        name="assunto"
+        placeholder="Informe o assunto do atendimento"
+      >
+
+    </div>
+
+
+    <div class="campo campo-completo">
+
+      <label for="descricao">
+        Descrição do atendimento
+      </label>
+
+      <textarea
+        id="descricao"
+        name="descricao"
+        placeholder="Descreva o atendimento..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="campo">
+
+      <label for="responsavel">
+        Responsável
+      </label>
+
+      <input
+        type="text"
+        id="responsavel"
+        name="responsavel"
+        placeholder="Responsável pelo atendimento"
+      >
+
+    </div>
+
+
+    <div class="campo">
+
+      <label for="statusAtendimento">
+        Status
+      </label>
+
+      <select
+        id="statusAtendimento"
+        name="status"
+      >
+
+        <option value="Aberto">
+          Aberto
+        </option>
+
+        <option value="Em andamento">
+          Em andamento
+        </option>
+
+        <option value="Concluído">
+          Concluído
+        </option>
+
+        <option value="Pendente">
+          Pendente
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="acoes-formulario">
+
+      <button
+        type="button"
+        class="btn-cancelar"
+        id="btnCancelarInclusao"
+      >
+        Cancelar
+      </button>
+
+      <button
+        type="submit"
+        class="btn-salvar"
+        id="btnSalvarAtendimento"
+      >
+        Salvar Atendimento
+      </button>
+
+    </div>
+
+  </form>
+
+</section>
+
 
 <!-- =====================================================
      PAINEL DE PESQUISA
      ===================================================== -->
 
-<section class="painel-pesquisa">
+<section class="painel">
 
   <div class="campo-grupo">
 
@@ -528,12 +807,14 @@ tbody tr:last-child td {
 
   </div>
 
+
   <div
     id="status"
     class="status"
   ></div>
 
 </section>
+
 
 <!-- =====================================================
      RESULTADO
@@ -575,6 +856,7 @@ tbody tr:last-child td {
 
 </div>
 
+
 <script>
 
 /* =====================================================
@@ -590,39 +872,40 @@ const URL_API =
    ===================================================== */
 
 const campoPesquisa =
-  document.getElementById(
-    "campoPesquisa"
-  );
+  document.getElementById("campoPesquisa");
 
 const btnPesquisar =
-  document.getElementById(
-    "btnPesquisar"
-  );
+  document.getElementById("btnPesquisar");
 
 const btnLimpar =
-  document.getElementById(
-    "btnLimpar"
-  );
+  document.getElementById("btnLimpar");
 
 const btnVoltar =
-  document.getElementById(
-    "btnVoltar"
-  );
+  document.getElementById("btnVoltar");
+
+const btnNovoAtendimento =
+  document.getElementById("btnNovoAtendimento");
+
+const btnCancelarInclusao =
+  document.getElementById("btnCancelarInclusao");
+
+const formAtendimento =
+  document.getElementById("formAtendimento");
+
+const painelInclusao =
+  document.getElementById("painelInclusao");
+
+const btnSalvarAtendimento =
+  document.getElementById("btnSalvarAtendimento");
 
 const areaResultado =
-  document.getElementById(
-    "areaResultado"
-  );
+  document.getElementById("areaResultado");
 
 const contador =
-  document.getElementById(
-    "contador"
-  );
+  document.getElementById("contador");
 
 const status =
-  document.getElementById(
-    "status"
-  );
+  document.getElementById("status");
 
 
 /* =====================================================
@@ -631,14 +914,7 @@ const status =
 
 function voltar() {
 
-  /*
-   * Se esta página foi aberta a partir
-   * de outra página, volta para ela.
-   */
-
-  if (
-    window.history.length > 1
-  ) {
+  if (window.history.length > 1) {
 
     window.history.back();
 
@@ -646,15 +922,43 @@ function voltar() {
 
   }
 
-  /*
-   * Caso não exista histórico,
-   * tenta retornar para a página inicial.
-   *
-   * Se o seu sistema utilizar outro
-   * arquivo inicial, altere abaixo.
-   */
+  window.location.href =
+    "index.html";
 
-  window.location.href = "index.html";
+}
+
+
+/* =====================================================
+   ABRIR INCLUSÃO
+   ===================================================== */
+
+function abrirInclusao() {
+
+  painelInclusao.style.display =
+    "block";
+
+  painelInclusao.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+
+  document
+    .getElementById("nome")
+    .focus();
+
+}
+
+
+/* =====================================================
+   FECHAR INCLUSÃO
+   ===================================================== */
+
+function fecharInclusao() {
+
+  painelInclusao.style.display =
+    "none";
+
+  formAtendimento.reset();
 
 }
 
@@ -680,7 +984,8 @@ function mostrarStatus(
 
 function ocultarStatus() {
 
-  status.textContent = "";
+  status.textContent =
+    "";
 
   status.className =
     "status";
@@ -692,9 +997,7 @@ function ocultarStatus() {
    ESCAPAR HTML
    ===================================================== */
 
-function escaparHTML(
-  valor
-) {
+function escaparHTML(valor) {
 
   if (
     valor === null ||
@@ -707,55 +1010,15 @@ function escaparHTML(
 
   return String(valor)
 
-    .replace(
-      /&/g,
-      "&amp;"
-    )
+    .replace(/&/g, "&amp;")
 
-    .replace(
-      /</g,
-      "&lt;"
-    )
+    .replace(/</g, "&lt;")
 
-    .replace(
-      />/g,
-      "&gt;"
-    )
+    .replace(/>/g, "&gt;")
 
-    .replace(
-      /"/g,
-      "&quot;"
-    )
+    .replace(/"/g, "&quot;")
 
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
-
-
-/* =====================================================
-   FORMATAR VALOR
-   ===================================================== */
-
-function formatarValor(
-  valor
-) {
-
-  if (
-    valor === null ||
-    valor === undefined ||
-    valor === ""
-  ) {
-
-    return "";
-
-  }
-
-  return escaparHTML(
-    valor
-  );
+    .replace(/'/g, "&#039;");
 
 }
 
@@ -787,16 +1050,11 @@ function chamarAPI(
         contadorJSONP;
 
       const script =
-        document.createElement(
-          "script"
-        );
+        document.createElement("script");
 
-      let finalizado = false;
+      let finalizado =
+        false;
 
-
-      /*
-       * Timeout
-       */
 
       const timeout =
         setTimeout(
@@ -806,20 +1064,17 @@ function chamarAPI(
               return;
             }
 
-            finalizado = true;
+            finalizado =
+              true;
 
             delete window[
               nomeCallback
             ];
 
-            if (
-              script.parentNode
-            ) {
+            if (script.parentNode) {
 
               script.parentNode
-                .removeChild(
-                  script
-                );
+                .removeChild(script);
 
             }
 
@@ -834,10 +1089,6 @@ function chamarAPI(
         );
 
 
-      /*
-       * Callback
-       */
-
       window[
         nomeCallback
       ] =
@@ -847,37 +1098,26 @@ function chamarAPI(
             return;
           }
 
-          finalizado = true;
+          finalizado =
+            true;
 
-          clearTimeout(
-            timeout
-          );
+          clearTimeout(timeout);
 
           delete window[
             nomeCallback
           ];
 
-          if (
-            script.parentNode
-          ) {
+          if (script.parentNode) {
 
             script.parentNode
-              .removeChild(
-                script
-              );
+              .removeChild(script);
 
           }
 
-          resolve(
-            resposta
-          );
+          resolve(resposta);
 
         };
 
-
-      /*
-       * Montar consulta
-       */
 
       const consulta =
         Object.assign(
@@ -893,17 +1133,13 @@ function chamarAPI(
 
 
       const query =
-        Object.keys(
-          consulta
-        )
+        Object.keys(consulta)
 
           .map(
             function(chave) {
 
               return (
-                encodeURIComponent(
-                  chave
-                ) +
+                encodeURIComponent(chave) +
                 "=" +
                 encodeURIComponent(
                   consulta[chave]
@@ -916,28 +1152,14 @@ function chamarAPI(
           .join("&");
 
 
-      const url =
+      script.src =
         URL_API +
         "?" +
         query;
 
-
-      console.log(
-        "Chamando API:",
-        url
-      );
-
-
-      script.src =
-        url;
-
       script.async =
         true;
 
-
-      /*
-       * Erro
-       */
 
       script.onerror =
         function() {
@@ -946,24 +1168,19 @@ function chamarAPI(
             return;
           }
 
-          finalizado = true;
+          finalizado =
+            true;
 
-          clearTimeout(
-            timeout
-          );
+          clearTimeout(timeout);
 
           delete window[
             nomeCallback
           ];
 
-          if (
-            script.parentNode
-          ) {
+          if (script.parentNode) {
 
             script.parentNode
-              .removeChild(
-                script
-              );
+              .removeChild(script);
 
           }
 
@@ -976,14 +1193,284 @@ function chamarAPI(
         };
 
 
-      document
-        .head
-        .appendChild(
-          script
-        );
+      document.head.appendChild(
+        script
+      );
 
     }
   );
+
+}
+
+
+/* =====================================================
+   SALVAR ATENDIMENTO
+   ===================================================== */
+
+async function salvarAtendimento(
+  evento
+) {
+
+  evento.preventDefault();
+
+
+  const nome =
+    document
+      .getElementById("nome")
+      .value
+      .trim();
+
+  const cpf =
+    document
+      .getElementById("cpf")
+      .value
+      .trim();
+
+  const telefone =
+    document
+      .getElementById("telefone")
+      .value
+      .trim();
+
+  const tipo =
+    document
+      .getElementById("tipo")
+      .value
+      .trim();
+
+  const assunto =
+    document
+      .getElementById("assunto")
+      .value
+      .trim();
+
+  const descricao =
+    document
+      .getElementById("descricao")
+      .value
+      .trim();
+
+  const responsavel =
+    document
+      .getElementById("responsavel")
+      .value
+      .trim();
+
+  const statusAtendimento =
+    document
+      .getElementById("statusAtendimento")
+      .value
+      .trim();
+
+
+  /* ===================================================
+     VALIDAÇÃO
+     =================================================== */
+
+  if (!nome) {
+
+    mostrarStatus(
+      "Informe o nome.",
+      "info"
+    );
+
+    document
+      .getElementById("nome")
+      .focus();
+
+    return;
+
+  }
+
+
+  if (!assunto) {
+
+    mostrarStatus(
+      "Informe o assunto do atendimento.",
+      "info"
+    );
+
+    document
+      .getElementById("assunto")
+      .focus();
+
+    return;
+
+  }
+
+
+  if (!descricao) {
+
+    mostrarStatus(
+      "Informe a descrição do atendimento.",
+      "info"
+    );
+
+    document
+      .getElementById("descricao")
+      .focus();
+
+    return;
+
+  }
+
+
+  /* ===================================================
+     BLOQUEAR BOTÃO
+     =================================================== */
+
+  btnSalvarAtendimento.disabled =
+    true;
+
+  btnSalvarAtendimento.textContent =
+    "Salvando...";
+
+
+  mostrarStatus(
+    "Salvando atendimento...",
+    "info"
+  );
+
+
+  try {
+
+    const resposta =
+      await chamarAPI(
+        "incluirAtendimento",
+        {
+          nome:
+            nome,
+
+          cpf:
+            cpf,
+
+          telefone:
+            telefone,
+
+          tipo:
+            tipo,
+
+          assunto:
+            assunto,
+
+          descricao:
+            descricao,
+
+          responsavel:
+            responsavel,
+
+          status:
+            statusAtendimento
+        }
+      );
+
+
+    console.log(
+      "Resposta incluirAtendimento:",
+      resposta
+    );
+
+
+    if (!resposta) {
+
+      throw new Error(
+        "A API não retornou uma resposta."
+      );
+
+    }
+
+
+    if (
+      resposta.sucesso === false
+    ) {
+
+      throw new Error(
+        resposta.mensagem ||
+        "Não foi possível incluir o atendimento."
+      );
+
+    }
+
+
+    mostrarStatus(
+      resposta.mensagem ||
+      "Atendimento incluído com sucesso!",
+      "sucesso"
+    );
+
+
+    formAtendimento.reset();
+
+
+    document
+      .getElementById("statusAtendimento")
+      .value =
+      "Aberto";
+
+
+    /*
+     * Fecha o formulário após
+     * alguns segundos.
+     */
+
+    setTimeout(
+      function() {
+
+        fecharInclusao();
+
+      },
+      1800
+    );
+
+
+    /*
+     * Se havia uma pesquisa,
+     * atualiza automaticamente.
+     */
+
+    const termo =
+      campoPesquisa
+        .value
+        .trim();
+
+
+    if (termo) {
+
+      setTimeout(
+        function() {
+
+          pesquisar();
+
+        },
+        500
+      );
+
+    }
+
+
+  } catch (erro) {
+
+    console.error(
+      "Erro ao incluir atendimento:",
+      erro
+    );
+
+
+    mostrarStatus(
+      erro.message ||
+      "Não foi possível incluir o atendimento.",
+      "erro"
+    );
+
+  } finally {
+
+    btnSalvarAtendimento.disabled =
+      false;
+
+    btnSalvarAtendimento.textContent =
+      "Salvar Atendimento";
+
+  }
 
 }
 
@@ -1041,7 +1528,8 @@ async function pesquisar() {
       await chamarAPI(
         "pesquisarAtendimento",
         {
-          termo: termo
+          termo:
+            termo
         }
       );
 
@@ -1183,10 +1671,6 @@ function renderizarResultados(
     );
 
 
-  /*
-   * Descobrir colunas
-   */
-
   const colunas = [];
 
 
@@ -1209,14 +1693,10 @@ function renderizarResultados(
         function(campo) {
 
           if (
-            colunas.indexOf(
-              campo
-            ) === -1
+            colunas.indexOf(campo) === -1
           ) {
 
-            colunas.push(
-              campo
-            );
+            colunas.push(campo);
 
           }
 
@@ -1246,10 +1726,6 @@ function renderizarResultados(
   }
 
 
-  /*
-   * Cabeçalho
-   */
-
   let html =
 
     '<div class="tabela-container">' +
@@ -1266,9 +1742,7 @@ function renderizarResultados(
 
       html +=
         "<th>" +
-        escaparHTML(
-          campo
-        ) +
+        escaparHTML(campo) +
         "</th>";
 
     }
@@ -1283,10 +1757,6 @@ function renderizarResultados(
 
         "<tbody>";
 
-
-  /*
-   * Registros
-   */
 
   dados.forEach(
     function(registro) {
@@ -1304,7 +1774,7 @@ function renderizarResultados(
 
           html +=
             "<td>" +
-            formatarValor(
+            escaparHTML(
               valor
             ) +
             "</td>";
@@ -1344,7 +1814,6 @@ function limparPesquisa() {
   campoPesquisa.value =
     "";
 
-
   areaResultado.innerHTML =
 
     '<div class="vazio">' +
@@ -1361,7 +1830,6 @@ function limparPesquisa() {
 
 
   ocultarStatus();
-
 
   campoPesquisa.focus();
 
@@ -1387,6 +1855,24 @@ btnLimpar.addEventListener(
 btnVoltar.addEventListener(
   "click",
   voltar
+);
+
+
+btnNovoAtendimento.addEventListener(
+  "click",
+  abrirInclusao
+);
+
+
+btnCancelarInclusao.addEventListener(
+  "click",
+  fecharInclusao
+);
+
+
+formAtendimento.addEventListener(
+  "submit",
+  salvarAtendimento
 );
 
 
@@ -1433,4 +1919,4 @@ document.addEventListener(
 </body>
 
 </html>
-
+```
