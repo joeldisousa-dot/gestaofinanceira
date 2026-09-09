@@ -15,6 +15,10 @@
 
 <style>
 
+/* =====================================================
+   CONFIGURAÇÃO GERAL
+   ===================================================== */
+
 * {
   box-sizing: border-box;
 }
@@ -22,17 +26,27 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   background: #f4f6f9;
+
   color: #1f2937;
 }
 
 .container {
   width: 100%;
+
   max-width: 1200px;
+
   margin: 0 auto;
+
   padding: 20px;
 }
+
 
 /* =====================================================
    CABEÇALHO
@@ -40,30 +54,43 @@ body {
 
 .cabecalho {
   background: #ffffff;
+
   border-radius: 12px;
+
   padding: 20px;
+
   margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.08);
 }
 
 .cabecalho-topo {
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
   gap: 15px;
 }
 
 .cabecalho h1 {
   margin: 0;
+
   font-size: 26px;
+
   color: #111827;
 }
 
 .cabecalho p {
   margin: 8px 0 0;
+
   color: #6b7280;
+
   font-size: 14px;
 }
+
 
 /* =====================================================
    BOTÕES
@@ -71,31 +98,57 @@ body {
 
 button {
   height: 44px;
+
   border: 0;
+
   border-radius: 8px;
+
   padding: 0 20px;
+
   cursor: pointer;
+
   font-size: 14px;
+
   font-weight: 600;
+
   transition: 0.2s;
 }
 
+button:disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+}
+
+
+/* BOTÃO VOLTAR */
+
 .btn-voltar {
   display: inline-flex;
+
   align-items: center;
+
   justify-content: center;
+
   gap: 7px;
+
   background: #374151;
+
   color: #ffffff;
 }
 
 .btn-voltar:hover {
   background: #1f2937;
+
   transform: translateX(-2px);
 }
 
+
+/* BOTÃO NOVO */
+
 .btn-novo {
   background: #16a34a;
+
   color: #ffffff;
 }
 
@@ -103,8 +156,12 @@ button {
   background: #15803d;
 }
 
+
+/* BOTÃO PESQUISAR */
+
 .btn-pesquisar {
   background: #2563eb;
+
   color: #ffffff;
 }
 
@@ -112,8 +169,12 @@ button {
   background: #1d4ed8;
 }
 
+
+/* BOTÃO LIMPAR */
+
 .btn-limpar {
   background: #e5e7eb;
+
   color: #374151;
 }
 
@@ -121,17 +182,12 @@ button {
   background: #d1d5db;
 }
 
-.btn-cancelar {
-  background: #e5e7eb;
-  color: #374151;
-}
 
-.btn-cancelar:hover {
-  background: #d1d5db;
-}
+/* BOTÃO SALVAR */
 
 .btn-salvar {
   background: #2563eb;
+
   color: #ffffff;
 }
 
@@ -139,21 +195,43 @@ button {
   background: #1d4ed8;
 }
 
+
+/* BOTÃO CANCELAR */
+
+.btn-cancelar {
+  background: #e5e7eb;
+
+  color: #374151;
+}
+
+.btn-cancelar:hover {
+  background: #d1d5db;
+}
+
+
 /* =====================================================
    BARRA DE AÇÕES
    ===================================================== */
 
 .barra-acoes {
   background: #ffffff;
+
   border-radius: 12px;
+
   padding: 16px 20px;
+
   margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.08);
 
   display: flex;
+
   justify-content: flex-end;
+
   gap: 10px;
 }
+
 
 /* =====================================================
    PAINEL
@@ -161,63 +239,25 @@ button {
 
 .painel {
   background: #ffffff;
+
   border-radius: 12px;
+
   padding: 20px;
+
   margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.08);
 }
 
 .painel h2 {
   margin: 0 0 18px;
+
   font-size: 19px;
+
   color: #111827;
 }
 
-/* =====================================================
-   PESQUISA
-   ===================================================== */
-
-.campo-grupo {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.campo-grupo label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #374151;
-}
-
-.linha-pesquisa {
-  display: flex;
-  gap: 10px;
-  width: 100%;
-}
-
-#campoPesquisa {
-  flex: 1;
-  min-width: 0;
-  height: 44px;
-
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-
-  padding: 0 14px;
-
-  font-size: 15px;
-  outline: none;
-}
-
-#campoPesquisa:focus,
-.formulario input:focus,
-.formulario select:focus,
-.formulario textarea:focus {
-  border-color: #2563eb;
-
-  box-shadow:
-    0 0 0 3px rgba(37,99,235,0.12);
-}
 
 /* =====================================================
    FORMULÁRIO
@@ -229,60 +269,133 @@ button {
 
 .formulario {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  grid-template-columns: 1fr;
+
   gap: 16px;
 }
 
 .campo {
   display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
 
-.campo-completo {
-  grid-column: 1 / -1;
+  flex-direction: column;
+
+  gap: 7px;
 }
 
 .campo label {
   font-size: 14px;
+
   font-weight: 600;
+
   color: #374151;
 }
 
-.campo input,
-.campo select,
 .campo textarea {
   width: 100%;
 
-  min-height: 44px;
+  min-height: 130px;
+
+  resize: vertical;
 
   border: 1px solid #d1d5db;
+
   border-radius: 8px;
 
-  padding: 10px 12px;
+  padding: 12px;
 
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   font-size: 14px;
+
+  line-height: 1.5;
 
   outline: none;
 
-  background: #ffffff;
+  transition: 0.2s;
 }
 
-.campo textarea {
-  min-height: 110px;
-  resize: vertical;
+.campo textarea:focus {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37,99,235,0.12);
 }
+
+
+/* =====================================================
+   AÇÕES DO FORMULÁRIO
+   ===================================================== */
 
 .acoes-formulario {
-  grid-column: 1 / -1;
-
   display: flex;
+
   justify-content: flex-end;
+
   gap: 10px;
 
   padding-top: 5px;
 }
+
+
+/* =====================================================
+   PESQUISA
+   ===================================================== */
+
+.campo-grupo {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.campo-grupo label {
+  font-size: 14px;
+
+  font-weight: 600;
+
+  color: #374151;
+}
+
+.linha-pesquisa {
+  display: flex;
+
+  gap: 10px;
+
+  width: 100%;
+}
+
+#campoPesquisa {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 44px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 8px;
+
+  padding: 0 14px;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition: 0.2s;
+}
+
+#campoPesquisa:focus {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 3px rgba(37,99,235,0.12);
+}
+
 
 /* =====================================================
    STATUS
@@ -290,32 +403,46 @@ button {
 
 .status {
   display: none;
+
   margin-top: 15px;
+
   padding: 12px 14px;
+
   border-radius: 8px;
+
   font-size: 14px;
 }
 
 .status.info {
   display: block;
+
   background: #eff6ff;
+
   color: #1d4ed8;
+
   border: 1px solid #bfdbfe;
 }
 
 .status.sucesso {
   display: block;
+
   background: #ecfdf5;
+
   color: #047857;
+
   border: 1px solid #a7f3d0;
 }
 
 .status.erro {
   display: block;
+
   background: #fef2f2;
+
   color: #b91c1c;
+
   border: 1px solid #fecaca;
 }
+
 
 /* =====================================================
    RESULTADO
@@ -323,30 +450,43 @@ button {
 
 .resultado {
   background: #ffffff;
+
   border-radius: 12px;
+
   padding: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.08);
 }
 
 .resultado-topo {
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
+
   gap: 10px;
+
   margin-bottom: 15px;
+
   flex-wrap: wrap;
 }
 
 .resultado-topo h2 {
   margin: 0;
+
   font-size: 19px;
+
   color: #111827;
 }
 
 .contador {
   color: #6b7280;
+
   font-size: 14px;
 }
+
 
 /* =====================================================
    TABELA
@@ -354,15 +494,20 @@ button {
 
 .tabela-container {
   width: 100%;
+
   overflow-x: auto;
+
   border: 1px solid #e5e7eb;
+
   border-radius: 8px;
 }
 
 table {
   width: 100%;
+
   border-collapse: collapse;
-  min-width: 700px;
+
+  min-width: 600px;
 }
 
 thead {
@@ -371,20 +516,32 @@ thead {
 
 th {
   padding: 12px;
+
   text-align: left;
+
   font-size: 13px;
+
   font-weight: 700;
+
   color: #374151;
+
   border-bottom: 1px solid #e5e7eb;
+
   white-space: nowrap;
 }
 
 td {
   padding: 11px 12px;
+
   border-bottom: 1px solid #f0f0f0;
+
   font-size: 14px;
+
   color: #4b5563;
+
   vertical-align: top;
+
+  white-space: pre-wrap;
 }
 
 tbody tr:hover {
@@ -395,46 +552,62 @@ tbody tr:last-child td {
   border-bottom: 0;
 }
 
+
 /* =====================================================
    MENSAGENS
    ===================================================== */
 
 .vazio {
   text-align: center;
+
   padding: 45px 20px;
+
   color: #6b7280;
 }
 
 .vazio strong {
   display: block;
+
   color: #374151;
+
   margin-bottom: 5px;
+
   font-size: 16px;
 }
 
 .carregando {
   text-align: center;
+
   padding: 35px;
+
   color: #6b7280;
 }
 
 .spinner {
   width: 25px;
+
   height: 25px;
+
   margin: 0 auto 10px auto;
 
   border: 3px solid #e5e7eb;
+
   border-top-color: #2563eb;
+
   border-radius: 50%;
 
-  animation: girar 0.8s linear infinite;
+  animation:
+    girar 0.8s linear infinite;
 }
 
 @keyframes girar {
+
   to {
     transform: rotate(360deg);
   }
+
 }
+
 
 /* =====================================================
    RESPONSIVO
@@ -454,6 +627,7 @@ tbody tr:last-child td {
 
   .cabecalho-topo {
     align-items: stretch;
+
     flex-direction: column;
   }
 
@@ -477,16 +651,7 @@ tbody tr:last-child td {
     width: 100%;
   }
 
-  .formulario {
-    grid-template-columns: 1fr;
-  }
-
-  .campo-completo {
-    grid-column: auto;
-  }
-
   .acoes-formulario {
-    grid-column: auto;
     flex-direction: column;
   }
 
@@ -508,6 +673,7 @@ tbody tr:last-child td {
 
 <div class="container">
 
+
 <!-- =====================================================
      CABEÇALHO
      ===================================================== -->
@@ -516,7 +682,9 @@ tbody tr:last-child td {
 
   <div class="cabecalho-topo">
 
-    <h1>Atendimento</h1>
+    <h1>
+      Atendimento
+    </h1>
 
     <button
       type="button"
@@ -529,7 +697,7 @@ tbody tr:last-child td {
   </div>
 
   <p>
-    Pesquisa e registro de atendimentos.
+    Consulte e registre problemas e suas respectivas soluções.
   </p>
 
 </section>
@@ -553,7 +721,7 @@ tbody tr:last-child td {
 
 
 <!-- =====================================================
-     PAINEL DE INCLUSÃO
+     INCLUIR ATENDIMENTO
      ===================================================== -->
 
 <section
@@ -562,7 +730,7 @@ tbody tr:last-child td {
 >
 
   <h2>
-    Novo Atendimento
+    Incluir Atendimento
   </h2>
 
   <form
@@ -570,176 +738,43 @@ tbody tr:last-child td {
     class="formulario"
   >
 
-    <div class="campo">
-
-      <label for="nome">
-        Nome
-      </label>
-
-      <input
-        type="text"
-        id="nome"
-        name="nome"
-        placeholder="Nome do cliente"
-      >
-
-    </div>
-
+    <!-- PROBLEMA -->
 
     <div class="campo">
 
-      <label for="cpf">
-        CPF
-      </label>
-
-      <input
-        type="text"
-        id="cpf"
-        name="cpf"
-        placeholder="CPF"
-      >
-
-    </div>
-
-
-    <div class="campo">
-
-      <label for="telefone">
-        Telefone
-      </label>
-
-      <input
-        type="text"
-        id="telefone"
-        name="telefone"
-        placeholder="Telefone"
-      >
-
-    </div>
-
-
-    <div class="campo">
-
-      <label for="tipo">
-        Tipo de atendimento
-      </label>
-
-      <select
-        id="tipo"
-        name="tipo"
-      >
-
-        <option value="">
-          Selecione
-        </option>
-
-        <option value="Dúvida">
-          Dúvida
-        </option>
-
-        <option value="Solicitação">
-          Solicitação
-        </option>
-
-        <option value="Reclamação">
-          Reclamação
-        </option>
-
-        <option value="Orientação">
-          Orientação
-        </option>
-
-        <option value="Retorno">
-          Retorno
-        </option>
-
-        <option value="Outros">
-          Outros
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <div class="campo campo-completo">
-
-      <label for="assunto">
-        Assunto
-      </label>
-
-      <input
-        type="text"
-        id="assunto"
-        name="assunto"
-        placeholder="Informe o assunto do atendimento"
-      >
-
-    </div>
-
-
-    <div class="campo campo-completo">
-
-      <label for="descricao">
-        Descrição do atendimento
+      <label for="problema">
+        Problema
       </label>
 
       <textarea
-        id="descricao"
-        name="descricao"
-        placeholder="Descreva o atendimento..."
+        id="problema"
+        name="problema"
+        placeholder="Descreva o problema identificado..."
+        required
       ></textarea>
 
     </div>
 
 
+    <!-- SOLUÇÃO -->
+
     <div class="campo">
 
-      <label for="responsavel">
-        Responsável
+      <label for="solucao">
+        Solução
       </label>
 
-      <input
-        type="text"
-        id="responsavel"
-        name="responsavel"
-        placeholder="Responsável pelo atendimento"
-      >
+      <textarea
+        id="solucao"
+        name="solucao"
+        placeholder="Informe a solução aplicada..."
+        required
+      ></textarea>
 
     </div>
 
 
-    <div class="campo">
-
-      <label for="statusAtendimento">
-        Status
-      </label>
-
-      <select
-        id="statusAtendimento"
-        name="status"
-      >
-
-        <option value="Aberto">
-          Aberto
-        </option>
-
-        <option value="Em andamento">
-          Em andamento
-        </option>
-
-        <option value="Concluído">
-          Concluído
-        </option>
-
-        <option value="Pendente">
-          Pendente
-        </option>
-
-      </select>
-
-    </div>
-
+    <!-- AÇÕES -->
 
     <div class="acoes-formulario">
 
@@ -767,7 +802,7 @@ tbody tr:last-child td {
 
 
 <!-- =====================================================
-     PAINEL DE PESQUISA
+     PESQUISA
      ===================================================== -->
 
 <section class="painel">
@@ -783,7 +818,7 @@ tbody tr:last-child td {
       <input
         type="text"
         id="campoPesquisa"
-        placeholder="Digite nome, CPF, telefone, endereço ou outra informação..."
+        placeholder="Digite um problema, solução ou palavra-chave..."
         autocomplete="off"
       >
 
@@ -837,6 +872,7 @@ tbody tr:last-child td {
 
   </div>
 
+
   <div id="areaResultado">
 
     <div class="vazio">
@@ -845,7 +881,8 @@ tbody tr:last-child td {
         Pesquise um atendimento
       </strong>
 
-      Digite algum termo no campo acima
+      Digite algum problema,
+      solução ou palavra-chave
       para localizar registros.
 
     </div>
@@ -853,6 +890,7 @@ tbody tr:last-child td {
   </div>
 
 </section>
+
 
 </div>
 
@@ -872,49 +910,75 @@ const URL_API =
    ===================================================== */
 
 const campoPesquisa =
-  document.getElementById("campoPesquisa");
+  document.getElementById(
+    "campoPesquisa"
+  );
 
 const btnPesquisar =
-  document.getElementById("btnPesquisar");
+  document.getElementById(
+    "btnPesquisar"
+  );
 
 const btnLimpar =
-  document.getElementById("btnLimpar");
+  document.getElementById(
+    "btnLimpar"
+  );
 
 const btnVoltar =
-  document.getElementById("btnVoltar");
+  document.getElementById(
+    "btnVoltar"
+  );
 
 const btnNovoAtendimento =
-  document.getElementById("btnNovoAtendimento");
+  document.getElementById(
+    "btnNovoAtendimento"
+  );
 
 const btnCancelarInclusao =
-  document.getElementById("btnCancelarInclusao");
+  document.getElementById(
+    "btnCancelarInclusao"
+  );
 
 const formAtendimento =
-  document.getElementById("formAtendimento");
+  document.getElementById(
+    "formAtendimento"
+  );
 
 const painelInclusao =
-  document.getElementById("painelInclusao");
+  document.getElementById(
+    "painelInclusao"
+  );
 
 const btnSalvarAtendimento =
-  document.getElementById("btnSalvarAtendimento");
+  document.getElementById(
+    "btnSalvarAtendimento"
+  );
 
 const areaResultado =
-  document.getElementById("areaResultado");
+  document.getElementById(
+    "areaResultado"
+  );
 
 const contador =
-  document.getElementById("contador");
+  document.getElementById(
+    "contador"
+  );
 
 const status =
-  document.getElementById("status");
+  document.getElementById(
+    "status"
+  );
 
 
 /* =====================================================
-   BOTÃO VOLTAR
+   VOLTAR
    ===================================================== */
 
 function voltar() {
 
-  if (window.history.length > 1) {
+  if (
+    window.history.length > 1
+  ) {
 
     window.history.back();
 
@@ -929,7 +993,7 @@ function voltar() {
 
 
 /* =====================================================
-   ABRIR INCLUSÃO
+   ABRIR FORMULÁRIO
    ===================================================== */
 
 function abrirInclusao() {
@@ -943,14 +1007,14 @@ function abrirInclusao() {
   });
 
   document
-    .getElementById("nome")
+    .getElementById("problema")
     .focus();
 
 }
 
 
 /* =====================================================
-   FECHAR INCLUSÃO
+   FECHAR FORMULÁRIO
    ===================================================== */
 
 function fecharInclusao() {
@@ -997,7 +1061,9 @@ function ocultarStatus() {
    ESCAPAR HTML
    ===================================================== */
 
-function escaparHTML(valor) {
+function escaparHTML(
+  valor
+) {
 
   if (
     valor === null ||
@@ -1010,15 +1076,30 @@ function escaparHTML(valor) {
 
   return String(valor)
 
-    .replace(/&/g, "&amp;")
+    .replace(
+      /&/g,
+      "&amp;"
+    )
 
-    .replace(/</g, "&lt;")
+    .replace(
+      /</g,
+      "&lt;"
+    )
 
-    .replace(/>/g, "&gt;")
+    .replace(
+      />/g,
+      "&gt;"
+    )
 
-    .replace(/"/g, "&quot;")
+    .replace(
+      /"/g,
+      "&quot;"
+    )
 
-    .replace(/'/g, "&#039;");
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
@@ -1043,18 +1124,27 @@ function chamarAPI(
 
       contadorJSONP++;
 
+
       const nomeCallback =
         "__controleFinanceiroCallback_" +
         Date.now() +
         "_" +
         contadorJSONP;
 
+
       const script =
-        document.createElement("script");
+        document.createElement(
+          "script"
+        );
+
 
       let finalizado =
         false;
 
+
+      /* -----------------------------------------------
+         TIMEOUT
+         ----------------------------------------------- */
 
       const timeout =
         setTimeout(
@@ -1067,16 +1157,23 @@ function chamarAPI(
             finalizado =
               true;
 
+
             delete window[
               nomeCallback
             ];
 
-            if (script.parentNode) {
+
+            if (
+              script.parentNode
+            ) {
 
               script.parentNode
-                .removeChild(script);
+                .removeChild(
+                  script
+                );
 
             }
+
 
             reject(
               new Error(
@@ -1089,6 +1186,10 @@ function chamarAPI(
         );
 
 
+      /* -----------------------------------------------
+         CALLBACK
+         ----------------------------------------------- */
+
       window[
         nomeCallback
       ] =
@@ -1098,26 +1199,43 @@ function chamarAPI(
             return;
           }
 
+
           finalizado =
             true;
 
-          clearTimeout(timeout);
+
+          clearTimeout(
+            timeout
+          );
+
 
           delete window[
             nomeCallback
           ];
 
-          if (script.parentNode) {
+
+          if (
+            script.parentNode
+          ) {
 
             script.parentNode
-              .removeChild(script);
+              .removeChild(
+                script
+              );
 
           }
 
-          resolve(resposta);
+
+          resolve(
+            resposta
+          );
 
         };
 
+
+      /* -----------------------------------------------
+         CONSULTA
+         ----------------------------------------------- */
 
       const consulta =
         Object.assign(
@@ -1125,21 +1243,27 @@ function chamarAPI(
           parametros
         );
 
+
       consulta.action =
         acao;
+
 
       consulta.callback =
         nomeCallback;
 
 
       const query =
-        Object.keys(consulta)
+        Object.keys(
+          consulta
+        )
 
           .map(
             function(chave) {
 
               return (
-                encodeURIComponent(chave) +
+                encodeURIComponent(
+                  chave
+                ) +
                 "=" +
                 encodeURIComponent(
                   consulta[chave]
@@ -1157,9 +1281,14 @@ function chamarAPI(
         "?" +
         query;
 
+
       script.async =
         true;
 
+
+      /* -----------------------------------------------
+         ERRO
+         ----------------------------------------------- */
 
       script.onerror =
         function() {
@@ -1168,21 +1297,32 @@ function chamarAPI(
             return;
           }
 
+
           finalizado =
             true;
 
-          clearTimeout(timeout);
+
+          clearTimeout(
+            timeout
+          );
+
 
           delete window[
             nomeCallback
           ];
 
-          if (script.parentNode) {
+
+          if (
+            script.parentNode
+          ) {
 
             script.parentNode
-              .removeChild(script);
+              .removeChild(
+                script
+              );
 
           }
+
 
           reject(
             new Error(
@@ -1193,9 +1333,11 @@ function chamarAPI(
         };
 
 
-      document.head.appendChild(
-        script
-      );
+      document
+        .head
+        .appendChild(
+          script
+        );
 
     }
   );
@@ -1214,113 +1356,75 @@ async function salvarAtendimento(
   evento.preventDefault();
 
 
-  const nome =
+  const problema =
     document
-      .getElementById("nome")
-      .value
-      .trim();
-
-  const cpf =
-    document
-      .getElementById("cpf")
-      .value
-      .trim();
-
-  const telefone =
-    document
-      .getElementById("telefone")
-      .value
-      .trim();
-
-  const tipo =
-    document
-      .getElementById("tipo")
-      .value
-      .trim();
-
-  const assunto =
-    document
-      .getElementById("assunto")
-      .value
-      .trim();
-
-  const descricao =
-    document
-      .getElementById("descricao")
-      .value
-      .trim();
-
-  const responsavel =
-    document
-      .getElementById("responsavel")
-      .value
-      .trim();
-
-  const statusAtendimento =
-    document
-      .getElementById("statusAtendimento")
+      .getElementById(
+        "problema"
+      )
       .value
       .trim();
 
 
-  /* ===================================================
+  const solucao =
+    document
+      .getElementById(
+        "solucao"
+      )
+      .value
+      .trim();
+
+
+  /* -----------------------------------------------
      VALIDAÇÃO
-     =================================================== */
+     ----------------------------------------------- */
 
-  if (!nome) {
+  if (!problema) {
 
     mostrarStatus(
-      "Informe o nome.",
+      "Informe o problema.",
       "info"
     );
 
+
     document
-      .getElementById("nome")
+      .getElementById(
+        "problema"
+      )
       .focus();
+
 
     return;
 
   }
 
 
-  if (!assunto) {
+  if (!solucao) {
 
     mostrarStatus(
-      "Informe o assunto do atendimento.",
+      "Informe a solução.",
       "info"
     );
 
+
     document
-      .getElementById("assunto")
+      .getElementById(
+        "solucao"
+      )
       .focus();
+
 
     return;
 
   }
 
 
-  if (!descricao) {
-
-    mostrarStatus(
-      "Informe a descrição do atendimento.",
-      "info"
-    );
-
-    document
-      .getElementById("descricao")
-      .focus();
-
-    return;
-
-  }
-
-
-  /* ===================================================
+  /* -----------------------------------------------
      BLOQUEAR BOTÃO
-     =================================================== */
+     ----------------------------------------------- */
 
   btnSalvarAtendimento.disabled =
     true;
+
 
   btnSalvarAtendimento.textContent =
     "Salvando...";
@@ -1334,33 +1438,22 @@ async function salvarAtendimento(
 
   try {
 
+    /*
+     * O ID NÃO é enviado.
+     *
+     * O Apps Script deve gerar
+     * o próximo ID automaticamente.
+     */
+
     const resposta =
       await chamarAPI(
         "incluirAtendimento",
         {
-          nome:
-            nome,
+          problema:
+            problema,
 
-          cpf:
-            cpf,
-
-          telefone:
-            telefone,
-
-          tipo:
-            tipo,
-
-          assunto:
-            assunto,
-
-          descricao:
-            descricao,
-
-          responsavel:
-            responsavel,
-
-          status:
-            statusAtendimento
+          solucao:
+            solucao
         }
       );
 
@@ -1399,18 +1492,16 @@ async function salvarAtendimento(
     );
 
 
+    /*
+     * Limpa o formulário.
+     */
+
     formAtendimento.reset();
 
 
-    document
-      .getElementById("statusAtendimento")
-      .value =
-      "Aberto";
-
-
     /*
-     * Fecha o formulário após
-     * alguns segundos.
+     * Fecha o formulário
+     * depois de 1,5 segundo.
      */
 
     setTimeout(
@@ -1419,12 +1510,12 @@ async function salvarAtendimento(
         fecharInclusao();
 
       },
-      1800
+      1500
     );
 
 
     /*
-     * Se havia uma pesquisa,
+     * Se existir pesquisa ativa,
      * atualiza automaticamente.
      */
 
@@ -1467,6 +1558,7 @@ async function salvarAtendimento(
     btnSalvarAtendimento.disabled =
       false;
 
+
     btnSalvarAtendimento.textContent =
       "Salvar Atendimento";
 
@@ -1494,7 +1586,9 @@ async function pesquisar() {
       "info"
     );
 
+
     campoPesquisa.focus();
+
 
     return;
 
@@ -1572,7 +1666,9 @@ async function pesquisar() {
             Array.isArray(
               resposta.lista
             )
+
               ? resposta.lista
+
               : []
           );
 
@@ -1657,6 +1753,7 @@ function renderizarResultados(
     contador.textContent =
       "0 registros";
 
+
     return;
 
   }
@@ -1671,8 +1768,69 @@ function renderizarResultados(
     );
 
 
-  const colunas = [];
+  /*
+   * Como a tabela possui somente:
+   *
+   * ID
+   * Problema
+   * Solução
+   *
+   * Primeiro tentamos manter
+   * exatamente essa ordem.
+   */
 
+  const colunasPadrao = [
+    "ID",
+    "Problema",
+    "Solução"
+  ];
+
+
+  /*
+   * Descobrir as colunas reais
+   * retornadas pela API.
+   */
+
+  const colunas =
+    [];
+
+
+  colunasPadrao.forEach(
+    function(campo) {
+
+      const existe =
+        dados.some(
+          function(registro) {
+
+            return (
+              registro &&
+              Object.prototype.hasOwnProperty.call(
+                registro,
+                campo
+              )
+            );
+
+          }
+        );
+
+
+      if (existe) {
+
+        colunas.push(
+          campo
+        );
+
+      }
+
+    }
+  );
+
+
+  /*
+   * Caso o Apps Script retorne
+   * nomes diferentes, adiciona
+   * os campos encontrados.
+   */
 
   dados.forEach(
     function(registro) {
@@ -1696,7 +1854,9 @@ function renderizarResultados(
             colunas.indexOf(campo) === -1
           ) {
 
-            colunas.push(campo);
+            colunas.push(
+              campo
+            );
 
           }
 
@@ -1721,10 +1881,15 @@ function renderizarResultados(
 
       '</div>';
 
+
     return;
 
   }
 
+
+  /*
+   * Cabeçalho da tabela.
+   */
 
   let html =
 
@@ -1741,8 +1906,13 @@ function renderizarResultados(
     function(campo) {
 
       html +=
+
         "<th>" +
-        escaparHTML(campo) +
+
+        escaparHTML(
+          campo
+        ) +
+
         "</th>";
 
     }
@@ -1758,6 +1928,10 @@ function renderizarResultados(
         "<tbody>";
 
 
+  /*
+   * Registros.
+   */
+
   dados.forEach(
     function(registro) {
 
@@ -1768,15 +1942,60 @@ function renderizarResultados(
       colunas.forEach(
         function(campo) {
 
-          const valor =
+          let valor =
             registro[campo];
 
 
+          /*
+           * Caso o backend retorne
+           * campo em minúsculo.
+           */
+
+          if (
+            valor === undefined
+          ) {
+
+            const campoMinusculo =
+              campo.toLowerCase();
+
+
+            const chaveEncontrada =
+              Object.keys(
+                registro
+              ).find(
+                function(chave) {
+
+                  return (
+                    chave.toLowerCase() ===
+                    campoMinusculo
+                  );
+
+                }
+              );
+
+
+            if (
+              chaveEncontrada
+            ) {
+
+              valor =
+                registro[
+                  chaveEncontrada
+                ];
+
+            }
+
+          }
+
+
           html +=
+
             "<td>" +
+
             escaparHTML(
               valor
             ) +
+
             "</td>";
 
         }
@@ -1806,7 +2025,7 @@ function renderizarResultados(
 
 
 /* =====================================================
-   LIMPAR
+   LIMPAR PESQUISA
    ===================================================== */
 
 function limparPesquisa() {
@@ -1814,13 +2033,14 @@ function limparPesquisa() {
   campoPesquisa.value =
     "";
 
+
   areaResultado.innerHTML =
 
     '<div class="vazio">' +
 
       '<strong>Pesquise um atendimento</strong>' +
 
-      'Digite algum termo no campo acima para localizar registros.' +
+      'Digite algum problema, solução ou palavra-chave para localizar registros.' +
 
     '</div>';
 
@@ -1830,6 +2050,7 @@ function limparPesquisa() {
 
 
   ocultarStatus();
+
 
   campoPesquisa.focus();
 
