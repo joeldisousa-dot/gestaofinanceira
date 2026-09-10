@@ -1,2278 +1,2768 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Controle Financeiro</title>
 
 <style>
 
+/* =========================================================
+   CONFIGURAÇÃO GERAL
+========================================================= */
+
 * {
     box-sizing: border-box;
 }
 
 body {
+
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f5f7fa;
+
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4f7fb 0%,
+            #eef3f9 100%
+        );
+
     color: #1f2937;
 }
 
-/* =========================
-   CABEÇALHO
-========================= */
-
-.header {
-    background: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
-    padding: 18px 28px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.header-left h1 {
-    margin: 0;
-    font-size: 22px;
-    color: #1e3a5f;
-}
-
-.header-left p {
-    margin: 4px 0 0;
-    font-size: 13px;
-    color: #6b7280;
-}
-
-.status {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #16803c;
-}
-
-.status-dot {
-    width: 9px;
-    height: 9px;
-    background: #22c55e;
-    border-radius: 50%;
-}
-
-/* =========================
-   CONTAINER
-========================= */
 
 .container {
-    max-width: 1400px;
+
+    width: 100%;
+
+    max-width: 1100px;
+
     margin: 0 auto;
-    padding: 22px 28px 40px;
+
+    padding: 20px 18px 30px;
 }
 
-/* =========================
-   COMPETÊNCIA
-========================= */
 
-.competencia-box {
+.card {
+
     background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    padding: 15px 18px;
-    margin-bottom: 18px;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    box-shadow:
+        0 8px 28px
+        rgba(15, 23, 42, 0.08);
+
+    border:
+        1px solid #e5eaf0;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.header {
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
+
     gap: 15px;
-}
 
-.competencia-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.competencia-info label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #4b5563;
-}
-
-#competencia {
-    border: 1px solid #d1d5db;
-    border-radius: 7px;
-    padding: 8px 10px;
-    font-size: 14px;
-    background: #ffffff;
-    color: #111827;
-}
-
-.competencia-acoes {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.btn {
-    border: none;
-    border-radius: 7px;
-    padding: 9px 13px;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 600;
-    transition: .2s;
-}
-
-.btn:hover {
-    opacity: .88;
-}
-
-.btn-primary {
-    background: #2563eb;
-    color: white;
-}
-
-.btn-secondary {
-    background: #f3f4f6;
-    color: #374151;
-    border: 1px solid #d1d5db;
-}
-
-.btn-danger {
-    background: #dc2626;
-    color: white;
-}
-
-.status-competencia {
-    padding: 6px 11px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.status-aberta {
-    background: #dcfce7;
-    color: #166534;
-}
-
-.status-fechada {
-    background: #fee2e2;
-    color: #991b1b;
-}
-
-/* =========================
-   ALERTA DE VENCIMENTOS
-========================= */
-
-.aviso-vencimentos {
-    display: none;
-    background: #fff7ed;
-    border: 1px solid #fed7aa;
-    border-left: 4px solid #f97316;
-    border-radius: 9px;
-    padding: 13px 16px;
     margin-bottom: 18px;
-
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
 }
 
-.aviso-vencimentos.visivel {
-    display: flex;
-}
 
-.aviso-conteudo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+.titulo {
 
-.aviso-icone {
-    font-size: 23px;
-}
+    margin: 0;
 
-.aviso-titulo {
-    font-size: 14px;
+    color: #17365d;
+
+    font-size: 26px;
+
     font-weight: 700;
-    color: #9a3412;
+
+    line-height: 1.2;
 }
 
-.aviso-detalhes {
-    margin-top: 3px;
+
+.subtitulo {
+
+    margin-top: 5px;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 6px 10px;
+
+    border-radius: 18px;
+
+    background: #f1f5f9;
+
+    color: #64748b;
+
     font-size: 12px;
-    color: #7c2d12;
-}
 
-.btn-aviso {
-    background: #f97316;
-    color: white;
+    font-weight: 600;
+
     white-space: nowrap;
 }
 
-/* =========================
-   CARDS FINANCEIROS
-========================= */
 
-.cards {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 12px;
-    margin-bottom: 16px;
+.status::before {
+
+    content: "";
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #94a3b8;
 }
 
-.card {
+
+.status.online {
+
+    background: #ecfdf3;
+
+    color: #166534;
+}
+
+
+.status.online::before {
+
+    background: #22c55e;
+}
+
+
+.status.erro {
+
+    background: #fef2f2;
+
+    color: #991b1b;
+}
+
+
+.status.erro::before {
+
+    background: #ef4444;
+}
+
+
+/* =========================================================
+   COMPETÊNCIA
+========================================================= */
+
+.competencia-box {
+
+    background: #f8fafc;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 9px;
+
+    padding: 10px 12px;
+
+    margin-bottom: 14px;
+}
+
+
+.competencia-label {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: #475569;
+}
+
+
+.competencia-linha {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    flex-wrap: wrap;
+}
+
+
+#competencia {
+
+    width: 180px;
+
+    height: 34px;
+
+    padding: 5px 9px;
+
+    border:
+        1px solid #cbd5e1;
+
+    border-radius: 7px;
+
     background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    padding: 15px;
-    min-height: 105px;
+
+    color: #1e293b;
+
+    font-size: 13px;
+
+    outline: none;
 }
 
-.card-titulo {
-    font-size: 11px;
+
+#competencia:focus {
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(37, 99, 235, 0.10);
+}
+
+
+/* =========================================================
+   BOTÃO ATUALIZAR
+========================================================= */
+
+.btn-atualizar {
+
+    height: 34px;
+
+    padding: 5px 10px;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    background: #17365d;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
     font-weight: 700;
-    color: #6b7280;
-    text-transform: uppercase;
-    margin-bottom: 9px;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition: .2s;
 }
 
-.card-valor {
-    font-size: 20px;
+
+.btn-atualizar:hover {
+
+    background: #214c7d;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   TÍTULOS
+========================================================= */
+
+.secao-titulo {
+
+    display: block;
+
+    margin:
+        16px 0 7px;
+
+    color: #17365d;
+
+    font-size: 16px;
+
     font-weight: 700;
-    color: #1f2937;
 }
 
-.card-sub {
-    margin-top: 6px;
-    font-size: 11px;
-    color: #6b7280;
+
+/* =========================================================
+   RESUMO
+========================================================= */
+
+.resumo {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, 1fr);
+
+    gap: 8px;
+
+    margin-bottom: 18px;
 }
 
-.card-receber .card-valor {
+
+.resumo-card {
+
+    min-height: 0;
+
+    height: auto;
+
+    padding: 8px 9px;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 2px 6px
+        rgba(15, 23, 42, 0.03);
+}
+
+
+.resumo-label {
+
+    margin:
+        0 0 3px;
+
+    color: #64748b;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    line-height: 1.15;
+}
+
+
+.resumo-valor {
+
+    margin: 0;
+
+    color: #17365d;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    line-height: 1.15;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   VALOR COMPLEMENTAR
+========================================================= */
+
+.resumo-subvalor {
+
+    margin-top: 4px;
+
+    color: #94a3b8;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   DESTAQUES
+========================================================= */
+
+.resumo-card.recebido {
+
+    border-left:
+        3px solid #16a34a;
+}
+
+
+.resumo-card.recebido
+.resumo-valor {
+
     color: #15803d;
 }
 
-.card-pagar .card-valor {
-    color: #dc2626;
+
+.resumo-card.pago {
+
+    border-left:
+        3px solid #dc2626;
 }
 
-.card-recebido .card-valor {
-    color: #2563eb;
+
+.resumo-card.pago
+.resumo-valor {
+
+    color: #b91c1c;
 }
 
-.card-pago .card-valor {
-    color: #7c3aed;
+
+.resumo-card.saldo {
+
+    border-left:
+        3px solid #17365d;
 }
 
-.card-banco {
-    border-left: 4px solid #2563eb;
-}
 
-.card-inicial {
-    border-left: 4px solid #6b7280;
-}
+/* =========================================================
+   MENU
+========================================================= */
 
-/* =========================
-   INDICADORES
-========================= */
+.menu {
 
-.indicadores {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-bottom: 22px;
-}
 
-.indicador {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 9px;
-    padding: 12px 15px;
+    grid-template-columns:
+        repeat(3, 1fr);
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.indicador-info span {
-    display: block;
-    font-size: 11px;
-    color: #6b7280;
-}
-
-.indicador-info strong {
-    display: block;
-    margin-top: 3px;
-    font-size: 18px;
-    color: #1f2937;
-}
-
-.indicador-numero {
-    font-size: 22px;
-    font-weight: 700;
-    color: #2563eb;
-}
-
-/* =========================
-   TÍTULOS
-========================= */
-
-.secao-titulo {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 11px;
-}
-
-.secao-titulo h2 {
-    margin: 0;
-    font-size: 15px;
-    color: #374151;
-}
-
-.secao-titulo span {
-    font-size: 11px;
-    color: #9ca3af;
-}
-
-/* =========================
-   ROTINAS
-========================= */
-
-.rotinas {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
     gap: 12px;
 }
 
-.rotina {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    padding: 17px 14px;
+
+.menu-item {
+
+    width: 100%;
+
+    min-height: 105px;
+
+    border: 0;
+
+    border-radius: 12px;
+
+    padding: 15px 12px;
+
+    background: #17365d;
+
+    color: #ffffff;
+
     cursor: pointer;
-    transition: .2s;
-    min-height: 100px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition:
+        transform .18s ease,
+        background .18s ease,
+        box-shadow .18s ease;
 }
 
-.rotina:hover {
-    border-color: #93c5fd;
-    box-shadow: 0 4px 12px rgba(0,0,0,.05);
-    transform: translateY(-1px);
+
+.menu-item:hover {
+
+    background: #214c7d;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 6px 15px
+        rgba(23, 54, 93, 0.18);
 }
 
-.rotina-icone {
-    font-size: 23px;
+
+.menu-item.novo {
+
+    background: #15803d;
+}
+
+
+.menu-item.novo:hover {
+
+    background: #166534;
+}
+
+
+.menu-icone {
+
+    display: block;
+
+    font-size: 28px;
+
+    line-height: 1;
+
     margin-bottom: 9px;
 }
 
-.rotina-titulo {
-    font-size: 13px;
-    font-weight: 700;
-    color: #1f2937;
+
+.menu-descricao {
+
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 10px;
+
+    font-weight: 400;
+
+    line-height: 1.25;
+
+    opacity: .80;
 }
 
-.rotina-desc {
-    margin-top: 4px;
-    font-size: 11px;
-    color: #6b7280;
-    line-height: 1.35;
-}
 
-/* =========================
+/* =========================================================
    MENSAGEM
-========================= */
+========================================================= */
 
 .mensagem {
+
     display: none;
-    margin-bottom: 15px;
-    padding: 11px 14px;
-    border-radius: 7px;
+
+    margin-top: 15px;
+
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    background: #fff7ed;
+
+    border:
+        1px solid #fed7aa;
+
+    color: #9a3412;
+
     font-size: 13px;
 }
 
-.mensagem.sucesso {
-    display: block;
-    background: #ecfdf5;
-    color: #166534;
-    border: 1px solid #bbf7d0;
-}
 
 .mensagem.erro {
-    display: block;
+
     background: #fef2f2;
+
+    border-color: #fecaca;
+
     color: #991b1b;
-    border: 1px solid #fecaca;
 }
 
-.mensagem.info {
-    display: block;
-    background: #eff6ff;
-    color: #1d4ed8;
-    border: 1px solid #bfdbfe;
+
+.mensagem.sucesso {
+
+    background: #f0fdf4;
+
+    border-color: #bbf7d0;
+
+    color: #166534;
 }
 
-/* =========================
+
+/* =========================================================
+   RODAPÉ
+========================================================= */
+
+.rodape {
+
+    margin-top: 18px;
+
+    padding-top: 12px;
+
+    border-top:
+        1px solid #e5e7eb;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
    RESPONSIVO
-========================= */
+========================================================= */
 
-@media (max-width: 1150px) {
+@media (max-width: 1000px) {
 
-    .cards {
-        grid-template-columns: repeat(3, 1fr);
-    }
+    .resumo {
 
-    .rotinas {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns:
+            repeat(3, 1fr);
     }
 }
 
-@media (max-width: 750px) {
 
-    .header {
-        padding: 15px;
+@media (max-width: 850px) {
+
+    .resumo {
+
+        grid-template-columns:
+            repeat(2, 1fr);
     }
+
+    .menu {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 560px) {
 
     .container {
+
+        padding:
+            10px 8px 20px;
+    }
+
+
+    .card {
+
         padding: 15px;
+
+        border-radius: 13px;
     }
 
-    .competencia-box {
+
+    .header {
+
         align-items: flex-start;
+
         flex-direction: column;
+
+        gap: 8px;
     }
 
-    .competencia-acoes {
-        width: 100%;
-        flex-wrap: wrap;
+
+    .titulo {
+
+        font-size: 23px;
     }
 
-    .cards {
-        grid-template-columns: repeat(2, 1fr);
+
+    .resumo {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 6px;
     }
 
-    .indicadores {
-        grid-template-columns: repeat(2, 1fr);
+
+    .resumo-card {
+
+        padding: 7px;
     }
 
-    .rotinas {
-        grid-template-columns: repeat(2, 1fr);
+
+    .resumo-label {
+
+        font-size: 9px;
     }
 
-    .aviso-vencimentos {
-        align-items: flex-start;
-        flex-direction: column;
+
+    .resumo-valor {
+
+        font-size: 14px;
     }
-}
 
-@media (max-width: 480px) {
 
-    .cards,
-    .indicadores,
-    .rotinas {
+    .resumo-subvalor {
+
+        font-size: 8px;
+    }
+
+
+    .menu {
+
         grid-template-columns: 1fr;
     }
 
-    .competencia-info {
+
+    .menu-item {
+
+        min-height: 90px;
+    }
+
+
+    #competencia {
+
+        width: 165px;
+    }
+
+
+    .rodape {
+
         flex-direction: column;
+
         align-items: flex-start;
+    }
+}
+
+
+@media (max-width: 380px) {
+
+    .resumo {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .resumo-card {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 8px;
+    }
+
+
+    .resumo-label {
+
+        margin: 0;
+    }
+
+
+    .resumo-valor {
+
+        text-align: right;
+    }
+
+
+    .resumo-subvalor {
+
+        margin-left: auto;
+
+        text-align: right;
     }
 }
 
 </style>
+
 </head>
 
 <body>
 
-<header class="header">
+<div class="container">
 
-    <div class="header-left">
-        <h1>Controle Financeiro</h1>
-        <p>Gestão de lançamentos e fluxo financeiro</p>
-    </div>
+<div class="card">
 
-    <div class="status">
-        <span class="status-dot"></span>
-        Online
-    </div>
+<!-- =====================================================
+     CABEÇALHO
+===================================================== -->
 
-</header>
+<div class="header">
 
+<div>
 
-<main class="container">
 
-    <!-- COMPETÊNCIA -->
+<h1 class="titulo">
+    Controle Financeiro
+</h1>
 
-    <div class="competencia-box">
+<div class="subtitulo">
+    Gestão de lançamentos e fluxo financeiro
+</div>
 
-        <div class="competencia-info">
 
-            <label for="competencia">
-                Competência
-            </label>
+</div>
 
-            <input
-                type="month"
-                id="competencia"
-            >
+<div
+    id="status"
+    class="status">
 
-            <span
-                id="nomeCompetencia"
-                style="font-size:13px;color:#6b7280;"
-            ></span>
 
-        </div>
+Sistema
 
-        <div class="competencia-acoes">
 
-            <span
-                id="statusCompetencia"
-                class="status-competencia status-aberta"
-            >
-                🟢 Aberta
-            </span>
+</div>
 
-            <button
-                class="btn btn-danger"
-                id="btnFechar"
-                onclick="fecharCompetencia()"
-            >
-                🔒 Fechar competência
-            </button>
+</div>
 
-            <button
-                class="btn btn-secondary"
-                onclick="atualizarTudo()"
-            >
-                ↻ Atualizar
-            </button>
+<!-- =====================================================
+     COMPETÊNCIA
+===================================================== -->
 
-        </div>
+<div class="competencia-box">
 
-    </div>
+<label
+ class="competencia-label"
+ for="competencia">
 
 
-    <!-- ALERTA DE VENCIMENTOS -->
+Competência
 
-    <div
-        id="avisoVencimentos"
-        class="aviso-vencimentos"
-    >
 
-        <div class="aviso-conteudo">
+</label>
 
-            <div class="aviso-icone">
-                🔔
-            </div>
+<div class="competencia-linha">
 
-            <div>
 
-                <div
-                    id="tituloAviso"
-                    class="aviso-titulo"
-                >
-                    Vencimentos hoje
-                </div>
+<input
+    id="competencia"
+    type="month"
+    title="Selecione a competência"
+>
 
-                <div
-                    id="detalhesAviso"
-                    class="aviso-detalhes"
-                >
-                    Existem lançamentos vencendo hoje.
-                </div>
 
-            </div>
+<button
+    type="button"
+    class="btn-atualizar"
+    onclick="fecharCompetencia()">
 
-        </div>
+    🔒 Fechar competência
 
-        <button
-            class="btn btn-aviso"
-            onclick="abrirPagina('BaixasPendentes')"
-        >
-            Ver pendências
-        </button>
+</button>
 
-    </div>
 
+<button
+    type="button"
+    class="btn-atualizar"
+    onclick="carregarResumo()">
 
-    <!-- MENSAGEM -->
+    ↻ Atualizar
 
-    <div id="mensagem" class="mensagem"></div>
+</button>
 
 
-    <!-- CARDS FINANCEIROS -->
+</div>
 
-    <div class="cards">
+</div>
 
-        <div class="card card-inicial">
+<!-- =====================================================
+     RESUMO
+===================================================== -->
 
-            <div class="card-titulo">
-                Saldo inicial
-            </div>
+<div class="secao-titulo">
 
-            <div
-                class="card-valor"
-                id="saldoInicial"
-            >
-                R$ 0,00
-            </div>
+Resumo da Competência
 
-        </div>
+</div>
 
+<div class="resumo">
 
-        <div class="card card-receber">
+<!-- SALDO INICIAL -->
 
-            <div class="card-titulo">
-                A receber
-            </div>
+<div class="resumo-card saldo">
 
-            <div
-                class="card-valor"
-                id="receber"
-            >
-                R$ 0,00
-            </div>
+<div class="resumo-label">
 
-            <div class="card-sub">
-                Saldo a receber:
-                <strong id="saldoAReceber">
-                    R$ 0,00
-                </strong>
-            </div>
 
-        </div>
+SALDO INICIAL
 
 
-        <div class="card card-recebido">
+</div>
 
-            <div class="card-titulo">
-                Recebido
-            </div>
+<div
+    id="saldoInicial"
+    class="resumo-valor">
 
-            <div
-                class="card-valor"
-                id="recebido"
-            >
-                R$ 0,00
-            </div>
 
-        </div>
+R$ 0,00
 
 
-        <div class="card card-pagar">
+</div>
 
-            <div class="card-titulo">
-                A pagar
-            </div>
+</div>
 
-            <div
-                class="card-valor"
-                id="pagar"
-            >
-                R$ 0,00
-            </div>
+<!-- A RECEBER -->
 
-            <div class="card-sub">
-                Saldo a pagar:
-                <strong id="saldoAPagar">
-                    R$ 0,00
-                </strong>
-            </div>
+<div class="resumo-card">
 
-        </div>
+<div class="resumo-label">
 
 
-        <div class="card card-pago">
+A RECEBER
 
-            <div class="card-titulo">
-                Pagos
-            </div>
 
-            <div
-                class="card-valor"
-                id="pago"
-            >
-                R$ 0,00
-            </div>
+</div>
 
-        </div>
+<div
+    id="receber"
+    class="resumo-valor">
 
 
-        <div class="card card-banco">
+R$ 0,00
 
-            <div class="card-titulo">
-                Saldo bancário
-            </div>
 
-            <div
-                class="card-valor"
-                id="saldoBanco"
-            >
-                R$ 0,00
-            </div>
+</div>
 
-        </div>
+<div
+    id="saldoAReceber"
+    class="resumo-subvalor">
 
-    </div>
 
+Saldo a receber: R$ 0,00
 
-    <!-- INDICADORES -->
 
-    <div class="indicadores">
+</div>
 
-        <div class="indicador">
+</div>
 
-            <div class="indicador-info">
-                <span>Lançamentos</span>
-                <strong id="totalLancamentos">—</strong>
-            </div>
+<!-- RECEBIDO -->
 
-            <div class="indicador-numero">
-                📋
-            </div>
+<div class="resumo-card recebido">
 
-        </div>
+<div class="resumo-label">
 
 
-        <div class="indicador">
+RECEBIDO
 
-            <div class="indicador-info">
-                <span>Pendentes</span>
-                <strong id="totalPendentes">—</strong>
-            </div>
 
-            <div class="indicador-numero">
-                ⏳
-            </div>
+</div>
 
-        </div>
+<div
+    id="recebido"
+    class="resumo-valor">
 
 
-        <div class="indicador">
+R$ 0,00
 
-            <div class="indicador-info">
-                <span>Baixados</span>
-                <strong id="totalBaixados">—</strong>
-            </div>
 
-            <div class="indicador-numero">
-                ✓
-            </div>
+</div>
 
-        </div>
+</div>
 
+<!-- A PAGAR -->
 
-        <div class="indicador">
+<div class="resumo-card">
 
-            <div class="indicador-info">
-                <span>Vencidos</span>
-                <strong id="totalVencidos">—</strong>
-            </div>
+<div class="resumo-label">
 
-            <div class="indicador-numero">
-                ⚠
-            </div>
 
-        </div>
+A PAGAR
 
-    </div>
 
+</div>
 
-    <!-- ROTINAS -->
+<div
+    id="pagar"
+    class="resumo-valor">
 
-    <div class="secao-titulo">
 
-        <h2>
-            Rotinas financeiras
-        </h2>
+R$ 0,00
 
-        <span>
-            Acesso rápido
-        </span>
 
-    </div>
+</div>
 
+<div
+    id="saldoAPagar"
+    class="resumo-subvalor">
 
-    <div class="rotinas">
 
+Saldo a pagar: R$ 0,00
 
-        <div
-            class="rotina"
-            onclick="abrirPagina('Lancamentos')"
-        >
 
-            <div class="rotina-icone">
-                📋
-            </div>
+</div>
 
-            <div class="rotina-titulo">
-                Lançamentos
-            </div>
+</div>
 
-            <div class="rotina-desc">
-                Cadastrar, editar e excluir
-            </div>
+<!-- PAGOS -->
 
-        </div>
+<div class="resumo-card pago">
 
+<div class="resumo-label">
 
-        <div
-            class="rotina"
-            onclick="abrirPagina('BaixasPendentes')"
-        >
 
-            <div class="rotina-icone">
-                💰
-            </div>
+PAGOS
 
-            <div class="rotina-titulo">
-                Baixas Pendentes
-            </div>
 
-            <div class="rotina-desc">
-                Receber e pagar lançamentos
-            </div>
+</div>
 
-        </div>
+<div
+    id="pago"
+    class="resumo-valor">
 
 
-        <div
-            class="rotina"
-            onclick="abrirPagina('Relatorio')"
-        >
+R$ 0,00
 
-            <div class="rotina-icone">
-                📊
-            </div>
 
-            <div class="rotina-titulo">
-                Relatório Financeiro
-            </div>
+</div>
 
-            <div class="rotina-desc">
-                Consultar movimentações
-            </div>
+</div>
 
-        </div>
+<!-- SALDO BANCÁRIO -->
 
+<div class="resumo-card saldo">
 
-        <div
-            class="rotina"
-            onclick="abrirPagina('Graficos')"
-        >
+<div class="resumo-label">
 
-            <div class="rotina-icone">
-                📈
-            </div>
 
-            <div class="rotina-titulo">
-                Gráficos
-            </div>
+SALDO BANCÁRIO
 
-            <div class="rotina-desc">
-                Visualizar evolução financeira
-            </div>
 
-        </div>
+</div>
 
+<div
+    id="saldoBanco"
+    class="resumo-valor">
 
-        <div
-            class="rotina"
-            onclick="abrirPagina('Atendimento')"
-        >
 
-            <div class="rotina-icone">
-                👥
-            </div>
+R$ 0,00
 
-            <div class="rotina-titulo">
-                Atendimento
-            </div>
 
-            <div class="rotina-desc">
-                Consultar atendimentos
-            </div>
+</div>
 
-        </div>
+</div>
 
+</div>
 
-        <div
-            class="rotina"
-            onclick="abrirNovoLancamento()"
-        >
+<!-- =====================================================
+     ROTINAS
+===================================================== -->
 
-            <div class="rotina-icone">
-                ➕
-            </div>
+<div class="secao-titulo">
 
-            <div class="rotina-titulo">
-                Novo Lançamento
-            </div>
+Rotinas
 
-            <div class="rotina-desc">
-                Registrar nova movimentação
-            </div>
+</div>
 
-        </div>
+<div class="menu">
 
-    </div>
+<!-- LANÇAMENTOS -->
 
-</main>
+<button
+ type="button"
+ class="menu-item"
+ onclick="abrirPagina('lancamentos')">
 
+<span class="menu-icone">
+    📋
+</span>
+
+Lançamentos
+
+<span class="menu-descricao">
+    Consultar, editar e excluir lançamentos
+</span>
+
+</button>
+
+<!-- BAIXAS PENDENTES -->
+
+<button
+ type="button"
+ class="menu-item"
+ onclick="abrirPagina('pendentes')">
+
+<span class="menu-icone">
+    ⏳
+</span>
+
+Baixas Pendentes
+
+<span class="menu-descricao">
+    Consultar lançamentos pendentes
+</span>
+
+</button>
+
+<!-- RELATÓRIO -->
+
+<button
+ type="button"
+ class="menu-item"
+ onclick="abrirPagina('relatorio')">
+
+<span class="menu-icone">
+    📊
+</span>
+
+Relatório Financeiro
+
+<span class="menu-descricao">
+    Visualizar relatório da competência
+</span>
+
+</button>
+
+<!-- GRÁFICOS -->
+
+<button
+ type="button"
+ class="menu-item"
+ onclick="abrirPagina('graficos')">
+
+<span class="menu-icone">
+    📈
+</span>
+
+Gráficos
+
+<span class="menu-descricao">
+    Análise visual dos dados financeiros
+</span>
+
+</button>
+
+<!-- ATENDIMENTO -->
+
+<button
+ type="button"
+ class="menu-item"
+ onclick="abrirPagina('atendimento')">
+
+<span class="menu-icone">
+    👤
+</span>
+
+Atendimento
+
+<span class="menu-descricao">
+    Pesquisa e registro de atendimento
+</span>
+
+</button>
+
+<!-- NOVO LANÇAMENTO -->
+
+<button
+ type="button"
+ class="menu-item novo"
+ onclick="abrirNovoLancamento()">
+
+<span class="menu-icone">
+    ➕
+</span>
+
+Novo Lançamento
+
+<span class="menu-descricao">
+    Cadastrar novo lançamento
+</span>
+
+</button>
+
+</div>
+
+<!-- =====================================================
+     MENSAGEM
+===================================================== -->
+
+<div
+    id="mensagem"
+    class="mensagem">
+</div>
+
+<!-- =====================================================
+     RODAPÉ
+===================================================== -->
+
+<div class="rodape">
+
+<span>
+    Controle Financeiro
+</span>
+
+<span>
+    Joel Rodrigues.
+</span>
+
+</div>
+
+</div>
+
+</div>
 
 <script>
 
-/* ==========================================================
+/* =========================================================
    CONFIGURAÇÃO
-========================================================== */
+========================================================= */
 
 const URL_API =
-'https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec';
+"https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec";
 
 
-/* ==========================================================
-   API
-========================================================== */
+/* =========================================================
+   ELEMENTOS
+========================================================= */
 
-async function chamarAPI(action, parametros = {}) {
+const statusEl =
+    document.getElementById("status");
 
-    try {
 
-        const params = new URLSearchParams();
+const mensagemEl =
+    document.getElementById("mensagem");
 
-        params.append('action', action);
 
-        Object.keys(parametros).forEach(chave => {
+const competenciaEl =
+    document.getElementById("competencia");
 
-            const valor = parametros[chave];
+
+/* =========================================================
+   FECHAR COMPETÊNCIA
+========================================================= */
+
+function fecharCompetencia() {
+
+    const competencia =
+        document.getElementById(
+            "competencia"
+        )?.value;
+
+
+    if (!competencia) {
+
+        alert(
+            "Selecione uma competência antes de fechar."
+        );
+
+        return;
+    }
+
+
+    const confirmar =
+        confirm(
+            "Deseja fechar a competência " +
+            competencia +
+            "?\n\n" +
+            "O saldo final será gravado como saldo inicial da próxima competência."
+        );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    alterarStatus(
+        "Fechando competência..."
+    );
+
+
+    chamarAPI(
+        "fecharMes",
+        {
+            competencia:
+                competencia
+        }
+    )
+    .then(
+        function(resultado) {
 
             if (
-                valor !== undefined &&
-                valor !== null &&
-                valor !== ''
+                !resultado ||
+                !resultado.sucesso
             ) {
 
-                params.append(chave, valor);
-
+                throw new Error(
+                    resultado?.mensagem ||
+                    "Não foi possível fechar a competência."
+                );
             }
 
-        });
 
-        const resposta = await fetch(
-            URL_API + '?' + params.toString(),
-            {
-                method: 'GET',
-                cache: 'no-store'
-            }
-        );
+            alert(
+                "Competência fechada com sucesso!\n\n" +
 
-        if (!resposta.ok) {
-            throw new Error(
-                'Erro HTTP ' + resposta.status
+                "Competência: " +
+                resultado.competenciaAtual +
+
+                "\n" +
+
+                "Saldo final: " +
+                resultado.saldoFinalFormatado +
+
+                "\n\n" +
+
+                "Saldo inicial gravado para: " +
+                resultado.proximaCompetencia
             );
+
+
+            alterarStatus(
+                "Sistema online"
+            );
+
+
+            carregarResumo();
+
         }
+    )
+    .catch(
+        function(erro) {
 
-        const texto = await resposta.text();
+            console.error(erro);
 
-        try {
 
-            return JSON.parse(texto);
-
-        } catch (e) {
-
-            console.error(
-                'Resposta não JSON:',
-                texto
+            alterarStatus(
+                "Sistema online"
             );
 
-            throw new Error(
-                'Resposta inválida da API.'
+
+            alert(
+                "Erro ao fechar a competência:\n\n" +
+                erro.message
             );
+
         }
-
-    } catch (erro) {
-
-        console.error(
-            'Erro API:',
-            action,
-            erro
-        );
-
-        throw erro;
-    }
-}
-
-
-/* ==========================================================
-   DATA DE HOJE
-========================================================== */
-
-function dataHoje() {
-
-    const agora = new Date();
-
-    const ano = agora.getFullYear();
-
-    const mes =
-        String(agora.getMonth() + 1)
-        .padStart(2, '0');
-
-    const dia =
-        String(agora.getDate())
-        .padStart(2, '0');
-
-    return `${ano}-${mes}-${dia}`;
-}
-
-
-/* ==========================================================
-   NORMALIZAÇÃO DE DATA
-
-   Importante:
-   NÃO utilizar simplesmente new Date("2026-09-10"),
-   pois isso pode causar diferença de fuso horário.
-========================================================== */
-
-function normalizarDataLancamento(valor) {
-
-    if (
-        valor === null ||
-        valor === undefined ||
-        valor === ''
-    ) {
-        return '';
-    }
-
-
-    /* Date real */
-
-    if (valor instanceof Date) {
-
-        if (isNaN(valor.getTime())) {
-            return '';
-        }
-
-        return [
-            valor.getFullYear(),
-            String(valor.getMonth() + 1).padStart(2, '0'),
-            String(valor.getDate()).padStart(2, '0')
-        ].join('-');
-    }
-
-
-    let texto = String(valor).trim();
-
-    if (!texto) {
-        return '';
-    }
-
-
-    /*
-       ISO:
-       2026-09-10
-       2026-09-10T00:00:00
-       2026-09-10T03:00:00.000Z
-    */
-
-    let match =
-        texto.match(/^(\d{4})-(\d{2})-(\d{2})/);
-
-    if (match) {
-
-        return `${match[1]}-${match[2]}-${match[3]}`;
-    }
-
-
-    /*
-       DD/MM/YYYY
-    */
-
-    match =
-        texto.match(/^(\d{2})\/(\d{2})\/(\d{4})/);
-
-    if (match) {
-
-        return `${match[3]}-${match[2]}-${match[1]}`;
-    }
-
-
-    /*
-       Google Apps Script pode retornar algo como:
-
-       Wed Sep 10 2026 00:00:00 GMT-0300
-    */
-
-    match =
-        texto.match(
-            /^[A-Za-z]{3}\s+([A-Za-z]{3})\s+(\d{1,2})\s+(\d{4})/
-        );
-
-    if (match) {
-
-        const meses = {
-            Jan: '01',
-            Feb: '02',
-            Mar: '03',
-            Apr: '04',
-            May: '05',
-            Jun: '06',
-            Jul: '07',
-            Aug: '08',
-            Sep: '09',
-            Oct: '10',
-            Nov: '11',
-            Dec: '12'
-        };
-
-        if (meses[match[1]]) {
-
-            return `${match[3]}-${meses[match[1]]}-${String(match[2]).padStart(2,'0')}`;
-        }
-    }
-
-
-    /*
-       Última tentativa
-    */
-
-    const data = new Date(texto);
-
-    if (!isNaN(data.getTime())) {
-
-        return [
-            data.getFullYear(),
-            String(data.getMonth() + 1).padStart(2, '0'),
-            String(data.getDate()).padStart(2, '0')
-        ].join('-');
-    }
-
-    return '';
-}
-
-
-/* ==========================================================
-   NORMALIZA TEXTO
-========================================================== */
-
-function textoNormalizado(valor) {
-
-    return String(valor || '')
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .trim()
-        .toLowerCase();
-}
-
-
-/* ==========================================================
-   IDENTIFICA SE ESTÁ BAIXADO
-========================================================== */
-
-function lancamentoBaixado(item) {
-
-    const status =
-        textoNormalizado(
-            item.status ??
-            item.situacao ??
-            item.estado ??
-            ''
-        );
-
-    const baixado =
-        item.baixado;
-
-    if (
-        baixado === true ||
-        baixado === 1 ||
-        String(baixado).toLowerCase() === 'true' ||
-        String(baixado) === '1'
-    ) {
-        return true;
-    }
-
-    if (
-        status.includes('baixado') ||
-        status.includes('pago') ||
-        status.includes('recebido')
-    ) {
-        return true;
-    }
-
-    /*
-       Se existir data de baixa,
-       também consideramos baixado.
-    */
-
-    const dataBaixa =
-        item.dataBaixa ??
-        item.data_baixa ??
-        item['Data da baixa'];
-
-    if (
-        dataBaixa !== undefined &&
-        dataBaixa !== null &&
-        String(dataBaixa).trim() !== ''
-    ) {
-        return true;
-    }
-
-    return false;
-}
-
-
-/* ==========================================================
-   IDENTIFICA TIPO
-========================================================== */
-
-function tipoLancamento(item) {
-
-    return textoNormalizado(
-        item.tipo ??
-        item.natureza ??
-        item.tipoLancamento ??
-        item.tipo_lancamento ??
-        ''
     );
 }
 
 
-function ehReceber(item) {
-
-    const tipo = tipoLancamento(item);
-
-    return (
-        tipo.includes('receber') ||
-        tipo.includes('receb')
-    );
-}
-
-
-function ehPagar(item) {
-
-    const tipo = tipoLancamento(item);
-
-    return (
-        tipo.includes('pagar') ||
-        tipo.includes('pag')
-    );
-}
-
-
-/* ==========================================================
-   EXTRAÇÃO DOS LANÇAMENTOS
-========================================================== */
-
-function extrairLancamentos(resposta) {
-
-    if (!resposta) {
-        return [];
-    }
-
-    if (Array.isArray(resposta)) {
-        return resposta;
-    }
-
-    return (
-        resposta.lancamentos ||
-        resposta.dados ||
-        resposta.registros ||
-        resposta.items ||
-        resposta.resultado ||
-        []
-    );
-}
-
-
-/* ==========================================================
-   ID DO LANÇAMENTO
-========================================================== */
-
-function idLancamento(item) {
-
-    return String(
-        item.id ??
-        item.ID ??
-        item.codigo ??
-        item.descricao + '|' +
-        item.valor + '|' +
-        item.vencimento
-    );
-}
-
-
-/* ==========================================================
-   MESCLAR LANÇAMENTOS
-========================================================== */
-
-function mesclarLancamentos(lista1, lista2) {
-
-    const mapa = new Map();
-
-    [...lista1, ...lista2].forEach(item => {
-
-        if (!item) return;
-
-        mapa.set(
-            idLancamento(item),
-            item
-        );
-
-    });
-
-    return Array.from(mapa.values());
-}
-
-
-/* ==========================================================
-   CARREGAR RESUMO
-========================================================== */
-
-async function carregarResumo() {
-
-    const competencia =
-        document.getElementById('competencia').value;
-
-    if (!competencia) {
-        return;
-    }
-
-    try {
-
-        const resposta =
-            await chamarAPI(
-                'obterResumo',
-                {
-                    competencia: competencia
-                }
-            );
-
-
-        console.log(
-            'Resumo:',
-            resposta
-        );
-
-
-        const dados =
-            resposta.resumo ||
-            resposta.dados ||
-            resposta;
-
-
-        const saldoInicial =
-            Number(
-                dados.saldoInicial || 0
-            );
-
-        const receber =
-            Number(
-                dados.receber || 0
-            );
-
-        const recebido =
-            Number(
-                dados.recebido || 0
-            );
-
-        const pagar =
-            Number(
-                dados.pagar || 0
-            );
-
-        const pago =
-            Number(
-                dados.pago || 0
-            );
-
-        const saldoBanco =
-            Number(
-                dados.saldoBanco ??
-                (
-                    saldoInicial +
-                    recebido -
-                    pago
-                )
-            );
-
-
-        document.getElementById(
-            'saldoInicial'
-        ).textContent = moeda(
-            saldoInicial
-        );
-
-
-        document.getElementById(
-            'receber'
-        ).textContent = moeda(
-            receber
-        );
-
-
-        document.getElementById(
-            'recebido'
-        ).textContent = moeda(
-            recebido
-        );
-
-
-        document.getElementById(
-            'saldoAReceber'
-        ).textContent = moeda(
-            receber - recebido
-        );
-
-
-        document.getElementById(
-            'pagar'
-        ).textContent = moeda(
-            pagar
-        );
-
-
-        document.getElementById(
-            'pago'
-        ).textContent = moeda(
-            pago
-        );
-
-
-        document.getElementById(
-            'saldoAPagar'
-        ).textContent = moeda(
-            Math.max(
-                0,
-                pagar - pago
-            )
-        );
-
-
-        document.getElementById(
-            'saldoBanco'
-        ).textContent = moeda(
-            saldoBanco
-        );
-
-
-        atualizarNomeCompetencia();
-
-        await verificarStatusCompetencia();
-
-    } catch (erro) {
-
-        console.error(
-            'Erro ao carregar resumo:',
-            erro
-        );
-
-        mostrarMensagem(
-            'Não foi possível carregar o resumo financeiro.',
-            'erro'
-        );
-    }
-}
-
-
-/* ==========================================================
-   VERIFICAR COMPETÊNCIA
-========================================================== */
-
-async function verificarStatusCompetencia() {
-
-    const competencia =
-        document.getElementById('competencia').value;
-
-    if (!competencia) return;
-
-    try {
-
-        const resposta =
-            await chamarAPI(
-                'competenciaFechada',
-                {
-                    competencia: competencia
-                }
-            );
-
-
-        const fechada =
-            resposta.fechada === true ||
-            resposta.fechada === 'true' ||
-            resposta.status === 'fechada';
-
-
-        const status =
-            document.getElementById(
-                'statusCompetencia'
-            );
-
-        const botao =
-            document.getElementById(
-                'btnFechar'
-            );
-
-
-        if (fechada) {
-
-            status.textContent =
-                '🔴 Fechada';
-
-            status.className =
-                'status-competencia status-fechada';
-
-            botao.disabled = true;
-            botao.style.opacity = '.5';
-            botao.style.cursor = 'not-allowed';
-
-        } else {
-
-            status.textContent =
-                '🟢 Aberta';
-
-            status.className =
-                'status-competencia status-aberta';
-
-            botao.disabled = false;
-            botao.style.opacity = '1';
-            botao.style.cursor = 'pointer';
-        }
-
-    } catch (erro) {
-
-        console.warn(
-            'Não foi possível verificar fechamento:',
-            erro
-        );
-    }
-}
-
-
-/* ==========================================================
-   VERIFICAR VENCIMENTOS DE HOJE
-========================================================== */
-
-async function verificarVencimentosHoje() {
-
-    const hoje = dataHoje();
-
-    const competencia =
-        document.getElementById(
-            'competencia'
-        ).value;
-
-
-    console.log(
-        'Verificando vencimentos:',
-        hoje,
-        'Competência:',
-        competencia
-    );
-
-
-    let lancamentosCompetencia = [];
-    let lancamentosTodos = [];
-
-
-    try {
-
-        /*
-           PRIMEIRA BUSCA:
-           competência selecionada
-        */
-
-        const respostaCompetencia =
-            await chamarAPI(
-                'listarLancamentos',
-                {
-                    competencia:
-                        competencia
-                }
-            );
-
-        lancamentosCompetencia =
-            extrairLancamentos(
-                respostaCompetencia
-            );
-
-
-        /*
-           SEGUNDA BUSCA:
-           sem filtro de competência.
-
-           Isso é importante porque um lançamento
-           pode ter competência diferente da data
-           de vencimento.
-        */
-
-        try {
-
-            const respostaTodos =
-                await chamarAPI(
-                    'listarLancamentos',
-                    {}
-                );
-
-            lancamentosTodos =
-                extrairLancamentos(
-                    respostaTodos
-                );
-
-        } catch (erroTodos) {
-
-            console.warn(
-                'Não foi possível buscar todos os lançamentos:',
-                erroTodos
-            );
-        }
-
-
-        /*
-           Junta as duas listas e remove duplicidades.
-        */
-
-        const lancamentos =
-            mesclarLancamentos(
-                lancamentosCompetencia,
-                lancamentosTodos
-            );
-
-
-        console.log(
-            'Lançamentos encontrados:',
-            lancamentos
-        );
-
-
-        atualizarIndicadores(
-            lancamentos,
-            hoje
-        );
-
-
-        /*
-           Localiza os vencimentos de hoje.
-        */
-
-        const vencimentosHoje =
-            lancamentos.filter(item => {
-
-                const vencimento =
-                    normalizarDataLancamento(
-                        item.vencimento ??
-                        item.dataVencimento ??
-                        item.data_vencimento ??
-                        item.dtVencimento ??
-                        item['Vencimento']
-                    );
-
-
-                const baixado =
-                    lancamentoBaixado(item);
-
-
-                console.log(
-                    'Verificação:',
-                    {
-                        id: idLancamento(item),
-                        tipo: tipoLancamento(item),
-                        vencimento: vencimento,
-                        hoje: hoje,
-                        baixado: baixado
-                    }
-                );
-
-
-                return (
-                    vencimento === hoje &&
-                    !baixado &&
-                    (
-                        ehReceber(item) ||
-                        ehPagar(item)
-                    )
-                );
-
-            });
-
-
-        console.log(
-            'Vencimentos de hoje:',
-            vencimentosHoje
-        );
-
-
-        mostrarAvisoVencimentos(
-            vencimentosHoje
-        );
-
-
-    } catch (erro) {
-
-        console.error(
-            'Erro ao verificar vencimentos:',
-            erro
-        );
-
-        atualizarIndicadores(
-            [],
-            hoje
-        );
-
-        esconderAvisoVencimentos();
-    }
-}
-
-
-/* ==========================================================
-   INDICADORES
-========================================================== */
-
-function atualizarIndicadores(
-    lancamentos,
-    hoje
-) {
-
-    const total =
-        lancamentos.length;
-
-
-    const baixados =
-        lancamentos.filter(
-            item =>
-                lancamentoBaixado(item)
-        ).length;
-
-
-    const pendentes =
-        lancamentos.filter(
-            item =>
-                !lancamentoBaixado(item)
-        ).length;
-
-
-    const vencidos =
-        lancamentos.filter(item => {
-
-            if (lancamentoBaixado(item)) {
-                return false;
-            }
-
-            const vencimento =
-                normalizarDataLancamento(
-                    item.vencimento ??
-                    item.dataVencimento ??
-                    item.data_vencimento ??
-                    item.dtVencimento ??
-                    item['Vencimento']
-                );
-
-            return (
-                vencimento &&
-                vencimento < hoje
-            );
-
-        }).length;
-
-
-    document.getElementById(
-        'totalLancamentos'
-    ).textContent = total;
-
-
-    document.getElementById(
-        'totalPendentes'
-    ).textContent = pendentes;
-
-
-    document.getElementById(
-        'totalBaixados'
-    ).textContent = baixados;
-
-
-    document.getElementById(
-        'totalVencidos'
-    ).textContent = vencidos;
-}
-
-
-/* ==========================================================
-   MOSTRAR AVISO
-========================================================== */
-
-function mostrarAvisoVencimentos(
-    lista
-) {
-
-    const aviso =
-        document.getElementById(
-            'avisoVencimentos'
-        );
-
-    if (!lista || lista.length === 0) {
-
-        aviso.classList.remove(
-            'visivel'
-        );
-
-        return;
-    }
-
-
-    const receber =
-        lista.filter(
-            item => ehReceber(item)
-        ).length;
-
-
-    const pagar =
-        lista.filter(
-            item => ehPagar(item)
-        ).length;
-
-
-    const total =
-        lista.length;
-
-
-    let partes = [];
-
-
-    if (receber > 0) {
-
-        partes.push(
-            receber +
-            (
-                receber === 1
-                    ? ' conta a receber'
-                    : ' contas a receber'
-            )
-        );
-    }
-
-
-    if (pagar > 0) {
-
-        partes.push(
-            pagar +
-            (
-                pagar === 1
-                    ? ' conta a pagar'
-                    : ' contas a pagar'
-            )
-        );
-    }
-
-
-    document.getElementById(
-        'tituloAviso'
-    ).textContent =
-        `🔔 ${total} ${
-            total === 1
-                ? 'vencimento hoje'
-                : 'vencimentos hoje'
-        }`;
-
-
-    document.getElementById(
-        'detalhesAviso'
-    ).textContent =
-        partes.join(' • ');
-
-
-    aviso.classList.add(
-        'visivel'
-    );
-
-
-    /*
-       Alerta somente uma vez por dia,
-       sem impedir que o aviso visual
-       continue aparecendo no dashboard.
-    */
-
-    const chave =
-        'alertaVencimentos_' +
-        dataHoje();
-
-
-    if (
-        sessionStorage.getItem(chave)
-        !== '1'
-    ) {
-
-        let mensagem =
-            `${total} ${
-                total === 1
-                    ? 'lançamento vence'
-                    : 'lançamentos vencem'
-            } hoje.`;
-
-        if (receber > 0) {
-
-            mensagem +=
-                ` A receber: ${receber}.`;
-        }
-
-        if (pagar > 0) {
-
-            mensagem +=
-                ` A pagar: ${pagar}.`;
-        }
-
-        alert(mensagem);
-
-        sessionStorage.setItem(
-            chave,
-            '1'
-        );
-    }
-}
-
-
-/* ==========================================================
-   ESCONDER AVISO
-========================================================== */
-
-function esconderAvisoVencimentos() {
-
-    const aviso =
-        document.getElementById(
-            'avisoVencimentos'
-        );
-
-    aviso.classList.remove(
-        'visivel'
-    );
-}
-
-
-/* ==========================================================
-   ATUALIZAR TUDO
-========================================================== */
-
-async function atualizarTudo() {
-
-    mostrarMensagem(
-        'Atualizando informações...',
-        'info'
-    );
-
-
-    await carregarResumo();
-
-    await verificarVencimentosHoje();
-
-
-    mostrarMensagem(
-        'Informações atualizadas.',
-        'sucesso'
-    );
-
-
-    setTimeout(
-        () => esconderMensagem(),
-        2500
-    );
-}
-
-
-/* ==========================================================
-   FECHAR COMPETÊNCIA
-========================================================== */
-
-async function fecharCompetencia() {
-
-    const competencia =
-        document.getElementById(
-            'competencia'
-        ).value;
-
-    if (!competencia) {
-
-        mostrarMensagem(
-            'Selecione uma competência.',
-            'erro'
-        );
-
-        return;
-    }
-
-
-    const confirmacao =
-        confirm(
-            `Deseja realmente fechar a competência ${competencia}?`
-        );
-
-
-    if (!confirmacao) {
-        return;
-    }
-
-
-    try {
-
-        mostrarMensagem(
-            'Fechando competência...',
-            'info'
-        );
-
-
-        const resposta =
-            await chamarAPI(
-                'fecharMes',
-                {
-                    competencia:
-                        competencia
-                }
-            );
-
-
-        if (
-            resposta.sucesso === false
-        ) {
-
-            throw new Error(
-                resposta.mensagem ||
-                'Não foi possível fechar a competência.'
-            );
-        }
-
-
-        mostrarMensagem(
-            resposta.mensagem ||
-            'Competência fechada com sucesso.',
-            'sucesso'
-        );
-
-
-        await verificarStatusCompetencia();
-
-
-    } catch (erro) {
-
-        console.error(
-            erro
-        );
-
-        mostrarMensagem(
-            erro.message ||
-            'Erro ao fechar competência.',
-            'erro'
-        );
-    }
-}
-
-
-/* ==========================================================
-   ABRIR PÁGINA
-========================================================== */
-
-function abrirPagina(
-    pagina
-) {
-
-    window.location.href =
-        '?page=' + pagina;
-}
-
-
-/* ==========================================================
-   NOVO LANÇAMENTO
-========================================================== */
-
-function abrirNovoLancamento() {
-
-    window.location.href =
-        '?page=Lancamentos&novo=1';
-}
-
-
-/* ==========================================================
+/* =========================================================
    COMPETÊNCIA ATUAL
-========================================================== */
+========================================================= */
 
 function competenciaAtual() {
 
     const agora =
         new Date();
 
-    return (
-        agora.getFullYear() +
-        '-' +
+
+    const ano =
+        agora.getFullYear();
+
+
+    const mes =
         String(
             agora.getMonth() + 1
-        ).padStart(2, '0')
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+        ano +
+        "-" +
+        mes
     );
 }
 
 
-/* ==========================================================
-   NOME DA COMPETÊNCIA
-========================================================== */
-
-function atualizarNomeCompetencia() {
-
-    const valor =
-        document.getElementById(
-            'competencia'
-        ).value;
-
-    if (!valor) {
-        return;
-    }
-
-    const partes =
-        valor.split('-');
-
-    const ano =
-        Number(partes[0]);
-
-    const mes =
-        Number(partes[1]);
+competenciaEl.value =
+    competenciaAtual();
 
 
-    const meses = [
-        'janeiro',
-        'fevereiro',
-        'março',
-        'abril',
-        'maio',
-        'junho',
-        'julho',
-        'agosto',
-        'setembro',
-        'outubro',
-        'novembro',
-        'dezembro'
-    ];
-
-
-    document.getElementById(
-        'nomeCompetencia'
-    ).textContent =
-        `${meses[mes - 1]} de ${ano}`;
-}
-
-
-/* ==========================================================
+/* =========================================================
    MOEDA
-========================================================== */
+========================================================= */
 
 function moeda(valor) {
 
-    const numero =
-        Number(valor) || 0;
+    let numero =
+        Number(valor);
+
+
+    if (
+        isNaN(numero)
+    ) {
+
+        numero = 0;
+    }
+
 
     return numero.toLocaleString(
-        'pt-BR',
+        "pt-BR",
         {
-            style: 'currency',
-            currency: 'BRL'
+            style: "currency",
+            currency: "BRL"
         }
     );
 }
 
 
-/* ==========================================================
-   MENSAGENS
-========================================================== */
+/* =========================================================
+   STATUS
+========================================================= */
+
+function alterarStatus(
+    texto
+) {
+
+    statusEl.textContent =
+        texto;
+
+
+    if (
+        texto === "Sistema online"
+    ) {
+
+        statusEl.className =
+            "status online";
+
+    } else if (
+        texto === "API indisponível"
+    ) {
+
+        statusEl.className =
+            "status erro";
+
+    } else {
+
+        statusEl.className =
+            "status";
+    }
+}
+
+
+/* =========================================================
+   MENSAGEM
+========================================================= */
 
 function mostrarMensagem(
     texto,
-    tipo = 'info'
+    tipo = ""
 ) {
 
-    const elemento =
-        document.getElementById(
-            'mensagem'
+    mensagemEl.textContent =
+        texto || "";
+
+
+    mensagemEl.className =
+        "mensagem";
+
+
+    if (tipo) {
+
+        mensagemEl.classList.add(
+            tipo
         );
+    }
 
-    elemento.textContent =
-        texto;
 
-    elemento.className =
-        'mensagem ' + tipo;
+    mensagemEl.style.display =
+        texto
+            ? "block"
+            : "none";
 }
 
 
-function esconderMensagem() {
+/* =========================================================
+   VALIDAR COMPETÊNCIA
+========================================================= */
 
-    const elemento =
-        document.getElementById(
-            'mensagem'
+function validarCompetencia(
+    competencia
+) {
+
+    if (
+        !/^\d{4}-\d{2}$/.test(
+            competencia
+        )
+    ) {
+
+        throw new Error(
+            "Selecione uma competência válida."
+        );
+    }
+
+
+    const partes =
+        competencia.split("-");
+
+
+    const ano =
+        Number(
+            partes[0]
         );
 
-    elemento.className =
-        'mensagem';
 
-    elemento.textContent =
-        '';
+    const mes =
+        Number(
+            partes[1]
+        );
+
+
+    if (
+        ano < 1900 ||
+        ano > 2100 ||
+        mes < 1 ||
+        mes > 12
+    ) {
+
+        throw new Error(
+            "Competência inválida."
+        );
+    }
 }
 
 
-/* ==========================================================
-   INICIALIZAÇÃO
-========================================================== */
+/* =========================================================
+   CHAMADA DA API
+========================================================= */
 
-document.addEventListener(
-    'DOMContentLoaded',
-    async function() {
+async function chamarAPI(
+    action,
+    parametros = {}
+) {
 
-        const campo =
-            document.getElementById(
-                'competencia'
+    const url =
+        new URL(
+            URL_API
+        );
+
+
+    url.searchParams.set(
+        "action",
+        action
+    );
+
+
+    Object.keys(
+        parametros
+    )
+    .forEach(
+        function(chave) {
+
+            const valor =
+                parametros[chave];
+
+
+            if (
+                valor !== undefined &&
+                valor !== null
+            ) {
+
+                url.searchParams.set(
+                    chave,
+                    String(valor)
+                );
+            }
+
+        }
+    );
+
+
+    console.log(
+        "Chamando API:",
+        url.href
+    );
+
+
+    let resposta;
+
+
+    try {
+
+        resposta =
+            await fetch(
+                url.href,
+                {
+                    method: "GET",
+                    cache: "no-store",
+                    redirect: "follow"
+                }
+            );
+
+    } catch (erro) {
+
+        console.error(
+            "Falha de conexão:",
+            erro
+        );
+
+
+        throw new Error(
+            "Não foi possível conectar ao Google Apps Script. " +
+            "Verifique se a URL /exec está publicada e acessível."
+        );
+    }
+
+
+    if (
+        !resposta.ok
+    ) {
+
+        throw new Error(
+            "Google Apps Script retornou HTTP " +
+            resposta.status +
+            "."
+        );
+    }
+
+
+    const texto =
+        await resposta.text();
+
+
+    console.log(
+        "Resposta da API:",
+        texto
+    );
+
+
+    if (!texto) {
+
+        throw new Error(
+            "A API retornou uma resposta vazia."
+        );
+    }
+
+
+    let dados;
+
+
+    try {
+
+        dados =
+            JSON.parse(
+                texto
+            );
+
+    } catch (erro) {
+
+        console.error(
+            "Resposta não é JSON:",
+            texto
+        );
+
+
+        if (
+            texto.includes(
+                "<!DOCTYPE html"
+            ) ||
+            texto.includes(
+                "<html"
+            )
+        ) {
+
+            throw new Error(
+                "O Apps Script retornou uma página HTML em vez de JSON. " +
+                "Verifique a implantação como aplicativo da Web (/exec)."
+            );
+        }
+
+
+        throw new Error(
+            "A API retornou dados inválidos."
+        );
+    }
+
+
+    if (
+        dados.sucesso === false
+    ) {
+
+        throw new Error(
+            dados.erro ||
+            dados.mensagem ||
+            "Erro retornado pelo Apps Script."
+        );
+    }
+
+
+    return dados;
+}
+
+
+/* =========================================================
+   CARREGAR RESUMO
+========================================================= */
+
+async function carregarResumo() {
+
+    const competencia =
+        competenciaEl.value;
+
+
+    try {
+
+        validarCompetencia(
+            competencia
+        );
+
+    } catch (erro) {
+
+        mostrarMensagem(
+            erro.message,
+            "erro"
+        );
+
+        return;
+    }
+
+
+    const cards =
+        document.querySelectorAll(
+            ".resumo-valor"
+        );
+
+
+    cards.forEach(
+        function(card) {
+
+            card.style.opacity =
+                "0.45";
+
+        }
+    );
+
+
+    alterarStatus(
+        "Atualizando..."
+    );
+
+
+    try {
+
+        const resposta =
+            await chamarAPI(
+                "obterResumo",
+                {
+                    competencia:
+                        competencia
+                }
+            );
+
+
+        /* =================================================
+           SALDO INICIAL
+        ================================================= */
+
+        const saldoInicial =
+            Number(
+                resposta.saldoInicial ??
+                resposta.saldo_inicial ??
+                0
+            );
+
+
+        /* =================================================
+           A RECEBER
+        ================================================= */
+
+        const receber =
+            Number(
+                resposta.receber ??
+                resposta.aReceber ??
+                resposta.a_receber ??
+                0
+            );
+
+
+        /* =================================================
+           RECEBIDO
+        ================================================= */
+
+        const recebido =
+            Number(
+                resposta.recebido ??
+                resposta.recebidos ??
+                resposta.totalRecebido ??
+                resposta.total_recebido ??
+                0
+            );
+
+
+        /* =================================================
+           A PAGAR
+        ================================================= */
+
+        const pagar =
+            Number(
+                resposta.pagar ??
+                resposta.aPagar ??
+                resposta.a_pagar ??
+                0
+            );
+
+
+        /* =================================================
+           PAGOS
+        ================================================= */
+
+        const pago =
+            Number(
+                resposta.pago ??
+                resposta.pagos ??
+                resposta.totalPago ??
+                resposta.total_pago ??
+                0
+            );
+
+
+        /* =================================================
+           SALDO BANCÁRIO
+        ================================================= */
+
+        const saldoBanco =
+            Number(
+                resposta.saldoBanco ??
+                resposta.saldo_banco ??
+                resposta.saldo ??
+                0
+            );
+
+
+        /* =================================================
+           CÁLCULO DOS SALDOS
+        ================================================= */
+
+        const saldoAReceber =
+            receber -
+            recebido;
+
+
+        const saldoAPagar =
+            pagar -
+            pago;
+
+
+        /* =================================================
+           PREENCHER SALDO INICIAL
+        ================================================= */
+
+        document.getElementById(
+            "saldoInicial"
+        ).textContent =
+            moeda(
+                saldoInicial
+            );
+
+
+        /* =================================================
+           PREENCHER A RECEBER
+        ================================================= */
+
+        document.getElementById(
+            "receber"
+        ).textContent =
+            moeda(
+                receber
+            );
+
+
+        /* =================================================
+           PREENCHER RECEBIDO
+        ================================================= */
+
+        document.getElementById(
+            "recebido"
+        ).textContent =
+            moeda(
+                recebido
+            );
+
+
+        /* =================================================
+           PREENCHER SALDO A RECEBER
+        ================================================= */
+
+        document.getElementById(
+            "saldoAReceber"
+        ).textContent =
+            "Saldo a receber: " +
+            moeda(
+                saldoAReceber
+            );
+
+
+        /* =================================================
+           PREENCHER A PAGAR
+        ================================================= */
+
+        document.getElementById(
+            "pagar"
+        ).textContent =
+            moeda(
+                pagar
+            );
+
+
+        /* =================================================
+           PREENCHER PAGOS
+        ================================================= */
+
+        document.getElementById(
+            "pago"
+        ).textContent =
+            moeda(
+                pago
+            );
+
+
+        /* =================================================
+           PREENCHER SALDO A PAGAR
+        ================================================= */
+
+        document.getElementById(
+            "saldoAPagar"
+        ).textContent =
+            "Saldo a pagar: " +
+            moeda(
+                saldoAPagar
+            );
+
+
+        /* =================================================
+           PREENCHER SALDO BANCÁRIO
+        ================================================= */
+
+        document.getElementById(
+            "saldoBanco"
+        ).textContent =
+            moeda(
+                saldoBanco
+            );
+
+
+        /* =================================================
+           STATUS
+        ================================================= */
+
+        alterarStatus(
+            "Sistema online"
+        );
+
+
+        mostrarMensagem(
+            "",
+            ""
+        );
+
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar resumo:",
+            erro
+        );
+
+
+        alterarStatus(
+            "API indisponível"
+        );
+
+
+        mostrarMensagem(
+            erro.message ||
+            "Não foi possível atualizar o resumo.",
+            "erro"
+        );
+
+
+    } finally {
+
+        cards.forEach(
+            function(card) {
+
+                card.style.opacity =
+                    "1";
+
+            }
+        );
+    }
+}
+
+
+/* =========================================================
+   NORMALIZAR DATA
+========================================================= */
+
+function normalizarDataLancamento(
+    valor
+) {
+
+    if (
+        valor === null ||
+        valor === undefined ||
+        valor === ""
+    ) {
+
+        return "";
+    }
+
+
+    /*
+     * AAAA-MM-DD
+     */
+
+    if (
+        typeof valor === "string" &&
+        /^\d{4}-\d{2}-\d{2}$/.test(
+            valor
+        )
+    ) {
+
+        return valor;
+    }
+
+
+    /*
+     * AAAA-MM-DDTHH:mm:ss
+     */
+
+    if (
+        typeof valor === "string" &&
+        /^\d{4}-\d{2}-\d{2}T/.test(
+            valor
+        )
+    ) {
+
+        return valor.substring(
+            0,
+            10
+        );
+    }
+
+
+    /*
+     * DD/MM/AAAA
+     */
+
+    if (
+        typeof valor === "string" &&
+        /^\d{2}\/\d{2}\/\d{4}$/.test(
+            valor
+        )
+    ) {
+
+        const partes =
+            valor.split("/");
+
+
+        return (
+            partes[2] +
+            "-" +
+            partes[1] +
+            "-" +
+            partes[0]
+        );
+    }
+
+
+    /*
+     * Data como objeto Date ou
+     * string reconhecida pelo navegador
+     */
+
+    const data =
+        new Date(
+            valor
+        );
+
+
+    if (
+        isNaN(
+            data.getTime()
+        )
+    ) {
+
+        return "";
+    }
+
+
+    const ano =
+        data.getFullYear();
+
+
+    const mes =
+        String(
+            data.getMonth() + 1
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    const dia =
+        String(
+            data.getDate()
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+        ano +
+        "-" +
+        mes +
+        "-" +
+        dia
+    );
+}
+
+
+/* =========================================================
+   DATA DE HOJE
+========================================================= */
+
+function dataHoje() {
+
+    const agora =
+        new Date();
+
+
+    const ano =
+        agora.getFullYear();
+
+
+    const mes =
+        String(
+            agora.getMonth() + 1
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    const dia =
+        String(
+            agora.getDate()
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+        ano +
+        "-" +
+        mes +
+        "-" +
+        dia
+    );
+}
+
+
+/* =========================================================
+   VERIFICAR VENCIMENTOS DE HOJE
+========================================================= */
+
+async function verificarVencimentosHoje() {
+
+    try {
+
+        const hoje =
+            dataHoje();
+
+
+        const competencia =
+            competenciaEl.value ||
+            competenciaAtual();
+
+
+        console.log(
+            "Verificando vencimentos:",
+            hoje
+        );
+
+
+        /*
+         * Busca os lançamentos da competência
+         * atual.
+         */
+
+        const resposta =
+            await chamarAPI(
+                "listarLancamentos",
+                {
+                    competencia:
+                        competencia
+                }
             );
 
 
         /*
-           Define a competência atual
-           automaticamente.
-        */
+         * Compatibilidade com diferentes
+         * formatos de retorno.
+         */
 
-        if (!campo.value) {
+        const lancamentos =
+            resposta.lancamentos ||
+            resposta.dados ||
+            resposta.registros ||
+            resposta.items ||
+            [];
 
-            campo.value =
-                competenciaAtual();
+
+        if (
+            !Array.isArray(
+                lancamentos
+            )
+        ) {
+
+            console.warn(
+                "A API não retornou uma lista de lançamentos."
+            );
+
+            return;
         }
 
 
-        atualizarNomeCompetencia();
+        /*
+         * Filtra somente lançamentos:
+         *
+         * - com vencimento hoje;
+         * - pendentes;
+         * - A Receber ou A Pagar.
+         */
+
+        const vencendoHoje =
+            lancamentos.filter(
+                function(item) {
+
+                    const vencimento =
+                        normalizarDataLancamento(
+                            item.vencimento ??
+                            item.Vencimento ??
+                            item.dataVencimento ??
+                            item.data_vencimento
+                        );
+
+
+                    if (
+                        vencimento !== hoje
+                    ) {
+
+                        return false;
+                    }
+
+
+                    /*
+                     * Verifica se já foi baixado.
+                     */
+
+                    const baixado =
+                        item.baixado === true ||
+                        item.baixado === "true" ||
+                        item.baixado === "TRUE" ||
+                        item.baixado === 1 ||
+                        item.baixado === "1" ||
+                        String(
+                            item.status ??
+                            item.Status ??
+                            ""
+                        )
+                        .trim()
+                        .toLowerCase() ===
+                        "baixado";
+
+
+                    if (
+                        baixado
+                    ) {
+
+                        return false;
+                    }
+
+
+                    /*
+                     * Verifica o tipo.
+                     */
+
+                    const tipo =
+                        String(
+                            item.tipo ??
+                            item.Tipo ??
+                            ""
+                        )
+                        .trim()
+                        .toLowerCase();
+
+
+                    return (
+                        tipo === "receber" ||
+                        tipo === "pagar" ||
+                        tipo === "a receber" ||
+                        tipo === "a pagar" ||
+                        tipo === "contas a receber" ||
+                        tipo === "contas a pagar"
+                    );
+
+                }
+            );
+
+
+        if (
+            vencendoHoje.length === 0
+        ) {
+
+            console.log(
+                "Nenhum lançamento vence hoje."
+            );
+
+            return;
+        }
 
 
         /*
-           Carrega o resumo.
-        */
+         * Controle dos alertas exibidos
+         * durante a sessão.
+         */
+
+        const chave =
+            "alertaVencimentos_" +
+            hoje;
+
+
+        let alertados = [];
+
+
+        try {
+
+            alertados =
+                JSON.parse(
+                    sessionStorage.getItem(
+                        chave
+                    ) ||
+                    "[]"
+                );
+
+        } catch (erro) {
+
+            alertados = [];
+        }
+
+
+        /*
+         * Identifica somente os lançamentos
+         * que ainda não foram apresentados.
+         */
+
+        const novos =
+            vencendoHoje.filter(
+                function(item) {
+
+                    const id =
+                        String(
+                            item.id ??
+                            item.ID ??
+                            (
+                                String(
+                                    item.descricao ??
+                                    item.Descricao ??
+                                    ""
+                                ) +
+                                "_" +
+                                String(
+                                    item.vencimento ??
+                                    item.Vencimento ??
+                                    ""
+                                )
+                            )
+                        );
+
+
+                    return !alertados.includes(
+                        id
+                    );
+                }
+            );
+
+
+        if (
+            novos.length === 0
+        ) {
+
+            return;
+        }
+
+
+        /* =================================================
+           MONTAR ALERTA
+        ================================================= */
+
+        let mensagem =
+            "⚠️ ATENÇÃO\n\n" +
+            "Existem lançamentos com vencimento hoje:\n\n";
+
+
+        novos.forEach(
+            function(item) {
+
+                const tipo =
+                    String(
+                        item.tipo ??
+                        item.Tipo ??
+                        ""
+                    )
+                    .trim()
+                    .toLowerCase();
+
+
+                const descricao =
+                    item.descricao ??
+                    item.Descricao ??
+                    "Sem descrição";
+
+
+                const valor =
+                    Number(
+                        item.valor ??
+                        item.Valor ??
+                        0
+                    );
+
+
+                let tipoTexto =
+                    "LANÇAMENTO";
+
+
+                if (
+                    tipo.includes(
+                        "receber"
+                    )
+                ) {
+
+                    tipoTexto =
+                        "A RECEBER";
+
+                } else if (
+                    tipo.includes(
+                        "pagar"
+                    )
+                ) {
+
+                    tipoTexto =
+                        "A PAGAR";
+                }
+
+
+                mensagem +=
+                    "• " +
+                    tipoTexto +
+                    " - " +
+                    descricao +
+                    " - " +
+                    moeda(
+                        valor
+                    ) +
+                    "\n";
+
+            }
+        );
+
+
+        mensagem +=
+            "\nVerifique os lançamentos pendentes.";
+
+
+        /*
+         * Exibe o alerta.
+         */
+
+        alert(
+            mensagem
+        );
+
+
+        /*
+         * Marca os lançamentos como já alertados.
+         */
+
+        const idsNovos =
+            novos.map(
+                function(item) {
+
+                    return String(
+                        item.id ??
+                        item.ID ??
+                        (
+                            String(
+                                item.descricao ??
+                                item.Descricao ??
+                                ""
+                            ) +
+                            "_" +
+                            String(
+                                item.vencimento ??
+                                item.Vencimento ??
+                                ""
+                            )
+                        )
+                    );
+
+                }
+            );
+
+
+        const listaAtualizada =
+            alertados.concat(
+                idsNovos
+            );
+
+
+        sessionStorage.setItem(
+            chave,
+            JSON.stringify(
+                listaAtualizada
+            )
+        );
+
+
+        console.log(
+            "Alerta de vencimentos exibido."
+        );
+
+    } catch (erro) {
+
+        /*
+         * O alerta nunca deve impedir
+         * o funcionamento do Dashboard.
+         */
+
+        console.error(
+            "Erro ao verificar vencimentos de hoje:",
+            erro
+        );
+    }
+}
+
+
+/* =========================================================
+   CONSTRUIR URL DA ROTINA
+========================================================= */
+
+function construirUrl(
+    arquivo
+) {
+
+    const competencia =
+        competenciaEl.value ||
+        competenciaAtual();
+
+
+    validarCompetencia(
+        competencia
+    );
+
+
+    const url =
+        new URL(
+            arquivo,
+            window.location.href
+        );
+
+
+    url.searchParams.set(
+        "competencia",
+        competencia
+    );
+
+
+    return url;
+}
+
+
+/* =========================================================
+   ABRIR PÁGINA
+========================================================= */
+
+function abrirPagina(
+    pagina
+) {
+
+    const arquivos = {
+
+        lancamentos:
+            "Lancamentos.html",
+
+        pendentes:
+            "BaixasPendentes.html",
+
+        relatorio:
+            "Relatorio.html",
+
+        graficos:
+            "Graficos.html",
+
+        atendimento:
+            "Atendimento.html"
+
+    };
+
+
+    const arquivo =
+        arquivos[pagina];
+
+
+    if (!arquivo) {
+
+        mostrarMensagem(
+            "Rotina não encontrada.",
+            "erro"
+        );
+
+        return;
+    }
+
+
+    try {
+
+        const url =
+            construirUrl(
+                arquivo
+            );
+
+
+        url.searchParams.set(
+            "modo",
+            "lista"
+        );
+
+
+        window.location.href =
+            url.href;
+
+
+    } catch (erro) {
+
+        mostrarMensagem(
+            erro.message,
+            "erro"
+        );
+    }
+}
+
+
+/* =========================================================
+   NOVO LANÇAMENTO
+========================================================= */
+
+function abrirNovoLancamento() {
+
+    try {
+
+        const url =
+            construirUrl(
+                "Lancamentos.html"
+            );
+
+
+        url.searchParams.set(
+            "modo",
+            "novo"
+        );
+
+
+        url.searchParams.set(
+            "novo",
+            "1"
+        );
+
+
+        window.location.href =
+            url.href;
+
+
+    } catch (erro) {
+
+        mostrarMensagem(
+            erro.message,
+            "erro"
+        );
+    }
+}
+
+
+/* =========================================================
+   ALTERAÇÃO DE COMPETÊNCIA
+========================================================= */
+
+competenciaEl.addEventListener(
+    "change",
+    async function() {
+
+        await carregarResumo();
+
+        /*
+         * Se o usuário mudar para outra
+         * competência, verifica também os
+         * vencimentos daquela competência.
+         */
+
+        await verificarVencimentosHoje();
+
+    }
+);
+
+
+/* =========================================================
+   ENTER
+========================================================= */
+
+competenciaEl.addEventListener(
+    "keydown",
+    function(evento) {
+
+        if (
+            evento.key === "Enter"
+        ) {
+
+            evento.preventDefault();
+
+            carregarResumo();
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function() {
+
+        /*
+         * Primeiro carrega o resumo.
+         */
 
         await carregarResumo();
 
 
         /*
-           Verifica vencimentos de hoje.
-        */
+         * Depois verifica se existe algum
+         * lançamento vencendo hoje.
+         */
 
         await verificarVencimentosHoje();
-
-
-        /*
-           Ao mudar competência,
-           atualiza TUDO novamente.
-        */
-
-        campo.addEventListener(
-            'change',
-            async function() {
-
-                atualizarNomeCompetencia();
-
-                esconderMensagem();
-
-                await carregarResumo();
-
-                await verificarVencimentosHoje();
-            }
-        );
 
     }
 );
@@ -2280,4 +2770,5 @@ document.addEventListener(
 </script>
 
 </body>
+
 </html>
