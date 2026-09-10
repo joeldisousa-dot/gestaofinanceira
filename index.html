@@ -797,28 +797,29 @@ body {
 
 <div class="header">
 
-
 <div>
 
-    <h1 class="titulo">
-        Controle Financeiro
-    </h1>
+```
+<h1 class="titulo">
+    Controle Financeiro
+</h1>
 
-    <div class="subtitulo">
-        Gestão de lançamentos e fluxo financeiro
-    </div>
+<div class="subtitulo">
+    Gestão de lançamentos e fluxo financeiro
+</div>
+```
 
 </div>
-
 
 <div
     id="status"
     class="status">
 
-    Sistema
+```
+Sistema
+```
 
 </div>
-
 
 </div>
 
@@ -828,43 +829,47 @@ body {
 
 <div class="competencia-box">
 
-
 <label
-    class="competencia-label"
-    for="competencia">
+ class="competencia-label"
+ for="competencia">
 
-    Competência
+```
+Competência
+```
 
 </label>
 
-
 <div class="competencia-linha">
 
-    <input
-        id="competencia"
-        type="month"
-        title="Selecione a competência"
-    >
+```
+<input
+    id="competencia"
+    type="month"
+    title="Selecione a competência"
+>
 
-<button class="menu-item" onclick="fecharCompetencia()">
-  <span class="menu-icon">🔒</span>
-  <span>
-    <strong>Fechar competência</strong>
-    <small></small>
-  </span>
+
+<button
+    type="button"
+    class="btn-atualizar"
+    onclick="fecharCompetencia()">
+
+    🔒 Fechar competência
+
 </button>
-   
-    <button
-        type="button"
-        class="btn-atualizar"
-        onclick="carregarResumo()">
 
-        ↻ Atualizar
 
-    </button>
+<button
+    type="button"
+    class="btn-atualizar"
+    onclick="carregarResumo()">
+
+    ↻ Atualizar
+
+</button>
+```
 
 </div>
-
 
 </div>
 
@@ -874,9 +879,7 @@ body {
 
 <div class="secao-titulo">
 
-
 Resumo da Competência
-
 
 </div>
 
@@ -886,22 +889,23 @@ Resumo da Competência
 
 <div class="resumo-card saldo">
 
-
 <div class="resumo-label">
 
-    SALDO INICIAL
+```
+SALDO INICIAL
+```
 
 </div>
-
 
 <div
     id="saldoInicial"
     class="resumo-valor">
 
-    R$ 0,00
+```
+R$ 0,00
+```
 
 </div>
-
 
 </div>
 
@@ -909,31 +913,33 @@ Resumo da Competência
 
 <div class="resumo-card">
 
-
 <div class="resumo-label">
 
-    A RECEBER
+```
+A RECEBER
+```
 
 </div>
-
 
 <div
     id="receber"
     class="resumo-valor">
 
-    R$ 0,00
+```
+R$ 0,00
+```
 
 </div>
-
 
 <div
     id="saldoAReceber"
     class="resumo-subvalor">
 
-    Saldo a receber: R$ 0,00
+```
+Saldo a receber: R$ 0,00
+```
 
 </div>
-
 
 </div>
 
@@ -941,22 +947,23 @@ Resumo da Competência
 
 <div class="resumo-card recebido">
 
-
 <div class="resumo-label">
 
-    RECEBIDO
+```
+RECEBIDO
+```
 
 </div>
-
 
 <div
     id="recebido"
     class="resumo-valor">
 
-    R$ 0,00
+```
+R$ 0,00
+```
 
 </div>
-
 
 </div>
 
@@ -964,31 +971,33 @@ Resumo da Competência
 
 <div class="resumo-card">
 
-
 <div class="resumo-label">
 
-    A PAGAR
+```
+A PAGAR
+```
 
 </div>
-
 
 <div
     id="pagar"
     class="resumo-valor">
 
-    R$ 0,00
+```
+R$ 0,00
+```
 
 </div>
-
 
 <div
     id="saldoAPagar"
     class="resumo-subvalor">
 
-    Saldo a pagar: R$ 0,00
+```
+Saldo a pagar: R$ 0,00
+```
 
 </div>
-
 
 </div>
 
@@ -996,22 +1005,23 @@ Resumo da Competência
 
 <div class="resumo-card pago">
 
-
 <div class="resumo-label">
 
-    PAGOS
+```
+PAGOS
+```
 
 </div>
-
 
 <div
     id="pago"
     class="resumo-valor">
 
-    R$ 0,00
+```
+R$ 0,00
+```
 
 </div>
-
 
 </div>
 
@@ -1019,22 +1029,23 @@ Resumo da Competência
 
 <div class="resumo-card saldo">
 
-
 <div class="resumo-label">
 
-    SALDO BANCÁRIO
+```
+SALDO BANCÁRIO
+```
 
 </div>
-
 
 <div
     id="saldoBanco"
     class="resumo-valor">
 
-    R$ 0,00
+```
+R$ 0,00
+```
 
 </div>
-
 
 </div>
 
@@ -1046,9 +1057,7 @@ Resumo da Competência
 
 <div class="secao-titulo">
 
-
 Rotinas
-
 
 </div>
 
@@ -1061,7 +1070,6 @@ Rotinas
  class="menu-item"
  onclick="abrirPagina('lancamentos')">
 
-
 <span class="menu-icone">
     📋
 </span>
@@ -1072,7 +1080,6 @@ Lançamentos
     Consultar, editar e excluir lançamentos
 </span>
 
-
 </button>
 
 <!-- BAIXAS PENDENTES -->
@@ -1081,7 +1088,6 @@ Lançamentos
  type="button"
  class="menu-item"
  onclick="abrirPagina('pendentes')">
-
 
 <span class="menu-icone">
     ⏳
@@ -1093,7 +1099,6 @@ Baixas Pendentes
     Consultar lançamentos pendentes
 </span>
 
-
 </button>
 
 <!-- RELATÓRIO -->
@@ -1102,7 +1107,6 @@ Baixas Pendentes
  type="button"
  class="menu-item"
  onclick="abrirPagina('relatorio')">
-
 
 <span class="menu-icone">
     📊
@@ -1114,7 +1118,6 @@ Relatório Financeiro
     Visualizar relatório da competência
 </span>
 
-
 </button>
 
 <!-- GRÁFICOS -->
@@ -1123,7 +1126,6 @@ Relatório Financeiro
  type="button"
  class="menu-item"
  onclick="abrirPagina('graficos')">
-
 
 <span class="menu-icone">
     📈
@@ -1135,7 +1137,6 @@ Gráficos
     Análise visual dos dados financeiros
 </span>
 
-
 </button>
 
 <!-- ATENDIMENTO -->
@@ -1144,7 +1145,6 @@ Gráficos
  type="button"
  class="menu-item"
  onclick="abrirPagina('atendimento')">
-
 
 <span class="menu-icone">
     👤
@@ -1156,7 +1156,6 @@ Atendimento
     Pesquisa e registro de atendimento
 </span>
 
-
 </button>
 
 <!-- NOVO LANÇAMENTO -->
@@ -1165,7 +1164,6 @@ Atendimento
  type="button"
  class="menu-item novo"
  onclick="abrirNovoLancamento()">
-
 
 <span class="menu-icone">
     ➕
@@ -1176,7 +1174,6 @@ Novo Lançamento
 <span class="menu-descricao">
     Cadastrar novo lançamento
 </span>
-
 
 </button>
 
@@ -1197,7 +1194,6 @@ Novo Lançamento
 
 <div class="rodape">
 
-
 <span>
     Controle Financeiro
 </span>
@@ -1206,7 +1202,6 @@ Novo Lançamento
     Joel Rodrigues.
 </span>
 
-
 </div>
 
 </div>
@@ -1214,7 +1209,6 @@ Novo Lançamento
 </div>
 
 <script>
-
 
 /* =========================================================
    CONFIGURAÇÃO
@@ -1231,64 +1225,126 @@ const URL_API =
 const statusEl =
     document.getElementById("status");
 
+
 const mensagemEl =
     document.getElementById("mensagem");
+
 
 const competenciaEl =
     document.getElementById("competencia");
 
+
+/* =========================================================
+   FECHAR COMPETÊNCIA
+========================================================= */
+
 function fecharCompetencia() {
-  const competencia = document.getElementById('competencia')?.value;
 
-  if (!competencia) {
-    alert('Selecione uma competência antes de fechar.');
-    return;
-  }
+    const competencia =
+        document.getElementById(
+            "competencia"
+        )?.value;
 
-  const confirmar = confirm(
-    'Deseja fechar a competência ' + competencia + '?\n\n' +
-    'O saldo final será gravado como saldo inicial da próxima competência.'
-  );
 
-  if (!confirmar) return;
+    if (!competencia) {
 
-  alterarStatus('Fechando competência...');
+        alert(
+            "Selecione uma competência antes de fechar."
+        );
 
-  chamarAPI('fecharMes', {
-    competencia: competencia
-  })
-  .then(function(resultado) {
-
-    if (!resultado || !resultado.sucesso) {
-      throw new Error(
-        resultado?.mensagem || 'Não foi possível fechar a competência.'
-      );
+        return;
     }
 
-    alert(
-      'Competência fechada com sucesso!\n\n' +
-      'Competência: ' + resultado.competenciaAtual + '\n' +
-      'Saldo final: ' + resultado.saldoFinalFormatado + '\n\n' +
-      'Saldo inicial gravado para: ' +
-      resultado.proximaCompetencia
+
+    const confirmar =
+        confirm(
+            "Deseja fechar a competência " +
+            competencia +
+            "?\n\n" +
+            "O saldo final será gravado como saldo inicial da próxima competência."
+        );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    alterarStatus(
+        "Fechando competência..."
     );
 
-    alterarStatus('Sistema online');
 
-    carregarResumo();
+    chamarAPI(
+        "fecharMes",
+        {
+            competencia:
+                competencia
+        }
+    )
+    .then(
+        function(resultado) {
 
-  })
-  .catch(function(erro) {
-    console.error(erro);
+            if (
+                !resultado ||
+                !resultado.sucesso
+            ) {
 
-    alterarStatus('Sistema online');
+                throw new Error(
+                    resultado?.mensagem ||
+                    "Não foi possível fechar a competência."
+                );
+            }
 
-    alert(
-      'Erro ao fechar a competência:\n\n' +
-      erro.message
+
+            alert(
+                "Competência fechada com sucesso!\n\n" +
+
+                "Competência: " +
+                resultado.competenciaAtual +
+
+                "\n" +
+
+                "Saldo final: " +
+                resultado.saldoFinalFormatado +
+
+                "\n\n" +
+
+                "Saldo inicial gravado para: " +
+                resultado.proximaCompetencia
+            );
+
+
+            alterarStatus(
+                "Sistema online"
+            );
+
+
+            carregarResumo();
+
+        }
+    )
+    .catch(
+        function(erro) {
+
+            console.error(erro);
+
+
+            alterarStatus(
+                "Sistema online"
+            );
+
+
+            alert(
+                "Erro ao fechar a competência:\n\n" +
+                erro.message
+            );
+
+        }
     );
-  });
 }
+
+
 /* =========================================================
    COMPETÊNCIA ATUAL
 ========================================================= */
@@ -1298,15 +1354,26 @@ function competenciaAtual() {
     const agora =
         new Date();
 
+
     const ano =
         agora.getFullYear();
+
 
     const mes =
         String(
             agora.getMonth() + 1
-        ).padStart(2, "0");
+        )
+        .padStart(
+            2,
+            "0"
+        );
 
-    return ano + "-" + mes;
+
+    return (
+        ano +
+        "-" +
+        mes
+    );
 }
 
 
@@ -1323,7 +1390,10 @@ function moeda(valor) {
     let numero =
         Number(valor);
 
-    if (isNaN(numero)) {
+
+    if (
+        isNaN(numero)
+    ) {
 
         numero = 0;
     }
@@ -1336,6 +1406,40 @@ function moeda(valor) {
             currency: "BRL"
         }
     );
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function alterarStatus(
+    texto
+) {
+
+    statusEl.textContent =
+        texto;
+
+
+    if (
+        texto === "Sistema online"
+    ) {
+
+        statusEl.className =
+            "status online";
+
+    } else if (
+        texto === "API indisponível"
+    ) {
+
+        statusEl.className =
+            "status erro";
+
+    } else {
+
+        statusEl.className =
+            "status";
+    }
 }
 
 
@@ -1396,11 +1500,15 @@ function validarCompetencia(
 
 
     const ano =
-        Number(partes[0]);
+        Number(
+            partes[0]
+        );
 
 
     const mes =
-        Number(partes[1]);
+        Number(
+            partes[1]
+        );
 
 
     if (
@@ -1427,7 +1535,9 @@ async function chamarAPI(
 ) {
 
     const url =
-        new URL(URL_API);
+        new URL(
+            URL_API
+        );
 
 
     url.searchParams.set(
@@ -1436,27 +1546,29 @@ async function chamarAPI(
     );
 
 
-    Object.keys(parametros)
-        .forEach(
-            function(chave) {
+    Object.keys(
+        parametros
+    )
+    .forEach(
+        function(chave) {
 
-                const valor =
-                    parametros[chave];
+            const valor =
+                parametros[chave];
 
 
-                if (
-                    valor !== undefined &&
-                    valor !== null
-                ) {
+            if (
+                valor !== undefined &&
+                valor !== null
+            ) {
 
-                    url.searchParams.set(
-                        chave,
-                        String(valor)
-                    );
-                }
-
+                url.searchParams.set(
+                    chave,
+                    String(valor)
+                );
             }
-        );
+
+        }
+    );
 
 
     console.log(
@@ -1495,7 +1607,9 @@ async function chamarAPI(
     }
 
 
-    if (!resposta.ok) {
+    if (
+        !resposta.ok
+    ) {
 
         throw new Error(
             "Google Apps Script retornou HTTP " +
@@ -1529,7 +1643,9 @@ async function chamarAPI(
     try {
 
         dados =
-            JSON.parse(texto);
+            JSON.parse(
+                texto
+            );
 
     } catch (erro) {
 
@@ -1620,12 +1736,9 @@ async function carregarResumo() {
     );
 
 
-    statusEl.textContent =
-        "Atualizando...";
-
-
-    statusEl.className =
-        "status";
+    alterarStatus(
+        "Atualizando..."
+    );
 
 
     try {
@@ -1720,21 +1833,17 @@ async function carregarResumo() {
 
 
         /* =================================================
-           CÁLCULOS DOS SALDOS
-           
-           Saldo a receber =
-           A receber - Recebido
-
-           Saldo a pagar =
-           A pagar - Pagos
+           CÁLCULO DOS SALDOS
         ================================================= */
 
         const saldoAReceber =
-            receber - recebido;
+            receber -
+            recebido;
 
 
         const saldoAPagar =
-            pagar - pago;
+            pagar -
+            pago;
 
 
         /* =================================================
@@ -1839,12 +1948,9 @@ async function carregarResumo() {
            STATUS
         ================================================= */
 
-        statusEl.textContent =
-            "Sistema online";
-
-
-        statusEl.className =
-            "status online";
+        alterarStatus(
+            "Sistema online"
+        );
 
 
         mostrarMensagem(
@@ -1861,12 +1967,9 @@ async function carregarResumo() {
         );
 
 
-        statusEl.textContent =
-            "API indisponível";
-
-
-        statusEl.className =
-            "status erro";
+        alterarStatus(
+            "API indisponível"
+        );
 
 
         mostrarMensagem(
@@ -1885,6 +1988,566 @@ async function carregarResumo() {
                     "1";
 
             }
+        );
+    }
+}
+
+
+/* =========================================================
+   NORMALIZAR DATA
+========================================================= */
+
+function normalizarDataLancamento(
+    valor
+) {
+
+    if (
+        valor === null ||
+        valor === undefined ||
+        valor === ""
+    ) {
+
+        return "";
+    }
+
+
+    /*
+     * AAAA-MM-DD
+     */
+
+    if (
+        typeof valor === "string" &&
+        /^\d{4}-\d{2}-\d{2}$/.test(
+            valor
+        )
+    ) {
+
+        return valor;
+    }
+
+
+    /*
+     * AAAA-MM-DDTHH:mm:ss
+     */
+
+    if (
+        typeof valor === "string" &&
+        /^\d{4}-\d{2}-\d{2}T/.test(
+            valor
+        )
+    ) {
+
+        return valor.substring(
+            0,
+            10
+        );
+    }
+
+
+    /*
+     * DD/MM/AAAA
+     */
+
+    if (
+        typeof valor === "string" &&
+        /^\d{2}\/\d{2}\/\d{4}$/.test(
+            valor
+        )
+    ) {
+
+        const partes =
+            valor.split("/");
+
+
+        return (
+            partes[2] +
+            "-" +
+            partes[1] +
+            "-" +
+            partes[0]
+        );
+    }
+
+
+    /*
+     * Data como objeto Date ou
+     * string reconhecida pelo navegador
+     */
+
+    const data =
+        new Date(
+            valor
+        );
+
+
+    if (
+        isNaN(
+            data.getTime()
+        )
+    ) {
+
+        return "";
+    }
+
+
+    const ano =
+        data.getFullYear();
+
+
+    const mes =
+        String(
+            data.getMonth() + 1
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    const dia =
+        String(
+            data.getDate()
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+        ano +
+        "-" +
+        mes +
+        "-" +
+        dia
+    );
+}
+
+
+/* =========================================================
+   DATA DE HOJE
+========================================================= */
+
+function dataHoje() {
+
+    const agora =
+        new Date();
+
+
+    const ano =
+        agora.getFullYear();
+
+
+    const mes =
+        String(
+            agora.getMonth() + 1
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    const dia =
+        String(
+            agora.getDate()
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+        ano +
+        "-" +
+        mes +
+        "-" +
+        dia
+    );
+}
+
+
+/* =========================================================
+   VERIFICAR VENCIMENTOS DE HOJE
+========================================================= */
+
+async function verificarVencimentosHoje() {
+
+    try {
+
+        const hoje =
+            dataHoje();
+
+
+        const competencia =
+            competenciaEl.value ||
+            competenciaAtual();
+
+
+        console.log(
+            "Verificando vencimentos:",
+            hoje
+        );
+
+
+        /*
+         * Busca os lançamentos da competência
+         * atual.
+         */
+
+        const resposta =
+            await chamarAPI(
+                "listarLancamentos",
+                {
+                    competencia:
+                        competencia
+                }
+            );
+
+
+        /*
+         * Compatibilidade com diferentes
+         * formatos de retorno.
+         */
+
+        const lancamentos =
+            resposta.lancamentos ||
+            resposta.dados ||
+            resposta.registros ||
+            resposta.items ||
+            [];
+
+
+        if (
+            !Array.isArray(
+                lancamentos
+            )
+        ) {
+
+            console.warn(
+                "A API não retornou uma lista de lançamentos."
+            );
+
+            return;
+        }
+
+
+        /*
+         * Filtra somente lançamentos:
+         *
+         * - com vencimento hoje;
+         * - pendentes;
+         * - A Receber ou A Pagar.
+         */
+
+        const vencendoHoje =
+            lancamentos.filter(
+                function(item) {
+
+                    const vencimento =
+                        normalizarDataLancamento(
+                            item.vencimento ??
+                            item.Vencimento ??
+                            item.dataVencimento ??
+                            item.data_vencimento
+                        );
+
+
+                    if (
+                        vencimento !== hoje
+                    ) {
+
+                        return false;
+                    }
+
+
+                    /*
+                     * Verifica se já foi baixado.
+                     */
+
+                    const baixado =
+                        item.baixado === true ||
+                        item.baixado === "true" ||
+                        item.baixado === "TRUE" ||
+                        item.baixado === 1 ||
+                        item.baixado === "1" ||
+                        String(
+                            item.status ??
+                            item.Status ??
+                            ""
+                        )
+                        .trim()
+                        .toLowerCase() ===
+                        "baixado";
+
+
+                    if (
+                        baixado
+                    ) {
+
+                        return false;
+                    }
+
+
+                    /*
+                     * Verifica o tipo.
+                     */
+
+                    const tipo =
+                        String(
+                            item.tipo ??
+                            item.Tipo ??
+                            ""
+                        )
+                        .trim()
+                        .toLowerCase();
+
+
+                    return (
+                        tipo === "receber" ||
+                        tipo === "pagar" ||
+                        tipo === "a receber" ||
+                        tipo === "a pagar" ||
+                        tipo === "contas a receber" ||
+                        tipo === "contas a pagar"
+                    );
+
+                }
+            );
+
+
+        if (
+            vencendoHoje.length === 0
+        ) {
+
+            console.log(
+                "Nenhum lançamento vence hoje."
+            );
+
+            return;
+        }
+
+
+        /*
+         * Controle dos alertas exibidos
+         * durante a sessão.
+         */
+
+        const chave =
+            "alertaVencimentos_" +
+            hoje;
+
+
+        let alertados = [];
+
+
+        try {
+
+            alertados =
+                JSON.parse(
+                    sessionStorage.getItem(
+                        chave
+                    ) ||
+                    "[]"
+                );
+
+        } catch (erro) {
+
+            alertados = [];
+        }
+
+
+        /*
+         * Identifica somente os lançamentos
+         * que ainda não foram apresentados.
+         */
+
+        const novos =
+            vencendoHoje.filter(
+                function(item) {
+
+                    const id =
+                        String(
+                            item.id ??
+                            item.ID ??
+                            (
+                                String(
+                                    item.descricao ??
+                                    item.Descricao ??
+                                    ""
+                                ) +
+                                "_" +
+                                String(
+                                    item.vencimento ??
+                                    item.Vencimento ??
+                                    ""
+                                )
+                            )
+                        );
+
+
+                    return !alertados.includes(
+                        id
+                    );
+                }
+            );
+
+
+        if (
+            novos.length === 0
+        ) {
+
+            return;
+        }
+
+
+        /* =================================================
+           MONTAR ALERTA
+        ================================================= */
+
+        let mensagem =
+            "⚠️ ATENÇÃO\n\n" +
+            "Existem lançamentos com vencimento hoje:\n\n";
+
+
+        novos.forEach(
+            function(item) {
+
+                const tipo =
+                    String(
+                        item.tipo ??
+                        item.Tipo ??
+                        ""
+                    )
+                    .trim()
+                    .toLowerCase();
+
+
+                const descricao =
+                    item.descricao ??
+                    item.Descricao ??
+                    "Sem descrição";
+
+
+                const valor =
+                    Number(
+                        item.valor ??
+                        item.Valor ??
+                        0
+                    );
+
+
+                let tipoTexto =
+                    "LANÇAMENTO";
+
+
+                if (
+                    tipo.includes(
+                        "receber"
+                    )
+                ) {
+
+                    tipoTexto =
+                        "A RECEBER";
+
+                } else if (
+                    tipo.includes(
+                        "pagar"
+                    )
+                ) {
+
+                    tipoTexto =
+                        "A PAGAR";
+                }
+
+
+                mensagem +=
+                    "• " +
+                    tipoTexto +
+                    " - " +
+                    descricao +
+                    " - " +
+                    moeda(
+                        valor
+                    ) +
+                    "\n";
+
+            }
+        );
+
+
+        mensagem +=
+            "\nVerifique os lançamentos pendentes.";
+
+
+        /*
+         * Exibe o alerta.
+         */
+
+        alert(
+            mensagem
+        );
+
+
+        /*
+         * Marca os lançamentos como já alertados.
+         */
+
+        const idsNovos =
+            novos.map(
+                function(item) {
+
+                    return String(
+                        item.id ??
+                        item.ID ??
+                        (
+                            String(
+                                item.descricao ??
+                                item.Descricao ??
+                                ""
+                            ) +
+                            "_" +
+                            String(
+                                item.vencimento ??
+                                item.Vencimento ??
+                                ""
+                            )
+                        )
+                    );
+
+                }
+            );
+
+
+        const listaAtualizada =
+            alertados.concat(
+                idsNovos
+            );
+
+
+        sessionStorage.setItem(
+            chave,
+            JSON.stringify(
+                listaAtualizada
+            )
+        );
+
+
+        console.log(
+            "Alerta de vencimentos exibido."
+        );
+
+    } catch (erro) {
+
+        /*
+         * O alerta nunca deve impedir
+         * o funcionamento do Dashboard.
+         */
+
+        console.error(
+            "Erro ao verificar vencimentos de hoje:",
+            erro
         );
     }
 }
@@ -1949,6 +2612,7 @@ function abrirPagina(
 
         atendimento:
             "Atendimento.html"
+
     };
 
 
@@ -2041,9 +2705,17 @@ function abrirNovoLancamento() {
 
 competenciaEl.addEventListener(
     "change",
-    function() {
+    async function() {
 
-        carregarResumo();
+        await carregarResumo();
+
+        /*
+         * Se o usuário mudar para outra
+         * competência, verifica também os
+         * vencimentos daquela competência.
+         */
+
+        await verificarVencimentosHoje();
 
     }
 );
@@ -2076,9 +2748,21 @@ competenciaEl.addEventListener(
 
 document.addEventListener(
     "DOMContentLoaded",
-    function() {
+    async function() {
 
-        carregarResumo();
+        /*
+         * Primeiro carrega o resumo.
+         */
+
+        await carregarResumo();
+
+
+        /*
+         * Depois verifica se existe algum
+         * lançamento vencendo hoje.
+         */
+
+        await verificarVencimentosHoje();
 
     }
 );
