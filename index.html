@@ -194,11 +194,25 @@ body {
     border:
         1px solid #e2e8f0;
 
-    border-radius: 9px;
+    border-radius: 10px;
 
-    padding: 10px 12px;
+    padding: 11px 12px;
 
     margin-bottom: 14px;
+}
+
+
+.competencia-topo {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 5px;
 }
 
 
@@ -206,13 +220,61 @@ body {
 
     display: block;
 
-    margin-bottom: 4px;
-
     font-size: 12px;
 
     font-weight: 700;
 
     color: #475569;
+}
+
+
+.competencia-status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 4px 8px;
+
+    border-radius: 12px;
+
+    background: #ecfdf3;
+
+    color: #166534;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+.competencia-status::before {
+
+    content: "";
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+}
+
+
+.competencia-status.fechada {
+
+    background: #f1f5f9;
+
+    color: #475569;
+}
+
+
+.competencia-status.fechada::before {
+
+    background: #64748b;
 }
 
 
@@ -262,7 +324,7 @@ body {
 
 
 /* =========================================================
-   BOTÃO ATUALIZAR
+   BOTÕES
 ========================================================= */
 
 .btn-atualizar {
@@ -300,13 +362,41 @@ body {
 }
 
 
+.btn-atualizar.fechar {
+
+    background: #475569;
+}
+
+
+.btn-atualizar.fechar:hover {
+
+    background: #334155;
+}
+
+
+.btn-atualizar:disabled {
+
+    opacity: .65;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
 /* =========================================================
    TÍTULOS
 ========================================================= */
 
 .secao-titulo {
 
-    display: block;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
 
     margin:
         16px 0 7px;
@@ -316,6 +406,16 @@ body {
     font-size: 16px;
 
     font-weight: 700;
+}
+
+
+.secao-legenda {
+
+    color: #94a3b8;
+
+    font-size: 10px;
+
+    font-weight: 500;
 }
 
 
@@ -332,7 +432,7 @@ body {
 
     gap: 8px;
 
-    margin-bottom: 18px;
+    margin-bottom: 14px;
 }
 
 
@@ -342,7 +442,7 @@ body {
 
     height: auto;
 
-    padding: 8px 9px;
+    padding: 9px 10px;
 
     border:
         1px solid #e5e7eb;
@@ -354,6 +454,21 @@ body {
     box-shadow:
         0 2px 6px
         rgba(15, 23, 42, 0.03);
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease;
+}
+
+
+.resumo-card:hover {
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 4px 10px
+        rgba(15, 23, 42, 0.06);
 }
 
 
@@ -409,7 +524,7 @@ body {
 
 
 /* =========================================================
-   DESTAQUES
+   DESTAQUES FINANCEIROS
 ========================================================= */
 
 .resumo-card.recebido {
@@ -447,8 +562,287 @@ body {
 }
 
 
+.resumo-card.saldo-banco {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8fbff,
+            #ffffff
+        );
+
+    border:
+        1px solid #cbd5e1;
+
+    border-left:
+        4px solid #17365d;
+
+    box-shadow:
+        0 4px 12px
+        rgba(23, 54, 93, 0.08);
+}
+
+
+.resumo-card.saldo-banco
+.resumo-valor {
+
+    font-size: 18px;
+
+    color: #17365d;
+}
+
+
 /* =========================================================
-   MENU
+   PAINEL OPERACIONAL
+========================================================= */
+
+.operacional {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 8px;
+
+    margin:
+        0 0 14px;
+}
+
+
+.operacional-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 9px 10px;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 8px;
+
+    background: #f8fafc;
+}
+
+
+.operacional-icone {
+
+    width: 29px;
+
+    height: 29px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background: #e2e8f0;
+
+    font-size: 15px;
+
+    flex-shrink: 0;
+}
+
+
+.operacional-conteudo {
+
+    min-width: 0;
+}
+
+
+.operacional-numero {
+
+    display: block;
+
+    color: #17365d;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+
+.operacional-label {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #64748b;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+.operacional-item.pendente {
+
+    border-left:
+        3px solid #f59e0b;
+}
+
+
+.operacional-item.pendente
+.operacional-numero {
+
+    color: #b45309;
+}
+
+
+.operacional-item.vencido {
+
+    border-left:
+        3px solid #dc2626;
+
+    background: #fffafa;
+}
+
+
+.operacional-item.vencido
+.operacional-numero {
+
+    color: #b91c1c;
+}
+
+
+/* =========================================================
+   ALERTA DE VENCIMENTOS
+========================================================= */
+
+.alerta-vencimentos {
+
+    display: none;
+
+    margin:
+        0 0 16px;
+
+    padding:
+        12px 14px;
+
+    border:
+        1px solid #fed7aa;
+
+    border-left:
+        4px solid #f59e0b;
+
+    border-radius: 9px;
+
+    background: #fffbeb;
+
+    color: #92400e;
+}
+
+
+.alerta-vencimentos.exibir {
+
+    display: block;
+}
+
+
+.alerta-vencimentos.tem-vencido {
+
+    border-color: #fecaca;
+
+    border-left-color: #dc2626;
+
+    background: #fef2f2;
+
+    color: #991b1b;
+}
+
+
+.alerta-titulo {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 5px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+.alerta-contador {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 23px;
+
+    height: 23px;
+
+    padding: 0 7px;
+
+    border-radius: 12px;
+
+    background: #f59e0b;
+
+    color: #ffffff;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.tem-vencido .alerta-contador {
+
+    background: #dc2626;
+}
+
+
+.alerta-lista {
+
+    margin: 0;
+
+    padding-left: 18px;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+.alerta-rodape {
+
+    margin-top: 7px;
+
+    color: #a16207;
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+
+.tem-vencido .alerta-rodape {
+
+    color: #b91c1c;
+}
+
+
+/* =========================================================
+   MENU / ROTINAS
 ========================================================= */
 
 .menu {
@@ -458,21 +852,23 @@ body {
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap: 12px;
+    gap: 10px;
 }
 
 
 .menu-item {
 
+    position: relative;
+
     width: 100%;
 
-    min-height: 105px;
+    min-height: 100px;
 
     border: 0;
 
-    border-radius: 12px;
+    border-radius: 11px;
 
-    padding: 15px 12px;
+    padding: 14px 12px;
 
     background: #17365d;
 
@@ -522,11 +918,11 @@ body {
 
     display: block;
 
-    font-size: 28px;
+    font-size: 26px;
 
     line-height: 1;
 
-    margin-bottom: 9px;
+    margin-bottom: 8px;
 }
 
 
@@ -543,6 +939,50 @@ body {
     line-height: 1.25;
 
     opacity: .80;
+}
+
+
+.menu-badge {
+
+    position: absolute;
+
+    top: 8px;
+
+    right: 8px;
+
+    min-width: 20px;
+
+    height: 20px;
+
+    padding: 0 5px;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #f59e0b;
+
+    color: #ffffff;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+.menu-badge.exibir {
+
+    display: inline-flex;
+}
+
+
+.menu-badge.alerta {
+
+    background: #dc2626;
 }
 
 
@@ -629,6 +1069,12 @@ body {
         grid-template-columns:
             repeat(3, 1fr);
     }
+
+    .operacional {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
 }
 
 
@@ -681,6 +1127,28 @@ body {
     }
 
 
+    .competencia-topo {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+
+    .competencia-linha {
+
+        width: 100%;
+    }
+
+
+    #competencia {
+
+        width: 165px;
+    }
+
+
     .resumo {
 
         grid-template-columns:
@@ -692,7 +1160,7 @@ body {
 
     .resumo-card {
 
-        padding: 7px;
+        padding: 8px;
     }
 
 
@@ -708,9 +1176,37 @@ body {
     }
 
 
+    .resumo-card.saldo-banco
+    .resumo-valor {
+
+        font-size: 16px;
+    }
+
+
     .resumo-subvalor {
 
         font-size: 8px;
+    }
+
+
+    .operacional {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 6px;
+    }
+
+
+    .operacional-item {
+
+        padding: 8px;
+    }
+
+
+    .operacional-numero {
+
+        font-size: 14px;
     }
 
 
@@ -722,13 +1218,7 @@ body {
 
     .menu-item {
 
-        min-height: 90px;
-    }
-
-
-    #competencia {
-
-        width: 165px;
+        min-height: 85px;
     }
 
 
@@ -779,6 +1269,12 @@ body {
 
         text-align: right;
     }
+
+
+    .operacional {
+
+        grid-template-columns: 1fr;
+    }
 }
 
 </style>
@@ -799,7 +1295,6 @@ body {
 
 <div>
 
-
 <h1 class="titulo">
     Controle Financeiro
 </h1>
@@ -808,16 +1303,13 @@ body {
     Gestão de lançamentos e fluxo financeiro
 </div>
 
-
 </div>
 
 <div
     id="status"
     class="status">
 
-
 Sistema
-
 
 </div>
 
@@ -829,57 +1321,79 @@ Sistema
 
 <div class="competencia-box">
 
+<div class="competencia-topo">
+
 <label
  class="competencia-label"
  for="competencia">
 
-
+```
 Competência
-
+```
 
 </label>
 
+<div
+    id="competenciaStatus"
+    class="competencia-status">
+
+```
+🟢 Aberta
+```
+
+</div>
+
+</div>
+
 <div class="competencia-linha">
 
-
 <input
-    id="competencia"
-    type="month"
-    title="Selecione a competência"
+id="competencia"
+type="month"
+title="Selecione a competência"
+
 >
 
-
 <button
-    type="button"
-    class="btn-atualizar"
-    onclick="fecharCompetencia()">
+ id="btnFechar"
+ type="button"
+ class="btn-atualizar fechar"
+ onclick="fecharCompetencia()">
 
-    🔒 Fechar competência
+```
+🔒 Fechar competência
+```
 
 </button>
 
-
 <button
-    type="button"
-    class="btn-atualizar"
-    onclick="carregarResumo()">
+ type="button"
+ class="btn-atualizar"
+ onclick="carregarTudo()">
 
-    ↻ Atualizar
+```
+↻ Atualizar
+```
 
 </button>
-
 
 </div>
 
 </div>
 
 <!-- =====================================================
-     RESUMO
+     RESUMO FINANCEIRO
 ===================================================== -->
 
 <div class="secao-titulo">
 
-Resumo da Competência
+<span>
+    Resumo da Competência
+</span>
+
+<span class="secao-legenda">
+    Valores da competência selecionada
+</span>
 
 </div>
 
@@ -890,20 +1404,16 @@ Resumo da Competência
 <div class="resumo-card saldo">
 
 <div class="resumo-label">
-
-
-SALDO INICIAL
-
-
+    SALDO INICIAL
 </div>
 
 <div
     id="saldoInicial"
     class="resumo-valor">
 
-
+```
 R$ 0,00
-
+```
 
 </div>
 
@@ -914,20 +1424,16 @@ R$ 0,00
 <div class="resumo-card">
 
 <div class="resumo-label">
-
-
-A RECEBER
-
-
+    A RECEBER
 </div>
 
 <div
     id="receber"
     class="resumo-valor">
 
-
+```
 R$ 0,00
-
+```
 
 </div>
 
@@ -935,9 +1441,9 @@ R$ 0,00
     id="saldoAReceber"
     class="resumo-subvalor">
 
-
+```
 Saldo a receber: R$ 0,00
-
+```
 
 </div>
 
@@ -948,20 +1454,16 @@ Saldo a receber: R$ 0,00
 <div class="resumo-card recebido">
 
 <div class="resumo-label">
-
-
-RECEBIDO
-
-
+    RECEBIDO
 </div>
 
 <div
     id="recebido"
     class="resumo-valor">
 
-
+```
 R$ 0,00
-
+```
 
 </div>
 
@@ -972,20 +1474,16 @@ R$ 0,00
 <div class="resumo-card">
 
 <div class="resumo-label">
-
-
-A PAGAR
-
-
+    A PAGAR
 </div>
 
 <div
     id="pagar"
     class="resumo-valor">
 
-
+```
 R$ 0,00
-
+```
 
 </div>
 
@@ -993,9 +1491,9 @@ R$ 0,00
     id="saldoAPagar"
     class="resumo-subvalor">
 
-
+```
 Saldo a pagar: R$ 0,00
-
+```
 
 </div>
 
@@ -1006,20 +1504,16 @@ Saldo a pagar: R$ 0,00
 <div class="resumo-card pago">
 
 <div class="resumo-label">
-
-
-PAGOS
-
-
+    PAGOS
 </div>
 
 <div
     id="pago"
     class="resumo-valor">
 
-
+```
 R$ 0,00
-
+```
 
 </div>
 
@@ -1027,23 +1521,19 @@ R$ 0,00
 
 <!-- SALDO BANCÁRIO -->
 
-<div class="resumo-card saldo">
+<div class="resumo-card saldo-banco">
 
 <div class="resumo-label">
-
-
-SALDO BANCÁRIO
-
-
+    SALDO BANCÁRIO
 </div>
 
 <div
     id="saldoBanco"
     class="resumo-valor">
 
-
+```
 R$ 0,00
-
+```
 
 </div>
 
@@ -1052,12 +1542,175 @@ R$ 0,00
 </div>
 
 <!-- =====================================================
-     ROTINAS
+     SITUAÇÃO DA COMPETÊNCIA
+===================================================== -->
+
+<div class="operacional">
+
+<div class="operacional-item">
+
+<div class="operacional-icone">
+    📋
+</div>
+
+<div class="operacional-conteudo">
+
+<span
+ id="totalLancamentos"
+ class="operacional-numero">
+
+```
+0
+```
+
+</span>
+
+<span class="operacional-label">
+    LANÇAMENTOS
+</span>
+
+</div>
+
+</div>
+
+<div class="operacional-item pendente">
+
+<div class="operacional-icone">
+    ⏳
+</div>
+
+<div class="operacional-conteudo">
+
+<span
+ id="totalPendentes"
+ class="operacional-numero">
+
+```
+0
+```
+
+</span>
+
+<span class="operacional-label">
+    PENDENTES
+</span>
+
+</div>
+
+</div>
+
+<div class="operacional-item">
+
+<div class="operacional-icone">
+    ✅
+</div>
+
+<div class="operacional-conteudo">
+
+<span
+ id="totalBaixados"
+ class="operacional-numero">
+
+```
+0
+```
+
+</span>
+
+<span class="operacional-label">
+    BAIXADOS
+</span>
+
+</div>
+
+</div>
+
+<div
+    id="operacionalVencidos"
+    class="operacional-item vencido">
+
+<div class="operacional-icone">
+    🔴
+</div>
+
+<div class="operacional-conteudo">
+
+<span
+ id="totalVencidos"
+ class="operacional-numero">
+
+```
+0
+```
+
+</span>
+
+<span class="operacional-label">
+    VENCIDOS
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+     ALERTA DE VENCIMENTOS
+===================================================== -->
+
+<div
+    id="alertaVencimentos"
+    class="alerta-vencimentos">
+
+<div class="alerta-titulo">
+
+<span id="alertaTitulo">
+    🔔 Atenção
+</span>
+
+<span
+ id="alertaContador"
+ class="alerta-contador">
+
+```
+0
+```
+
+</span>
+
+</div>
+
+<ul
+    id="alertaLista"
+    class="alerta-lista">
+</ul>
+
+<div
+    id="alertaRodape"
+    class="alerta-rodape">
+
+```
+Verifique os lançamentos pendentes.
+```
+
+</div>
+
+</div>
+
+<!-- =====================================================
+     MOVIMENTAÇÃO
 ===================================================== -->
 
 <div class="secao-titulo">
 
-Rotinas
+<span>
+    Movimentação
+</span>
+
+<span class="secao-legenda">
+    Cadastro e acompanhamento
+</span>
 
 </div>
 
@@ -1089,6 +1742,15 @@ Lançamentos
  class="menu-item"
  onclick="abrirPagina('pendentes')">
 
+<span class="menu-badge"
+ id="badgePendentes">
+
+```
+0
+```
+
+</span>
+
 <span class="menu-icone">
     ⏳
 </span>
@@ -1100,6 +1762,45 @@ Baixas Pendentes
 </span>
 
 </button>
+
+<!-- NOVO LANÇAMENTO -->
+
+<button
+ type="button"
+ class="menu-item novo"
+ onclick="abrirNovoLancamento()">
+
+<span class="menu-icone">
+    ➕
+</span>
+
+Novo Lançamento
+
+<span class="menu-descricao">
+    Cadastrar novo lançamento
+</span>
+
+</button>
+
+</div>
+
+<!-- =====================================================
+     ANÁLISES
+===================================================== -->
+
+<div class="secao-titulo">
+
+<span>
+    Análises
+</span>
+
+<span class="secao-legenda">
+    Informações financeiras
+</span>
+
+</div>
+
+<div class="menu">
 
 <!-- RELATÓRIO -->
 
@@ -1154,25 +1855,6 @@ Atendimento
 
 <span class="menu-descricao">
     Pesquisa e registro de atendimento
-</span>
-
-</button>
-
-<!-- NOVO LANÇAMENTO -->
-
-<button
- type="button"
- class="menu-item novo"
- onclick="abrirNovoLancamento()">
-
-<span class="menu-icone">
-    ➕
-</span>
-
-Novo Lançamento
-
-<span class="menu-descricao">
-    Cadastrar novo lançamento
 </span>
 
 </button>
@@ -1234,115 +1916,32 @@ const competenciaEl =
     document.getElementById("competencia");
 
 
-/* =========================================================
-   FECHAR COMPETÊNCIA
-========================================================= */
-
-function fecharCompetencia() {
-
-    const competencia =
-        document.getElementById(
-            "competencia"
-        )?.value;
+const competenciaStatusEl =
+    document.getElementById("competenciaStatus");
 
 
-    if (!competencia) {
-
-        alert(
-            "Selecione uma competência antes de fechar."
-        );
-
-        return;
-    }
+const btnFecharEl =
+    document.getElementById("btnFechar");
 
 
-    const confirmar =
-        confirm(
-            "Deseja fechar a competência " +
-            competencia +
-            "?\n\n" +
-            "O saldo final será gravado como saldo inicial da próxima competência."
-        );
+const alertaEl =
+    document.getElementById("alertaVencimentos");
 
 
-    if (!confirmar) {
-        return;
-    }
+const alertaTituloEl =
+    document.getElementById("alertaTitulo");
 
 
-    alterarStatus(
-        "Fechando competência..."
-    );
+const alertaContadorEl =
+    document.getElementById("alertaContador");
 
 
-    chamarAPI(
-        "fecharMes",
-        {
-            competencia:
-                competencia
-        }
-    )
-    .then(
-        function(resultado) {
-
-            if (
-                !resultado ||
-                !resultado.sucesso
-            ) {
-
-                throw new Error(
-                    resultado?.mensagem ||
-                    "Não foi possível fechar a competência."
-                );
-            }
+const alertaListaEl =
+    document.getElementById("alertaLista");
 
 
-            alert(
-                "Competência fechada com sucesso!\n\n" +
-
-                "Competência: " +
-                resultado.competenciaAtual +
-
-                "\n" +
-
-                "Saldo final: " +
-                resultado.saldoFinalFormatado +
-
-                "\n\n" +
-
-                "Saldo inicial gravado para: " +
-                resultado.proximaCompetencia
-            );
-
-
-            alterarStatus(
-                "Sistema online"
-            );
-
-
-            carregarResumo();
-
-        }
-    )
-    .catch(
-        function(erro) {
-
-            console.error(erro);
-
-
-            alterarStatus(
-                "Sistema online"
-            );
-
-
-            alert(
-                "Erro ao fechar a competência:\n\n" +
-                erro.message
-            );
-
-        }
-    );
-}
+const alertaRodapeEl =
+    document.getElementById("alertaRodape");
 
 
 /* =========================================================
@@ -1379,6 +1978,50 @@ function competenciaAtual() {
 
 competenciaEl.value =
     competenciaAtual();
+
+
+/* =========================================================
+   DATA DE HOJE
+========================================================= */
+
+function dataHoje() {
+
+    const agora =
+        new Date();
+
+
+    const ano =
+        agora.getFullYear();
+
+
+    const mes =
+        String(
+            agora.getMonth() + 1
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    const dia =
+        String(
+            agora.getDate()
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+        ano +
+        "-" +
+        mes +
+        "-" +
+        dia
+    );
+}
 
 
 /* =========================================================
@@ -1694,6 +2337,257 @@ async function chamarAPI(
 
 
 /* =========================================================
+   NORMALIZAR DATA
+========================================================= */
+
+function normalizarDataLancamento(
+    valor
+) {
+
+    if (
+        valor === null ||
+        valor === undefined ||
+        valor === ""
+    ) {
+
+        return "";
+    }
+
+
+    if (
+        typeof valor === "string" &&
+        /^\d{4}-\d{2}-\d{2}$/.test(
+            valor
+        )
+    ) {
+
+        return valor;
+    }
+
+
+    if (
+        typeof valor === "string" &&
+        /^\d{4}-\d{2}-\d{2}T/.test(
+            valor
+        )
+    ) {
+
+        return valor.substring(
+            0,
+            10
+        );
+    }
+
+
+    if (
+        typeof valor === "string" &&
+        /^\d{2}\/\d{2}\/\d{4}$/.test(
+            valor
+        )
+    ) {
+
+        const partes =
+            valor.split("/");
+
+
+        return (
+            partes[2] +
+            "-" +
+            partes[1] +
+            "-" +
+            partes[0]
+        );
+    }
+
+
+    const data =
+        new Date(
+            valor
+        );
+
+
+    if (
+        isNaN(
+            data.getTime()
+        )
+    ) {
+
+        return "";
+    }
+
+
+    const ano =
+        data.getFullYear();
+
+
+    const mes =
+        String(
+            data.getMonth() + 1
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    const dia =
+        String(
+            data.getDate()
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+        ano +
+        "-" +
+        mes +
+        "-" +
+        dia
+    );
+}
+
+
+/* =========================================================
+   OBTER LISTA DE LANÇAMENTOS
+========================================================= */
+
+function extrairLancamentos(
+    resposta
+) {
+
+    const lista =
+        resposta?.lancamentos ||
+        resposta?.dados ||
+        resposta?.registros ||
+        resposta?.items ||
+        resposta?.data ||
+        [];
+
+
+    return Array.isArray(lista)
+        ? lista
+        : [];
+}
+
+
+/* =========================================================
+   VERIFICAR SE ESTÁ BAIXADO
+========================================================= */
+
+function estaBaixado(
+    item
+) {
+
+    return (
+        item.baixado === true ||
+        item.baixado === "true" ||
+        item.baixado === "TRUE" ||
+        item.baixado === 1 ||
+        item.baixado === "1" ||
+
+        String(
+            item.status ??
+            item.Status ??
+            ""
+        )
+        .trim()
+        .toLowerCase() ===
+        "baixado"
+    );
+}
+
+
+/* =========================================================
+   OBTER TIPO
+========================================================= */
+
+function obterTipo(
+    item
+) {
+
+    return String(
+        item.tipo ??
+        item.Tipo ??
+        ""
+    )
+    .trim()
+    .toLowerCase();
+}
+
+
+/* =========================================================
+   VERIFICAR SE É TIPO FINANCEIRO
+========================================================= */
+
+function ehTipoFinanceiro(
+    item
+) {
+
+    const tipo =
+        obterTipo(
+            item
+        );
+
+
+    return (
+        tipo === "receber" ||
+        tipo === "pagar" ||
+        tipo === "a receber" ||
+        tipo === "a pagar" ||
+        tipo === "contas a receber" ||
+        tipo === "contas a pagar"
+    );
+}
+
+
+/* =========================================================
+   É A RECEBER?
+========================================================= */
+
+function ehReceber(
+    item
+) {
+
+    const tipo =
+        obterTipo(
+            item
+        );
+
+
+    return (
+        tipo.includes(
+            "receber"
+        )
+    );
+}
+
+
+/* =========================================================
+   É A PAGAR?
+========================================================= */
+
+function ehPagar(
+    item
+) {
+
+    const tipo =
+        obterTipo(
+            item
+        );
+
+
+    return (
+        tipo.includes(
+            "pagar"
+        )
+    );
+}
+
+
+/* =========================================================
    CARREGAR RESUMO
 ========================================================= */
 
@@ -1753,10 +2647,6 @@ async function carregarResumo() {
             );
 
 
-        /* =================================================
-           SALDO INICIAL
-        ================================================= */
-
         const saldoInicial =
             Number(
                 resposta.saldoInicial ??
@@ -1764,10 +2654,6 @@ async function carregarResumo() {
                 0
             );
 
-
-        /* =================================================
-           A RECEBER
-        ================================================= */
 
         const receber =
             Number(
@@ -1777,10 +2663,6 @@ async function carregarResumo() {
                 0
             );
 
-
-        /* =================================================
-           RECEBIDO
-        ================================================= */
 
         const recebido =
             Number(
@@ -1792,10 +2674,6 @@ async function carregarResumo() {
             );
 
 
-        /* =================================================
-           A PAGAR
-        ================================================= */
-
         const pagar =
             Number(
                 resposta.pagar ??
@@ -1804,10 +2682,6 @@ async function carregarResumo() {
                 0
             );
 
-
-        /* =================================================
-           PAGOS
-        ================================================= */
 
         const pago =
             Number(
@@ -1819,10 +2693,6 @@ async function carregarResumo() {
             );
 
 
-        /* =================================================
-           SALDO BANCÁRIO
-        ================================================= */
-
         const saldoBanco =
             Number(
                 resposta.saldoBanco ??
@@ -1831,10 +2701,6 @@ async function carregarResumo() {
                 0
             );
 
-
-        /* =================================================
-           CÁLCULO DOS SALDOS
-        ================================================= */
 
         const saldoAReceber =
             receber -
@@ -1846,10 +2712,6 @@ async function carregarResumo() {
             pago;
 
 
-        /* =================================================
-           PREENCHER SALDO INICIAL
-        ================================================= */
-
         document.getElementById(
             "saldoInicial"
         ).textContent =
@@ -1857,10 +2719,6 @@ async function carregarResumo() {
                 saldoInicial
             );
 
-
-        /* =================================================
-           PREENCHER A RECEBER
-        ================================================= */
 
         document.getElementById(
             "receber"
@@ -1870,10 +2728,6 @@ async function carregarResumo() {
             );
 
 
-        /* =================================================
-           PREENCHER RECEBIDO
-        ================================================= */
-
         document.getElementById(
             "recebido"
         ).textContent =
@@ -1881,10 +2735,6 @@ async function carregarResumo() {
                 recebido
             );
 
-
-        /* =================================================
-           PREENCHER SALDO A RECEBER
-        ================================================= */
 
         document.getElementById(
             "saldoAReceber"
@@ -1895,10 +2745,6 @@ async function carregarResumo() {
             );
 
 
-        /* =================================================
-           PREENCHER A PAGAR
-        ================================================= */
-
         document.getElementById(
             "pagar"
         ).textContent =
@@ -1907,10 +2753,6 @@ async function carregarResumo() {
             );
 
 
-        /* =================================================
-           PREENCHER PAGOS
-        ================================================= */
-
         document.getElementById(
             "pago"
         ).textContent =
@@ -1918,10 +2760,6 @@ async function carregarResumo() {
                 pago
             );
 
-
-        /* =================================================
-           PREENCHER SALDO A PAGAR
-        ================================================= */
 
         document.getElementById(
             "saldoAPagar"
@@ -1932,10 +2770,6 @@ async function carregarResumo() {
             );
 
 
-        /* =================================================
-           PREENCHER SALDO BANCÁRIO
-        ================================================= */
-
         document.getElementById(
             "saldoBanco"
         ).textContent =
@@ -1943,10 +2777,6 @@ async function carregarResumo() {
                 saldoBanco
             );
 
-
-        /* =================================================
-           STATUS
-        ================================================= */
 
         alterarStatus(
             "Sistema online"
@@ -1994,182 +2824,592 @@ async function carregarResumo() {
 
 
 /* =========================================================
-   NORMALIZAR DATA
+   ATUALIZAR STATUS DA COMPETÊNCIA
 ========================================================= */
 
-function normalizarDataLancamento(
-    valor
+async function verificarCompetenciaFechada() {
+
+    const competencia =
+        competenciaEl.value;
+
+
+    try {
+
+        const resposta =
+            await chamarAPI(
+                "competenciaFechada",
+                {
+                    competencia:
+                        competencia
+                }
+            );
+
+
+        const fechada =
+            resposta.fechada === true ||
+            resposta.fechada === "true" ||
+            resposta.fechada === 1 ||
+            resposta.fechada === "1" ||
+            resposta.competenciaFechada === true;
+
+
+        if (
+            fechada
+        ) {
+
+            competenciaStatusEl.textContent =
+                "🔒 Fechada";
+
+
+            competenciaStatusEl.classList.add(
+                "fechada"
+            );
+
+
+            btnFecharEl.textContent =
+                "🔒 Competência fechada";
+
+
+            btnFecharEl.disabled =
+                true;
+
+        } else {
+
+            competenciaStatusEl.textContent =
+                "🟢 Aberta";
+
+
+            competenciaStatusEl.classList.remove(
+                "fechada"
+            );
+
+
+            btnFecharEl.textContent =
+                "🔒 Fechar competência";
+
+
+            btnFecharEl.disabled =
+                false;
+        }
+
+
+    } catch (erro) {
+
+        console.warn(
+            "Não foi possível verificar o status da competência:",
+            erro
+        );
+
+
+        /*
+         * Caso a API antiga não retorne
+         * corretamente essa informação,
+         * mantém o sistema utilizável.
+         */
+
+        competenciaStatusEl.textContent =
+            "🟢 Aberta";
+
+
+        competenciaStatusEl.classList.remove(
+            "fechada"
+        );
+
+
+        btnFecharEl.textContent =
+            "🔒 Fechar competência";
+
+
+        btnFecharEl.disabled =
+            false;
+    }
+}
+
+
+/* =========================================================
+   CARREGAR LANÇAMENTOS
+========================================================= */
+
+async function carregarIndicadores() {
+
+    const competencia =
+        competenciaEl.value;
+
+
+    try {
+
+        const resposta =
+            await chamarAPI(
+                "listarLancamentos",
+                {
+                    competencia:
+                        competencia
+                }
+            );
+
+
+        const lancamentos =
+            extrairLancamentos(
+                resposta
+            );
+
+
+        const total =
+            lancamentos.length;
+
+
+        const baixados =
+            lancamentos.filter(
+                function(item) {
+
+                    return estaBaixado(
+                        item
+                    );
+
+                }
+            ).length;
+
+
+        const pendentes =
+            lancamentos.filter(
+                function(item) {
+
+                    return (
+                        !estaBaixado(
+                            item
+                        ) &&
+                        ehTipoFinanceiro(
+                            item
+                        )
+                    );
+
+                }
+            );
+
+
+        const hoje =
+            dataHoje();
+
+
+        const vencidos =
+            pendentes.filter(
+                function(item) {
+
+                    const vencimento =
+                        normalizarDataLancamento(
+                            item.vencimento ??
+                            item.Vencimento ??
+                            item.dataVencimento ??
+                            item.data_vencimento
+                        );
+
+
+                    return (
+                        vencimento &&
+                        vencimento < hoje
+                    );
+                }
+            );
+
+
+        document.getElementById(
+            "totalLancamentos"
+        ).textContent =
+            total;
+
+
+        document.getElementById(
+            "totalPendentes"
+        ).textContent =
+            pendentes.length;
+
+
+        document.getElementById(
+            "totalBaixados"
+        ).textContent =
+            baixados;
+
+
+        document.getElementById(
+            "totalVencidos"
+        ).textContent =
+            vencidos.length;
+
+
+        atualizarBadgePendentes(
+            pendentes.length,
+            vencidos.length
+        );
+
+
+        atualizarAlertaVencimentos(
+            pendentes,
+            hoje
+        );
+
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar indicadores:",
+            erro
+        );
+
+
+        /*
+         * Não interrompe o Dashboard.
+         */
+
+        document.getElementById(
+            "totalLancamentos"
+        ).textContent =
+            "—";
+
+
+        document.getElementById(
+            "totalPendentes"
+        ).textContent =
+            "—";
+
+
+        document.getElementById(
+            "totalBaixados"
+        ).textContent =
+            "—";
+
+
+        document.getElementById(
+            "totalVencidos"
+        ).textContent =
+            "—";
+    }
+}
+
+
+/* =========================================================
+   BADGE DE PENDÊNCIAS
+========================================================= */
+
+function atualizarBadgePendentes(
+    quantidade,
+    vencidos
 ) {
 
-    if (
-        valor === null ||
-        valor === undefined ||
-        valor === ""
-    ) {
-
-        return "";
-    }
-
-
-    /*
-     * AAAA-MM-DD
-     */
-
-    if (
-        typeof valor === "string" &&
-        /^\d{4}-\d{2}-\d{2}$/.test(
-            valor
-        )
-    ) {
-
-        return valor;
-    }
-
-
-    /*
-     * AAAA-MM-DDTHH:mm:ss
-     */
-
-    if (
-        typeof valor === "string" &&
-        /^\d{4}-\d{2}-\d{2}T/.test(
-            valor
-        )
-    ) {
-
-        return valor.substring(
-            0,
-            10
-        );
-    }
-
-
-    /*
-     * DD/MM/AAAA
-     */
-
-    if (
-        typeof valor === "string" &&
-        /^\d{2}\/\d{2}\/\d{4}$/.test(
-            valor
-        )
-    ) {
-
-        const partes =
-            valor.split("/");
-
-
-        return (
-            partes[2] +
-            "-" +
-            partes[1] +
-            "-" +
-            partes[0]
-        );
-    }
-
-
-    /*
-     * Data como objeto Date ou
-     * string reconhecida pelo navegador
-     */
-
-    const data =
-        new Date(
-            valor
+    const badge =
+        document.getElementById(
+            "badgePendentes"
         );
 
 
     if (
-        isNaN(
-            data.getTime()
-        )
+        quantidade <= 0
     ) {
 
-        return "";
+        badge.classList.remove(
+            "exibir"
+        );
+
+        return;
     }
 
 
-    const ano =
-        data.getFullYear();
+    badge.textContent =
+        quantidade;
 
 
-    const mes =
-        String(
-            data.getMonth() + 1
-        )
-        .padStart(
-            2,
-            "0"
-        );
-
-
-    const dia =
-        String(
-            data.getDate()
-        )
-        .padStart(
-            2,
-            "0"
-        );
-
-
-    return (
-        ano +
-        "-" +
-        mes +
-        "-" +
-        dia
+    badge.classList.add(
+        "exibir"
     );
+
+
+    if (
+        vencidos > 0
+    ) {
+
+        badge.classList.add(
+            "alerta"
+        );
+
+    } else {
+
+        badge.classList.remove(
+            "alerta"
+        );
+    }
 }
 
 
 /* =========================================================
-   DATA DE HOJE
+   ATUALIZAR ALERTA VISUAL
 ========================================================= */
 
-function dataHoje() {
+function atualizarAlertaVencimentos(
+    pendentes,
+    hoje
+) {
 
-    const agora =
-        new Date();
+    const hojeLista =
+        pendentes.filter(
+            function(item) {
+
+                const vencimento =
+                    normalizarDataLancamento(
+                        item.vencimento ??
+                        item.Vencimento ??
+                        item.dataVencimento ??
+                        item.data_vencimento
+                    );
 
 
-    const ano =
-        agora.getFullYear();
-
-
-    const mes =
-        String(
-            agora.getMonth() + 1
-        )
-        .padStart(
-            2,
-            "0"
+                return (
+                    vencimento === hoje
+                );
+            }
         );
 
 
-    const dia =
-        String(
-            agora.getDate()
-        )
-        .padStart(
-            2,
-            "0"
+    const vencidosLista =
+        pendentes.filter(
+            function(item) {
+
+                const vencimento =
+                    normalizarDataLancamento(
+                        item.vencimento ??
+                        item.Vencimento ??
+                        item.dataVencimento ??
+                        item.data_vencimento
+                    );
+
+
+                return (
+                    vencimento &&
+                    vencimento < hoje
+                );
+            }
         );
 
 
-    return (
-        ano +
-        "-" +
-        mes +
-        "-" +
-        dia
+    const quantidade =
+        hojeLista.length +
+        vencidosLista.length;
+
+
+    if (
+        quantidade === 0
+    ) {
+
+        alertaEl.classList.remove(
+            "exibir"
+        );
+
+        return;
+    }
+
+
+    alertaEl.classList.add(
+        "exibir"
+    );
+
+
+    alertaListaEl.innerHTML =
+        "";
+
+
+    if (
+        vencidosLista.length > 0
+    ) {
+
+        alertaEl.classList.add(
+            "tem-vencido"
+        );
+
+
+        alertaTituloEl.textContent =
+            "🔴 Atenção: existem vencimentos pendentes";
+
+
+        alertaContadorEl.textContent =
+            vencidosLista.length +
+            hojeLista.length;
+
+
+        vencidosLista
+        .slice(0, 4)
+        .forEach(
+            function(item) {
+
+                adicionarItemAlerta(
+                    item,
+                    "Vencido"
+                );
+
+            }
+        );
+
+
+        hojeLista
+        .slice(0, 4)
+        .forEach(
+            function(item) {
+
+                adicionarItemAlerta(
+                    item,
+                    "Vence hoje"
+                );
+
+            }
+        );
+
+
+        alertaRodapeEl.textContent =
+            "Existem lançamentos vencidos ou com vencimento hoje.";
+
+    } else {
+
+        alertaEl.classList.remove(
+            "tem-vencido"
+        );
+
+
+        alertaTituloEl.textContent =
+            "🔔 Vencimentos hoje";
+
+
+        alertaContadorEl.textContent =
+            hojeLista.length;
+
+
+        hojeLista
+        .slice(0, 6)
+        .forEach(
+            function(item) {
+
+                adicionarItemAlerta(
+                    item,
+                    "Vence hoje"
+                );
+
+            }
+        );
+
+
+        alertaRodapeEl.textContent =
+            "Verifique os lançamentos pendentes com vencimento hoje.";
+    }
+
+
+    const totalExibido =
+        Math.min(
+            quantidade,
+            6
+        );
+
+
+    if (
+        quantidade > totalExibido
+    ) {
+
+        const li =
+            document.createElement(
+                "li"
+            );
+
+
+        li.textContent =
+            "e mais " +
+            (
+                quantidade -
+                totalExibido
+            ) +
+            " lançamento(s).";
+
+
+        alertaListaEl.appendChild(
+            li
+        );
+    }
+}
+
+
+/* =========================================================
+   ADICIONAR ITEM AO ALERTA
+========================================================= */
+
+function adicionarItemAlerta(
+    item,
+    situacao
+) {
+
+    const li =
+        document.createElement(
+            "li"
+        );
+
+
+    const tipo =
+        obterTipo(
+            item
+        );
+
+
+    const descricao =
+        item.descricao ??
+        item.Descricao ??
+        "Sem descrição";
+
+
+    const valor =
+        Number(
+            item.valor ??
+            item.Valor ??
+            0
+        );
+
+
+    let tipoTexto =
+        "LANÇAMENTO";
+
+
+    if (
+        ehReceber(
+            item
+        )
+    ) {
+
+        tipoTexto =
+            "A RECEBER";
+
+    } else if (
+        ehPagar(
+            item
+        )
+    ) {
+
+        tipoTexto =
+            "A PAGAR";
+    }
+
+
+    li.textContent =
+        situacao +
+        " • " +
+        tipoTexto +
+        " • " +
+        descricao +
+        " • " +
+        moeda(
+            valor
+        );
+
+
+    alertaListaEl.appendChild(
+        li
     );
 }
 
 
 /* =========================================================
-   VERIFICAR VENCIMENTOS DE HOJE
+   ALERTA POP-UP DE VENCIMENTOS
 ========================================================= */
 
 async function verificarVencimentosHoje() {
@@ -2185,17 +3425,6 @@ async function verificarVencimentosHoje() {
             competenciaAtual();
 
 
-        console.log(
-            "Verificando vencimentos:",
-            hoje
-        );
-
-
-        /*
-         * Busca os lançamentos da competência
-         * atual.
-         */
-
         const resposta =
             await chamarAPI(
                 "listarLancamentos",
@@ -2206,40 +3435,11 @@ async function verificarVencimentosHoje() {
             );
 
 
-        /*
-         * Compatibilidade com diferentes
-         * formatos de retorno.
-         */
-
         const lancamentos =
-            resposta.lancamentos ||
-            resposta.dados ||
-            resposta.registros ||
-            resposta.items ||
-            [];
-
-
-        if (
-            !Array.isArray(
-                lancamentos
-            )
-        ) {
-
-            console.warn(
-                "A API não retornou uma lista de lançamentos."
+            extrairLancamentos(
+                resposta
             );
 
-            return;
-        }
-
-
-        /*
-         * Filtra somente lançamentos:
-         *
-         * - com vencimento hoje;
-         * - pendentes;
-         * - A Receber ou A Pagar.
-         */
 
         const vencendoHoje =
             lancamentos.filter(
@@ -2262,57 +3462,19 @@ async function verificarVencimentosHoje() {
                     }
 
 
-                    /*
-                     * Verifica se já foi baixado.
-                     */
-
-                    const baixado =
-                        item.baixado === true ||
-                        item.baixado === "true" ||
-                        item.baixado === "TRUE" ||
-                        item.baixado === 1 ||
-                        item.baixado === "1" ||
-                        String(
-                            item.status ??
-                            item.Status ??
-                            ""
-                        )
-                        .trim()
-                        .toLowerCase() ===
-                        "baixado";
-
-
                     if (
-                        baixado
+                        estaBaixado(
+                            item
+                        )
                     ) {
 
                         return false;
                     }
 
 
-                    /*
-                     * Verifica o tipo.
-                     */
-
-                    const tipo =
-                        String(
-                            item.tipo ??
-                            item.Tipo ??
-                            ""
-                        )
-                        .trim()
-                        .toLowerCase();
-
-
-                    return (
-                        tipo === "receber" ||
-                        tipo === "pagar" ||
-                        tipo === "a receber" ||
-                        tipo === "a pagar" ||
-                        tipo === "contas a receber" ||
-                        tipo === "contas a pagar"
+                    return ehTipoFinanceiro(
+                        item
                     );
-
                 }
             );
 
@@ -2321,18 +3483,9 @@ async function verificarVencimentosHoje() {
             vencendoHoje.length === 0
         ) {
 
-            console.log(
-                "Nenhum lançamento vence hoje."
-            );
-
             return;
         }
 
-
-        /*
-         * Controle dos alertas exibidos
-         * durante a sessão.
-         */
 
         const chave =
             "alertaVencimentos_" +
@@ -2357,11 +3510,6 @@ async function verificarVencimentosHoje() {
             alertados = [];
         }
 
-
-        /*
-         * Identifica somente os lançamentos
-         * que ainda não foram apresentados.
-         */
 
         const novos =
             vencendoHoje.filter(
@@ -2402,10 +3550,6 @@ async function verificarVencimentosHoje() {
         }
 
 
-        /* =================================================
-           MONTAR ALERTA
-        ================================================= */
-
         let mensagem =
             "⚠️ ATENÇÃO\n\n" +
             "Existem lançamentos com vencimento hoje:\n\n";
@@ -2415,13 +3559,9 @@ async function verificarVencimentosHoje() {
             function(item) {
 
                 const tipo =
-                    String(
-                        item.tipo ??
-                        item.Tipo ??
-                        ""
-                    )
-                    .trim()
-                    .toLowerCase();
+                    obterTipo(
+                        item
+                    );
 
 
                 const descricao =
@@ -2481,18 +3621,10 @@ async function verificarVencimentosHoje() {
             "\nVerifique os lançamentos pendentes.";
 
 
-        /*
-         * Exibe o alerta.
-         */
-
         alert(
             mensagem
         );
 
-
-        /*
-         * Marca os lançamentos como já alertados.
-         */
 
         const idsNovos =
             novos.map(
@@ -2520,34 +3652,163 @@ async function verificarVencimentosHoje() {
             );
 
 
-        const listaAtualizada =
-            alertados.concat(
-                idsNovos
-            );
-
-
         sessionStorage.setItem(
             chave,
             JSON.stringify(
-                listaAtualizada
+                alertados.concat(
+                    idsNovos
+                )
             )
         );
 
 
-        console.log(
-            "Alerta de vencimentos exibido."
+    } catch (erro) {
+
+        console.error(
+            "Erro ao verificar vencimentos:",
+            erro
         );
+    }
+}
+
+
+/* =========================================================
+   CARREGAR TUDO
+========================================================= */
+
+async function carregarTudo() {
+
+    await carregarResumo();
+
+    await verificarCompetenciaFechada();
+
+    await carregarIndicadores();
+
+    await verificarVencimentosHoje();
+}
+
+
+/* =========================================================
+   FECHAR COMPETÊNCIA
+========================================================= */
+
+async function fecharCompetencia() {
+
+    const competencia =
+        competenciaEl.value;
+
+
+    if (!competencia) {
+
+        alert(
+            "Selecione uma competência antes de fechar."
+        );
+
+        return;
+    }
+
+
+    if (
+        btnFecharEl.disabled
+    ) {
+
+        return;
+    }
+
+
+    const confirmar =
+        confirm(
+            "Deseja fechar a competência " +
+            competencia +
+            "?\n\n" +
+            "O saldo final será gravado como saldo inicial da próxima competência."
+        );
+
+
+    if (!confirmar) {
+
+        return;
+    }
+
+
+    alterarStatus(
+        "Fechando competência..."
+    );
+
+
+    btnFecharEl.disabled =
+        true;
+
+
+    try {
+
+        const resultado =
+            await chamarAPI(
+                "fecharMes",
+                {
+                    competencia:
+                        competencia
+                }
+            );
+
+
+        if (
+            !resultado ||
+            !resultado.sucesso
+        ) {
+
+            throw new Error(
+                resultado?.mensagem ||
+                "Não foi possível fechar a competência."
+            );
+        }
+
+
+        alert(
+            "Competência fechada com sucesso!\n\n" +
+
+            "Competência: " +
+            resultado.competenciaAtual +
+
+            "\n" +
+
+            "Saldo final: " +
+            resultado.saldoFinalFormatado +
+
+            "\n\n" +
+
+            "Saldo inicial gravado para: " +
+            resultado.proximaCompetencia
+        );
+
+
+        alterarStatus(
+            "Sistema online"
+        );
+
+
+        await carregarTudo();
+
 
     } catch (erro) {
 
-        /*
-         * O alerta nunca deve impedir
-         * o funcionamento do Dashboard.
-         */
-
         console.error(
-            "Erro ao verificar vencimentos de hoje:",
             erro
+        );
+
+
+        alterarStatus(
+            "Sistema online"
+        );
+
+
+        btnFecharEl.disabled =
+            false;
+
+
+        alert(
+            "Erro ao fechar a competência:\n\n" +
+            erro.message
         );
     }
 }
@@ -2707,16 +3968,24 @@ competenciaEl.addEventListener(
     "change",
     async function() {
 
-        await carregarResumo();
-
         /*
-         * Se o usuário mudar para outra
-         * competência, verifica também os
-         * vencimentos daquela competência.
+         * Ao mudar a competência,
+         * atualiza todos os indicadores.
          */
 
-        await verificarVencimentosHoje();
+        mostrarMensagem(
+            "Atualizando competência...",
+            ""
+        );
 
+
+        await carregarTudo();
+
+
+        mostrarMensagem(
+            "",
+            ""
+        );
     }
 );
 
@@ -2735,7 +4004,7 @@ competenciaEl.addEventListener(
 
             evento.preventDefault();
 
-            carregarResumo();
+            carregarTudo();
         }
 
     }
@@ -2751,18 +4020,10 @@ document.addEventListener(
     async function() {
 
         /*
-         * Primeiro carrega o resumo.
+         * Carrega o Dashboard.
          */
 
-        await carregarResumo();
-
-
-        /*
-         * Depois verifica se existe algum
-         * lançamento vencendo hoje.
-         */
-
-        await verificarVencimentosHoje();
+        await carregarTudo();
 
     }
 );
