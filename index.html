@@ -1,3750 +1,2027 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Controle Financeiro</title>
 
 <style>
 
-/* =========================================================
-   CONFIGURAÇÃO GERAL
-========================================================= */
-
 * {
     box-sizing: border-box;
 }
 
 body {
-
     margin: 0;
-
-    min-height: 100vh;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f4f7fb 0%,
-            #eef3f9 100%
-        );
-
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fa;
     color: #1f2937;
 }
 
-
-.container {
-
-    width: 100%;
-
-    max-width: 1100px;
-
-    margin: 0 auto;
-
-    padding: 20px 18px 30px;
-}
-
-
-.card {
-
-    background: #ffffff;
-
-    border-radius: 16px;
-
-    padding: 22px;
-
-    box-shadow:
-        0 8px 28px
-        rgba(15, 23, 42, 0.08);
-
-    border:
-        1px solid #e5eaf0;
-}
-
-
-/* =========================================================
+/* =========================
    CABEÇALHO
-========================================================= */
+========================= */
 
 .header {
-
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 18px 28px;
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
-    gap: 15px;
-
-    margin-bottom: 18px;
 }
 
-
-.titulo {
-
+.header-left h1 {
     margin: 0;
-
-    color: #17365d;
-
-    font-size: 26px;
-
-    font-weight: 700;
-
-    line-height: 1.2;
+    font-size: 22px;
+    color: #1e3a5f;
 }
 
-
-.subtitulo {
-
-    margin-top: 5px;
-
-    color: #64748b;
-
+.header-left p {
+    margin: 4px 0 0;
     font-size: 13px;
+    color: #6b7280;
 }
-
-
-/* =========================================================
-   STATUS
-========================================================= */
 
 .status {
-
-    display: inline-flex;
-
+    display: flex;
     align-items: center;
-
-    gap: 6px;
-
-    padding: 6px 10px;
-
-    border-radius: 18px;
-
-    background: #f1f5f9;
-
-    color: #64748b;
-
-    font-size: 12px;
-
+    gap: 7px;
+    font-size: 13px;
     font-weight: 600;
-
-    white-space: nowrap;
+    color: #16803c;
 }
 
-
-.status::before {
-
-    content: "";
-
-    width: 7px;
-
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: #94a3b8;
-}
-
-
-.status.online {
-
-    background: #ecfdf3;
-
-    color: #166534;
-}
-
-
-.status.online::before {
-
+.status-dot {
+    width: 9px;
+    height: 9px;
     background: #22c55e;
+    border-radius: 50%;
 }
 
+/* =========================
+   CONTAINER
+========================= */
 
-.status.erro {
-
-    background: #fef2f2;
-
-    color: #991b1b;
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 22px 28px 40px;
 }
 
-
-.status.erro::before {
-
-    background: #ef4444;
-}
-
-
-/* =========================================================
+/* =========================
    COMPETÊNCIA
-========================================================= */
+========================= */
 
 .competencia-box {
-
-    background: #f8fafc;
-
-    border:
-        1px solid #e2e8f0;
-
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
     border-radius: 10px;
-
-    padding: 11px 12px;
-
-    margin-bottom: 14px;
-}
-
-
-.competencia-topo {
+    padding: 15px 18px;
+    margin-bottom: 18px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
-    gap: 10px;
-
-    margin-bottom: 5px;
+    gap: 15px;
 }
 
-
-.competencia-label {
-
-    display: block;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    color: #475569;
-}
-
-
-.competencia-status {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 5px;
-
-    padding: 4px 8px;
-
-    border-radius: 12px;
-
-    background: #ecfdf3;
-
-    color: #166534;
-
-    font-size: 10px;
-
-    font-weight: 700;
-}
-
-
-.competencia-status::before {
-
-    content: "";
-
-    width: 6px;
-
-    height: 6px;
-
-    border-radius: 50%;
-
-    background: #22c55e;
-}
-
-
-.competencia-status.fechada {
-
-    background: #f1f5f9;
-
-    color: #475569;
-}
-
-
-.competencia-status.fechada::before {
-
-    background: #64748b;
-}
-
-
-.competencia-linha {
-
+.competencia-info {
     display: flex;
-
     align-items: center;
-
-    gap: 6px;
-
-    flex-wrap: wrap;
+    gap: 12px;
 }
 
+.competencia-info label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4b5563;
+}
 
 #competencia {
-
-    width: 180px;
-
-    height: 34px;
-
-    padding: 5px 9px;
-
-    border:
-        1px solid #cbd5e1;
-
+    border: 1px solid #d1d5db;
     border-radius: 7px;
-
+    padding: 8px 10px;
+    font-size: 14px;
     background: #ffffff;
-
-    color: #1e293b;
-
-    font-size: 13px;
-
-    outline: none;
+    color: #111827;
 }
 
-
-#competencia:focus {
-
-    border-color: #2563eb;
-
-    box-shadow:
-        0 0 0 2px
-        rgba(37, 99, 235, 0.10);
+.competencia-acoes {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-
-/* =========================================================
-   BOTÕES
-========================================================= */
-
-.btn-atualizar {
-
-    height: 34px;
-
-    padding: 5px 10px;
-
-    border: 0;
-
+.btn {
+    border: none;
     border-radius: 7px;
-
-    background: #17365d;
-
-    color: #ffffff;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
+    padding: 9px 13px;
     cursor: pointer;
-
-    white-space: nowrap;
-
+    font-size: 13px;
+    font-weight: 600;
     transition: .2s;
 }
 
-
-.btn-atualizar:hover {
-
-    background: #214c7d;
-
-    transform:
-        translateY(-1px);
+.btn:hover {
+    opacity: .88;
 }
 
-
-.btn-atualizar.fechar {
-
-    background: #475569;
+.btn-primary {
+    background: #2563eb;
+    color: white;
 }
 
-
-.btn-atualizar.fechar:hover {
-
-    background: #334155;
+.btn-secondary {
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
 }
 
-
-.btn-atualizar:disabled {
-
-    opacity: .65;
-
-    cursor: not-allowed;
-
-    transform: none;
-}
-
-
-/* =========================================================
-   TÍTULOS
-========================================================= */
-
-.secao-titulo {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 10px;
-
-    margin:
-        16px 0 7px;
-
-    color: #17365d;
-
-    font-size: 16px;
-
-    font-weight: 700;
-}
-
-
-.secao-legenda {
-
-    color: #94a3b8;
-
-    font-size: 10px;
-
-    font-weight: 500;
-}
-
-
-/* =========================================================
-   RESUMO
-========================================================= */
-
-.resumo {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(6, 1fr);
-
-    gap: 8px;
-
-    margin-bottom: 14px;
-}
-
-
-.resumo-card {
-
-    min-height: 0;
-
-    height: auto;
-
-    padding: 9px 10px;
-
-    border:
-        1px solid #e5e7eb;
-
-    border-radius: 8px;
-
-    background: #ffffff;
-
-    box-shadow:
-        0 2px 6px
-        rgba(15, 23, 42, 0.03);
-
-    transition:
-        transform .18s ease,
-        box-shadow .18s ease;
-}
-
-
-.resumo-card:hover {
-
-    transform:
-        translateY(-1px);
-
-    box-shadow:
-        0 4px 10px
-        rgba(15, 23, 42, 0.06);
-}
-
-
-.resumo-label {
-
-    margin:
-        0 0 3px;
-
-    color: #64748b;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-    line-height: 1.15;
-}
-
-
-.resumo-valor {
-
-    margin: 0;
-
-    color: #17365d;
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    line-height: 1.15;
-
-    word-break: break-word;
-}
-
-
-/* =========================================================
-   VALOR COMPLEMENTAR
-========================================================= */
-
-.resumo-subvalor {
-
-    margin-top: 4px;
-
-    color: #94a3b8;
-
-    font-size: 9px;
-
-    font-weight: 600;
-
-    line-height: 1.2;
-
-    white-space: nowrap;
-}
-
-
-/* =========================================================
-   DESTAQUES FINANCEIROS
-========================================================= */
-
-.resumo-card.recebido {
-
-    border-left:
-        3px solid #16a34a;
-}
-
-
-.resumo-card.recebido
-.resumo-valor {
-
-    color: #15803d;
-}
-
-
-.resumo-card.pago {
-
-    border-left:
-        3px solid #dc2626;
-}
-
-
-.resumo-card.pago
-.resumo-valor {
-
-    color: #b91c1c;
-}
-
-
-.resumo-card.saldo {
-
-    border-left:
-        3px solid #17365d;
-}
-
-
-.resumo-card.saldo-banco {
-
-    background:
-        linear-gradient(
-            135deg,
-            #f8fbff,
-            #ffffff
-        );
-
-    border:
-        1px solid #cbd5e1;
-
-    border-left:
-        4px solid #17365d;
-
-    box-shadow:
-        0 4px 12px
-        rgba(23, 54, 93, 0.08);
-}
-
-
-.resumo-card.saldo-banco
-.resumo-valor {
-
-    font-size: 18px;
-
-    color: #17365d;
-}
-
-
-/* =========================================================
-   PAINEL OPERACIONAL
-========================================================= */
-
-.operacional {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 8px;
-
-    margin:
-        0 0 14px;
-}
-
-
-.operacional-item {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    padding: 9px 10px;
-
-    border:
-        1px solid #e5e7eb;
-
-    border-radius: 8px;
-
-    background: #f8fafc;
-}
-
-
-.operacional-icone {
-
-    width: 29px;
-
-    height: 29px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 7px;
-
-    background: #e2e8f0;
-
-    font-size: 15px;
-
-    flex-shrink: 0;
-}
-
-
-.operacional-conteudo {
-
-    min-width: 0;
-}
-
-
-.operacional-numero {
-
-    display: block;
-
-    color: #17365d;
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    line-height: 1;
-}
-
-
-.operacional-label {
-
-    display: block;
-
-    margin-top: 3px;
-
-    color: #64748b;
-
-    font-size: 9px;
-
-    font-weight: 600;
-}
-
-
-.operacional-item.pendente {
-
-    border-left:
-        3px solid #f59e0b;
-}
-
-
-.operacional-item.pendente
-.operacional-numero {
-
-    color: #b45309;
-}
-
-
-.operacional-item.vencido {
-
-    border-left:
-        3px solid #dc2626;
-
-    background: #fffafa;
-}
-
-
-.operacional-item.vencido
-.operacional-numero {
-
-    color: #b91c1c;
-}
-
-
-/* =========================================================
-   ALERTA DE VENCIMENTOS
-========================================================= */
-
-.alerta-vencimentos {
-
-    display: none;
-
-    margin:
-        0 0 16px;
-
-    padding:
-        12px 14px;
-
-    border:
-        1px solid #fed7aa;
-
-    border-left:
-        4px solid #f59e0b;
-
-    border-radius: 9px;
-
-    background: #fffbeb;
-
-    color: #92400e;
-}
-
-
-.alerta-vencimentos.exibir {
-
-    display: block;
-}
-
-
-.alerta-vencimentos.tem-vencido {
-
-    border-color: #fecaca;
-
-    border-left-color: #dc2626;
-
-    background: #fef2f2;
-
-    color: #991b1b;
-}
-
-
-.alerta-titulo {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 10px;
-
-    margin-bottom: 5px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-}
-
-
-.alerta-contador {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    min-width: 23px;
-
-    height: 23px;
-
-    padding: 0 7px;
-
-    border-radius: 12px;
-
-    background: #f59e0b;
-
-    color: #ffffff;
-
-    font-size: 11px;
-
-    font-weight: 700;
-}
-
-
-.tem-vencido .alerta-contador {
-
+.btn-danger {
     background: #dc2626;
+    color: white;
 }
 
-
-.alerta-lista {
-
-    margin: 0;
-
-    padding-left: 18px;
-
-    font-size: 11px;
-
-    line-height: 1.6;
-}
-
-
-.alerta-rodape {
-
-    margin-top: 7px;
-
-    color: #a16207;
-
-    font-size: 10px;
-
+.status-competencia {
+    padding: 6px 11px;
+    border-radius: 20px;
+    font-size: 12px;
     font-weight: 600;
 }
 
-
-.tem-vencido .alerta-rodape {
-
-    color: #b91c1c;
-}
-
-
-/* =========================================================
-   MENU / ROTINAS
-========================================================= */
-
-.menu {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 10px;
-}
-
-
-.menu-item {
-
-    position: relative;
-
-    width: 100%;
-
-    min-height: 100px;
-
-    border: 0;
-
-    border-radius: 11px;
-
-    padding: 14px 12px;
-
-    background: #17365d;
-
-    color: #ffffff;
-
-    cursor: pointer;
-
-    text-align: center;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    transition:
-        transform .18s ease,
-        background .18s ease,
-        box-shadow .18s ease;
-}
-
-
-.menu-item:hover {
-
-    background: #214c7d;
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 6px 15px
-        rgba(23, 54, 93, 0.18);
-}
-
-
-.menu-item.novo {
-
-    background: #15803d;
-}
-
-
-.menu-item.novo:hover {
-
-    background: #166534;
-}
-
-
-.menu-icone {
-
-    display: block;
-
-    font-size: 26px;
-
-    line-height: 1;
-
-    margin-bottom: 8px;
-}
-
-
-.menu-descricao {
-
-    display: block;
-
-    margin-top: 5px;
-
-    font-size: 10px;
-
-    font-weight: 400;
-
-    line-height: 1.25;
-
-    opacity: .80;
-}
-
-
-.menu-badge {
-
-    position: absolute;
-
-    top: 8px;
-
-    right: 8px;
-
-    min-width: 20px;
-
-    height: 20px;
-
-    padding: 0 5px;
-
-    display: none;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 10px;
-
-    background: #f59e0b;
-
-    color: #ffffff;
-
-    font-size: 10px;
-
-    font-weight: 700;
-}
-
-
-.menu-badge.exibir {
-
-    display: inline-flex;
-}
-
-
-.menu-badge.alerta {
-
-    background: #dc2626;
-}
-
-
-/* =========================================================
-   MENSAGEM
-========================================================= */
-
-.mensagem {
-
-    display: none;
-
-    margin-top: 15px;
-
-    padding: 10px 12px;
-
-    border-radius: 8px;
-
-    background: #fff7ed;
-
-    border:
-        1px solid #fed7aa;
-
-    color: #9a3412;
-
-    font-size: 13px;
-}
-
-
-.mensagem.erro {
-
-    background: #fef2f2;
-
-    border-color: #fecaca;
-
-    color: #991b1b;
-}
-
-
-.mensagem.sucesso {
-
-    background: #f0fdf4;
-
-    border-color: #bbf7d0;
-
+.status-aberta {
+    background: #dcfce7;
     color: #166534;
 }
 
+.status-fechada {
+    background: #fee2e2;
+    color: #991b1b;
+}
 
-/* =========================================================
-   RODAPÉ
-========================================================= */
+/* =========================
+   ALERTA DE VENCIMENTOS
+========================= */
 
-.rodape {
-
-    margin-top: 18px;
-
-    padding-top: 12px;
-
-    border-top:
-        1px solid #e5e7eb;
-
-    display: flex;
-
-    justify-content: space-between;
+.aviso-vencimentos {
+    display: none;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-left: 4px solid #f97316;
+    border-radius: 9px;
+    padding: 13px 16px;
+    margin-bottom: 18px;
 
     align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
 
+.aviso-vencimentos.visivel {
+    display: flex;
+}
+
+.aviso-conteudo {
+    display: flex;
+    align-items: center;
     gap: 12px;
+}
 
-    color: #94a3b8;
+.aviso-icone {
+    font-size: 23px;
+}
 
+.aviso-titulo {
+    font-size: 14px;
+    font-weight: 700;
+    color: #9a3412;
+}
+
+.aviso-detalhes {
+    margin-top: 3px;
+    font-size: 12px;
+    color: #7c2d12;
+}
+
+.btn-aviso {
+    background: #f97316;
+    color: white;
+    white-space: nowrap;
+}
+
+/* =========================
+   CARDS FINANCEIROS
+========================= */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 15px;
+    min-height: 105px;
+}
+
+.card-titulo {
     font-size: 11px;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    margin-bottom: 9px;
 }
 
+.card-valor {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f2937;
+}
 
-/* =========================================================
+.card-sub {
+    margin-top: 6px;
+    font-size: 11px;
+    color: #6b7280;
+}
+
+.card-receber .card-valor {
+    color: #15803d;
+}
+
+.card-pagar .card-valor {
+    color: #dc2626;
+}
+
+.card-recebido .card-valor {
+    color: #2563eb;
+}
+
+.card-pago .card-valor {
+    color: #7c3aed;
+}
+
+.card-banco {
+    border-left: 4px solid #2563eb;
+}
+
+.card-inicial {
+    border-left: 4px solid #6b7280;
+}
+
+/* =========================
+   INDICADORES
+========================= */
+
+.indicadores {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.indicador {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    padding: 12px 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.indicador-info span {
+    display: block;
+    font-size: 11px;
+    color: #6b7280;
+}
+
+.indicador-info strong {
+    display: block;
+    margin-top: 3px;
+    font-size: 18px;
+    color: #1f2937;
+}
+
+.indicador-numero {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+/* =========================
+   TÍTULOS
+========================= */
+
+.secao-titulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 11px;
+}
+
+.secao-titulo h2 {
+    margin: 0;
+    font-size: 15px;
+    color: #374151;
+}
+
+.secao-titulo span {
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+/* =========================
+   ROTINAS
+========================= */
+
+.rotinas {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+}
+
+.rotina {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 17px 14px;
+    cursor: pointer;
+    transition: .2s;
+    min-height: 100px;
+}
+
+.rotina:hover {
+    border-color: #93c5fd;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+    transform: translateY(-1px);
+}
+
+.rotina-icone {
+    font-size: 23px;
+    margin-bottom: 9px;
+}
+
+.rotina-titulo {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.rotina-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: #6b7280;
+    line-height: 1.35;
+}
+
+/* =========================
+   MENSAGEM
+========================= */
+
+.mensagem {
+    display: none;
+    margin-bottom: 15px;
+    padding: 11px 14px;
+    border-radius: 7px;
+    font-size: 13px;
+}
+
+.mensagem.sucesso {
+    display: block;
+    background: #ecfdf5;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.mensagem.erro {
+    display: block;
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.mensagem.info {
+    display: block;
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+
+/* =========================
    RESPONSIVO
-========================================================= */
+========================= */
 
-@media (max-width: 1000px) {
+@media (max-width: 1150px) {
 
-    .resumo {
-
-        grid-template-columns:
-            repeat(3, 1fr);
+    .cards {
+        grid-template-columns: repeat(3, 1fr);
     }
 
-    .operacional {
-
-        grid-template-columns:
-            repeat(2, 1fr);
+    .rotinas {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
-
-@media (max-width: 850px) {
-
-    .resumo {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .menu {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-}
-
-
-@media (max-width: 560px) {
-
-    .container {
-
-        padding:
-            10px 8px 20px;
-    }
-
-
-    .card {
-
-        padding: 15px;
-
-        border-radius: 13px;
-    }
-
+@media (max-width: 750px) {
 
     .header {
+        padding: 15px;
+    }
 
+    .container {
+        padding: 15px;
+    }
+
+    .competencia-box {
         align-items: flex-start;
-
         flex-direction: column;
-
-        gap: 8px;
     }
 
-
-    .titulo {
-
-        font-size: 23px;
-    }
-
-
-    .competencia-topo {
-
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        gap: 5px;
-    }
-
-
-    .competencia-linha {
-
+    .competencia-acoes {
         width: 100%;
+        flex-wrap: wrap;
     }
 
-
-    #competencia {
-
-        width: 165px;
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-
-    .resumo {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 6px;
+    .indicadores {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-
-    .resumo-card {
-
-        padding: 8px;
+    .rotinas {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-
-    .resumo-label {
-
-        font-size: 9px;
-    }
-
-
-    .resumo-valor {
-
-        font-size: 14px;
-    }
-
-
-    .resumo-card.saldo-banco
-    .resumo-valor {
-
-        font-size: 16px;
-    }
-
-
-    .resumo-subvalor {
-
-        font-size: 8px;
-    }
-
-
-    .operacional {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 6px;
-    }
-
-
-    .operacional-item {
-
-        padding: 8px;
-    }
-
-
-    .operacional-numero {
-
-        font-size: 14px;
-    }
-
-
-    .menu {
-
-        grid-template-columns: 1fr;
-    }
-
-
-    .menu-item {
-
-        min-height: 85px;
-    }
-
-
-    .rodape {
-
-        flex-direction: column;
-
+    .aviso-vencimentos {
         align-items: flex-start;
+        flex-direction: column;
     }
 }
 
+@media (max-width: 480px) {
 
-@media (max-width: 380px) {
-
-    .resumo {
-
+    .cards,
+    .indicadores,
+    .rotinas {
         grid-template-columns: 1fr;
     }
 
-
-    .resumo-card {
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: space-between;
-
-        gap: 8px;
-    }
-
-
-    .resumo-label {
-
-        margin: 0;
-    }
-
-
-    .resumo-valor {
-
-        text-align: right;
-    }
-
-
-    .resumo-subvalor {
-
-        margin-left: auto;
-
-        text-align: right;
-    }
-
-
-    .operacional {
-
-        grid-template-columns: 1fr;
+    .competencia-info {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
+<header class="header">
 
-<div class="card">
+    <div class="header-left">
+        <h1>Controle Financeiro</h1>
+        <p>Gestão de lançamentos e fluxo financeiro</p>
+    </div>
 
-<!-- =====================================================
-     CABEÇALHO
-===================================================== -->
+    <div class="status">
+        <span class="status-dot"></span>
+        Online
+    </div>
 
-<div class="header">
+</header>
 
-<div>
 
-<h1 class="titulo">
-    Controle Financeiro
-</h1>
+<main class="container">
 
-<div class="subtitulo">
-    Gestão de lançamentos e fluxo financeiro
-</div>
+    <!-- COMPETÊNCIA -->
 
-</div>
+    <div class="competencia-box">
 
-<div
-    id="status"
-    class="status">
+        <div class="competencia-info">
 
-Sistema
+            <label for="competencia">
+                Competência
+            </label>
 
-</div>
+            <input
+                type="month"
+                id="competencia"
+            >
 
-</div>
+            <span
+                id="nomeCompetencia"
+                style="font-size:13px;color:#6b7280;"
+            ></span>
 
-<!-- =====================================================
-     COMPETÊNCIA
-===================================================== -->
+        </div>
 
-<div class="competencia-box">
+        <div class="competencia-acoes">
 
-<div class="competencia-topo">
+            <span
+                id="statusCompetencia"
+                class="status-competencia status-aberta"
+            >
+                🟢 Aberta
+            </span>
 
-<label
- class="competencia-label"
- for="competencia">
+            <button
+                class="btn btn-danger"
+                id="btnFechar"
+                onclick="fecharCompetencia()"
+            >
+                🔒 Fechar competência
+            </button>
 
-```
-Competência
-```
+            <button
+                class="btn btn-secondary"
+                onclick="atualizarTudo()"
+            >
+                ↻ Atualizar
+            </button>
 
-</label>
+        </div>
 
-<div
-    id="competenciaStatus"
-    class="competencia-status">
+    </div>
 
-```
-🟢 Aberta
-```
 
-</div>
+    <!-- ALERTA DE VENCIMENTOS -->
 
-</div>
+    <div
+        id="avisoVencimentos"
+        class="aviso-vencimentos"
+    >
 
-<div class="competencia-linha">
+        <div class="aviso-conteudo">
 
-<input
-id="competencia"
-type="month"
-title="Selecione a competência"
+            <div class="aviso-icone">
+                🔔
+            </div>
 
->
+            <div>
 
-<button
- id="btnFechar"
- type="button"
- class="btn-atualizar fechar"
- onclick="fecharCompetencia()">
+                <div
+                    id="tituloAviso"
+                    class="aviso-titulo"
+                >
+                    Vencimentos hoje
+                </div>
 
-```
-🔒 Fechar competência
-```
+                <div
+                    id="detalhesAviso"
+                    class="aviso-detalhes"
+                >
+                    Existem lançamentos vencendo hoje.
+                </div>
 
-</button>
+            </div>
 
-<button
- type="button"
- class="btn-atualizar"
- onclick="carregarTudo()">
+        </div>
 
-```
-↻ Atualizar
-```
+        <button
+            class="btn btn-aviso"
+            onclick="abrirPagina('BaixasPendentes')"
+        >
+            Ver pendências
+        </button>
 
-</button>
+    </div>
 
-</div>
 
-</div>
+    <!-- MENSAGEM -->
 
-<!-- =====================================================
-     RESUMO FINANCEIRO
-===================================================== -->
+    <div id="mensagem" class="mensagem"></div>
 
-<div class="secao-titulo">
 
-<span>
-    Resumo da Competência
-</span>
+    <!-- CARDS FINANCEIROS -->
 
-<span class="secao-legenda">
-    Valores da competência selecionada
-</span>
+    <div class="cards">
 
-</div>
+        <div class="card card-inicial">
 
-<div class="resumo">
+            <div class="card-titulo">
+                Saldo inicial
+            </div>
 
-<!-- SALDO INICIAL -->
+            <div
+                class="card-valor"
+                id="saldoInicial"
+            >
+                R$ 0,00
+            </div>
 
-<div class="resumo-card saldo">
+        </div>
 
-<div class="resumo-label">
-    SALDO INICIAL
-</div>
 
-<div
-    id="saldoInicial"
-    class="resumo-valor">
+        <div class="card card-receber">
 
-```
-R$ 0,00
-```
+            <div class="card-titulo">
+                A receber
+            </div>
 
-</div>
+            <div
+                class="card-valor"
+                id="receber"
+            >
+                R$ 0,00
+            </div>
 
-</div>
+            <div class="card-sub">
+                Saldo a receber:
+                <strong id="saldoAReceber">
+                    R$ 0,00
+                </strong>
+            </div>
 
-<!-- A RECEBER -->
+        </div>
 
-<div class="resumo-card">
 
-<div class="resumo-label">
-    A RECEBER
-</div>
+        <div class="card card-recebido">
 
-<div
-    id="receber"
-    class="resumo-valor">
+            <div class="card-titulo">
+                Recebido
+            </div>
 
-```
-R$ 0,00
-```
+            <div
+                class="card-valor"
+                id="recebido"
+            >
+                R$ 0,00
+            </div>
 
-</div>
+        </div>
 
-<div
-    id="saldoAReceber"
-    class="resumo-subvalor">
 
-```
-Saldo a receber: R$ 0,00
-```
+        <div class="card card-pagar">
 
-</div>
+            <div class="card-titulo">
+                A pagar
+            </div>
 
-</div>
+            <div
+                class="card-valor"
+                id="pagar"
+            >
+                R$ 0,00
+            </div>
 
-<!-- RECEBIDO -->
+            <div class="card-sub">
+                Saldo a pagar:
+                <strong id="saldoAPagar">
+                    R$ 0,00
+                </strong>
+            </div>
 
-<div class="resumo-card recebido">
+        </div>
 
-<div class="resumo-label">
-    RECEBIDO
-</div>
 
-<div
-    id="recebido"
-    class="resumo-valor">
+        <div class="card card-pago">
 
-```
-R$ 0,00
-```
+            <div class="card-titulo">
+                Pagos
+            </div>
 
-</div>
+            <div
+                class="card-valor"
+                id="pago"
+            >
+                R$ 0,00
+            </div>
 
-</div>
+        </div>
 
-<!-- A PAGAR -->
 
-<div class="resumo-card">
+        <div class="card card-banco">
 
-<div class="resumo-label">
-    A PAGAR
-</div>
+            <div class="card-titulo">
+                Saldo bancário
+            </div>
 
-<div
-    id="pagar"
-    class="resumo-valor">
+            <div
+                class="card-valor"
+                id="saldoBanco"
+            >
+                R$ 0,00
+            </div>
 
-```
-R$ 0,00
-```
+        </div>
 
-</div>
+    </div>
 
-<div
-    id="saldoAPagar"
-    class="resumo-subvalor">
 
-```
-Saldo a pagar: R$ 0,00
-```
+    <!-- INDICADORES -->
 
-</div>
+    <div class="indicadores">
 
-</div>
+        <div class="indicador">
 
-<!-- PAGOS -->
+            <div class="indicador-info">
+                <span>Lançamentos</span>
+                <strong id="totalLancamentos">—</strong>
+            </div>
 
-<div class="resumo-card pago">
+            <div class="indicador-numero">
+                📋
+            </div>
 
-<div class="resumo-label">
-    PAGOS
-</div>
+        </div>
 
-<div
-    id="pago"
-    class="resumo-valor">
 
-```
-R$ 0,00
-```
+        <div class="indicador">
 
-</div>
+            <div class="indicador-info">
+                <span>Pendentes</span>
+                <strong id="totalPendentes">—</strong>
+            </div>
 
-</div>
+            <div class="indicador-numero">
+                ⏳
+            </div>
 
-<!-- SALDO BANCÁRIO -->
+        </div>
 
-<div class="resumo-card saldo-banco">
 
-<div class="resumo-label">
-    SALDO BANCÁRIO
-</div>
+        <div class="indicador">
 
-<div
-    id="saldoBanco"
-    class="resumo-valor">
+            <div class="indicador-info">
+                <span>Baixados</span>
+                <strong id="totalBaixados">—</strong>
+            </div>
 
-```
-R$ 0,00
-```
+            <div class="indicador-numero">
+                ✓
+            </div>
 
-</div>
+        </div>
 
-</div>
 
-</div>
+        <div class="indicador">
 
-<!-- =====================================================
-     SITUAÇÃO DA COMPETÊNCIA
-===================================================== -->
+            <div class="indicador-info">
+                <span>Vencidos</span>
+                <strong id="totalVencidos">—</strong>
+            </div>
 
-<div class="operacional">
+            <div class="indicador-numero">
+                ⚠
+            </div>
 
-<div class="operacional-item">
+        </div>
 
-<div class="operacional-icone">
-    📋
-</div>
+    </div>
 
-<div class="operacional-conteudo">
 
-<span
- id="totalLancamentos"
- class="operacional-numero">
+    <!-- ROTINAS -->
 
-```
-0
-```
+    <div class="secao-titulo">
 
-</span>
+        <h2>
+            Rotinas financeiras
+        </h2>
 
-<span class="operacional-label">
-    LANÇAMENTOS
-</span>
+        <span>
+            Acesso rápido
+        </span>
 
-</div>
+    </div>
 
-</div>
 
-<div class="operacional-item pendente">
+    <div class="rotinas">
 
-<div class="operacional-icone">
-    ⏳
-</div>
 
-<div class="operacional-conteudo">
+        <div
+            class="rotina"
+            onclick="abrirPagina('Lancamentos')"
+        >
 
-<span
- id="totalPendentes"
- class="operacional-numero">
+            <div class="rotina-icone">
+                📋
+            </div>
 
-```
-0
-```
+            <div class="rotina-titulo">
+                Lançamentos
+            </div>
 
-</span>
+            <div class="rotina-desc">
+                Cadastrar, editar e excluir
+            </div>
 
-<span class="operacional-label">
-    PENDENTES
-</span>
+        </div>
 
-</div>
 
-</div>
+        <div
+            class="rotina"
+            onclick="abrirPagina('BaixasPendentes')"
+        >
 
-<div class="operacional-item">
+            <div class="rotina-icone">
+                💰
+            </div>
 
-<div class="operacional-icone">
-    ✅
-</div>
+            <div class="rotina-titulo">
+                Baixas Pendentes
+            </div>
 
-<div class="operacional-conteudo">
+            <div class="rotina-desc">
+                Receber e pagar lançamentos
+            </div>
 
-<span
- id="totalBaixados"
- class="operacional-numero">
+        </div>
 
-```
-0
-```
 
-</span>
+        <div
+            class="rotina"
+            onclick="abrirPagina('Relatorio')"
+        >
 
-<span class="operacional-label">
-    BAIXADOS
-</span>
+            <div class="rotina-icone">
+                📊
+            </div>
 
-</div>
+            <div class="rotina-titulo">
+                Relatório Financeiro
+            </div>
 
-</div>
+            <div class="rotina-desc">
+                Consultar movimentações
+            </div>
 
-<div
-    id="operacionalVencidos"
-    class="operacional-item vencido">
+        </div>
 
-<div class="operacional-icone">
-    🔴
-</div>
 
-<div class="operacional-conteudo">
+        <div
+            class="rotina"
+            onclick="abrirPagina('Graficos')"
+        >
 
-<span
- id="totalVencidos"
- class="operacional-numero">
+            <div class="rotina-icone">
+                📈
+            </div>
 
-```
-0
-```
+            <div class="rotina-titulo">
+                Gráficos
+            </div>
 
-</span>
+            <div class="rotina-desc">
+                Visualizar evolução financeira
+            </div>
 
-<span class="operacional-label">
-    VENCIDOS
-</span>
+        </div>
 
-</div>
 
-</div>
+        <div
+            class="rotina"
+            onclick="abrirPagina('Atendimento')"
+        >
 
-</div>
+            <div class="rotina-icone">
+                👥
+            </div>
 
-<!-- =====================================================
-     ALERTA DE VENCIMENTOS
-===================================================== -->
+            <div class="rotina-titulo">
+                Atendimento
+            </div>
 
-<div
-    id="alertaVencimentos"
-    class="alerta-vencimentos">
+            <div class="rotina-desc">
+                Consultar atendimentos
+            </div>
 
-<div class="alerta-titulo">
+        </div>
 
-<span id="alertaTitulo">
-    🔔 Atenção
-</span>
 
-<span
- id="alertaContador"
- class="alerta-contador">
+        <div
+            class="rotina"
+            onclick="abrirNovoLancamento()"
+        >
 
-```
-0
-```
+            <div class="rotina-icone">
+                ➕
+            </div>
 
-</span>
+            <div class="rotina-titulo">
+                Novo Lançamento
+            </div>
 
-</div>
+            <div class="rotina-desc">
+                Registrar nova movimentação
+            </div>
 
-<ul
-    id="alertaLista"
-    class="alerta-lista">
-</ul>
+        </div>
 
-<div
-    id="alertaRodape"
-    class="alerta-rodape">
+    </div>
 
-```
-Verifique os lançamentos pendentes.
-```
+</main>
 
-</div>
-
-</div>
-
-<!-- =====================================================
-     MOVIMENTAÇÃO
-===================================================== -->
-
-<div class="secao-titulo">
-
-<span>
-    Movimentação
-</span>
-
-<span class="secao-legenda">
-    Cadastro e acompanhamento
-</span>
-
-</div>
-
-<div class="menu">
-
-<!-- LANÇAMENTOS -->
-
-<button
- type="button"
- class="menu-item"
- onclick="abrirPagina('lancamentos')">
-
-<span class="menu-icone">
-    📋
-</span>
-
-Lançamentos
-
-<span class="menu-descricao">
-    Consultar, editar e excluir lançamentos
-</span>
-
-</button>
-
-<!-- BAIXAS PENDENTES -->
-
-<button
- type="button"
- class="menu-item"
- onclick="abrirPagina('pendentes')">
-
-<span class="menu-badge"
- id="badgePendentes">
-
-```
-0
-```
-
-</span>
-
-<span class="menu-icone">
-    ⏳
-</span>
-
-Baixas Pendentes
-
-<span class="menu-descricao">
-    Consultar lançamentos pendentes
-</span>
-
-</button>
-
-<!-- NOVO LANÇAMENTO -->
-
-<button
- type="button"
- class="menu-item novo"
- onclick="abrirNovoLancamento()">
-
-<span class="menu-icone">
-    ➕
-</span>
-
-Novo Lançamento
-
-<span class="menu-descricao">
-    Cadastrar novo lançamento
-</span>
-
-</button>
-
-</div>
-
-<!-- =====================================================
-     ANÁLISES
-===================================================== -->
-
-<div class="secao-titulo">
-
-<span>
-    Análises
-</span>
-
-<span class="secao-legenda">
-    Informações financeiras
-</span>
-
-</div>
-
-<div class="menu">
-
-<!-- RELATÓRIO -->
-
-<button
- type="button"
- class="menu-item"
- onclick="abrirPagina('relatorio')">
-
-<span class="menu-icone">
-    📊
-</span>
-
-Relatório Financeiro
-
-<span class="menu-descricao">
-    Visualizar relatório da competência
-</span>
-
-</button>
-
-<!-- GRÁFICOS -->
-
-<button
- type="button"
- class="menu-item"
- onclick="abrirPagina('graficos')">
-
-<span class="menu-icone">
-    📈
-</span>
-
-Gráficos
-
-<span class="menu-descricao">
-    Análise visual dos dados financeiros
-</span>
-
-</button>
-
-<!-- ATENDIMENTO -->
-
-<button
- type="button"
- class="menu-item"
- onclick="abrirPagina('atendimento')">
-
-<span class="menu-icone">
-    👤
-</span>
-
-Atendimento
-
-<span class="menu-descricao">
-    Pesquisa e registro de atendimento
-</span>
-
-</button>
-
-</div>
-
-<!-- =====================================================
-     MENSAGEM
-===================================================== -->
-
-<div
-    id="mensagem"
-    class="mensagem">
-</div>
-
-<!-- =====================================================
-     RODAPÉ
-===================================================== -->
-
-<div class="rodape">
-
-<span>
-    Controle Financeiro
-</span>
-
-<span>
-    Joel Rodrigues.
-</span>
-
-</div>
-
-</div>
-
-</div>
 
 <script>
 
-/* =========================================================
+/* ==========================================================
    CONFIGURAÇÃO
-========================================================= */
+========================================================== */
 
 const URL_API =
-"https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec";
+'https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec';
 
 
-/* =========================================================
-   ELEMENTOS
-========================================================= */
+/* ==========================================================
+   API
+========================================================== */
 
-const statusEl =
-    document.getElementById("status");
+async function chamarAPI(action, parametros = {}) {
 
+    try {
 
-const mensagemEl =
-    document.getElementById("mensagem");
+        const params = new URLSearchParams();
 
+        params.append('action', action);
 
-const competenciaEl =
-    document.getElementById("competencia");
+        Object.keys(parametros).forEach(chave => {
 
-
-const competenciaStatusEl =
-    document.getElementById("competenciaStatus");
-
-
-const btnFecharEl =
-    document.getElementById("btnFechar");
-
-
-const alertaEl =
-    document.getElementById("alertaVencimentos");
-
-
-const alertaTituloEl =
-    document.getElementById("alertaTitulo");
-
-
-const alertaContadorEl =
-    document.getElementById("alertaContador");
-
-
-const alertaListaEl =
-    document.getElementById("alertaLista");
-
-
-const alertaRodapeEl =
-    document.getElementById("alertaRodape");
-
-
-/* =========================================================
-   COMPETÊNCIA ATUAL
-========================================================= */
-
-function competenciaAtual() {
-
-    const agora =
-        new Date();
-
-
-    const ano =
-        agora.getFullYear();
-
-
-    const mes =
-        String(
-            agora.getMonth() + 1
-        )
-        .padStart(
-            2,
-            "0"
-        );
-
-
-    return (
-        ano +
-        "-" +
-        mes
-    );
-}
-
-
-competenciaEl.value =
-    competenciaAtual();
-
-
-/* =========================================================
-   DATA DE HOJE
-========================================================= */
-
-function dataHoje() {
-
-    const agora =
-        new Date();
-
-
-    const ano =
-        agora.getFullYear();
-
-
-    const mes =
-        String(
-            agora.getMonth() + 1
-        )
-        .padStart(
-            2,
-            "0"
-        );
-
-
-    const dia =
-        String(
-            agora.getDate()
-        )
-        .padStart(
-            2,
-            "0"
-        );
-
-
-    return (
-        ano +
-        "-" +
-        mes +
-        "-" +
-        dia
-    );
-}
-
-
-/* =========================================================
-   MOEDA
-========================================================= */
-
-function moeda(valor) {
-
-    let numero =
-        Number(valor);
-
-
-    if (
-        isNaN(numero)
-    ) {
-
-        numero = 0;
-    }
-
-
-    return numero.toLocaleString(
-        "pt-BR",
-        {
-            style: "currency",
-            currency: "BRL"
-        }
-    );
-}
-
-
-/* =========================================================
-   STATUS
-========================================================= */
-
-function alterarStatus(
-    texto
-) {
-
-    statusEl.textContent =
-        texto;
-
-
-    if (
-        texto === "Sistema online"
-    ) {
-
-        statusEl.className =
-            "status online";
-
-    } else if (
-        texto === "API indisponível"
-    ) {
-
-        statusEl.className =
-            "status erro";
-
-    } else {
-
-        statusEl.className =
-            "status";
-    }
-}
-
-
-/* =========================================================
-   MENSAGEM
-========================================================= */
-
-function mostrarMensagem(
-    texto,
-    tipo = ""
-) {
-
-    mensagemEl.textContent =
-        texto || "";
-
-
-    mensagemEl.className =
-        "mensagem";
-
-
-    if (tipo) {
-
-        mensagemEl.classList.add(
-            tipo
-        );
-    }
-
-
-    mensagemEl.style.display =
-        texto
-            ? "block"
-            : "none";
-}
-
-
-/* =========================================================
-   VALIDAR COMPETÊNCIA
-========================================================= */
-
-function validarCompetencia(
-    competencia
-) {
-
-    if (
-        !/^\d{4}-\d{2}$/.test(
-            competencia
-        )
-    ) {
-
-        throw new Error(
-            "Selecione uma competência válida."
-        );
-    }
-
-
-    const partes =
-        competencia.split("-");
-
-
-    const ano =
-        Number(
-            partes[0]
-        );
-
-
-    const mes =
-        Number(
-            partes[1]
-        );
-
-
-    if (
-        ano < 1900 ||
-        ano > 2100 ||
-        mes < 1 ||
-        mes > 12
-    ) {
-
-        throw new Error(
-            "Competência inválida."
-        );
-    }
-}
-
-
-/* =========================================================
-   CHAMADA DA API
-========================================================= */
-
-async function chamarAPI(
-    action,
-    parametros = {}
-) {
-
-    const url =
-        new URL(
-            URL_API
-        );
-
-
-    url.searchParams.set(
-        "action",
-        action
-    );
-
-
-    Object.keys(
-        parametros
-    )
-    .forEach(
-        function(chave) {
-
-            const valor =
-                parametros[chave];
-
+            const valor = parametros[chave];
 
             if (
                 valor !== undefined &&
-                valor !== null
+                valor !== null &&
+                valor !== ''
             ) {
 
-                url.searchParams.set(
-                    chave,
-                    String(valor)
-                );
+                params.append(chave, valor);
+
             }
 
-        }
-    );
+        });
 
+        const resposta = await fetch(
+            URL_API + '?' + params.toString(),
+            {
+                method: 'GET',
+                cache: 'no-store'
+            }
+        );
 
-    console.log(
-        "Chamando API:",
-        url.href
-    );
-
-
-    let resposta;
-
-
-    try {
-
-        resposta =
-            await fetch(
-                url.href,
-                {
-                    method: "GET",
-                    cache: "no-store",
-                    redirect: "follow"
-                }
+        if (!resposta.ok) {
+            throw new Error(
+                'Erro HTTP ' + resposta.status
             );
+        }
 
-    } catch (erro) {
+        const texto = await resposta.text();
 
-        console.error(
-            "Falha de conexão:",
-            erro
-        );
+        try {
 
+            return JSON.parse(texto);
 
-        throw new Error(
-            "Não foi possível conectar ao Google Apps Script. " +
-            "Verifique se a URL /exec está publicada e acessível."
-        );
-    }
+        } catch (e) {
 
-
-    if (
-        !resposta.ok
-    ) {
-
-        throw new Error(
-            "Google Apps Script retornou HTTP " +
-            resposta.status +
-            "."
-        );
-    }
-
-
-    const texto =
-        await resposta.text();
-
-
-    console.log(
-        "Resposta da API:",
-        texto
-    );
-
-
-    if (!texto) {
-
-        throw new Error(
-            "A API retornou uma resposta vazia."
-        );
-    }
-
-
-    let dados;
-
-
-    try {
-
-        dados =
-            JSON.parse(
+            console.error(
+                'Resposta não JSON:',
                 texto
             );
 
-    } catch (erro) {
-
-        console.error(
-            "Resposta não é JSON:",
-            texto
-        );
-
-
-        if (
-            texto.includes(
-                "<!DOCTYPE html"
-            ) ||
-            texto.includes(
-                "<html"
-            )
-        ) {
-
             throw new Error(
-                "O Apps Script retornou uma página HTML em vez de JSON. " +
-                "Verifique a implantação como aplicativo da Web (/exec)."
+                'Resposta inválida da API.'
             );
         }
 
+    } catch (erro) {
 
-        throw new Error(
-            "A API retornou dados inválidos."
+        console.error(
+            'Erro API:',
+            action,
+            erro
         );
+
+        throw erro;
     }
-
-
-    if (
-        dados.sucesso === false
-    ) {
-
-        throw new Error(
-            dados.erro ||
-            dados.mensagem ||
-            "Erro retornado pelo Apps Script."
-        );
-    }
-
-
-    return dados;
 }
 
 
-/* =========================================================
-   NORMALIZAR DATA
-========================================================= */
+/* ==========================================================
+   DATA DE HOJE
+========================================================== */
 
-function normalizarDataLancamento(
-    valor
-) {
+function dataHoje() {
+
+    const agora = new Date();
+
+    const ano = agora.getFullYear();
+
+    const mes =
+        String(agora.getMonth() + 1)
+        .padStart(2, '0');
+
+    const dia =
+        String(agora.getDate())
+        .padStart(2, '0');
+
+    return `${ano}-${mes}-${dia}`;
+}
+
+
+/* ==========================================================
+   NORMALIZAÇÃO DE DATA
+
+   Importante:
+   NÃO utilizar simplesmente new Date("2026-09-10"),
+   pois isso pode causar diferença de fuso horário.
+========================================================== */
+
+function normalizarDataLancamento(valor) {
 
     if (
         valor === null ||
         valor === undefined ||
-        valor === ""
+        valor === ''
     ) {
-
-        return "";
+        return '';
     }
 
 
-    if (
-        typeof valor === "string" &&
-        /^\d{4}-\d{2}-\d{2}$/.test(
-            valor
-        )
-    ) {
+    /* Date real */
 
-        return valor;
+    if (valor instanceof Date) {
+
+        if (isNaN(valor.getTime())) {
+            return '';
+        }
+
+        return [
+            valor.getFullYear(),
+            String(valor.getMonth() + 1).padStart(2, '0'),
+            String(valor.getDate()).padStart(2, '0')
+        ].join('-');
     }
 
 
-    if (
-        typeof valor === "string" &&
-        /^\d{4}-\d{2}-\d{2}T/.test(
-            valor
-        )
-    ) {
+    let texto = String(valor).trim();
 
-        return valor.substring(
-            0,
-            10
-        );
+    if (!texto) {
+        return '';
     }
 
 
-    if (
-        typeof valor === "string" &&
-        /^\d{2}\/\d{2}\/\d{4}$/.test(
-            valor
-        )
-    ) {
+    /*
+       ISO:
+       2026-09-10
+       2026-09-10T00:00:00
+       2026-09-10T03:00:00.000Z
+    */
 
-        const partes =
-            valor.split("/");
+    let match =
+        texto.match(/^(\d{4})-(\d{2})-(\d{2})/);
 
+    if (match) {
 
-        return (
-            partes[2] +
-            "-" +
-            partes[1] +
-            "-" +
-            partes[0]
-        );
+        return `${match[1]}-${match[2]}-${match[3]}`;
     }
 
 
-    const data =
-        new Date(
-            valor
-        );
+    /*
+       DD/MM/YYYY
+    */
 
+    match =
+        texto.match(/^(\d{2})\/(\d{2})\/(\d{4})/);
 
-    if (
-        isNaN(
-            data.getTime()
-        )
-    ) {
+    if (match) {
 
-        return "";
+        return `${match[3]}-${match[2]}-${match[1]}`;
     }
 
 
-    const ano =
-        data.getFullYear();
+    /*
+       Google Apps Script pode retornar algo como:
 
+       Wed Sep 10 2026 00:00:00 GMT-0300
+    */
 
-    const mes =
-        String(
-            data.getMonth() + 1
-        )
-        .padStart(
-            2,
-            "0"
+    match =
+        texto.match(
+            /^[A-Za-z]{3}\s+([A-Za-z]{3})\s+(\d{1,2})\s+(\d{4})/
         );
 
+    if (match) {
 
-    const dia =
-        String(
-            data.getDate()
-        )
-        .padStart(
-            2,
-            "0"
-        );
+        const meses = {
+            Jan: '01',
+            Feb: '02',
+            Mar: '03',
+            Apr: '04',
+            May: '05',
+            Jun: '06',
+            Jul: '07',
+            Aug: '08',
+            Sep: '09',
+            Oct: '10',
+            Nov: '11',
+            Dec: '12'
+        };
+
+        if (meses[match[1]]) {
+
+            return `${match[3]}-${meses[match[1]]}-${String(match[2]).padStart(2,'0')}`;
+        }
+    }
 
 
-    return (
-        ano +
-        "-" +
-        mes +
-        "-" +
-        dia
-    );
+    /*
+       Última tentativa
+    */
+
+    const data = new Date(texto);
+
+    if (!isNaN(data.getTime())) {
+
+        return [
+            data.getFullYear(),
+            String(data.getMonth() + 1).padStart(2, '0'),
+            String(data.getDate()).padStart(2, '0')
+        ].join('-');
+    }
+
+    return '';
 }
 
 
-/* =========================================================
-   OBTER LISTA DE LANÇAMENTOS
-========================================================= */
+/* ==========================================================
+   NORMALIZA TEXTO
+========================================================== */
 
-function extrairLancamentos(
-    resposta
-) {
+function textoNormalizado(valor) {
 
-    const lista =
-        resposta?.lancamentos ||
-        resposta?.dados ||
-        resposta?.registros ||
-        resposta?.items ||
-        resposta?.data ||
-        [];
-
-
-    return Array.isArray(lista)
-        ? lista
-        : [];
-}
-
-
-/* =========================================================
-   VERIFICAR SE ESTÁ BAIXADO
-========================================================= */
-
-function estaBaixado(
-    item
-) {
-
-    return (
-        item.baixado === true ||
-        item.baixado === "true" ||
-        item.baixado === "TRUE" ||
-        item.baixado === 1 ||
-        item.baixado === "1" ||
-
-        String(
-            item.status ??
-            item.Status ??
-            ""
-        )
+    return String(valor || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
         .trim()
-        .toLowerCase() ===
-        "baixado"
+        .toLowerCase();
+}
+
+
+/* ==========================================================
+   IDENTIFICA SE ESTÁ BAIXADO
+========================================================== */
+
+function lancamentoBaixado(item) {
+
+    const status =
+        textoNormalizado(
+            item.status ??
+            item.situacao ??
+            item.estado ??
+            ''
+        );
+
+    const baixado =
+        item.baixado;
+
+    if (
+        baixado === true ||
+        baixado === 1 ||
+        String(baixado).toLowerCase() === 'true' ||
+        String(baixado) === '1'
+    ) {
+        return true;
+    }
+
+    if (
+        status.includes('baixado') ||
+        status.includes('pago') ||
+        status.includes('recebido')
+    ) {
+        return true;
+    }
+
+    /*
+       Se existir data de baixa,
+       também consideramos baixado.
+    */
+
+    const dataBaixa =
+        item.dataBaixa ??
+        item.data_baixa ??
+        item['Data da baixa'];
+
+    if (
+        dataBaixa !== undefined &&
+        dataBaixa !== null &&
+        String(dataBaixa).trim() !== ''
+    ) {
+        return true;
+    }
+
+    return false;
+}
+
+
+/* ==========================================================
+   IDENTIFICA TIPO
+========================================================== */
+
+function tipoLancamento(item) {
+
+    return textoNormalizado(
+        item.tipo ??
+        item.natureza ??
+        item.tipoLancamento ??
+        item.tipo_lancamento ??
+        ''
     );
 }
 
 
-/* =========================================================
-   OBTER TIPO
-========================================================= */
+function ehReceber(item) {
 
-function obterTipo(
-    item
-) {
+    const tipo = tipoLancamento(item);
+
+    return (
+        tipo.includes('receber') ||
+        tipo.includes('receb')
+    );
+}
+
+
+function ehPagar(item) {
+
+    const tipo = tipoLancamento(item);
+
+    return (
+        tipo.includes('pagar') ||
+        tipo.includes('pag')
+    );
+}
+
+
+/* ==========================================================
+   EXTRAÇÃO DOS LANÇAMENTOS
+========================================================== */
+
+function extrairLancamentos(resposta) {
+
+    if (!resposta) {
+        return [];
+    }
+
+    if (Array.isArray(resposta)) {
+        return resposta;
+    }
+
+    return (
+        resposta.lancamentos ||
+        resposta.dados ||
+        resposta.registros ||
+        resposta.items ||
+        resposta.resultado ||
+        []
+    );
+}
+
+
+/* ==========================================================
+   ID DO LANÇAMENTO
+========================================================== */
+
+function idLancamento(item) {
 
     return String(
-        item.tipo ??
-        item.Tipo ??
-        ""
-    )
-    .trim()
-    .toLowerCase();
-}
-
-
-/* =========================================================
-   VERIFICAR SE É TIPO FINANCEIRO
-========================================================= */
-
-function ehTipoFinanceiro(
-    item
-) {
-
-    const tipo =
-        obterTipo(
-            item
-        );
-
-
-    return (
-        tipo === "receber" ||
-        tipo === "pagar" ||
-        tipo === "a receber" ||
-        tipo === "a pagar" ||
-        tipo === "contas a receber" ||
-        tipo === "contas a pagar"
+        item.id ??
+        item.ID ??
+        item.codigo ??
+        item.descricao + '|' +
+        item.valor + '|' +
+        item.vencimento
     );
 }
 
 
-/* =========================================================
-   É A RECEBER?
-========================================================= */
+/* ==========================================================
+   MESCLAR LANÇAMENTOS
+========================================================== */
 
-function ehReceber(
-    item
-) {
+function mesclarLancamentos(lista1, lista2) {
 
-    const tipo =
-        obterTipo(
+    const mapa = new Map();
+
+    [...lista1, ...lista2].forEach(item => {
+
+        if (!item) return;
+
+        mapa.set(
+            idLancamento(item),
             item
         );
 
+    });
 
-    return (
-        tipo.includes(
-            "receber"
-        )
-    );
+    return Array.from(mapa.values());
 }
 
 
-/* =========================================================
-   É A PAGAR?
-========================================================= */
-
-function ehPagar(
-    item
-) {
-
-    const tipo =
-        obterTipo(
-            item
-        );
-
-
-    return (
-        tipo.includes(
-            "pagar"
-        )
-    );
-}
-
-
-/* =========================================================
+/* ==========================================================
    CARREGAR RESUMO
-========================================================= */
+========================================================== */
 
 async function carregarResumo() {
 
     const competencia =
-        competenciaEl.value;
+        document.getElementById('competencia').value;
 
-
-    try {
-
-        validarCompetencia(
-            competencia
-        );
-
-    } catch (erro) {
-
-        mostrarMensagem(
-            erro.message,
-            "erro"
-        );
-
+    if (!competencia) {
         return;
     }
-
-
-    const cards =
-        document.querySelectorAll(
-            ".resumo-valor"
-        );
-
-
-    cards.forEach(
-        function(card) {
-
-            card.style.opacity =
-                "0.45";
-
-        }
-    );
-
-
-    alterarStatus(
-        "Atualizando..."
-    );
-
 
     try {
 
         const resposta =
             await chamarAPI(
-                "obterResumo",
+                'obterResumo',
                 {
-                    competencia:
-                        competencia
+                    competencia: competencia
                 }
             );
 
 
+        console.log(
+            'Resumo:',
+            resposta
+        );
+
+
+        const dados =
+            resposta.resumo ||
+            resposta.dados ||
+            resposta;
+
+
         const saldoInicial =
             Number(
-                resposta.saldoInicial ??
-                resposta.saldo_inicial ??
-                0
+                dados.saldoInicial || 0
             );
-
 
         const receber =
             Number(
-                resposta.receber ??
-                resposta.aReceber ??
-                resposta.a_receber ??
-                0
+                dados.receber || 0
             );
-
 
         const recebido =
             Number(
-                resposta.recebido ??
-                resposta.recebidos ??
-                resposta.totalRecebido ??
-                resposta.total_recebido ??
-                0
+                dados.recebido || 0
             );
-
 
         const pagar =
             Number(
-                resposta.pagar ??
-                resposta.aPagar ??
-                resposta.a_pagar ??
-                0
+                dados.pagar || 0
             );
-
 
         const pago =
             Number(
-                resposta.pago ??
-                resposta.pagos ??
-                resposta.totalPago ??
-                resposta.total_pago ??
-                0
+                dados.pago || 0
             );
-
 
         const saldoBanco =
             Number(
-                resposta.saldoBanco ??
-                resposta.saldo_banco ??
-                resposta.saldo ??
-                0
-            );
-
-
-        const saldoAReceber =
-            receber -
-            recebido;
-
-
-        const saldoAPagar =
-            pagar -
-            pago;
-
-
-        document.getElementById(
-            "saldoInicial"
-        ).textContent =
-            moeda(
-                saldoInicial
+                dados.saldoBanco ??
+                (
+                    saldoInicial +
+                    recebido -
+                    pago
+                )
             );
 
 
         document.getElementById(
-            "receber"
-        ).textContent =
-            moeda(
-                receber
-            );
-
-
-        document.getElementById(
-            "recebido"
-        ).textContent =
-            moeda(
-                recebido
-            );
-
-
-        document.getElementById(
-            "saldoAReceber"
-        ).textContent =
-            "Saldo a receber: " +
-            moeda(
-                saldoAReceber
-            );
-
-
-        document.getElementById(
-            "pagar"
-        ).textContent =
-            moeda(
-                pagar
-            );
-
-
-        document.getElementById(
-            "pago"
-        ).textContent =
-            moeda(
-                pago
-            );
-
-
-        document.getElementById(
-            "saldoAPagar"
-        ).textContent =
-            "Saldo a pagar: " +
-            moeda(
-                saldoAPagar
-            );
-
-
-        document.getElementById(
-            "saldoBanco"
-        ).textContent =
-            moeda(
-                saldoBanco
-            );
-
-
-        alterarStatus(
-            "Sistema online"
+            'saldoInicial'
+        ).textContent = moeda(
+            saldoInicial
         );
 
 
-        mostrarMensagem(
-            "",
-            ""
+        document.getElementById(
+            'receber'
+        ).textContent = moeda(
+            receber
         );
 
+
+        document.getElementById(
+            'recebido'
+        ).textContent = moeda(
+            recebido
+        );
+
+
+        document.getElementById(
+            'saldoAReceber'
+        ).textContent = moeda(
+            receber - recebido
+        );
+
+
+        document.getElementById(
+            'pagar'
+        ).textContent = moeda(
+            pagar
+        );
+
+
+        document.getElementById(
+            'pago'
+        ).textContent = moeda(
+            pago
+        );
+
+
+        document.getElementById(
+            'saldoAPagar'
+        ).textContent = moeda(
+            Math.max(
+                0,
+                pagar - pago
+            )
+        );
+
+
+        document.getElementById(
+            'saldoBanco'
+        ).textContent = moeda(
+            saldoBanco
+        );
+
+
+        atualizarNomeCompetencia();
+
+        await verificarStatusCompetencia();
 
     } catch (erro) {
 
         console.error(
-            "Erro ao carregar resumo:",
+            'Erro ao carregar resumo:',
             erro
         );
 
-
-        alterarStatus(
-            "API indisponível"
-        );
-
-
         mostrarMensagem(
-            erro.message ||
-            "Não foi possível atualizar o resumo.",
-            "erro"
-        );
-
-
-    } finally {
-
-        cards.forEach(
-            function(card) {
-
-                card.style.opacity =
-                    "1";
-
-            }
+            'Não foi possível carregar o resumo financeiro.',
+            'erro'
         );
     }
 }
 
 
-/* =========================================================
-   ATUALIZAR STATUS DA COMPETÊNCIA
-========================================================= */
+/* ==========================================================
+   VERIFICAR COMPETÊNCIA
+========================================================== */
 
-async function verificarCompetenciaFechada() {
+async function verificarStatusCompetencia() {
 
     const competencia =
-        competenciaEl.value;
+        document.getElementById('competencia').value;
 
+    if (!competencia) return;
 
     try {
 
         const resposta =
             await chamarAPI(
-                "competenciaFechada",
+                'competenciaFechada',
                 {
-                    competencia:
-                        competencia
+                    competencia: competencia
                 }
             );
 
 
         const fechada =
             resposta.fechada === true ||
-            resposta.fechada === "true" ||
-            resposta.fechada === 1 ||
-            resposta.fechada === "1" ||
-            resposta.competenciaFechada === true;
+            resposta.fechada === 'true' ||
+            resposta.status === 'fechada';
 
 
-        if (
-            fechada
-        ) {
+        const status =
+            document.getElementById(
+                'statusCompetencia'
+            );
 
-            competenciaStatusEl.textContent =
-                "🔒 Fechada";
-
-
-            competenciaStatusEl.classList.add(
-                "fechada"
+        const botao =
+            document.getElementById(
+                'btnFechar'
             );
 
 
-            btnFecharEl.textContent =
-                "🔒 Competência fechada";
+        if (fechada) {
 
+            status.textContent =
+                '🔴 Fechada';
 
-            btnFecharEl.disabled =
-                true;
+            status.className =
+                'status-competencia status-fechada';
+
+            botao.disabled = true;
+            botao.style.opacity = '.5';
+            botao.style.cursor = 'not-allowed';
 
         } else {
 
-            competenciaStatusEl.textContent =
-                "🟢 Aberta";
+            status.textContent =
+                '🟢 Aberta';
 
+            status.className =
+                'status-competencia status-aberta';
 
-            competenciaStatusEl.classList.remove(
-                "fechada"
-            );
-
-
-            btnFecharEl.textContent =
-                "🔒 Fechar competência";
-
-
-            btnFecharEl.disabled =
-                false;
+            botao.disabled = false;
+            botao.style.opacity = '1';
+            botao.style.cursor = 'pointer';
         }
-
 
     } catch (erro) {
 
         console.warn(
-            "Não foi possível verificar o status da competência:",
+            'Não foi possível verificar fechamento:',
             erro
         );
-
-
-        /*
-         * Caso a API antiga não retorne
-         * corretamente essa informação,
-         * mantém o sistema utilizável.
-         */
-
-        competenciaStatusEl.textContent =
-            "🟢 Aberta";
-
-
-        competenciaStatusEl.classList.remove(
-            "fechada"
-        );
-
-
-        btnFecharEl.textContent =
-            "🔒 Fechar competência";
-
-
-        btnFecharEl.disabled =
-            false;
     }
 }
 
 
-/* =========================================================
-   CARREGAR LANÇAMENTOS
-========================================================= */
+/* ==========================================================
+   VERIFICAR VENCIMENTOS DE HOJE
+========================================================== */
 
-async function carregarIndicadores() {
+async function verificarVencimentosHoje() {
+
+    const hoje = dataHoje();
 
     const competencia =
-        competenciaEl.value;
+        document.getElementById(
+            'competencia'
+        ).value;
+
+
+    console.log(
+        'Verificando vencimentos:',
+        hoje,
+        'Competência:',
+        competencia
+    );
+
+
+    let lancamentosCompetencia = [];
+    let lancamentosTodos = [];
 
 
     try {
 
-        const resposta =
+        /*
+           PRIMEIRA BUSCA:
+           competência selecionada
+        */
+
+        const respostaCompetencia =
             await chamarAPI(
-                "listarLancamentos",
+                'listarLancamentos',
                 {
                     competencia:
                         competencia
                 }
             );
 
+        lancamentosCompetencia =
+            extrairLancamentos(
+                respostaCompetencia
+            );
+
+
+        /*
+           SEGUNDA BUSCA:
+           sem filtro de competência.
+
+           Isso é importante porque um lançamento
+           pode ter competência diferente da data
+           de vencimento.
+        */
+
+        try {
+
+            const respostaTodos =
+                await chamarAPI(
+                    'listarLancamentos',
+                    {}
+                );
+
+            lancamentosTodos =
+                extrairLancamentos(
+                    respostaTodos
+                );
+
+        } catch (erroTodos) {
+
+            console.warn(
+                'Não foi possível buscar todos os lançamentos:',
+                erroTodos
+            );
+        }
+
+
+        /*
+           Junta as duas listas e remove duplicidades.
+        */
 
         const lancamentos =
-            extrairLancamentos(
-                resposta
+            mesclarLancamentos(
+                lancamentosCompetencia,
+                lancamentosTodos
             );
 
 
-        const total =
-            lancamentos.length;
-
-
-        const baixados =
-            lancamentos.filter(
-                function(item) {
-
-                    return estaBaixado(
-                        item
-                    );
-
-                }
-            ).length;
-
-
-        const pendentes =
-            lancamentos.filter(
-                function(item) {
-
-                    return (
-                        !estaBaixado(
-                            item
-                        ) &&
-                        ehTipoFinanceiro(
-                            item
-                        )
-                    );
-
-                }
-            );
-
-
-        const hoje =
-            dataHoje();
-
-
-        const vencidos =
-            pendentes.filter(
-                function(item) {
-
-                    const vencimento =
-                        normalizarDataLancamento(
-                            item.vencimento ??
-                            item.Vencimento ??
-                            item.dataVencimento ??
-                            item.data_vencimento
-                        );
-
-
-                    return (
-                        vencimento &&
-                        vencimento < hoje
-                    );
-                }
-            );
-
-
-        document.getElementById(
-            "totalLancamentos"
-        ).textContent =
-            total;
-
-
-        document.getElementById(
-            "totalPendentes"
-        ).textContent =
-            pendentes.length;
-
-
-        document.getElementById(
-            "totalBaixados"
-        ).textContent =
-            baixados;
-
-
-        document.getElementById(
-            "totalVencidos"
-        ).textContent =
-            vencidos.length;
-
-
-        atualizarBadgePendentes(
-            pendentes.length,
-            vencidos.length
+        console.log(
+            'Lançamentos encontrados:',
+            lancamentos
         );
 
 
-        atualizarAlertaVencimentos(
-            pendentes,
+        atualizarIndicadores(
+            lancamentos,
             hoje
         );
 
 
+        /*
+           Localiza os vencimentos de hoje.
+        */
+
+        const vencimentosHoje =
+            lancamentos.filter(item => {
+
+                const vencimento =
+                    normalizarDataLancamento(
+                        item.vencimento ??
+                        item.dataVencimento ??
+                        item.data_vencimento ??
+                        item.dtVencimento ??
+                        item['Vencimento']
+                    );
+
+
+                const baixado =
+                    lancamentoBaixado(item);
+
+
+                console.log(
+                    'Verificação:',
+                    {
+                        id: idLancamento(item),
+                        tipo: tipoLancamento(item),
+                        vencimento: vencimento,
+                        hoje: hoje,
+                        baixado: baixado
+                    }
+                );
+
+
+                return (
+                    vencimento === hoje &&
+                    !baixado &&
+                    (
+                        ehReceber(item) ||
+                        ehPagar(item)
+                    )
+                );
+
+            });
+
+
+        console.log(
+            'Vencimentos de hoje:',
+            vencimentosHoje
+        );
+
+
+        mostrarAvisoVencimentos(
+            vencimentosHoje
+        );
+
+
     } catch (erro) {
 
         console.error(
-            "Erro ao carregar indicadores:",
+            'Erro ao verificar vencimentos:',
             erro
         );
 
+        atualizarIndicadores(
+            [],
+            hoje
+        );
 
-        /*
-         * Não interrompe o Dashboard.
-         */
-
-        document.getElementById(
-            "totalLancamentos"
-        ).textContent =
-            "—";
-
-
-        document.getElementById(
-            "totalPendentes"
-        ).textContent =
-            "—";
-
-
-        document.getElementById(
-            "totalBaixados"
-        ).textContent =
-            "—";
-
-
-        document.getElementById(
-            "totalVencidos"
-        ).textContent =
-            "—";
+        esconderAvisoVencimentos();
     }
 }
 
 
-/* =========================================================
-   BADGE DE PENDÊNCIAS
-========================================================= */
+/* ==========================================================
+   INDICADORES
+========================================================== */
 
-function atualizarBadgePendentes(
-    quantidade,
-    vencidos
-) {
-
-    const badge =
-        document.getElementById(
-            "badgePendentes"
-        );
-
-
-    if (
-        quantidade <= 0
-    ) {
-
-        badge.classList.remove(
-            "exibir"
-        );
-
-        return;
-    }
-
-
-    badge.textContent =
-        quantidade;
-
-
-    badge.classList.add(
-        "exibir"
-    );
-
-
-    if (
-        vencidos > 0
-    ) {
-
-        badge.classList.add(
-            "alerta"
-        );
-
-    } else {
-
-        badge.classList.remove(
-            "alerta"
-        );
-    }
-}
-
-
-/* =========================================================
-   ATUALIZAR ALERTA VISUAL
-========================================================= */
-
-function atualizarAlertaVencimentos(
-    pendentes,
+function atualizarIndicadores(
+    lancamentos,
     hoje
 ) {
 
-    const hojeLista =
-        pendentes.filter(
-            function(item) {
-
-                const vencimento =
-                    normalizarDataLancamento(
-                        item.vencimento ??
-                        item.Vencimento ??
-                        item.dataVencimento ??
-                        item.data_vencimento
-                    );
+    const total =
+        lancamentos.length;
 
 
-                return (
-                    vencimento === hoje
-                );
+    const baixados =
+        lancamentos.filter(
+            item =>
+                lancamentoBaixado(item)
+        ).length;
+
+
+    const pendentes =
+        lancamentos.filter(
+            item =>
+                !lancamentoBaixado(item)
+        ).length;
+
+
+    const vencidos =
+        lancamentos.filter(item => {
+
+            if (lancamentoBaixado(item)) {
+                return false;
             }
+
+            const vencimento =
+                normalizarDataLancamento(
+                    item.vencimento ??
+                    item.dataVencimento ??
+                    item.data_vencimento ??
+                    item.dtVencimento ??
+                    item['Vencimento']
+                );
+
+            return (
+                vencimento &&
+                vencimento < hoje
+            );
+
+        }).length;
+
+
+    document.getElementById(
+        'totalLancamentos'
+    ).textContent = total;
+
+
+    document.getElementById(
+        'totalPendentes'
+    ).textContent = pendentes;
+
+
+    document.getElementById(
+        'totalBaixados'
+    ).textContent = baixados;
+
+
+    document.getElementById(
+        'totalVencidos'
+    ).textContent = vencidos;
+}
+
+
+/* ==========================================================
+   MOSTRAR AVISO
+========================================================== */
+
+function mostrarAvisoVencimentos(
+    lista
+) {
+
+    const aviso =
+        document.getElementById(
+            'avisoVencimentos'
         );
 
+    if (!lista || lista.length === 0) {
 
-    const vencidosLista =
-        pendentes.filter(
-            function(item) {
-
-                const vencimento =
-                    normalizarDataLancamento(
-                        item.vencimento ??
-                        item.Vencimento ??
-                        item.dataVencimento ??
-                        item.data_vencimento
-                    );
-
-
-                return (
-                    vencimento &&
-                    vencimento < hoje
-                );
-            }
-        );
-
-
-    const quantidade =
-        hojeLista.length +
-        vencidosLista.length;
-
-
-    if (
-        quantidade === 0
-    ) {
-
-        alertaEl.classList.remove(
-            "exibir"
+        aviso.classList.remove(
+            'visivel'
         );
 
         return;
     }
 
 
-    alertaEl.classList.add(
-        "exibir"
-    );
+    const receber =
+        lista.filter(
+            item => ehReceber(item)
+        ).length;
 
 
-    alertaListaEl.innerHTML =
-        "";
+    const pagar =
+        lista.filter(
+            item => ehPagar(item)
+        ).length;
 
 
-    if (
-        vencidosLista.length > 0
-    ) {
-
-        alertaEl.classList.add(
-            "tem-vencido"
-        );
+    const total =
+        lista.length;
 
 
-        alertaTituloEl.textContent =
-            "🔴 Atenção: existem vencimentos pendentes";
+    let partes = [];
 
 
-        alertaContadorEl.textContent =
-            vencidosLista.length +
-            hojeLista.length;
+    if (receber > 0) {
 
-
-        vencidosLista
-        .slice(0, 4)
-        .forEach(
-            function(item) {
-
-                adicionarItemAlerta(
-                    item,
-                    "Vencido"
-                );
-
-            }
-        );
-
-
-        hojeLista
-        .slice(0, 4)
-        .forEach(
-            function(item) {
-
-                adicionarItemAlerta(
-                    item,
-                    "Vence hoje"
-                );
-
-            }
-        );
-
-
-        alertaRodapeEl.textContent =
-            "Existem lançamentos vencidos ou com vencimento hoje.";
-
-    } else {
-
-        alertaEl.classList.remove(
-            "tem-vencido"
-        );
-
-
-        alertaTituloEl.textContent =
-            "🔔 Vencimentos hoje";
-
-
-        alertaContadorEl.textContent =
-            hojeLista.length;
-
-
-        hojeLista
-        .slice(0, 6)
-        .forEach(
-            function(item) {
-
-                adicionarItemAlerta(
-                    item,
-                    "Vence hoje"
-                );
-
-            }
-        );
-
-
-        alertaRodapeEl.textContent =
-            "Verifique os lançamentos pendentes com vencimento hoje.";
-    }
-
-
-    const totalExibido =
-        Math.min(
-            quantidade,
-            6
-        );
-
-
-    if (
-        quantidade > totalExibido
-    ) {
-
-        const li =
-            document.createElement(
-                "li"
-            );
-
-
-        li.textContent =
-            "e mais " +
+        partes.push(
+            receber +
             (
-                quantidade -
-                totalExibido
-            ) +
-            " lançamento(s).";
-
-
-        alertaListaEl.appendChild(
-            li
+                receber === 1
+                    ? ' conta a receber'
+                    : ' contas a receber'
+            )
         );
     }
-}
 
 
-/* =========================================================
-   ADICIONAR ITEM AO ALERTA
-========================================================= */
+    if (pagar > 0) {
 
-function adicionarItemAlerta(
-    item,
-    situacao
-) {
-
-    const li =
-        document.createElement(
-            "li"
+        partes.push(
+            pagar +
+            (
+                pagar === 1
+                    ? ' conta a pagar'
+                    : ' contas a pagar'
+            )
         );
+    }
 
 
-    const tipo =
-        obterTipo(
-            item
-        );
+    document.getElementById(
+        'tituloAviso'
+    ).textContent =
+        `🔔 ${total} ${
+            total === 1
+                ? 'vencimento hoje'
+                : 'vencimentos hoje'
+        }`;
 
 
-    const descricao =
-        item.descricao ??
-        item.Descricao ??
-        "Sem descrição";
+    document.getElementById(
+        'detalhesAviso'
+    ).textContent =
+        partes.join(' • ');
 
 
-    const valor =
-        Number(
-            item.valor ??
-            item.Valor ??
-            0
-        );
+    aviso.classList.add(
+        'visivel'
+    );
 
 
-    let tipoTexto =
-        "LANÇAMENTO";
+    /*
+       Alerta somente uma vez por dia,
+       sem impedir que o aviso visual
+       continue aparecendo no dashboard.
+    */
+
+    const chave =
+        'alertaVencimentos_' +
+        dataHoje();
 
 
     if (
-        ehReceber(
-            item
-        )
+        sessionStorage.getItem(chave)
+        !== '1'
     ) {
-
-        tipoTexto =
-            "A RECEBER";
-
-    } else if (
-        ehPagar(
-            item
-        )
-    ) {
-
-        tipoTexto =
-            "A PAGAR";
-    }
-
-
-    li.textContent =
-        situacao +
-        " • " +
-        tipoTexto +
-        " • " +
-        descricao +
-        " • " +
-        moeda(
-            valor
-        );
-
-
-    alertaListaEl.appendChild(
-        li
-    );
-}
-
-
-/* =========================================================
-   ALERTA POP-UP DE VENCIMENTOS
-========================================================= */
-
-async function verificarVencimentosHoje() {
-
-    try {
-
-        const hoje =
-            dataHoje();
-
-
-        const competencia =
-            competenciaEl.value ||
-            competenciaAtual();
-
-
-        const resposta =
-            await chamarAPI(
-                "listarLancamentos",
-                {
-                    competencia:
-                        competencia
-                }
-            );
-
-
-        const lancamentos =
-            extrairLancamentos(
-                resposta
-            );
-
-
-        const vencendoHoje =
-            lancamentos.filter(
-                function(item) {
-
-                    const vencimento =
-                        normalizarDataLancamento(
-                            item.vencimento ??
-                            item.Vencimento ??
-                            item.dataVencimento ??
-                            item.data_vencimento
-                        );
-
-
-                    if (
-                        vencimento !== hoje
-                    ) {
-
-                        return false;
-                    }
-
-
-                    if (
-                        estaBaixado(
-                            item
-                        )
-                    ) {
-
-                        return false;
-                    }
-
-
-                    return ehTipoFinanceiro(
-                        item
-                    );
-                }
-            );
-
-
-        if (
-            vencendoHoje.length === 0
-        ) {
-
-            return;
-        }
-
-
-        const chave =
-            "alertaVencimentos_" +
-            hoje;
-
-
-        let alertados = [];
-
-
-        try {
-
-            alertados =
-                JSON.parse(
-                    sessionStorage.getItem(
-                        chave
-                    ) ||
-                    "[]"
-                );
-
-        } catch (erro) {
-
-            alertados = [];
-        }
-
-
-        const novos =
-            vencendoHoje.filter(
-                function(item) {
-
-                    const id =
-                        String(
-                            item.id ??
-                            item.ID ??
-                            (
-                                String(
-                                    item.descricao ??
-                                    item.Descricao ??
-                                    ""
-                                ) +
-                                "_" +
-                                String(
-                                    item.vencimento ??
-                                    item.Vencimento ??
-                                    ""
-                                )
-                            )
-                        );
-
-
-                    return !alertados.includes(
-                        id
-                    );
-                }
-            );
-
-
-        if (
-            novos.length === 0
-        ) {
-
-            return;
-        }
-
 
         let mensagem =
-            "⚠️ ATENÇÃO\n\n" +
-            "Existem lançamentos com vencimento hoje:\n\n";
+            `${total} ${
+                total === 1
+                    ? 'lançamento vence'
+                    : 'lançamentos vencem'
+            } hoje.`;
 
+        if (receber > 0) {
 
-        novos.forEach(
-            function(item) {
+            mensagem +=
+                ` A receber: ${receber}.`;
+        }
 
-                const tipo =
-                    obterTipo(
-                        item
-                    );
+        if (pagar > 0) {
 
+            mensagem +=
+                ` A pagar: ${pagar}.`;
+        }
 
-                const descricao =
-                    item.descricao ??
-                    item.Descricao ??
-                    "Sem descrição";
-
-
-                const valor =
-                    Number(
-                        item.valor ??
-                        item.Valor ??
-                        0
-                    );
-
-
-                let tipoTexto =
-                    "LANÇAMENTO";
-
-
-                if (
-                    tipo.includes(
-                        "receber"
-                    )
-                ) {
-
-                    tipoTexto =
-                        "A RECEBER";
-
-                } else if (
-                    tipo.includes(
-                        "pagar"
-                    )
-                ) {
-
-                    tipoTexto =
-                        "A PAGAR";
-                }
-
-
-                mensagem +=
-                    "• " +
-                    tipoTexto +
-                    " - " +
-                    descricao +
-                    " - " +
-                    moeda(
-                        valor
-                    ) +
-                    "\n";
-
-            }
-        );
-
-
-        mensagem +=
-            "\nVerifique os lançamentos pendentes.";
-
-
-        alert(
-            mensagem
-        );
-
-
-        const idsNovos =
-            novos.map(
-                function(item) {
-
-                    return String(
-                        item.id ??
-                        item.ID ??
-                        (
-                            String(
-                                item.descricao ??
-                                item.Descricao ??
-                                ""
-                            ) +
-                            "_" +
-                            String(
-                                item.vencimento ??
-                                item.Vencimento ??
-                                ""
-                            )
-                        )
-                    );
-
-                }
-            );
-
+        alert(mensagem);
 
         sessionStorage.setItem(
             chave,
-            JSON.stringify(
-                alertados.concat(
-                    idsNovos
-                )
-            )
-        );
-
-
-    } catch (erro) {
-
-        console.error(
-            "Erro ao verificar vencimentos:",
-            erro
+            '1'
         );
     }
 }
 
 
-/* =========================================================
-   CARREGAR TUDO
-========================================================= */
+/* ==========================================================
+   ESCONDER AVISO
+========================================================== */
 
-async function carregarTudo() {
+function esconderAvisoVencimentos() {
 
-    await carregarResumo();
+    const aviso =
+        document.getElementById(
+            'avisoVencimentos'
+        );
 
-    await verificarCompetenciaFechada();
-
-    await carregarIndicadores();
-
-    await verificarVencimentosHoje();
+    aviso.classList.remove(
+        'visivel'
+    );
 }
 
 
-/* =========================================================
+/* ==========================================================
+   ATUALIZAR TUDO
+========================================================== */
+
+async function atualizarTudo() {
+
+    mostrarMensagem(
+        'Atualizando informações...',
+        'info'
+    );
+
+
+    await carregarResumo();
+
+    await verificarVencimentosHoje();
+
+
+    mostrarMensagem(
+        'Informações atualizadas.',
+        'sucesso'
+    );
+
+
+    setTimeout(
+        () => esconderMensagem(),
+        2500
+    );
+}
+
+
+/* ==========================================================
    FECHAR COMPETÊNCIA
-========================================================= */
+========================================================== */
 
 async function fecharCompetencia() {
 
     const competencia =
-        competenciaEl.value;
-
+        document.getElementById(
+            'competencia'
+        ).value;
 
     if (!competencia) {
 
-        alert(
-            "Selecione uma competência antes de fechar."
+        mostrarMensagem(
+            'Selecione uma competência.',
+            'erro'
         );
 
         return;
     }
 
 
-    if (
-        btnFecharEl.disabled
-    ) {
-
-        return;
-    }
-
-
-    const confirmar =
+    const confirmacao =
         confirm(
-            "Deseja fechar a competência " +
-            competencia +
-            "?\n\n" +
-            "O saldo final será gravado como saldo inicial da próxima competência."
+            `Deseja realmente fechar a competência ${competencia}?`
         );
 
 
-    if (!confirmar) {
-
+    if (!confirmacao) {
         return;
     }
-
-
-    alterarStatus(
-        "Fechando competência..."
-    );
-
-
-    btnFecharEl.disabled =
-        true;
 
 
     try {
 
-        const resultado =
+        mostrarMensagem(
+            'Fechando competência...',
+            'info'
+        );
+
+
+        const resposta =
             await chamarAPI(
-                "fecharMes",
+                'fecharMes',
                 {
                     competencia:
                         competencia
@@ -3753,41 +2030,24 @@ async function fecharCompetencia() {
 
 
         if (
-            !resultado ||
-            !resultado.sucesso
+            resposta.sucesso === false
         ) {
 
             throw new Error(
-                resultado?.mensagem ||
-                "Não foi possível fechar a competência."
+                resposta.mensagem ||
+                'Não foi possível fechar a competência.'
             );
         }
 
 
-        alert(
-            "Competência fechada com sucesso!\n\n" +
-
-            "Competência: " +
-            resultado.competenciaAtual +
-
-            "\n" +
-
-            "Saldo final: " +
-            resultado.saldoFinalFormatado +
-
-            "\n\n" +
-
-            "Saldo inicial gravado para: " +
-            resultado.proximaCompetencia
+        mostrarMensagem(
+            resposta.mensagem ||
+            'Competência fechada com sucesso.',
+            'sucesso'
         );
 
 
-        alterarStatus(
-            "Sistema online"
-        );
-
-
-        await carregarTudo();
+        await verificarStatusCompetencia();
 
 
     } catch (erro) {
@@ -3796,234 +2056,223 @@ async function fecharCompetencia() {
             erro
         );
 
-
-        alterarStatus(
-            "Sistema online"
-        );
-
-
-        btnFecharEl.disabled =
-            false;
-
-
-        alert(
-            "Erro ao fechar a competência:\n\n" +
-            erro.message
+        mostrarMensagem(
+            erro.message ||
+            'Erro ao fechar competência.',
+            'erro'
         );
     }
 }
 
 
-/* =========================================================
-   CONSTRUIR URL DA ROTINA
-========================================================= */
-
-function construirUrl(
-    arquivo
-) {
-
-    const competencia =
-        competenciaEl.value ||
-        competenciaAtual();
-
-
-    validarCompetencia(
-        competencia
-    );
-
-
-    const url =
-        new URL(
-            arquivo,
-            window.location.href
-        );
-
-
-    url.searchParams.set(
-        "competencia",
-        competencia
-    );
-
-
-    return url;
-}
-
-
-/* =========================================================
+/* ==========================================================
    ABRIR PÁGINA
-========================================================= */
+========================================================== */
 
 function abrirPagina(
     pagina
 ) {
 
-    const arquivos = {
-
-        lancamentos:
-            "Lancamentos.html",
-
-        pendentes:
-            "BaixasPendentes.html",
-
-        relatorio:
-            "Relatorio.html",
-
-        graficos:
-            "Graficos.html",
-
-        atendimento:
-            "Atendimento.html"
-
-    };
-
-
-    const arquivo =
-        arquivos[pagina];
-
-
-    if (!arquivo) {
-
-        mostrarMensagem(
-            "Rotina não encontrada.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    try {
-
-        const url =
-            construirUrl(
-                arquivo
-            );
-
-
-        url.searchParams.set(
-            "modo",
-            "lista"
-        );
-
-
-        window.location.href =
-            url.href;
-
-
-    } catch (erro) {
-
-        mostrarMensagem(
-            erro.message,
-            "erro"
-        );
-    }
+    window.location.href =
+        '?page=' + pagina;
 }
 
 
-/* =========================================================
+/* ==========================================================
    NOVO LANÇAMENTO
-========================================================= */
+========================================================== */
 
 function abrirNovoLancamento() {
 
-    try {
-
-        const url =
-            construirUrl(
-                "Lancamentos.html"
-            );
-
-
-        url.searchParams.set(
-            "modo",
-            "novo"
-        );
-
-
-        url.searchParams.set(
-            "novo",
-            "1"
-        );
-
-
-        window.location.href =
-            url.href;
-
-
-    } catch (erro) {
-
-        mostrarMensagem(
-            erro.message,
-            "erro"
-        );
-    }
+    window.location.href =
+        '?page=Lancamentos&novo=1';
 }
 
 
-/* =========================================================
-   ALTERAÇÃO DE COMPETÊNCIA
-========================================================= */
+/* ==========================================================
+   COMPETÊNCIA ATUAL
+========================================================== */
 
-competenciaEl.addEventListener(
-    "change",
-    async function() {
+function competenciaAtual() {
 
-        /*
-         * Ao mudar a competência,
-         * atualiza todos os indicadores.
-         */
+    const agora =
+        new Date();
 
-        mostrarMensagem(
-            "Atualizando competência...",
-            ""
-        );
-
-
-        await carregarTudo();
+    return (
+        agora.getFullYear() +
+        '-' +
+        String(
+            agora.getMonth() + 1
+        ).padStart(2, '0')
+    );
+}
 
 
-        mostrarMensagem(
-            "",
-            ""
-        );
+/* ==========================================================
+   NOME DA COMPETÊNCIA
+========================================================== */
+
+function atualizarNomeCompetencia() {
+
+    const valor =
+        document.getElementById(
+            'competencia'
+        ).value;
+
+    if (!valor) {
+        return;
     }
-);
+
+    const partes =
+        valor.split('-');
+
+    const ano =
+        Number(partes[0]);
+
+    const mes =
+        Number(partes[1]);
 
 
-/* =========================================================
-   ENTER
-========================================================= */
+    const meses = [
+        'janeiro',
+        'fevereiro',
+        'março',
+        'abril',
+        'maio',
+        'junho',
+        'julho',
+        'agosto',
+        'setembro',
+        'outubro',
+        'novembro',
+        'dezembro'
+    ];
 
-competenciaEl.addEventListener(
-    "keydown",
-    function(evento) {
 
-        if (
-            evento.key === "Enter"
-        ) {
+    document.getElementById(
+        'nomeCompetencia'
+    ).textContent =
+        `${meses[mes - 1]} de ${ano}`;
+}
 
-            evento.preventDefault();
 
-            carregarTudo();
+/* ==========================================================
+   MOEDA
+========================================================== */
+
+function moeda(valor) {
+
+    const numero =
+        Number(valor) || 0;
+
+    return numero.toLocaleString(
+        'pt-BR',
+        {
+            style: 'currency',
+            currency: 'BRL'
         }
+    );
+}
 
-    }
-);
+
+/* ==========================================================
+   MENSAGENS
+========================================================== */
+
+function mostrarMensagem(
+    texto,
+    tipo = 'info'
+) {
+
+    const elemento =
+        document.getElementById(
+            'mensagem'
+        );
+
+    elemento.textContent =
+        texto;
+
+    elemento.className =
+        'mensagem ' + tipo;
+}
 
 
-/* =========================================================
+function esconderMensagem() {
+
+    const elemento =
+        document.getElementById(
+            'mensagem'
+        );
+
+    elemento.className =
+        'mensagem';
+
+    elemento.textContent =
+        '';
+}
+
+
+/* ==========================================================
    INICIALIZAÇÃO
-========================================================= */
+========================================================== */
 
 document.addEventListener(
-    "DOMContentLoaded",
+    'DOMContentLoaded',
     async function() {
 
-        /*
-         * Carrega o Dashboard.
-         */
+        const campo =
+            document.getElementById(
+                'competencia'
+            );
 
-        await carregarTudo();
+
+        /*
+           Define a competência atual
+           automaticamente.
+        */
+
+        if (!campo.value) {
+
+            campo.value =
+                competenciaAtual();
+        }
+
+
+        atualizarNomeCompetencia();
+
+
+        /*
+           Carrega o resumo.
+        */
+
+        await carregarResumo();
+
+
+        /*
+           Verifica vencimentos de hoje.
+        */
+
+        await verificarVencimentosHoje();
+
+
+        /*
+           Ao mudar competência,
+           atualiza TUDO novamente.
+        */
+
+        campo.addEventListener(
+            'change',
+            async function() {
+
+                atualizarNomeCompetencia();
+
+                esconderMensagem();
+
+                await carregarResumo();
+
+                await verificarVencimentosHoje();
+            }
+        );
 
     }
 );
@@ -4031,5 +2280,4 @@ document.addEventListener(
 </script>
 
 </body>
-
 </html>
