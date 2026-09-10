@@ -1,22 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
 
 <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Atendimento</title>
 
 <style>
-
-/* =====================================================
-   CONFIGURAÇÃO GERAL
-   ===================================================== */
 
 * {
   box-sizing: border-box;
@@ -25,129 +19,89 @@
 body {
   margin: 0;
   padding: 0;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+  font-family: Arial, Helvetica, sans-serif;
   background: #f4f6f9;
-
   color: #1f2937;
 }
 
 .container {
   width: 100%;
-
   max-width: 1200px;
-
   margin: 0 auto;
-
   padding: 20px;
 }
 
-
 /* =====================================================
    CABEÇALHO
-   ===================================================== */
+===================================================== */
 
 .cabecalho {
   background: #ffffff;
-
   border-radius: 12px;
-
   padding: 20px;
-
   margin-bottom: 20px;
-
-  box-shadow:
-    0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .cabecalho-topo {
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
   gap: 15px;
 }
 
 .cabecalho h1 {
   margin: 0;
-
   font-size: 26px;
-
   color: #111827;
 }
 
 .cabecalho p {
   margin: 8px 0 0;
-
   color: #6b7280;
-
   font-size: 14px;
 }
 
-
 /* =====================================================
    BOTÕES
-   ===================================================== */
+===================================================== */
 
 button {
   height: 44px;
-
   border: 0;
-
   border-radius: 8px;
-
   padding: 0 20px;
-
   cursor: pointer;
-
   font-size: 14px;
-
   font-weight: 600;
-
   transition: 0.2s;
 }
 
 button:disabled {
   opacity: 0.65;
-
   cursor: not-allowed;
 }
 
-
-/* BOTÃO VOLTAR */
+/* VOLTAR */
 
 .btn-voltar {
   display: inline-flex;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 7px;
-
   background: #374151;
-
   color: #ffffff;
 }
 
 .btn-voltar:hover {
   background: #1f2937;
-
   transform: translateX(-2px);
 }
 
-
-/* BOTÃO NOVO */
+/* NOVO */
 
 .btn-novo {
   background: #16a34a;
-
   color: #ffffff;
 }
 
@@ -155,12 +109,10 @@ button:disabled {
   background: #15803d;
 }
 
-
-/* BOTÃO PESQUISAR */
+/* PESQUISAR */
 
 .btn-pesquisar {
   background: #2563eb;
-
   color: #ffffff;
 }
 
@@ -168,12 +120,10 @@ button:disabled {
   background: #1d4ed8;
 }
 
-
-/* BOTÃO LIMPAR */
+/* LIMPAR */
 
 .btn-limpar {
   background: #e5e7eb;
-
   color: #374151;
 }
 
@@ -181,12 +131,10 @@ button:disabled {
   background: #d1d5db;
 }
 
-
-/* BOTÃO SALVAR */
+/* SALVAR */
 
 .btn-salvar {
   background: #2563eb;
-
   color: #ffffff;
 }
 
@@ -194,12 +142,10 @@ button:disabled {
   background: #1d4ed8;
 }
 
-
-/* BOTÃO CANCELAR */
+/* CANCELAR */
 
 .btn-cancelar {
   background: #e5e7eb;
-
   color: #374151;
 }
 
@@ -207,113 +153,81 @@ button:disabled {
   background: #d1d5db;
 }
 
-
 /* =====================================================
    BARRA DE AÇÕES
-   ===================================================== */
+===================================================== */
 
 .barra-acoes {
   background: #ffffff;
-
   border-radius: 12px;
-
   padding: 16px 20px;
-
   margin-bottom: 20px;
-
-  box-shadow:
-    0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 
   display: flex;
-
   justify-content: flex-end;
-
   gap: 10px;
 }
 
-
 /* =====================================================
    PAINEL
-   ===================================================== */
+===================================================== */
 
 .painel {
   background: #ffffff;
-
   border-radius: 12px;
-
   padding: 20px;
-
   margin-bottom: 20px;
-
-  box-shadow:
-    0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .painel h2 {
   margin: 0 0 18px;
-
   font-size: 19px;
-
   color: #111827;
 }
-
-
-/* =====================================================
-   FORMULÁRIO
-   ===================================================== */
 
 #painelInclusao {
   display: none;
 }
 
+/* =====================================================
+   FORMULÁRIO
+===================================================== */
+
 .formulario {
   display: grid;
-
   grid-template-columns: 1fr;
-
   gap: 16px;
 }
 
 .campo {
   display: flex;
-
   flex-direction: column;
-
   gap: 7px;
 }
 
 .campo label {
   font-size: 14px;
-
   font-weight: 600;
-
   color: #374151;
 }
 
 .campo textarea {
   width: 100%;
-
   min-height: 130px;
-
   resize: vertical;
 
   border: 1px solid #d1d5db;
-
   border-radius: 8px;
 
   padding: 12px;
 
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
-
   line-height: 1.5;
 
   outline: none;
-
   transition: 0.2s;
 }
 
@@ -324,59 +238,46 @@ button:disabled {
     0 0 0 3px rgba(37,99,235,0.12);
 }
 
-
 /* =====================================================
    AÇÕES DO FORMULÁRIO
-   ===================================================== */
+===================================================== */
 
 .acoes-formulario {
   display: flex;
-
   justify-content: flex-end;
-
   gap: 10px;
-
   padding-top: 5px;
 }
 
-
 /* =====================================================
    PESQUISA
-   ===================================================== */
+===================================================== */
 
 .campo-grupo {
   display: flex;
-
   flex-direction: column;
-
   gap: 7px;
 }
 
 .campo-grupo label {
   font-size: 14px;
-
   font-weight: 600;
-
   color: #374151;
 }
 
 .linha-pesquisa {
   display: flex;
-
   gap: 10px;
-
   width: 100%;
 }
 
 #campoPesquisa {
   flex: 1;
-
   min-width: 0;
 
   height: 44px;
 
   border: 1px solid #d1d5db;
-
   border-radius: 8px;
 
   padding: 0 14px;
@@ -384,7 +285,6 @@ button:disabled {
   font-size: 15px;
 
   outline: none;
-
   transition: 0.2s;
 }
 
@@ -395,117 +295,85 @@ button:disabled {
     0 0 0 3px rgba(37,99,235,0.12);
 }
 
-
 /* =====================================================
    STATUS
-   ===================================================== */
+===================================================== */
 
 .status {
   display: none;
-
   margin-top: 15px;
-
   padding: 12px 14px;
-
   border-radius: 8px;
-
   font-size: 14px;
 }
 
 .status.info {
   display: block;
-
   background: #eff6ff;
-
   color: #1d4ed8;
-
   border: 1px solid #bfdbfe;
 }
 
 .status.sucesso {
   display: block;
-
   background: #ecfdf5;
-
   color: #047857;
-
   border: 1px solid #a7f3d0;
 }
 
 .status.erro {
   display: block;
-
   background: #fef2f2;
-
   color: #b91c1c;
-
   border: 1px solid #fecaca;
 }
 
-
 /* =====================================================
    RESULTADO
-   ===================================================== */
+===================================================== */
 
 .resultado {
   background: #ffffff;
-
   border-radius: 12px;
-
   padding: 20px;
-
-  box-shadow:
-    0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .resultado-topo {
   display: flex;
-
   justify-content: space-between;
-
   align-items: center;
-
   gap: 10px;
-
   margin-bottom: 15px;
-
   flex-wrap: wrap;
 }
 
 .resultado-topo h2 {
   margin: 0;
-
   font-size: 19px;
-
   color: #111827;
 }
 
 .contador {
   color: #6b7280;
-
   font-size: 14px;
 }
 
-
 /* =====================================================
    TABELA
-   ===================================================== */
+===================================================== */
 
 .tabela-container {
   width: 100%;
-
   overflow-x: auto;
 
   border: 1px solid #e5e7eb;
-
   border-radius: 8px;
 }
 
 table {
   width: 100%;
-
   border-collapse: collapse;
-
   min-width: 600px;
 }
 
@@ -519,7 +387,6 @@ th {
   text-align: left;
 
   font-size: 13px;
-
   font-weight: 700;
 
   color: #374151;
@@ -551,66 +418,52 @@ tbody tr:last-child td {
   border-bottom: 0;
 }
 
-
 /* =====================================================
    MENSAGENS
-   ===================================================== */
+===================================================== */
 
 .vazio {
   text-align: center;
-
   padding: 45px 20px;
-
   color: #6b7280;
 }
 
 .vazio strong {
   display: block;
-
   color: #374151;
-
   margin-bottom: 5px;
-
   font-size: 16px;
 }
 
 .carregando {
   text-align: center;
-
   padding: 35px;
-
   color: #6b7280;
 }
 
 .spinner {
   width: 25px;
-
   height: 25px;
 
   margin: 0 auto 10px auto;
 
   border: 3px solid #e5e7eb;
-
   border-top-color: #2563eb;
 
   border-radius: 50%;
 
-  animation:
-    girar 0.8s linear infinite;
+  animation: girar 0.8s linear infinite;
 }
 
 @keyframes girar {
-
   to {
     transform: rotate(360deg);
   }
-
 }
-
 
 /* =====================================================
    RESPONSIVO
-   ===================================================== */
+===================================================== */
 
 @media (max-width: 700px) {
 
@@ -626,7 +479,6 @@ tbody tr:last-child td {
 
   .cabecalho-topo {
     align-items: stretch;
-
     flex-direction: column;
   }
 
@@ -661,7 +513,6 @@ tbody tr:last-child td {
   .cabecalho h1 {
     font-size: 22px;
   }
-
 }
 
 </style>
@@ -672,26 +523,27 @@ tbody tr:last-child td {
 
 <div class="container">
 
-
 <!-- =====================================================
      CABEÇALHO
-     ===================================================== -->
+===================================================== -->
 
 <section class="cabecalho">
 
   <div class="cabecalho-topo">
 
-    <h1>
-      Atendimento
-    </h1>
+```
+<h1>
+  Atendimento
+</h1>
 
-    <button
-      type="button"
-      class="btn-voltar"
-      id="btnVoltar"
-    >
-      ← Voltar
-    </button>
+<button
+  type="button"
+  class="btn-voltar"
+  id="btnVoltar"
+>
+  ← Voltar
+</button>
+```
 
   </div>
 
@@ -701,27 +553,30 @@ tbody tr:last-child td {
 
 </section>
 
-
 <!-- =====================================================
      BARRA DE AÇÕES
-     ===================================================== -->
+===================================================== -->
 
 <section class="barra-acoes">
 
-  <button
-    type="button"
-    class="btn-novo"
-    id="btnNovoAtendimento"
-  >
-    + Incluir Atendimento
+<button
+type="button"
+class="btn-novo"
+id="btnNovoAtendimento"
+
+>
+
+```
++ Incluir Atendimento
+```
+
   </button>
 
 </section>
 
-
 <!-- =====================================================
-     INCLUIR ATENDIMENTO
-     ===================================================== -->
+     INCLUSÃO
+===================================================== -->
 
 <section
   class="painel"
@@ -737,110 +592,106 @@ tbody tr:last-child td {
     class="formulario"
   >
 
-    <!-- PROBLEMA -->
+```
+<div class="campo">
 
-    <div class="campo">
+  <label for="problema">
+    Problema
+  </label>
 
-      <label for="problema">
-        Problema
-      </label>
+  <textarea
+    id="problema"
+    name="problema"
+    placeholder="Descreva o problema identificado..."
+    required
+  ></textarea>
 
-      <textarea
-        id="problema"
-        name="problema"
-        placeholder="Descreva o problema identificado..."
-        required
-      ></textarea>
-
-    </div>
-
-
-    <!-- SOLUÇÃO -->
-
-    <div class="campo">
-
-      <label for="solucao">
-        Solução
-      </label>
-
-      <textarea
-        id="solucao"
-        name="solucao"
-        placeholder="Informe a solução aplicada..."
-        required
-      ></textarea>
-
-    </div>
+</div>
 
 
-    <!-- AÇÕES -->
+<div class="campo">
 
-    <div class="acoes-formulario">
+  <label for="solucao">
+    Solução
+  </label>
 
-      <button
-        type="button"
-        class="btn-cancelar"
-        id="btnCancelarInclusao"
-      >
-        Cancelar
-      </button>
+  <textarea
+    id="solucao"
+    name="solucao"
+    placeholder="Informe a solução aplicada..."
+    required
+  ></textarea>
 
-      <button
-        type="submit"
-        class="btn-salvar"
-        id="btnSalvarAtendimento"
-      >
-        Salvar Atendimento
-      </button>
+</div>
 
-    </div>
+
+<div class="acoes-formulario">
+
+  <button
+    type="button"
+    class="btn-cancelar"
+    id="btnCancelarInclusao"
+  >
+    Cancelar
+  </button>
+
+  <button
+    type="submit"
+    class="btn-salvar"
+    id="btnSalvarAtendimento"
+  >
+    Salvar Atendimento
+  </button>
+
+</div>
+```
 
   </form>
 
 </section>
 
-
 <!-- =====================================================
      PESQUISA
-     ===================================================== -->
+===================================================== -->
 
 <section class="painel">
 
   <div class="campo-grupo">
 
-    <label for="campoPesquisa">
-      Pesquisa
-    </label>
+```
+<label for="campoPesquisa">
+  Pesquisa
+</label>
 
-    <div class="linha-pesquisa">
+<div class="linha-pesquisa">
 
-      <input
-        type="text"
-        id="campoPesquisa"
-        placeholder="Digite um problema, solução ou palavra-chave..."
-        autocomplete="off"
-      >
+  <input
+    type="text"
+    id="campoPesquisa"
+    placeholder="Digite um problema, solução ou palavra-chave..."
+    autocomplete="off"
+  >
 
-      <button
-        type="button"
-        class="btn-pesquisar"
-        id="btnPesquisar"
-      >
-        Pesquisar
-      </button>
+  <button
+    type="button"
+    class="btn-pesquisar"
+    id="btnPesquisar"
+  >
+    Pesquisar
+  </button>
 
-      <button
-        type="button"
-        class="btn-limpar"
-        id="btnLimpar"
-      >
-        Limpar
-      </button>
+  <button
+    type="button"
+    class="btn-limpar"
+    id="btnLimpar"
+  >
+    Limpar
+  </button>
 
-    </div>
+</div>
+```
 
   </div>
-
 
   <div
     id="status"
@@ -849,56 +700,56 @@ tbody tr:last-child td {
 
 </section>
 
-
 <!-- =====================================================
      RESULTADO
-     ===================================================== -->
+===================================================== -->
 
 <section class="resultado">
 
   <div class="resultado-topo">
 
-    <h2>
-      Resultado da pesquisa
-    </h2>
+```
+<h2>
+  Resultado da pesquisa
+</h2>
 
-    <div
-      id="contador"
-      class="contador"
-    >
-      Nenhuma pesquisa realizada.
-    </div>
+<div
+  id="contador"
+  class="contador"
+>
+  Nenhuma pesquisa realizada.
+</div>
+```
 
   </div>
 
-
   <div id="areaResultado">
 
-    <div class="vazio">
+```
+<div class="vazio">
 
-      <strong>
-        Pesquise um atendimento
-      </strong>
+  <strong>
+    Pesquise um atendimento
+  </strong>
 
-      Digite algum problema,
-      solução ou palavra-chave
-      para localizar registros.
+  Digite algum problema,
+  solução ou palavra-chave
+  para localizar registros.
 
-    </div>
+</div>
+```
 
   </div>
 
 </section>
 
-
 </div>
-
 
 <script>
 
 /* =====================================================
    CONFIGURAÇÃO DA API
-   ===================================================== */
+===================================================== */
 
 const URL_API =
   "https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec";
@@ -906,99 +757,78 @@ const URL_API =
 
 /* =====================================================
    ELEMENTOS
-   ===================================================== */
+===================================================== */
 
 const campoPesquisa =
-  document.getElementById(
-    "campoPesquisa"
-  );
+  document.getElementById("campoPesquisa");
 
 const btnPesquisar =
-  document.getElementById(
-    "btnPesquisar"
-  );
+  document.getElementById("btnPesquisar");
 
 const btnLimpar =
-  document.getElementById(
-    "btnLimpar"
-  );
+  document.getElementById("btnLimpar");
 
 const btnVoltar =
-  document.getElementById(
-    "btnVoltar"
-  );
+  document.getElementById("btnVoltar");
 
 const btnNovoAtendimento =
-  document.getElementById(
-    "btnNovoAtendimento"
-  );
+  document.getElementById("btnNovoAtendimento");
 
 const btnCancelarInclusao =
-  document.getElementById(
-    "btnCancelarInclusao"
-  );
+  document.getElementById("btnCancelarInclusao");
 
 const formAtendimento =
-  document.getElementById(
-    "formAtendimento"
-  );
+  document.getElementById("formAtendimento");
 
 const painelInclusao =
-  document.getElementById(
-    "painelInclusao"
-  );
+  document.getElementById("painelInclusao");
 
 const btnSalvarAtendimento =
-  document.getElementById(
-    "btnSalvarAtendimento"
-  );
+  document.getElementById("btnSalvarAtendimento");
 
 const areaResultado =
-  document.getElementById(
-    "areaResultado"
-  );
+  document.getElementById("areaResultado");
 
 const contador =
-  document.getElementById(
-    "contador"
-  );
+  document.getElementById("contador");
 
 const status =
-  document.getElementById(
-    "status"
-  );
+  document.getElementById("status");
+
+
+/* =====================================================
+   CONTROLE JSONP
+===================================================== */
+
+let contadorJSONP = 0;
+
+let requisicaoEmAndamento = false;
 
 
 /* =====================================================
    VOLTAR
-   ===================================================== */
+===================================================== */
 
 function voltar() {
 
-  if (
-    window.history.length > 1
-  ) {
+  if (window.history.length > 1) {
 
     window.history.back();
 
     return;
-
   }
 
-  window.location.href =
-    "index.html";
-
+  window.location.href = "index.html";
 }
 
 
 /* =====================================================
-   ABRIR FORMULÁRIO
-   ===================================================== */
+   ABRIR INCLUSÃO
+===================================================== */
 
 function abrirInclusao() {
 
-  painelInclusao.style.display =
-    "block";
+  painelInclusao.style.display = "block";
 
   painelInclusao.scrollIntoView({
     behavior: "smooth",
@@ -1008,61 +838,48 @@ function abrirInclusao() {
   document
     .getElementById("problema")
     .focus();
-
 }
 
 
 /* =====================================================
-   FECHAR FORMULÁRIO
-   ===================================================== */
+   FECHAR INCLUSÃO
+===================================================== */
 
 function fecharInclusao() {
 
-  painelInclusao.style.display =
-    "none";
+  painelInclusao.style.display = "none";
 
   formAtendimento.reset();
-
 }
 
 
 /* =====================================================
    STATUS
-   ===================================================== */
+===================================================== */
 
-function mostrarStatus(
-  mensagem,
-  tipo
-) {
+function mostrarStatus(mensagem, tipo) {
 
-  status.textContent =
-    mensagem;
+  status.textContent = mensagem;
 
   status.className =
     "status " +
     (tipo || "info");
-
 }
 
 
 function ocultarStatus() {
 
-  status.textContent =
-    "";
+  status.textContent = "";
 
-  status.className =
-    "status";
-
+  status.className = "status";
 }
 
 
 /* =====================================================
    ESCAPAR HTML
-   ===================================================== */
+===================================================== */
 
-function escaparHTML(
-  valor
-) {
+function escaparHTML(valor) {
 
   if (
     valor === null ||
@@ -1070,80 +887,52 @@ function escaparHTML(
   ) {
 
     return "";
-
   }
 
   return String(valor)
 
-    .replace(
-      /&/g,
-      "&amp;"
-    )
+    .replace(/&/g, "&amp;")
 
-    .replace(
-      /</g,
-      "&lt;"
-    )
+    .replace(/</g, "&lt;")
 
-    .replace(
-      />/g,
-      "&gt;"
-    )
+    .replace(/>/g, "&gt;")
 
-    .replace(
-      /"/g,
-      "&quot;"
-    )
+    .replace(/"/g, "&quot;")
 
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
+    .replace(/'/g, "&#039;");
 }
 
 
 /* =====================================================
-   JSONP
-   ===================================================== */
+   CHAMAR API — JSONP ROBUSTO
+===================================================== */
 
-let contadorJSONP = 0;
+function chamarAPI(acao, parametros) {
 
-
-function chamarAPI(
-  acao,
-  parametros
-) {
-
-  parametros =
-    parametros || {};
+  parametros = parametros || {};
 
   return new Promise(
     function(resolve, reject) {
 
       contadorJSONP++;
 
-
       const nomeCallback =
-        "__controleFinanceiroCallback_" +
+        "__atendimentoCallback_" +
         Date.now() +
         "_" +
         contadorJSONP;
 
 
       const script =
-        document.createElement(
-          "script"
-        );
+        document.createElement("script");
 
 
-      let finalizado =
-        false;
+      let finalizado = false;
 
 
-      /* -----------------------------------------------
-         TIMEOUT
-         ----------------------------------------------- */
+      /*
+       * Timeout aumentado para 60 segundos.
+       */
 
       const timeout =
         setTimeout(
@@ -1153,88 +942,82 @@ function chamarAPI(
               return;
             }
 
-            finalizado =
-              true;
-
-
-            delete window[
-              nomeCallback
-            ];
-
-
-            if (
-              script.parentNode
-            ) {
-
-              script.parentNode
-                .removeChild(
-                  script
-                );
-
-            }
-
+            finalizar();
 
             reject(
               new Error(
-                "Tempo limite excedido ao consultar a API."
+                "A API não respondeu dentro de 60 segundos. " +
+                "Verifique se o Apps Script está executando corretamente."
               )
             );
 
           },
-          30000
+          60000
         );
 
 
-      /* -----------------------------------------------
-         CALLBACK
-         ----------------------------------------------- */
+      /*
+       * Finalização centralizada.
+       */
 
-      window[
-        nomeCallback
-      ] =
+      function finalizar() {
+
+        if (finalizado) {
+          return;
+        }
+
+        finalizado = true;
+
+        clearTimeout(timeout);
+
+        try {
+
+          delete window[nomeCallback];
+
+        } catch (e) {}
+
+        if (script.parentNode) {
+
+          script.parentNode.removeChild(script);
+
+        }
+      }
+
+
+      /*
+       * Callback recebido do Apps Script.
+       */
+
+      window[nomeCallback] =
         function(resposta) {
 
           if (finalizado) {
             return;
           }
 
-
-          finalizado =
-            true;
-
-
-          clearTimeout(
-            timeout
-          );
-
-
-          delete window[
-            nomeCallback
-          ];
-
+          finalizar();
 
           if (
-            script.parentNode
+            resposta === null ||
+            resposta === undefined
           ) {
 
-            script.parentNode
-              .removeChild(
-                script
-              );
+            reject(
+              new Error(
+                "A API retornou uma resposta vazia."
+              )
+            );
 
+            return;
           }
 
-
-          resolve(
-            resposta
-          );
-
+          resolve(resposta);
         };
 
 
-      /* -----------------------------------------------
-         CONSULTA
-         ----------------------------------------------- */
+      /*
+       * Monta os parâmetros.
+       */
 
       const consulta =
         Object.assign(
@@ -1243,26 +1026,28 @@ function chamarAPI(
         );
 
 
-      consulta.action =
-        acao;
-
+      consulta.action = acao;
 
       consulta.callback =
         nomeCallback;
 
 
+      /*
+       * Evita cache do navegador.
+       */
+
+      consulta._ =
+        Date.now();
+
+
       const query =
-        Object.keys(
-          consulta
-        )
+        Object.keys(consulta)
 
           .map(
             function(chave) {
 
               return (
-                encodeURIComponent(
-                  chave
-                ) +
+                encodeURIComponent(chave) +
                 "=" +
                 encodeURIComponent(
                   consulta[chave]
@@ -1275,19 +1060,22 @@ function chamarAPI(
           .join("&");
 
 
+      /*
+       * URL final.
+       */
+
       script.src =
         URL_API +
         "?" +
         query;
 
 
-      script.async =
-        true;
+      script.async = true;
 
 
-      /* -----------------------------------------------
-         ERRO
-         ----------------------------------------------- */
+      /*
+       * Erro de carregamento.
+       */
 
       script.onerror =
         function() {
@@ -1296,86 +1084,49 @@ function chamarAPI(
             return;
           }
 
-
-          finalizado =
-            true;
-
-
-          clearTimeout(
-            timeout
-          );
-
-
-          delete window[
-            nomeCallback
-          ];
-
-
-          if (
-            script.parentNode
-          ) {
-
-            script.parentNode
-              .removeChild(
-                script
-              );
-
-          }
-
+          finalizar();
 
           reject(
             new Error(
-              "Não foi possível conectar à API."
+              "Não foi possível conectar ao Google Apps Script."
             )
           );
-
         };
 
 
-      document
-        .head
-        .appendChild(
-          script
-        );
+      /*
+       * Adiciona o script à página.
+       */
+
+      document.head.appendChild(script);
 
     }
   );
-
 }
 
 
 /* =====================================================
    SALVAR ATENDIMENTO
-   ===================================================== */
+===================================================== */
 
-async function salvarAtendimento(
-  evento
-) {
+async function salvarAtendimento(evento) {
 
   evento.preventDefault();
 
 
   const problema =
     document
-      .getElementById(
-        "problema"
-      )
+      .getElementById("problema")
       .value
       .trim();
 
 
   const solucao =
     document
-      .getElementById(
-        "solucao"
-      )
+      .getElementById("solucao")
       .value
       .trim();
 
-
-  /* -----------------------------------------------
-     VALIDAÇÃO
-     ----------------------------------------------- */
 
   if (!problema) {
 
@@ -1384,16 +1135,11 @@ async function salvarAtendimento(
       "info"
     );
 
-
     document
-      .getElementById(
-        "problema"
-      )
+      .getElementById("problema")
       .focus();
 
-
     return;
-
   }
 
 
@@ -1404,26 +1150,22 @@ async function salvarAtendimento(
       "info"
     );
 
-
     document
-      .getElementById(
-        "solucao"
-      )
+      .getElementById("solucao")
       .focus();
 
-
     return;
-
   }
 
 
-  /* -----------------------------------------------
-     BLOQUEAR BOTÃO
-     ----------------------------------------------- */
+  if (requisicaoEmAndamento) {
+    return;
+  }
 
-  btnSalvarAtendimento.disabled =
-    true;
 
+  requisicaoEmAndamento = true;
+
+  btnSalvarAtendimento.disabled = true;
 
   btnSalvarAtendimento.textContent =
     "Salvando...";
@@ -1437,22 +1179,12 @@ async function salvarAtendimento(
 
   try {
 
-    /*
-     * O ID NÃO é enviado.
-     *
-     * O Apps Script deve gerar
-     * o próximo ID automaticamente.
-     */
-
     const resposta =
       await chamarAPI(
         "incluirAtendimento",
         {
-          problema:
-            problema,
-
-          solucao:
-            solucao
+          problema: problema,
+          solucao: solucao
         }
       );
 
@@ -1468,19 +1200,16 @@ async function salvarAtendimento(
       throw new Error(
         "A API não retornou uma resposta."
       );
-
     }
 
 
-    if (
-      resposta.sucesso === false
-    ) {
+    if (resposta.sucesso === false) {
 
       throw new Error(
         resposta.mensagem ||
+        resposta.erro ||
         "Não foi possível incluir o atendimento."
       );
-
     }
 
 
@@ -1491,37 +1220,16 @@ async function salvarAtendimento(
     );
 
 
-    /*
-     * Limpa o formulário.
-     */
-
     formAtendimento.reset();
 
 
     /*
-     * Fecha o formulário
-     * depois de 1,5 segundo.
-     */
-
-    setTimeout(
-      function() {
-
-        fecharInclusao();
-
-      },
-      1500
-    );
-
-
-    /*
-     * Se existir pesquisa ativa,
-     * atualiza automaticamente.
+     * Atualiza pesquisa somente
+     * se houver uma pesquisa ativa.
      */
 
     const termo =
-      campoPesquisa
-        .value
-        .trim();
+      campoPesquisa.value.trim();
 
 
     if (termo) {
@@ -1532,10 +1240,20 @@ async function salvarAtendimento(
           pesquisar();
 
         },
-        500
+        700
       );
 
     }
+
+
+    setTimeout(
+      function() {
+
+        fecharInclusao();
+
+      },
+      1500
+    );
 
 
   } catch (erro) {
@@ -1552,30 +1270,27 @@ async function salvarAtendimento(
       "erro"
     );
 
+
   } finally {
 
-    btnSalvarAtendimento.disabled =
-      false;
+    requisicaoEmAndamento = false;
 
+    btnSalvarAtendimento.disabled = false;
 
     btnSalvarAtendimento.textContent =
       "Salvar Atendimento";
-
   }
-
 }
 
 
 /* =====================================================
    PESQUISAR
-   ===================================================== */
+===================================================== */
 
 async function pesquisar() {
 
   const termo =
-    campoPesquisa
-      .value
-      .trim();
+    campoPesquisa.value.trim();
 
 
   if (!termo) {
@@ -1585,17 +1300,28 @@ async function pesquisar() {
       "info"
     );
 
-
     campoPesquisa.focus();
 
-
     return;
-
   }
 
 
+  if (requisicaoEmAndamento) {
+    return;
+  }
+
+
+  requisicaoEmAndamento = true;
+
+
+  btnPesquisar.disabled = true;
+
+  btnPesquisar.textContent =
+    "Pesquisando...";
+
+
   mostrarStatus(
-    "Pesquisando...",
+    "Pesquisando atendimento...",
     "info"
   );
 
@@ -1621,8 +1347,7 @@ async function pesquisar() {
       await chamarAPI(
         "pesquisarAtendimento",
         {
-          termo:
-            termo
+          termo: termo
         }
       );
 
@@ -1638,33 +1363,26 @@ async function pesquisar() {
       throw new Error(
         "A API não retornou uma resposta."
       );
-
     }
 
 
-    if (
-      resposta.sucesso === false
-    ) {
+    if (resposta.sucesso === false) {
 
       throw new Error(
         resposta.mensagem ||
+        resposta.erro ||
         "Erro retornado pela API."
       );
-
     }
 
 
     const dados =
-      Array.isArray(
-        resposta.dados
-      )
+      Array.isArray(resposta.dados)
 
         ? resposta.dados
 
         : (
-            Array.isArray(
-              resposta.lista
-            )
+            Array.isArray(resposta.lista)
 
               ? resposta.lista
 
@@ -1672,9 +1390,7 @@ async function pesquisar() {
           );
 
 
-    renderizarResultados(
-      dados
-    );
+    renderizarResultados(dados);
 
 
     mostrarStatus(
@@ -1720,18 +1436,24 @@ async function pesquisar() {
       "erro"
     );
 
-  }
 
+  } finally {
+
+    requisicaoEmAndamento = false;
+
+    btnPesquisar.disabled = false;
+
+    btnPesquisar.textContent =
+      "Pesquisar";
+  }
 }
 
 
 /* =====================================================
    RENDERIZAR RESULTADOS
-   ===================================================== */
+===================================================== */
 
-function renderizarResultados(
-  dados
-) {
+function renderizarResultados(dados) {
 
   if (
     !Array.isArray(dados) ||
@@ -1752,9 +1474,7 @@ function renderizarResultados(
     contador.textContent =
       "0 registros";
 
-
     return;
-
   }
 
 
@@ -1767,17 +1487,6 @@ function renderizarResultados(
     );
 
 
-  /*
-   * Como a tabela possui somente:
-   *
-   * ID
-   * Problema
-   * Solução
-   *
-   * Primeiro tentamos manter
-   * exatamente essa ordem.
-   */
-
   const colunasPadrao = [
     "ID",
     "Problema",
@@ -1785,13 +1494,7 @@ function renderizarResultados(
   ];
 
 
-  /*
-   * Descobrir as colunas reais
-   * retornadas pela API.
-   */
-
-  const colunas =
-    [];
+  const colunas = [];
 
 
   colunasPadrao.forEach(
@@ -1801,12 +1504,26 @@ function renderizarResultados(
         dados.some(
           function(registro) {
 
-            return (
-              registro &&
-              Object.prototype.hasOwnProperty.call(
-                registro,
-                campo
-              )
+            if (
+              !registro ||
+              typeof registro !== "object"
+            ) {
+
+              return false;
+            }
+
+
+            return Object.keys(
+              registro
+            ).some(
+              function(chave) {
+
+                return (
+                  chave.toLowerCase() ===
+                  campo.toLowerCase()
+                );
+
+              }
             );
 
           }
@@ -1815,10 +1532,7 @@ function renderizarResultados(
 
       if (existe) {
 
-        colunas.push(
-          campo
-        );
-
+        colunas.push(campo);
       }
 
     }
@@ -1826,9 +1540,8 @@ function renderizarResultados(
 
 
   /*
-   * Caso o Apps Script retorne
-   * nomes diferentes, adiciona
-   * os campos encontrados.
+   * Adiciona eventuais campos
+   * extras retornados pela API.
    */
 
   dados.forEach(
@@ -1840,35 +1553,39 @@ function renderizarResultados(
       ) {
 
         return;
-
       }
 
 
-      Object.keys(
-        registro
-      ).forEach(
-        function(campo) {
+      Object.keys(registro)
+        .forEach(
+          function(campo) {
 
-          if (
-            colunas.indexOf(campo) === -1
-          ) {
+            const jaExiste =
+              colunas.some(
+                function(coluna) {
 
-            colunas.push(
-              campo
-            );
+                  return (
+                    coluna.toLowerCase() ===
+                    campo.toLowerCase()
+                  );
+
+                }
+              );
+
+
+            if (!jaExiste) {
+
+              colunas.push(campo);
+            }
 
           }
-
-        }
-      );
+        );
 
     }
   );
 
 
-  if (
-    colunas.length === 0
-  ) {
+  if (colunas.length === 0) {
 
     areaResultado.innerHTML =
 
@@ -1880,15 +1597,9 @@ function renderizarResultados(
 
       '</div>';
 
-
     return;
-
   }
 
-
-  /*
-   * Cabeçalho da tabela.
-   */
 
   let html =
 
@@ -1907,11 +1618,7 @@ function renderizarResultados(
       html +=
 
         "<th>" +
-
-        escaparHTML(
-          campo
-        ) +
-
+        escaparHTML(campo) +
         "</th>";
 
     }
@@ -1927,62 +1634,36 @@ function renderizarResultados(
         "<tbody>";
 
 
-  /*
-   * Registros.
-   */
-
   dados.forEach(
     function(registro) {
 
-      html +=
-        "<tr>";
+      html += "<tr>";
 
 
       colunas.forEach(
         function(campo) {
 
-          let valor =
-            registro[campo];
+          let valor;
 
 
-          /*
-           * Caso o backend retorne
-           * campo em minúsculo.
-           */
-
-          if (
-            valor === undefined
-          ) {
-
-            const campoMinusculo =
-              campo.toLowerCase();
-
-
-            const chaveEncontrada =
-              Object.keys(
-                registro
-              ).find(
+          const chaveEncontrada =
+            Object.keys(registro || {})
+              .find(
                 function(chave) {
 
                   return (
                     chave.toLowerCase() ===
-                    campoMinusculo
+                    campo.toLowerCase()
                   );
 
                 }
               );
 
 
-            if (
-              chaveEncontrada
-            ) {
+          if (chaveEncontrada) {
 
-              valor =
-                registro[
-                  chaveEncontrada
-                ];
-
-            }
+            valor =
+              registro[chaveEncontrada];
 
           }
 
@@ -1991,9 +1672,7 @@ function renderizarResultados(
 
             "<td>" +
 
-            escaparHTML(
-              valor
-            ) +
+            escaparHTML(valor) +
 
             "</td>";
 
@@ -2001,8 +1680,7 @@ function renderizarResultados(
       );
 
 
-      html +=
-        "</tr>";
+      html += "</tr>";
 
     }
   );
@@ -2019,18 +1697,16 @@ function renderizarResultados(
 
   areaResultado.innerHTML =
     html;
-
 }
 
 
 /* =====================================================
-   LIMPAR PESQUISA
-   ===================================================== */
+   LIMPAR
+===================================================== */
 
 function limparPesquisa() {
 
-  campoPesquisa.value =
-    "";
+  campoPesquisa.value = "";
 
 
   areaResultado.innerHTML =
@@ -2052,13 +1728,12 @@ function limparPesquisa() {
 
 
   campoPesquisa.focus();
-
 }
 
 
 /* =====================================================
    EVENTOS
-   ===================================================== */
+===================================================== */
 
 btnPesquisar.addEventListener(
   "click",
@@ -2100,14 +1775,11 @@ campoPesquisa.addEventListener(
   "keydown",
   function(evento) {
 
-    if (
-      evento.key === "Enter"
-    ) {
+    if (evento.key === "Enter") {
 
       evento.preventDefault();
 
       pesquisar();
-
     }
 
   }
@@ -2116,7 +1788,7 @@ campoPesquisa.addEventListener(
 
 /* =====================================================
    INICIALIZAÇÃO
-   ===================================================== */
+===================================================== */
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -2139,4 +1811,3 @@ document.addEventListener(
 </body>
 
 </html>
-
