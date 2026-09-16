@@ -1,22 +1,38 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+from pathlib import Path
+import re
 
-<head>
+src = Path("/mnt/data/Texto colado(20260916-130236).txt")
+out = Path("/mnt/data/index-profissional-atualizado.html")
 
-<meta charset="UTF-8">
+html = src.read_text(encoding="utf-8")
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Controle Financeiro</title>
-
-<style>
-
-/* =========================================================
-   CONFIGURAÇÃO GERAL
-========================================================= */
-
-* {
+# Mantém TODO o HTML/JavaScript original e substitui somente a camada visual (CSS).
+# Os IDs, onclicks, nomes de funções e URL da API permanecem intactos.
+new_css = r
+*,
+*::before,
+*::after {
     box-sizing: border-box;
+}
+
+:root {
+    --navy-950: #0f2742;
+    --navy-900: #17365d;
+    --navy-800: #214c7d;
+    --blue: #2563eb;
+    --blue-soft: #eff6ff;
+    --green: #16a34a;
+    --green-dark: #15803d;
+    --red: #dc2626;
+    --text: #172033;
+    --muted: #64748b;
+    --muted-2: #94a3b8;
+    --line: #e5eaf1;
+    --surface: #ffffff;
+    --surface-soft: #f7f9fc;
+    --shadow: 0 18px 45px rgba(15, 39, 66, .10);
+    --shadow-soft: 0 7px 22px rgba(15, 39, 66, .065);
+    --radius: 18px;
 }
 
 html {
@@ -24,2806 +40,739 @@ html {
 }
 
 body {
-
     margin: 0;
-
     min-height: 100vh;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Arial, Helvetica, sans-serif;
+    color: var(--text);
     background:
-        linear-gradient(
-            135deg,
-            #f4f7fb 0%,
-            #eef3f9 100%
-        );
-
-    color: #1e293b;
+        radial-gradient(circle at 8% 0%, rgba(37,99,235,.08), transparent 30%),
+        radial-gradient(circle at 92% 8%, rgba(22,163,74,.055), transparent 26%),
+        linear-gradient(180deg, #f4f7fb 0%, #eef3f8 100%);
+    -webkit-font-smoothing: antialiased;
 }
 
+button,
+input {
+    font: inherit;
+}
 
-/* =========================================================
-   CONTAINER
-========================================================= */
+button {
+    -webkit-tap-highlight-color: transparent;
+}
 
 .container {
-
     width: 100%;
-
-    max-width: 1120px;
-
+    max-width: 1180px;
     margin: 0 auto;
-
-    padding: 24px 18px 35px;
+    padding: 28px 20px 38px;
 }
-
-
-/* =========================================================
-   CARD PRINCIPAL
-========================================================= */
 
 .card {
-
-    background: #ffffff;
-
-    border-radius: 18px;
-
+    background: var(--surface);
+    border: 1px solid rgba(226,232,240,.95);
+    border-radius: 22px;
     overflow: hidden;
-
-    box-shadow:
-        0 12px 35px
-        rgba(15, 23, 42, 0.08);
-
-    border:
-        1px solid #e2e8f0;
+    box-shadow: var(--shadow);
 }
 
-
-/* =========================================================
+/* =========================
    CABEÇALHO
-========================================================= */
+========================= */
 
 .header {
-
+    position: relative;
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
-    gap: 20px;
-
-    padding: 24px 26px;
-
+    gap: 24px;
+    min-height: 128px;
+    padding: 28px 32px;
+    color: #fff;
     background:
-        linear-gradient(
-            135deg,
-            #17365d 0%,
-            #214c7d 100%
-        );
-
-    color: #ffffff;
+        radial-gradient(circle at 90% 15%, rgba(255,255,255,.12), transparent 27%),
+        linear-gradient(135deg, var(--navy-950) 0%, var(--navy-900) 48%, var(--navy-800) 100%);
+    overflow: hidden;
 }
 
+.header::after {
+    content: "";
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    right: -105px;
+    bottom: -165px;
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 50%;
+    box-shadow: 0 0 0 30px rgba(255,255,255,.025),
+                0 0 0 60px rgba(255,255,255,.018);
+    pointer-events: none;
+}
 
 .header-conteudo {
-
+    position: relative;
+    z-index: 1;
     min-width: 0;
 }
 
-
 .titulo {
-
     margin: 0;
-
-    color: #ffffff;
-
-    font-size: 27px;
-
-    font-weight: 700;
-
-    line-height: 1.2;
-
-    letter-spacing: -0.3px;
+    color: #fff;
+    font-size: clamp(24px, 3vw, 31px);
+    font-weight: 750;
+    line-height: 1.15;
+    letter-spacing: -.65px;
 }
-
 
 .subtitulo {
-
-    margin-top: 6px;
-
-    color: rgba(255,255,255,0.78);
-
+    margin-top: 8px;
+    color: rgba(255,255,255,.72);
     font-size: 13px;
-
-    line-height: 1.4;
+    line-height: 1.45;
 }
-
-
-/* =========================================================
-   STATUS
-========================================================= */
 
 .status {
-
+    position: relative;
+    z-index: 1;
     display: inline-flex;
-
     align-items: center;
-
-    gap: 7px;
-
-    padding: 7px 12px;
-
-    border-radius: 20px;
-
-    background: rgba(255,255,255,0.12);
-
-    border:
-        1px solid rgba(255,255,255,0.18);
-
-    color: rgba(255,255,255,0.88);
-
-    font-size: 12px;
-
-    font-weight: 600;
-
+    gap: 8px;
+    flex: 0 0 auto;
+    padding: 8px 13px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 999px;
+    background: rgba(255,255,255,.09);
+    color: rgba(255,255,255,.86);
+    font-size: 11px;
+    font-weight: 700;
     white-space: nowrap;
+    backdrop-filter: blur(8px);
 }
-
 
 .status::before {
-
     content: "";
-
     width: 7px;
-
     height: 7px;
-
     border-radius: 50%;
-
     background: #cbd5e1;
+    box-shadow: 0 0 0 3px rgba(203,213,225,.08);
 }
-
 
 .status.online {
-
-    background: rgba(34,197,94,0.14);
-
+    background: rgba(34,197,94,.12);
     color: #dcfce7;
-
-    border-color:
-        rgba(134,239,172,0.20);
+    border-color: rgba(134,239,172,.18);
 }
-
 
 .status.online::before {
-
     background: #4ade80;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(74,222,128,0.12);
+    box-shadow: 0 0 0 3px rgba(74,222,128,.13);
 }
-
 
 .status.erro {
-
-    background: rgba(239,68,68,0.15);
-
+    background: rgba(239,68,68,.13);
     color: #fee2e2;
-
-    border-color:
-        rgba(252,165,165,0.20);
+    border-color: rgba(252,165,165,.18);
 }
 
-
 .status.erro::before {
-
     background: #f87171;
 }
 
-
-/* =========================================================
-   ÁREA INTERNA
-========================================================= */
+/* =========================
+   CONTEÚDO
+========================= */
 
 .conteudo {
-
-    padding: 22px 26px 20px;
+    padding: 28px 32px 24px;
 }
-
-
-/* =========================================================
-   TÍTULOS DAS SEÇÕES
-========================================================= */
 
 .secao-cabecalho {
-
     display: flex;
-
     align-items: center;
-
-    justify-content: space-between;
-
-    gap: 10px;
-
-    margin:
-        20px 0 10px;
+    gap: 12px;
+    margin: 24px 0 12px;
 }
 
-
 .secao-cabecalho:first-child {
-
     margin-top: 0;
 }
 
-
 .secao-titulo {
-
     margin: 0;
-
-    color: #17365d;
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    letter-spacing: 0.1px;
+    color: var(--navy-900);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .55px;
+    text-transform: uppercase;
+    white-space: nowrap;
 }
-
 
 .secao-linha {
-
     flex: 1;
-
     height: 1px;
-
-    background: #e2e8f0;
-
-    margin-left: 8px;
+    background: linear-gradient(90deg, var(--line), transparent);
 }
 
-
-/* =========================================================
+/* =========================
    COMPETÊNCIA
-========================================================= */
+========================= */
 
 .competencia-box {
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
-    gap: 18px;
-
-    padding: 15px 16px;
-
-    margin-bottom: 20px;
-
-    background: #f8fafc;
-
-    border:
-        1px solid #e2e8f0;
-
-    border-radius: 12px;
+    gap: 22px;
+    padding: 17px 18px;
+    margin-bottom: 24px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background:
+        linear-gradient(135deg, #fbfcfe, #f6f9fd);
 }
-
 
 .competencia-info {
-
-    min-width: 100px;
+    min-width: 145px;
 }
-
 
 .competencia-label {
-
     display: block;
-
-    margin-bottom: 3px;
-
-    color: #64748b;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
+    margin-bottom: 4px;
+    color: var(--muted-2);
+    font-size: 9px;
+    font-weight: 800;
     text-transform: uppercase;
-
-    letter-spacing: 0.5px;
+    letter-spacing: .8px;
 }
-
 
 .competencia-descricao {
-
-    color: #17365d;
-
+    color: var(--navy-900);
     font-size: 13px;
-
-    font-weight: 600;
+    font-weight: 650;
 }
 
-
 .competencia-linha {
-
     display: flex;
-
     align-items: center;
-
     justify-content: flex-end;
-
-    gap: 7px;
-
+    gap: 8px;
     flex-wrap: wrap;
 }
 
-
 #competencia {
-
-    width: 175px;
-
-    height: 36px;
-
-    padding: 5px 10px;
-
-    border:
-        1px solid #cbd5e1;
-
-    border-radius: 8px;
-
-    background: #ffffff;
-
-    color: #1e293b;
-
-    font-family: inherit;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
+    width: 170px;
+    height: 38px;
+    padding: 5px 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
     outline: none;
-
+    background: #fff;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 650;
     cursor: pointer;
-
-    transition:
-        border-color .2s,
-        box-shadow .2s;
+    transition: border-color .18s ease, box-shadow .18s ease;
 }
 
-
 #competencia:hover {
-
     border-color: #94a3b8;
 }
 
-
 #competencia:focus {
-
-    border-color: #2563eb;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(37,99,235,0.10);
+    border-color: var(--blue);
+    box-shadow: 0 0 0 4px rgba(37,99,235,.10);
 }
 
-
-/* =========================================================
-   BOTÃO ATUALIZAR
-========================================================= */
+.btn-atualizar,
+.btn-fechar {
+    height: 38px;
+    padding: 0 14px;
+    border-radius: 9px;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform .18s ease, box-shadow .18s ease,
+                background .18s ease, color .18s ease;
+}
 
 .btn-atualizar {
-
-    height: 36px;
-
-    padding: 0 13px;
-
-    border:
-        1px solid #17365d;
-
-    border-radius: 8px;
-
-    background: #17365d;
-
-    color: #ffffff;
-
-    font-family: inherit;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    white-space: nowrap;
-
-    transition:
-        background .2s,
-        transform .2s,
-        box-shadow .2s;
+    border: 1px solid var(--navy-900);
+    background: var(--navy-900);
+    color: #fff;
 }
-
 
 .btn-atualizar:hover {
-
-    background: #214c7d;
-
-    transform:
-        translateY(-1px);
-
-    box-shadow:
-        0 4px 10px
-        rgba(23,54,93,0.16);
+    background: var(--navy-800);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(23,54,93,.16);
 }
-
-
-/* =========================================================
-   BOTÃO FECHAR COMPETÊNCIA
-========================================================= */
 
 .btn-fechar {
-
-    height: 36px;
-
-    padding: 0 13px;
-
-    border:
-        1px solid #17365d;
-
-    border-radius: 8px;
-
-    background: #ffffff;
-
-    color: #17365d;
-
-    font-family: inherit;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 7px;
-
-    white-space: nowrap;
-
-    transition:
-        background .2s,
-        color .2s,
-        transform .2s,
-        box-shadow .2s;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: var(--navy-900);
 }
-
 
 .btn-fechar:hover {
-
-    background: #17365d;
-
-    color: #ffffff;
-
-    transform:
-        translateY(-1px);
-
-    box-shadow:
-        0 4px 10px
-        rgba(23,54,93,0.14);
+    border-color: var(--navy-900);
+    background: var(--navy-900);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(23,54,93,.12);
 }
 
-
 .btn-fechar-icone {
-
-    font-size: 14px;
-
+    font-size: 13px;
     line-height: 1;
 }
 
-
-/* =========================================================
+/* =========================
    RESUMO FINANCEIRO
-========================================================= */
+========================= */
 
 .resumo {
-
     display: grid;
-
-    grid-template-columns:
-        repeat(6, 1fr);
-
-    gap: 10px;
-
-    margin-bottom: 22px;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    margin-bottom: 25px;
 }
-
 
 .resumo-card {
-
     position: relative;
-
     min-width: 0;
-
-    min-height: 104px;
-
-    padding: 14px 13px;
-
-    border:
-        1px solid #e2e8f0;
-
-    border-radius: 11px;
-
-    background: #ffffff;
-
-    box-shadow:
-        0 3px 10px
-        rgba(15,23,42,0.035);
-
+    min-height: 112px;
+    padding: 17px 15px 15px 17px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: var(--shadow-soft);
     overflow: hidden;
-
-    transition:
-        transform .18s ease,
-        box-shadow .18s ease;
+    transition: transform .18s ease, box-shadow .18s ease,
+                border-color .18s ease;
 }
-
-
-.resumo-card:hover {
-
-    transform:
-        translateY(-1px);
-
-    box-shadow:
-        0 6px 16px
-        rgba(15,23,42,0.07);
-}
-
-
-/* =========================================================
-   BARRA LATERAL DOS CARDS
-========================================================= */
 
 .resumo-card::before {
-
     content: "";
-
     position: absolute;
-
     left: 0;
-
     top: 0;
-
     bottom: 0;
-
     width: 3px;
-
     background: #cbd5e1;
 }
 
-
 .resumo-card.recebido::before {
-
-    background: #16a34a;
+    background: var(--green);
 }
-
 
 .resumo-card.pago::before {
-
-    background: #dc2626;
+    background: var(--red);
 }
-
 
 .resumo-card.saldo::before {
-
-    background: #17365d;
+    background: var(--navy-900);
 }
 
-
-/* =========================================================
-   LABEL
-========================================================= */
+.resumo-card:hover {
+    transform: translateY(-2px);
+    border-color: #d8e0ea;
+    box-shadow: 0 10px 25px rgba(15,39,66,.09);
+}
 
 .resumo-label {
-
-    margin:
-        0 0 7px;
-
-    color: #64748b;
-
+    margin: 0 0 9px;
+    color: var(--muted);
     font-size: 9px;
-
-    font-weight: 700;
-
+    font-weight: 800;
     line-height: 1.2;
-
-    letter-spacing: 0.4px;
+    letter-spacing: .55px;
 }
 
-
-/* =========================================================
-   VALOR
-========================================================= */
-
 .resumo-valor {
-
     margin: 0;
-
-    color: #17365d;
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    line-height: 1.2;
-
+    color: var(--navy-900);
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.25;
     word-break: break-word;
 }
 
-
-.resumo-card.recebido
-.resumo-valor {
-
-    color: #15803d;
+.resumo-card.recebido .resumo-valor {
+    color: var(--green-dark);
 }
 
-
-.resumo-card.pago
-.resumo-valor {
-
+.resumo-card.pago .resumo-valor {
     color: #b91c1c;
 }
 
-
-/* =========================================================
-   SUBVALOR
-========================================================= */
-
 .resumo-subvalor {
-
-    margin-top: 7px;
-
-    color: #94a3b8;
-
+    margin-top: 8px;
+    color: var(--muted-2);
     font-size: 9px;
-
     font-weight: 600;
-
-    line-height: 1.25;
-
-    white-space: normal;
-}
-
-
-/* =========================================================
-   ROTINAS
-========================================================= */
-
-.menu {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 11px;
-
-    margin-bottom: 4px;
-}
-
-
-.menu-item {
-
-    position: relative;
-
-    width: 100%;
-
-    min-height: 105px;
-
-    border:
-        1px solid #dbe3ed;
-
-    border-radius: 12px;
-
-    padding: 15px 13px;
-
-    background: #ffffff;
-
-    color: #17365d;
-
-    cursor: pointer;
-
-    text-align: center;
-
-    font-family: inherit;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    box-shadow:
-        0 3px 10px
-        rgba(15,23,42,0.035);
-
-    transition:
-        transform .18s ease,
-        background .18s ease,
-        border-color .18s ease,
-        box-shadow .18s ease;
-}
-
-
-.menu-item:hover {
-
-    background: #f8fbff;
-
-    border-color: #b8c8da;
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 7px 18px
-        rgba(23,54,93,0.10);
-}
-
-
-/* =========================================================
-   ÍCONE
-========================================================= */
-
-.menu-icone {
-
-    display: block;
-
-    width: 40px;
-
-    height: 40px;
-
-    margin:
-        0 auto 9px;
-
-    border-radius: 10px;
-
-    background: #eef4fa;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 21px;
-
-    line-height: 1;
-}
-
-
-/* =========================================================
-   DESCRIÇÃO
-========================================================= */
-
-.menu-descricao {
-
-    display: block;
-
-    margin-top: 5px;
-
-    color: #94a3b8;
-
-    font-size: 9px;
-
-    font-weight: 400;
-
     line-height: 1.3;
 }
 
+/* =========================
+   ROTINAS
+========================= */
 
-/* =========================================================
-   NOVO LANÇAMENTO
-========================================================= */
+.menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 5px;
+}
+
+.menu-item {
+    position: relative;
+    width: 100%;
+    min-height: 112px;
+    padding: 17px 14px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: #fff;
+    color: var(--navy-900);
+    cursor: pointer;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 750;
+    box-shadow: var(--shadow-soft);
+    transition: transform .18s ease, background .18s ease,
+                border-color .18s ease, box-shadow .18s ease;
+}
+
+.menu-item:hover {
+    background: #fbfdff;
+    border-color: #bfd0e3;
+    transform: translateY(-2px);
+    box-shadow: 0 11px 25px rgba(23,54,93,.10);
+}
+
+.menu-item:focus-visible,
+.btn-atualizar:focus-visible,
+.btn-fechar:focus-visible {
+    outline: 3px solid rgba(37,99,235,.20);
+    outline-offset: 2px;
+}
+
+.menu-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    margin: 0 auto 10px;
+    border: 1px solid #e3eaf3;
+    border-radius: 12px;
+    background: #f2f6fb;
+    color: var(--navy-800);
+    font-size: 20px;
+    line-height: 1;
+}
+
+.menu-descricao {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted-2);
+    font-size: 9px;
+    font-weight: 450;
+    line-height: 1.35;
+}
 
 .menu-item.novo {
-
-    background:
-        linear-gradient(
-            135deg,
-            #15803d,
-            #16a34a
-        );
-
-    border-color: #15803d;
-
-    color: #ffffff;
-
-    box-shadow:
-        0 5px 14px
-        rgba(21,128,61,0.16);
+    border-color: var(--green-dark);
+    background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
+    color: #fff;
+    box-shadow: 0 8px 22px rgba(21,128,61,.16);
 }
-
 
 .menu-item.novo .menu-icone {
-
-    background:
-        rgba(255,255,255,0.16);
-
-    color: #ffffff;
+    border-color: rgba(255,255,255,.15);
+    background: rgba(255,255,255,.14);
+    color: #fff;
 }
-
 
 .menu-item.novo .menu-descricao {
-
-    color:
-        rgba(255,255,255,0.78);
+    color: rgba(255,255,255,.78);
 }
-
 
 .menu-item.novo:hover {
-
-    background:
-        linear-gradient(
-            135deg,
-            #166534,
-            #15803d
-        );
-
     border-color: #166534;
-
-    box-shadow:
-        0 8px 20px
-        rgba(21,128,61,0.20);
+    background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+    box-shadow: 0 12px 27px rgba(21,128,61,.22);
 }
 
-
-/* =========================================================
-   MENSAGEM
-========================================================= */
+/* =========================
+   MENSAGENS
+========================= */
 
 .mensagem {
-
     display: none;
-
-    margin-top: 15px;
-
-    padding: 11px 13px;
-
-    border-radius: 9px;
-
+    margin-top: 17px;
+    padding: 12px 14px;
+    border-radius: 10px;
     background: #fff7ed;
-
-    border:
-        1px solid #fed7aa;
-
+    border: 1px solid #fed7aa;
     color: #9a3412;
-
     font-size: 12px;
-
-    line-height: 1.4;
+    line-height: 1.45;
 }
 
-
 .mensagem.erro {
-
     background: #fef2f2;
-
     border-color: #fecaca;
-
     color: #991b1b;
 }
 
-
 .mensagem.sucesso {
-
     background: #f0fdf4;
-
     border-color: #bbf7d0;
-
     color: #166534;
 }
 
-
-/* =========================================================
+/* =========================
    RODAPÉ
-========================================================= */
+========================= */
 
 .rodape {
-
-    margin-top: 22px;
-
-    padding-top: 14px;
-
-    border-top:
-        1px solid #e5e7eb;
-
     display: flex;
-
-    justify-content: space-between;
-
     align-items: center;
-
+    justify-content: space-between;
     gap: 12px;
-
-    color: #94a3b8;
-
+    margin-top: 25px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    color: var(--muted-2);
     font-size: 10px;
 }
 
+/* =========================
+   RESPONSIVO
+========================= */
 
-/* =========================================================
-   RESPONSIVO — TABLET
-========================================================= */
-
-@media (max-width: 1000px) {
-
+@media (max-width: 1050px) {
     .resumo {
-
-        grid-template-columns:
-            repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
-
 }
 
-
-/* =========================================================
-   RESPONSIVO — TABLET MENOR
-========================================================= */
-
 @media (max-width: 850px) {
-
     .competencia-box {
-
         align-items: flex-start;
-
         flex-direction: column;
-
-        gap: 12px;
+        gap: 13px;
     }
 
-
     .competencia-linha {
-
         width: 100%;
-
         justify-content: flex-start;
     }
 
-
     .menu {
-
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
-
 }
 
-
-/* =========================================================
-   RESPONSIVO — CELULAR
-========================================================= */
-
 @media (max-width: 600px) {
-
     .container {
-
-        padding:
-            10px 8px 20px;
+        padding: 10px 8px 20px;
     }
-
 
     .card {
-
-        border-radius: 14px;
+        border-radius: 16px;
     }
-
 
     .header {
-
-        padding: 19px 18px;
-
+        min-height: auto;
+        padding: 22px 19px;
         align-items: flex-start;
-
         flex-direction: column;
-
-        gap: 11px;
+        gap: 13px;
     }
-
 
     .titulo {
-
-        font-size: 23px;
+        font-size: 24px;
     }
 
-
     .subtitulo {
-
         font-size: 12px;
     }
 
-
     .status {
-
         align-self: flex-start;
     }
 
-
     .conteudo {
-
-        padding:
-            17px 15px 17px;
+        padding: 19px 15px 18px;
     }
 
+    .competencia-box {
+        padding: 15px;
+        margin-bottom: 21px;
+    }
 
     .resumo {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 8px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 9px;
     }
-
 
     .resumo-card {
-
-        min-height: 96px;
-
-        padding:
-            12px 11px;
+        min-height: 98px;
+        padding: 13px 11px 12px 13px;
     }
 
-
     .resumo-label {
-
         font-size: 8px;
     }
 
-
     .resumo-valor {
-
         font-size: 14px;
     }
 
-
     .resumo-subvalor {
-
         font-size: 8px;
     }
 
-
     .menu {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 8px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 9px;
     }
 
-
     .menu-item {
-
-        min-height: 105px;
-
-        padding:
-            13px 8px;
-
+        min-height: 106px;
+        padding: 14px 9px;
         font-size: 12px;
     }
 
-
     .menu-icone {
-
-        width: 36px;
-
-        height: 36px;
-
-        font-size: 19px;
+        width: 37px;
+        height: 37px;
+        margin-bottom: 8px;
+        font-size: 18px;
     }
 
-
     .menu-descricao {
-
         font-size: 8px;
     }
 
-
     .competencia-linha {
-
         display: grid;
-
-        grid-template-columns:
-            1fr 1fr;
-
+        grid-template-columns: 1fr 1fr;
         width: 100%;
     }
-
 
     #competencia {
-
         width: 100%;
     }
-
 
     .btn-atualizar,
     .btn-fechar {
-
         width: 100%;
     }
 
-
     .rodape {
-
         flex-direction: column;
-
         align-items: flex-start;
-
         gap: 5px;
     }
-
 }
 
-
-/* =========================================================
-   RESPONSIVO — CELULAR PEQUENO
-========================================================= */
-
 @media (max-width: 420px) {
-
     .resumo {
-
-        grid-template-columns:
-            1fr 1fr;
+        grid-template-columns: 1fr 1fr;
     }
-
 
     .resumo-card {
-
-        min-height: 90px;
-
-        padding: 10px;
+        min-height: 91px;
+        padding: 11px;
     }
 
-
     .resumo-valor {
-
         font-size: 13px;
     }
 
-
     .menu {
-
         grid-template-columns: 1fr;
     }
 
-
     .menu-item {
-
-        min-height: 88px;
-
+        min-height: 82px;
         display: grid;
-
-        grid-template-columns:
-            42px 1fr;
-
-        grid-template-rows:
-            auto auto;
-
+        grid-template-columns: 42px 1fr;
+        grid-template-rows: auto auto;
         column-gap: 10px;
-
         align-items: center;
-
         text-align: left;
-
         padding: 10px 12px;
     }
 
-
     .menu-icone {
-
-        grid-row:
-            1 / 3;
-
+        grid-row: 1 / 3;
         margin: 0;
-
         width: 38px;
-
         height: 38px;
     }
 
-
     .menu-descricao {
-
         margin-top: 1px;
     }
-
 }
 
-
-/* =========================================================
-   CELULAR MUITO PEQUENO
-========================================================= */
-
 @media (max-width: 350px) {
-
     .resumo {
-
         grid-template-columns: 1fr;
     }
 
-
     .resumo-card {
-
         min-height: 72px;
-
         display: flex;
-
         align-items: center;
-
         gap: 10px;
     }
 
-
     .resumo-label {
-
         margin: 0;
-
         flex: 1;
     }
 
-
     .resumo-valor {
-
         text-align: right;
     }
-
 
     .resumo-subvalor {
-
         margin-top: 0;
-
         text-align: right;
     }
 
-
     .competencia-linha {
-
         grid-template-columns: 1fr;
     }
-
-}
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<div class="container">
-
-<div class="card">
-
-
-<!-- =====================================================
-     CABEÇALHO
-===================================================== -->
-
-<div class="header">
-
-    <div class="header-conteudo">
-
-        <h1 class="titulo">
-            Controle Financeiro
-        </h1>
-
-        <div class="subtitulo">
-            Gestão de lançamentos e fluxo financeiro
-        </div>
-
-    </div>
-
-
-    <div
-        id="status"
-        class="status">
-
-        Sistema
-
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     CONTEÚDO
-===================================================== -->
-
-<div class="conteudo">
-
-
-<!-- =====================================================
-     COMPETÊNCIA
-===================================================== -->
-
-<div class="competencia-box">
-
-
-    <div class="competencia-info">
-
-        <span class="competencia-label">
-            Competência
-        </span>
-
-        <span class="competencia-descricao">
-            Período financeiro selecionado
-        </span>
-
-    </div>
-
-
-    <div class="competencia-linha">
-
-
-        <input
-            id="competencia"
-            type="month"
-            title="Selecione a competência"
-        >
-
-
-        <button
-            type="button"
-            class="btn-atualizar"
-            onclick="carregarResumo()">
-
-            ↻ Atualizar
-
-        </button>
-
-
-        <button
-            type="button"
-            class="btn-fechar"
-            onclick="fecharCompetencia()">
-
-            <span class="btn-fechar-icone">
-                🔒
-            </span>
-
-            <span>
-                Fechar competência
-            </span>
-
-        </button>
-
-
-    </div>
-
-
-</div>
-
-
-<!-- =====================================================
-     RESUMO
-===================================================== -->
-
-<div class="secao-cabecalho">
-
-    <div class="secao-titulo">
-        Resumo da Competência
-    </div>
-
-    <div class="secao-linha"></div>
-
-</div>
-
-
-<div class="resumo">
-
-
-<!-- SALDO INICIAL -->
-
-<div class="resumo-card saldo">
-
-    <div class="resumo-label">
-        SALDO INICIAL
-    </div>
-
-    <div
-        id="saldoInicial"
-        class="resumo-valor">
-
-        R$ 0,00
-
-    </div>
-
-</div>
-
-
-<!-- A RECEBER -->
-
-<div class="resumo-card">
-
-    <div class="resumo-label">
-        A RECEBER
-    </div>
-
-    <div
-        id="receber"
-        class="resumo-valor">
-
-        R$ 0,00
-
-    </div>
-
-    <div
-        id="saldoAReceber"
-        class="resumo-subvalor">
-
-        Saldo a receber: R$ 0,00
-
-    </div>
-
-</div>
-
-
-<!-- RECEBIDO -->
-
-<div class="resumo-card recebido">
-
-    <div class="resumo-label">
-        RECEBIDO
-    </div>
-
-    <div
-        id="recebido"
-        class="resumo-valor">
-
-        R$ 0,00
-
-    </div>
-
-</div>
-
-
-<!-- A PAGAR -->
-
-<div class="resumo-card">
-
-    <div class="resumo-label">
-        A PAGAR
-    </div>
-
-    <div
-        id="pagar"
-        class="resumo-valor">
-
-        R$ 0,00
-
-    </div>
-
-    <div
-        id="saldoAPagar"
-        class="resumo-subvalor">
-
-        Saldo a pagar: R$ 0,00
-
-    </div>
-
-</div>
-
-
-<!-- PAGOS -->
-
-<div class="resumo-card pago">
-
-    <div class="resumo-label">
-        PAGOS
-    </div>
-
-    <div
-        id="pago"
-        class="resumo-valor">
-
-        R$ 0,00
-
-    </div>
-
-</div>
-
-
-<!-- SALDO BANCÁRIO -->
-
-<div class="resumo-card saldo">
-
-    <div class="resumo-label">
-        SALDO BANCÁRIO
-    </div>
-
-    <div
-        id="saldoBanco"
-        class="resumo-valor">
-
-        R$ 0,00
-
-    </div>
-
-</div>
-
-
-</div>
-
-
-<!-- =====================================================
-     ROTINAS
-===================================================== -->
-
-<div class="secao-cabecalho">
-
-    <div class="secao-titulo">
-        Rotinas
-    </div>
-
-    <div class="secao-linha"></div>
-
-</div>
-
-
-<div class="menu">
-
-
-<!-- LANÇAMENTOS -->
-
-<button
-    type="button"
-    class="menu-item"
-    onclick="abrirPagina('lancamentos')">
-
-
-    <span class="menu-icone">
-        📋
-    </span>
-
-    Lançamentos
-
-    <span class="menu-descricao">
-        Consultar, editar e excluir lançamentos
-    </span>
-
-
-</button>
-
-
-<!-- BAIXAS PENDENTES -->
-
-<button
-    type="button"
-    class="menu-item"
-    onclick="abrirPagina('pendentes')">
-
-
-    <span class="menu-icone">
-        ⏳
-    </span>
-
-    Baixas Pendentes
-
-    <span class="menu-descricao">
-        Consultar lançamentos pendentes
-    </span>
-
-
-</button>
-
-
-<!-- RELATÓRIO -->
-
-<button
-    type="button"
-    class="menu-item"
-    onclick="abrirPagina('relatorio')">
-
-
-    <span class="menu-icone">
-        📊
-    </span>
-
-    Relatório Financeiro
-
-    <span class="menu-descricao">
-        Visualizar relatório da competência
-    </span>
-
-
-</button>
-
-
-<!-- GRÁFICOS -->
-
-<button
-    type="button"
-    class="menu-item"
-    onclick="abrirPagina('graficos')">
-
-
-    <span class="menu-icone">
-        📈
-    </span>
-
-    Gráficos
-
-    <span class="menu-descricao">
-        Análise visual dos dados financeiros
-    </span>
-
-
-</button>
-
-
-<!-- ATENDIMENTO -->
-
-<button
-    type="button"
-    class="menu-item"
-    onclick="abrirPagina('atendimento')">
-
-
-    <span class="menu-icone">
-        👤
-    </span>
-
-    Atendimento
-
-    <span class="menu-descricao">
-        Pesquisa e registro de atendimento
-    </span>
-
-
-</button>
-
-
-<!-- NOVO LANÇAMENTO -->
-
-<button
-    type="button"
-    class="menu-item novo"
-    onclick="abrirNovoLancamento()">
-
-
-    <span class="menu-icone">
-        ➕
-    </span>
-
-    Novo Lançamento
-
-    <span class="menu-descricao">
-        Cadastrar novo lançamento
-    </span>
-
-
-</button>
-
-
-</div>
-
-
-<!-- =====================================================
-     MENSAGEM
-===================================================== -->
-
-<div
-    id="mensagem"
-    class="mensagem">
-</div>
-
-
-<!-- =====================================================
-     RODAPÉ
-===================================================== -->
-
-<div class="rodape">
-
-
-    <span>
-        Controle Financeiro
-    </span>
-
-
-    <span>
-        Joel Rodrigues.
-    </span>
-
-
-</div>
-
-
-</div>
-
-</div>
-
-</div>
-
-
-<script>
-
-
-/* =========================================================
-   CONFIGURAÇÃO
-========================================================= */
-
-const URL_API =
-"https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec";
-
-
-/* =========================================================
-   ELEMENTOS
-========================================================= */
-
-const statusEl =
-    document.getElementById("status");
-
-const mensagemEl =
-    document.getElementById("mensagem");
-
-const competenciaEl =
-    document.getElementById("competencia");
-
-
-/* =========================================================
-   FECHAR COMPETÊNCIA
-========================================================= */
-
-function fecharCompetencia() {
-
-    const competencia =
-        document.getElementById('competencia')?.value;
-
-
-    if (!competencia) {
-
-        alert(
-            'Selecione uma competência antes de fechar.'
-        );
-
-        return;
-    }
-
-
-    const confirmar =
-        confirm(
-
-            'Deseja fechar a competência ' +
-            competencia +
-            '?\n\n' +
-
-            'O saldo final será gravado como saldo inicial da próxima competência.'
-
-        );
-
-
-    if (!confirmar) return;
-
-
-    alterarStatus(
-        'Fechando competência...'
-    );
-
-
-    chamarAPI(
-        'fecharMes',
-        {
-            competencia:
-                competencia
-        }
-    )
-
-
-    .then(
-        function(resultado) {
-
-
-            if (
-                !resultado ||
-                !resultado.sucesso
-            ) {
-
-                throw new Error(
-
-                    resultado?.mensagem ||
-                    'Não foi possível fechar a competência.'
-
-                );
-
-            }
-
-
-            alert(
-
-                'Competência fechada com sucesso!\n\n' +
-
-                'Competência: ' +
-                resultado.competenciaAtual +
-
-                '\n' +
-
-                'Saldo final: ' +
-                resultado.saldoFinalFormatado +
-
-                '\n\n' +
-
-                'Saldo inicial gravado para: ' +
-                resultado.proximaCompetencia
-
-            );
-
-
-            alterarStatus(
-                'Sistema online'
-            );
-
-
-            carregarResumo();
-
-
-        }
-    )
-
-
-    .catch(
-        function(erro) {
-
-
-            console.error(
-                erro
-            );
-
-
-            alterarStatus(
-                'Sistema online'
-            );
-
-
-            alert(
-
-                'Erro ao fechar a competência:\n\n' +
-                erro.message
-
-            );
-
-        }
-    );
-
 }
 
 
-/* =========================================================
-   ALTERAR STATUS
-========================================================= */
-
-function alterarStatus(
-    texto
-) {
-
-    statusEl.textContent =
-        texto;
-
-
-    if (
-        texto ===
-        "Sistema online"
-    ) {
-
-        statusEl.className =
-            "status online";
-
-    } else {
-
-        statusEl.className =
-            "status";
-
-    }
-
-}
-
-
-/* =========================================================
-   COMPETÊNCIA ATUAL
-========================================================= */
-
-function competenciaAtual() {
-
-    const agora =
-        new Date();
-
-
-    const ano =
-        agora.getFullYear();
-
-
-    const mes =
-        String(
-            agora.getMonth() + 1
-        ).padStart(
-            2,
-            "0"
-        );
-
-
-    return ano + "-" + mes;
-
-}
-
-
-competenciaEl.value =
-    competenciaAtual();
-
-
-/* =========================================================
-   MOEDA
-========================================================= */
-
-function moeda(
-    valor
-) {
-
-    let numero =
-        Number(valor);
-
-
-    if (
-        isNaN(numero)
-    ) {
-
-        numero = 0;
-
-    }
-
-
-    return numero.toLocaleString(
-        "pt-BR",
-        {
-            style:
-                "currency",
-
-            currency:
-                "BRL"
-        }
-    );
-
-}
-
-
-/* =========================================================
-   MENSAGEM
-========================================================= */
-
-function mostrarMensagem(
-    texto,
-    tipo = ""
-) {
-
-    mensagemEl.textContent =
-        texto || "";
-
-
-    mensagemEl.className =
-        "mensagem";
-
-
-    if (tipo) {
-
-        mensagemEl.classList.add(
-            tipo
-        );
-
-    }
-
-
-    mensagemEl.style.display =
-        texto
-            ? "block"
-            : "none";
-
-}
-
-
-/* =========================================================
-   VALIDAR COMPETÊNCIA
-========================================================= */
-
-function validarCompetencia(
-    competencia
-) {
-
-    if (
-        !/^\d{4}-\d{2}$/.test(
-            competencia
-        )
-    ) {
-
-        throw new Error(
-            "Selecione uma competência válida."
-        );
-
-    }
-
-
-    const partes =
-        competencia.split("-");
-
-
-    const ano =
-        Number(
-            partes[0]
-        );
-
-
-    const mes =
-        Number(
-            partes[1]
-        );
-
-
-    if (
-        ano < 1900 ||
-        ano > 2100 ||
-        mes < 1 ||
-        mes > 12
-    ) {
-
-        throw new Error(
-            "Competência inválida."
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   CHAMADA DA API
-========================================================= */
-
-async function chamarAPI(
-    action,
-    parametros = {}
-) {
-
-    const url =
-        new URL(
-            URL_API
-        );
-
-
-    url.searchParams.set(
-        "action",
-        action
-    );
-
-
-    Object.keys(
-        parametros
-    )
-    .forEach(
-        function(chave) {
-
-
-            const valor =
-                parametros[chave];
-
-
-            if (
-                valor !== undefined &&
-                valor !== null
-            ) {
-
-                url.searchParams.set(
-
-                    chave,
-
-                    String(
-                        valor
-                    )
-
-                );
-
-            }
-
-        }
-    );
-
-
-    console.log(
-        "Chamando API:",
-        url.href
-    );
-
-
-    let resposta;
-
-
-    try {
-
-        resposta =
-            await fetch(
-                url.href,
-                {
-                    method:
-                        "GET",
-
-                    cache:
-                        "no-store",
-
-                    redirect:
-                        "follow"
-                }
-            );
-
-
-    } catch (erro) {
-
-        console.error(
-            "Falha de conexão:",
-            erro
-        );
-
-
-        throw new Error(
-
-            "Não foi possível conectar ao Google Apps Script. " +
-
-            "Verifique se a URL /exec está publicada e acessível."
-
-        );
-
-    }
-
-
-    if (
-        !resposta.ok
-    ) {
-
-        throw new Error(
-
-            "Google Apps Script retornou HTTP " +
-            resposta.status +
-            "."
-
-        );
-
-    }
-
-
-    const texto =
-        await resposta.text();
-
-
-    console.log(
-        "Resposta da API:",
-        texto
-    );
-
-
-    if (!texto) {
-
-        throw new Error(
-            "A API retornou uma resposta vazia."
-        );
-
-    }
-
-
-    let dados;
-
-
-    try {
-
-        dados =
-            JSON.parse(
-                texto
-            );
-
-
-    } catch (erro) {
-
-        console.error(
-            "Resposta não é JSON:",
-            texto
-        );
-
-
-        if (
-
-            texto.includes(
-                "<!DOCTYPE html"
-            ) ||
-
-            texto.includes(
-                "<html"
-            )
-
-        ) {
-
-            throw new Error(
-
-                "O Apps Script retornou uma página HTML em vez de JSON. " +
-
-                "Verifique a implantação como aplicativo da Web (/exec)."
-
-            );
-
-        }
-
-
-        throw new Error(
-            "A API retornou dados inválidos."
-        );
-
-    }
-
-
-    if (
-        dados.sucesso === false
-    ) {
-
-        throw new Error(
-
-            dados.erro ||
-
-            dados.mensagem ||
-
-            "Erro retornado pelo Apps Script."
-
-        );
-
-    }
-
-
-    return dados;
-
-}
-
-
-/* =========================================================
-   CARREGAR RESUMO
-========================================================= */
-
-async function carregarResumo() {
-
-    const competencia =
-        competenciaEl.value;
-
-
-    try {
-
-        validarCompetencia(
-            competencia
-        );
-
-
-    } catch (erro) {
-
-        mostrarMensagem(
-            erro.message,
-            "erro"
-        );
-
-        return;
-
-    }
-
-
-    const cards =
-        document.querySelectorAll(
-            ".resumo-valor"
-        );
-
-
-    cards.forEach(
-        function(card) {
-
-            card.style.opacity =
-                "0.45";
-
-        }
-    );
-
-
-    alterarStatus(
-        "Atualizando..."
-    );
-
-
-    try {
-
-        const resposta =
-            await chamarAPI(
-
-                "obterResumo",
-
-                {
-                    competencia:
-                        competencia
-                }
-
-            );
-
-
-        /* =================================================
-           SALDO INICIAL
-        ================================================= */
-
-        const saldoInicial =
-            Number(
-
-                resposta.saldoInicial ??
-                resposta.saldo_inicial ??
-                0
-
-            );
-
-
-        /* =================================================
-           A RECEBER
-        ================================================= */
-
-        const receber =
-            Number(
-
-                resposta.receber ??
-                resposta.aReceber ??
-                resposta.a_receber ??
-                0
-
-            );
-
-
-        /* =================================================
-           RECEBIDO
-        ================================================= */
-
-        const recebido =
-            Number(
-
-                resposta.recebido ??
-                resposta.recebidos ??
-                resposta.totalRecebido ??
-                resposta.total_recebido ??
-                0
-
-            );
-
-
-        /* =================================================
-           A PAGAR
-        ================================================= */
-
-        const pagar =
-            Number(
-
-                resposta.pagar ??
-                resposta.aPagar ??
-                resposta.a_pagar ??
-                0
-
-            );
-
-
-        /* =================================================
-           PAGOS
-        ================================================= */
-
-        const pago =
-            Number(
-
-                resposta.pago ??
-                resposta.pagos ??
-                resposta.totalPago ??
-                resposta.total_pago ??
-                0
-
-            );
-
-
-        /* =================================================
-           SALDO BANCÁRIO
-        ================================================= */
-
-        const saldoBanco =
-            Number(
-
-                resposta.saldoBanco ??
-                resposta.saldo_banco ??
-                resposta.saldo ??
-                0
-
-            );
-
-
-        /* =================================================
-           CÁLCULOS DOS SALDOS
-        ================================================= */
-
-        const saldoAReceber =
-            receber -
-            recebido;
-
-
-        const saldoAPagar =
-            pagar -
-            pago;
-
-
-        /* =================================================
-           PREENCHER SALDO INICIAL
-        ================================================= */
-
-        document.getElementById(
-            "saldoInicial"
-        ).textContent =
-            moeda(
-                saldoInicial
-            );
-
-
-        /* =================================================
-           PREENCHER A RECEBER
-        ================================================= */
-
-        document.getElementById(
-            "receber"
-        ).textContent =
-            moeda(
-                receber
-            );
-
-
-        /* =================================================
-           PREENCHER RECEBIDO
-        ================================================= */
-
-        document.getElementById(
-            "recebido"
-        ).textContent =
-            moeda(
-                recebido
-            );
-
-
-        /* =================================================
-           PREENCHER SALDO A RECEBER
-        ================================================= */
-
-        document.getElementById(
-            "saldoAReceber"
-        ).textContent =
-
-            "Saldo a receber: " +
-
-            moeda(
-                saldoAReceber
-            );
-
-
-        /* =================================================
-           PREENCHER A PAGAR
-        ================================================= */
-
-        document.getElementById(
-            "pagar"
-        ).textContent =
-            moeda(
-                pagar
-            );
-
-
-        /* =================================================
-           PREENCHER PAGOS
-        ================================================= */
-
-        document.getElementById(
-            "pago"
-        ).textContent =
-            moeda(
-                pago
-            );
-
-
-        /* =================================================
-           PREENCHER SALDO A PAGAR
-        ================================================= */
-
-        document.getElementById(
-            "saldoAPagar"
-        ).textContent =
-
-            "Saldo a pagar: " +
-
-            moeda(
-                saldoAPagar
-            );
-
-
-        /* =================================================
-           PREENCHER SALDO BANCÁRIO
-        ================================================= */
-
-        document.getElementById(
-            "saldoBanco"
-        ).textContent =
-            moeda(
-                saldoBanco
-            );
-
-
-        /* =================================================
-           STATUS
-        ================================================= */
-
-        alterarStatus(
-            "Sistema online"
-        );
-
-
-        mostrarMensagem(
-            "",
-            ""
-        );
-
-
-    } catch (erro) {
-
-        console.error(
-            "Erro ao carregar resumo:",
-            erro
-        );
-
-
-        statusEl.textContent =
-            "API indisponível";
-
-
-        statusEl.className =
-            "status erro";
-
-
-        mostrarMensagem(
-
-            erro.message ||
-            "Não foi possível atualizar o resumo.",
-
-            "erro"
-
-        );
-
-
-    } finally {
-
-        cards.forEach(
-            function(card) {
-
-                card.style.opacity =
-                    "1";
-
-            }
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   CONSTRUIR URL DA ROTINA
-========================================================= */
-
-function construirUrl(
-    arquivo
-) {
-
-    const competencia =
-        competenciaEl.value ||
-        competenciaAtual();
-
-
-    validarCompetencia(
-        competencia
-    );
-
-
-    const url =
-        new URL(
-            arquivo,
-            window.location.href
-        );
-
-
-    url.searchParams.set(
-        "competencia",
-        competencia
-    );
-
-
-    return url;
-
-}
-
-
-/* =========================================================
-   ABRIR PÁGINA
-========================================================= */
-
-function abrirPagina(
-    pagina
-) {
-
-    const arquivos = {
-
-        lancamentos:
-            "Lancamentos.html",
-
-        pendentes:
-            "BaixasPendentes.html",
-
-        relatorio:
-            "Relatorio.html",
-
-        graficos:
-            "Graficos.html",
-
-        atendimento:
-            "Atendimento.html"
-
-    };
-
-
-    const arquivo =
-        arquivos[pagina];
-
-
-    if (!arquivo) {
-
-        mostrarMensagem(
-
-            "Rotina não encontrada.",
-
-            "erro"
-
-        );
-
-        return;
-
-    }
-
-
-    try {
-
-        const url =
-            construirUrl(
-                arquivo
-            );
-
-
-        url.searchParams.set(
-            "modo",
-            "lista"
-        );
-
-
-        window.location.href =
-            url.href;
-
-
-    } catch (erro) {
-
-        mostrarMensagem(
-            erro.message,
-            "erro"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   NOVO LANÇAMENTO
-========================================================= */
-
-function abrirNovoLancamento() {
-
-    try {
-
-        const url =
-            construirUrl(
-                "Lancamentos.html"
-            );
-
-
-        url.searchParams.set(
-            "modo",
-            "novo"
-        );
-
-
-        url.searchParams.set(
-            "novo",
-            "1"
-        );
-
-
-        window.location.href =
-            url.href;
-
-
-    } catch (erro) {
-
-        mostrarMensagem(
-            erro.message,
-            "erro"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   ALTERAÇÃO DE COMPETÊNCIA
-========================================================= */
-
-competenciaEl.addEventListener(
-    "change",
-    function() {
-
-        carregarResumo();
-
-    }
-);
-
-
-/* =========================================================
-   ENTER
-========================================================= */
-
-competenciaEl.addEventListener(
-    "keydown",
-    function(evento) {
-
-        if (
-            evento.key === "Enter"
-        ) {
-
-            evento.preventDefault();
-
-            carregarResumo();
-
-        }
-
-    }
-);
-
-/* =========================================================
-   INICIALIZAÇÃO
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
-
-        carregarResumo();
-
-    }
-);
-
-</script>
-
-
-</body>
-
-</html>
-
+# Substitui apenas o primeiro bloco <style>...</style>.
+html2 = re.sub(
+    r"<style>.*?</style>",
+    "<style>\n" + new_css.strip() + "\n</style>",
+    html,
+    count=1,
+    flags=re.S
+)
+
+# Pequena melhoria textual visual, sem alterar IDs ou funcionamento.
+html2 = html2.replace(
+    "<div class=\"secao-titulo\">\n        Resumo da Competência",
+    "<div class=\"secao-titulo\">\n        Resumo da Competência"
+)
+
+out.write_text(html2, encoding="utf-8")
+
+print(f"Arquivo criado: {out}")
+print(f"Linhas: {len(html2.splitlines())}")
+print("JavaScript e IDs preservados; alteração concentrada no CSS.")
