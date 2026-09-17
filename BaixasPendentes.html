@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
@@ -98,6 +99,64 @@ h2{
     background:#1b5e20;
 }
 
+
+/* =====================================================
+   FILTROS
+===================================================== */
+
+.filtros{
+    display:grid;
+    grid-template-columns:minmax(250px, 1fr);
+    gap:12px;
+    margin-bottom:20px;
+    padding:15px;
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+}
+
+.filtro-grupo{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.filtro-grupo label{
+    font-size:13px;
+    font-weight:bold;
+    color:#475569;
+}
+
+.filtro-grupo select{
+    width:100%;
+    height:42px;
+    padding:0 12px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    background:#fff;
+    color:#334155;
+    font-family:inherit;
+    font-size:14px;
+    outline:none;
+    cursor:pointer;
+}
+
+.filtro-grupo select:focus{
+    border-color:#1565c0;
+    box-shadow:0 0 0 3px rgba(21,101,192,.10);
+}
+
+.info-filtro{
+    font-size:12px;
+    color:#64748b;
+    margin-top:2px;
+}
+
+
+/* =====================================================
+   MENSAGENS
+===================================================== */
+
 .mensagem{
     display:none;
     padding:12px 15px;
@@ -117,6 +176,11 @@ h2{
     background:#e8f5e9;
     color:#2e7d32;
 }
+
+
+/* =====================================================
+   RESUMO
+===================================================== */
 
 .resumo{
     display:grid;
@@ -146,6 +210,11 @@ h2{
     color:#c62828;
     font-weight:bold;
 }
+
+
+/* =====================================================
+   TABELA
+===================================================== */
 
 .area-tabela{
     width:100%;
@@ -204,6 +273,11 @@ tbody tr:hover{
     padding:20px;
 }
 
+
+/* =====================================================
+   BADGES
+===================================================== */
+
 .badge{
     display:inline-block;
     padding:6px 10px;
@@ -247,6 +321,11 @@ tbody tr:hover{
     white-space:nowrap;
 }
 
+
+/* =====================================================
+   SPINNERS
+===================================================== */
+
 .spinner{
     display:inline-block;
     width:22px;
@@ -279,6 +358,11 @@ tbody tr:hover{
 
 }
 
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
 @media(max-width:700px){
 
     body{
@@ -298,6 +382,10 @@ tbody tr:hover{
         flex-direction:column;
     }
 
+    .filtros{
+        grid-template-columns:1fr;
+    }
+
 }
 
 </style>
@@ -308,145 +396,181 @@ tbody tr:hover{
 
 <div class="container">
 
-    <div class="topo">
+```
+<div class="topo">
 
-        <h2>⚠️ Baixas Pendentes</h2>
+    <h2>⚠️ Baixas Pendentes</h2>
 
-        <button
-            type="button"
-            class="btn btn-voltar"
-            onclick="voltarIndex()"
+    <button
+        type="button"
+        class="btn btn-voltar"
+        onclick="voltarIndex()"
+    >
+        ← Voltar
+    </button>
+
+</div>
+
+
+<h3 class="subtitulo">
+    Todos os lançamentos pendentes
+</h3>
+
+
+<div class="acoes">
+
+    <button
+        type="button"
+        id="btnAtualizar"
+        class="btn btn-atualizar"
+        onclick="carregar()"
+    >
+        🔄 Atualizar
+    </button>
+
+</div>
+
+
+<!-- =================================================
+     FILTRO POR DESCRIÇÃO
+================================================== -->
+
+<div class="filtros">
+
+    <div class="filtro-grupo">
+
+        <label for="filtroDescricao">
+            🔎 Filtrar por descrição
+        </label>
+
+        <select
+            id="filtroDescricao"
+            onchange="aplicarFiltroDescricao()"
         >
-            ← Voltar
-        </button>
 
-    </div>
+            <option value="">
+                Todas as descrições
+            </option>
 
+        </select>
 
-    <h3 class="subtitulo">
-        Todos os lançamentos pendentes
-    </h3>
-
-
-    <div class="acoes">
-
-        <button
-            type="button"
-            id="btnAtualizar"
-            class="btn btn-atualizar"
-            onclick="carregar()"
+        <div
+            id="infoFiltro"
+            class="info-filtro"
         >
-            🔄 Atualizar
-        </button>
-
-    </div>
-
-
-    <div
-        id="mensagem"
-        class="mensagem"
-    ></div>
-
-
-    <div class="resumo">
-
-        <div class="card-resumo">
-
-            <span class="titulo">
-                Pendências
-            </span>
-
-            <span
-                class="valor"
-                id="totalPendentes"
-            >
-                0
-            </span>
-
+            Exibindo todos os lançamentos pendentes.
         </div>
-
-
-        <div class="card-resumo">
-
-            <span class="titulo">
-                Contas a Receber
-            </span>
-
-            <span
-                class="valor"
-                id="totalReceber"
-            >
-                R$ 0,00
-            </span>
-
-        </div>
-
-
-        <div class="card-resumo">
-
-            <span class="titulo">
-                Contas a Pagar
-            </span>
-
-            <span
-                class="valor"
-                id="totalPagar"
-            >
-                R$ 0,00
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <div class="area-tabela">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>ID</th>
-                    <th>Competência</th>
-                    <th>Tipo</th>
-                    <th>Descrição</th>
-                    <th>Valor</th>
-                    <th>Vencimento</th>
-                    <th>Baixado</th>
-                    <th>Ação</th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody id="lista">
-
-                <tr>
-
-                    <td
-                        colspan="8"
-                        class="loading"
-                    >
-
-                        <span class="spinner"></span>
-
-                        Carregando baixas pendentes...
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
 
     </div>
 
 </div>
 
+
+<div
+    id="mensagem"
+    class="mensagem"
+></div>
+
+
+<div class="resumo">
+
+    <div class="card-resumo">
+
+        <span class="titulo">
+            Pendências
+        </span>
+
+        <span
+            class="valor"
+            id="totalPendentes"
+        >
+            0
+        </span>
+
+    </div>
+
+
+    <div class="card-resumo">
+
+        <span class="titulo">
+            Contas a Receber
+        </span>
+
+        <span
+            class="valor"
+            id="totalReceber"
+        >
+            R$ 0,00
+        </span>
+
+    </div>
+
+
+    <div class="card-resumo">
+
+        <span class="titulo">
+            Contas a Pagar
+        </span>
+
+        <span
+            class="valor"
+            id="totalPagar"
+        >
+            R$ 0,00
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="area-tabela">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+                <th>Competência</th>
+                <th>Tipo</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Vencimento</th>
+                <th>Baixado</th>
+                <th>Ação</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody id="lista">
+
+            <tr>
+
+                <td
+                    colspan="8"
+                    class="loading"
+                >
+
+                    <span class="spinner"></span>
+
+                    Carregando baixas pendentes...
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+```
+
+</div>
 
 <script>
 
@@ -457,18 +581,21 @@ tbody tr:hover{
 const URL_API =
 "https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec";
 
-/*
- * Nome da ação usada pelo botão BAIXAR.
- *
- * Se no seu Apps Script a função tiver outro nome,
- * altere somente esta constante.
- */
 
 const ACAO_BAIXAR =
 "baixarLancamento";
 
 
 let contadorCallback = 0;
+
+
+/*
+ * Guarda todos os lançamentos recebidos da API.
+ *
+ * O filtro trabalha em cima desta lista.
+ */
+
+let listaPendentes = [];
 
 
 /* =====================================================
@@ -498,10 +625,6 @@ async function carregar(){
         document.getElementById("btnAtualizar");
 
 
-    /*
-     * Impede duas consultas simultâneas.
-     */
-
     if(
         botao.disabled
     ){
@@ -529,7 +652,6 @@ async function carregar(){
 
     limparMensagem();
 
-
     zerarResumo();
 
 
@@ -539,17 +661,6 @@ async function carregar(){
             "Consultando todas as baixas pendentes..."
         );
 
-
-        /*
-         * IMPORTANTE:
-         *
-         * Não enviamos competência.
-         *
-         * A API recebe somente:
-         *
-         * action=listarBaixasPendentes
-         *
-         */
 
         const resposta =
             await chamarAPI(
@@ -598,17 +709,38 @@ async function carregar(){
         );
 
 
-        mostrarLista(lista);
+        /*
+         * Guarda a lista completa.
+         */
 
-        atualizarResumo(lista);
+        listaPendentes =
+            Array.isArray(lista)
+                ? lista
+                : [];
+
+
+        /*
+         * Monta as opções do filtro.
+         */
+
+        preencherFiltroDescricoes(
+            listaPendentes
+        );
+
+
+        /*
+         * Exibe a lista completa.
+         */
+
+        aplicarFiltroDescricao();
 
 
         if(
-            lista.length > 0
+            listaPendentes.length > 0
         ){
 
             mostrarMensagem(
-                lista.length +
+                listaPendentes.length +
                 " lançamento(s) pendente(s) encontrado(s).",
                 "sucesso"
             );
@@ -645,6 +777,10 @@ async function carregar(){
         );
 
 
+        listaPendentes = [];
+
+        limparFiltroDescricao();
+
         zerarResumo();
 
     }
@@ -656,6 +792,320 @@ async function carregar(){
             "🔄 Atualizar";
 
     }
+
+}
+
+
+/* =====================================================
+   PREENCHER FILTRO DE DESCRIÇÕES
+===================================================== */
+
+function preencherFiltroDescricoes(lista){
+
+    const select =
+        document.getElementById(
+            "filtroDescricao"
+        );
+
+
+    /*
+     * Limpa todas as opções anteriores.
+     */
+
+    select.innerHTML = `
+        <option value="">
+            Todas as descrições
+        </option>
+    `;
+
+
+    /*
+     * Array temporário para armazenar
+     * as descrições únicas.
+     */
+
+    const descricoes = [];
+
+
+    lista.forEach(
+        function(item){
+
+            const descricao =
+                String(
+                    item.descricao ?? ""
+                ).trim();
+
+
+            if(
+                descricao === ""
+            ){
+
+                return;
+
+            }
+
+
+            /*
+             * Evita duplicidades considerando
+             * maiúsculas/minúsculas e acentos.
+             */
+
+            const chave =
+                normalizarTexto(
+                    descricao
+                );
+
+
+            const jaExiste =
+                descricoes.some(
+                    function(itemExistente){
+
+                        return (
+                            itemExistente.chave ===
+                            chave
+                        );
+
+                    }
+                );
+
+
+            if(
+                !jaExiste
+            ){
+
+                descricoes.push({
+
+                    chave:chave,
+
+                    descricao:descricao
+
+                });
+
+            }
+
+        }
+    );
+
+
+    /*
+     * Ordena alfabeticamente.
+     */
+
+    descricoes.sort(
+        function(a,b){
+
+            return a.descricao.localeCompare(
+                b.descricao,
+                "pt-BR",
+                {
+                    sensitivity:"base"
+                }
+            );
+
+        }
+    );
+
+
+    /*
+     * Cria as opções do SELECT.
+     */
+
+    descricoes.forEach(
+        function(item){
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                item.chave;
+
+
+            option.textContent =
+                item.descricao;
+
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    console.log(
+        "Descrições encontradas:",
+        descricoes.length
+    );
+
+}
+
+
+/* =====================================================
+   APLICAR FILTRO POR DESCRIÇÃO
+===================================================== */
+
+function aplicarFiltroDescricao(){
+
+    const select =
+        document.getElementById(
+            "filtroDescricao"
+        );
+
+
+    const filtro =
+        normalizarTexto(
+            select.value
+        );
+
+
+    let listaFiltrada;
+
+
+    /*
+     * Sem filtro:
+     * mostra tudo.
+     */
+
+    if(
+        filtro === ""
+    ){
+
+        listaFiltrada =
+            listaPendentes.slice();
+
+    }
+
+
+    /*
+     * Com filtro:
+     * mostra somente a descrição selecionada.
+     */
+
+    else{
+
+        listaFiltrada =
+            listaPendentes.filter(
+                function(item){
+
+                    return (
+                        normalizarTexto(
+                            item.descricao
+                        ) === filtro
+                    );
+
+                }
+            );
+
+    }
+
+
+    /*
+     * Atualiza informação abaixo do filtro.
+     */
+
+    atualizarInfoFiltro(
+        listaFiltrada.length,
+        filtro
+    );
+
+
+    /*
+     * Renderiza a tabela filtrada.
+     */
+
+    mostrarLista(
+        listaFiltrada
+    );
+
+
+    /*
+     * Atualiza os totais somente
+     * dos itens atualmente exibidos.
+     */
+
+    atualizarResumo(
+        listaFiltrada
+    );
+
+}
+
+
+/* =====================================================
+   INFORMAÇÃO DO FILTRO
+===================================================== */
+
+function atualizarInfoFiltro(
+    quantidade,
+    filtro
+){
+
+    const elemento =
+        document.getElementById(
+            "infoFiltro"
+        );
+
+
+    if(
+        !filtro
+    ){
+
+        elemento.textContent =
+            "Exibindo todos os lançamentos pendentes.";
+
+        return;
+
+    }
+
+
+    const select =
+        document.getElementById(
+            "filtroDescricao"
+        );
+
+
+    const textoDescricao =
+        select.options[
+            select.selectedIndex
+        ]?.text || "";
+
+
+    elemento.textContent =
+        quantidade +
+        " lançamento(s) encontrado(s) para: " +
+        textoDescricao;
+
+}
+
+
+/* =====================================================
+   LIMPAR FILTRO
+===================================================== */
+
+function limparFiltroDescricao(){
+
+    const select =
+        document.getElementById(
+            "filtroDescricao"
+        );
+
+
+    select.innerHTML = `
+        <option value="">
+            Todas as descrições
+        </option>
+    `;
+
+
+    select.value = "";
+
+
+    atualizarInfoFiltro(
+        0,
+        ""
+    );
 
 }
 
@@ -970,7 +1420,11 @@ function mostrarLista(lista){
                     colspan="8"
                     class="vazio"
                 >
-                    ✅ Nenhum lançamento pendente.
+                    ${
+                        listaPendentes.length > 0
+                        ? "🔎 Nenhum lançamento encontrado para a descrição selecionada."
+                        : "✅ Nenhum lançamento pendente."
+                    }
                 </td>
             </tr>
         `;
@@ -981,142 +1435,123 @@ function mostrarLista(lista){
 
 
     /*
-     * Ordenação:
-     *
-     * 1. Competência
-     * 2. Vencimento
+     * Faz uma cópia para não alterar
+     * a ordem da lista original.
      */
 
+    const listaOrdenada =
+        lista.slice();
+
+
     /*
- * Ordenação:
- *
- * 1. Tipo
- *    - Contas a Receber
- *    - Contas a Pagar
- *    - Outros
- *
- * 2. Competência
- *
- * 3. Vencimento
- */
+     * Ordenação:
+     *
+     * 1. Tipo
+     * 2. Competência
+     * 3. Vencimento
+     */
 
-lista.sort(
-    function(a, b){
+    listaOrdenada.sort(
+        function(a,b){
 
-        const tipoA =
-            normalizarTexto(
-                a.tipo
-            );
+            const tipoA =
+                normalizarTexto(
+                    a.tipo
+                );
 
-        const tipoB =
-            normalizarTexto(
-                b.tipo
-            );
+            const tipoB =
+                normalizarTexto(
+                    b.tipo
+                );
 
 
-        /*
-         * Define a ordem dos tipos
-         */
+            function ordemTipo(tipo){
 
-        function ordemTipo(tipo){
+                if(
+                    tipo.includes("receber")
+                ){
 
-            if(
-                tipo.includes("receber")
-            ){
+                    return 1;
 
-                return 1;
-
-            }
+                }
 
 
-            if(
-                tipo.includes("pagar")
-            ){
+                if(
+                    tipo.includes("pagar")
+                ){
 
-                return 2;
+                    return 2;
+
+                }
+
+
+                return 3;
 
             }
 
 
-            return 3;
+            const ordemA =
+                ordemTipo(
+                    tipoA
+                );
+
+            const ordemB =
+                ordemTipo(
+                    tipoB
+                );
+
+
+            if(
+                ordemA !== ordemB
+            ){
+
+                return ordemA - ordemB;
+
+            }
+
+
+            const compA =
+                String(
+                    a.competencia || ""
+                );
+
+            const compB =
+                String(
+                    b.competencia || ""
+                );
+
+
+            if(
+                compA !== compB
+            ){
+
+                return compA.localeCompare(
+                    compB
+                );
+
+            }
+
+
+            const dataA =
+                String(
+                    a.vencimento || ""
+                );
+
+            const dataB =
+                String(
+                    b.vencimento || ""
+                );
+
+
+            return dataA.localeCompare(
+                dataB
+            );
 
         }
+    );
 
 
-        const ordemA =
-            ordemTipo(
-                tipoA
-            );
-
-        const ordemB =
-            ordemTipo(
-                tipoB
-            );
-
-
-        /*
-         * Primeiro: Tipo
-         */
-
-        if(
-            ordemA !== ordemB
-        ){
-
-            return ordemA - ordemB;
-
-        }
-
-
-        /*
-         * Segundo: Competência
-         */
-
-        const compA =
-            String(
-                a.competencia || ""
-            );
-
-        const compB =
-            String(
-                b.competencia || ""
-            );
-
-
-        if(
-            compA !== compB
-        ){
-
-            return compA.localeCompare(
-                compB
-            );
-
-        }
-
-
-        /*
-         * Terceiro: Vencimento
-         */
-
-        const dataA =
-            String(
-                a.vencimento || ""
-            );
-
-        const dataB =
-            String(
-                b.vencimento || ""
-            );
-
-
-        return dataA.localeCompare(
-            dataB
-        );
-
-    }
-);
-
-
-    lista.forEach(
+    listaOrdenada.forEach(
         function(item){
 
             const valor =
@@ -1245,10 +1680,6 @@ function classificarTipo(tipo){
         );
 
 
-    /*
-     * CONTAS A RECEBER
-     */
-
     if(
         texto.includes(
             "receber"
@@ -1271,10 +1702,6 @@ function classificarTipo(tipo){
     }
 
 
-    /*
-     * CONTAS A PAGAR
-     */
-
     if(
         texto.includes(
             "pagar"
@@ -1296,10 +1723,6 @@ function classificarTipo(tipo){
 
     }
 
-
-    /*
-     * OUTROS TIPOS
-     */
 
     return {
 
@@ -1418,56 +1841,76 @@ async function baixarLancamento(
 
 
         /*
-         * Remove a linha imediatamente.
+         * Remove também da lista original.
          */
 
-        const linha =
-            botao.closest("tr");
+        listaPendentes =
+            listaPendentes.filter(
+                function(item){
 
+                    return String(
+                        item.id
+                    ) !== String(
+                        id
+                    );
 
-        if(linha){
-
-            linha.remove();
-
-        }
-
-
-        /*
-         * Atualiza os totais
-         * sem precisar esperar a API
-         * novamente.
-         */
-
-        atualizarResumoTabela();
-
-
-        /*
-         * Se não houver mais linhas,
-         * mostra mensagem de vazio.
-         */
-
-        const corpo =
-            document.getElementById(
-                "lista"
+                }
             );
 
 
-        if(
-            corpo.children.length === 0
-        ){
+        /*
+         * Recria o filtro para refletir
+         * os lançamentos restantes.
+         */
 
-            corpo.innerHTML = `
-                <tr>
-                    <td
-                        colspan="8"
-                        class="vazio"
-                    >
-                        ✅ Nenhum lançamento pendente.
-                    </td>
-                </tr>
-            `;
+        const filtroAtual =
+            document.getElementById(
+                "filtroDescricao"
+            ).value;
+
+
+        preencherFiltroDescricoes(
+            listaPendentes
+        );
+
+
+        /*
+         * Tenta manter o filtro selecionado.
+         */
+
+        const select =
+            document.getElementById(
+                "filtroDescricao"
+            );
+
+
+        const existe =
+            Array.from(
+                select.options
+            ).some(
+                function(option){
+
+                    return option.value ===
+                        filtroAtual;
+
+                }
+            );
+
+
+        if(existe){
+
+            select.value =
+                filtroAtual;
 
         }
+        else{
+
+            select.value = "";
+
+        }
+
+
+        aplicarFiltroDescricao();
 
     }
     catch(erro){
@@ -1515,10 +1958,6 @@ function atualizarResumoTabela(){
 
     linhas.forEach(
         function(linha){
-
-            /*
-             * Ignora a linha de vazio.
-             */
 
             const celulas =
                 linha.querySelectorAll(
@@ -1740,11 +2179,6 @@ function converterNumero(valor){
             ""
         );
 
-
-    /*
-     * Formato brasileiro:
-     * 1.234,56
-     */
 
     if(
         texto.indexOf(",") >= 0
