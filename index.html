@@ -485,6 +485,76 @@ body {
 }
 
 
+.btn-fixos {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    height: 38px;
+
+    padding:
+        0 14px;
+
+    border:
+        1px solid #1f7a4d;
+
+    border-radius: 9px;
+
+    background:
+        #ffffff;
+
+    color:
+        #17613c;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        transform .18s ease,
+        background .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease;
+}
+
+
+.btn-fixos:hover {
+    border-color:
+        #17613c;
+
+    background:
+        #f0fdf4;
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 5px 12px
+        rgba(22,132,74,0.10);
+}
+
+
+.btn-fixos:disabled {
+    opacity:
+        0.55;
+
+    cursor:
+        wait;
+
+    transform:
+        none;
+}
+
+
 .btn-fechar-icone {
     font-size: 13px;
 
@@ -1443,6 +1513,22 @@ body {
 
     </button>
 
+    <button
+        type="button"
+        id="btnInserirFixos"
+        class="btn-fixos"
+        onclick="inserirFixosMes()">
+
+        <span>
+            🔁
+        </span>
+
+        <span>
+            Inserir fixos do mês
+        </span>
+
+    </button>
+
 
 </div>
 
@@ -1932,8 +2018,163 @@ function fecharCompetencia() {
 
 
 /* =========================================================
+   INSERIR FIXOS DO MÊS
+========================================================= */
+
+async function inserirFixosMes() {
+
+    const competencia =
+        document.getElementById(
+            "competencia"
+        )?.value;
+
+
+    if (!competencia) {
+
+        mostrarMensagem(
+            "Selecione uma competência antes de inserir os lançamentos fixos.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        validarCompetencia(
+            competencia
+        );
+
+    } catch (erro) {
+
+        mostrarMensagem(
+            erro.message,
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    const botao =
+        document.getElementById(
+            "btnInserirFixos"
+        );
+
+
+    const textoOriginal =
+        botao
+          ? botao.innerHTML
+          : "";
+
+
+    if (botao) {
+
+        botao.disabled = true;
+
+        botao.innerHTML =
+            "⏳ Inserindo...";
+
+    }
+
+
+    alterarStatus(
+        "Inserindo lançamentos fixos..."
+    );
+
+
+    try {
+
+        const resposta =
+            await chamarAPI(
+
+                "inserirFixosCompetencia",
+
+                {
+                    competencia:
+                        competencia
+                }
+
+            );
+
+
+        if (
+            !resposta ||
+            resposta.sucesso === false
+        ) {
+
+            throw new Error(
+                resposta?.mensagem ||
+                "Não foi possível inserir os lançamentos fixos."
+            );
+
+        }
+
+
+        mostrarMensagem(
+            resposta.mensagem ||
+            (
+                String(
+                    resposta.inseridos || 0
+                ) +
+                " lançamento(s) fixo(s) inserido(s)."
+            ),
+            resposta.inseridos > 0
+                ? "sucesso"
+                : ""
+        );
+
+
+        alterarStatus(
+            "Sistema online"
+        );
+
+
+        await carregarResumo();
+
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao inserir fixos:",
+            erro
+        );
+
+
+        alterarStatus(
+            "API indisponível"
+        );
+
+
+        mostrarMensagem(
+            erro.message ||
+            "Não foi possível inserir os lançamentos fixos.",
+            "erro"
+        );
+
+    } finally {
+
+        if (botao) {
+
+            botao.disabled = false;
+
+            botao.innerHTML =
+                textoOriginal;
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
    ALTERAR STATUS
 ========================================================= */
+
 
 function alterarStatus(
     texto
