@@ -888,6 +888,57 @@ button { -webkit-tap-highlight-color: transparent; }
 
 }
 
+
+/* =========================================================
+   RESUMO DA COMPETÊNCIA — BOTÕES DINÂMICOS
+========================================================= */
+.resumo {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+.resumo-botao {
+    appearance: none;
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 7px;
+    padding: 16px;
+    border: 1px solid #dbe4ef;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #ffffff, #f5f8fc);
+    color: #26374d;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(24, 48, 80, .06);
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+}
+.resumo-botao:hover {
+    transform: translateY(-3px);
+    border-color: #7da6d7;
+    box-shadow: 0 9px 22px rgba(37, 99, 235, .13);
+}
+.resumo-botao:active { transform: scale(.985); }
+.resumo-botao:focus-visible { outline: 3px solid rgba(37, 99, 235, .28); outline-offset: 3px; }
+.resumo-botao[aria-pressed="true"] {
+    border-color: #2563eb;
+    background: linear-gradient(145deg, #eff6ff, #dbeafe);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, .12), 0 8px 20px rgba(37, 99, 235, .12);
+}
+.resumo-botao .resumo-label { font-size: 10px; font-weight: 800; letter-spacing: .07em; color: #64748b; }
+.resumo-botao .resumo-valor { display: block; font-size: clamp(17px, 1.8vw, 23px); line-height: 1.25; font-weight: 850; color: #172b4d; overflow-wrap: anywhere; }
+.resumo-botao.recebido .resumo-valor { color: #15803d; }
+.resumo-botao.pago .resumo-valor { color: #b45309; }
+.resumo-botao .resumo-subvalor { display: block; font-size: 10px; color: #64748b; }
+.resumo-hint { align-self: flex-end; font-size: 10px; font-weight: 750; color: #2563eb; opacity: .8; }
+.resumo-botao:hover .resumo-hint, .resumo-botao[aria-pressed="true"] .resumo-hint { opacity: 1; }
+@media (max-width: 850px) { .resumo { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 420px) { .resumo { grid-template-columns: 1fr; } .resumo-botao { min-height: 88px; } }
+
 </style>
 
 </head>
@@ -1012,143 +1063,45 @@ button { -webkit-tap-highlight-color: transparent; }
 
 </div>
 
-<div class="resumo">
+<div class="resumo" id="resumoCompetencia">
 
-<!-- SALDO INICIAL -->
+<button type="button" class="resumo-card resumo-botao saldo" data-resumo="saldoInicial" aria-pressed="false" onclick="selecionarResumo('saldoInicial')">
+  <span class="resumo-label">SALDO INICIAL</span>
+  <span id="saldoInicial" class="resumo-valor">R$ 0,00</span>
+  <span class="resumo-hint">Ver valor</span>
+</button>
 
-<div class="resumo-card saldo">
+<button type="button" class="resumo-card resumo-botao" data-resumo="receber" aria-pressed="false" onclick="selecionarResumo('receber')">
+  <span class="resumo-label">A RECEBER</span>
+  <span id="receber" class="resumo-valor">R$ 0,00</span>
+  <span id="saldoAReceber" class="resumo-subvalor">Saldo a receber: R$ 0,00</span>
+  <span class="resumo-hint">Ver valor</span>
+</button>
 
+<button type="button" class="resumo-card resumo-botao recebido" data-resumo="recebido" aria-pressed="false" onclick="selecionarResumo('recebido')">
+  <span class="resumo-label">RECEBIDO</span>
+  <span id="recebido" class="resumo-valor">R$ 0,00</span>
+  <span class="resumo-hint">Ver valor</span>
+</button>
 
-<div class="resumo-label">
-    SALDO INICIAL
-</div>
+<button type="button" class="resumo-card resumo-botao" data-resumo="pagar" aria-pressed="false" onclick="selecionarResumo('pagar')">
+  <span class="resumo-label">A PAGAR</span>
+  <span id="pagar" class="resumo-valor">R$ 0,00</span>
+  <span id="saldoAPagar" class="resumo-subvalor">Saldo a pagar: R$ 0,00</span>
+  <span class="resumo-hint">Ver valor</span>
+</button>
 
-<div
-    id="saldoInicial"
-    class="resumo-valor">
+<button type="button" class="resumo-card resumo-botao pago" data-resumo="pago" aria-pressed="false" onclick="selecionarResumo('pago')">
+  <span class="resumo-label">PAGOS</span>
+  <span id="pago" class="resumo-valor">R$ 0,00</span>
+  <span class="resumo-hint">Ver valor</span>
+</button>
 
-    R$ 0,00
-
-</div>
-
-
-</div>
-
-<!-- A RECEBER -->
-
-<div class="resumo-card">
-
-
-<div class="resumo-label">
-    A RECEBER
-</div>
-
-<div
-    id="receber"
-    class="resumo-valor">
-
-    R$ 0,00
-
-</div>
-
-<div
-    id="saldoAReceber"
-    class="resumo-subvalor">
-
-    Saldo a receber: R$ 0,00
-
-</div>
-
-
-</div>
-
-<!-- RECEBIDO -->
-
-<div class="resumo-card recebido">
-
-
-<div class="resumo-label">
-    RECEBIDO
-</div>
-
-<div
-    id="recebido"
-    class="resumo-valor">
-
-    R$ 0,00
-
-</div>
-
-
-</div>
-
-<!-- A PAGAR -->
-
-<div class="resumo-card">
-
-
-<div class="resumo-label">
-    A PAGAR
-</div>
-
-<div
-    id="pagar"
-    class="resumo-valor">
-
-    R$ 0,00
-
-</div>
-
-<div
-    id="saldoAPagar"
-    class="resumo-subvalor">
-
-    Saldo a pagar: R$ 0,00
-
-</div>
-
-
-</div>
-
-<!-- PAGOS -->
-
-<div class="resumo-card pago">
-
-
-<div class="resumo-label">
-    PAGOS
-</div>
-
-<div
-    id="pago"
-    class="resumo-valor">
-
-    R$ 0,00
-
-</div>
-
-
-</div>
-
-<!-- SALDO BANCÁRIO -->
-
-<div class="resumo-card saldo">
-
-
-<div class="resumo-label">
-    SALDO BANCÁRIO
-</div>
-
-<div
-    id="saldoBanco"
-    class="resumo-valor">
-
-    R$ 0,00
-
-</div>
-
-
-</div>
+<button type="button" class="resumo-card resumo-botao saldo" data-resumo="saldoBanco" aria-pressed="false" onclick="selecionarResumo('saldoBanco')">
+  <span class="resumo-label">SALDO BANCÁRIO</span>
+  <span id="saldoBanco" class="resumo-valor">R$ 0,00</span>
+  <span class="resumo-hint">Ver valor</span>
+</button>
 
 </div>
 
@@ -1869,6 +1822,27 @@ async function chamarAPI(
    CARREGAR RESUMO
 ========================================================= */
 
+/* =========================================================
+   INTERAÇÃO DOS BOTÕES DO RESUMO
+========================================================= */
+function selecionarResumo(chave) {
+    const botao = document.querySelector('.resumo-botao[data-resumo="' + chave + '"]');
+    if (!botao) return;
+
+    document.querySelectorAll('.resumo-botao').forEach(function(item) {
+        const selecionado = item === botao;
+        item.setAttribute('aria-pressed', selecionado ? 'true' : 'false');
+    });
+
+    const rotulo = botao.querySelector('.resumo-label')?.textContent?.trim() || 'Resumo';
+    const valor = botao.querySelector('.resumo-valor')?.textContent?.trim() || 'R$ 0,00';
+    const competencia = competenciaEl?.value || '';
+    const [ano, mes] = competencia.split('-');
+    const periodo = ano && mes ? mes + '/' + ano : 'competência selecionada';
+
+    mostrarMensagem(rotulo + ' — ' + periodo + ': ' + valor, 'sucesso');
+}
+
 async function carregarResumo() {
 
     const competencia =
@@ -2148,18 +2122,20 @@ function construirUrl(
     );
 
 
-    const url =
-        new URL(
-            arquivo,
-            window.location.href
-        );
+    // Resolve a página sempre a partir da pasta onde está o index.html.
+    // Assim, o clique em “Lançamentos” abre Lancamentos.html na mesma pasta,
+    // preservando os parâmetros necessários para a tela de consulta.
+    const pastaAtual = new URL(".", window.location.href);
 
+    const url = new URL(
+        arquivo,
+        pastaAtual
+    );
 
     url.searchParams.set(
         "competencia",
         competencia
     );
-
 
     return url;
 
@@ -2227,8 +2203,7 @@ function abrirPagina(
         );
 
 
-        window.location.href =
-            url.href;
+        window.location.assign(url.href);
 
 
     } catch (erro) {
