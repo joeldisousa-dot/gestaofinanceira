@@ -48,7 +48,7 @@ td{padding:11px 12px;border-top:1px solid #edf1f5;font-size:11px;color:#33445a}
 </head>
 <body>
 <div class="container"><div class="card">
-<header class="header"><h1>📋 Lançamentos</h1><p>Cadastre despesas e receitas e lance as contas fixas conforme a competência selecionada.</p></header>
+<header class="header"><h1>📋 Lançamentos</h1><p>Cadastre despesas e receitas por competência, mesmo quando o vencimento ocorrer em outro mês.</p></header>
 <main class="conteudo">
   <div class="barra">
     <div class="competencia"><label for="competencia">Competência</label><input id="competencia" type="month" required></div>
@@ -63,7 +63,7 @@ td{padding:11px 12px;border-top:1px solid #edf1f5;font-size:11px;color:#33445a}
   <label class="checkbox-fixa" title="Marca o lançamento mensal como fixo. Para cadastrar uma conta no cadastro permanente, use a aba Fixos.">
     <input id="fixa" type="checkbox"><span>🔁 Marcar este lançamento como fixo</span>
   </label>
-  <p class="ajuda-fixa">O cadastro permanente fica na aba <strong>Fixos</strong>. O botão abaixo copia as contas fixas ativas para a competência selecionada, sem duplicar as já lançadas.</p>
+  <p class="ajuda-fixa">A competência define o mês em que o lançamento será contabilizado; o vencimento pode ser em outro mês. Exemplo: competência <strong>09/2026</strong> e vencimento em <strong>20/10/2026</strong>. O cadastro permanente fica na aba <strong>Fixos</strong>; o botão abaixo copia as contas fixas ativas para a competência selecionada, sem duplicar as já lançadas.</p>
   <div class="acoes">
     <button type="button" onclick="voltar()">← Voltar</button>
     <button type="button" id="btnFixos" class="btn-fixos" onclick="inserirFixos()">🔁 Inserir fixos do mês</button>
@@ -202,7 +202,8 @@ async function inserir(){
     if(!descricao) throw new Error("Informe a descrição.");
     if(!Number.isFinite(valor) || valor <= 0) throw new Error("Informe um valor numérico maior que zero.");
     if(!vencimento) throw new Error("Informe o vencimento.");
-    if(vencimento.slice(0,7) !== competencia) throw new Error("O mês e ano do vencimento devem corresponder à competência selecionada.");
+    // A competência e o vencimento são independentes.
+    // Exemplo: competência 2026-09 com vencimento em 2026-10-20.
     btnInserir.disabled = true; btnInserir.textContent = "⏳ Inserindo...";
     statusEl.textContent = "Inserindo lançamento...";
     const resposta = await chamarAPI("incluirLancamento",{competencia,tipo,descricao,valor,vencimento,fixa});
