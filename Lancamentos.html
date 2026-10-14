@@ -683,71 +683,37 @@ async function carregarDescricoes() {
 }
 
 async function carregarLancamentos() {
-  const competencia = competenciaEl.value;
-  validarCompetencia(competencia);
+  
+const resposta = await chamarAPI("listarLancamentos", { competencia });
 
-  listaEl.innerHTML =
-    '<tr><td colspan="8">Carregando lançamentos...</td></tr>';
+const lancamentos = Array.isArray(resposta.lista)
+  ? resposta.lista
+  : [];
 
-  const resposta = await chamarAPI("listarLancamentos", { competencia });
-  const lancamentos = Array.isArray(resposta.lista)
-    ? resposta.lista
-    : [];
+// Classifica primeiro por TIPO e depois por DESCRIÇÃO.
+lancamentos.sort((a, b) => {
+  const tipoA = String(a.tipo || "").trim().toLowerCase();
+  const tipoB = String(b.tipo || "").trim().toLowerCase();
 
-  document.getElementById("tituloLista").textContent =
-    "Lançamentos da competência " + competencia;
+  const ordemTipo = tipo => {
+    if (["pagar", "despesa"].includes(tipo)) return 1;
+    if (["receber", "receita"].includes(tipo)) return 2;
+    return 3;
+  };
 
-  if (!lancamentos.length) {
-    listaEl.innerHTML =
-      '<tr><td colspan="8">Nenhum lançamento nesta competência.</td></tr>';
-    statusEl.textContent = "Sistema online · Nenhum lançamento";
-    return;
+  const diferenca = ordemTipo(tipoA) - ordemTipo(tipoB);
+
+  if (diferenca !== 0) {
+    return diferenca;
   }
 
-  listaEl.innerHTML = lancamentos.map(l => {
-    const tipo = String(l.tipo || "").trim().toLowerCase();
-    const receita = ["receber", "receita"].includes(tipo);
+  return String(a.descricao || "").localeCompare(
+    String(b.descricao || ""),
+    "pt-BR",
+    { sensitivity: "base" }
+  );
+});
 
-    const fixa = [
-      "sim", "s", "true", "1", "fixa", "fixo"
-    ].includes(String(l.fixa || "").trim().toLowerCase());
-
-    const baixado = [
-      "sim", "s", "true", "1", "pago", "recebido"
-    ].includes(String(l.baixado || "").trim().toLowerCase());
-
-    const id = l.id ?? "";
-
-    return `
-      <tr>
-        <td>${esc(id)}</td>
-        <td>
-          <span class="badge ${receita ? "receber" : "pagar"}">
-            ${receita ? "Receita" : "Despesa"}
-          </span>
-        </td>
-        <td>${esc(l.descricao ?? "")}</td>
-        <td>${esc(formatarData(l.vencimento))}</td>
-        <td>
-          <span class="badge ${fixa ? "fixa" : "normal"}">
-            ${fixa ? "Sim" : "Não"}
-          </span>
-        </td>
-        <td>${baixado ? "Sim" : "Não"}</td>
-        <td class="valor">${moeda(l.valor)}</td>
-        <td>
-          <button
-            type="button"
-            class="btn-excluir"
-            data-excluir-id="${esc(id)}"
-            ${String(id).trim() === "" ? "disabled" : ""}
-            title="Excluir este lançamento"
-            aria-label="Excluir lançamento ${esc(id)}"
-          >🗑 Excluir</button>
-        </td>
-      </tr>
-    `;
-  }).join("");
 
   statusEl.textContent =
     "Sistema online · " + lancamentos.length + " lançamento(s)";
@@ -894,7 +860,7 @@ async function excluirLancamento(id, botao) {
       "sucesso"
     );
 
-    await carregarLancamentos();
+    await const resposta = await chamarAPI("listarLancamentos", { competencia });();
 
   } catch (erro) {
     console.error("Erro ao excluir:", erro);
@@ -933,7 +899,7 @@ competenciaEl.addEventListener("change", async () => {
   document.getElementById("resumoFixos").textContent = "";
 
   try {
-    await carregarLancamentos();
+    await const resposta = await chamarAPI("listarLancamentos", { competencia });();
   } catch (erro) {
     console.error(erro);
     listaEl.innerHTML =
@@ -960,7 +926,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   await carregarDescricoes();
 
   try {
-    await carregarLancamentos();
+    await const resposta = await chamarAPI("listarLancamentos", { competencia });();
   } catch (erro) {
     console.error(erro);
     listaEl.innerHTML =
