@@ -1,485 +1,96 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17365d">
 <title>Lançamentos — Controle Financeiro</title>
-
 <style>
-:root {
-  --azul: #17365d;
-  --azul-claro: #214c7d;
-  --verde: #16844a;
-  --vermelho: #b42318;
-  --fundo: #f4f7fb;
-  --texto: #172033;
-  --borda: #e3e9f1;
-}
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: var(--fundo);
-  color: var(--texto);
-}
-
-.container {
-  max-width: 1180px;
-  margin: auto;
-  padding: 24px 16px 36px;
-}
-
-.card {
-  overflow: hidden;
-  background: #fff;
-  border: 1px solid var(--borda);
-  border-radius: 18px;
-  box-shadow: 0 12px 40px rgba(15,23,42,.07);
-}
-
-.header {
-  padding: 25px 30px;
-  color: white;
-  background: linear-gradient(135deg,var(--azul),var(--azul-claro));
-}
-
-.header h1 { margin: 0; font-size: 26px; }
-
-.header p {
-  margin: 7px 0 0;
-  color: #dbe8f7;
-  font-size: 13px;
-}
-
-.conteudo { padding: 25px 30px; }
-
-.barra {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 22px;
-}
-
-.competencia {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.competencia label,
-.campo label {
-  color: #66758a;
-  font-size: 11px;
-  font-weight: 750;
-}
-
-input, select {
-  width: 100%;
-  height: 41px;
-  padding: 0 11px;
-  border: 1px solid #d5dde8;
-  border-radius: 9px;
-  outline: none;
-  background: #fff;
-  color: #24344b;
-  font: inherit;
-  font-size: 12px;
-}
-
-input:focus, select:focus {
-  border-color: #356da5;
-  box-shadow: 0 0 0 3px rgba(53,109,165,.1);
-}
-
-#competencia { width: 160px; }
-
-.status {
-  color: #52647a;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr 1fr;
-  gap: 13px;
-}
-
-.campo {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.campo label {
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  font-size: 10px;
-}
-
-.checkbox-fixa {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 43px;
-  margin-top: 18px;
-  padding: 0 12px;
-  border: 1px solid #d7e2dc;
-  border-radius: 9px;
-  background: #f5fbf7;
-  color: #17613c;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.checkbox-fixa input {
-  width: 17px;
-  height: 17px;
-  margin: 0;
-  accent-color: var(--verde);
-}
-
-.ajuda {
-  margin: 9px 0 0;
-  color: #718096;
-  font-size: 11px;
-  line-height: 1.7;
-}
-
-.acoes {
-  display: flex;
-  justify-content: flex-end;
-  gap: 9px;
-  flex-wrap: wrap;
-  margin-top: 19px;
-}
-
-button {
-  min-height: 40px;
-  padding: 0 15px;
-  border: 1px solid #d5dde8;
-  border-radius: 9px;
-  background: white;
-  color: #41536b;
-  font: inherit;
-  font-size: 11px;
-  font-weight: 750;
-  cursor: pointer;
-  transition: .15s;
-}
-
-button:hover { transform: translateY(-1px); }
-
-button:disabled {
-  opacity: .55;
-  cursor: wait;
-  transform: none;
-}
-
-.btn-inserir {
-  border-color: var(--verde);
-  background: linear-gradient(135deg,#148345,#1ba457);
-  color: white;
-}
-
-.btn-fixos {
-  border-color: #1f7a4d;
-  background: #effaf3;
-  color: #17613c;
-}
-
-.btn-excluir {
-  min-height: 31px;
-  padding: 0 10px;
-  border-color: #fecaca;
-  background: #fff1f2;
-  color: var(--vermelho);
-  white-space: nowrap;
-}
-
-.btn-excluir:hover {
-  background: #fee2e2;
-  border-color: #fca5a5;
-}
-
-.mensagem {
-  display: none;
-  margin-top: 16px;
-  padding: 12px 14px;
-  border-radius: 9px;
-  font-size: 12px;
-  line-height: 1.6;
-  white-space: pre-line;
-}
-
-.mensagem.sucesso {
-  display: block;
-  border: 1px solid #bbf7d0;
-  background: #f0fdf4;
-  color: #166534;
-}
-
-.mensagem.erro {
-  display: block;
-  border: 1px solid #fecaca;
-  background: #fef2f2;
-  color: #991b1b;
-}
-
-.mensagem.info {
-  display: block;
-  border: 1px solid #bfdbfe;
-  background: #eff6ff;
-  color: #1e40af;
-}
-
-.titulo-lista {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 29px 0 13px;
-}
-
-.titulo-lista h2 {
-  margin: 0;
-  color: #24364f;
-  font-size: 14px;
-}
-
-.linha {
-  flex: 1;
-  height: 1px;
-  background: #e6ebf1;
-}
-
-.tabela-wrap {
-  overflow-x: auto;
-  border: 1px solid #e5eaf1;
-  border-radius: 12px;
-}
-
-table {
-  width: 100%;
-  min-width: 850px;
-  border-collapse: collapse;
-}
-
-th {
-  padding: 12px;
-  background: #f7f9fc;
-  color: #7b8798;
-  font-size: 9px;
-  text-align: left;
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  white-space: nowrap;
-}
-
-td {
-  padding: 12px;
-  border-top: 1px solid #edf1f5;
-  color: #33445a;
-  font-size: 11px;
-}
-
-tbody tr:hover { background: #fafcff; }
-
-.valor {
-  font-weight: 750;
-  text-align: right;
-  white-space: nowrap;
-}
-
-.badge {
-  display: inline-block;
-  padding: 4px 8px;
-  border-radius: 20px;
-  font-size: 9px;
-  font-weight: 750;
-  white-space: nowrap;
-}
-
-.badge.fixa {
-  background: #eaf7ef;
-  color: #17613c;
-}
-
-.badge.normal {
-  background: #f1f4f8;
-  color: #66758a;
-}
-
-.badge.pagar {
-  background: #fff0f0;
-  color: #a52b2b;
-}
-
-.badge.receber {
-  background: #edf9f2;
-  color: #19713f;
-}
-
-.resumo-fixos {
-  margin-top: 10px;
-  color: #52647a;
-  font-size: 11px;
-}
-
-@media (max-width:850px) {
-  .grid { grid-template-columns: 1fr 1fr; }
-}
-
-@media (max-width:600px) {
-  .container { padding: 9px 7px 20px; }
-  .header { padding: 21px 18px; }
-  .conteudo { padding: 18px 14px; }
-  .grid { grid-template-columns: 1fr; }
-
-  .competencia {
-    width: 100%;
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  #competencia { width: 100%; }
-  .acoes button { width: 100%; }
-}
+:root{--azul:#17365d;--azul-claro:#214c7d;--verde:#16844a;--vermelho:#b42318;--fundo:#f4f7fb;--texto:#172033;--borda:#e3e9f1}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;background:var(--fundo);color:var(--texto)}
+.container{max-width:1180px;margin:auto;padding:24px 16px 36px}
+.card{overflow:hidden;background:#fff;border:1px solid var(--borda);border-radius:18px;box-shadow:0 12px 40px rgba(15,23,42,.07)}
+.header{padding:25px 30px;color:#fff;background:linear-gradient(135deg,var(--azul),var(--azul-claro))}
+.header h1{margin:0;font-size:26px}.header p{margin:7px 0 0;color:#dbe8f7;font-size:13px}
+.conteudo{padding:25px 30px}.barra{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.competencia{display:flex;align-items:center;gap:10px}.competencia label,.campo label{color:#66758a;font-size:11px;font-weight:750}
+input,select{width:100%;height:41px;padding:0 11px;border:1px solid #d5dde8;border-radius:9px;outline:none;background:#fff;color:#24344b;font:inherit;font-size:12px}
+input:focus,select:focus{border-color:#356da5;box-shadow:0 0 0 3px rgba(53,109,165,.1)}
+#competencia{width:160px}.status{color:#52647a;font-size:11px;font-weight:700}
+.grid{display:grid;grid-template-columns:1fr 1.5fr 1fr 1fr;gap:13px}.campo{display:flex;flex-direction:column;gap:7px}
+.campo label{text-transform:uppercase;letter-spacing:.5px;font-size:10px}
+.checkbox-fixa{display:flex;align-items:center;gap:10px;min-height:43px;margin-top:18px;padding:0 12px;border:1px solid #d7e2dc;border-radius:9px;background:#f5fbf7;color:#17613c;font-size:12px;font-weight:700;cursor:pointer}
+.checkbox-fixa input{width:17px;height:17px;margin:0;accent-color:var(--verde)}
+.ajuda{margin:9px 0 0;color:#718096;font-size:11px;line-height:1.7}
+.acoes{display:flex;justify-content:flex-end;gap:9px;flex-wrap:wrap;margin-top:19px}
+button{min-height:40px;padding:0 15px;border:1px solid #d5dde8;border-radius:9px;background:#fff;color:#41536b;font:inherit;font-size:11px;font-weight:750;cursor:pointer;transition:.15s}
+button:hover{transform:translateY(-1px)}button:disabled{opacity:.55;cursor:wait;transform:none}
+.btn-inserir{border-color:var(--verde);background:linear-gradient(135deg,#148345,#1ba457);color:#fff}
+.btn-fixos{border-color:#1f7a4d;background:#effaf3;color:#17613c}
+.btn-excluir{min-height:31px;padding:0 10px;border-color:#fecaca;background:#fff1f2;color:var(--vermelho);white-space:nowrap}
+.btn-excluir:hover{background:#fee2e2;border-color:#fca5a5}
+.btn-excluir-selecionados{border-color:var(--vermelho);background:var(--vermelho);color:#fff}
+.btn-excluir-selecionados:hover{background:#8f1d14}.btn-excluir-selecionados:disabled{opacity:.45;cursor:not-allowed}
+.mensagem{display:none;margin-top:16px;padding:12px 14px;border-radius:9px;font-size:12px;line-height:1.6;white-space:pre-line}
+.mensagem.sucesso{display:block;border:1px solid #bbf7d0;background:#f0fdf4;color:#166534}
+.mensagem.erro{display:block;border:1px solid #fecaca;background:#fef2f2;color:#991b1b}
+.mensagem.info{display:block;border:1px solid #bfdbfe;background:#eff6ff;color:#1e40af}
+.titulo-lista{display:flex;align-items:center;gap:10px;margin:29px 0 13px}.titulo-lista h2{margin:0;color:#24364f;font-size:14px}
+.linha{flex:1;height:1px;background:#e6ebf1}.selecao-acoes{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin:0 0 12px}
+#quantidadeSelecionada{color:#52647a;font-size:11px;font-weight:700}
+.tabela-wrap{overflow-x:auto;border:1px solid #e5eaf1;border-radius:12px}
+table{width:100%;min-width:900px;border-collapse:collapse}th{padding:12px;background:#f7f9fc;color:#7b8798;font-size:9px;text-align:left;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+td{padding:12px;border-top:1px solid #edf1f5;color:#33445a;font-size:11px}tbody tr:hover{background:#fafcff}
+.valor{font-weight:750;text-align:right;white-space:nowrap}.badge{display:inline-block;padding:4px 8px;border-radius:20px;font-size:9px;font-weight:750;white-space:nowrap}
+.badge.fixa{background:#eaf7ef;color:#17613c}.badge.normal{background:#f1f4f8;color:#66758a}.badge.pagar{background:#fff0f0;color:#a52b2b}.badge.receber{background:#edf9f2;color:#19713f}
+.checkbox-linha,.checkbox-todos{width:17px;height:17px;margin:0;cursor:pointer;accent-color:var(--azul);vertical-align:middle}
+.checkbox-linha:disabled{cursor:not-allowed}.resumo-fixos{margin-top:10px;color:#52647a;font-size:11px}
+@media(max-width:850px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.container{padding:9px 7px 20px}.header{padding:21px 18px}.conteudo{padding:18px 14px}.grid{grid-template-columns:1fr}.competencia{width:100%;align-items:stretch;flex-direction:column}#competencia{width:100%}.acoes button{width:100%}}
 </style>
 </head>
-
 <body>
-<div class="container">
-  <div class="card">
-
-    <header class="header">
-      <h1>📋 Lançamentos</h1>
-      <p>Cadastro e gerenciamento de despesas e receitas por competência.</p>
-    </header>
-
-    <main class="conteudo">
-
-      <div class="barra">
-        <div class="competencia">
-          <label for="competencia">Competência</label>
-          <input id="competencia" type="month" required>
-        </div>
-
-        <div id="status" class="status" role="status" aria-live="polite">
-          Conectando à API...
-        </div>
-      </div>
-
-      <div class="grid">
-        <div class="campo">
-          <label for="tipo">Tipo</label>
-          <select id="tipo">
-            <option value="pagar">Despesa</option>
-            <option value="receber">Receita</option>
-          </select>
-        </div>
-
-        <div class="campo">
-          <label for="descricao">Descrição</label>
-          <input
-            id="descricao"
-            list="listaDescricoes"
-            type="text"
-            placeholder="Ex.: Aluguel, Energia, Salário..."
-          >
-          <datalist id="listaDescricoes"></datalist>
-        </div>
-
-        <div class="campo">
-          <label for="valor">Valor</label>
-          <input
-            id="valor"
-            type="text"
-            inputmode="decimal"
-            placeholder="R$ 0,00"
-          >
-        </div>
-
-        <div class="campo">
-          <label for="vencimento">Vencimento</label>
-          <input id="vencimento" type="date">
-        </div>
-      </div>
-
-      <label class="checkbox-fixa">
-        <input id="fixa" type="checkbox">
-        <span>🔁 Marcar este lançamento como fixo</span>
-      </label>
-
-      <p class="ajuda">
-        A competência define o mês em que o lançamento será contabilizado.
-        O vencimento pode ocorrer em outro mês. Exemplo: competência 09/2026
-        com vencimento em 20/10/2026. O botão de contas fixas copia as contas
-        fixas ativas para a competência selecionada.
-      </p>
-
-      <div class="acoes">
-        <button type="button" onclick="voltar()">← Voltar</button>
-
-        <button
-          type="button"
-          id="btnFixos"
-          class="btn-fixos"
-          onclick="inserirFixos()"
-        >🔁 Inserir fixos do mês</button>
-
-        <button
-          type="button"
-          id="btnInserir"
-          class="btn-inserir"
-          onclick="inserir()"
-        >➕ Inserir lançamento</button>
-      </div>
-
-      <div id="mensagem" class="mensagem" role="alert" aria-live="polite"></div>
-      <div id="resumoFixos" class="resumo-fixos"></div>
-
-      <div class="titulo-lista">
-        <h2 id="tituloLista">Lançamentos da competência</h2>
-        <div class="linha"></div>
-      </div>
-
-      <div class="tabela-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Tipo</th>
-              <th>Descrição</th>
-              <th>Vencimento</th>
-              <th>Fixa</th>
-              <th>Baixado</th>
-              <th>Valor</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="lista">
-            <tr><td colspan="8">Carregando lançamentos...</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-    </main>
-  </div>
-</div>
-
+<div class="container"><div class="card">
+  <header class="header"><h1>📋 Lançamentos</h1><p>Cadastro e gerenciamento de despesas e receitas por competência.</p></header>
+  <main class="conteudo">
+    <div class="barra">
+      <div class="competencia"><label for="competencia">Competência</label><input id="competencia" type="month" required></div>
+      <div id="status" class="status" role="status" aria-live="polite">Conectando à API...</div>
+    </div>
+    <div class="grid">
+      <div class="campo"><label for="tipo">Tipo</label><select id="tipo"><option value="pagar">Despesa</option><option value="receber">Receita</option></select></div>
+      <div class="campo"><label for="descricao">Descrição</label><input id="descricao" list="listaDescricoes" type="text" placeholder="Ex.: Aluguel, Energia, Salário..."><datalist id="listaDescricoes"></datalist></div>
+      <div class="campo"><label for="valor">Valor</label><input id="valor" type="text" inputmode="decimal" placeholder="R$ 0,00"></div>
+      <div class="campo"><label for="vencimento">Vencimento</label><input id="vencimento" type="date"></div>
+    </div>
+    <label class="checkbox-fixa"><input id="fixa" type="checkbox"><span>🔁 Marcar este lançamento como fixo</span></label>
+    <p class="ajuda">A competência define o mês em que o lançamento será contabilizado. O vencimento pode ocorrer em outro mês. Exemplo: competência 09/2026 com vencimento em 20/10/2026. O botão de contas fixas copia as contas fixas ativas para a competência selecionada.</p>
+    <div class="acoes">
+      <button type="button" onclick="voltar()">← Voltar</button>
+      <button type="button" id="btnFixos" class="btn-fixos" onclick="inserirFixos()">🔁 Inserir fixos do mês</button>
+      <button type="button" id="btnInserir" class="btn-inserir" onclick="inserir()">➕ Inserir lançamento</button>
+    </div>
+    <div id="mensagem" class="mensagem" role="alert" aria-live="polite"></div>
+    <div id="resumoFixos" class="resumo-fixos"></div>
+    <div class="titulo-lista"><h2 id="tituloLista">Lançamentos da competência</h2><div class="linha"></div></div>
+    <div class="selecao-acoes">
+      <span id="quantidadeSelecionada">Nenhum lançamento selecionado</span>
+      <button type="button" id="btnExcluirSelecionados" class="btn-excluir-selecionados" disabled>🗑 Excluir selecionados</button>
+    </div>
+    <div class="tabela-wrap"><table>
+      <thead><tr>
+        <th><input type="checkbox" id="selecionarTodos" class="checkbox-todos" aria-label="Selecionar todos os lançamentos" title="Selecionar todos"></th>
+        <th>ID</th><th>Tipo</th><th>Descrição</th><th>Vencimento</th><th>Fixa</th><th>Baixado</th><th>Valor</th><th>Ações</th>
+      </tr></thead>
+      <tbody id="lista"><tr><td colspan="9">Carregando lançamentos...</td></tr></tbody>
+    </table></div>
+  </main>
+</div></div>
 <script>
 "use strict";
 
-const URL_API =
-  "https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec";
-
+const URL_API = "https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec";
 const competenciaEl = document.getElementById("competencia");
 const tipoEl = document.getElementById("tipo");
 const descricaoEl = document.getElementById("descricao");
@@ -491,581 +102,81 @@ const mensagemEl = document.getElementById("mensagem");
 const statusEl = document.getElementById("status");
 const btnInserir = document.getElementById("btnInserir");
 const btnFixos = document.getElementById("btnFixos");
+const selecionarTodosEl = document.getElementById("selecionarTodos");
+const btnExcluirSelecionados = document.getElementById("btnExcluirSelecionados");
+const quantidadeSelecionadaEl = document.getElementById("quantidadeSelecionada");
 
-function competenciaAtual() {
-  const agora = new Date();
+function competenciaAtual(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")}
+function validarCompetencia(v){if(!/^\d{4}-(0[1-9]|1[0-2])$/.test(v))throw new Error("Selecione uma competência válida.")}
+function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")}
+function mostrarMensagem(texto,tipo="info"){mensagemEl.textContent=texto||"";mensagemEl.className="mensagem "+tipo}
+function normalizarTexto(v){return String(v??"").trim().toLocaleLowerCase("pt-BR")}
+function obterCampo(obj,names,padrao=""){for(const n of names){if(obj&&obj[n]!==undefined&&obj[n]!==null&&obj[n]!=="")return obj[n]}return padrao}
+function normalizarTipo(v){const t=normalizarTexto(v);if(["pagar","despesa","saída","saida"].includes(t))return"pagar";if(["receber","receita","entrada"].includes(t))return"receber";return t||"outro"}
+function rotuloTipo(v){const t=normalizarTipo(v);if(t==="pagar")return"Despesa";if(t==="receber")return"Receita";return String(v||"Outro")}
+function normalizarValor(texto){let v=String(texto||"").replace(/R\$/gi,"").replace(/\s/g,"").trim();if(!v)return NaN;if(v.includes(","))v=v.replace(/\./g,"").replace(",",".");const n=Number(v);return Number.isFinite(n)?n:NaN}
+function moeda(valor){let n;if(typeof valor==="number")n=valor;else{let t=String(valor??"0").replace(/R\$/gi,"").replace(/\s/g,"");if(t.includes(","))t=t.replace(/\./g,"").replace(",",".");n=Number(t)}return(Number.isFinite(n)?n:0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
+function formatarData(data){if(!data)return"";const t=String(data).trim();if(/^\d{4}-\d{2}-\d{2}$/.test(t)){const[a,m,d]=t.split("-");return`${d}/${m}/${a}`}if(/^\d{2}\/\d{2}\/\d{4}$/.test(t))return t;const iso=t.match(/^(\d{4})-(\d{2})-(\d{2})T/);if(iso)return`${iso[3]}/${iso[2]}/${iso[1]}`;return t}
+function valorBooleano(v){if(typeof v==="boolean")return v;return["sim","true","1","baixado","pago","ativo"].includes(normalizarTexto(v))}
 
-  return agora.getFullYear() + "-" +
-    String(agora.getMonth() + 1).padStart(2, "0");
-}
-
-function validarCompetencia(valor) {
-  if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(valor)) {
-    throw new Error("Selecione uma competência válida.");
-  }
-}
-
-function esc(valor) {
-  return String(valor ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-function mostrarMensagem(texto, tipo = "info") {
-  mensagemEl.textContent = texto || "";
-  mensagemEl.className = "mensagem " + tipo;
-}
-
-function normalizarTexto(valor) {
-  return String(valor ?? "").trim().toLocaleLowerCase("pt-BR");
-}
-
-function obterCampo(objeto, nomes, padrao = "") {
-  for (const nome of nomes) {
-    if (
-      objeto &&
-      objeto[nome] !== undefined &&
-      objeto[nome] !== null &&
-      objeto[nome] !== ""
-    ) {
-      return objeto[nome];
-    }
-  }
-
-  return padrao;
-}
-
-function normalizarTipo(valor) {
-  const tipo = normalizarTexto(valor);
-
-  if (["pagar", "despesa", "saída", "saida"].includes(tipo)) {
-    return "pagar";
-  }
-
-  if (["receber", "receita", "entrada"].includes(tipo)) {
-    return "receber";
-  }
-
-  return tipo || "outro";
-}
-
-function rotuloTipo(valor) {
-  const tipo = normalizarTipo(valor);
-
-  if (tipo === "pagar") return "Despesa";
-  if (tipo === "receber") return "Receita";
-
-  return String(valor || "Outro");
-}
-
-function normalizarValor(texto) {
-  let valor = String(texto || "")
-    .replace(/R\$/gi, "")
-    .replace(/\s/g, "")
-    .trim();
-
-  if (!valor) return NaN;
-
-  if (valor.includes(",")) {
-    valor = valor.replace(/\./g, "").replace(",", ".");
-  }
-
-  const numero = Number(valor);
-  return Number.isFinite(numero) ? numero : NaN;
-}
-
-function moeda(valor) {
-  let numero;
-
-  if (typeof valor === "number") {
-    numero = valor;
-  } else {
-    let texto = String(valor ?? "0")
-      .replace(/R\$/gi, "")
-      .replace(/\s/g, "");
-
-    if (texto.includes(",")) {
-      texto = texto.replace(/\./g, "").replace(",", ".");
-    }
-
-    numero = Number(texto);
-  }
-
-  return (Number.isFinite(numero) ? numero : 0).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL"
-  });
-}
-
-function formatarData(data) {
-  if (!data) return "";
-
-  const texto = String(data).trim();
-
-  if (/^\d{4}-\d{2}-\d{2}$/.test(texto)) {
-    const [ano, mes, dia] = texto.split("-");
-    return `${dia}/${mes}/${ano}`;
-  }
-
-  if (/^\d{2}\/\d{2}\/\d{4}$/.test(texto)) {
-    return texto;
-  }
-
-  const iso = texto.match(/^(\d{4})-(\d{2})-(\d{2})T/);
-
-  if (iso) {
-    return `${iso[3]}/${iso[2]}/${iso[1]}`;
-  }
-
-  return texto;
-}
-
-function valorBooleano(valor) {
-  if (typeof valor === "boolean") return valor;
-
-  const texto = normalizarTexto(valor);
-
-  return ["sim", "true", "1", "sim.", "baixado", "pago", "ativo"].includes(texto);
-}
-
-async function chamarAPI(action, parametros = {}) {
-  const url = new URL(URL_API);
-
-  // Mantém o parâmetro action usado por esta versão do HTML.
-  url.searchParams.set("action", action);
-
-  Object.entries(parametros).forEach(([chave, valor]) => {
-    if (valor !== undefined && valor !== null) {
-      url.searchParams.set(chave, String(valor));
-    }
-  });
-
+async function chamarAPI(action,parametros={}){
+  const url=new URL(URL_API);url.searchParams.set("action",action);
+  Object.entries(parametros).forEach(([k,v])=>{if(v!==undefined&&v!==null)url.searchParams.set(k,String(v))});
   let resposta;
-
-  try {
-    resposta = await fetch(url.href, {
-      method: "GET",
-      cache: "no-store",
-      redirect: "follow"
-    });
-  } catch (erro) {
-    throw new Error(
-      "Não foi possível comunicar com a API. Confira a URL, a implantação " +
-      "e as permissões do Apps Script. Se houver bloqueio de CORS, será " +
-      "necessário adequar a integração do backend."
-    );
-  }
-
-  if (!resposta.ok) {
-    throw new Error("A API retornou HTTP " + resposta.status + ".");
-  }
-
-  const texto = await resposta.text();
-
-  if (!texto) {
-    throw new Error("A API retornou uma resposta vazia.");
-  }
-
-  let dados;
-
-  try {
-    dados = JSON.parse(texto);
-  } catch (erro) {
-    throw new Error(
-      "A API não retornou JSON válido. Confira o parâmetro da ação " +
-      "e a implantação do Apps Script."
-    );
-  }
-
-  if (dados.sucesso === false || dados.erro) {
-    throw new Error(
-      dados.mensagem || dados.erro || "A operação falhou."
-    );
-  }
-
+  try{resposta=await fetch(url.href,{method:"GET",cache:"no-store",redirect:"follow"})}
+  catch(e){throw new Error("Não foi possível comunicar com a API. Confira a URL, a implantação e as permissões do Apps Script. Se houver bloqueio de CORS, será necessário adequar a integração do backend.")}
+  if(!resposta.ok)throw new Error("A API retornou HTTP "+resposta.status+".");
+  const texto=await resposta.text();if(!texto)throw new Error("A API retornou uma resposta vazia.");
+  let dados;try{dados=JSON.parse(texto)}catch(e){throw new Error("A API não retornou JSON válido. Confira o parâmetro da ação e a implantação do Apps Script.")}
+  if(dados.sucesso===false||dados.erro)throw new Error(dados.mensagem||dados.erro||"A operação falhou.");
   return dados;
 }
+function extrairLista(resposta){if(Array.isArray(resposta))return resposta;for(const v of[resposta?.lista,resposta?.lancamentos,resposta?.dados,resposta?.registros,resposta?.descricoes])if(Array.isArray(v))return v;return[]}
 
-function extrairLista(resposta) {
-  if (Array.isArray(resposta)) return resposta;
-
-  const possiveis = [
-    resposta?.lista,
-    resposta?.lancamentos,
-    resposta?.dados,
-    resposta?.registros,
-    resposta?.descricoes
-  ];
-
-  return possiveis.find(Array.isArray) || [];
+async function carregarDescricoes(){try{const resposta=await chamarAPI("listarDescricoes");const descricoes=extrairLista(resposta);document.getElementById("listaDescricoes").innerHTML=descricoes.map(item=>{const d=typeof item==="string"?item:obterCampo(item,["descricao","Descrição","Descricao","DESCRICAO","nome","Nome"]);return d?`<option value="${esc(d)}"></option>`:""}).join("")}catch(e){console.warn("Não foi possível carregar as descrições:",e)}}
+function classificarLancamentos(lancamentos){const ordem=t=>normalizarTipo(t)==="pagar"?1:normalizarTipo(t)==="receber"?2:3;return[...lancamentos].sort((a,b)=>{const ta=obterCampo(a,["tipo","Tipo","TIPO"]),tb=obterCampo(b,["tipo","Tipo","TIPO"]);const dif=ordem(ta)-ordem(tb);if(dif)return dif;return String(obterCampo(a,["descricao","Descrição","Descricao","DESCRICAO"])).localeCompare(String(obterCampo(b,["descricao","Descrição","Descricao","DESCRICAO"])),"pt-BR",{sensitivity:"base"})})}
+function atualizarSelecao(){const c=Array.from(listaEl.querySelectorAll('input.checkbox-linha:not(:disabled)'));const n=c.filter(x=>x.checked).length;selecionarTodosEl.checked=c.length>0&&n===c.length;selecionarTodosEl.indeterminate=n>0&&n<c.length;btnExcluirSelecionados.disabled=n===0;quantidadeSelecionadaEl.textContent=n===0?"Nenhum lançamento selecionado":`${n} lançamento(s) selecionado(s)`}
+function obterIdsSelecionados(){return Array.from(listaEl.querySelectorAll('input.checkbox-linha:checked:not(:disabled)')).map(c=>c.dataset.selecionarId).filter(id=>id!==undefined&&id!=="")}
+function renderizarLancamentos(lancamentos){
+  selecionarTodosEl.checked=false;selecionarTodosEl.indeterminate=false;
+  if(!lancamentos.length){listaEl.innerHTML='<tr><td colspan="9">Nenhum lançamento encontrado nesta competência.</td></tr>';atualizarSelecao();return}
+  listaEl.innerHTML=lancamentos.map(item=>{
+    const id=obterCampo(item,["id","ID","Id","codigo","Código"]);
+    const tipoOriginal=obterCampo(item,["tipo","Tipo","TIPO"]);const tipo=normalizarTipo(tipoOriginal);
+    const descricao=obterCampo(item,["descricao","Descrição","Descricao","DESCRICAO"]);
+    const vencimento=obterCampo(item,["vencimento","Vencimento","dataVencimento","DATA_VENCIMENTO"]);
+    const fixa=valorBooleano(obterCampo(item,["fixa","Fixa","FIXA","contaFixa"]));
+    const baixado=valorBooleano(obterCampo(item,["baixado","Baixado","BAIXADO","pago","Pago","statusBaixa"]));
+    const valor=obterCampo(item,["valor","Valor","VALOR"],0);
+    const classe=tipo==="pagar"?"pagar":tipo==="receber"?"receber":"normal";
+    const idValido=id!==""&&id!==null&&id!==undefined;
+    return `<tr>
+      <td><input type="checkbox" class="checkbox-linha" data-selecionar-id="${esc(id)}" aria-label="Selecionar lançamento ${esc(id)}" ${idValido?"":"disabled"}></td>
+      <td>${esc(id)}</td><td><span class="badge ${classe}">${esc(rotuloTipo(tipoOriginal))}</span></td>
+      <td>${esc(descricao)}</td><td>${esc(formatarData(vencimento))}</td>
+      <td><span class="badge ${fixa?"fixa":"normal"}">${fixa?"Sim":"Não"}</span></td>
+      <td><span class="badge ${baixado?"fixa":"normal"}">${baixado?"Sim":"Não"}</span></td>
+      <td class="valor">${esc(moeda(valor))}</td>
+      <td><button type="button" class="btn-excluir" data-excluir-id="${esc(id)}" ${idValido?"":"disabled"}>🗑 Excluir</button></td>
+    </tr>`;
+  }).join("");atualizarSelecao();
 }
+async function carregarLancamentos(){const competencia=competenciaEl.value;validarCompetencia(competencia);listaEl.innerHTML='<tr><td colspan="9">Carregando lançamentos...</td></tr>';statusEl.textContent="Consultando lançamentos...";try{const resposta=await chamarAPI("listarLancamentos",{competencia});const lancamentos=classificarLancamentos(extrairLista(resposta));renderizarLancamentos(lancamentos);document.getElementById("tituloLista").textContent="Lançamentos da competência "+competencia;statusEl.textContent="Sistema online · "+lancamentos.length+" lançamento(s)"}catch(e){console.error("Erro ao carregar lançamentos:",e);listaEl.innerHTML=`<tr><td colspan="9">${esc(e.message)}</td></tr>`;statusEl.textContent="Erro ao carregar";atualizarSelecao();throw e}}
 
-async function carregarDescricoes() {
-  try {
-    const resposta = await chamarAPI("listarDescricoes");
-    const descricoes = extrairLista(resposta);
+async function inserir(){const competencia=competenciaEl.value,tipo=tipoEl.value,descricao=descricaoEl.value.trim(),valor=normalizarValor(valorEl.value),vencimento=vencimentoEl.value,fixa=fixaEl.checked?"Sim":"Não";try{validarCompetencia(competencia);if(!descricao)throw new Error("Informe a descrição do lançamento.");if(!Number.isFinite(valor)||valor<=0)throw new Error("Informe um valor maior que zero.");if(!vencimento)throw new Error("Informe a data de vencimento.");btnInserir.disabled=true;btnInserir.textContent="⏳ Inserindo...";statusEl.textContent="Inserindo lançamento...";const resposta=await chamarAPI("incluirLancamento",{competencia,tipo,descricao,valor,vencimento,fixa});mostrarMensagem(resposta.mensagem||"Lançamento inserido com sucesso.","sucesso");descricaoEl.value="";valorEl.value="";fixaEl.checked=false;await carregarLancamentos()}catch(e){console.error(e);mostrarMensagem(e.message,"erro");statusEl.textContent="Verifique a operação"}finally{btnInserir.disabled=false;btnInserir.textContent="➕ Inserir lançamento"}}
+async function inserirFixos(){const competencia=competenciaEl.value;try{validarCompetencia(competencia);btnFixos.disabled=true;btnFixos.textContent="⏳ Processando...";statusEl.textContent="Inserindo contas fixas...";const resposta=await chamarAPI("inserirFixosCompetencia",{competencia});const inseridos=Number(resposta.inseridos??0),ignorados=Number(resposta.ignorados??0);document.getElementById("resumoFixos").textContent=`Competência ${competencia} · Inseridos: ${inseridos} · Ignorados: ${ignorados}`;mostrarMensagem(resposta.mensagem||`Operação concluída. Inseridos: ${inseridos}; ignorados: ${ignorados}.`,"sucesso");await carregarLancamentos()}catch(e){console.error(e);mostrarMensagem(e.message,"erro");statusEl.textContent="Falha na operação"}finally{btnFixos.disabled=false;btnFixos.textContent="🔁 Inserir fixos do mês"}}
 
-    document.getElementById("listaDescricoes").innerHTML =
-      descricoes.map(item => {
-        const descricao = typeof item === "string"
-          ? item
-          : obterCampo(item, ["descricao", "Descricao", "DESCRICAO", "nome", "Nome"]);
+async function excluirLancamento(id,botao){if(id===undefined||id===null||String(id).trim()===""){mostrarMensagem("Não foi possível identificar o lançamento.","erro");return}if(!window.confirm("Deseja realmente excluir este lançamento?\n\nID: "+id+"\n\nEsta operação não poderá ser desfeita."))return;const textoOriginal=botao.textContent;try{validarCompetencia(competenciaEl.value);botao.disabled=true;botao.textContent="Excluindo...";statusEl.textContent="Excluindo lançamento...";const resposta=await chamarAPI("excluirLancamento",{id:String(id),competencia:competenciaEl.value});if(resposta.sucesso!==true)throw new Error(resposta.mensagem||"A API não confirmou a exclusão.");mostrarMensagem(resposta.mensagem||"Lançamento excluído com sucesso.","sucesso");await carregarLancamentos()}catch(e){console.error(e);mostrarMensagem(e.message||"Não foi possível excluir o lançamento.","erro");statusEl.textContent="Falha na exclusão"}finally{if(botao.isConnected){botao.disabled=false;botao.textContent=textoOriginal}}}
 
-        return descricao
-          ? `<option value="${esc(descricao)}"></option>`
-          : "";
-      }).join("");
-  } catch (erro) {
-    console.warn("Não foi possível carregar as descrições:", erro);
-  }
-}
+async function excluirSelecionados(){const ids=obterIdsSelecionados();if(!ids.length){mostrarMensagem("Selecione pelo menos um lançamento.","info");return}if(!window.confirm(`Deseja realmente excluir ${ids.length} lançamento(s)?\n\nEsta operação não poderá ser desfeita.`))return;const textoOriginal=btnExcluirSelecionados.textContent;try{validarCompetencia(competenciaEl.value);btnExcluirSelecionados.disabled=true;btnExcluirSelecionados.textContent="⏳ Excluindo...";statusEl.textContent="Excluindo lançamentos selecionados...";const resposta=await chamarAPI("excluirLancamentos",{ids:ids.join(","),competencia:competenciaEl.value});const excluidos=Number(resposta.excluidos??0);if(resposta.sucesso!==true&&excluidos===0)throw new Error(resposta.mensagem||"A API não confirmou a exclusão em lote.");const falhas=Array.isArray(resposta.falhas)?resposta.falhas:[];let msg=resposta.mensagem||`${excluidos} lançamento(s) excluído(s).`;if(falhas.length)msg+="\nFalhas: "+falhas.map(f=>typeof f==="object"?`ID ${f.id??"?"}: ${f.mensagem??f.erro??"erro"}`:String(f)).join("; ");mostrarMensagem(msg,falhas.length?"info":"sucesso");await carregarLancamentos()}catch(e){console.error("Erro na exclusão em lote:",e);mostrarMensagem(e.message||"Não foi possível excluir os lançamentos.","erro");statusEl.textContent="Falha na exclusão"}finally{btnExcluirSelecionados.textContent=textoOriginal;atualizarSelecao()}}
 
-function classificarLancamentos(lancamentos) {
-  const ordemTipo = tipo => {
-    const normalizado = normalizarTipo(tipo);
-
-    if (normalizado === "pagar") return 1;
-    if (normalizado === "receber") return 2;
-
-    return 3;
-  };
-
-  return [...lancamentos].sort((a, b) => {
-    const tipoA = obterCampo(a, ["tipo", "Tipo", "TIPO"]);
-    const tipoB = obterCampo(b, ["tipo", "Tipo", "TIPO"]);
-
-    const diferenca = ordemTipo(tipoA) - ordemTipo(tipoB);
-
-    if (diferenca !== 0) return diferenca;
-
-    const descricaoA = obterCampo(
-      a, ["descricao", "Descrição", "Descricao", "DESCRICAO"]
-    );
-
-    const descricaoB = obterCampo(
-      b, ["descricao", "Descrição", "Descricao", "DESCRICAO"]
-    );
-
-    return String(descricaoA).localeCompare(
-      String(descricaoB),
-      "pt-BR",
-      { sensitivity: "base" }
-    );
-  });
-}
-
-function renderizarLancamentos(lancamentos) {
-  if (!lancamentos.length) {
-    listaEl.innerHTML =
-      '<tr><td colspan="8">Nenhum lançamento encontrado nesta competência.</td></tr>';
-    return;
-  }
-
-  listaEl.innerHTML = lancamentos.map(item => {
-    const id = obterCampo(item, ["id", "ID", "Id", "codigo", "Código"]);
-    const tipoOriginal = obterCampo(item, ["tipo", "Tipo", "TIPO"]);
-    const tipo = normalizarTipo(tipoOriginal);
-    const descricao = obterCampo(
-      item, ["descricao", "Descrição", "Descricao", "DESCRICAO"]
-    );
-
-    const vencimento = obterCampo(
-      item, ["vencimento", "Vencimento", "dataVencimento", "DATA_VENCIMENTO"]
-    );
-
-    const fixaValor = obterCampo(item, ["fixa", "Fixa", "FIXA", "contaFixa"]);
-    const baixadoValor = obterCampo(
-      item, ["baixado", "Baixado", "BAIXADO", "pago", "Pago", "statusBaixa"]
-    );
-
-    const valor = obterCampo(item, ["valor", "Valor", "VALOR"], 0);
-    const fixa = valorBooleano(fixaValor);
-    const baixado = valorBooleano(baixadoValor);
-
-    const classeTipo = tipo === "pagar"
-      ? "pagar"
-      : tipo === "receber"
-        ? "receber"
-        : "normal";
-
-    const idSeguro = esc(id);
-
-    return `
-      <tr>
-        <td>${esc(id)}</td>
-        <td><span class="badge ${classeTipo}">${esc(rotuloTipo(tipoOriginal))}</span></td>
-        <td>${esc(descricao)}</td>
-        <td>${esc(formatarData(vencimento))}</td>
-        <td>
-          <span class="badge ${fixa ? "fixa" : "normal"}">
-            ${fixa ? "Sim" : "Não"}
-          </span>
-        </td>
-        <td>
-          <span class="badge ${baixado ? "fixa" : "normal"}">
-            ${baixado ? "Sim" : "Não"}
-          </span>
-        </td>
-        <td class="valor">${esc(moeda(valor))}</td>
-        <td>
-          <button
-            type="button"
-            class="btn-excluir"
-            data-excluir-id="${idSeguro}"
-            ${id === "" || id === null || id === undefined ? "disabled" : ""}
-            aria-label="Excluir lançamento ${idSeguro}"
-          >🗑 Excluir</button>
-        </td>
-      </tr>
-    `;
-  }).join("");
-}
-
-async function carregarLancamentos() {
-  const competencia = competenciaEl.value;
-
-  try {
-    validarCompetencia(competencia);
-
-    listaEl.innerHTML =
-      '<tr><td colspan="8">Carregando lançamentos...</td></tr>';
-
-    statusEl.textContent = "Consultando lançamentos...";
-
-    const resposta = await chamarAPI("listarLancamentos", {
-      competencia
-    });
-
-    const lancamentos = classificarLancamentos(extrairLista(resposta));
-
-    renderizarLancamentos(lancamentos);
-
-    document.getElementById("tituloLista").textContent =
-      "Lançamentos da competência " + competencia;
-
-    statusEl.textContent =
-      "Sistema online · " + lancamentos.length + " lançamento(s)";
-  } catch (erro) {
-    console.error("Erro ao carregar lançamentos:", erro);
-
-    listaEl.innerHTML =
-      `<tr><td colspan="8">${esc(erro.message)}</td></tr>`;
-
-    statusEl.textContent = "Erro ao carregar";
-    throw erro;
-  }
-}
-
-async function inserir() {
-  const competencia = competenciaEl.value;
-  const tipo = tipoEl.value;
-  const descricao = descricaoEl.value.trim();
-  const valor = normalizarValor(valorEl.value);
-  const vencimento = vencimentoEl.value;
-  const fixa = fixaEl.checked ? "Sim" : "Não";
-
-  try {
-    validarCompetencia(competencia);
-
-    if (!descricao) {
-      throw new Error("Informe a descrição do lançamento.");
-    }
-
-    if (!Number.isFinite(valor) || valor <= 0) {
-      throw new Error("Informe um valor maior que zero.");
-    }
-
-    if (!vencimento) {
-      throw new Error("Informe a data de vencimento.");
-    }
-
-    btnInserir.disabled = true;
-    btnInserir.textContent = "⏳ Inserindo...";
-    statusEl.textContent = "Inserindo lançamento...";
-
-    const resposta = await chamarAPI("incluirLancamento", {
-      competencia,
-      tipo,
-      descricao,
-      valor,
-      vencimento,
-      fixa
-    });
-
-    mostrarMensagem(
-      resposta.mensagem || "Lançamento inserido com sucesso.",
-      "sucesso"
-    );
-
-    descricaoEl.value = "";
-    valorEl.value = "";
-    fixaEl.checked = false;
-
-    await carregarLancamentos();
-  } catch (erro) {
-    console.error(erro);
-    mostrarMensagem(erro.message, "erro");
-    statusEl.textContent = "Verifique a operação";
-  } finally {
-    btnInserir.disabled = false;
-    btnInserir.textContent = "➕ Inserir lançamento";
-  }
-}
-
-async function inserirFixos() {
-  const competencia = competenciaEl.value;
-
-  try {
-    validarCompetencia(competencia);
-
-    btnFixos.disabled = true;
-    btnFixos.textContent = "⏳ Processando...";
-    statusEl.textContent = "Inserindo contas fixas...";
-
-    const resposta = await chamarAPI("inserirFixosCompetencia", {
-      competencia
-    });
-
-    const inseridos = Number(resposta.inseridos ?? 0);
-    const ignorados = Number(resposta.ignorados ?? 0);
-
-    document.getElementById("resumoFixos").textContent =
-      `Competência ${competencia} · Inseridos: ${inseridos}` +
-      ` · Ignorados: ${ignorados}`;
-
-    mostrarMensagem(
-      resposta.mensagem ||
-      `Operação concluída. Inseridos: ${inseridos}; ignorados: ${ignorados}.`,
-      "sucesso"
-    );
-
-    await carregarLancamentos();
-  } catch (erro) {
-    console.error(erro);
-    mostrarMensagem(erro.message, "erro");
-    statusEl.textContent = "Falha na operação";
-  } finally {
-    btnFixos.disabled = false;
-    btnFixos.textContent = "🔁 Inserir fixos do mês";
-  }
-}
-
-async function excluirLancamento(id, botao) {
-  if (id === undefined || id === null || String(id).trim() === "") {
-    mostrarMensagem("Não foi possível identificar o lançamento.", "erro");
-    return;
-  }
-
-  const confirmado = window.confirm(
-    "Deseja realmente excluir este lançamento?\n\n" +
-    "ID: " + id + "\n\n" +
-    "Esta operação não poderá ser desfeita."
-  );
-
-  if (!confirmado) return;
-
-  const competencia = competenciaEl.value;
-  const textoOriginal = botao.textContent;
-
-  try {
-    validarCompetencia(competencia);
-
-    botao.disabled = true;
-    botao.textContent = "Excluindo...";
-    statusEl.textContent = "Excluindo lançamento...";
-
-    const resposta = await chamarAPI("excluirLancamento", {
-      id: String(id),
-      competencia
-    });
-
-    if (resposta.sucesso !== true) {
-      throw new Error(
-        resposta.mensagem || "A API não confirmou a exclusão."
-      );
-    }
-
-    mostrarMensagem(
-      resposta.mensagem || "Lançamento excluído com sucesso.",
-      "sucesso"
-    );
-
-    // Recarrega a tabela e mantém a classificação por tipo.
-    await carregarLancamentos();
-  } catch (erro) {
-    console.error("Erro ao excluir:", erro);
-
-    mostrarMensagem(
-      erro.message || "Não foi possível excluir o lançamento.",
-      "erro"
-    );
-
-    statusEl.textContent = "Falha na exclusão";
-  } finally {
-    if (botao.isConnected) {
-      botao.disabled = false;
-      botao.textContent = textoOriginal;
-    }
-  }
-}
-
-listaEl.addEventListener("click", event => {
-  const botao = event.target.closest("button[data-excluir-id]");
-
-  if (!botao || botao.disabled) return;
-
-  excluirLancamento(botao.dataset.excluirId, botao);
-});
-
-function voltar() {
-  const url = new URL("index.html", window.location.href);
-
-  if (competenciaEl.value) {
-    url.searchParams.set("competencia", competenciaEl.value);
-  }
-
-  window.location.href = url.href;
-}
-
-competenciaEl.addEventListener("change", async () => {
-  document.getElementById("resumoFixos").textContent = "";
-  mensagemEl.className = "mensagem";
-  mensagemEl.textContent = "";
-
-  try {
-    await carregarLancamentos();
-  } catch (erro) {
-    console.error(erro);
-  }
-});
-
-document.addEventListener("DOMContentLoaded", async () => {
-  const parametros = new URLSearchParams(window.location.search);
-  const competenciaUrl = parametros.get("competencia");
-
-  competenciaEl.value =
-    competenciaUrl && /^\d{4}-(0[1-9]|1[0-2])$/.test(competenciaUrl)
-      ? competenciaUrl
-      : competenciaAtual();
-
-  const hoje = new Date();
-
-  vencimentoEl.value =
-    hoje.getFullYear() + "-" +
-    String(hoje.getMonth() + 1).padStart(2, "0") + "-" +
-    String(hoje.getDate()).padStart(2, "0");
-
-  await carregarDescricoes();
-
-  try {
-    await carregarLancamentos();
-  } catch (erro) {
-    mostrarMensagem(erro.message, "erro");
-  }
-});
+selecionarTodosEl.addEventListener("change",()=>{listaEl.querySelectorAll('input.checkbox-linha:not(:disabled)').forEach(c=>c.checked=selecionarTodosEl.checked);atualizarSelecao()});
+listaEl.addEventListener("change",e=>{if(e.target.matches(".checkbox-linha"))atualizarSelecao()});
+listaEl.addEventListener("click",e=>{const botao=e.target.closest("button[data-excluir-id]");if(botao&&!botao.disabled)excluirLancamento(botao.dataset.excluirId,botao)});
+btnExcluirSelecionados.addEventListener("click",excluirSelecionados);
+function voltar(){const url=new URL("index.html",window.location.href);if(competenciaEl.value)url.searchParams.set("competencia",competenciaEl.value);window.location.href=url.href}
+competenciaEl.addEventListener("change",async()=>{document.getElementById("resumoFixos").textContent="";mensagemEl.className="mensagem";mensagemEl.textContent="";try{await carregarLancamentos()}catch(e){console.error(e)}});
+document.addEventListener("DOMContentLoaded",async()=>{const p=new URLSearchParams(window.location.search),competenciaUrl=p.get("competencia");competenciaEl.value=competenciaUrl&&/^\d{4}-(0[1-9]|1[0-2])$/.test(competenciaUrl)?competenciaUrl:competenciaAtual();const hoje=new Date();vencimentoEl.value=hoje.getFullYear()+"-"+String(hoje.getMonth()+1).padStart(2,"0")+"-"+String(hoje.getDate()).padStart(2,"0");await carregarDescricoes();try{await carregarLancamentos()}catch(e){mostrarMensagem(e.message,"erro")}});
 </script>
 </body>
 </html>
