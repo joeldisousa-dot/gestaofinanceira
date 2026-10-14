@@ -17,9 +17,7 @@
   --borda: #e3e9f1;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -40,19 +38,16 @@ body {
   background: #fff;
   border: 1px solid var(--borda);
   border-radius: 18px;
-  box-shadow: 0 12px 40px rgba(15, 23, 42, .07);
+  box-shadow: 0 12px 40px rgba(15,23,42,.07);
 }
 
 .header {
   padding: 25px 30px;
   color: white;
-  background: linear-gradient(135deg, var(--azul), var(--azul-claro));
+  background: linear-gradient(135deg,var(--azul),var(--azul-claro));
 }
 
-.header h1 {
-  margin: 0;
-  font-size: 26px;
-}
+.header h1 { margin: 0; font-size: 26px; }
 
 .header p {
   margin: 7px 0 0;
@@ -60,9 +55,7 @@ body {
   font-size: 13px;
 }
 
-.conteudo {
-  padding: 25px 30px;
-}
+.conteudo { padding: 25px 30px; }
 
 .barra {
   display: flex;
@@ -86,8 +79,7 @@ body {
   font-weight: 750;
 }
 
-input,
-select {
+input, select {
   width: 100%;
   height: 41px;
   padding: 0 11px;
@@ -100,15 +92,12 @@ select {
   font-size: 12px;
 }
 
-input:focus,
-select:focus {
+input:focus, select:focus {
   border-color: #356da5;
-  box-shadow: 0 0 0 3px rgba(53, 109, 165, .1);
+  box-shadow: 0 0 0 3px rgba(53,109,165,.1);
 }
 
-#competencia {
-  width: 160px;
-}
+#competencia { width: 160px; }
 
 .status {
   color: #52647a;
@@ -186,9 +175,7 @@ button {
   transition: .15s;
 }
 
-button:hover {
-  transform: translateY(-1px);
-}
+button:hover { transform: translateY(-1px); }
 
 button:disabled {
   opacity: .55;
@@ -198,7 +185,7 @@ button:disabled {
 
 .btn-inserir {
   border-color: var(--verde);
-  background: linear-gradient(135deg, #148345, #1ba457);
+  background: linear-gradient(135deg,#148345,#1ba457);
   color: white;
 }
 
@@ -302,9 +289,7 @@ td {
   font-size: 11px;
 }
 
-tbody tr:hover {
-  background: #fafcff;
-}
+tbody tr:hover { background: #fafcff; }
 
 .valor {
   font-weight: 750;
@@ -347,28 +332,15 @@ tbody tr:hover {
   font-size: 11px;
 }
 
-@media (max-width: 850px) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-  }
+@media (max-width:850px) {
+  .grid { grid-template-columns: 1fr 1fr; }
 }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 9px 7px 20px;
-  }
-
-  .header {
-    padding: 21px 18px;
-  }
-
-  .conteudo {
-    padding: 18px 14px;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-  }
+@media (max-width:600px) {
+  .container { padding: 9px 7px 20px; }
+  .header { padding: 21px 18px; }
+  .conteudo { padding: 18px 14px; }
+  .grid { grid-template-columns: 1fr; }
 
   .competencia {
     width: 100%;
@@ -376,13 +348,8 @@ tbody tr:hover {
     flex-direction: column;
   }
 
-  #competencia {
-    width: 100%;
-  }
-
-  .acoes button {
-    width: 100%;
-  }
+  #competencia { width: 100%; }
+  .acoes button { width: 100%; }
 }
 </style>
 </head>
@@ -403,13 +370,13 @@ tbody tr:hover {
           <label for="competencia">Competência</label>
           <input id="competencia" type="month" required>
         </div>
-        <div id="status" class="status" role="status">
+
+        <div id="status" class="status" role="status" aria-live="polite">
           Conectando à API...
         </div>
       </div>
 
       <div class="grid">
-
         <div class="campo">
           <label for="tipo">Tipo</label>
           <select id="tipo">
@@ -443,7 +410,6 @@ tbody tr:hover {
           <label for="vencimento">Vencimento</label>
           <input id="vencimento" type="date">
         </div>
-
       </div>
 
       <label class="checkbox-fixa">
@@ -460,12 +426,14 @@ tbody tr:hover {
 
       <div class="acoes">
         <button type="button" onclick="voltar()">← Voltar</button>
+
         <button
           type="button"
           id="btnFixos"
           class="btn-fixos"
           onclick="inserirFixos()"
         >🔁 Inserir fixos do mês</button>
+
         <button
           type="button"
           id="btnInserir"
@@ -526,6 +494,7 @@ const btnFixos = document.getElementById("btnFixos");
 
 function competenciaAtual() {
   const agora = new Date();
+
   return agora.getFullYear() + "-" +
     String(agora.getMonth() + 1).padStart(2, "0");
 }
@@ -548,6 +517,48 @@ function esc(valor) {
 function mostrarMensagem(texto, tipo = "info") {
   mensagemEl.textContent = texto || "";
   mensagemEl.className = "mensagem " + tipo;
+}
+
+function normalizarTexto(valor) {
+  return String(valor ?? "").trim().toLocaleLowerCase("pt-BR");
+}
+
+function obterCampo(objeto, nomes, padrao = "") {
+  for (const nome of nomes) {
+    if (
+      objeto &&
+      objeto[nome] !== undefined &&
+      objeto[nome] !== null &&
+      objeto[nome] !== ""
+    ) {
+      return objeto[nome];
+    }
+  }
+
+  return padrao;
+}
+
+function normalizarTipo(valor) {
+  const tipo = normalizarTexto(valor);
+
+  if (["pagar", "despesa", "saída", "saida"].includes(tipo)) {
+    return "pagar";
+  }
+
+  if (["receber", "receita", "entrada"].includes(tipo)) {
+    return "receber";
+  }
+
+  return tipo || "outro";
+}
+
+function rotuloTipo(valor) {
+  const tipo = normalizarTipo(valor);
+
+  if (tipo === "pagar") return "Despesa";
+  if (tipo === "receber") return "Receita";
+
+  return String(valor || "Outro");
 }
 
 function normalizarValor(texto) {
@@ -599,17 +610,31 @@ function formatarData(data) {
     return `${dia}/${mes}/${ano}`;
   }
 
-  const br = texto.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
-  if (br) return texto;
+  if (/^\d{2}\/\d{2}\/\d{4}$/.test(texto)) {
+    return texto;
+  }
 
   const iso = texto.match(/^(\d{4})-(\d{2})-(\d{2})T/);
-  if (iso) return `${iso[3]}/${iso[2]}/${iso[1]}`;
+
+  if (iso) {
+    return `${iso[3]}/${iso[2]}/${iso[1]}`;
+  }
 
   return texto;
 }
 
+function valorBooleano(valor) {
+  if (typeof valor === "boolean") return valor;
+
+  const texto = normalizarTexto(valor);
+
+  return ["sim", "true", "1", "sim.", "baixado", "pago", "ativo"].includes(texto);
+}
+
 async function chamarAPI(action, parametros = {}) {
   const url = new URL(URL_API);
+
+  // Mantém o parâmetro action usado por esta versão do HTML.
   url.searchParams.set("action", action);
 
   Object.entries(parametros).forEach(([chave, valor]) => {
@@ -628,9 +653,9 @@ async function chamarAPI(action, parametros = {}) {
     });
   } catch (erro) {
     throw new Error(
-      "Não foi possível comunicar com a API. Confira a implantação do " +
-      "Apps Script e as permissões de acesso. Se houver bloqueio de CORS, " +
-      "será necessário ajustar a integração."
+      "Não foi possível comunicar com a API. Confira a URL, a implantação " +
+      "e as permissões do Apps Script. Se houver bloqueio de CORS, será " +
+      "necessário adequar a integração do backend."
     );
   }
 
@@ -650,28 +675,44 @@ async function chamarAPI(action, parametros = {}) {
     dados = JSON.parse(texto);
   } catch (erro) {
     throw new Error(
-      "A API não retornou JSON válido. Confira a URL e a implantação do Apps Script."
+      "A API não retornou JSON válido. Confira o parâmetro da ação " +
+      "e a implantação do Apps Script."
     );
   }
 
-  if (dados.sucesso === false) {
-    throw new Error(dados.mensagem || dados.erro || "A operação falhou.");
+  if (dados.sucesso === false || dados.erro) {
+    throw new Error(
+      dados.mensagem || dados.erro || "A operação falhou."
+    );
   }
 
   return dados;
 }
 
+function extrairLista(resposta) {
+  if (Array.isArray(resposta)) return resposta;
+
+  const possiveis = [
+    resposta?.lista,
+    resposta?.lancamentos,
+    resposta?.dados,
+    resposta?.registros,
+    resposta?.descricoes
+  ];
+
+  return possiveis.find(Array.isArray) || [];
+}
+
 async function carregarDescricoes() {
   try {
     const resposta = await chamarAPI("listarDescricoes");
-    const descricoes =
-      resposta.lista || resposta.descricoes || resposta.dados || [];
+    const descricoes = extrairLista(resposta);
 
     document.getElementById("listaDescricoes").innerHTML =
       descricoes.map(item => {
         const descricao = typeof item === "string"
           ? item
-          : (item.descricao || item.Descricao || "");
+          : obterCampo(item, ["descricao", "Descricao", "DESCRICAO", "nome", "Nome"]);
 
         return descricao
           ? `<option value="${esc(descricao)}"></option>`
@@ -682,41 +723,140 @@ async function carregarDescricoes() {
   }
 }
 
-async function carregarLancamentos() {
-  
-const resposta = await chamarAPI("listarLancamentos", { competencia });
-
-const lancamentos = Array.isArray(resposta.lista)
-  ? resposta.lista
-  : [];
-
-// Classifica primeiro por TIPO e depois por DESCRIÇÃO.
-lancamentos.sort((a, b) => {
-  const tipoA = String(a.tipo || "").trim().toLowerCase();
-  const tipoB = String(b.tipo || "").trim().toLowerCase();
-
+function classificarLancamentos(lancamentos) {
   const ordemTipo = tipo => {
-    if (["pagar", "despesa"].includes(tipo)) return 1;
-    if (["receber", "receita"].includes(tipo)) return 2;
+    const normalizado = normalizarTipo(tipo);
+
+    if (normalizado === "pagar") return 1;
+    if (normalizado === "receber") return 2;
+
     return 3;
   };
 
-  const diferenca = ordemTipo(tipoA) - ordemTipo(tipoB);
+  return [...lancamentos].sort((a, b) => {
+    const tipoA = obterCampo(a, ["tipo", "Tipo", "TIPO"]);
+    const tipoB = obterCampo(b, ["tipo", "Tipo", "TIPO"]);
 
-  if (diferenca !== 0) {
-    return diferenca;
+    const diferenca = ordemTipo(tipoA) - ordemTipo(tipoB);
+
+    if (diferenca !== 0) return diferenca;
+
+    const descricaoA = obterCampo(
+      a, ["descricao", "Descrição", "Descricao", "DESCRICAO"]
+    );
+
+    const descricaoB = obterCampo(
+      b, ["descricao", "Descrição", "Descricao", "DESCRICAO"]
+    );
+
+    return String(descricaoA).localeCompare(
+      String(descricaoB),
+      "pt-BR",
+      { sensitivity: "base" }
+    );
+  });
+}
+
+function renderizarLancamentos(lancamentos) {
+  if (!lancamentos.length) {
+    listaEl.innerHTML =
+      '<tr><td colspan="8">Nenhum lançamento encontrado nesta competência.</td></tr>';
+    return;
   }
 
-  return String(a.descricao || "").localeCompare(
-    String(b.descricao || ""),
-    "pt-BR",
-    { sensitivity: "base" }
-  );
-});
+  listaEl.innerHTML = lancamentos.map(item => {
+    const id = obterCampo(item, ["id", "ID", "Id", "codigo", "Código"]);
+    const tipoOriginal = obterCampo(item, ["tipo", "Tipo", "TIPO"]);
+    const tipo = normalizarTipo(tipoOriginal);
+    const descricao = obterCampo(
+      item, ["descricao", "Descrição", "Descricao", "DESCRICAO"]
+    );
 
+    const vencimento = obterCampo(
+      item, ["vencimento", "Vencimento", "dataVencimento", "DATA_VENCIMENTO"]
+    );
 
-  statusEl.textContent =
-    "Sistema online · " + lancamentos.length + " lançamento(s)";
+    const fixaValor = obterCampo(item, ["fixa", "Fixa", "FIXA", "contaFixa"]);
+    const baixadoValor = obterCampo(
+      item, ["baixado", "Baixado", "BAIXADO", "pago", "Pago", "statusBaixa"]
+    );
+
+    const valor = obterCampo(item, ["valor", "Valor", "VALOR"], 0);
+    const fixa = valorBooleano(fixaValor);
+    const baixado = valorBooleano(baixadoValor);
+
+    const classeTipo = tipo === "pagar"
+      ? "pagar"
+      : tipo === "receber"
+        ? "receber"
+        : "normal";
+
+    const idSeguro = esc(id);
+
+    return `
+      <tr>
+        <td>${esc(id)}</td>
+        <td><span class="badge ${classeTipo}">${esc(rotuloTipo(tipoOriginal))}</span></td>
+        <td>${esc(descricao)}</td>
+        <td>${esc(formatarData(vencimento))}</td>
+        <td>
+          <span class="badge ${fixa ? "fixa" : "normal"}">
+            ${fixa ? "Sim" : "Não"}
+          </span>
+        </td>
+        <td>
+          <span class="badge ${baixado ? "fixa" : "normal"}">
+            ${baixado ? "Sim" : "Não"}
+          </span>
+        </td>
+        <td class="valor">${esc(moeda(valor))}</td>
+        <td>
+          <button
+            type="button"
+            class="btn-excluir"
+            data-excluir-id="${idSeguro}"
+            ${id === "" || id === null || id === undefined ? "disabled" : ""}
+            aria-label="Excluir lançamento ${idSeguro}"
+          >🗑 Excluir</button>
+        </td>
+      </tr>
+    `;
+  }).join("");
+}
+
+async function carregarLancamentos() {
+  const competencia = competenciaEl.value;
+
+  try {
+    validarCompetencia(competencia);
+
+    listaEl.innerHTML =
+      '<tr><td colspan="8">Carregando lançamentos...</td></tr>';
+
+    statusEl.textContent = "Consultando lançamentos...";
+
+    const resposta = await chamarAPI("listarLancamentos", {
+      competencia
+    });
+
+    const lancamentos = classificarLancamentos(extrairLista(resposta));
+
+    renderizarLancamentos(lancamentos);
+
+    document.getElementById("tituloLista").textContent =
+      "Lançamentos da competência " + competencia;
+
+    statusEl.textContent =
+      "Sistema online · " + lancamentos.length + " lançamento(s)";
+  } catch (erro) {
+    console.error("Erro ao carregar lançamentos:", erro);
+
+    listaEl.innerHTML =
+      `<tr><td colspan="8">${esc(erro.message)}</td></tr>`;
+
+    statusEl.textContent = "Erro ao carregar";
+    throw erro;
+  }
 }
 
 async function inserir() {
@@ -765,7 +905,6 @@ async function inserir() {
     fixaEl.checked = false;
 
     await carregarLancamentos();
-
   } catch (erro) {
     console.error(erro);
     mostrarMensagem(erro.message, "erro");
@@ -804,7 +943,6 @@ async function inserirFixos() {
     );
 
     await carregarLancamentos();
-
   } catch (erro) {
     console.error(erro);
     mostrarMensagem(erro.message, "erro");
@@ -839,11 +977,6 @@ async function excluirLancamento(id, botao) {
     botao.textContent = "Excluindo...";
     statusEl.textContent = "Excluindo lançamento...";
 
-    /*
-      IMPORTANTE:
-      O Apps Script precisa ter a ação excluirLancamento.
-      Ela deve validar o ID e a competência no servidor.
-    */
     const resposta = await chamarAPI("excluirLancamento", {
       id: String(id),
       competencia
@@ -860,14 +993,16 @@ async function excluirLancamento(id, botao) {
       "sucesso"
     );
 
-    await const resposta = await chamarAPI("listarLancamentos", { competencia });();
-
+    // Recarrega a tabela e mantém a classificação por tipo.
+    await carregarLancamentos();
   } catch (erro) {
     console.error("Erro ao excluir:", erro);
+
     mostrarMensagem(
       erro.message || "Não foi possível excluir o lançamento.",
       "erro"
     );
+
     statusEl.textContent = "Falha na exclusão";
   } finally {
     if (botao.isConnected) {
@@ -897,14 +1032,13 @@ function voltar() {
 
 competenciaEl.addEventListener("change", async () => {
   document.getElementById("resumoFixos").textContent = "";
+  mensagemEl.className = "mensagem";
+  mensagemEl.textContent = "";
 
   try {
-    await const resposta = await chamarAPI("listarLancamentos", { competencia });();
+    await carregarLancamentos();
   } catch (erro) {
     console.error(erro);
-    listaEl.innerHTML =
-      `<tr><td colspan="8">${esc(erro.message)}</td></tr>`;
-    statusEl.textContent = "Erro ao carregar";
   }
 });
 
@@ -918,6 +1052,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       : competenciaAtual();
 
   const hoje = new Date();
+
   vencimentoEl.value =
     hoje.getFullYear() + "-" +
     String(hoje.getMonth() + 1).padStart(2, "0") + "-" +
@@ -926,12 +1061,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   await carregarDescricoes();
 
   try {
-    await const resposta = await chamarAPI("listarLancamentos", { competencia });();
+    await carregarLancamentos();
   } catch (erro) {
-    console.error(erro);
-    listaEl.innerHTML =
-      `<tr><td colspan="8">${esc(erro.message)}</td></tr>`;
-    statusEl.textContent = "Erro ao conectar";
     mostrarMensagem(erro.message, "erro");
   }
 });
