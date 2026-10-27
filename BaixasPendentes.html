@@ -1,2455 +1,5843 @@
-<!DOCTYPE html>
-
-<html lang="pt-BR">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Baixas Pendentes - Controle Financeiro</title>
-
-<style>
-
-*{
-    box-sizing:border-box;
-}
-
-body{
-    margin:0;
-    padding:20px;
-    font-family:"Segoe UI",Arial,sans-serif;
-    background:#f4f6f8;
-    color:#333;
-}
-
-.container{
-    max-width:1250px;
-    margin:auto;
-    background:#fff;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 5px 20px rgba(0,0,0,.10);
-}
-
-.topo{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    margin-bottom:20px;
-    flex-wrap:wrap;
-}
-
-h2{
-    margin:0;
-    color:#c62828;
-}
-
-.subtitulo{
-    margin:0 0 20px;
-    color:#555;
-}
-
-.acoes{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-bottom:20px;
-}
-
-.btn{
-    border:0;
-    padding:10px 18px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-    transition:.2s;
-}
-
-.btn:hover{
-    opacity:.9;
-    transform:translateY(-1px);
-}
-
-.btn:disabled{
-    opacity:.6;
-    cursor:not-allowed;
-    transform:none;
-}
-
-.btn-voltar{
-    background:#546e7a;
-    color:#fff;
-}
-
-.btn-atualizar{
-    background:#1565c0;
-    color:#fff;
-}
-
-.btn-baixar{
-    background:#2e7d32;
-    color:#fff;
-    padding:7px 13px;
-    font-size:13px;
-}
-
-.btn-baixar:hover{
-    background:#1b5e20;
-}
-
-
-/* =====================================================
-   FILTROS
-===================================================== */
-
-.filtros{
-    display:grid;
-    grid-template-columns:minmax(250px, 1fr);
-    gap:12px;
-    margin-bottom:20px;
-    padding:15px;
-    background:#f8fafc;
-    border:1px solid #e2e8f0;
-    border-radius:10px;
-}
-
-.filtro-grupo{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-}
-
-.filtro-grupo label{
-    font-size:13px;
-    font-weight:bold;
-    color:#475569;
-}
-
-.filtro-grupo select{
-    width:100%;
-    height:42px;
-    padding:0 12px;
-    border:1px solid #cbd5e1;
-    border-radius:8px;
-    background:#fff;
-    color:#334155;
-    font-family:inherit;
-    font-size:14px;
-    outline:none;
-    cursor:pointer;
-}
-
-.filtro-grupo select:focus{
-    border-color:#1565c0;
-    box-shadow:0 0 0 3px rgba(21,101,192,.10);
-}
-
-.info-filtro{
-    font-size:12px;
-    color:#64748b;
-    margin-top:2px;
-}
-
-
-/* =====================================================
-   MENSAGENS
-===================================================== */
-
-.mensagem{
-    display:none;
-    padding:12px 15px;
-    margin-bottom:15px;
-    border-radius:8px;
-    font-weight:bold;
-}
-
-.mensagem.erro{
-    display:block;
-    background:#ffebee;
-    color:#c62828;
-}
-
-.mensagem.sucesso{
-    display:block;
-    background:#e8f5e9;
-    color:#2e7d32;
-}
-
-
-/* =====================================================
-   RESUMO
-===================================================== */
-
-.resumo{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-bottom:20px;
-}
-
-.card-resumo{
-    background:#f8fafc;
-    border:1px solid #e2e8f0;
-    border-radius:10px;
-    padding:15px;
-    text-align:center;
-}
-
-.card-resumo .titulo{
-    font-size:13px;
-    color:#64748b;
-}
-
-.card-resumo .valor{
-    display:block;
-    margin-top:5px;
-    text-align:center;
-    font-size:20px;
-    color:#c62828;
-    font-weight:bold;
-}
-
-
-/* =====================================================
-   TABELA
-===================================================== */
-
-.area-tabela{
-    width:100%;
-    overflow-x:auto;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:1050px;
-}
-
-th{
-    background:#c62828;
-    color:#fff;
-    padding:12px;
-    text-align:center;
-    white-space:nowrap;
-}
-
-td{
-    padding:10px;
-    border-bottom:1px solid #ddd;
-    text-align:center;
-    vertical-align:middle;
-}
-
-tbody tr:hover{
-    background:#f8f9fa;
-}
-
-.valor{
-    text-align:right !important;
-    font-weight:bold;
-    white-space:nowrap;
-}
-
-.loading{
-    text-align:center;
-    padding:30px;
-    color:#64748b;
-    font-weight:bold;
-}
-
-.vazio{
-    text-align:center;
-    padding:30px;
-    color:#64748b;
-}
-
-.erro-tabela{
-    background:#ffebee;
-    color:#c62828;
-    font-weight:bold;
-    text-align:center;
-    padding:20px;
-}
-
-
-/* =====================================================
-   BADGES
-===================================================== */
-
-.badge{
-    display:inline-block;
-    padding:6px 10px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-    white-space:nowrap;
-}
-
-.badge-pendente{
-    background:#fff3e0;
-    color:#e65100;
-}
-
-.tipo{
-    display:inline-block;
-    min-width:130px;
-    padding:7px 10px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-    white-space:nowrap;
-}
-
-.tipo-receber{
-    background:#e8f5e9;
-    color:#2e7d32;
-}
-
-.tipo-pagar{
-    background:#ffebee;
-    color:#c62828;
-}
-
-.tipo-outro{
-    background:#eceff1;
-    color:#455a64;
-}
-
-.acoes-linha{
-    white-space:nowrap;
-}
-
-
-/* =====================================================
-   SPINNERS
-===================================================== */
-
-.spinner{
-    display:inline-block;
-    width:22px;
-    height:22px;
-    border:3px solid #ddd;
-    border-top-color:#c62828;
-    border-radius:50%;
-    animation:girar .8s linear infinite;
-    vertical-align:middle;
-    margin-right:8px;
-}
-
-.spinner-pequeno{
-    display:inline-block;
-    width:13px;
-    height:13px;
-    border:2px solid rgba(255,255,255,.4);
-    border-top-color:#fff;
-    border-radius:50%;
-    animation:girar .8s linear infinite;
-    vertical-align:middle;
-    margin-right:5px;
-}
-
-@keyframes girar{
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-
-/* =====================================================
-   RESPONSIVO
-===================================================== */
-
-@media(max-width:700px){
-
-    body{
-        padding:10px;
-    }
-
-    .container{
-        padding:15px;
-    }
-
-    .resumo{
-        grid-template-columns:1fr;
-    }
-
-    .topo{
-        align-items:flex-start;
-        flex-direction:column;
-    }
-
-    .filtros{
-        grid-template-columns:1fr;
-    }
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="container">
-
-
-<div class="topo">
-
-    <h2>⚠️ Baixas Pendentes</h2>
-
-    <button
-        type="button"
-        class="btn btn-voltar"
-        onclick="voltarIndex()"
-    >
-        ← Voltar
-    </button>
-
-</div>
-
-
-<h3 class="subtitulo">
-    Todos os lançamentos pendentes
-</h3>
-
-
-<div class="acoes">
-
-    <button
-        type="button"
-        id="btnAtualizar"
-        class="btn btn-atualizar"
-        onclick="carregar()"
-    >
-        🔄 Atualizar
-    </button>
-
-</div>
-
-
-<!-- =================================================
-     FILTRO POR DESCRIÇÃO
-================================================== -->
-
-<div class="filtros">
-
-    <div class="filtro-grupo">
-
-        <label for="filtroDescricao">
-            🔎 Filtrar por descrição
-        </label>
-
-        <select
-            id="filtroDescricao"
-            onchange="aplicarFiltroDescricao()"
-        >
-
-            <option value="">
-                Todas as descrições
-            </option>
-
-        </select>
-
-        <div
-            id="infoFiltro"
-            class="info-filtro"
-        >
-            Exibindo todos os lançamentos pendentes.
-        </div>
-
-    </div>
-
-</div>
-
-
-<div
-    id="mensagem"
-    class="mensagem"
-></div>
-
-
-<div class="resumo">
-
-    <div class="card-resumo">
-
-        <span class="titulo">
-            Pendências
-        </span>
-
-        <span
-            class="valor"
-            id="totalPendentes"
-        >
-            0
-        </span>
-
-    </div>
-
-
-    <div class="card-resumo">
-
-        <span class="titulo">
-            Contas a Receber
-        </span>
-
-        <span
-            class="valor"
-            id="totalReceber"
-        >
-            R$ 0,00
-        </span>
-
-    </div>
-
-
-    <div class="card-resumo">
-
-        <span class="titulo">
-            Contas a Pagar
-        </span>
-
-        <span
-            class="valor"
-            id="totalPagar"
-        >
-            R$ 0,00
-        </span>
-
-    </div>
-
-</div>
-
-
-<div class="area-tabela">
-
-    <table>
-
-        <thead>
-
-            <tr>
-
-                <th>ID</th>
-                <th>Competência</th>
-                <th>Tipo</th>
-                <th>Descrição</th>
-                <th>Valor</th>
-                <th>Vencimento</th>
-                <th>Baixado</th>
-                <th>Ação</th>
-
-            </tr>
-
-        </thead>
-
-
-        <tbody id="lista">
-
-            <tr>
-
-                <td
-                    colspan="8"
-                    class="loading"
-                >
-
-                    <span class="spinner"></span>
-
-                    Carregando baixas pendentes...
-
-                </td>
-
-            </tr>
-
-        </tbody>
-
-    </table>
-
-</div>
-
-
-</div>
-
-<script>
-
-/* =====================================================
-   CONFIGURAÇÃO
-===================================================== */
-
-const URL_API =
-"https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec";
-
-
-const ACAO_BAIXAR =
-"baixarLancamento";
-
-
-let contadorCallback = 0;
-
-
-/*
- * Guarda todos os lançamentos recebidos da API.
+/************************************************************
+ * CONTROLE FINANCEIRO
+ * GOOGLE APPS SCRIPT - Código.gs
  *
- * O filtro trabalha em cima desta lista.
- */
+ * VERSÃO COMPLETA E ATUALIZADA
+ *
+ * ABAS:
+ *
+ * Lancamentos
+ * ID | Competência | Tipo | Descricao | Valor | Vencimento | Baixado | Fixa
+ *
+ * Descricoes
+ * Descricao
+ *
+ * Saldos
+ * Competência | Saldo Inicial
+ *
+ * Atendimento
+ * ID | Problema | Solução
+ *
+ * Fixos (cadastro permanente)
+ * ID | Tipo | Descricao | Valor | Dia Vencimento | Ativa
+ *
+ *
+ * API:
+ *
+ * listarLancamentos
+ * incluirLancamento
+ * inserirFixosCompetencia
+ * editarLancamento
+ * baixarLancamento
+ * excluirLancamento
+ * obterResumo
+ * listarDescricoes
+ * listarAnos
+ * listarTiposFinanceiros
+ * dadosGraficos
+ * dadosLinhaTempo
+ * listarBaixasPendentes
+ * obterSaldoInicial
+ * salvarSaldoInicial
+ * listarSaldos
+ * fecharMes
+ * pesquisarAtendimento
+ * incluirAtendimento
+ * ping
+ ************************************************************/
 
-let listaPendentes = [];
+
+/************************************************************
+ * CONFIGURAÇÃO
+ ************************************************************/
+
+const NOME_ABA_LANCAMENTOS = "Lancamentos";
+const NOME_ABA_DESCRICOES = "Descricoes";
+const NOME_ABA_SALDOS = "Saldos";
+const NOME_ABA_ATENDIMENTO = "Atendimento";
+const NOME_ABA_FIXOS = "Fixos";
 
 
-/* =====================================================
-   INICIALIZAÇÃO
-===================================================== */
+const COLUNAS_LANCAMENTOS = [
+  "ID",
+  "Competência",
+  "Tipo",
+  "Descricao",
+  "Valor",
+  "Vencimento",
+  "Baixado",
+  "Fixa",
+  "QR Code"
+];
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
 
-        carregar();
+const COLUNAS_SALDOS = [
+  "Competência",
+  "Saldo Inicial"
+];
+
+
+const COLUNAS_ATENDIMENTO = [
+  "ID",
+  "Problema",
+  "Solução"
+];
+
+
+const COLUNAS_FIXOS = [
+  "ID",
+  "Tipo",
+  "Descricao",
+  "Valor",
+  "Dia Vencimento",
+  "Ativa"
+];
+
+
+/************************************************************
+ * DO GET
+ ************************************************************/
+
+function doGet(e) {
+
+  try {
+
+    e = e || {};
+
+    const parametros =
+      e.parameter || {};
+
+    const acao =
+      String(
+        parametros.action || ""
+      ).trim();
+
+
+    let resultado;
+
+
+    /**********************************************************
+     * SEM AÇÃO
+     **********************************************************/
+
+    if (!acao) {
+
+      resultado = {
+
+        sucesso: true,
+
+        sistema:
+          "Controle Financeiro",
+
+        mensagem:
+          "API do Controle Financeiro funcionando.",
+
+        status:
+          "online",
+
+        acoes: [
+
+          "ping",
+
+          "listarLancamentos",
+          "incluirLancamento",
+          "inserirFixosCompetencia",
+          "listarFixos",
+          "sincronizarFixos",
+          "editarLancamento",
+          "baixarLancamento",
+          "excluirLancamento",
+
+          "obterResumo",
+
+          "listarDescricoes",
+
+          "listarAnos",
+          "listarTiposFinanceiros",
+          "dadosGraficos",
+          "dadosLinhaTempo",
+
+          "listarBaixasPendentes",
+
+          "obterSaldoInicial",
+          "salvarSaldoInicial",
+          "listarSaldos",
+          "fecharMes",
+
+          "pesquisarAtendimento",
+          "incluirAtendimento"
+
+        ]
+
+      };
 
     }
-);
 
 
-/* =====================================================
-   CARREGAR TODAS AS PENDÊNCIAS
-===================================================== */
+    /**********************************************************
+     * AÇÕES
+     **********************************************************/
 
-async function carregar(){
+    else {
 
-    const corpo =
-        document.getElementById("lista");
-
-    const botao =
-        document.getElementById("btnAtualizar");
+      switch (acao) {
 
 
-    if(
-        botao.disabled
-    ){
+        /******************************************************
+         * PING
+         ******************************************************/
+
+        case "ping":
+
+          resultado =
+            ping();
+
+          break;
+
+
+        /******************************************************
+         * LANÇAMENTOS
+         ******************************************************/
+
+        case "listarLancamentos":
+
+          resultado =
+            listarLancamentos(
+              parametros
+            );
+
+          break;
+
+
+        case "incluirLancamento":
+
+          resultado =
+            incluirLancamento(
+              parametros
+            );
+
+          break;
+
+
+        case "inserirFixosCompetencia":
+
+          resultado =
+            inserirFixosCompetencia(
+              parametros
+            );
+
+          break;
+
+
+        case "listarFixos":
+
+          resultado =
+            listarFixos(
+              parametros
+            );
+
+          break;
+
+
+        case "sincronizarFixos":
+
+          resultado =
+            sincronizarFixos();
+
+          break;
+
+
+        case "editarLancamento":
+
+          resultado =
+            editarLancamento(
+              parametros
+            );
+
+          break;
+
+
+        case "baixarLancamento":
+
+          resultado =
+            baixarLancamento(
+              parametros
+            );
+
+          break;
+
+
+        case "excluirLancamento":
+
+          resultado =
+            excluirLancamento(
+              parametros
+            );
+
+          break;
+
+
+        case "listarBaixasPendentes":
+
+          resultado =
+            listarBaixasPendentes(
+              parametros
+            );
+
+          break;
+
+
+        /******************************************************
+         * RESUMO
+         ******************************************************/
+
+        case "obterResumo":
+
+          resultado =
+            obterResumo(
+              parametros
+            );
+
+          break;
+
+
+        /******************************************************
+         * DESCRIÇÕES
+         ******************************************************/
+
+        case "listarDescricoes":
+
+          resultado =
+            listarDescricoes();
+
+          break;
+
+
+        /******************************************************
+         * GRÁFICOS
+         ******************************************************/
+
+        case "listarAnos":
+
+          resultado =
+            listarAnos();
+
+          break;
+
+
+        case "listarTiposFinanceiros":
+
+          resultado =
+            listarTiposFinanceiros(
+              parametros
+            );
+
+          break;
+
+
+        case "dadosGraficos":
+
+          resultado =
+            dadosGraficos(
+              parametros
+            );
+
+          break;
+
+
+        case "dadosLinhaTempo":
+
+          resultado =
+            dadosLinhaTempo(
+              parametros
+            );
+
+          break;
+
+
+        /******************************************************
+         * SALDOS
+         ******************************************************/
+
+        case "obterSaldoInicial":
+
+          resultado =
+            obterSaldoInicial(
+              parametros
+            );
+
+          break;
+
+
+        case "salvarSaldoInicial":
+
+          resultado =
+            salvarSaldoInicial(
+              parametros
+            );
+
+          break;
+
+
+        case "listarSaldos":
+
+          resultado =
+            listarSaldos();
+
+          break;
+
+
+        case "fecharMes":
+
+          resultado =
+            fecharMes(
+              parametros
+            );
+
+          break;
+
+
+        /******************************************************
+         * ATENDIMENTO
+         ******************************************************/
+
+        case "pesquisarAtendimento":
+
+          resultado =
+            pesquisarAtendimento(
+              parametros
+            );
+
+          break;
+
+
+        case "incluirAtendimento":
+
+          resultado =
+            incluirAtendimento(
+              parametros
+            );
+
+          break;
+
+
+        /******************************************************
+         * AÇÃO INVÁLIDA
+         ******************************************************/
+
+        default:
+
+          throw new Error(
+            "Ação não reconhecida: " +
+            acao
+          );
+
+      }
+
+    }
+
+
+    return responderComJSONP(
+      resultado,
+      parametros
+    );
+
+  }
+
+
+  catch (erro) {
+
+    console.error(
+      erro
+    );
+
+
+    const mensagem =
+      erro &&
+      erro.message
+        ? erro.message
+        : String(erro);
+
+
+    const resposta = {
+
+      sucesso: false,
+
+      mensagem:
+        mensagem,
+
+      erro:
+        mensagem
+
+    };
+
+
+    const parametros =
+      e &&
+      e.parameter
+        ? e.parameter
+        : {};
+
+
+    return responderComJSONP(
+      resposta,
+      parametros
+    );
+
+  }
+
+}
+
+
+/************************************************************
+ * PING
+ ************************************************************/
+
+function ping() {
+
+  return {
+
+    sucesso: true,
+
+    sistema:
+      "Controle Financeiro",
+
+    status:
+      "online",
+
+    mensagem:
+      "API funcionando corretamente.",
+
+    timestamp:
+      new Date().toISOString()
+
+  };
+
+}
+
+
+/************************************************************
+ * FECHAR MÊS
+ ************************************************************/
+
+function fecharMes(parametros) {
+
+  parametros =
+    parametros || {};
+
+
+  const competencia =
+    String(
+      parametros.competencia || ""
+    ).trim();
+
+
+  if (!competencia) {
+
+    return {
+
+      sucesso: false,
+
+      mensagem:
+        "Competência não informada."
+
+    };
+
+  }
+
+
+  if (!validarCompetencia(competencia)) {
+
+    return {
+
+      sucesso: false,
+
+      mensagem:
+        "Competência inválida: " +
+        competencia
+
+    };
+
+  }
+
+
+  const ss =
+    obterPlanilha();
+
+
+  const abaLancamentos =
+    ss.getSheetByName(
+      NOME_ABA_LANCAMENTOS
+    );
+
+
+  const abaSaldos =
+    ss.getSheetByName(
+      NOME_ABA_SALDOS
+    );
+
+
+  if (!abaLancamentos) {
+
+    return {
+
+      sucesso: false,
+
+      mensagem:
+        'A aba "' +
+        NOME_ABA_LANCAMENTOS +
+        '" não foi encontrada.'
+
+    };
+
+  }
+
+
+  if (!abaSaldos) {
+
+    return {
+
+      sucesso: false,
+
+      mensagem:
+        'A aba "' +
+        NOME_ABA_SALDOS +
+        '" não foi encontrada.'
+
+    };
+
+  }
+
+
+  /**********************************************************
+   * PRÓXIMA COMPETÊNCIA
+   **********************************************************/
+
+  const partes =
+    competencia.split("-");
+
+
+  const ano =
+    Number(partes[0]);
+
+
+  const mes =
+    Number(partes[1]);
+
+
+  let proximoAno =
+    ano;
+
+
+  let proximoMes =
+    mes + 1;
+
+
+  if (proximoMes > 12) {
+
+    proximoMes = 1;
+
+    proximoAno++;
+
+  }
+
+
+  const proximaCompetencia =
+    proximoAno +
+    "-" +
+    String(proximoMes).padStart(2, "0");
+
+
+  /**********************************************************
+   * SALDO FINAL
+   **********************************************************/
+
+  const resumo =
+    obterResumo({
+      competencia:
+        competencia
+    });
+
+
+  if (
+    !resumo ||
+    resumo.saldo === undefined
+  ) {
+
+    return {
+
+      sucesso: false,
+
+      mensagem:
+        "Não foi possível obter o saldo final da competência."
+
+    };
+
+  }
+
+
+  const saldoFinal =
+    converterNumero(
+      resumo.saldo
+    );
+
+
+  /**********************************************************
+   * MAPA SALDOS
+   **********************************************************/
+
+  const mapa =
+    obterMapaColunasSaldos(
+      abaSaldos
+    );
+
+
+  const ultimaLinha =
+    abaSaldos.getLastRow();
+
+
+  let linhaProxima =
+    -1;
+
+
+  if (ultimaLinha >= 2) {
+
+    const dados =
+      abaSaldos
+        .getRange(
+          2,
+          mapa.competencia,
+          ultimaLinha - 1,
+          1
+        )
+        .getValues();
+
+
+    for (
+      let i = 0;
+      i < dados.length;
+      i++
+    ) {
+
+      const competenciaLinha =
+        converterCompetencia(
+          dados[i][0]
+        );
+
+
+      if (
+        competenciaLinha ===
+        proximaCompetencia
+      ) {
+
+        linhaProxima =
+          i + 2;
+
+        break;
+
+      }
+
+    }
+
+  }
+
+
+  /**********************************************************
+   * GRAVAR
+   **********************************************************/
+
+  if (linhaProxima === -1) {
+
+    const novaLinha =
+      new Array(
+        abaSaldos.getLastColumn()
+      ).fill("");
+
+
+    novaLinha[
+      mapa.competencia - 1
+    ] =
+      proximaCompetencia;
+
+
+    novaLinha[
+      mapa.saldoInicial - 1
+    ] =
+      saldoFinal;
+
+
+    abaSaldos.appendRow(
+      novaLinha
+    );
+
+  }
+
+
+  else {
+
+    abaSaldos
+      .getRange(
+        linhaProxima,
+        mapa.saldoInicial
+      )
+      .setValue(
+        saldoFinal
+      );
+
+  }
+
+
+  const saldoFinalFormatado =
+    saldoFinal.toLocaleString(
+      "pt-BR",
+      {
+        style:
+          "currency",
+        currency:
+          "BRL"
+      }
+    );
+
+
+  return {
+
+    sucesso: true,
+
+    competenciaAtual:
+      competencia,
+
+    proximaCompetencia:
+      proximaCompetencia,
+
+    saldoFinal:
+      saldoFinal,
+
+    saldoFinalFormatado:
+      saldoFinalFormatado,
+
+    mensagem:
+      "Competência fechada. Saldo inicial da próxima competência gravado com sucesso."
+
+  };
+
+}
+
+
+/************************************************************
+ * JSON / JSONP
+ ************************************************************/
+
+function responderComJSONP(
+  resultado,
+  parametros
+) {
+
+  parametros =
+    parametros || {};
+
+
+  const callback =
+    String(
+      parametros.callback || ""
+    ).trim();
+
+
+  if (callback) {
+
+    if (
+      !/^[a-zA-Z_$][0-9a-zA-Z_$]*$/.test(
+        callback
+      )
+    ) {
+
+      throw new Error(
+        "Callback JSONP inválido."
+      );
+
+    }
+
+
+    return ContentService
+      .createTextOutput(
+        callback +
+        "(" +
+        JSON.stringify(
+          resultado
+        ) +
+        ");"
+      )
+      .setMimeType(
+        ContentService.MimeType.JAVASCRIPT
+      );
+
+  }
+
+
+  return respostaJson(
+    resultado
+  );
+
+}
+
+
+/************************************************************
+ * RESPOSTA JSON
+ ************************************************************/
+
+function respostaJson(
+  objeto
+) {
+
+  return ContentService
+    .createTextOutput(
+      JSON.stringify(
+        objeto
+      )
+    )
+    .setMimeType(
+      ContentService.MimeType.JSON
+    );
+
+}
+
+
+/************************************************************
+ * PLANILHA
+ ************************************************************/
+
+function obterPlanilha() {
+
+  const planilha =
+    SpreadsheetApp.getActiveSpreadsheet();
+
+
+  if (!planilha) {
+
+    throw new Error(
+      "Não foi possível acessar a planilha."
+    );
+
+  }
+
+
+  return planilha;
+
+}
+
+
+/************************************************************
+ * NORMALIZAR CABEÇALHO
+ ************************************************************/
+
+function normalizarCabecalho(
+  valor
+) {
+
+  return String(
+    valor || ""
+  )
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .replace(
+      /\s+/g,
+      ""
+    );
+
+}
+
+
+/************************************************************
+ * MAPA DAS COLUNAS
+ ************************************************************/
+
+function obterMapaColunas(
+  aba
+) {
+
+  const ultimaColuna =
+    aba.getLastColumn();
+
+
+  if (
+    ultimaColuna < 1
+  ) {
+
+    throw new Error(
+      'A aba "' +
+      aba.getName() +
+      '" não possui cabeçalho.'
+    );
+
+  }
+
+
+  const cabecalho =
+    aba
+      .getRange(
+        1,
+        1,
+        1,
+        ultimaColuna
+      )
+      .getValues()[0];
+
+
+  const mapa = {};
+
+
+  cabecalho.forEach(
+    function(
+      nome,
+      indice
+    ) {
+
+      const chave =
+        normalizarCabecalho(
+          nome
+        );
+
+
+      if (chave) {
+
+        mapa[chave] =
+          indice + 1;
+
+      }
+
+    }
+  );
+
+
+  return mapa;
+
+}
+
+
+/************************************************************
+ * ABA LANÇAMENTOS
+ ************************************************************/
+
+function obterAbaLancamentos() {
+
+  const aba =
+    obterPlanilha()
+      .getSheetByName(
+        NOME_ABA_LANCAMENTOS
+      );
+
+
+  if (!aba) {
+
+    throw new Error(
+      'A aba "' +
+      NOME_ABA_LANCAMENTOS +
+      '" não foi encontrada.'
+    );
+
+  }
+
+
+  validarEstruturaLancamentos(
+    aba
+  );
+
+
+  return aba;
+
+}
+
+
+/************************************************************
+ * VALIDAR LANÇAMENTOS
+ ************************************************************/
+
+function validarEstruturaLancamentos(
+  aba
+) {
+
+  let mapa =
+    obterMapaColunas(
+      aba
+    );
+
+
+  /*
+   * Compatibilidade com versões anteriores:
+   * se a coluna Fixa ainda não existir, ela será
+   * criada automaticamente no final da aba.
+   */
+
+  if (!mapa.fixa) {
+
+    const novaColuna =
+      Math.max(
+        aba.getLastColumn(),
+        1
+      ) + 1;
+
+    aba
+      .getRange(
+        1,
+        novaColuna
+      )
+      .setValue(
+        "Fixa"
+      );
+
+    mapa =
+      obterMapaColunas(
+        aba
+      );
+
+  }
+
+  // Compatibilidade com planilhas existentes: cria a coluna QR Code
+  // no final da aba caso ela ainda não exista.
+  if (!mapa.qrcode) {
+
+    const novaColuna =
+      Math.max(
+        aba.getLastColumn(),
+        1
+      ) + 1;
+
+    aba
+      .getRange(
+        1,
+        novaColuna
+      )
+      .setValue(
+        "QR Code"
+      );
+
+    mapa =
+      obterMapaColunas(
+        aba
+      );
+
+  }
+
+
+  const ausentes = [];
+
+
+  COLUNAS_LANCAMENTOS.forEach(
+    function(coluna) {
+
+      const chave =
+        normalizarCabecalho(
+          coluna
+        );
+
+
+      if (!mapa[chave]) {
+
+        ausentes.push(
+          coluna
+        );
+
+      }
+
+    }
+  );
+
+
+  if (
+    ausentes.length > 0
+  ) {
+
+    throw new Error(
+      'A aba "' +
+      NOME_ABA_LANCAMENTOS +
+      '" possui estrutura incompatível. ' +
+      "Colunas ausentes: " +
+      ausentes.join(", ")
+    );
+
+  }
+
+}
+
+
+/************************************************************
+ * LISTAR LANÇAMENTOS
+ ************************************************************/
+
+function listarLancamentos(
+  parametros
+) {
+
+  parametros =
+    parametros || {};
+
+
+  const competencia =
+    obterCompetenciaParametro(parametros);
+
+
+  if (!competencia) {
+
+    throw new Error(
+      "Informe a competência."
+    );
+
+  }
+
+
+  const aba =
+    obterAbaLancamentos();
+
+
+  const mapa =
+    obterMapaColunas(
+      aba
+    );
+
+
+  const ultimaLinha =
+    aba.getLastRow();
+
+
+  if (
+    ultimaLinha < 2
+  ) {
+
+    return {
+
+      sucesso: true,
+
+      lista: []
+
+    };
+
+  }
+
+
+  const dados =
+    aba
+      .getRange(
+        2,
+        1,
+        ultimaLinha - 1,
+        aba.getLastColumn()
+      )
+      .getValues();
+
+
+  const lista = [];
+
+
+  dados.forEach(
+    function(linha) {
+
+      const id =
+        linha[
+          mapa.id - 1
+        ];
+
+
+      if (
+        id === "" ||
+        id === null ||
+        id === undefined
+      ) {
 
         return;
 
-    }
+      }
 
 
-    botao.disabled = true;
-
-    botao.textContent =
-        "⏳ Carregando...";
-
-
-    corpo.innerHTML = `
-        <tr>
-            <td colspan="8" class="loading">
-                <span class="spinner"></span>
-                Carregando baixas pendentes...
-            </td>
-        </tr>
-    `;
-
-
-    limparMensagem();
-
-    zerarResumo();
-
-
-    try{
-
-        console.log(
-            "Consultando todas as baixas pendentes..."
+      const competenciaLinha =
+        converterCompetencia(
+          linha[
+            mapa.competencia - 1
+          ]
         );
 
 
-        const resposta =
-            await chamarAPI(
-                "listarBaixasPendentes",
-                {}
-            );
-
-
-        console.log(
-            "Resposta recebida:",
-            resposta
-        );
-
-
-        if(
-            !resposta
-        ){
-
-            throw new Error(
-                "A API não retornou nenhuma resposta."
-            );
-
-        }
-
-
-        if(
-            resposta.sucesso !== true
-        ){
-
-            throw new Error(
-                resposta.erro ||
-                resposta.mensagem ||
-                "A API retornou um erro."
-            );
-
-        }
-
-
-        const lista =
-            obterLista(resposta);
-
-
-        console.log(
-            "Quantidade de pendências:",
-            lista.length
-        );
-
-
-        /*
-         * Guarda a lista completa.
-         */
-
-        listaPendentes =
-            Array.isArray(lista)
-                ? lista
-                : [];
-
-
-        /*
-         * Monta as opções do filtro.
-         */
-
-        preencherFiltroDescricoes(
-            listaPendentes
-        );
-
-
-        /*
-         * Exibe a lista completa.
-         */
-
-        aplicarFiltroDescricao();
-
-
-        if(
-            listaPendentes.length > 0
-        ){
-
-            mostrarMensagem(
-                listaPendentes.length +
-                " lançamento(s) pendente(s) encontrado(s).",
-                "sucesso"
-            );
-
-        }
-
-
-    }
-    catch(erro){
-
-        console.error(
-            "Erro ao carregar:",
-            erro
-        );
-
-
-        corpo.innerHTML = `
-            <tr>
-                <td
-                    colspan="8"
-                    class="erro-tabela"
-                >
-                    ⚠ ${escapeHtml(
-                        obterMensagemErro(erro)
-                    )}
-                </td>
-            </tr>
-        `;
-
-
-        mostrarMensagem(
-            obterMensagemErro(erro),
-            "erro"
-        );
-
-
-        listaPendentes = [];
-
-        limparFiltroDescricao();
-
-        zerarResumo();
-
-    }
-    finally{
-
-        botao.disabled = false;
-
-        botao.textContent =
-            "🔄 Atualizar";
-
-    }
-
-}
-
-
-/* =====================================================
-   PREENCHER FILTRO DE DESCRIÇÕES
-===================================================== */
-
-function preencherFiltroDescricoes(lista){
-
-    const select =
-        document.getElementById(
-            "filtroDescricao"
-        );
-
-
-    /*
-     * Limpa todas as opções anteriores.
-     */
-
-    select.innerHTML = `
-        <option value="">
-            Todas as descrições
-        </option>
-    `;
-
-
-    /*
-     * Array temporário para armazenar
-     * as descrições únicas.
-     */
-
-    const descricoes = [];
-
-
-    lista.forEach(
-        function(item){
-
-            const descricao =
-                String(
-                    item.descricao ?? ""
-                ).trim();
-
-
-            if(
-                descricao === ""
-            ){
-
-                return;
-
-            }
-
-
-            /*
-             * Evita duplicidades considerando
-             * maiúsculas/minúsculas e acentos.
-             */
-
-            const chave =
-                normalizarTexto(
-                    descricao
-                );
-
-
-            const jaExiste =
-                descricoes.some(
-                    function(itemExistente){
-
-                        return (
-                            itemExistente.chave ===
-                            chave
-                        );
-
-                    }
-                );
-
-
-            if(
-                !jaExiste
-            ){
-
-                descricoes.push({
-
-                    chave:chave,
-
-                    descricao:descricao
-
-                });
-
-            }
-
-        }
-    );
-
-
-    /*
-     * Ordena alfabeticamente.
-     */
-
-    descricoes.sort(
-        function(a,b){
-
-            return a.descricao.localeCompare(
-                b.descricao,
-                "pt-BR",
-                {
-                    sensitivity:"base"
-                }
-            );
-
-        }
-    );
-
-
-    /*
-     * Cria as opções do SELECT.
-     */
-
-    descricoes.forEach(
-        function(item){
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-
-            option.value =
-                item.chave;
-
-
-            option.textContent =
-                item.descricao;
-
-
-            select.appendChild(
-                option
-            );
-
-        }
-    );
-
-
-    console.log(
-        "Descrições encontradas:",
-        descricoes.length
-    );
-
-}
-
-
-/* =====================================================
-   APLICAR FILTRO POR DESCRIÇÃO
-===================================================== */
-
-function aplicarFiltroDescricao(){
-
-    const select =
-        document.getElementById(
-            "filtroDescricao"
-        );
-
-
-    const filtro =
-        normalizarTexto(
-            select.value
-        );
-
-
-    let listaFiltrada;
-
-
-    /*
-     * Sem filtro:
-     * mostra tudo.
-     */
-
-    if(
-        filtro === ""
-    ){
-
-        listaFiltrada =
-            listaPendentes.slice();
-
-    }
-
-
-    /*
-     * Com filtro:
-     * mostra somente a descrição selecionada.
-     */
-
-    else{
-
-        listaFiltrada =
-            listaPendentes.filter(
-                function(item){
-
-                    return (
-                        normalizarTexto(
-                            item.descricao
-                        ) === filtro
-                    );
-
-                }
-            );
-
-    }
-
-
-    /*
-     * Atualiza informação abaixo do filtro.
-     */
-
-    atualizarInfoFiltro(
-        listaFiltrada.length,
-        filtro
-    );
-
-
-    /*
-     * Renderiza a tabela filtrada.
-     */
-
-    mostrarLista(
-        listaFiltrada
-    );
-
-
-    /*
-     * Atualiza os totais somente
-     * dos itens atualmente exibidos.
-     */
-
-    atualizarResumo(
-        listaFiltrada
-    );
-
-}
-
-
-/* =====================================================
-   INFORMAÇÃO DO FILTRO
-===================================================== */
-
-function atualizarInfoFiltro(
-    quantidade,
-    filtro
-){
-
-    const elemento =
-        document.getElementById(
-            "infoFiltro"
-        );
-
-
-    if(
-        !filtro
-    ){
-
-        elemento.textContent =
-            "Exibindo todos os lançamentos pendentes.";
+      if (
+        competenciaLinha !==
+        competencia
+      ) {
 
         return;
 
+      }
+
+
+      lista.push({
+
+        id:
+          String(id),
+
+        competencia:
+          competenciaLinha,
+
+        tipo:
+          String(
+            linha[
+              mapa.tipo - 1
+            ] || ""
+          ),
+
+        descricao:
+          String(
+            linha[
+              mapa.descricao - 1
+            ] || ""
+          ),
+
+        valor:
+          converterNumero(
+            linha[
+              mapa.valor - 1
+            ]
+          ),
+
+        vencimento:
+          formatarData(
+            linha[
+              mapa.vencimento - 1
+            ]
+          ),
+
+        baixado:
+          normalizarBaixado(
+            linha[
+              mapa.baixado - 1
+            ]
+          ),
+
+        fixa:
+          normalizarFixa(
+            linha[
+              mapa.fixa - 1
+            ]
+          ),
+
+        qrcode:
+          String(
+            linha[
+              mapa.qrcode - 1
+            ] || ""
+          )
+
+      });
+
     }
+  );
 
 
-    const select =
-        document.getElementById(
-            "filtroDescricao"
-        );
+  return {
 
+    sucesso: true,
 
-    const textoDescricao =
-        select.options[
-            select.selectedIndex
-        ]?.text || "";
+    lista:
+      lista
 
-
-    elemento.textContent =
-        quantidade +
-        " lançamento(s) encontrado(s) para: " +
-        textoDescricao;
+  };
 
 }
 
 
-/* =====================================================
-   LIMPAR FILTRO
-===================================================== */
+/************************************************************
+ * INCLUIR LANÇAMENTO
+ ************************************************************/
 
-function limparFiltroDescricao(){
+function incluirLancamento(
+  parametros
+) {
 
-    const select =
-        document.getElementById(
-            "filtroDescricao"
-        );
-
-
-    select.innerHTML = `
-        <option value="">
-            Todas as descrições
-        </option>
-    `;
+  parametros =
+    parametros || {};
 
 
-    select.value = "";
+  const competencia =
+    obterCompetenciaParametro(parametros);
 
 
-    atualizarInfoFiltro(
-        0,
+  const tipo =
+    String(
+      parametros.tipo || ""
+    ).trim();
+
+
+  const descricao =
+    String(
+      parametros.descricao || ""
+    ).trim();
+
+
+  const valor =
+    converterNumero(
+      parametros.valor
+    );
+
+
+  const vencimento =
+    String(
+      parametros.vencimento || ""
+    ).trim();
+
+
+  const fixa =
+    normalizarFixa(
+      parametros.fixa
+    );
+
+
+  validarLancamento(
+    competencia,
+    tipo,
+    descricao,
+    valor,
+    vencimento
+  );
+
+
+  const aba =
+    obterAbaLancamentos();
+
+
+  const mapa =
+    obterMapaColunas(
+      aba
+    );
+
+
+  const id =
+    gerarNovoId(
+      aba,
+      mapa
+    );
+
+
+  const linha =
+    new Array(
+      aba.getLastColumn()
+    ).fill("");
+
+
+  linha[
+    mapa.id - 1
+  ] =
+    id;
+
+
+  linha[
+    mapa.competencia - 1
+  ] =
+    competencia;
+
+
+  linha[
+    mapa.tipo - 1
+  ] =
+    tipo;
+
+
+  linha[
+    mapa.descricao - 1
+  ] =
+    descricao;
+
+
+  linha[
+    mapa.valor - 1
+  ] =
+    valor;
+
+
+  linha[
+    mapa.vencimento - 1
+  ] =
+    converterDataPlanilha(
+      vencimento
+    );
+
+
+  linha[
+    mapa.baixado - 1
+  ] =
+    "Não";
+
+
+  linha[
+    mapa.fixa - 1
+  ] =
+    fixa;
+
+  linha[
+    mapa.qrcode - 1
+  ] =
+    String(
+      parametros.qrcode || parametros.qrCode || parametros["QR Code"] || ""
+    ).trim();
+
+
+  aba.appendRow(
+    linha
+  );
+
+
+  limparCacheBaixasPendentes();
+
+
+  return {
+
+    sucesso: true,
+
+    mensagem:
+      "Lançamento incluído com sucesso.",
+
+    id:
+      String(id),
+
+    fixa:
+      fixa
+
+  };
+
+}
+
+
+/************************************************************
+ * EDITAR LANÇAMENTO
+ ************************************************************/
+
+function editarLancamento(
+  parametros,
+  dadosEdicao
+) {
+
+  // Aceita tanto a chamada pela API (editarLancamento({id, ...}))
+  // quanto a chamada pela interface HTML (editarLancamento(id, dados)).
+  if (
+    parametros === null ||
+    typeof parametros !== "object" ||
+    Array.isArray(parametros)
+  ) {
+    parametros = Object.assign(
+      {},
+      dadosEdicao || {},
+      { id: parametros }
+    );
+  } else {
+    parametros = parametros || {};
+  }
+
+
+  const id =
+    String(
+      parametros.id || ""
+    ).trim();
+
+
+  if (!id) {
+
+    throw new Error(
+      "Informe o ID do lançamento."
+    );
+
+  }
+
+
+  const competencia =
+    String(
+      parametros.competencia || ""
+    ).trim();
+
+
+  const tipo =
+    String(
+      parametros.tipo || ""
+    ).trim();
+
+
+  const descricao =
+    String(
+      parametros.descricao || ""
+    ).trim();
+
+
+  const valor =
+    converterNumero(
+      parametros.valor
+    );
+
+
+  const vencimento =
+    String(
+      parametros.vencimento || ""
+    ).trim();
+
+
+  const fixa =
+    normalizarFixa(
+      parametros.fixa
+    );
+
+
+  validarLancamento(
+    competencia,
+    tipo,
+    descricao,
+    valor,
+    vencimento
+  );
+
+
+  const aba =
+    obterAbaLancamentos();
+
+
+  const mapa =
+    obterMapaColunas(
+      aba
+    );
+
+
+  const linhaNumero =
+    localizarLinhaPorId(
+      aba,
+      mapa,
+      id
+    );
+
+
+  if (!linhaNumero) {
+
+    throw new Error(
+      "Lançamento #" +
+      id +
+      " não encontrado."
+    );
+
+  }
+
+
+  const baixadoAtual =
+    aba
+      .getRange(
+        linhaNumero,
+        mapa.baixado
+      )
+      .getValue();
+
+
+  aba
+    .getRange(
+      linhaNumero,
+      mapa.competencia
+    )
+    .setValue(
+      competencia
+    );
+
+
+  aba
+    .getRange(
+      linhaNumero,
+      mapa.tipo
+    )
+    .setValue(
+      tipo
+    );
+
+
+  aba
+    .getRange(
+      linhaNumero,
+      mapa.descricao
+    )
+    .setValue(
+      descricao
+    );
+
+
+  aba
+    .getRange(
+      linhaNumero,
+      mapa.valor
+    )
+    .setValue(
+      valor
+    );
+
+
+  aba
+    .getRange(
+      linhaNumero,
+      mapa.vencimento
+    )
+    .setValue(
+      converterDataPlanilha(
+        vencimento
+      )
+    );
+
+
+  aba
+    .getRange(
+      linhaNumero,
+      mapa.baixado
+    )
+    .setValue(
+      baixadoAtual
+    );
+
+
+  aba
+    .getRange(
+      linhaNumero,
+      mapa.fixa
+    )
+    .setValue(
+      fixa
+    );
+
+  // Grava o QR Code enviado pelo formulário. Se o campo não vier na
+  // requisição, preserva o valor já salvo na planilha.
+  if (
+    Object.prototype.hasOwnProperty.call(parametros, "qrcode") ||
+    Object.prototype.hasOwnProperty.call(parametros, "qrCode") ||
+    Object.prototype.hasOwnProperty.call(parametros, "QR Code")
+  ) {
+    const qrCode = String(
+      parametros.qrcode || parametros.qrCode || parametros["QR Code"] || ""
+    ).trim();
+
+    aba
+      .getRange(
+        linhaNumero,
+        mapa.qrcode
+      )
+      .setValue(
+        qrCode
+      );
+  }
+
+
+  limparCacheBaixasPendentes();
+
+
+  return {
+
+    sucesso: true,
+
+    mensagem:
+      "Lançamento #" +
+      id +
+      " alterado com sucesso.",
+
+    fixa:
+      fixa
+
+  };
+
+}
+
+
+/************************************************************
+ * NORMALIZAR MARCADOR DE LANÇAMENTO FIXO
+ ************************************************************/
+
+function normalizarFixa(
+  valor
+) {
+
+  const texto =
+    String(
+      valor === true
+        ? "sim"
+        : valor === false
+          ? "nao"
+          : valor || ""
+    )
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(
+        /[\u0300-\u036f]/g,
         ""
-    );
+      );
+
+
+  return (
+    texto === "sim" ||
+    texto === "s" ||
+    texto === "true" ||
+    texto === "1" ||
+    texto === "fixa" ||
+    texto === "fixo"
+  )
+    ? "Sim"
+    : "Não";
 
 }
 
 
-/* =====================================================
-   JSONP
-===================================================== */
-
-function chamarAPI(
-    acao,
-    parametros
-){
-
-    parametros =
-        parametros || {};
-
-
-    return new Promise(
-        function(resolve,reject){
-
-            contadorCallback++;
-
-
-            const callback =
-                "controleFinanceiroCallback_" +
-                Date.now() +
-                "_" +
-                contadorCallback;
-
-
-            const script =
-                document.createElement(
-                    "script"
-                );
-
-
-            let finalizado = false;
-
-            let timeout = null;
-
-
-            function limpar(){
-
-                if(timeout){
-
-                    clearTimeout(
-                        timeout
-                    );
-
-                    timeout = null;
-
-                }
-
-
-                if(
-                    script.parentNode
-                ){
-
-                    script.parentNode.removeChild(
-                        script
-                    );
-
-                }
-
-
-                try{
-
-                    delete window[
-                        callback
-                    ];
-
-                }
-                catch(e){
-
-                    window[
-                        callback
-                    ] = undefined;
-
-                }
-
-            }
-
-
-            function finalizar(
-                fn,
-                valor
-            ){
-
-                if(finalizado){
-
-                    return;
-
-                }
-
-
-                finalizado = true;
-
-                limpar();
-
-                fn(valor);
-
-            }
-
-
-            window[callback] =
-                function(resposta){
-
-                    console.log(
-                        "JSONP recebido:",
-                        resposta
-                    );
-
-
-                    finalizar(
-                        resolve,
-                        resposta
-                    );
-
-                };
-
-
-            const params =
-                new URLSearchParams();
-
-
-            params.set(
-                "action",
-                acao
-            );
-
-
-            params.set(
-                "callback",
-                callback
-            );
-
-
-            Object.keys(
-                parametros
-            ).forEach(
-                function(chave){
-
-                    const valor =
-                        parametros[chave];
-
-
-                    if(
-                        valor === null ||
-                        valor === undefined ||
-                        valor === ""
-                    ){
-
-                        return;
-
-                    }
-
-
-                    params.set(
-                        chave,
-                        String(valor)
-                    );
-
-                }
-            );
-
-
-            const separador =
-                URL_API.indexOf("?") >= 0
-                ? "&"
-                : "?";
-
-
-            const url =
-                URL_API +
-                separador +
-                params.toString();
-
-
-            console.log(
-                "Chamando API:",
-                url
-            );
-
-
-            script.async = true;
-
-            script.src = url;
-
-
-            script.onerror =
-                function(){
-
-                    finalizar(
-                        reject,
-                        new Error(
-                            "Não foi possível conectar ao Google Apps Script."
-                        )
-                    );
-
-                };
-
-
-            timeout =
-                setTimeout(
-                    function(){
-
-                        finalizar(
-                            reject,
-                            new Error(
-                                "A API demorou mais de 20 segundos para responder."
-                            )
-                        );
-
-                    },
-                    20000
-                );
-
-
-            document.head.appendChild(
-                script
-            );
-
-        }
-    );
+/************************************************************
+ * INSERIR DESPESAS E RECEITAS FIXAS DA COMPETÊNCIA
+ *
+ * A rotina:
+ * 1. procura lançamentos marcados como Fixa = Sim;
+ * 2. usa o último cadastro fixo anterior ou da própria
+ *    competência como modelo;
+ * 3. cria o lançamento na competência informada;
+ * 4. preserva o valor e ajusta o vencimento para o mês;
+ * 5. não duplica descrição + tipo na mesma competência.
+ ************************************************************/
+
+function inserirFixosCompetencia(parametros) {
+  parametros = parametros || {};
+  const competencia = obterCompetenciaParametro(parametros);
+  const abaFixos = obterAbaFixos();
+  const abaLanc = obterAbaLancamentos();
+  const mapaLanc = obterMapaColunas(abaLanc);
+  const ultimaFixa = abaFixos.getLastRow();
+
+  if (ultimaFixa < 2) {
+    return { sucesso: true, competencia: competencia, inseridos: 0, ignorados: 0,
+      mensagem: "A aba Fixos está vazia. Cadastre as contas fixas antes de lançá-las." };
+  }
+
+  const fixos = abaFixos.getRange(2, 1, ultimaFixa - 1, COLUNAS_FIXOS.length).getValues();
+  const ultimaLanc = abaLanc.getLastRow();
+  const dadosLanc = ultimaLanc >= 2
+    ? abaLanc.getRange(2, 1, ultimaLanc - 1, abaLanc.getLastColumn()).getValues()
+    : [];
+  const existentes = {};
+
+  dadosLanc.forEach(linha => {
+    if (converterCompetencia(linha[mapaLanc.competencia - 1]) !== competencia) return;
+    const tipo = String(linha[mapaLanc.tipo - 1] || "").trim();
+    const descricao = String(linha[mapaLanc.descricao - 1] || "").trim();
+    const fixa = normalizarFixa(linha[mapaLanc.fixa - 1]);
+    if (tipo && descricao && fixa === "Sim") existentes[normalizarChaveFixa(tipo, descricao)] = true;
+  });
+
+  let inseridos = 0, ignorados = 0;
+  const erros = [];
+  fixos.forEach(reg => {
+    const idFixo = reg[0];
+    const tipo = String(reg[1] || "").trim();
+    const descricao = String(reg[2] || "").trim();
+    const valor = converterNumero(reg[3]);
+    const dia = Number(reg[4]) || 1;
+    const ativa = normalizarFixa(reg[5]);
+
+    if (!tipo || !descricao || valor <= 0 || ativa !== "Sim") return;
+    const chave = normalizarChaveFixa(tipo, descricao);
+    if (existentes[chave]) { ignorados++; return; }
+
+    const vencimento = ajustarVencimentoParaCompetencia(dia, competencia);
+    const id = gerarNovoId(abaLanc, mapaLanc);
+    const nova = new Array(abaLanc.getLastColumn()).fill("");
+    nova[mapaLanc.id - 1] = id;
+    nova[mapaLanc.competencia - 1] = competencia;
+    nova[mapaLanc.tipo - 1] = tipo;
+    nova[mapaLanc.descricao - 1] = descricao;
+    nova[mapaLanc.valor - 1] = valor;
+    nova[mapaLanc.vencimento - 1] = vencimento;
+    nova[mapaLanc.baixado - 1] = "Não";
+    nova[mapaLanc.fixa - 1] = "Sim";
+    abaLanc.appendRow(nova);
+    existentes[chave] = true;
+    inseridos++;
+  });
+
+  limparCacheBaixasPendentes();
+  return {
+    sucesso: true,
+    competencia: competencia,
+    inseridos: inseridos,
+    ignorados: ignorados,
+    mensagem: inseridos
+      ? inseridos + " conta(s) fixa(s) lançada(s) na competência " + competencia + "." + (ignorados ? " " + ignorados + " já existiam e foram ignoradas." : "")
+      : "Nenhuma conta nova foi lançada. As contas podem já existir nesta competência ou não há contas fixas ativas."
+  };
+}
+
+
+
+/************************************************************
+ * CHAVE DO LANÇAMENTO FIXO
+ ************************************************************/
+
+function normalizarChaveFixa(
+  tipo,
+  descricao
+) {
+
+  return (
+    String(tipo || "")
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(
+        /[\u0300-\u036f]/g,
+        ""
+      ) +
+    "|" +
+    String(descricao || "")
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(
+        /[\u0300-\u036f]/g,
+        ""
+      )
+  );
 
 }
 
 
-/* =====================================================
-   OBTER LISTA
-===================================================== */
-
-function obterLista(resposta){
-
-    if(
-        Array.isArray(resposta)
-    ){
-
-        return resposta;
-
-    }
-
-
-    const propriedades = [
-
-        "lista",
-        "baixasPendentes",
-        "baixas",
-        "lancamentos",
-        "dados",
-        "resultado"
-
-    ];
-
-
-    for(
-        let i = 0;
-        i < propriedades.length;
-        i++
-    ){
-
-        const propriedade =
-            propriedades[i];
-
-
-        if(
-            resposta &&
-            Array.isArray(
-                resposta[
-                    propriedade
-                ]
-            )
-        ){
-
-            return resposta[
-                propriedade
-            ];
-
-        }
-
-    }
-
-
-    return [];
-
-}
-
-
-/* =====================================================
-   MOSTRAR LISTA
-===================================================== */
-
-function mostrarLista(lista){
-
-    const corpo =
-        document.getElementById(
-            "lista"
-        );
-
-
-    corpo.innerHTML = "";
-
-
-    if(
-        !Array.isArray(lista) ||
-        lista.length === 0
-    ){
-
-        corpo.innerHTML = `
-            <tr>
-                <td
-                    colspan="8"
-                    class="vazio"
-                >
-                    ${
-                        listaPendentes.length > 0
-                        ? "🔎 Nenhum lançamento encontrado para a descrição selecionada."
-                        : "✅ Nenhum lançamento pendente."
-                    }
-                </td>
-            </tr>
-        `;
-
-        return;
-
-    }
-
-
-    /*
-     * Faz uma cópia para não alterar
-     * a ordem da lista original.
-     */
-
-    const listaOrdenada =
-        lista.slice();
-
-
-    /*
-     * Ordenação:
-     *
-     * 1. Tipo
-     * 2. Competência
-     * 3. Vencimento
-     */
-
-    listaOrdenada.sort(
-        function(a,b){
-
-            const tipoA =
-                normalizarTexto(
-                    a.tipo
-                );
-
-            const tipoB =
-                normalizarTexto(
-                    b.tipo
-                );
-
-
-            function ordemTipo(tipo){
-
-                if(
-                    tipo.includes("receber")
-                ){
-
-                    return 1;
-
-                }
-
-
-                if(
-                    tipo.includes("pagar")
-                ){
-
-                    return 2;
-
-                }
-
-
-                return 3;
-
-            }
-
-
-            const ordemA =
-                ordemTipo(
-                    tipoA
-                );
-
-            const ordemB =
-                ordemTipo(
-                    tipoB
-                );
-
-
-            if(
-                ordemA !== ordemB
-            ){
-
-                return ordemA - ordemB;
-
-            }
-
-
-            const compA =
-                String(
-                    a.competencia || ""
-                );
-
-            const compB =
-                String(
-                    b.competencia || ""
-                );
-
-
-            if(
-                compA !== compB
-            ){
-
-                return compA.localeCompare(
-                    compB
-                );
-
-            }
-
-
-            const dataA =
-                String(
-                    a.vencimento || ""
-                );
-
-            const dataB =
-                String(
-                    b.vencimento || ""
-                );
-
-
-            return dataA.localeCompare(
-                dataB
-            );
-
-        }
+/************************************************************
+ * AJUSTAR VENCIMENTO PARA A COMPETÊNCIA
+ ************************************************************/
+
+function ajustarVencimentoParaCompetencia(
+  vencimento,
+  competencia
+) {
+
+  const partes =
+    String(
+      competencia
+    ).split("-");
+
+
+  const ano =
+    Number(
+      partes[0]
     );
 
 
-    listaOrdenada.forEach(
-        function(item){
-
-            const valor =
-                converterNumero(
-                    item.valor
-                );
-
-
-            const linha =
-                document.createElement(
-                    "tr"
-                );
-
-
-            const tipo =
-                classificarTipo(
-                    item.tipo
-                );
-
-
-            linha.innerHTML = `
-
-                <td>
-                    ${escapeHtml(
-                        item.id
-                    )}
-                </td>
-
-
-                <td>
-                    ${escapeHtml(
-                        item.competencia
-                    )}
-                </td>
-
-
-                <td>
-
-                    <span
-                        class="tipo ${tipo.classe}"
-                    >
-                        ${tipo.icone}
-                        ${escapeHtml(
-                            tipo.nome
-                        )}
-                    </span>
-
-                </td>
-
-
-                <td>
-                    ${escapeHtml(
-                        item.descricao
-                    )}
-                </td>
-
-
-                <td class="valor">
-
-                    ${formatarMoeda(
-                        valor
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    ${escapeHtml(
-                        formatarData(
-                            item.vencimento
-                        )
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    <span
-                        class="badge badge-pendente"
-                    >
-                        ${escapeHtml(
-                            item.baixado ||
-                            "Não"
-                        )}
-                    </span>
-
-                </td>
-
-
-                <td class="acoes-linha">
-
-                    <button
-                        type="button"
-                        class="btn btn-baixar"
-                        onclick="baixarLancamento(this, '${escapeHtmlAttr(item.id)}')"
-                    >
-                        ✓ Baixar
-                    </button>
-
-                </td>
-
-            `;
-
-
-            corpo.appendChild(
-                linha
-            );
-
-        }
+  const mes =
+    Number(
+      partes[1]
     );
 
-}
+
+  let dia = 1;
+
+  if (typeof vencimento === "number" && isFinite(vencimento)) {
+    dia = Math.floor(vencimento);
+  }
+
+  else if (
+    Object.prototype.toString.call(
+      vencimento
+    ) ===
+    "[object Date]" &&
+    !isNaN(
+      vencimento.getTime()
+    )
+  ) {
+
+    dia =
+      vencimento.getDate();
+
+  }
 
 
-/* =====================================================
-   CLASSIFICAR TIPO
-===================================================== */
-
-function classificarTipo(tipo){
+  else {
 
     const texto =
-        normalizarTexto(
-            tipo
+      String(
+        vencimento || ""
+      ).trim();
+
+
+    let encontrado =
+      texto.match(
+        /^(\d{2})\/(\d{2})\/(\d{4})$/
+      );
+
+
+    if (
+      encontrado
+    ) {
+
+      dia =
+        Number(
+          encontrado[1]
+        );
+
+    }
+
+
+    else {
+
+      encontrado =
+        texto.match(
+          /^(\d{4})-(\d{2})-(\d{2})$/
         );
 
 
-    if(
-        texto.includes(
-            "receber"
+      if (
+        encontrado
+      ) {
+
+        dia =
+          Number(
+            encontrado[3]
+          );
+
+      }
+
+    }
+
+  }
+
+
+  const ultimoDia =
+    new Date(
+      ano,
+      mes,
+      0
+    ).getDate();
+
+
+  dia =
+    Math.min(
+      Math.max(
+        dia,
+        1
+      ),
+      ultimoDia
+    );
+
+
+  return new Date(
+    ano,
+    mes - 1,
+    dia
+  );
+
+}
+
+
+/************************************************************
+ * BAIXAR LANÇAMENTO
+ ************************************************************/
+
+function baixarLancamento(
+  parametros
+) {
+
+  parametros =
+    parametros || {};
+
+
+  const id =
+    String(
+      parametros.id || ""
+    ).trim();
+
+
+  if (!id) {
+
+    throw new Error(
+      "Informe o ID do lançamento."
+    );
+
+  }
+
+
+  const aba =
+    obterAbaLancamentos();
+
+
+  const mapa =
+    obterMapaColunas(
+      aba
+    );
+
+
+  const linhaNumero =
+    localizarLinhaPorId(
+      aba,
+      mapa,
+      id
+    );
+
+
+  if (!linhaNumero) {
+
+    throw new Error(
+      "Lançamento #" +
+      id +
+      " não encontrado."
+    );
+
+  }
+
+
+  aba
+    .getRange(
+      linhaNumero,
+      mapa.baixado
+    )
+    .setValue(
+      "Sim"
+    );
+
+
+  limparCacheBaixasPendentes();
+
+
+  return {
+
+    sucesso: true,
+
+    mensagem:
+      "Lançamento #" +
+      id +
+      " baixado com sucesso."
+
+  };
+
+}
+
+
+/************************************************************
+ * EXCLUIR LANÇAMENTO
+ ************************************************************/
+
+function excluirLancamento(
+  parametros
+) {
+
+  parametros =
+    parametros || {};
+
+
+  const id =
+    String(
+      parametros.id || ""
+    ).trim();
+
+
+  if (!id) {
+
+    throw new Error(
+      "Informe o ID do lançamento."
+    );
+
+  }
+
+
+  const aba =
+    obterAbaLancamentos();
+
+
+  const mapa =
+    obterMapaColunas(
+      aba
+    );
+
+
+  const linhaNumero =
+    localizarLinhaPorId(
+      aba,
+      mapa,
+      id
+    );
+
+
+  if (!linhaNumero) {
+
+    throw new Error(
+      "Lançamento #" +
+      id +
+      " não encontrado."
+    );
+
+  }
+
+
+  aba.deleteRow(
+    linhaNumero
+  );
+
+
+  limparCacheBaixasPendentes();
+
+
+  return {
+
+    sucesso: true,
+
+    mensagem:
+      "Lançamento #" +
+      id +
+      " excluído com sucesso."
+
+  };
+
+}
+
+
+/************************************************************
+ * LOCALIZAR ID
+ ************************************************************/
+
+function localizarLinhaPorId(
+  aba,
+  mapa,
+  id
+) {
+
+  const ultimaLinha =
+    aba.getLastRow();
+
+
+  if (
+    ultimaLinha < 2
+  ) {
+
+    return null;
+
+  }
+
+
+  const valores =
+    aba
+      .getRange(
+        2,
+        mapa.id,
+        ultimaLinha - 1,
+        1
+      )
+      .getValues();
+
+
+  for (
+    let i = 0;
+    i < valores.length;
+    i++
+  ) {
+
+    if (
+      String(
+        valores[i][0]
+      ).trim() ===
+      String(id).trim()
+    ) {
+
+      return i + 2;
+
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+/************************************************************
+ * GERAR NOVO ID
+ ************************************************************/
+
+function gerarNovoId(
+  aba,
+  mapa
+) {
+
+  const ultimaLinha =
+    aba.getLastRow();
+
+
+  if (
+    ultimaLinha < 2
+  ) {
+
+    return 1;
+
+  }
+
+
+  const valores =
+    aba
+      .getRange(
+        2,
+        mapa.id,
+        ultimaLinha - 1,
+        1
+      )
+      .getValues();
+
+
+  let maiorId = 0;
+
+
+  valores.forEach(
+    function(linha) {
+
+      const numero =
+        parseInt(
+          String(
+            linha[0]
+          ).trim(),
+          10
+        );
+
+
+      if (
+        !isNaN(numero) &&
+        numero > maiorId
+      ) {
+
+        maiorId =
+          numero;
+
+      }
+
+    }
+  );
+
+
+  return maiorId + 1;
+
+}
+
+
+/************************************************************
+ * RESUMO FINANCEIRO
+ ************************************************************/
+
+function obterResumo(
+  parametros
+) {
+
+  parametros =
+    parametros || {};
+
+
+  const competencia =
+    String(
+      parametros.competencia || ""
+    ).trim();
+
+
+  if (!competencia) {
+
+    throw new Error(
+      "Informe a competência."
+    );
+
+  }
+
+
+  const aba =
+    obterAbaLancamentos();
+
+
+  const mapa =
+    obterMapaColunas(
+      aba
+    );
+
+
+  const ultimaLinha =
+    aba.getLastRow();
+
+
+  let receber = 0;
+  let pagar = 0;
+  let recebido = 0;
+  let pago = 0;
+
+
+  if (
+    ultimaLinha >= 2
+  ) {
+
+    const dados =
+      aba
+        .getRange(
+          2,
+          1,
+          ultimaLinha - 1,
+          aba.getLastColumn()
         )
-    ){
+        .getValues();
+
+
+    dados.forEach(
+      function(linha) {
+
+        const competenciaLinha =
+          converterCompetencia(
+            linha[
+              mapa.competencia - 1
+            ]
+          );
+
+
+        if (
+          competenciaLinha !==
+          competencia
+        ) {
+
+          return;
+
+        }
+
+
+        const tipo =
+          normalizarTipo(
+            linha[
+              mapa.tipo - 1
+            ]
+          );
+
+
+        const valor =
+          converterNumero(
+            linha[
+              mapa.valor - 1
+            ]
+          );
+
+
+        const baixado =
+          ehBaixado(
+            linha[
+              mapa.baixado - 1
+            ]
+          );
+
+
+        if (
+          tipo === "receber"
+        ) {
+
+          receber += valor;
+
+
+          if (baixado) {
+
+            recebido += valor;
+
+          }
+
+        }
+
+
+        else if (
+          tipo === "pagar"
+        ) {
+
+          pagar += valor;
+
+
+          if (baixado) {
+
+            pago += valor;
+
+          }
+
+        }
+
+      }
+    );
+
+  }
+
+
+  const saldoInicial =
+    obterSaldoInicialSeguro(
+      competencia
+    );
+
+
+  const saldo =
+    saldoInicial +
+    recebido -
+    pago;
+
+
+  return {
+
+    sucesso: true,
+
+    receber:
+      receber,
+
+    pagar:
+      pagar,
+
+    recebido:
+      recebido,
+
+    pago:
+      pago,
+
+    saldoInicial:
+      saldoInicial,
+
+    saldo:
+      saldo,
+
+    saldoBanco:
+      saldo
+
+  };
+
+}
+
+
+/************************************************************
+ * DESCRIÇÕES
+ ************************************************************/
+
+function listarDescricoes() {
+
+  const aba =
+    obterPlanilha()
+      .getSheetByName(
+        NOME_ABA_DESCRICOES
+      );
+
+
+  if (!aba) {
+
+    return {
+
+      sucesso: true,
+
+      lista: []
+
+    };
+
+  }
+
+
+  const ultimaLinha =
+    aba.getLastRow();
+
+
+  if (
+    ultimaLinha < 2
+  ) {
+
+    return {
+
+      sucesso: true,
+
+      lista: []
+
+    };
+
+  }
+
+
+  const valores =
+    aba
+      .getRange(
+        2,
+        1,
+        ultimaLinha - 1,
+        1
+      )
+      .getValues();
+
+
+  const lista = [];
+
+
+  valores.forEach(
+    function(linha) {
+
+      const descricao =
+        String(
+          linha[0] || ""
+        ).trim();
+
+
+      if (descricao) {
+
+        lista.push(
+          descricao
+        );
+
+      }
+
+    }
+  );
+
+
+  return {
+
+    sucesso: true,
+
+    lista:
+      [...new Set(lista)]
+
+  };
+
+}
+
+
+/************************************************************
+ * LISTAR ANOS
+ ************************************************************/
+
+function listarAnos() {
+
+  const aba =
+    obterAbaLancamentos();
+
+
+  const mapa =
+    obterMapaColunas(
+      aba
+    );
+
+
+  const ultimaLinha =
+    aba.getLastRow();
+
+
+  const anos = {};
+
+
+  if (
+    ultimaLinha >= 2
+  ) {
+
+    const valores =
+      aba
+        .getRange(
+          2,
+          mapa.competencia,
+          ultimaLinha - 1,
+          1
+        )
+        .getValues();
+
+
+    valores.forEach(
+      function(linha) {
+
+        const competencia =
+          converterCompetencia(
+            linha[0]
+          );
+
+
+        if (
+          /^\d{4}-\d{2}$/.test(
+            competencia
+          )
+        ) {
+
+          const ano =
+            Number(
+              competencia.substring(
+                0,
+                4
+              )
+            );
+
+
+          if (!isNaN(ano)) {
+
+            anos[ano] = true;
+
+          }
+
+        }
+
+      }
+    );
+
+  }
+
+
+  const lista =
+    Object.keys(
+      anos
+    )
+      .map(
+        function(ano) {
+
+          return Number(
+            ano
+          );
+
+        }
+      )
+      .sort(
+        function(a, b) {
+
+          return b - a;
+
+        }
+      );
+
+
+  return {
+
+    sucesso: true,
+
+    lista:
+      lista
+
+  };
+
+}
+
+
+/************************************************************
+ * NORMALIZAR TIPO
+ ************************************************************/
+
+function normalizarTipo(
+  valor
+) {
+
+  const texto =
+    String(
+      valor || ""
+    )
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(
+        /[\u0300-\u036f]/g,
+        ""
+      );
+
+
+  if (
+    texto === "contas a receber" ||
+    texto === "receber" ||
+    texto === "receita" ||
+    texto === "receitas"
+  ) {
+
+    return "receber";
+
+  }
+
+
+  if (
+    texto === "contas a pagar" ||
+    texto === "pagar" ||
+    texto === "despesa" ||
+    texto === "despesas"
+  ) {
+
+    return "pagar";
+
+  }
+
+
+  return texto;
+
+}
+
+
+/************************************************************
+ * LISTAR TIPOS / CATEGORIAS
+ ************************************************************/
+
+function listarTiposFinanceiros(
+  parametros
+) {
+
+  parametros =
+    parametros || {};
+
+
+  const ano =
+    String(
+      parametros.ano || ""
+    ).trim();
+
+
+  const tipoSolicitado =
+    normalizarTipo(
+      parametros.tipo
+    );
+
+
+  if (
+    !/^\d{4}$/.test(
+      ano
+    )
+  ) {
+
+    throw new Error(
+      "Ano inválido."
+    );
+
+  }
+
+
+  const aba =
+    obterAbaLancamentos();
+
+
+  const mapa =
+    obterMapaColunas(
+      aba
+    );
+
+
+  const ultimaLinha =
+    aba.getLastRow();
+
+
+  const categorias = {};
+
+
+  if (
+    ultimaLinha >= 2
+  ) {
+
+    const dados =
+      aba
+        .getRange(
+          2,
+          1,
+          ultimaLinha - 1,
+          aba.getLastColumn()
+        )
+        .getValues();
+
+
+    dados.forEach(
+      function(linha) {
+
+        const competencia =
+          converterCompetencia(
+            linha[
+              mapa.competencia - 1
+            ]
+          );
+
+
+        if (
+          competencia.substring(
+            0,
+            4
+          ) !== ano
+        ) {
+
+          return;
+
+        }
+
+
+        const tipo =
+          normalizarTipo(
+            linha[
+              mapa.tipo - 1
+            ]
+          );
+
+
+        if (
+          tipoSolicitado &&
+          tipo !== tipoSolicitado
+        ) {
+
+          return;
+
+        }
+
+
+        const descricao =
+          String(
+            linha[
+              mapa.descricao - 1
+            ] || ""
+          ).trim();
+
+
+        if (descricao) {
+
+          categorias[
+            descricao
+          ] = true;
+
+        }
+
+      }
+    );
+
+  }
+
+
+  const lista =
+    Object.keys(
+      categorias
+    ).sort(
+      function(a, b) {
+
+        return a.localeCompare(
+          b,
+          "pt-BR",
+          {
+            sensitivity:
+              "base"
+          }
+        );
+
+      }
+    );
+
+
+  return {
+
+    sucesso: true,
+
+    lista:
+      lista
+
+  };
+
+}
+
+
+/************************************************************
+ * DADOS DOS GRÁFICOS
+ ************************************************************/
+
+function dadosGraficos(
+  parametros
+) {
+
+  parametros =
+    parametros || {};
+
+
+  const ano =
+    String(
+      parametros.ano || ""
+    ).trim();
+
+
+  if (
+    !/^\d{4}$/.test(
+      ano
+    )
+  ) {
+
+    throw new Error(
+      "Informe um ano válido."
+    );
+
+  }
+
+
+  const receber =
+    Array(12).fill(0);
+
+
+  const pagar =
+    Array(12).fill(0);
+
+
+  const aba =
+    obterAbaLancamentos();
+
+
+  const mapa =
+    obterMapaColunas(
+      aba
+    );
+
+
+  const ultimaLinha =
+    aba.getLastRow();
+
+
+  if (
+    ultimaLinha >= 2
+  ) {
+
+    const dados =
+      aba
+        .getRange(
+          2,
+          1,
+          ultimaLinha - 1,
+          aba.getLastColumn()
+        )
+        .getValues();
+
+
+    dados.forEach(
+      function(linha) {
+
+        const competencia =
+          converterCompetencia(
+            linha[
+              mapa.competencia - 1
+            ]
+          );
+
+
+        if (
+          !/^\d{4}-\d{2}$/.test(
+            competencia
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          competencia.substring(
+            0,
+            4
+          ) !== ano
+        ) {
+
+          return;
+
+        }
+
+
+        const mes =
+          Number(
+            competencia.substring(
+              5,
+              7
+            )
+          );
+
+
+        if (
+          mes < 1 ||
+          mes > 12
+        ) {
+
+          return;
+
+        }
+
+
+        const valor =
+          converterNumero(
+            linha[
+              mapa.valor - 1
+            ]
+          );
+
+
+        const tipo =
+          normalizarTipo(
+            linha[
+              mapa.tipo - 1
+            ]
+          );
+
+
+        if (
+          tipo === "receber"
+        ) {
+
+          receber[
+            mes - 1
+          ] += valor;
+
+        }
+
+
+        else if (
+          tipo === "pagar"
+        ) {
+
+          pagar[
+            mes - 1
+          ] += valor;
+
+        }
+
+      }
+    );
+
+  }
+
+
+  return {
+
+    sucesso: true,
+
+    receber:
+      receber,
+
+    pagar:
+      pagar
+
+  };
+
+}
+
+
+/************************************************************
+ * LINHA DO TEMPO
+ ************************************************************/
+
+function dadosLinhaTempo(
+  parametros
+) {
+
+  parametros =
+    parametros || {};
+
+
+  const ano =
+    String(
+      parametros.ano || ""
+    ).trim();
+
+
+  const tipoSolicitado =
+    normalizarTipo(
+      parametros.tipo
+    );
+
+
+  const categoria =
+    String(
+      parametros.categoria || ""
+    ).trim();
+
+
+  if (
+    !/^\d{4}$/.test(
+      ano
+    )
+  ) {
+
+    throw new Error(
+      "Ano inválido."
+    );
+
+  }
+
+
+  if (!categoria) {
+
+    throw new Error(
+      "Informe a categoria."
+    );
+
+  }
+
+
+  const valores =
+    Array(12).fill(0);
+
+
+  const aba =
+    obterAbaLancamentos();
+
+
+  const mapa =
+    obterMapaColunas(
+      aba
+    );
+
+
+  const ultimaLinha =
+    aba.getLastRow();
+
+
+  if (
+    ultimaLinha >= 2
+  ) {
+
+    const dados =
+      aba
+        .getRange(
+          2,
+          1,
+          ultimaLinha - 1,
+          aba.getLastColumn()
+        )
+        .getValues();
+
+
+    dados.forEach(
+      function(linha) {
+
+        const competencia =
+          converterCompetencia(
+            linha[
+              mapa.competencia - 1
+            ]
+          );
+
+
+        if (
+          !/^\d{4}-\d{2}$/.test(
+            competencia
+          )
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          competencia.substring(
+            0,
+            4
+          ) !== ano
+        ) {
+
+          return;
+
+        }
+
+
+        const tipo =
+          normalizarTipo(
+            linha[
+              mapa.tipo - 1
+            ]
+          );
+
+
+        if (
+          tipo !== tipoSolicitado
+        ) {
+
+          return;
+
+        }
+
+
+        const descricao =
+          String(
+            linha[
+              mapa.descricao - 1
+            ] || ""
+          ).trim();
+
+
+        if (
+          descricao.toLowerCase() !==
+          categoria.toLowerCase()
+        ) {
+
+          return;
+
+        }
+
+
+        const mes =
+          Number(
+            competencia.substring(
+              5,
+              7
+            )
+          );
+
+
+        if (
+          mes < 1 ||
+          mes > 12
+        ) {
+
+          return;
+
+        }
+
+
+        valores[
+          mes - 1
+        ] +=
+          converterNumero(
+            linha[
+              mapa.valor - 1
+            ]
+          );
+
+      }
+    );
+
+  }
+
+
+  return {
+
+    sucesso: true,
+
+    lista:
+      valores,
+
+    dados:
+      valores,
+
+    resultado:
+      valores
+
+  };
+
+}
+
+
+/************************************************************
+ * BAIXAS PENDENTES
+ ************************************************************/
+
+function listarBaixasPendentes() {
+
+  const CACHE_KEY = "baixas_pendentes_v2";
+  const cache = CacheService.getScriptCache();
+
+  /**********************************************************
+   * CACHE
+   **********************************************************/
+
+  const cacheAtual =
+    cache.get(CACHE_KEY);
+
+  if (cacheAtual) {
+
+    try {
+
+      return JSON.parse(
+        cacheAtual
+      );
+
+    } catch (erro) {
+
+      console.warn(
+        "Cache de baixas pendentes inválido."
+      );
+
+    }
+
+  }
+
+  /**********************************************************
+   * ABA E MAPA
+   **********************************************************/
+
+  const aba =
+    obterAbaLancamentos();
+
+  const mapa =
+    obterMapaColunas(
+      aba
+    );
+
+  const ultimaLinha =
+    aba.getLastRow();
+
+  /**********************************************************
+   * SEM LANÇAMENTOS
+   **********************************************************/
+
+  if (
+    ultimaLinha < 2
+  ) {
+
+    const respostaVazia = {
+      sucesso: true,
+      lista: []
+    };
+
+    try {
+
+      cache.put(
+        CACHE_KEY,
+        JSON.stringify(
+          respostaVazia
+        ),
+        30
+      );
+
+    } catch (erro) {
+
+      console.warn(
+        "Não foi possível salvar cache:",
+        erro.message
+      );
+
+    }
+
+    return respostaVazia;
+
+  }
+
+  /**********************************************************
+   * LÊ SOMENTE AS COLUNAS NECESSÁRIAS
+   *
+   * ID
+   * Competência
+   * Tipo
+   * Descricao
+   * Valor
+   * Vencimento
+   * Baixado
+   **********************************************************/
+
+  const colunas = [
+    mapa.id,
+    mapa.competencia,
+    mapa.tipo,
+    mapa.descricao,
+    mapa.valor,
+    mapa.vencimento,
+    mapa.baixado,
+    mapa.fixa,
+    mapa.qrcode
+  ];
+
+  const menorColuna =
+    Math.min.apply(
+      null,
+      colunas
+    );
+
+  const maiorColuna =
+    Math.max.apply(
+      null,
+      colunas
+    );
+
+  const quantidadeColunas =
+    maiorColuna -
+    menorColuna +
+    1;
+
+  const dados =
+    aba
+      .getRange(
+        2,
+        menorColuna,
+        ultimaLinha - 1,
+        quantidadeColunas
+      )
+      .getValues();
+
+  /**********************************************************
+   * ÍNDICES RELATIVOS AO INTERVALO
+   **********************************************************/
+
+  const idxId =
+    mapa.id - menorColuna;
+
+  const idxCompetencia =
+    mapa.competencia - menorColuna;
+
+  const idxTipo =
+    mapa.tipo - menorColuna;
+
+  const idxDescricao =
+    mapa.descricao - menorColuna;
+
+  const idxValor =
+    mapa.valor - menorColuna;
+
+  const idxVencimento =
+    mapa.vencimento - menorColuna;
+
+  const idxBaixado =
+    mapa.baixado - menorColuna;
+
+  const idxFixa =
+    mapa.fixa - menorColuna;
+
+  const idxQrCode =
+    mapa.qrcode - menorColuna;
+
+  const lista = [];
+
+  /**********************************************************
+   * PROCESSAMENTO
+   **********************************************************/
+
+  for (
+    let i = 0;
+    i < dados.length;
+    i++
+  ) {
+
+    const linha =
+      dados[i];
+
+    const id =
+      linha[idxId];
+
+    if (
+      id === "" ||
+      id === null ||
+      id === undefined
+    ) {
+      continue;
+    }
+
+    if (
+      ehBaixado(
+        linha[idxBaixado]
+      )
+    ) {
+      continue;
+    }
+
+    lista.push({
+
+      id:
+        String(id),
+
+      competencia:
+        converterCompetencia(
+          linha[idxCompetencia]
+        ),
+
+      tipo:
+        String(
+          linha[idxTipo] || ""
+        ),
+
+      descricao:
+        String(
+          linha[idxDescricao] || ""
+        ),
+
+      valor:
+        converterNumero(
+          linha[idxValor]
+        ),
+
+      vencimento:
+        formatarData(
+          linha[idxVencimento]
+        ),
+
+      baixado:
+        "Não",
+
+      fixa:
+        normalizarFixa(
+          linha[idxFixa]
+        ),
+
+      qrcode:
+        String(
+          linha[idxQrCode] || ""
+        )
+
+    });
+
+  }
+
+  const resposta = {
+    sucesso: true,
+    lista: lista
+  };
+
+  /**********************************************************
+   * CACHE POR 30 SEGUNDOS
+   **********************************************************/
+
+  try {
+
+    cache.put(
+      CACHE_KEY,
+      JSON.stringify(
+        resposta
+      ),
+      30
+    );
+
+  } catch (erro) {
+
+    console.warn(
+      "Não foi possível salvar cache:",
+      erro.message
+    );
+
+  }
+
+  return resposta;
+
+}
+
+
+/************************************************************
+ * LIMPAR CACHE DE BAIXAS PENDENTES
+ *
+ * Deve ser chamado sempre que um lançamento for incluído,
+ * editado, baixado ou excluído.
+ ************************************************************/
+
+function limparCacheBaixasPendentes() {
+
+  try {
+
+    CacheService
+      .getScriptCache()
+      .remove(
+        "baixas_pendentes_v2"
+      );
+
+  } catch (erro) {
+
+    console.warn(
+      "Erro ao limpar cache de baixas pendentes:",
+      erro.message
+    );
+
+  }
+
+}
+
+
+/************************************************************
+ * ABA SALDOS
+ ************************************************************/
+
+function obterAbaSaldos() {
+
+  const aba =
+    obterPlanilha()
+      .getSheetByName(
+        NOME_ABA_SALDOS
+      );
+
+
+  if (!aba) {
+
+    throw new Error(
+      'A aba "' +
+      NOME_ABA_SALDOS +
+      '" não foi encontrada.'
+    );
+
+  }
+
+
+  return aba;
+
+}
+
+
+/************************************************************
+ * MAPA SALDOS
+ ************************************************************/
+
+function obterMapaColunasSaldos(
+  aba
+) {
+
+  const mapa =
+    obterMapaColunas(
+      aba
+    );
+
+
+  if (!mapa.competencia) {
+
+    throw new Error(
+      'A aba "' +
+      NOME_ABA_SALDOS +
+      '" precisa possuir a coluna "Competência".'
+    );
+
+  }
+
+
+  if (!mapa.saldoinicial) {
+
+    throw new Error(
+      'A aba "' +
+      NOME_ABA_SALDOS +
+      '" precisa possuir a coluna "Saldo Inicial".'
+    );
+
+  }
+
+
+  return {
+
+    competencia:
+      mapa.competencia,
+
+    saldoInicial:
+      mapa.saldoinicial
+
+  };
+
+}
+
+
+/************************************************************
+ * OBTER SALDO INICIAL
+ ************************************************************/
+
+function obterSaldoInicial(
+  parametros
+) {
+
+  parametros =
+    parametros || {};
+
+
+  const competencia =
+    String(
+      parametros.competencia || ""
+    ).trim();
+
+
+  if (!competencia) {
+
+    throw new Error(
+      "Informe a competência."
+    );
+
+  }
+
+
+  if (
+    !/^\d{4}-\d{2}$/.test(
+      competencia
+    )
+  ) {
+
+    throw new Error(
+      "Competência inválida. Use AAAA-MM."
+    );
+
+  }
+
+
+  const aba =
+    obterAbaSaldos();
+
+
+  const mapa =
+    obterMapaColunasSaldos(
+      aba
+    );
+
+
+  const ultimaLinha =
+    aba.getLastRow();
+
+
+  let saldoInicial = 0;
+
+
+  if (
+    ultimaLinha >= 2
+  ) {
+
+    const dados =
+      aba
+        .getRange(
+          2,
+          1,
+          ultimaLinha - 1,
+          aba.getLastColumn()
+        )
+        .getValues();
+
+
+    for (
+      let i = 0;
+      i < dados.length;
+      i++
+    ) {
+
+      const competenciaLinha =
+        converterCompetencia(
+          dados[i][
+            mapa.competencia - 1
+          ]
+        );
+
+
+      if (
+        competenciaLinha ===
+        competencia
+      ) {
+
+        saldoInicial =
+          converterNumero(
+            dados[i][
+              mapa.saldoInicial - 1
+            ]
+          );
+
+
+        break;
+
+      }
+
+    }
+
+  }
+
+
+  return {
+
+    sucesso: true,
+
+    competencia:
+      competencia,
+
+    saldoInicial:
+      saldoInicial,
+
+    saldo:
+      saldoInicial
+
+  };
+
+}
+
+
+/************************************************************
+ * SALDO INICIAL SEGURO
+ ************************************************************/
+
+function obterSaldoInicialSeguro(
+  competencia
+) {
+
+  try {
+
+    const resultado =
+      obterSaldoInicial({
+
+        competencia:
+          competencia
+
+      });
+
+
+    return converterNumero(
+      resultado.saldoInicial
+    );
+
+  }
+
+
+  catch (erro) {
+
+    console.warn(
+      "Saldo inicial:",
+      erro.message
+    );
+
+
+    return 0;
+
+  }
+
+}
+
+
+/************************************************************
+ * LISTAR SALDOS
+ ************************************************************/
+
+function listarSaldos() {
+
+  const aba =
+    obterAbaSaldos();
+
+
+  const mapa =
+    obterMapaColunasSaldos(
+      aba
+    );
+
+
+  const ultimaLinha =
+    aba.getLastRow();
+
+
+  const lista = [];
+
+
+  if (
+    ultimaLinha < 2
+  ) {
+
+    return {
+
+      sucesso: true,
+
+      lista: []
+
+    };
+
+  }
+
+
+  const dados =
+    aba
+      .getRange(
+        2,
+        1,
+        ultimaLinha - 1,
+        aba.getLastColumn()
+      )
+      .getValues();
+
+
+  dados.forEach(
+    function(linha) {
+
+      const competencia =
+        converterCompetencia(
+          linha[
+            mapa.competencia - 1
+          ]
+        );
+
+
+      if (!competencia) {
+
+        return;
+
+      }
+
+
+      lista.push({
+
+        competencia:
+          competencia,
+
+        saldoInicial:
+          converterNumero(
+            linha[
+              mapa.saldoInicial - 1
+            ]
+          )
+
+      });
+
+    }
+  );
+
+
+  lista.sort(
+    function(a, b) {
+
+      return String(
+        b.competencia
+      ).localeCompare(
+        String(
+          a.competencia
+        )
+      );
+
+    }
+  );
+
+
+  return {
+
+    sucesso: true,
+
+    lista:
+      lista
+
+  };
+
+}
+
+
+/************************************************************
+ * SALVAR SALDO INICIAL
+ ************************************************************/
+
+function salvarSaldoInicial(
+  parametros
+) {
+
+  parametros =
+    parametros || {};
+
+
+  const competencia =
+    String(
+      parametros.competencia || ""
+    ).trim();
+
+
+  const saldoInicial =
+    converterNumero(
+      parametros.saldoInicial ??
+      parametros.saldo ??
+      0
+    );
+
+
+  if (!competencia) {
+
+    throw new Error(
+      "Informe a competência."
+    );
+
+  }
+
+
+  if (
+    !/^\d{4}-\d{2}$/.test(
+      competencia
+    )
+  ) {
+
+    throw new Error(
+      "Competência inválida. Use AAAA-MM."
+    );
+
+  }
+
+
+  const aba =
+    obterAbaSaldos();
+
+
+  const mapa =
+    obterMapaColunasSaldos(
+      aba
+    );
+
+
+  const ultimaLinha =
+    aba.getLastRow();
+
+
+  if (
+    ultimaLinha >= 2
+  ) {
+
+    const dados =
+      aba
+        .getRange(
+          2,
+          mapa.competencia,
+          ultimaLinha - 1,
+          1
+        )
+        .getValues();
+
+
+    for (
+      let i = 0;
+      i < dados.length;
+      i++
+    ) {
+
+      const competenciaLinha =
+        converterCompetencia(
+          dados[i][0]
+        );
+
+
+      if (
+        competenciaLinha ===
+        competencia
+      ) {
+
+        const linha =
+          i + 2;
+
+
+        aba
+          .getRange(
+            linha,
+            mapa.saldoInicial
+          )
+          .setValue(
+            saldoInicial
+          );
+
 
         return {
 
-            nome:
-                "Contas a Receber",
+          sucesso: true,
 
-            classe:
-                "tipo-receber",
+          mensagem:
+            "Saldo inicial atualizado com sucesso.",
 
-            icone:
-                "🟢"
+          competencia:
+            competencia,
+
+          saldoInicial:
+            saldoInicial
 
         };
+
+      }
+
+    }
+
+  }
+
+
+  const novaLinha =
+    new Array(
+      aba.getLastColumn()
+    ).fill("");
+
+
+  novaLinha[
+    mapa.competencia - 1
+  ] =
+    competencia;
+
+
+  novaLinha[
+    mapa.saldoInicial - 1
+  ] =
+    saldoInicial;
+
+
+  aba.appendRow(
+    novaLinha
+  );
+
+
+  return {
+
+    sucesso: true,
+
+    mensagem:
+      "Saldo inicial cadastrado com sucesso.",
+
+    competencia:
+      competencia,
+
+    saldoInicial:
+      saldoInicial
+
+  };
+
+}
+
+
+/************************************************************
+ * ==========================================================
+ * ATENDIMENTO
+ * ==========================================================
+ ************************************************************/
+
+
+/************************************************************
+ * VALIDAR ESTRUTURA DO ATENDIMENTO
+ *
+ * Estrutura esperada:
+ *
+ * ID | Problema | Solução
+ *
+ * A função usa o cabeçalho da planilha.
+ * Não depende da posição fixa das colunas.
+ ************************************************************/
+
+function validarEstruturaAtendimento(
+  aba
+) {
+
+  const mapa =
+    obterMapaColunas(
+      aba
+    );
+
+
+  const ausentes = [];
+
+
+  COLUNAS_ATENDIMENTO.forEach(
+    function(coluna) {
+
+      const chave =
+        normalizarCabecalho(
+          coluna
+        );
+
+
+      if (!mapa[chave]) {
+
+        ausentes.push(
+          coluna
+        );
+
+      }
+
+    }
+  );
+
+
+  if (
+    ausentes.length > 0
+  ) {
+
+    throw new Error(
+      'A aba "' +
+      NOME_ABA_ATENDIMENTO +
+      '" possui estrutura incompatível. ' +
+      "Colunas ausentes: " +
+      ausentes.join(", ")
+    );
+
+  }
+
+
+  return mapa;
+
+}
+
+
+/************************************************************
+ * GERAR NOVO ID DO ATENDIMENTO
+ ************************************************************/
+
+function gerarNovoIdAtendimento(
+  aba,
+  colunaId
+) {
+
+  const ultimaLinha =
+    aba.getLastRow();
+
+
+  if (
+    ultimaLinha < 2
+  ) {
+
+    return 1;
+
+  }
+
+
+  const valores =
+    aba
+      .getRange(
+        2,
+        colunaId,
+        ultimaLinha - 1,
+        1
+      )
+      .getValues();
+
+
+  let maiorId = 0;
+
+
+  valores.forEach(
+    function(linha) {
+
+      const texto =
+        String(
+          linha[0] ?? ""
+        ).trim();
+
+
+      if (!texto) {
+
+        return;
+
+      }
+
+
+      const numero =
+        parseInt(
+          texto,
+          10
+        );
+
+
+      if (
+        !isNaN(numero) &&
+        numero > maiorId
+      ) {
+
+        maiorId =
+          numero;
+
+      }
+
+    }
+  );
+
+
+  return maiorId + 1;
+
+}
+
+
+/************************************************************
+ * INCLUIR ATENDIMENTO
+ *
+ * Recebe:
+ *
+ * {
+ *   problema: "...",
+ *   solucao: "..."
+ * }
+ *
+ *
+ * Grava:
+ *
+ * ID | Problema | Solução
+ *
+ *
+ * O ID é gerado automaticamente.
+ ************************************************************/
+
+function incluirAtendimento(
+  parametros
+) {
+
+  try {
+
+    /******************************************************
+     * 1. GARANTIR OBJETO
+     ******************************************************/
+
+    parametros =
+      parametros || {};
+
+
+    /******************************************************
+     * 2. LER PROBLEMA
+     ******************************************************/
+
+    const problema =
+      String(
+        parametros.problema ??
+        parametros.Problema ??
+        ""
+      ).trim();
+
+
+    /******************************************************
+     * 3. LER SOLUÇÃO
+     ******************************************************/
+
+    const solucao =
+      String(
+        parametros.solucao ??
+        parametros.Solução ??
+        parametros.Solucao ??
+        ""
+      ).trim();
+
+
+    /******************************************************
+     * 4. VALIDAR PROBLEMA
+     ******************************************************/
+
+    if (!problema) {
+
+      return {
+
+        sucesso: false,
+
+        mensagem:
+          "Informe o problema."
+
+      };
 
     }
 
 
-    if(
-        texto.includes(
-            "pagar"
-        )
-    ){
+    /******************************************************
+     * 5. VALIDAR SOLUÇÃO
+     ******************************************************/
 
-        return {
+    if (!solucao) {
 
-            nome:
-                "Contas a Pagar",
+      return {
 
-            classe:
-                "tipo-pagar",
+        sucesso: false,
 
-            icone:
-                "🔴"
+        mensagem:
+          "Informe a solução."
 
-        };
+      };
 
     }
+
+
+    /******************************************************
+     * 6. PLANILHA
+     ******************************************************/
+
+    const ss =
+      obterPlanilha();
+
+
+    /******************************************************
+     * 7. ABA ATENDIMENTO
+     ******************************************************/
+
+    const aba =
+      ss.getSheetByName(
+        NOME_ABA_ATENDIMENTO
+      );
+
+
+    if (!aba) {
+
+      return {
+
+        sucesso: false,
+
+        mensagem:
+          'A aba "' +
+          NOME_ABA_ATENDIMENTO +
+          '" não foi encontrada.'
+
+      };
+
+    }
+
+
+    /******************************************************
+     * 8. VERIFICAR CABEÇALHO
+     ******************************************************/
+
+    if (
+      aba.getLastColumn() < 1
+    ) {
+
+      return {
+
+        sucesso: false,
+
+        mensagem:
+          'A aba "' +
+          NOME_ABA_ATENDIMENTO +
+          '" não possui cabeçalho.'
+
+      };
+
+    }
+
+
+    /******************************************************
+     * 9. MAPEAR COLUNAS
+     ******************************************************/
+
+    const mapa =
+      validarEstruturaAtendimento(
+        aba
+      );
+
+
+    /******************************************************
+     * 10. GERAR ID
+     ******************************************************/
+
+    const novoId =
+      gerarNovoIdAtendimento(
+        aba,
+        mapa.id
+      );
+
+
+    /******************************************************
+     * 11. CRIAR LINHA
+     ******************************************************/
+
+    const novaLinha =
+      new Array(
+        aba.getLastColumn()
+      ).fill("");
+
+
+    novaLinha[
+      mapa.id - 1
+    ] =
+      novoId;
+
+
+    novaLinha[
+      mapa.problema - 1
+    ] =
+      problema;
+
+
+    novaLinha[
+      mapa.solucao - 1
+    ] =
+      solucao;
+
+
+    /******************************************************
+     * 12. GRAVAR
+     ******************************************************/
+
+    aba.appendRow(
+      novaLinha
+    );
+
+
+    /******************************************************
+     * 13. RETORNO
+     ******************************************************/
+
+    return {
+
+      sucesso: true,
+
+      mensagem:
+        "Atendimento incluído com sucesso.",
+
+      id:
+        String(novoId),
+
+      problema:
+        problema,
+
+      solucao:
+        solucao
+
+    };
+
+  }
+
+
+  catch (erro) {
+
+    console.error(
+      "Erro em incluirAtendimento:",
+      erro
+    );
+
+
+    const mensagem =
+      erro &&
+      erro.message
+        ? erro.message
+        : String(erro);
 
 
     return {
 
-        nome:
-            tipo ||
-            "Não informado",
+      sucesso: false,
 
-        classe:
-            "tipo-outro",
+      mensagem:
+        "Não foi possível incluir o atendimento: " +
+        mensagem,
 
-        icone:
-            "⚪"
+      erro:
+        mensagem
 
     };
 
+  }
+
 }
 
 
-/* =====================================================
-   BAIXAR LANÇAMENTO
-===================================================== */
+/************************************************************
+ * PESQUISAR ATENDIMENTO
+ *
+ * Pesquisa todas as colunas.
+ *
+ * Aceita:
+ *
+ * ?action=pesquisarAtendimento&termo=joao
+ *
+ * Também:
+ *
+ * palavra
+ * busca
+ * query
+ * q
+ * pesquisa
+ ************************************************************/
 
-async function baixarLancamento(
-    botao,
-    id
-){
+function pesquisarAtendimento(
+  parametros
+) {
 
-    if(
-        !id
-    ){
+  /**********************************************************
+   * ACEITAR STRING DIRETAMENTE
+   **********************************************************/
 
-        alert(
-            "Não foi possível identificar o lançamento."
-        );
+  if (
+    typeof parametros === "string" ||
+    typeof parametros === "number"
+  ) {
+
+    parametros = {
+
+      termo:
+        String(parametros)
+
+    };
+
+  }
+
+
+  parametros =
+    parametros || {};
+
+
+  /**********************************************************
+   * TERMO
+   **********************************************************/
+
+  let termo =
+    parametros.termo ??
+    parametros.palavra ??
+    parametros.busca ??
+    parametros.query ??
+    parametros.q ??
+    parametros.pesquisa ??
+    "";
+
+
+  termo =
+    String(
+      termo
+    ).trim();
+
+
+  if (!termo) {
+
+    throw new Error(
+      "Informe uma palavra para pesquisar."
+    );
+
+  }
+
+
+  /**********************************************************
+   * PLANILHA
+   **********************************************************/
+
+  const planilha =
+    obterPlanilha();
+
+
+  /**********************************************************
+   * ABA
+   **********************************************************/
+
+  const aba =
+    planilha.getSheetByName(
+      NOME_ABA_ATENDIMENTO
+    );
+
+
+  if (!aba) {
+
+    throw new Error(
+      'A aba "' +
+      NOME_ABA_ATENDIMENTO +
+      '" não foi encontrada.'
+    );
+
+  }
+
+
+  /**********************************************************
+   * DIMENSÕES
+   **********************************************************/
+
+  const ultimaLinha =
+    aba.getLastRow();
+
+
+  const ultimaColuna =
+    aba.getLastColumn();
+
+
+  if (
+    ultimaLinha < 1 ||
+    ultimaColuna < 1
+  ) {
+
+    return {
+
+      sucesso: true,
+
+      termo:
+        termo,
+
+      total:
+        0,
+
+      lista: [],
+
+      resultados: [],
+
+      dados: []
+
+    };
+
+  }
+
+
+  /**********************************************************
+   * CABEÇALHO
+   **********************************************************/
+
+  const cabecalho =
+    aba
+      .getRange(
+        1,
+        1,
+        1,
+        ultimaColuna
+      )
+      .getDisplayValues()[0];
+
+
+  /**********************************************************
+   * DADOS
+   **********************************************************/
+
+  let dados = [];
+
+
+  if (
+    ultimaLinha >= 2
+  ) {
+
+    dados =
+      aba
+        .getRange(
+          2,
+          1,
+          ultimaLinha - 1,
+          ultimaColuna
+        )
+        .getDisplayValues();
+
+  }
+
+
+  /**********************************************************
+   * NORMALIZAR TERMO
+   **********************************************************/
+
+  const termoNormalizado =
+    normalizarTextoPesquisa(
+      termo
+    );
+
+
+  const lista = [];
+
+
+  /**********************************************************
+   * PESQUISAR
+   **********************************************************/
+
+  dados.forEach(
+    function(
+      linha,
+      indice
+    ) {
+
+      let encontrado =
+        false;
+
+
+      for (
+        let coluna = 0;
+        coluna < linha.length;
+        coluna++
+      ) {
+
+        const valor =
+          linha[coluna];
+
+
+        const textoNormalizado =
+          normalizarTextoPesquisa(
+            valor
+          );
+
+
+        if (
+          textoNormalizado.indexOf(
+            termoNormalizado
+          ) !== -1
+        ) {
+
+          encontrado =
+            true;
+
+          break;
+
+        }
+
+      }
+
+
+      if (!encontrado) {
 
         return;
 
-    }
+      }
 
 
-    const confirmou =
-        confirm(
-            "Deseja realmente baixar este lançamento?"
-        );
+      /****************************************************
+       * CRIAR REGISTRO
+       ****************************************************/
+
+      const registro = {};
 
 
-    if(
-        !confirmou
-    ){
+      cabecalho.forEach(
+        function(
+          nome,
+          coluna
+        ) {
 
-        return;
-
-    }
-
-
-    const textoOriginal =
-        botao.innerHTML;
-
-
-    botao.disabled = true;
-
-    botao.innerHTML = `
-        <span class="spinner-pequeno"></span>
-        Baixando...
-    `;
-
-
-    try{
-
-        console.log(
-            "Baixando lançamento:",
-            id
-        );
-
-
-        const resposta =
-            await chamarAPI(
-                ACAO_BAIXAR,
-                {
-                    id:id
-                }
+          const chave =
+            normalizarNomeCampo(
+              nome
             );
 
 
-        console.log(
-            "Resposta da baixa:",
-            resposta
-        );
+          if (!chave) {
+
+            return;
+
+          }
 
 
-        if(
-            !resposta ||
-            resposta.sucesso !== true
-        ){
-
-            throw new Error(
-                resposta &&
-                (
-                    resposta.erro ||
-                    resposta.mensagem
-                )
-                    ? (
-                        resposta.erro ||
-                        resposta.mensagem
-                    )
-                    : "Não foi possível baixar o lançamento."
-            );
+          registro[chave] =
+            linha[coluna] ??
+            "";
 
         }
+      );
 
 
-        mostrarMensagem(
-            "Lançamento baixado com sucesso.",
-            "sucesso"
-        );
+      /****************************************************
+       * DADOS ORIGINAIS
+       ****************************************************/
+
+      registro.dados =
+        linha.slice();
 
 
-        /*
-         * Remove também da lista original.
-         */
+      /****************************************************
+       * LINHA
+       ****************************************************/
 
-        listaPendentes =
-            listaPendentes.filter(
-                function(item){
-
-                    return String(
-                        item.id
-                    ) !== String(
-                        id
-                    );
-
-                }
-            );
+      registro.linha =
+        indice + 2;
 
 
-        /*
-         * Recria o filtro para refletir
-         * os lançamentos restantes.
-         */
-
-        const filtroAtual =
-            document.getElementById(
-                "filtroDescricao"
-            ).value;
+      registro.indice =
+        indice;
 
 
-        preencherFiltroDescricoes(
-            listaPendentes
-        );
-
-
-        /*
-         * Tenta manter o filtro selecionado.
-         */
-
-        const select =
-            document.getElementById(
-                "filtroDescricao"
-            );
-
-
-        const existe =
-            Array.from(
-                select.options
-            ).some(
-                function(option){
-
-                    return option.value ===
-                        filtroAtual;
-
-                }
-            );
-
-
-        if(existe){
-
-            select.value =
-                filtroAtual;
-
-        }
-        else{
-
-            select.value = "";
-
-        }
-
-
-        aplicarFiltroDescricao();
+      lista.push(
+        registro
+      );
 
     }
-    catch(erro){
-
-        console.error(
-            "Erro ao baixar:",
-            erro
-        );
+  );
 
 
-        mostrarMensagem(
-            obterMensagemErro(erro),
-            "erro"
-        );
+  /**********************************************************
+   * RETORNO
+   **********************************************************/
 
+  return {
 
-        botao.disabled = false;
+    sucesso: true,
 
-        botao.innerHTML =
-            textoOriginal;
+    termo:
+      termo,
 
-    }
+    total:
+      lista.length,
+
+    lista:
+      lista,
+
+    resultados:
+      lista,
+
+    dados:
+      lista
+
+  };
 
 }
 
 
-/* =====================================================
-   ATUALIZAR RESUMO APÓS BAIXA
-===================================================== */
+/************************************************************
+ * NORMALIZAR TEXTO DA PESQUISA
+ ************************************************************/
 
-function atualizarResumoTabela(){
+function normalizarTextoPesquisa(
+  valor
+) {
 
-    const linhas =
-        document.querySelectorAll(
-            "#lista tr"
-        );
+  if (
+    valor === null ||
+    valor === undefined
+  ) {
 
+    return "";
 
-    let quantidade = 0;
-
-    let receber = 0;
-
-    let pagar = 0;
-
-
-    linhas.forEach(
-        function(linha){
-
-            const celulas =
-                linha.querySelectorAll(
-                    "td"
-                );
+  }
 
 
-            if(
-                celulas.length < 8
-            ){
+  return String(valor)
 
-                return;
+    .normalize("NFD")
 
-            }
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
 
+    .toLowerCase()
 
-            quantidade++;
+    .trim();
 
-
-            const tipo =
-                normalizarTexto(
-                    celulas[2].textContent
-                );
+}
 
 
-            const valor =
-                converterNumero(
-                    celulas[4].textContent
-                );
+/************************************************************
+ * NORMALIZAR NOME DE CAMPO
+ *
+ * Exemplos:
+ *
+ * Nome             -> nome
+ * Nome Completo    -> nomeCompleto
+ * Data Atendimento -> dataAtendimento
+ * Solução          -> solucao
+ ************************************************************/
 
+function normalizarNomeCampo(
+  valor
+) {
 
-            if(
-                tipo.includes(
-                    "receber"
-                )
-            ){
-
-                receber += valor;
-
-            }
-
-
-            else if(
-                tipo.includes(
-                    "pagar"
-                )
-            ){
-
-                pagar += valor;
-
-            }
-
-        }
+  const texto =
+    normalizarTextoPesquisa(
+      valor
     );
 
 
-    document.getElementById(
-        "totalPendentes"
-    ).textContent =
-        quantidade;
+  if (!texto) {
+
+    return "";
+
+  }
 
 
-    document.getElementById(
-        "totalReceber"
-    ).textContent =
-        formatarMoeda(
-            receber
-        );
+  const partes =
+    texto
+      .replace(
+        /[^a-z0-9]+/g,
+        " "
+      )
+      .trim()
+      .split(
+        /\s+/
+      );
 
 
-    document.getElementById(
-        "totalPagar"
-    ).textContent =
-        formatarMoeda(
-            pagar
-        );
+  if (
+    partes.length === 0
+  ) {
+
+    return "";
+
+  }
+
+
+  let resultado =
+    partes[0];
+
+
+  for (
+    let i = 1;
+    i < partes.length;
+    i++
+  ) {
+
+    resultado +=
+      partes[i]
+        .charAt(0)
+        .toUpperCase() +
+      partes[i]
+        .slice(1);
+
+  }
+
+
+  return resultado;
 
 }
 
 
-/* =====================================================
-   RESUMO
-===================================================== */
+/************************************************************
+ * COMPATIBILIDADE
+ ************************************************************/
 
-function atualizarResumo(lista){
+function normalizarTextoAtendimento(
+  valor
+) {
 
-    let receber = 0;
+  return normalizarTextoPesquisa(
+    valor
+  );
 
-    let pagar = 0;
-
-
-    lista.forEach(
-        function(item){
-
-            const valor =
-                converterNumero(
-                    item.valor
-                );
+}
 
 
-            const tipo =
-                normalizarTexto(
-                    item.tipo
-                );
+/************************************************************
+ * COMPATIBILIDADE
+ ************************************************************/
 
+function normalizarChaveAtendimento(
+  valor
+) {
 
-            if(
-                tipo.includes(
-                    "receber"
-                )
-            ){
-
-                receber += valor;
-
-            }
-
-
-            else if(
-                tipo.includes(
-                    "pagar"
-                )
-            ){
-
-                pagar += valor;
-
-            }
-
-        }
+  return normalizarTextoPesquisa(
+    valor
+  )
+    .replace(
+      /[^a-z0-9]/g,
+      ""
     );
 
-
-    document.getElementById(
-        "totalPendentes"
-    ).textContent =
-        lista.length;
+}
 
 
-    document.getElementById(
-        "totalReceber"
-    ).textContent =
-        formatarMoeda(
-            receber
-        );
+/************************************************************
+ * COMPATIBILIDADE
+ ************************************************************/
 
+function normalizarNomeCampoAtendimento(
+  valor
+) {
 
-    document.getElementById(
-        "totalPagar"
-    ).textContent =
-        formatarMoeda(
-            pagar
-        );
+  return normalizarNomeCampo(
+    valor
+  );
 
 }
 
 
-/* =====================================================
-   ZERAR RESUMO
-===================================================== */
+/************************************************************
+ * FORMATAR VALOR ATENDIMENTO
+ ************************************************************/
 
-function zerarResumo(){
+function formatarValorAtendimento(
+  valor
+) {
 
-    document.getElementById(
-        "totalPendentes"
-    ).textContent =
-        "0";
+  if (
+    valor === null ||
+    valor === undefined
+  ) {
+
+    return "";
+
+  }
 
 
-    document.getElementById(
-        "totalReceber"
-    ).textContent =
-        "R$ 0,00";
+  if (
+    Object.prototype.toString.call(
+      valor
+    ) ===
+    "[object Date]"
+  ) {
+
+    if (
+      isNaN(
+        valor.getTime()
+      )
+    ) {
+
+      return "";
+
+    }
 
 
-    document.getElementById(
-        "totalPagar"
-    ).textContent =
-        "R$ 0,00";
+    return Utilities.formatDate(
+      valor,
+      Session.getScriptTimeZone(),
+      "dd/MM/yyyy"
+    );
+
+  }
+
+
+  return String(
+    valor
+  );
 
 }
 
 
-/* =====================================================
-   CONVERTER NÚMERO
-===================================================== */
+/************************************************************
+ * OBTER VALOR POR CHAVES
+ ************************************************************/
 
-function converterNumero(valor){
+function obterValorPorChaves(
+  objeto,
+  chaves
+) {
 
-    if(
-        valor === null ||
-        valor === undefined ||
-        valor === ""
-    ){
+  if (
+    !objeto ||
+    !Array.isArray(chaves)
+  ) {
 
-        return 0;
+    return "";
+
+  }
+
+
+  /**********************************************************
+   * CHAVE EXATA
+   **********************************************************/
+
+  for (
+    let i = 0;
+    i < chaves.length;
+    i++
+  ) {
+
+    const chaveOriginal =
+      String(
+        chaves[i] || ""
+      );
+
+
+    if (
+      Object.prototype.hasOwnProperty.call(
+        objeto,
+        chaveOriginal
+      )
+    ) {
+
+      return objeto[
+        chaveOriginal
+      ];
 
     }
 
+  }
 
-    if(
-        typeof valor === "number"
-    ){
 
-        return isFinite(valor)
-            ? valor
-            : 0;
+  /**********************************************************
+   * CHAVE NORMALIZADA
+   **********************************************************/
+
+  const mapa = {};
+
+
+  Object.keys(
+    objeto
+  ).forEach(
+    function(chave) {
+
+      mapa[
+        normalizarChaveAtendimento(
+          chave
+        )
+      ] =
+        objeto[chave];
+
+    }
+  );
+
+
+  for (
+    let i = 0;
+    i < chaves.length;
+    i++
+  ) {
+
+    const chave =
+      normalizarChaveAtendimento(
+        chaves[i]
+      );
+
+
+    if (
+      Object.prototype.hasOwnProperty.call(
+        mapa,
+        chave
+      )
+    ) {
+
+      return mapa[chave];
 
     }
 
+  }
 
-    let texto =
-        String(valor)
-        .trim()
+
+  return "";
+
+}
+
+
+/************************************************************
+ * VALIDAÇÃO LANÇAMENTO
+ ************************************************************/
+
+/************************************************************
+ * NORMALIZAR E OBTER COMPETÊNCIA DOS PARÂMETROS
+ ************************************************************/
+function obterCompetenciaParametro(parametros) {
+  parametros = parametros || {};
+  let competencia =
+    parametros.competencia ??
+    parametros.Competência ??
+    parametros.Competencia ??
+    parametros.mesCompetencia ??
+    parametros.mes ??
+    "";
+
+  competencia = String(competencia || "").trim();
+
+  if (/^\d{2}\/\d{4}$/.test(competencia)) {
+    const partes = competencia.split("/");
+    competencia = partes[1] + "-" + partes[0];
+  } else if (/^\d{4}\/\d{2}$/.test(competencia)) {
+    competencia = competencia.replace("/", "-");
+  } else if (/^\d{2}-\d{4}$/.test(competencia)) {
+    const partes = competencia.split("-");
+    competencia = partes[1] + "-" + partes[0];
+  }
+
+  // Se o cliente não enviar competência, tenta derivar do vencimento.
+  if (!competencia) {
+    const vencimento = String(
+      parametros.vencimento ?? parametros.Vencimento ?? ""
+    ).trim();
+    if (/^\d{4}-\d{2}-\d{2}$/.test(vencimento)) {
+      competencia = vencimento.substring(0, 7);
+    } else if (/^\d{2}\/\d{2}\/\d{4}$/.test(vencimento)) {
+      const partes = vencimento.split("/");
+      competencia = partes[2] + "-" + partes[1];
+    }
+  }
+
+  if (!validarCompetencia(competencia)) {
+    throw new Error(
+      "Competência ausente ou inválida. Informe o mês no formato AAAA-MM, por exemplo, 2026-10."
+    );
+  }
+  return competencia;
+}
+
+
+/************************************************************
+ * ABA FIXOS — ESPELHO DOS LANÇAMENTOS MARCADOS COMO FIXOS
+ ************************************************************/
+function obterAbaFixos() {
+  const ss = obterPlanilha();
+  let aba = ss.getSheetByName(NOME_ABA_FIXOS);
+  if (!aba) aba = ss.insertSheet(NOME_ABA_FIXOS);
+
+  const ultimaLinha = aba.getLastRow();
+  const ultimaColuna = aba.getLastColumn();
+  let dadosAntigos = [];
+  let mapaAntigo = {};
+
+  if (ultimaLinha >= 1 && ultimaColuna >= 1) {
+    const cabecalho = aba.getRange(1, 1, 1, ultimaColuna).getValues()[0];
+    cabecalho.forEach((v, i) => mapaAntigo[normalizarCabecalho(v)] = i);
+    const jaEhCadastro = !!mapaAntigo[normalizarCabecalho("Dia Vencimento")] &&
+      !!mapaAntigo[normalizarCabecalho("Ativa")];
+
+    if (!jaEhCadastro && ultimaLinha >= 2) {
+      dadosAntigos = aba.getRange(2, 1, ultimaLinha - 1, ultimaColuna).getValues();
+    } else if (jaEhCadastro) {
+      aplicarFormatacaoFixos_(aba);
+      return aba;
+    }
+  }
+
+  // Migra o antigo formato de espelho para o novo cadastro permanente.
+  const migrados = [];
+  const vistos = {};
+  dadosAntigos.forEach(linha => {
+    const get = nome => {
+      const idx = mapaAntigo[normalizarCabecalho(nome)];
+      return idx === undefined ? "" : linha[idx];
+    };
+    const tipo = String(get("Tipo") || "").trim();
+    const descricao = String(get("Descricao") || get("Descrição") || "").trim();
+    const valor = converterNumero(get("Valor"));
+    if (!tipo || !descricao || valor <= 0) return;
+    if (normalizarFixa(get("Fixa")) !== "Sim" && String(get("Ativa") || "").trim() === "") return;
+    const chave = normalizarChaveFixa(tipo, descricao);
+    if (vistos[chave]) return;
+    vistos[chave] = true;
+    let dia = 1;
+    const venc = get("Vencimento");
+    if (venc instanceof Date && !isNaN(venc.getTime())) dia = venc.getDate();
+    else {
+      const texto = String(venc || "").trim();
+      let m = texto.match(/^\d{4}-\d{2}-(\d{2})$/) || texto.match(/^(\d{2})\/\d{2}\/\d{4}$/);
+      if (m) dia = Number(m[1]);
+    }
+    const ativaAntiga = get("Ativa");
+    const ativa = String(ativaAntiga || "").trim() ? (normalizarFixa(ativaAntiga) === "Sim" ? "Sim" : "Não") : "Sim";
+    migrados.push([get("ID") || migrados.length + 1, tipo, descricao, valor, Math.min(31, Math.max(1, dia)), ativa]);
+  });
+
+  // Não apaga as linhas antigas antes de copiá-las para o novo formato.
+  aba.clearContents();
+  aba.getRange(1, 1, 1, COLUNAS_FIXOS.length).setValues([COLUNAS_FIXOS]);
+  if (migrados.length) aba.getRange(2, 1, migrados.length, COLUNAS_FIXOS.length).setValues(migrados);
+  aplicarFormatacaoFixos_(aba);
+  return aba;
+}
+
+function aplicarFormatacaoFixos_(aba) {
+  aba.setFrozenRows(1);
+  aba.getRange(1, 1, 1, COLUNAS_FIXOS.length)
+    .setFontWeight("bold").setBackground("#1f4e78").setFontColor("#ffffff");
+  aba.getRange("D:D").setNumberFormat('"R$" #,##0.00');
+  aba.getRange("E:E").setNumberFormat("0");
+  aba.autoResizeColumns(1, COLUNAS_FIXOS.length);
+}
+
+
+
+function sincronizarFixos() {
+  const aba = obterAbaFixos();
+  const ultimaLinha = aba.getLastRow();
+  let total = 0, ativos = 0, receitas = 0, despesas = 0;
+  if (ultimaLinha >= 2) {
+    const dados = aba.getRange(2, 1, ultimaLinha - 1, COLUNAS_FIXOS.length).getValues();
+    dados.forEach(linha => {
+      if (!linha[2] || !linha[1]) return;
+      total++;
+      if (normalizarFixa(linha[5]) === "Sim") {
+        ativos++;
+        const valor = converterNumero(linha[3]);
+        if (normalizarTipo(linha[1]) === "receber") receitas += valor;
+        if (normalizarTipo(linha[1]) === "pagar") despesas += valor;
+      }
+    });
+  }
+  return {
+    sucesso: true,
+    total: total,
+    ativos: ativos,
+    totalReceitas: receitas,
+    totalDespesas: despesas,
+    saldoPrevisto: receitas - despesas,
+    mensagem: "Cadastro permanente de contas fixas atualizado."
+  };
+}
+
+function listarFixos(parametros) {
+  parametros = parametros || {};
+  const aba = obterAbaFixos();
+  const ultimaLinha = aba.getLastRow();
+  const lista = [];
+
+  if (ultimaLinha >= 2) {
+    const dados = aba.getRange(2, 1, ultimaLinha - 1, COLUNAS_FIXOS.length).getValues();
+    dados.forEach(linha => {
+      if (!linha[2]) return;
+      lista.push({
+        id: String(linha[0] || ""),
+        tipo: String(linha[1] || ""),
+        descricao: String(linha[2] || ""),
+        valor: converterNumero(linha[3]),
+        diaVencimento: Number(linha[4]) || 1,
+        ativa: normalizarFixa(linha[5])
+      });
+    });
+  }
+
+  const tipoFiltro = String(parametros.tipo || "").trim();
+  const somenteAtivas = String(parametros.somenteAtivas || "").toLowerCase();
+  let filtrada = lista;
+  if (tipoFiltro) filtrada = filtrada.filter(x => normalizarTipo(x.tipo) === normalizarTipo(tipoFiltro));
+  if (somenteAtivas === "sim" || somenteAtivas === "true" || somenteAtivas === "1") {
+    filtrada = filtrada.filter(x => x.ativa === "Sim");
+  }
+
+  const receitas = filtrada.reduce((s, x) => s + (normalizarTipo(x.tipo) === "receber" && x.ativa === "Sim" ? x.valor : 0), 0);
+  const despesas = filtrada.reduce((s, x) => s + (normalizarTipo(x.tipo) === "pagar" && x.ativa === "Sim" ? x.valor : 0), 0);
+  return { sucesso: true, lista: filtrada, total: filtrada.length, totalReceitas: receitas, totalDespesas: despesas, saldoPrevisto: receitas - despesas };
+}
+
+
+
+
+
+
+
+function validarLancamento(
+  competencia,
+  tipo,
+  descricao,
+  valor,
+  vencimento
+) {
+  competencia = String(competencia || "").trim();
+  tipo = String(tipo || "").trim();
+  descricao = String(descricao || "").trim();
+  vencimento = String(vencimento || "").trim();
+  valor = converterNumero(valor);
+
+  if (!validarCompetencia(competencia)) {
+    throw new Error("Informe uma competência válida no formato AAAA-MM, por exemplo, 2026-10.");
+  }
+  if (!tipo) throw new Error("Selecione o tipo do lançamento.");
+  if (!descricao) throw new Error("Informe a descrição.");
+  if (!isFinite(valor) || valor <= 0) throw new Error("Informe um valor maior que zero.");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(vencimento)) {
+    throw new Error("Informe o vencimento no formato AAAA-MM-DD.");
+  }
+
+  const partes = vencimento.split("-").map(Number);
+  const data = new Date(partes[0], partes[1] - 1, partes[2]);
+  if (
+    data.getFullYear() !== partes[0] ||
+    data.getMonth() !== partes[1] - 1 ||
+    data.getDate() !== partes[2]
+  ) {
+    throw new Error("A data de vencimento é inválida.");
+  }
+
+  return true;
+}
+
+/************************************************************
+ * CONVERTER NÚMERO
+ ************************************************************/
+
+function converterNumero(
+  valor
+) {
+
+  if (
+    valor === null ||
+    valor === undefined ||
+    valor === ""
+  ) {
+
+    return 0;
+
+  }
+
+
+  if (
+    typeof valor === "number"
+  ) {
+
+    return isFinite(valor)
+      ? valor
+      : 0;
+
+  }
+
+
+  let texto =
+    String(valor)
+      .trim()
+      .replace(
+        /R\$/gi,
+        ""
+      )
+      .replace(
+        /\s/g,
+        ""
+      );
+
+
+  if (
+    texto.indexOf(",") !== -1
+  ) {
+
+    texto =
+      texto
         .replace(
-            /R\$/gi,
-            ""
+          /\./g,
+          ""
         )
         .replace(
-            /\s/g,
-            ""
+          ",",
+          "."
         );
 
-
-    if(
-        texto.indexOf(",") >= 0
-    ){
-
-        texto =
-            texto.replace(
-                /\./g,
-                ""
-            );
+  }
 
 
-        texto =
-            texto.replace(
-                ",",
-                "."
-            );
-
-    }
-
-
-    const numero =
-        Number(
-            texto
-        );
-
-
-    return isFinite(numero)
-        ? numero
-        : 0;
-
-}
-
-
-/* =====================================================
-   FORMATAR MOEDA
-===================================================== */
-
-function formatarMoeda(valor){
-
-    return Number(
-        valor || 0
-    ).toLocaleString(
-        "pt-BR",
-        {
-            style:"currency",
-            currency:"BRL"
-        }
+  const numero =
+    Number(
+      texto
     );
 
+
+  return isNaN(numero)
+    ? 0
+    : numero;
+
 }
 
 
-/* =====================================================
-   FORMATAR DATA
-===================================================== */
+/************************************************************
+ * CONVERTER DATA PARA PLANILHA
+ ************************************************************/
 
-function formatarData(data){
+function converterDataPlanilha(
+  valor
+) {
 
-    if(
-        !data
-    ){
+  if (!valor) {
 
-        return "";
+    return "";
+
+  }
+
+
+  const texto =
+    String(
+      valor
+    ).trim();
+
+
+  if (
+    /^\d{4}-\d{2}-\d{2}$/.test(
+      texto
+    )
+  ) {
+
+    const partes =
+      texto.split("-");
+
+
+    return new Date(
+      Number(partes[0]),
+      Number(partes[1]) - 1,
+      Number(partes[2])
+    );
+
+  }
+
+
+  if (
+    /^\d{2}\/\d{2}\/\d{4}$/.test(
+      texto
+    )
+  ) {
+
+    const partes =
+      texto.split("/");
+
+
+    return new Date(
+      Number(partes[2]),
+      Number(partes[1]) - 1,
+      Number(partes[0])
+    );
+
+  }
+
+
+  return valor;
+
+}
+
+
+/************************************************************
+ * FORMATAR DATA
+ ************************************************************/
+
+function formatarData(
+  valor
+) {
+
+  if (!valor) {
+
+    return "";
+
+  }
+
+
+  if (
+    Object.prototype.toString.call(
+      valor
+    ) ===
+    "[object Date]"
+  ) {
+
+    if (
+      isNaN(
+        valor.getTime()
+      )
+    ) {
+
+      return "";
 
     }
 
 
-    const texto =
-        String(data).trim();
+    return Utilities.formatDate(
+      valor,
+      Session.getScriptTimeZone(),
+      "dd/MM/yyyy"
+    );
+
+  }
 
 
-    if(
-        /^\d{2}\/\d{2}\/\d{4}$/.test(
-            texto
-        )
-    ){
-
-        return texto;
-
-    }
+  const texto =
+    String(
+      valor
+    ).trim();
 
 
-    if(
-        /^\d{4}-\d{2}-\d{2}$/.test(
-            texto
-        )
-    ){
-
-        const partes =
-            texto.split("-");
-
-
-        return (
-            partes[2] +
-            "/" +
-            partes[1] +
-            "/" +
-            partes[0]
-        );
-
-    }
-
+  if (
+    /^\d{2}\/\d{2}\/\d{4}$/.test(
+      texto
+    )
+  ) {
 
     return texto;
 
-}
+  }
 
 
-/* =====================================================
-   NORMALIZAR TEXTO
-===================================================== */
-
-function normalizarTexto(valor){
-
-    return String(
-        valor ?? ""
+  if (
+    /^\d{4}-\d{2}-\d{2}$/.test(
+      texto
     )
-    .normalize("NFD")
-    .replace(
-        /[\u0300-\u036f]/g,
-        ""
-    )
-    .trim()
-    .toLowerCase();
+  ) {
 
-}
+    const partes =
+      texto.split("-");
 
 
-/* =====================================================
-   ESCAPAR HTML
-===================================================== */
-
-function escapeHtml(valor){
-
-    return String(
-        valor ?? ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
+    return (
+      partes[2] +
+      "/" +
+      partes[1] +
+      "/" +
+      partes[0]
     );
 
-}
+  }
 
 
-/* =====================================================
-   ESCAPAR ATRIBUTO
-===================================================== */
-
-function escapeHtmlAttr(valor){
-
-    return String(
-        valor ?? ""
-    )
-    .replace(
-        /\\/g,
-        "\\\\"
-    )
-    .replace(
-        /'/g,
-        "\\'"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    );
+  return texto;
 
 }
 
 
-/* =====================================================
-   MENSAGEM
-===================================================== */
+/************************************************************
+ * CONVERTER COMPETÊNCIA
+ ************************************************************/
 
-function mostrarMensagem(
-    texto,
-    tipo
-){
+function converterCompetencia(
+  valor
+) {
 
-    const elemento =
-        document.getElementById(
-            "mensagem"
-        );
+  if (!valor) {
 
+    return "";
 
-    elemento.textContent =
-        texto;
+  }
 
 
-    elemento.className =
-        "mensagem " +
-        (
-            tipo ||
-            "sucesso"
-        );
+  if (
+    Object.prototype.toString.call(
+      valor
+    ) ===
+    "[object Date]"
+  ) {
 
-}
+    if (
+      isNaN(
+        valor.getTime()
+      )
+    ) {
 
-
-function limparMensagem(){
-
-    const elemento =
-        document.getElementById(
-            "mensagem"
-        );
-
-
-    elemento.textContent =
-        "";
-
-
-    elemento.className =
-        "mensagem";
-
-}
-
-
-/* =====================================================
-   ERRO
-===================================================== */
-
-function obterMensagemErro(erro){
-
-    if(
-        erro &&
-        erro.message
-    ){
-
-        return erro.message;
+      return "";
 
     }
 
 
-    return String(
-        erro ||
-        "Erro desconhecido."
+    return Utilities.formatDate(
+      valor,
+      Session.getScriptTimeZone(),
+      "yyyy-MM"
     );
 
+  }
+
+
+  const texto =
+    String(
+      valor
+    ).trim();
+
+
+  /**********************************************************
+   * AAAA-MM
+   **********************************************************/
+
+  if (
+    /^\d{4}-\d{2}$/.test(
+      texto
+    )
+  ) {
+
+    return texto;
+
+  }
+
+
+  /**********************************************************
+   * MM/AAAA
+   **********************************************************/
+
+  if (
+    /^\d{2}\/\d{4}$/.test(
+      texto
+    )
+  ) {
+
+    const partes =
+      texto.split("/");
+
+
+    return (
+      partes[1] +
+      "-" +
+      partes[0]
+    );
+
+  }
+
+
+  /**********************************************************
+   * MM-AAAA
+   **********************************************************/
+
+  if (
+    /^\d{2}-\d{4}$/.test(
+      texto
+    )
+  ) {
+
+    const partes =
+      texto.split("-");
+
+
+    return (
+      partes[1] +
+      "-" +
+      partes[0]
+    );
+
+  }
+
+
+  /**********************************************************
+   * AAAA/MM
+   **********************************************************/
+
+  if (
+    /^\d{4}\/\d{2}$/.test(
+      texto
+    )
+  ) {
+
+    return texto.replace(
+      "/",
+      "-"
+    );
+
+  }
+
+
+  return texto;
+
 }
 
 
-/* =====================================================
-   VOLTAR
-===================================================== */
+/************************************************************
+ * VALIDAR COMPETÊNCIA
+ ************************************************************/
 
-function voltarIndex(){
+function validarCompetencia(competencia) {
+  const texto = String(competencia || "").trim();
+  const resultado = texto.match(/^(\d{4})-(\d{2})$/);
+  if (!resultado) return false;
+  const ano = Number(resultado[1]);
+  const mes = Number(resultado[2]);
+  return ano >= 1900 && ano <= 3000 && mes >= 1 && mes <= 12;
+}
 
-    window.location.href =
-        "./index.html";
+/************************************************************
+ * EH BAIXADO
+ ************************************************************/
+
+function ehBaixado(
+  valor
+) {
+
+  const texto =
+    String(
+      valor || ""
+    )
+      .trim()
+      .toLowerCase();
+
+
+  return (
+    texto === "sim" ||
+    texto === "baixado" ||
+    texto === "true" ||
+    texto === "1" ||
+    texto === "s"
+  );
 
 }
 
-</script>
 
-</body>
+/************************************************************
+ * NORMALIZAR BAIXADO
+ ************************************************************/
 
-</html>
+function normalizarBaixado(
+  valor
+) {
+
+  return ehBaixado(
+    valor
+  )
+    ? "Sim"
+    : "Não";
+
+}
