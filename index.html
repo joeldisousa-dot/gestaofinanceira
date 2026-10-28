@@ -10,7 +10,7 @@
 *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;background:var(--fundo);color:var(--texto)}
 .container{max-width:1180px;margin:auto;padding:24px 16px 36px}.card{overflow:hidden;background:#fff;border:1px solid var(--borda);border-radius:18px;box-shadow:0 12px 40px rgba(15,23,42,.07)}
 .header{padding:25px 30px;color:#fff;background:linear-gradient(135deg,var(--azul),var(--azul-claro))}.header h1{margin:0;font-size:26px}.header p{margin:7px 0 0;color:#dbe8f7;font-size:13px}
-.conteudo{padding:25px 30px}.menu-sistema{display:flex;gap:10px;flex-wrap:wrap;padding:12px 30px;background:#f8fafc;border-bottom:1px solid var(--borda)}.menu-sistema a{display:inline-flex;align-items:center;min-height:34px;padding:0 12px;border:1px solid #d5dde8;border-radius:8px;color:#17365d;text-decoration:none;font-size:11px;font-weight:750;background:#fff}.menu-sistema a.ativo{background:#17365d;color:#fff;border-color:#17365d}.barra{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}.competencia{display:flex;align-items:center;gap:10px}.competencia label,.campo label{color:#66758a;font-size:11px;font-weight:750}
+.conteudo{padding:25px 30px}.menu-sistema{display:flex;gap:8px;flex-wrap:wrap;padding:12px 30px;background:#f8fafc;border-bottom:1px solid var(--borda)}.menu-sistema a{display:inline-flex;align-items:center;min-height:34px;padding:0 10px;border:1px solid #d5dde8;border-radius:8px;color:#17365d;text-decoration:none;font-size:11px;font-weight:750;background:#fff;white-space:nowrap}.menu-sistema a.ativo{background:#17365d;color:#fff;border-color:#17365d}.barra{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}.competencia{display:flex;align-items:center;gap:10px}.competencia label,.campo label{color:#66758a;font-size:11px;font-weight:750}
 input,select{width:100%;height:41px;padding:0 11px;border:1px solid #d5dde8;border-radius:9px;outline:none;background:#fff;color:#24344b;font:inherit;font-size:12px}input:focus,select:focus{border-color:#356da5;box-shadow:0 0 0 3px rgba(53,109,165,.1)}#competencia{width:160px}.status{color:#52647a;font-size:11px;font-weight:700}
 .grid{display:grid;grid-template-columns:1fr 1.5fr 1fr 1fr;gap:13px}.campo{display:flex;flex-direction:column;gap:7px}.campo label{text-transform:uppercase;letter-spacing:.5px;font-size:10px}
 .checkbox-fixa{display:flex;align-items:center;gap:10px;min-height:43px;margin-top:18px;padding:0 12px;border:1px solid #d7e2dc;border-radius:9px;background:#f5fbf7;color:#17613c;font-size:12px;font-weight:700;cursor:pointer}.checkbox-fixa input{width:17px;height:17px;margin:0;accent-color:var(--verde)}
@@ -27,7 +27,15 @@ button{min-height:40px;padding:0 15px;border:1px solid #d5dde8;border-radius:9px
 <body>
 <div class="container"><div class="card">
 <header class="header"><h1>📋 Despesas e Receitas</h1><p>Cadastro e gerenciamento de despesas e receitas por competência.</p></header>
-<nav class="menu-sistema" aria-label="Menu do sistema"><a class="ativo" href="index.html">📋 Despesas e Receitas</a><a href="contas_bancarias.html">🏦 Contas bancárias e Pix</a></nav><main class="conteudo">
+<nav class="menu-sistema" aria-label="Menu do sistema">
+<a class="ativo" href="index.html">📋 Despesas e Receitas</a>
+<a href="Lancamentos.html">🧾 Lançamentos</a>
+<a href="Relatorio.html">📑 Relatórios</a>
+<a href="Graficos.html">📊 Gráficos</a>
+<a href="BaixasPendentes.html">⏳ Baixas pendentes</a>
+<a href="Atendimento.html">🎧 Atendimento</a>
+<a href="contas_bancarias.html">🏦 Contas bancárias e Pix</a>
+</nav><main class="conteudo">
 <div class="barra"><div class="competencia"><label for="competencia">Competência</label><input id="competencia" type="month" required></div><div id="status" class="status" role="status" aria-live="polite">Conectando à API...</div></div>
 <div class="grid">
 <div class="campo"><label for="tipo">Tipo</label><select id="tipo"><option value="pagar">Despesa</option><option value="receber">Receita</option></select></div>
