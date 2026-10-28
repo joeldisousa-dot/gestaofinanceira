@@ -2,1035 +2,708 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#17365d">
-<title>Relatório Financeiro</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17365d">
+  <title>Relatório Financeiro</title>
 
-<style>
-*{box-sizing:border-box}
-body{
-  margin:0;padding:20px;font-family:"Segoe UI",Arial,sans-serif;
-  background:linear-gradient(135deg,#e8eef5,#fff);color:#333
-}
-.container{
-  max-width:1100px;margin:auto;background:#fff;padding:25px;
-  border-radius:18px;box-shadow:0 8px 25px rgba(0,0,0,.15)
-}
-.topo{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}
-.topo h1{margin:0;font-size:28px;color:#0d47a1}
-button{
-  border:0;background:linear-gradient(135deg,#1976d2,#2196f3);
-  color:white;padding:12px 22px;border-radius:10px;cursor:pointer;
-  font-weight:bold;font-size:15px
-}
-button:hover{filter:brightness(1.08)}
-button:disabled{opacity:.6;cursor:wait}
-.voltar{background:linear-gradient(135deg,#455a64,#78909c);padding:14px 28px}
-.seletor-competencia{
-  display:flex;align-items:center;gap:12px;background:#f5f8fc;
-  border:1px solid #d9e2ec;padding:15px 18px;border-radius:12px;margin-bottom:20px
-}
-.seletor-competencia label{font-weight:bold}
-select{
-  min-width:220px;padding:11px 14px;border:1px solid #b0bec5;
-  border-radius:8px;background:#fff;font-size:15px;font-weight:bold
-}
-.cabecalho{
-  display:flex;justify-content:space-between;align-items:center;gap:20px;
-  background:linear-gradient(135deg,#0d47a1,#1976d2);color:#fff;
-  padding:20px;border-radius:12px;margin-bottom:25px
-}
-.cabecalho h1{margin:0;font-size:26px}
-.cabecalho p{margin:7px 0 0}
-.info{text-align:right;font-size:14px;line-height:25px}
-h2{font-size:18px;margin-top:25px;border-left:6px solid #1976d2;padding-left:10px;color:#1976d2}
-.tabela-container{overflow-x:auto;width:100%}
-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
-th{background:#1976d2;color:#fff;padding:10px;text-align:center}
-td{padding:9px;border-bottom:1px solid #ddd;text-align:center}
-td:first-child{text-align:left}
-tr:nth-child(even){background:#f8f9fc}
-tr:hover{background:#eef5ff}
-.valor{font-weight:bold;text-align:right!important;white-space:nowrap}
-.pago,.pendente{display:inline-block;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:bold}
-.pago{background:#c8e6c9;color:#256029}
-.pendente{background:#fff3cd;color:#856404}
-.total-receita,.total-despesa{
-  margin-top:12px;padding:12px;border-left:6px solid;
-  font-weight:bold;font-size:15px;border-radius:8px
-}
-.total-receita{background:#e8f5e9;border-color:#2e7d32;color:#2e7d32}
-.total-despesa{background:#ffebee;border-color:#c62828;color:#c62828}
-.resultado-final{
-  margin-top:20px;padding:15px;background:#e3f2fd;border-left:6px solid #1976d2;
-  font-size:18px;font-weight:bold;color:#0d47a1;border-radius:8px
-}
-.carregando{text-align:center;padding:25px;color:#777}
-.erro{background:#ffebee;color:#c62828;padding:15px;border-radius:8px;border-left:5px solid #c62828;overflow-wrap:anywhere}
-.diagnostico{
-  margin-top:15px;padding:12px;background:#f5f8fc;border:1px solid #d9e2ec;
-  border-radius:8px;font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere
-}
-.rodape{text-align:center;margin-top:25px;color:#777;font-size:12px}
-@media(max-width:700px){
-  body{padding:10px}.container{padding:15px}
-  .topo,.cabecalho{align-items:stretch;flex-direction:column}
-  .topo h1{font-size:22px}.voltar{width:100%}
-  .seletor-competencia{align-items:stretch;flex-direction:column}
-  .seletor-competencia select,.seletor-competencia button{width:100%}
-  .info{text-align:left}table{font-size:11px}th,td{padding:7px 5px}
-}
-@media print{
-  @page{size:A4 portrait;margin:10mm}
-  body{background:#fff;padding:0}
-  .container{width:100%;max-width:none;box-shadow:none;padding:10px}
-  button,.voltar,.seletor-competencia{display:none!important}
-  .cabecalho{background:#fff!important;color:#000;border:1px solid #ddd}
-  table{font-size:10px}th,td{padding:5px}
-  .diagnostico{display:none}
-}
-</style>
+  <style>
+    :root {
+      --azul: #17365d;
+      --azul2: #24558b;
+      --fundo: #f3f6fa;
+      --borda: #dce3ec;
+      --texto: #1e293b;
+      --muted: #64748b;
+      --verde: #16803c;
+      --vermelho: #b42318;
+      --branco: #fff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--fundo);
+      color: var(--texto);
+      font: 15px/1.5 Arial, Helvetica, sans-serif;
+    }
+
+    header {
+      background: linear-gradient(120deg, var(--azul), var(--azul2));
+      color: white;
+      padding: 25px 18px;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 28px));
+      margin: auto;
+    }
+
+    header h1 {
+      margin: 0 0 5px;
+      font-size: clamp(22px, 3vw, 30px);
+    }
+
+    header p { margin: 0; opacity: .9; }
+
+    main { padding: 22px 0 40px; }
+
+    .painel {
+      background: white;
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 24px rgba(23,54,93,.08);
+    }
+
+    .filtros {
+      display: grid;
+      grid-template-columns: minmax(190px, 1fr) auto auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    select, button {
+      font: inherit;
+      min-height: 43px;
+      border-radius: 9px;
+    }
+
+    select {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      padding: 9px 11px;
+      background: white;
+      color: var(--texto);
+    }
+
+    button {
+      border: 0;
+      padding: 10px 17px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    .primario {
+      color: white;
+      background: var(--azul);
+    }
+
+    .secundario {
+      color: var(--azul);
+      background: #e8eef6;
+    }
+
+    .status {
+      margin-top: 14px;
+      padding: 11px 13px;
+      border-radius: 9px;
+      background: #eff6ff;
+      color: #1d4e89;
+      overflow-wrap: anywhere;
+    }
+
+    .status.erro {
+      background: #fef2f2;
+      color: var(--vermelho);
+    }
+
+    .status.ok {
+      background: #f0fdf4;
+      color: var(--verde);
+    }
+
+    .resumo {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .indicador {
+      background: white;
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+      padding: 15px;
+    }
+
+    .indicador .nome {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .indicador .valor {
+      margin-top: 5px;
+      font-weight: bold;
+      font-size: clamp(18px, 2.5vw, 25px);
+      overflow-wrap: anywhere;
+    }
+
+    .positivo { color: var(--verde); }
+    .negativo { color: var(--vermelho); }
+
+    .tabela-wrap {
+      overflow-x: auto;
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 650px;
+    }
+
+    th, td {
+      padding: 11px 12px;
+      border-bottom: 1px solid #e5eaf1;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f8fafc;
+      color: #334155;
+      font-size: 13px;
+    }
+
+    td { overflow-wrap: anywhere; }
+
+    .vazio {
+      text-align: center;
+      padding: 28px 12px;
+      color: var(--muted);
+    }
+
+    .rodape {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 12px;
+    }
+
+    .oculto { display: none !important; }
+
+    @media (max-width: 680px) {
+      .filtros { grid-template-columns: 1fr; }
+      .resumo { grid-template-columns: 1fr; }
+      .painel { padding: 14px; }
+    }
+  </style>
 </head>
 
 <body>
-<div class="container">
-
-  <div class="topo">
-    <h1>📄 Relatório Financeiro</h1>
-    <button class="voltar" type="button" onclick="voltar()">⬅ Voltar</button>
+<header>
+  <div class="container">
+    <h1>Relatório Financeiro</h1>
+    <p>Consulte os lançamentos por competência.</p>
   </div>
+</header>
 
-  <div class="seletor-competencia">
-    <label for="selectCompetencia">📅 Competência:</label>
-    <select id="selectCompetencia" onchange="competenciaAlterada()">
-      <option value="">Carregando competências...</option>
-    </select>
-    <button id="btnAtualizar" type="button" onclick="carregarRelatorio()">🔄 Atualizar</button>
-  </div>
+<main class="container">
 
-  <div class="cabecalho">
-    <div>
-      <h1>💰 Controle Financeiro</h1>
-      <p>Relatório Financeiro Pessoal</p>
+  <section class="painel">
+    <div class="filtros">
+      <div>
+        <label for="competencia">Competência</label>
+        <select id="competencia"></select>
+      </div>
+
+      <button id="btnConsultar" class="primario" type="button">
+        Consultar relatório
+      </button>
+
+      <button id="btnAtualizar" class="secundario" type="button">
+        Atualizar
+      </button>
     </div>
-    <div class="info">
-      Competência: <b id="competencia">-</b><br>
-      Emitido: <span id="data">-</span>
+
+    <div id="status" class="status" role="status" aria-live="polite">
+      Preparando consulta...
     </div>
-  </div>
 
-  <h2>📥 Receitas</h2>
-  <div id="receber" class="carregando">Selecione uma competência.</div>
+    <div class="rodape">
+      A competência é enviada à API no formato AAAA-MM.
+    </div>
+  </section>
 
-  <h2>📤 Despesas</h2>
-  <div id="pagar" class="carregando">Selecione uma competência.</div>
+  <section id="resumo" class="resumo oculto">
+    <div class="indicador">
+      <div class="nome">Quantidade de lançamentos</div>
+      <div id="totalRegistros" class="valor">0</div>
+    </div>
 
-  <div id="resumoFinal" class="resultado-final">
-    Selecione uma competência para calcular o resultado.
-  </div>
+    <div class="indicador">
+      <div class="nome">Total de receitas</div>
+      <div id="totalReceitas" class="valor positivo">R$ 0,00</div>
+    </div>
 
-  <div id="diagnostico" class="diagnostico" hidden></div>
+    <div class="indicador">
+      <div class="nome">Total de despesas</div>
+      <div id="totalDespesas" class="valor negativo">R$ 0,00</div>
+    </div>
+  </section>
 
-  <p style="text-align:right">
-    <button type="button" onclick="window.print()">🖨 Imprimir / Salvar PDF</button>
-  </p>
+  <section class="painel">
+    <h2 style="font-size:19px;margin:0 0 14px">
+      Lançamentos da competência
+    </h2>
 
-  <div class="rodape">
-    Relatório gerado automaticamente<br>
-    Controle Financeiro Pessoal
-  </div>
-</div>
+    <div id="areaTabela" class="tabela-wrap">
+      <div class="vazio">Carregando relatório...</div>
+    </div>
+  </section>
+
+</main>
 
 <script>
-"use strict";
+(() => {
+  'use strict';
 
-/* =====================================================
-   CONFIGURAÇÃO DA API
-===================================================== */
+  /*
+   * URL publicada do Google Apps Script.
+   * Confirme se esta é a versão atual do seu Web App.
+   */
+  const API_URL =
+    'https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec';
 
-const URL_API =
-"https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec";
+  const seletor = document.getElementById('competencia');
+  const status = document.getElementById('status');
+  const areaTabela = document.getElementById('areaTabela');
+  const resumo = document.getElementById('resumo');
+  const btnConsultar = document.getElementById('btnConsultar');
+  const btnAtualizar = document.getElementById('btnAtualizar');
 
-let contadorJSONP = 0;
-let requisicaoAtual = 0;
-let competenciaSelecionada = "";
-
-/* =====================================================
-   COMPETÊNCIAS E DATAS
-===================================================== */
-
-function converterCompetencia(valor) {
-  if (valor === null || valor === undefined) return "";
-
-  // Algumas APIs devolvem objetos de data serializados em JSON.
-  if (typeof valor === "object") {
-    if (valor instanceof Date) {
-      if (isNaN(valor.getTime())) return "";
-      return anoMes(valor.getFullYear(), valor.getMonth() + 1);
-    }
-
-    if (valor.year !== undefined && valor.month !== undefined) {
-      return anoMes(valor.year, valor.month);
-    }
-
-    if (valor.ano !== undefined && valor.mes !== undefined) {
-      return anoMes(valor.ano, valor.mes);
-    }
-
-    if (valor.value !== undefined) {
-      return converterCompetencia(valor.value);
-    }
-
-    if (valor.iso !== undefined) {
-      return converterCompetencia(valor.iso);
-    }
-
-    return "";
-  }
-
-  const texto = String(valor).trim();
-  let m;
-
-  // AAAA-MM
-  if ((m = texto.match(/^(\d{4})-(\d{1,2})$/))) {
-    return anoMes(m[1], m[2]);
-  }
-
-  // MM/AAAA
-  if ((m = texto.match(/^(\d{1,2})\/(\d{4})$/))) {
-    return anoMes(m[2], m[1]);
-  }
-
-  // MM-AAAA
-  if ((m = texto.match(/^(\d{1,2})-(\d{4})$/))) {
-    return anoMes(m[2], m[1]);
-  }
-
-  // AAAA/MM
-  if ((m = texto.match(/^(\d{4})\/(\d{1,2})$/))) {
-    return anoMes(m[1], m[2]);
-  }
-
-  // AAAA-MM-DD
-  if ((m = texto.match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:T.*)?$/))) {
-    return anoMes(m[1], m[2]);
-  }
-
-  // DD/MM/AAAA
-  if ((m = texto.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/))) {
-    return anoMes(m[3], m[2]);
-  }
-
-  // Evita interpretar texto ou números isolados como data.
-  if (!/[/-]/.test(texto)) return "";
-
-  const data = new Date(texto);
-
-  if (!isNaN(data.getTime())) {
-    return anoMes(data.getFullYear(), data.getMonth() + 1);
-  }
-
-  return "";
-}
-
-function anoMes(ano, mes) {
-  const a = Number(ano);
-  const m = Number(mes);
-
-  if (!Number.isInteger(a) || a < 1900 || a > 2200 ||
-      !Number.isInteger(m) || m < 1 || m > 12) {
-    return "";
-  }
-
-  return String(a) + "-" + String(m).padStart(2, "0");
-}
-
-function competenciaAtual() {
-  const d = new Date();
-  return anoMes(d.getFullYear(), d.getMonth() + 1);
-}
-
-function obterCompetenciaURL() {
-  const params = new URLSearchParams(location.search);
-
-  return converterCompetencia(
-    params.get("competencia") ||
-    params.get("comp") ||
-    ""
-  );
-}
-
-function formatarCompetencia(valor) {
-  const comp = converterCompetencia(valor);
-
-  if (!comp) return valor || "-";
-
-  const partes = comp.split("-");
-  return partes[1] + "/" + partes[0];
-}
-
-function gerarUltimasCompetencias(quantidade) {
-  const lista = [];
-  const agora = new Date();
-
-  for (let i = 0; i < quantidade; i++) {
-    const d = new Date(
-      agora.getFullYear(),
-      agora.getMonth() - i,
-      1
-    );
-
-    lista.push(anoMes(d.getFullYear(), d.getMonth() + 1));
-  }
-
-  return lista;
-}
-
-/* =====================================================
-   CONSULTA JSONP
-===================================================== */
-
-function chamarAPI(acao, parametros = {}) {
-  return new Promise((resolve, reject) => {
-    const callback =
-      "financeiroCallback_" + Date.now() + "_" + (++contadorJSONP);
-
-    const script = document.createElement("script");
-
-    const dados = Object.assign({}, parametros, {
-      action: acao,
-      callback: callback
-    });
-
-    const query = Object.keys(dados)
-      .map(chave =>
-        encodeURIComponent(chave) + "=" +
-        encodeURIComponent(String(dados[chave] ?? ""))
-      )
-      .join("&");
-
-    let finalizado = false;
-
-    const temporizador = setTimeout(() => {
-      finalizar(new Error(
-        "Tempo limite excedido ao consultar a API após 30 segundos."
-      ));
-    }, 30000);
-
-    function limpar() {
-      clearTimeout(temporizador);
-
-      try {
-        delete window[callback];
-      } catch (e) {
-        window[callback] = undefined;
-      }
-
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    }
-
-    function finalizar(erro, resposta) {
-      if (finalizado) return;
-
-      finalizado = true;
-      limpar();
-
-      if (erro) reject(erro);
-      else resolve(resposta);
-    }
-
-    window[callback] = resposta => finalizar(null, resposta);
-
-    script.onerror = () => finalizar(new Error(
-      "Falha ao consultar a API. Confira a URL e a publicação do Apps Script."
-    ));
-
-    script.async = true;
-
-    script.src = URL_API +
-      (URL_API.includes("?") ? "&" : "?") + query;
-
-    document.head.appendChild(script);
+  const moeda = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
   });
-}
 
-/* =====================================================
-   ESTRUTURA DA RESPOSTA
-===================================================== */
+  function competenciaValida(valor) {
+    return /^\d{4}-(0[1-9]|1[0-2])$/.test(String(valor || ''));
+  }
 
-function extrairLista(resposta) {
-  if (Array.isArray(resposta)) return resposta;
+  function formatarCompetencia(valor) {
+    if (!competenciaValida(valor)) return valor;
 
-  if (!resposta || typeof resposta !== "object") return [];
+    const partes = valor.split('-');
+    return partes[1] + '/' + partes[0];
+  }
 
-  const chaves = [
-    "dados", "lista", "lancamentos", "lançamentos",
-    "registros", "resultados", "items", "data"
-  ];
+  function competenciaDoMesAtual() {
+    const agora = new Date();
 
-  for (const chave of chaves) {
-    const valor = resposta[chave];
+    return agora.getFullYear() + '-' +
+      String(agora.getMonth() + 1).padStart(2, '0');
+  }
 
-    if (Array.isArray(valor)) return valor;
+  function montarCompetencias() {
+    const parametros = new URLSearchParams(location.search);
 
-    if (valor && typeof valor === "object") {
-      for (const subchave of chaves) {
-        if (Array.isArray(valor[subchave])) {
-          return valor[subchave];
+    // A competência que vem na URL da página deve ser copiada para o seletor.
+    const informada = parametros.get('competencia') ||
+                      parametros.get('mes');
+
+    const inicial = competenciaValida(informada)
+      ? informada
+      : competenciaDoMesAtual();
+
+    const partes = inicial.split('-').map(Number);
+    const dataBase = new Date(partes[0], partes[1] - 1, 1);
+
+    seletor.replaceChildren();
+
+    // Exibe 60 competências, começando pelo mês solicitado.
+    for (let i = 0; i < 60; i++) {
+      const data = new Date(
+        dataBase.getFullYear(),
+        dataBase.getMonth() - i,
+        1
+      );
+
+      const valor = data.getFullYear() + '-' +
+        String(data.getMonth() + 1).padStart(2, '0');
+
+      const opcao = document.createElement('option');
+      opcao.value = valor;
+      opcao.textContent = formatarCompetencia(valor);
+      seletor.appendChild(opcao);
+    }
+
+    seletor.value = inicial;
+    return inicial;
+  }
+
+  function mostrarStatus(mensagem, tipo = '') {
+    status.textContent = mensagem;
+    status.className = 'status' + (tipo ? ' ' + tipo : '');
+  }
+
+  function bloquearInterface(bloquear) {
+    btnConsultar.disabled = bloquear;
+    btnAtualizar.disabled = bloquear;
+    seletor.disabled = bloquear;
+    btnConsultar.textContent = bloquear
+      ? 'Consultando...'
+      : 'Consultar relatório';
+  }
+
+  /*
+   * IMPORTANTE:
+   * A competência da página NÃO é automaticamente enviada à API.
+   * Por isso, esta função adiciona explicitamente:
+   * action=listarLancamentos
+   * competencia=AAAA-MM
+   * callback=...
+   */
+  function montarUrlApi(competencia, callback) {
+    const url = new URL(API_URL);
+
+    url.searchParams.set('action', 'listarLancamentos');
+    url.searchParams.set('competencia', competencia);
+    url.searchParams.set('callback', callback);
+    url.searchParams.set('_cache', Date.now());
+
+    return url.toString();
+  }
+
+  function consultarApi(competencia) {
+    return new Promise((resolve, reject) => {
+      const callback = '__relatorio_' + Date.now() + '_' +
+        Math.random().toString(36).slice(2);
+
+      const script = document.createElement('script');
+      let concluido = false;
+
+      const temporizador = setTimeout(() => {
+        finalizar(new Error(
+          'Tempo esgotado ao consultar a API. Verifique a publicação do Apps Script e a URL do Web App.'
+        ));
+      }, 25000);
+
+      function limpar() {
+        clearTimeout(temporizador);
+        script.remove();
+
+        try {
+          delete window[callback];
+        } catch (e) {
+          window[callback] = undefined;
         }
       }
-    }
-  }
 
-  return [];
-}
+      function finalizar(erro, dados) {
+        if (concluido) return;
+        concluido = true;
+        limpar();
 
-function normalizarTexto(texto) {
-  return String(texto ?? "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .trim();
-}
+        if (erro) reject(erro);
+        else resolve(dados);
+      }
 
-function localizarCampo(item, nomes) {
-  if (!item || typeof item !== "object") return "";
+      window[callback] = dados => finalizar(null, dados);
 
-  // Primeiro tenta os nomes exatos.
-  for (const nome of nomes) {
-    if (item[nome] !== undefined &&
-        item[nome] !== null &&
-        String(item[nome]).trim() !== "") {
-      return item[nome];
-    }
-  }
+      script.onerror = () => finalizar(new Error(
+        'Não foi possível acessar a API. Confirme a URL do Apps Script e se o Web App está publicado para acesso pela web.'
+      ));
 
-  // Depois tenta ignorando maiúsculas, acentos e espaços.
-  const desejados = nomes.map(normalizarTexto);
+      script.src = montarUrlApi(competencia, callback);
 
-  for (const chave of Object.keys(item)) {
-    if (desejados.includes(normalizarTexto(chave)) &&
-        item[chave] !== null &&
-        item[chave] !== undefined &&
-        String(item[chave]).trim() !== "") {
-      return item[chave];
-    }
-  }
+      // Exibe no console a URL exata enviada para facilitar o diagnóstico.
+      console.log('URL enviada para a API:', script.src);
 
-  return "";
-}
-
-/* =====================================================
-   IDENTIFICAR A COMPETÊNCIA DE CADA LANÇAMENTO
-===================================================== */
-
-function obterCompetenciaItem(item) {
-  if (!item || typeof item !== "object") return "";
-
-  // Campos que podem conter a competência diretamente.
-  const camposCompetencia = [
-    "Competência", "Competencia", "COMPETENCIA",
-    "comp", "competenciaFormatada", "mesCompetencia",
-    "MesCompetencia", "CompetenciaData",
-    "dataCompetencia", "DataCompetencia",
-    "Mês/Ano", "Mes/Ano", "Referência",
-    "Referencia", "Periodo", "Período"
-  ];
-
-  for (const campo of camposCompetencia) {
-    const valor = localizarCampo(item, [campo]);
-
-    if (valor !== "") {
-      const comp = converterCompetencia(valor);
-
-      if (comp) return comp;
-    }
-  }
-
-  // Se não existir coluna de competência, tenta as datas.
-  const camposData = [
-    "Vencimento", "DataVencimento", "dataVencimento",
-    "Data", "data", "DATA", "DataLancamento",
-    "DataLançamento", "Data do lançamento",
-    "DataPagamento", "Data de pagamento",
-    "dataPagamento", "CriadoEm", "DataCadastro"
-  ];
-
-  for (const campo of camposData) {
-    const valor = localizarCampo(item, [campo]);
-
-    if (valor !== "") {
-      const comp = converterCompetencia(valor);
-
-      if (comp) return comp;
-    }
-  }
-
-  return "";
-}
-
-/* =====================================================
-   CARREGAR A LISTA DE COMPETÊNCIAS
-===================================================== */
-
-async function carregarCompetencias() {
-  const select = document.getElementById("selectCompetencia");
-
-  select.innerHTML =
-    '<option value="">Consultando competências...</option>';
-
-  const competencias = new Set();
-
-  // Garante que a competência atual e os meses anteriores
-  // possam ser selecionados mesmo se não forem identificados
-  // automaticamente nos dados retornados pela API.
-  gerarUltimasCompetencias(60).forEach(comp => {
-    competencias.add(comp);
-  });
-
-  const competenciaURL = obterCompetenciaURL();
-
-  if (competenciaURL) {
-    competencias.add(competenciaURL);
-  }
-
-  let totalAPI = 0;
-  let erroAPI = "";
-
-  try {
-    const resposta = await chamarAPI("listarLancamentos", {});
-
-    console.log("Resposta da API ao carregar competências:", resposta);
-
-    if (resposta && resposta.sucesso === false) {
-      throw new Error(
-        resposta.erro || resposta.mensagem || "Erro informado pela API."
-      );
-    }
-
-    const lista = extrairLista(resposta);
-    totalAPI = lista.length;
-
-    lista.forEach(item => {
-      const comp = obterCompetenciaItem(item);
-
-      if (comp) competencias.add(comp);
+      document.body.appendChild(script);
     });
-
-  } catch (erro) {
-    erroAPI = erro.message || String(erro);
-    console.error("Erro ao carregar competências:", erro);
   }
 
-  const ordenadas = Array.from(competencias).sort(
-    (a, b) => b.localeCompare(a)
-  );
+  function extrairLista(resposta) {
+    console.log('Resposta bruta da API:', resposta);
 
-  select.innerHTML = "";
+    if (Array.isArray(resposta)) return resposta;
 
-  ordenadas.forEach(comp => {
-    const option = document.createElement("option");
-
-    option.value = comp;
-    option.textContent = formatarCompetencia(comp);
-
-    select.appendChild(option);
-  });
-
-  // Prioridade: URL, mês atual.
-  const inicial = competenciaURL || competenciaAtual();
-
-  select.value = inicial;
-  competenciaSelecionada = inicial;
-
-  atualizarCabecalho();
-
-  let mensagem =
-    "Competências disponíveis: " + ordenadas.length +
-    "\nLançamentos identificados na consulta inicial: " + totalAPI +
-    "\nCompetência selecionada: " + formatarCompetencia(inicial);
-
-  if (erroAPI) {
-    mensagem += "\nAviso na consulta inicial: " + erroAPI;
-  }
-
-  mostrarDiagnostico(mensagem);
-}
-
-/* =====================================================
-   CABEÇALHO E DIAGNÓSTICO
-===================================================== */
-
-function atualizarCabecalho() {
-  document.getElementById("competencia").textContent =
-    formatarCompetencia(competenciaSelecionada);
-}
-
-function atualizarData() {
-  document.getElementById("data").textContent =
-    new Date().toLocaleString("pt-BR");
-}
-
-function mostrarDiagnostico(texto) {
-  const el = document.getElementById("diagnostico");
-
-  el.hidden = !texto;
-  el.textContent = texto || "";
-}
-
-/* =====================================================
-   SELEÇÃO DA COMPETÊNCIA
-===================================================== */
-
-function competenciaAlterada() {
-  const select = document.getElementById("selectCompetencia");
-  const comp = converterCompetencia(select.value);
-
-  if (!comp) return;
-
-  competenciaSelecionada = comp;
-  atualizarCabecalho();
-
-  try {
-    const url = new URL(location.href);
-
-    url.searchParams.set("competencia", comp);
-
-    history.replaceState(
-      {},
-      "",
-      url.pathname + url.search + url.hash
-    );
-  } catch (erro) {
-    console.warn("Não foi possível atualizar a URL:", erro);
-  }
-
-  carregarRelatorio();
-}
-
-/* =====================================================
-   CARREGAR RELATÓRIO
-===================================================== */
-
-async function carregarRelatorio() {
-  const receber = document.getElementById("receber");
-  const pagar = document.getElementById("pagar");
-  const resumo = document.getElementById("resumoFinal");
-  const botao = document.getElementById("btnAtualizar");
-  const select = document.getElementById("selectCompetencia");
-
-  const comp = converterCompetencia(
-    select.value || competenciaSelecionada
-  );
-
-  if (!comp) {
-    receber.innerHTML =
-      '<div class="erro">Selecione uma competência válida.</div>';
-
-    pagar.innerHTML = "";
-    resumo.textContent = "Competência inválida.";
-    return;
-  }
-
-  competenciaSelecionada = comp;
-  atualizarCabecalho();
-
-  const idRequisicao = ++requisicaoAtual;
-
-  receber.innerHTML =
-    '<div class="carregando">⏳ Carregando receitas...</div>';
-
-  pagar.innerHTML =
-    '<div class="carregando">⏳ Carregando despesas...</div>';
-
-  resumo.textContent = "Calculando resultado...";
-
-  botao.disabled = true;
-  botao.textContent = "⏳ Carregando...";
-
-  try {
-    /*
-      A consulta é feita sem filtro de competência.
-      O filtro é realizado no navegador para evitar diferenças
-      entre os formatos AAAA-MM e MM/AAAA aceitos pela API.
-    */
-    const resposta = await chamarAPI("listarLancamentos", {});
-
-    console.log("Resposta bruta do relatório:", resposta);
-
-    if (idRequisicao !== requisicaoAtual) return;
-
-    if (!resposta) {
-      throw new Error("A API não retornou uma resposta.");
+    if (!resposta || typeof resposta !== 'object') {
+      throw new Error('A API retornou uma resposta vazia ou inválida.');
     }
 
     if (resposta.sucesso === false) {
       throw new Error(
-        resposta.erro || resposta.mensagem || "A API informou uma falha."
+        resposta.mensagem ||
+        resposta.erro ||
+        'O Apps Script informou que não foi possível consultar os dados.'
       );
     }
 
-    const todos = extrairLista(resposta);
+    const propriedades = [
+      'lista',
+      'lancamentos',
+      'dados',
+      'registros',
+      'resultado'
+    ];
 
-    console.log("Total de registros recebidos:", todos.length);
-
-    if (!todos.length) {
-      mostrarDiagnostico(
-        "A API respondeu, mas não foi reconhecida uma lista de lançamentos." +
-        "\nVerifique o console do navegador (F12)." +
-        "\nResposta recebida: " +
-        JSON.stringify(resposta).slice(0, 2500)
-      );
-
-      receber.innerHTML =
-        '<div class="erro">A API respondeu, mas não foram identificados lançamentos. Confira o diagnóstico abaixo.</div>';
-
-      pagar.innerHTML =
-        '<div class="erro">Não foi possível identificar a lista de lançamentos.</div>';
-
-      resumo.textContent = "Relatório sem dados reconhecidos.";
-      return;
+    for (const propriedade of propriedades) {
+      if (Array.isArray(resposta[propriedade])) {
+        return resposta[propriedade];
+      }
     }
 
-    const filtrados = todos.filter(item =>
-      obterCompetenciaItem(item) === comp
+    if (resposta.sucesso === true) return [];
+
+    throw new Error(
+      'A API respondeu, mas não retornou uma lista reconhecida. Confira o formato do JSON do Apps Script.'
     );
-
-    console.log(
-      "Competência:", comp,
-      "| recebidos:", todos.length,
-      "| encontrados:", filtrados.length
-    );
-
-    if (!filtrados.length) {
-      const exemplos = todos.slice(0, 5).map(item => ({
-        campos: Object.keys(item || {}),
-        competenciaIdentificada: obterCompetenciaItem(item),
-        registro: item
-      }));
-
-      mostrarDiagnostico(
-        "A API retornou " + todos.length +
-        " lançamento(s), mas nenhum foi associado à competência " +
-        formatarCompetencia(comp) + "." +
-        "\n\nConfira os campos e valores dos primeiros registros:" +
-        "\n" + JSON.stringify(exemplos, null, 2)
-      );
-    } else {
-      mostrarDiagnostico(
-        "Consulta concluída." +
-        "\nTotal recebido da API: " + todos.length +
-        "\nLançamentos de " + formatarCompetencia(comp) +
-        ": " + filtrados.length
-      );
-    }
-
-    processarRelatorio(filtrados);
-
-    atualizarData();
-
-  } catch (erro) {
-    console.error("Erro ao carregar relatório:", erro);
-
-    if (idRequisicao !== requisicaoAtual) return;
-
-    const mensagem = escaparHTML(
-      erro.message || String(erro)
-    );
-
-    receber.innerHTML =
-      '<div class="erro">Erro ao carregar receitas:<br>' +
-      mensagem + '</div>';
-
-    pagar.innerHTML =
-      '<div class="erro">Erro ao carregar despesas:<br>' +
-      mensagem + '</div>';
-
-    resumo.textContent = "Não foi possível gerar o relatório.";
-
-    mostrarDiagnostico(
-      "Detalhes técnicos:\n" +
-      (erro.stack || erro.message || String(erro))
-    );
-
-  } finally {
-    if (idRequisicao === requisicaoAtual) {
-      botao.disabled = false;
-      botao.textContent = "🔄 Atualizar";
-    }
   }
-}
 
-/* =====================================================
-   PROCESSAR RECEITAS E DESPESAS
-===================================================== */
+  function normalizarNome(nome) {
+    return String(nome)
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .replace(/[_-]+/g, ' ')
+      .replace(/^./, letra => letra.toUpperCase());
+  }
 
-function processarRelatorio(lista) {
-  const receitas = [];
-  const despesas = [];
-
-  let totalReceitas = 0;
-  let totalDespesas = 0;
-  let totalRepasse = 0;
-
-  lista.forEach(item => {
-    if (!item || typeof item !== "object") return;
-
-    const descricao = localizarCampo(
-      item, ["Descricao", "Descrição", "descricao"]
-    );
-
-    const tipo = localizarCampo(
-      item, ["Tipo", "tipo", "TIPO"]
-    );
-
-    const valor = converterNumero(
-      localizarCampo(item, ["Valor", "valor", "VALOR"])
-    );
-
-    const baixado = ehBaixado(
-      localizarCampo(item, ["Baixado", "baixado", "Pago"])
-    );
-
-    if (tipoContasReceber(tipo)) {
-      receitas.push(item);
-      totalReceitas += valor;
-      return;
+  function formatarCelula(valor) {
+    if (valor === null || valor === undefined || valor === '') {
+      return '—';
     }
 
-    if (tipoContasPagar(tipo)) {
-      if (
-        normalizarTexto(descricao) === "repasse aluguel" &&
-        baixado
-      ) {
-        totalRepasse += valor;
+    if (typeof valor === 'object') {
+      return JSON.stringify(valor);
+    }
+
+    if (typeof valor === 'boolean') {
+      return valor ? 'Sim' : 'Não';
+    }
+
+    return String(valor);
+  }
+
+  function localizarCampo(objeto, nomes) {
+    const normalizar = texto =>
+      String(texto).toLowerCase().replace(/[\s_-]/g, '');
+
+    const chaves = Object.keys(objeto || {});
+    const chave = chaves.find(k =>
+      nomes.map(normalizar).includes(normalizar(k))
+    );
+
+    return chave === undefined ? undefined : objeto[chave];
+  }
+
+  function converterNumero(valor) {
+    if (typeof valor === 'number') {
+      return Number.isFinite(valor) ? valor : 0;
+    }
+
+    if (valor === null || valor === undefined || valor === '') {
+      return 0;
+    }
+
+    let texto = String(valor).trim().replace(/[R$\s]/g, '');
+
+    if (texto.includes(',')) {
+      texto = texto.replace(/\./g, '').replace(',', '.');
+    }
+
+    const numero = Number(texto);
+    return Number.isFinite(numero) ? numero : 0;
+  }
+
+  function atualizarResumo(lista) {
+    let receitas = 0;
+    let despesas = 0;
+
+    lista.forEach(item => {
+      if (!item || typeof item !== 'object') return;
+
+      const valor = converterNumero(localizarCampo(item, [
+        'valor',
+        'valorLancamento',
+        'valor lançamento',
+        'valorTotal'
+      ]));
+
+      const tipo = String(localizarCampo(item, [
+        'tipo',
+        'natureza',
+        'classificacao',
+        'categoria'
+      ]) || '').toLowerCase();
+
+      if (tipo.includes('despesa') ||
+          tipo.includes('saída') ||
+          tipo.includes('saida')) {
+        despesas += Math.abs(valor);
+      } else if (tipo.includes('receita') ||
+                 tipo.includes('entrada')) {
+        receitas += Math.abs(valor);
+      } else if (valor < 0) {
+        despesas += Math.abs(valor);
       } else {
-        despesas.push(item);
-        totalDespesas += valor;
+        receitas += valor;
       }
+    });
 
+    document.getElementById('totalRegistros').textContent =
+      String(lista.length);
+
+    document.getElementById('totalReceitas').textContent =
+      moeda.format(receitas);
+
+    document.getElementById('totalDespesas').textContent =
+      moeda.format(despesas);
+
+    resumo.classList.remove('oculto');
+  }
+
+  function renderizarTabela(lista) {
+    areaTabela.replaceChildren();
+
+    if (lista.length === 0) {
+      const vazio = document.createElement('div');
+      vazio.className = 'vazio';
+      vazio.textContent =
+        'A consulta foi concluída, mas a API não encontrou lançamentos para ' +
+        formatarCompetencia(seletor.value) + '.';
+      areaTabela.appendChild(vazio);
       return;
     }
 
-    console.warn("Tipo de lançamento não reconhecido:", item);
-  });
-
-  // Mantém a regra original de repasse de aluguel.
-  totalReceitas = Math.max(0, totalReceitas - totalRepasse);
-  totalDespesas = Math.max(0, totalDespesas - totalRepasse);
-
-  montarTabela("receber", receitas, "receita", totalReceitas);
-  montarTabela("pagar", despesas, "despesa", totalDespesas);
-
-  const saldo = totalReceitas - totalDespesas;
-
-  const cor = saldo >= 0 ? "#2e7d32" : "#c62828";
-
-  document.getElementById("resumoFinal").innerHTML =
-    "Resultado da competência: <span style=\"color:" +
-    cor + "\">" + formatar(saldo) + "</span>";
-}
-
-function tipoContasReceber(tipo) {
-  const t = normalizarTexto(tipo);
-
-  return t.includes("contas a receber") ||
-    t.includes("conta a receber") ||
-    t === "receita" ||
-    t === "entrada" ||
-    t === "receber";
-}
-
-function tipoContasPagar(tipo) {
-  const t = normalizarTexto(tipo);
-
-  return t.includes("contas a pagar") ||
-    t.includes("conta a pagar") ||
-    t === "despesa" ||
-    t === "saida" ||
-    t === "pagar";
-}
-
-/* =====================================================
-   MONTAR TABELAS
-===================================================== */
-
-function montarTabela(id, lista, tipo, total) {
-  const elemento = document.getElementById(id);
-
-  if (!lista.length) {
-    elemento.innerHTML =
-      '<div class="carregando">Nenhum lançamento encontrado nesta competência.</div>';
-    return;
-  }
-
-  let html =
-    '<div class="tabela-container">' +
-    '<table><thead><tr>' +
-    '<th>Descrição</th>' +
-    '<th>Valor</th>' +
-    '<th>Vencimento</th>' +
-    '<th>Status</th>' +
-    '</tr></thead><tbody>';
-
-  lista.forEach(item => {
-    const descricao = localizarCampo(
-      item, ["Descricao", "Descrição", "descricao"]
-    );
-
-    const valor = converterNumero(
-      localizarCampo(item, ["Valor", "valor", "VALOR"])
-    );
-
-    const vencimento = localizarCampo(
-      item, ["Vencimento", "vencimento", "DataVencimento",
-             "dataVencimento", "Data", "data"]
-    );
-
-    const baixado = ehBaixado(
-      localizarCampo(item, ["Baixado", "baixado", "Pago"])
-    );
-
-    html +=
-      "<tr><td>" + escaparHTML(descricao) + "</td>" +
-      '<td class="valor">' + formatar(valor) + "</td>" +
-      "<td>" + escaparHTML(formatarData(vencimento)) + "</td>" +
-      "<td>" +
-      (baixado
-        ? '<span class="pago">✔ Pago</span>'
-        : '<span class="pendente">⏳ Pendente</span>') +
-      "</td></tr>";
-  });
-
-  html += "</tbody></table></div>";
-
-  if (tipo === "receita") {
-    html +=
-      '<div class="total-receita">Total de Receitas:<br>' +
-      formatar(total) + "</div>";
-  } else {
-    html +=
-      '<div class="total-despesa">Total de Despesas:<br>' +
-      formatar(total) + "</div>";
-  }
-
-  elemento.innerHTML = html;
-}
-
-/* =====================================================
-   FORMATAÇÃO
-===================================================== */
-
-function converterNumero(valor) {
-  if (valor === null || valor === undefined || valor === "") {
-    return 0;
-  }
-
-  if (typeof valor === "number") {
-    return Number.isFinite(valor) ? valor : 0;
-  }
-
-  let texto = String(valor)
-    .trim()
-    .replace(/R\$/gi, "")
-    .replace(/\s/g, "");
-
-  if (texto.includes(",")) {
-    texto = texto.replace(/\./g, "").replace(",", ".");
-  }
-
-  const numero = Number(texto);
-
-  return Number.isFinite(numero) ? numero : 0;
-}
-
-function ehBaixado(valor) {
-  const t = normalizarTexto(valor);
-
-  return valor === true ||
-    valor === 1 ||
-    t === "sim" ||
-    t === "s" ||
-    t === "true" ||
-    t === "1" ||
-    t === "pago" ||
-    t === "baixado" ||
-    t === "quitado";
-}
-
-function formatar(valor) {
-  return converterNumero(valor).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL"
-  });
-}
-
-function formatarData(valor) {
-  if (valor === null || valor === undefined || valor === "") {
-    return "";
-  }
-
-  if (valor instanceof Date) {
-    return isNaN(valor.getTime())
-      ? ""
-      : valor.toLocaleDateString("pt-BR");
-  }
-
-  const texto = String(valor).trim();
-  let m;
-
-  if ((m = texto.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/))) {
-    return m[1].padStart(2, "0") + "/" +
-      m[2].padStart(2, "0") + "/" + m[3];
-  }
-
-  if ((m = texto.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/))) {
-    return m[3].padStart(2, "0") + "/" +
-      m[2].padStart(2, "0") + "/" + m[1];
-  }
-
-  return texto;
-}
-
-function escaparHTML(valor) {
-  return String(valor ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-/* =====================================================
-   VOLTAR E INICIALIZAÇÃO
-===================================================== */
-
-function voltar() {
-  try {
-    if (document.referrer) {
-      const origem = new URL(document.referrer);
-
-      if (origem.origin === location.origin) {
-        history.back();
-        return;
+    const objetos = lista.map(item => {
+      if (item && typeof item === 'object' && !Array.isArray(item)) {
+        return item;
       }
-    }
-  } catch (erro) {
-    console.warn("Erro ao voltar:", erro);
+
+      return { lancamento: item };
+    });
+
+    const colunas = [];
+
+    objetos.forEach(objeto => {
+      Object.keys(objeto).forEach(chave => {
+        if (!colunas.includes(chave)) colunas.push(chave);
+      });
+    });
+
+    const tabela = document.createElement('table');
+    const thead = document.createElement('thead');
+    const cabecalho = document.createElement('tr');
+
+    colunas.forEach(coluna => {
+      const th = document.createElement('th');
+      th.textContent = normalizarNome(coluna);
+      cabecalho.appendChild(th);
+    });
+
+    thead.appendChild(cabecalho);
+    tabela.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+
+    objetos.forEach(objeto => {
+      const tr = document.createElement('tr');
+
+      colunas.forEach(coluna => {
+        const td = document.createElement('td');
+        td.textContent = formatarCelula(objeto[coluna]);
+        tr.appendChild(td);
+      });
+
+      tbody.appendChild(tr);
+    });
+
+    tabela.appendChild(tbody);
+    areaTabela.appendChild(tabela);
   }
 
-  location.href = "index.html";
-}
+  async function carregarRelatorio() {
+    const competencia = seletor.value;
 
-document.addEventListener("DOMContentLoaded", async () => {
-  console.log("Relatório Financeiro iniciado.");
+    if (!competenciaValida(competencia)) {
+      mostrarStatus(
+        'Competência inválida. Selecione um mês válido.',
+        'erro'
+      );
+      return;
+    }
 
-  await carregarCompetencias();
-  await carregarRelatorio();
-});
+    bloquearInterface(true);
+    resumo.classList.add('oculto');
+
+    mostrarStatus(
+      'Consultando a API para ' +
+      formatarCompetencia(competencia) + '...'
+    );
+
+    try {
+      const resposta = await consultarApi(competencia);
+      const lista = extrairLista(resposta);
+
+      renderizarTabela(lista);
+      atualizarResumo(lista);
+
+      if (lista.length) {
+        mostrarStatus(
+          'Relatório carregado: ' + lista.length +
+          ' lançamento(s) em ' + formatarCompetencia(competencia) + '.',
+          'ok'
+        );
+      } else {
+        mostrarStatus(
+          'A API respondeu corretamente, mas não retornou lançamentos para ' +
+          formatarCompetencia(competencia) + '.',
+          'ok'
+        );
+      }
+
+      // Mantém a competência selecionada na URL da página.
+      const pagina = new URL(window.location.href);
+      pagina.searchParams.set('competencia', competencia);
+      window.history.replaceState({}, '', pagina);
+
+    } catch (erro) {
+      console.error('Erro ao carregar relatório:', erro);
+
+      areaTabela.replaceChildren();
+      const aviso = document.createElement('div');
+      aviso.className = 'vazio';
+      aviso.textContent =
+        'Não foi possível carregar os lançamentos. Leia a mensagem de erro acima.';
+      areaTabela.appendChild(aviso);
+
+      mostrarStatus(
+        erro && erro.message
+          ? erro.message
+          : 'Erro desconhecido ao consultar a API.',
+        'erro'
+      );
+    } finally {
+      bloquearInterface(false);
+    }
+  }
+
+  btnConsultar.addEventListener('click', carregarRelatorio);
+  btnAtualizar.addEventListener('click', carregarRelatorio);
+
+  seletor.addEventListener('change', () => {
+    const pagina = new URL(window.location.href);
+    pagina.searchParams.set('competencia', seletor.value);
+    window.history.replaceState({}, '', pagina);
+  });
+
+  montarCompetencias();
+  carregarRelatorio();
+})();
 </script>
 </body>
 </html>
