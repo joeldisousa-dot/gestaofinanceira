@@ -1,186 +1,1036 @@
-<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8">
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17365d">
+<title>Relatório Financeiro</title>
 
-<title>Relatório Financeiro</title> <style> /* ===================================================== RESET ===================================================== */ * { box-sizing: border-box; } /* ===================================================== BODY ===================================================== */ body { margin: 0; padding: 20px; font-family: "Segoe UI", Arial, sans-serif; background: linear-gradient(135deg, #e8eef5, #ffffff); color: #333; } /* ===================================================== CONTAINER ===================================================== */ .container { max-width: 1100px; margin: auto; background: #fff; padding: 25px; border-radius: 18px; box-shadow: 0 8px 25px rgba(0, 0, 0, .15); } /* ===================================================== TOPO ===================================================== */ .topo { display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-bottom: 25px; } .topo h1 { margin: 0; font-size: 28px; color: #0d47a1; } /* ===================================================== BOTÃO VOLTAR ===================================================== */ .voltar { background: linear-gradient(135deg, #455a64, #78909c); border: none; padding: 14px 28px; border-radius: 12px; cursor: pointer; font-size: 16px; font-weight: bold; color: white; box-shadow: 0 5px 12px rgba(0, 0, 0, .25); transition: .2s; } .voltar:hover { transform: translateY(-2px); filter: brightness(1.08); } /* ===================================================== SELETOR DE COMPETÊNCIA ===================================================== */ .seletor-competencia { display: flex; align-items: center; gap: 12px; background: #f5f8fc; border: 1px solid #d9e2ec; padding: 15px 18px; border-radius: 12px; margin-bottom: 20px; } .seletor-competencia label { font-weight: bold; color: #37474f; } .seletor-competencia select { min-width: 220px; padding: 11px 14px; border: 1px solid #b0bec5; border-radius: 8px; background: #fff; color: #333; font-size: 15px; font-weight: bold; cursor: pointer; outline: none; } .seletor-competencia select:focus { border-color: #1976d2; box-shadow: 0 0 0 2px rgba(25, 118, 210, .15); } /* ===================================================== BOTÕES ===================================================== */ button { border: none; background: linear-gradient(135deg, #1976d2, #2196f3); color: white; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 15px; transition: .2s; } button:hover { filter: brightness(1.08); transform: translateY(-2px); } button:disabled { opacity: .6; cursor: not-allowed; transform: none; } .btn-atualizar { padding: 11px 18px; font-size: 14px; } /* ===================================================== CABEÇALHO ===================================================== */ .cabecalho { display: flex; justify-content: space-between; align-items: center; gap: 20px; background: linear-gradient(135deg, #0d47a1, #1976d2); color: #fff; padding: 20px; border-radius: 12px; margin-bottom: 25px; } .cabecalho h1 { margin: 0; font-size: 26px; } .cabecalho p { margin: 7px 0 0; } .info { text-align: right; font-size: 14px; line-height: 25px; } /* ===================================================== TÍTULOS ===================================================== */ h2 { font-size: 18px; margin-top: 25px; border-left: 6px solid #1976d2; padding-left: 10px; color: #1976d2; } /* ===================================================== TABELAS ===================================================== */ .tabela-container { overflow-x: auto; width: 100%; } table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; } th { background: #1976d2; color: #fff; padding: 10px; text-align: center; } td { padding: 9px; border-bottom: 1px solid #ddd; text-align: center; } td:first-child { text-align: left; } tr:nth-child(even) { background: #f8f9fc; } tr:hover { background: #eef5ff; } .valor { font-weight: bold; text-align: right !important; } /* ===================================================== STATUS ===================================================== */ .pago { display: inline-block; background: #c8e6c9; color: #256029; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; } .pendente { display: inline-block; background: #fff3cd; color: #856404; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; } /* ===================================================== TOTAIS ===================================================== */ .total-receita { margin-top: 12px; padding: 12px; background: #e8f5e9; border-left: 6px solid #2e7d32; color: #2e7d32; font-weight: bold; font-size: 15px; border-radius: 8px; } .total-despesa { margin-top: 12px; padding: 12px; background: #ffebee; border-left: 6px solid #c62828; color: #c62828; font-weight: bold; font-size: 15px; border-radius: 8px; } /* ===================================================== RESULTADO ===================================================== */ .resultado-final { margin-top: 20px; padding: 15px; background: #e3f2fd; border-left: 6px solid #1976d2; font-size: 18px; font-weight: bold; color: #0d47a1; border-radius: 8px; } /* ===================================================== CARREGAMENTO ===================================================== */ .carregando { text-align: center; padding: 30px; color: #777; } /* ===================================================== ERRO ===================================================== */ .erro { background: #ffebee; color: #c62828; padding: 15px; border-radius: 8px; border-left: 5px solid #c62828; font-weight: bold; } /* ===================================================== RODAPÉ ===================================================== */ .rodape { text-align: center; margin-top: 25px; color: #777; font-size: 12px; } /* ===================================================== RESPONSIVO ===================================================== */ @media (max-width: 700px) { body { padding: 10px; } .container { padding: 15px; border-radius: 12px; } .topo { align-items: flex-start; flex-direction: column; } .topo h1 { font-size: 22px; } .voltar { width: 100%; } .seletor-competencia { flex-direction: column; align-items: stretch; } .seletor-competencia select, .btn-atualizar { width: 100%; } .cabecalho { flex-direction: column; align-items: flex-start; } .info { text-align: left; } table { font-size: 11px; } th, td { padding: 7px 5px; } } /* ===================================================== IMPRESSÃO ===================================================== */ @media print { @page { size: A4 portrait; margin: 10mm; } body { background: #fff; padding: 0; } .container { width: 100%; max-width: none; box-shadow: none; padding: 10px; } button, .voltar, .seletor-competencia { display: none !important; } .cabecalho { background: #fff !important; color: #000; border: 1px solid #ddd; } table { font-size: 10px; } th, td { padding: 5px; } h2 { font-size: 14px; } } </style> </head> <body> <div class="container">
-<!-- =================================================
-TOPO
-================================================== -->
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;padding:20px;font-family:"Segoe UI",Arial,sans-serif;
+  background:linear-gradient(135deg,#e8eef5,#fff);color:#333
+}
+.container{
+  max-width:1100px;margin:auto;background:#fff;padding:25px;
+  border-radius:18px;box-shadow:0 8px 25px rgba(0,0,0,.15)
+}
+.topo{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}
+.topo h1{margin:0;font-size:28px;color:#0d47a1}
+button{
+  border:0;background:linear-gradient(135deg,#1976d2,#2196f3);
+  color:white;padding:12px 22px;border-radius:10px;cursor:pointer;
+  font-weight:bold;font-size:15px
+}
+button:hover{filter:brightness(1.08)}
+button:disabled{opacity:.6;cursor:wait}
+.voltar{background:linear-gradient(135deg,#455a64,#78909c);padding:14px 28px}
+.seletor-competencia{
+  display:flex;align-items:center;gap:12px;background:#f5f8fc;
+  border:1px solid #d9e2ec;padding:15px 18px;border-radius:12px;margin-bottom:20px
+}
+.seletor-competencia label{font-weight:bold}
+select{
+  min-width:220px;padding:11px 14px;border:1px solid #b0bec5;
+  border-radius:8px;background:#fff;font-size:15px;font-weight:bold
+}
+.cabecalho{
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+  background:linear-gradient(135deg,#0d47a1,#1976d2);color:#fff;
+  padding:20px;border-radius:12px;margin-bottom:25px
+}
+.cabecalho h1{margin:0;font-size:26px}
+.cabecalho p{margin:7px 0 0}
+.info{text-align:right;font-size:14px;line-height:25px}
+h2{font-size:18px;margin-top:25px;border-left:6px solid #1976d2;padding-left:10px;color:#1976d2}
+.tabela-container{overflow-x:auto;width:100%}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+th{background:#1976d2;color:#fff;padding:10px;text-align:center}
+td{padding:9px;border-bottom:1px solid #ddd;text-align:center}
+td:first-child{text-align:left}
+tr:nth-child(even){background:#f8f9fc}
+tr:hover{background:#eef5ff}
+.valor{font-weight:bold;text-align:right!important;white-space:nowrap}
+.pago,.pendente{display:inline-block;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:bold}
+.pago{background:#c8e6c9;color:#256029}
+.pendente{background:#fff3cd;color:#856404}
+.total-receita,.total-despesa{
+  margin-top:12px;padding:12px;border-left:6px solid;
+  font-weight:bold;font-size:15px;border-radius:8px
+}
+.total-receita{background:#e8f5e9;border-color:#2e7d32;color:#2e7d32}
+.total-despesa{background:#ffebee;border-color:#c62828;color:#c62828}
+.resultado-final{
+  margin-top:20px;padding:15px;background:#e3f2fd;border-left:6px solid #1976d2;
+  font-size:18px;font-weight:bold;color:#0d47a1;border-radius:8px
+}
+.carregando{text-align:center;padding:25px;color:#777}
+.erro{background:#ffebee;color:#c62828;padding:15px;border-radius:8px;border-left:5px solid #c62828;overflow-wrap:anywhere}
+.diagnostico{
+  margin-top:15px;padding:12px;background:#f5f8fc;border:1px solid #d9e2ec;
+  border-radius:8px;font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere
+}
+.rodape{text-align:center;margin-top:25px;color:#777;font-size:12px}
+@media(max-width:700px){
+  body{padding:10px}.container{padding:15px}
+  .topo,.cabecalho{align-items:stretch;flex-direction:column}
+  .topo h1{font-size:22px}.voltar{width:100%}
+  .seletor-competencia{align-items:stretch;flex-direction:column}
+  .seletor-competencia select,.seletor-competencia button{width:100%}
+  .info{text-align:left}table{font-size:11px}th,td{padding:7px 5px}
+}
+@media print{
+  @page{size:A4 portrait;margin:10mm}
+  body{background:#fff;padding:0}
+  .container{width:100%;max-width:none;box-shadow:none;padding:10px}
+  button,.voltar,.seletor-competencia{display:none!important}
+  .cabecalho{background:#fff!important;color:#000;border:1px solid #ddd}
+  table{font-size:10px}th,td{padding:5px}
+  .diagnostico{display:none}
+}
+</style>
+</head>
 
-<div class="topo">
+<body>
+<div class="container">
 
+  <div class="topo">
     <h1>📄 Relatório Financeiro</h1>
+    <button class="voltar" type="button" onclick="voltar()">⬅ Voltar</button>
+  </div>
 
-    <button
-        type="button"
-        class="voltar"
-        onclick="voltar()">
-
-        ⬅ Voltar
-
-    </button>
-
-</div>
-
-
-<!-- =================================================
-SELETOR DE COMPETÊNCIA
-================================================== -->
-
-<div class="seletor-competencia">
-
-    <label for="selectCompetencia">
-
-        📅 Competência:
-
-    </label>
-
-    <select
-        id="selectCompetencia"
-        onchange="competenciaAlterada()">
-
-        <option value="">
-
-            ⏳ Carregando competências...
-
-        </option>
-
+  <div class="seletor-competencia">
+    <label for="selectCompetencia">📅 Competência:</label>
+    <select id="selectCompetencia" onchange="competenciaAlterada()">
+      <option value="">Carregando competências...</option>
     </select>
+    <button id="btnAtualizar" type="button" onclick="carregarRelatorio()">🔄 Atualizar</button>
+  </div>
 
-    <button
-        type="button"
-        class="btn-atualizar"
-        id="btnAtualizar"
-        onclick="carregarRelatorio()">
-
-        🔄 Atualizar
-
-    </button>
-
-</div>
-
-
-<!-- =================================================
-CABEÇALHO
-================================================== -->
-
-<div class="cabecalho">
-
+  <div class="cabecalho">
     <div>
-
-        <h1>💰 Controle Financeiro</h1>
-
-        <p>
-            Relatório Financeiro Pessoal
-        </p>
-
+      <h1>💰 Controle Financeiro</h1>
+      <p>Relatório Financeiro Pessoal</p>
     </div>
-
     <div class="info">
-
-        Competência:
-
-        <b id="competencia">
-            -
-        </b>
-
-        <br>
-
-        Emitido:
-
-        <span id="data">
-            -
-        </span>
-
+      Competência: <b id="competencia">-</b><br>
+      Emitido: <span id="data">-</span>
     </div>
+  </div>
 
-</div>
+  <h2>📥 Receitas</h2>
+  <div id="receber" class="carregando">Selecione uma competência.</div>
 
+  <h2>📤 Despesas</h2>
+  <div id="pagar" class="carregando">Selecione uma competência.</div>
 
-<!-- =================================================
-RECEITAS
-================================================== -->
+  <div id="resumoFinal" class="resultado-final">
+    Selecione uma competência para calcular o resultado.
+  </div>
 
-<h2>
-    📥 Receitas
-</h2>
+  <div id="diagnostico" class="diagnostico" hidden></div>
 
-<div
-    id="receber"
-    class="carregando">
+  <p style="text-align:right">
+    <button type="button" onclick="window.print()">🖨 Imprimir / Salvar PDF</button>
+  </p>
 
-    Selecione uma competência para
-    carregar as receitas...
-
-</div>
-
-
-<!-- =================================================
-DESPESAS
-================================================== -->
-
-<h2>
-    📤 Despesas
-</h2>
-
-<div
-    id="pagar"
-    class="carregando">
-
-    Selecione uma competência para
-    carregar as despesas...
-
-</div>
-
-
-<!-- =================================================
-RESULTADO
-================================================== -->
-
-<div
-    class="resultado-final"
-    id="resumoFinal">
-
-    Selecione uma competência para
-    calcular o resultado.
-
-</div>
-
-
-<br>
-
-
-<!-- =================================================
-IMPRESSÃO
-================================================== -->
-
-<div style="text-align:right">
-
-    <button
-        type="button"
-        onclick="window.print()">
-
-        🖨 Imprimir / Salvar PDF
-
-    </button>
-
-</div>
-
-
-<!-- =================================================
-RODAPÉ
-================================================== -->
-
-<div class="rodape">
-
-    Relatório gerado automaticamente
-
-    <br>
-
+  <div class="rodape">
+    Relatório gerado automaticamente<br>
     Controle Financeiro Pessoal
-
+  </div>
 </div>
 
-</div> <script> /* ===================================================== CONFIGURAÇÃO DA API ===================================================== */ const URL_API = "https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec"; /* ===================================================== VARIÁVEIS ===================================================== */ let contadorJSONP = 0; let requisicaoAtual = 0; let competenciaSelecionada = ""; /* ===================================================== OBTER COMPETÊNCIA DA URL ===================================================== */ function obterCompetenciaURL() { try { const parametros = new URLSearchParams( window.location.search ); const valor = parametros.get("competencia") || parametros.get("comp"); return converterCompetencia(valor); } catch (erro) { console.error( "Erro ao ler competência da URL:", erro ); return ""; } } /* ===================================================== CONVERTER COMPETÊNCIA ===================================================== */ function converterCompetencia(valor) { if ( valor === null || valor === undefined ) { return ""; } const texto = String(valor).trim(); /* * AAAA-MM */ if ( /^\d{4}-\d{2}$/.test(texto) ) { return texto; } /* * MM/AAAA */ if ( /^\d{1,2}\/\d{4}$/.test(texto) ) { const partes = texto.split("/"); return ( partes[1] + "-" + String(partes[0]).padStart(2, "0") ); } /* * MM-AAAA */ if ( /^\d{1,2}-\d{4}$/.test(texto) ) { const partes = texto.split("-"); return ( partes[1] + "-" + String(partes[0]).padStart(2, "0") ); } /* * AAAA/MM */ if ( /^\d{4}\/\d{1,2}$/.test(texto) ) { const partes = texto.split("/"); return ( partes[0] + "-" + String(partes[1]).padStart(2, "0") ); } /* * AAAA-MM-DD */ if ( /^\d{4}-\d{2}-\d{2}$/.test(texto) ) { return texto.substring(0, 7); } /* * DD/MM/AAAA */ if ( /^\d{1,2}\/\d{1,2}\/\d{4}$/.test(texto) ) { const partes = texto.split("/"); return ( partes[2] + "-" + String(partes[1]).padStart(2, "0") ); } /* * Datas do Google Sheets podem * chegar como objeto/string. */ const data = new Date(texto); if ( !isNaN(data.getTime()) ) { /* * Evita interpretar números * como datas acidentalmente. */ if ( /[\/-]/.test(texto) ) { return ( data.getFullYear() + "-" + String( data.getMonth() + 1 ).padStart(2, "0") ); } } return ""; } /* ===================================================== COMPETÊNCIA ATUAL ===================================================== */ function competenciaAtual() { const agora = new Date(); return ( agora.getFullYear() + "-" + String( agora.getMonth() + 1 ).padStart(2, "0") ); } /* ===================================================== JSONP ===================================================== */ function chamarAPI( acao, parametros ) { return new Promise( function(resolve, reject) { const callback = "financeiroCallback_" + Date.now() + "_" + (++contadorJSONP); const script = document.createElement( "script" ); const dados = Object.assign( {}, parametros || {}, { action: acao, callback: callback } ); const partes = []; Object.keys(dados).forEach( function(chave) { let valor = dados[chave]; if ( valor === null || valor === undefined ) { valor = ""; } partes.push( encodeURIComponent(chave) + "=" + encodeURIComponent( String(valor) ) ); } ); const url = URL_API + "?" + partes.join("&"); let finalizado = false; let temporizador = null; function limpar() { if ( temporizador ) { clearTimeout( temporizador ); } try { delete window[callback]; } catch (e) { window[callback] = undefined; } if ( script.parentNode ) { script.parentNode.removeChild( script ); } } window[callback] = function(resposta) { if ( finalizado ) { return; } finalizado = true; limpar(); resolve(resposta); }; script.onerror = function() { if ( finalizado ) { return; } finalizado = true; limpar(); reject( new Error( "Não foi possível conectar à API." ) ); }; temporizador = setTimeout( function() { if ( finalizado ) { return; } finalizado = true; limpar(); reject( new Error( "Tempo limite excedido ao consultar a API." ) ); }, 30000 ); script.src = url; script.async = true; document.head.appendChild( script ); } ); } /* ===================================================== EXTRAIR LISTA DA RESPOSTA ===================================================== */ function extrairLista(resposta) { if ( !resposta ) { return []; } if ( Array.isArray(resposta) ) { return resposta; } if ( Array.isArray( resposta.dados ) ) { return resposta.dados; } if ( Array.isArray( resposta.lista ) ) { return resposta.lista; } if ( Array.isArray( resposta.lancamentos ) ) { return resposta.lancamentos; } return []; } /* ===================================================== OBTER COMPETÊNCIA DO ITEM ===================================================== */ function obterCompetenciaItem(item) { if ( !item ) { return ""; } const campos = [ item.Competência, item.Competencia, item.competência, item.competencia, item.COMPETENCIA, item.COMPETÊNCIA, item.comp, item.CompetenciaData, item.CompetênciaData, item.dataCompetencia, item.DataCompetencia, item.mesCompetencia, item.MesCompetencia ]; for ( let i = 0; i < campos.length; i++ ) { const valor = campos[i]; if ( valor !== null && valor !== undefined && String(valor).trim() !== "" ) { const resultado = converterCompetencia( valor ); if ( /^\d{4}-\d{2}$/.test( resultado ) ) { return resultado; } } } /* * Caso não exista uma coluna * Competência, tenta descobrir * pela data de vencimento. */ const datas = [ item.Vencimento, item.vencimento, item.Data, item.data, item.DATA, item.DataVencimento, item.dataVencimento ]; for ( let i = 0; i < datas.length; i++ ) { if ( datas[i] !== null && datas[i] !== undefined && String(datas[i]).trim() !== "" ) { const resultado = converterCompetencia( datas[i] ); if ( /^\d{4}-\d{2}$/.test( resultado ) ) { return resultado; } } } return ""; } /* ===================================================== CARREGAR COMPETÊNCIAS ===================================================== */ async function carregarCompetencias() { const select = document.getElementById( "selectCompetencia" ); select.innerHTML = '<option value="">⏳ Carregando...</option>'; try { /* * Busca todos os lançamentos. */ const resposta = await chamarAPI( "listarLancamentos", {} ); console.log( "Resposta da API para competências:", resposta ); if ( resposta && resposta.sucesso === false ) { throw new Error( resposta.erro || resposta.mensagem || "Erro retornado pela API." ); } const lista = extrairLista( resposta ); const mapa = {}; /* * Descobre as competências * existentes nos lançamentos. */ lista.forEach( function(item) { const competencia = obterCompetenciaItem( item ); if ( /^\d{4}-\d{2}$/.test( competencia ) ) { mapa[ competencia ] = true; } } ); /* * Inclui a competência da URL, * se existir. */ const competenciaURL = obterCompetenciaURL(); if ( /^\d{4}-\d{2}$/.test( competenciaURL ) ) { mapa[ competenciaURL ] = true; } /* * Converte o mapa para array. */ let competencias = Object.keys( mapa ); /* * Ordena da mais recente * para a mais antiga. */ competencias.sort( function(a, b) { return b.localeCompare(a); } ); /* * Se não houver competências * na API, gera últimos 36 meses. */ if ( competencias.length === 0 ) { competencias = gerarUltimasCompetencias( 36 ); } /* * Limpa o combobox. */ select.innerHTML = ""; /* * Adiciona as competências. */ competencias.forEach( function(comp) { const option = document.createElement( "option" ); option.value = comp; option.textContent = formatarCompetencia( comp ); select.appendChild( option ); } ); /* * Prioridade da competência inicial: * * 1. URL * 2. Primeira competência * 3. Mês atual */ let inicial = competenciaURL; if ( !/^\d{4}-\d{2}$/.test( inicial ) ) { inicial = competencias[0] || competenciaAtual(); } /* * Garante que a competência * inicial exista. */ const existe = Array.from( select.options ).some( function(option) { return ( option.value === inicial ); } ); if ( !existe ) { const option = document.createElement( "option" ); option.value = inicial; option.textContent = formatarCompetencia( inicial ); select.insertBefore( option, select.firstChild ); } select.value = inicial; competenciaSelecionada = inicial; atualizarCabecalho(); console.log( "Competências encontradas:", competencias ); } catch (erro) { console.error( "Erro ao carregar competências:", erro ); /* * Fallback. */ const url = obterCompetenciaURL(); const inicial = /^\d{4}-\d{2}$/.test(url) ? url : competenciaAtual(); const competencias = gerarUltimasCompetencias( 36 ); if ( !competencias.includes( inicial ) ) { competencias.unshift( inicial ); } select.innerHTML = ""; competencias.forEach( function(comp) { const option = document.createElement( "option" ); option.value = comp; option.textContent = formatarCompetencia( comp ); select.appendChild( option ); } ); select.value = inicial; competenciaSelecionada = inicial; atualizarCabecalho(); } } /* ===================================================== GERAR ÚLTIMAS COMPETÊNCIAS ===================================================== */ function gerarUltimasCompetencias( quantidade ) { const resultado = []; const agora = new Date(); for ( let i = 0; i < quantidade; i++ ) { const data = new Date( agora.getFullYear(), agora.getMonth() - i, 1 ); const ano = data.getFullYear(); const mes = String( data.getMonth() + 1 ).padStart( 2, "0" ); resultado.push( ano + "-" + mes ); } return resultado; } /* ===================================================== ALTERAÇÃO DA COMPETÊNCIA ===================================================== */ function competenciaAlterada() { const select = document.getElementById( "selectCompetencia" ); const competencia = converterCompetencia( select.value ); if ( !/^\d{4}-\d{2}$/.test( competencia ) ) { return; } competenciaSelecionada = competencia; atualizarCabecalho(); /* * Atualiza a URL sem recarregar. */ try { const novaURL = window.location.pathname + "?competencia=" + encodeURIComponent( competencia ); window.history.replaceState( {}, "", novaURL ); } catch (erro) { console.warn( "Não foi possível atualizar a URL:", erro ); } /* * Carrega o relatório. */ carregarRelatorio(); } /* ===================================================== ATUALIZAR CABEÇALHO ===================================================== */ function atualizarCabecalho() { document.getElementById( "competencia" ).textContent = formatarCompetencia( competenciaSelecionada ); } /* ===================================================== ATUALIZAR DATA ===================================================== */ function atualizarData() { document.getElementById( "data" ).textContent = new Date().toLocaleString( "pt-BR" ); } /* ===================================================== CARREGAR RELATÓRIO ===================================================== */ async function carregarRelatorio() { const receber = document.getElementById( "receber" ); const pagar = document.getElementById( "pagar" ); const resumo = document.getElementById( "resumoFinal" ); const botao = document.getElementById( "btnAtualizar" ); const select = document.getElementById( "selectCompetencia" ); /* * Pega diretamente do combobox. */ let competencia = converterCompetencia( select.value ); /* * Fallback. */ if ( !/^\d{4}-\d{2}$/.test( competencia ) ) { competencia = converterCompetencia( competenciaSelecionada ); } /* * Validação. */ if ( !/^\d{4}-\d{2}$/.test( competencia ) ) { receber.innerHTML = '<div class="erro">' + '⚠ Selecione uma competência válida.' + '</div>'; pagar.innerHTML = ""; resumo.textContent = "Competência inválida."; return; } competenciaSelecionada = competencia; atualizarCabecalho(); const numero = ++requisicaoAtual; receber.innerHTML = '<div class="carregando">' + '⏳ Carregando receitas...' + '</div>'; pagar.innerHTML = '<div class="carregando">' + '⏳ Carregando despesas...' + '</div>'; resumo.textContent = "Calculando resultado..."; botao.disabled = true; botao.textContent = "⏳ Carregando..."; try { console.log( "Consultando competência:", competencia ); const resposta = await chamarAPI( "listarLancamentos", { competencia: competencia } ); console.log( "Resposta do relatório:", resposta ); /* * Ignora respostas antigas * caso o usuário troque * rapidamente a competência. */ if ( numero !== requisicaoAtual ) { return; } if ( !resposta ) { throw new Error( "A API não retornou resposta." ); } if ( resposta.sucesso === false ) { throw new Error( resposta.erro || resposta.mensagem || "Erro retornado pela API." ); } const lista = extrairLista( resposta ); processarRelatorio( lista ); atualizarData(); /* * Mantém o combobox sincronizado. */ select.value = competencia; } catch (erro) { console.error( "Erro ao carregar relatório:", erro ); if ( numero !== requisicaoAtual ) { return; } const mensagem = escaparHTML( erro && erro.message ? erro.message : String(erro) ); receber.innerHTML = '<div class="erro">' + '⚠ Erro ao carregar receitas:<br>' + mensagem + '</div>'; pagar.innerHTML = '<div class="erro">' + '⚠ Erro ao carregar despesas.' + '</div>'; resumo.innerHTML = '<span style="color:#c62828;">' + 'Não foi possível gerar o relatório.' + '</span>'; } finally { if ( numero === requisicaoAtual ) { botao.disabled = false; botao.textContent = "🔄 Atualizar"; } } } /* ===================================================== PROCESSAR RELATÓRIO ===================================================== */ function processarRelatorio( lista ) { const receitas = []; const despesas = []; let totalReceitas = 0; let totalDespesas = 0; let totalRepasse = 0; if ( !Array.isArray(lista) ) { lista = []; } lista.forEach( function(item) {
-    if ( !item ) {
+<script>
+"use strict";
+
+/* =====================================================
+   CONFIGURAÇÃO DA API
+===================================================== */
+
+const URL_API =
+"https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec";
+
+let contadorJSONP = 0;
+let requisicaoAtual = 0;
+let competenciaSelecionada = "";
+
+/* =====================================================
+   COMPETÊNCIAS E DATAS
+===================================================== */
+
+function converterCompetencia(valor) {
+  if (valor === null || valor === undefined) return "";
+
+  // Algumas APIs devolvem objetos de data serializados em JSON.
+  if (typeof valor === "object") {
+    if (valor instanceof Date) {
+      if (isNaN(valor.getTime())) return "";
+      return anoMes(valor.getFullYear(), valor.getMonth() + 1);
+    }
+
+    if (valor.year !== undefined && valor.month !== undefined) {
+      return anoMes(valor.year, valor.month);
+    }
+
+    if (valor.ano !== undefined && valor.mes !== undefined) {
+      return anoMes(valor.ano, valor.mes);
+    }
+
+    if (valor.value !== undefined) {
+      return converterCompetencia(valor.value);
+    }
+
+    if (valor.iso !== undefined) {
+      return converterCompetencia(valor.iso);
+    }
+
+    return "";
+  }
+
+  const texto = String(valor).trim();
+  let m;
+
+  // AAAA-MM
+  if ((m = texto.match(/^(\d{4})-(\d{1,2})$/))) {
+    return anoMes(m[1], m[2]);
+  }
+
+  // MM/AAAA
+  if ((m = texto.match(/^(\d{1,2})\/(\d{4})$/))) {
+    return anoMes(m[2], m[1]);
+  }
+
+  // MM-AAAA
+  if ((m = texto.match(/^(\d{1,2})-(\d{4})$/))) {
+    return anoMes(m[2], m[1]);
+  }
+
+  // AAAA/MM
+  if ((m = texto.match(/^(\d{4})\/(\d{1,2})$/))) {
+    return anoMes(m[1], m[2]);
+  }
+
+  // AAAA-MM-DD
+  if ((m = texto.match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:T.*)?$/))) {
+    return anoMes(m[1], m[2]);
+  }
+
+  // DD/MM/AAAA
+  if ((m = texto.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/))) {
+    return anoMes(m[3], m[2]);
+  }
+
+  // Evita interpretar texto ou números isolados como data.
+  if (!/[/-]/.test(texto)) return "";
+
+  const data = new Date(texto);
+
+  if (!isNaN(data.getTime())) {
+    return anoMes(data.getFullYear(), data.getMonth() + 1);
+  }
+
+  return "";
+}
+
+function anoMes(ano, mes) {
+  const a = Number(ano);
+  const m = Number(mes);
+
+  if (!Number.isInteger(a) || a < 1900 || a > 2200 ||
+      !Number.isInteger(m) || m < 1 || m > 12) {
+    return "";
+  }
+
+  return String(a) + "-" + String(m).padStart(2, "0");
+}
+
+function competenciaAtual() {
+  const d = new Date();
+  return anoMes(d.getFullYear(), d.getMonth() + 1);
+}
+
+function obterCompetenciaURL() {
+  const params = new URLSearchParams(location.search);
+
+  return converterCompetencia(
+    params.get("competencia") ||
+    params.get("comp") ||
+    ""
+  );
+}
+
+function formatarCompetencia(valor) {
+  const comp = converterCompetencia(valor);
+
+  if (!comp) return valor || "-";
+
+  const partes = comp.split("-");
+  return partes[1] + "/" + partes[0];
+}
+
+function gerarUltimasCompetencias(quantidade) {
+  const lista = [];
+  const agora = new Date();
+
+  for (let i = 0; i < quantidade; i++) {
+    const d = new Date(
+      agora.getFullYear(),
+      agora.getMonth() - i,
+      1
+    );
+
+    lista.push(anoMes(d.getFullYear(), d.getMonth() + 1));
+  }
+
+  return lista;
+}
+
+/* =====================================================
+   CONSULTA JSONP
+===================================================== */
+
+function chamarAPI(acao, parametros = {}) {
+  return new Promise((resolve, reject) => {
+    const callback =
+      "financeiroCallback_" + Date.now() + "_" + (++contadorJSONP);
+
+    const script = document.createElement("script");
+
+    const dados = Object.assign({}, parametros, {
+      action: acao,
+      callback: callback
+    });
+
+    const query = Object.keys(dados)
+      .map(chave =>
+        encodeURIComponent(chave) + "=" +
+        encodeURIComponent(String(dados[chave] ?? ""))
+      )
+      .join("&");
+
+    let finalizado = false;
+
+    const temporizador = setTimeout(() => {
+      finalizar(new Error(
+        "Tempo limite excedido ao consultar a API após 30 segundos."
+      ));
+    }, 30000);
+
+    function limpar() {
+      clearTimeout(temporizador);
+
+      try {
+        delete window[callback];
+      } catch (e) {
+        window[callback] = undefined;
+      }
+
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    }
+
+    function finalizar(erro, resposta) {
+      if (finalizado) return;
+
+      finalizado = true;
+      limpar();
+
+      if (erro) reject(erro);
+      else resolve(resposta);
+    }
+
+    window[callback] = resposta => finalizar(null, resposta);
+
+    script.onerror = () => finalizar(new Error(
+      "Falha ao consultar a API. Confira a URL e a publicação do Apps Script."
+    ));
+
+    script.async = true;
+
+    script.src = URL_API +
+      (URL_API.includes("?") ? "&" : "?") + query;
+
+    document.head.appendChild(script);
+  });
+}
+
+/* =====================================================
+   ESTRUTURA DA RESPOSTA
+===================================================== */
+
+function extrairLista(resposta) {
+  if (Array.isArray(resposta)) return resposta;
+
+  if (!resposta || typeof resposta !== "object") return [];
+
+  const chaves = [
+    "dados", "lista", "lancamentos", "lançamentos",
+    "registros", "resultados", "items", "data"
+  ];
+
+  for (const chave of chaves) {
+    const valor = resposta[chave];
+
+    if (Array.isArray(valor)) return valor;
+
+    if (valor && typeof valor === "object") {
+      for (const subchave of chaves) {
+        if (Array.isArray(valor[subchave])) {
+          return valor[subchave];
+        }
+      }
+    }
+  }
+
+  return [];
+}
+
+function normalizarTexto(texto) {
+  return String(texto ?? "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+}
+
+function localizarCampo(item, nomes) {
+  if (!item || typeof item !== "object") return "";
+
+  // Primeiro tenta os nomes exatos.
+  for (const nome of nomes) {
+    if (item[nome] !== undefined &&
+        item[nome] !== null &&
+        String(item[nome]).trim() !== "") {
+      return item[nome];
+    }
+  }
+
+  // Depois tenta ignorando maiúsculas, acentos e espaços.
+  const desejados = nomes.map(normalizarTexto);
+
+  for (const chave of Object.keys(item)) {
+    if (desejados.includes(normalizarTexto(chave)) &&
+        item[chave] !== null &&
+        item[chave] !== undefined &&
+        String(item[chave]).trim() !== "") {
+      return item[chave];
+    }
+  }
+
+  return "";
+}
+
+/* =====================================================
+   IDENTIFICAR A COMPETÊNCIA DE CADA LANÇAMENTO
+===================================================== */
+
+function obterCompetenciaItem(item) {
+  if (!item || typeof item !== "object") return "";
+
+  // Campos que podem conter a competência diretamente.
+  const camposCompetencia = [
+    "Competência", "Competencia", "COMPETENCIA",
+    "comp", "competenciaFormatada", "mesCompetencia",
+    "MesCompetencia", "CompetenciaData",
+    "dataCompetencia", "DataCompetencia",
+    "Mês/Ano", "Mes/Ano", "Referência",
+    "Referencia", "Periodo", "Período"
+  ];
+
+  for (const campo of camposCompetencia) {
+    const valor = localizarCampo(item, [campo]);
+
+    if (valor !== "") {
+      const comp = converterCompetencia(valor);
+
+      if (comp) return comp;
+    }
+  }
+
+  // Se não existir coluna de competência, tenta as datas.
+  const camposData = [
+    "Vencimento", "DataVencimento", "dataVencimento",
+    "Data", "data", "DATA", "DataLancamento",
+    "DataLançamento", "Data do lançamento",
+    "DataPagamento", "Data de pagamento",
+    "dataPagamento", "CriadoEm", "DataCadastro"
+  ];
+
+  for (const campo of camposData) {
+    const valor = localizarCampo(item, [campo]);
+
+    if (valor !== "") {
+      const comp = converterCompetencia(valor);
+
+      if (comp) return comp;
+    }
+  }
+
+  return "";
+}
+
+/* =====================================================
+   CARREGAR A LISTA DE COMPETÊNCIAS
+===================================================== */
+
+async function carregarCompetencias() {
+  const select = document.getElementById("selectCompetencia");
+
+  select.innerHTML =
+    '<option value="">Consultando competências...</option>';
+
+  const competencias = new Set();
+
+  // Garante que a competência atual e os meses anteriores
+  // possam ser selecionados mesmo se não forem identificados
+  // automaticamente nos dados retornados pela API.
+  gerarUltimasCompetencias(60).forEach(comp => {
+    competencias.add(comp);
+  });
+
+  const competenciaURL = obterCompetenciaURL();
+
+  if (competenciaURL) {
+    competencias.add(competenciaURL);
+  }
+
+  let totalAPI = 0;
+  let erroAPI = "";
+
+  try {
+    const resposta = await chamarAPI("listarLancamentos", {});
+
+    console.log("Resposta da API ao carregar competências:", resposta);
+
+    if (resposta && resposta.sucesso === false) {
+      throw new Error(
+        resposta.erro || resposta.mensagem || "Erro informado pela API."
+      );
+    }
+
+    const lista = extrairLista(resposta);
+    totalAPI = lista.length;
+
+    lista.forEach(item => {
+      const comp = obterCompetenciaItem(item);
+
+      if (comp) competencias.add(comp);
+    });
+
+  } catch (erro) {
+    erroAPI = erro.message || String(erro);
+    console.error("Erro ao carregar competências:", erro);
+  }
+
+  const ordenadas = Array.from(competencias).sort(
+    (a, b) => b.localeCompare(a)
+  );
+
+  select.innerHTML = "";
+
+  ordenadas.forEach(comp => {
+    const option = document.createElement("option");
+
+    option.value = comp;
+    option.textContent = formatarCompetencia(comp);
+
+    select.appendChild(option);
+  });
+
+  // Prioridade: URL, mês atual.
+  const inicial = competenciaURL || competenciaAtual();
+
+  select.value = inicial;
+  competenciaSelecionada = inicial;
+
+  atualizarCabecalho();
+
+  let mensagem =
+    "Competências disponíveis: " + ordenadas.length +
+    "\nLançamentos identificados na consulta inicial: " + totalAPI +
+    "\nCompetência selecionada: " + formatarCompetencia(inicial);
+
+  if (erroAPI) {
+    mensagem += "\nAviso na consulta inicial: " + erroAPI;
+  }
+
+  mostrarDiagnostico(mensagem);
+}
+
+/* =====================================================
+   CABEÇALHO E DIAGNÓSTICO
+===================================================== */
+
+function atualizarCabecalho() {
+  document.getElementById("competencia").textContent =
+    formatarCompetencia(competenciaSelecionada);
+}
+
+function atualizarData() {
+  document.getElementById("data").textContent =
+    new Date().toLocaleString("pt-BR");
+}
+
+function mostrarDiagnostico(texto) {
+  const el = document.getElementById("diagnostico");
+
+  el.hidden = !texto;
+  el.textContent = texto || "";
+}
+
+/* =====================================================
+   SELEÇÃO DA COMPETÊNCIA
+===================================================== */
+
+function competenciaAlterada() {
+  const select = document.getElementById("selectCompetencia");
+  const comp = converterCompetencia(select.value);
+
+  if (!comp) return;
+
+  competenciaSelecionada = comp;
+  atualizarCabecalho();
+
+  try {
+    const url = new URL(location.href);
+
+    url.searchParams.set("competencia", comp);
+
+    history.replaceState(
+      {},
+      "",
+      url.pathname + url.search + url.hash
+    );
+  } catch (erro) {
+    console.warn("Não foi possível atualizar a URL:", erro);
+  }
+
+  carregarRelatorio();
+}
+
+/* =====================================================
+   CARREGAR RELATÓRIO
+===================================================== */
+
+async function carregarRelatorio() {
+  const receber = document.getElementById("receber");
+  const pagar = document.getElementById("pagar");
+  const resumo = document.getElementById("resumoFinal");
+  const botao = document.getElementById("btnAtualizar");
+  const select = document.getElementById("selectCompetencia");
+
+  const comp = converterCompetencia(
+    select.value || competenciaSelecionada
+  );
+
+  if (!comp) {
+    receber.innerHTML =
+      '<div class="erro">Selecione uma competência válida.</div>';
+
+    pagar.innerHTML = "";
+    resumo.textContent = "Competência inválida.";
+    return;
+  }
+
+  competenciaSelecionada = comp;
+  atualizarCabecalho();
+
+  const idRequisicao = ++requisicaoAtual;
+
+  receber.innerHTML =
+    '<div class="carregando">⏳ Carregando receitas...</div>';
+
+  pagar.innerHTML =
+    '<div class="carregando">⏳ Carregando despesas...</div>';
+
+  resumo.textContent = "Calculando resultado...";
+
+  botao.disabled = true;
+  botao.textContent = "⏳ Carregando...";
+
+  try {
+    /*
+      A consulta é feita sem filtro de competência.
+      O filtro é realizado no navegador para evitar diferenças
+      entre os formatos AAAA-MM e MM/AAAA aceitos pela API.
+    */
+    const resposta = await chamarAPI("listarLancamentos", {});
+
+    console.log("Resposta bruta do relatório:", resposta);
+
+    if (idRequisicao !== requisicaoAtual) return;
+
+    if (!resposta) {
+      throw new Error("A API não retornou uma resposta.");
+    }
+
+    if (resposta.sucesso === false) {
+      throw new Error(
+        resposta.erro || resposta.mensagem || "A API informou uma falha."
+      );
+    }
+
+    const todos = extrairLista(resposta);
+
+    console.log("Total de registros recebidos:", todos.length);
+
+    if (!todos.length) {
+      mostrarDiagnostico(
+        "A API respondeu, mas não foi reconhecida uma lista de lançamentos." +
+        "\nVerifique o console do navegador (F12)." +
+        "\nResposta recebida: " +
+        JSON.stringify(resposta).slice(0, 2500)
+      );
+
+      receber.innerHTML =
+        '<div class="erro">A API respondeu, mas não foram identificados lançamentos. Confira o diagnóstico abaixo.</div>';
+
+      pagar.innerHTML =
+        '<div class="erro">Não foi possível identificar a lista de lançamentos.</div>';
+
+      resumo.textContent = "Relatório sem dados reconhecidos.";
+      return;
+    }
+
+    const filtrados = todos.filter(item =>
+      obterCompetenciaItem(item) === comp
+    );
+
+    console.log(
+      "Competência:", comp,
+      "| recebidos:", todos.length,
+      "| encontrados:", filtrados.length
+    );
+
+    if (!filtrados.length) {
+      const exemplos = todos.slice(0, 5).map(item => ({
+        campos: Object.keys(item || {}),
+        competenciaIdentificada: obterCompetenciaItem(item),
+        registro: item
+      }));
+
+      mostrarDiagnostico(
+        "A API retornou " + todos.length +
+        " lançamento(s), mas nenhum foi associado à competência " +
+        formatarCompetencia(comp) + "." +
+        "\n\nConfira os campos e valores dos primeiros registros:" +
+        "\n" + JSON.stringify(exemplos, null, 2)
+      );
+    } else {
+      mostrarDiagnostico(
+        "Consulta concluída." +
+        "\nTotal recebido da API: " + todos.length +
+        "\nLançamentos de " + formatarCompetencia(comp) +
+        ": " + filtrados.length
+      );
+    }
+
+    processarRelatorio(filtrados);
+
+    atualizarData();
+
+  } catch (erro) {
+    console.error("Erro ao carregar relatório:", erro);
+
+    if (idRequisicao !== requisicaoAtual) return;
+
+    const mensagem = escaparHTML(
+      erro.message || String(erro)
+    );
+
+    receber.innerHTML =
+      '<div class="erro">Erro ao carregar receitas:<br>' +
+      mensagem + '</div>';
+
+    pagar.innerHTML =
+      '<div class="erro">Erro ao carregar despesas:<br>' +
+      mensagem + '</div>';
+
+    resumo.textContent = "Não foi possível gerar o relatório.";
+
+    mostrarDiagnostico(
+      "Detalhes técnicos:\n" +
+      (erro.stack || erro.message || String(erro))
+    );
+
+  } finally {
+    if (idRequisicao === requisicaoAtual) {
+      botao.disabled = false;
+      botao.textContent = "🔄 Atualizar";
+    }
+  }
+}
+
+/* =====================================================
+   PROCESSAR RECEITAS E DESPESAS
+===================================================== */
+
+function processarRelatorio(lista) {
+  const receitas = [];
+  const despesas = [];
+
+  let totalReceitas = 0;
+  let totalDespesas = 0;
+  let totalRepasse = 0;
+
+  lista.forEach(item => {
+    if (!item || typeof item !== "object") return;
+
+    const descricao = localizarCampo(
+      item, ["Descricao", "Descrição", "descricao"]
+    );
+
+    const tipo = localizarCampo(
+      item, ["Tipo", "tipo", "TIPO"]
+    );
+
+    const valor = converterNumero(
+      localizarCampo(item, ["Valor", "valor", "VALOR"])
+    );
+
+    const baixado = ehBaixado(
+      localizarCampo(item, ["Baixado", "baixado", "Pago"])
+    );
+
+    if (tipoContasReceber(tipo)) {
+      receitas.push(item);
+      totalReceitas += valor;
+      return;
+    }
+
+    if (tipoContasPagar(tipo)) {
+      if (
+        normalizarTexto(descricao) === "repasse aluguel" &&
+        baixado
+      ) {
+        totalRepasse += valor;
+      } else {
+        despesas.push(item);
+        totalDespesas += valor;
+      }
+
+      return;
+    }
+
+    console.warn("Tipo de lançamento não reconhecido:", item);
+  });
+
+  // Mantém a regra original de repasse de aluguel.
+  totalReceitas = Math.max(0, totalReceitas - totalRepasse);
+  totalDespesas = Math.max(0, totalDespesas - totalRepasse);
+
+  montarTabela("receber", receitas, "receita", totalReceitas);
+  montarTabela("pagar", despesas, "despesa", totalDespesas);
+
+  const saldo = totalReceitas - totalDespesas;
+
+  const cor = saldo >= 0 ? "#2e7d32" : "#c62828";
+
+  document.getElementById("resumoFinal").innerHTML =
+    "Resultado da competência: <span style=\"color:" +
+    cor + "\">" + formatar(saldo) + "</span>";
+}
+
+function tipoContasReceber(tipo) {
+  const t = normalizarTexto(tipo);
+
+  return t.includes("contas a receber") ||
+    t.includes("conta a receber") ||
+    t === "receita" ||
+    t === "entrada" ||
+    t === "receber";
+}
+
+function tipoContasPagar(tipo) {
+  const t = normalizarTexto(tipo);
+
+  return t.includes("contas a pagar") ||
+    t.includes("conta a pagar") ||
+    t === "despesa" ||
+    t === "saida" ||
+    t === "pagar";
+}
+
+/* =====================================================
+   MONTAR TABELAS
+===================================================== */
+
+function montarTabela(id, lista, tipo, total) {
+  const elemento = document.getElementById(id);
+
+  if (!lista.length) {
+    elemento.innerHTML =
+      '<div class="carregando">Nenhum lançamento encontrado nesta competência.</div>';
+    return;
+  }
+
+  let html =
+    '<div class="tabela-container">' +
+    '<table><thead><tr>' +
+    '<th>Descrição</th>' +
+    '<th>Valor</th>' +
+    '<th>Vencimento</th>' +
+    '<th>Status</th>' +
+    '</tr></thead><tbody>';
+
+  lista.forEach(item => {
+    const descricao = localizarCampo(
+      item, ["Descricao", "Descrição", "descricao"]
+    );
+
+    const valor = converterNumero(
+      localizarCampo(item, ["Valor", "valor", "VALOR"])
+    );
+
+    const vencimento = localizarCampo(
+      item, ["Vencimento", "vencimento", "DataVencimento",
+             "dataVencimento", "Data", "data"]
+    );
+
+    const baixado = ehBaixado(
+      localizarCampo(item, ["Baixado", "baixado", "Pago"])
+    );
+
+    html +=
+      "<tr><td>" + escaparHTML(descricao) + "</td>" +
+      '<td class="valor">' + formatar(valor) + "</td>" +
+      "<td>" + escaparHTML(formatarData(vencimento)) + "</td>" +
+      "<td>" +
+      (baixado
+        ? '<span class="pago">✔ Pago</span>'
+        : '<span class="pendente">⏳ Pendente</span>') +
+      "</td></tr>";
+  });
+
+  html += "</tbody></table></div>";
+
+  if (tipo === "receita") {
+    html +=
+      '<div class="total-receita">Total de Receitas:<br>' +
+      formatar(total) + "</div>";
+  } else {
+    html +=
+      '<div class="total-despesa">Total de Despesas:<br>' +
+      formatar(total) + "</div>";
+  }
+
+  elemento.innerHTML = html;
+}
+
+/* =====================================================
+   FORMATAÇÃO
+===================================================== */
+
+function converterNumero(valor) {
+  if (valor === null || valor === undefined || valor === "") {
+    return 0;
+  }
+
+  if (typeof valor === "number") {
+    return Number.isFinite(valor) ? valor : 0;
+  }
+
+  let texto = String(valor)
+    .trim()
+    .replace(/R\$/gi, "")
+    .replace(/\s/g, "");
+
+  if (texto.includes(",")) {
+    texto = texto.replace(/\./g, "").replace(",", ".");
+  }
+
+  const numero = Number(texto);
+
+  return Number.isFinite(numero) ? numero : 0;
+}
+
+function ehBaixado(valor) {
+  const t = normalizarTexto(valor);
+
+  return valor === true ||
+    valor === 1 ||
+    t === "sim" ||
+    t === "s" ||
+    t === "true" ||
+    t === "1" ||
+    t === "pago" ||
+    t === "baixado" ||
+    t === "quitado";
+}
+
+function formatar(valor) {
+  return converterNumero(valor).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  });
+}
+
+function formatarData(valor) {
+  if (valor === null || valor === undefined || valor === "") {
+    return "";
+  }
+
+  if (valor instanceof Date) {
+    return isNaN(valor.getTime())
+      ? ""
+      : valor.toLocaleDateString("pt-BR");
+  }
+
+  const texto = String(valor).trim();
+  let m;
+
+  if ((m = texto.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/))) {
+    return m[1].padStart(2, "0") + "/" +
+      m[2].padStart(2, "0") + "/" + m[3];
+  }
+
+  if ((m = texto.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/))) {
+    return m[3].padStart(2, "0") + "/" +
+      m[2].padStart(2, "0") + "/" + m[1];
+  }
+
+  return texto;
+}
+
+function escaparHTML(valor) {
+  return String(valor ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+/* =====================================================
+   VOLTAR E INICIALIZAÇÃO
+===================================================== */
+
+function voltar() {
+  try {
+    if (document.referrer) {
+      const origem = new URL(document.referrer);
+
+      if (origem.origin === location.origin) {
+        history.back();
         return;
-    } const descricao = String( item.Descricao || item.descricao || "" ).trim(); const descricaoNormalizada = normalizarTexto( descricao ); const tipo = item.Tipo || item.tipo || item.TIPO || ""; const valor = converterNumero( item.Valor !== undefined ? item.Valor : item.valor ); const baixado = ehBaixado( item.Baixado !== undefined ? item.Baixado : item.baixado ); /* * RECEITAS */ if ( tipoContasReceber( tipo ) ) { receitas.push( item ); totalReceitas += valor; return; } /* * DESPESAS */ if ( tipoContasPagar( tipo ) ) { /* * Regra especial: * Repasse aluguel baixado. */ if ( descricaoNormalizada === "repasse aluguel" && baixado ) { totalRepasse += valor; } else { despesas.push( item ); totalDespesas += valor; } } } ); /* * Abate o repasse. */ totalReceitas -= totalRepasse; totalDespesas -= totalRepasse; /* * Evita valores negativos. */ if ( totalReceitas < 0 ) { totalReceitas = 0; } if ( totalDespesas < 0 ) { totalDespesas = 0; } /* * Monta as tabelas. */ montarTabela( "receber", receitas, "receita", totalReceitas ); montarTabela( "pagar", despesas, "despesa", totalDespesas ); /* * Resultado. */ const saldo = totalReceitas - totalDespesas; const cor = saldo >= 0 ? "#2e7d32" : "#c62828"; document.getElementById( "resumoFinal" ).innerHTML = "Resultado da competência: " + '<span style="color:' + cor + ';">' + formatar(saldo) + '</span>'; } /* ===================================================== TIPO RECEITA ===================================================== */ function tipoContasReceber( tipo ) { const texto = normalizarTexto( tipo ); return ( texto.indexOf( "contas a receber" ) !== -1 || texto.indexOf( "conta a receber" ) !== -1 || texto === "receita" || texto === "entrada" ); } /* ===================================================== TIPO DESPESA ===================================================== */ function tipoContasPagar( tipo ) { const texto = normalizarTexto( tipo ); return ( texto.indexOf( "contas a pagar" ) !== -1 || texto.indexOf( "conta a pagar" ) !== -1 || texto === "despesa" || texto === "saida" || texto === "saída" ); } /* ===================================================== MONTAR TABELA ===================================================== */ function montarTabela( id, lista, tipo, total ) { const elemento = document.getElementById( id ); if ( !lista || lista.length === 0 ) { elemento.innerHTML = '<div class="carregando">' + 'Nenhum lançamento encontrado.' + '</div>'; return; } let html = '<div class="tabela-container">' + '<table>' + '<thead>' + '<tr>' + '<th>Descrição</th>' + '<th>Valor</th>' + '<th>Vencimento</th>' + '<th>Status</th>' + '</tr>' + '</thead>' + '<tbody>'; lista.forEach( function(item) { const descricao = item.Descricao || item.descricao || ""; const valor = converterNumero( item.Valor !== undefined ? item.Valor : item.valor ); const vencimento = item.Vencimento || item.vencimento || ""; const baixado = ehBaixado( item.Baixado !== undefined ? item.Baixado : item.baixado ); html += '<tr>' + '<td>' + escaparHTML( descricao ) + '</td>' + '<td class="valor">' + formatar( valor ) + '</td>' + '<td>' + formatarData( vencimento ) + '</td>' + '<td>' + ( baixado ? '<span class="pago">' + '✔ Pago' + '</span>' : '<span class="pendente">' + '⏳ Pendente' + '</span>' ) + '</td>' + '</tr>'; } ); html += '</tbody>' + '</table>' + '</div>'; /* * Total de receitas. */ if ( tipo === "receita" ) { html += '<div class="total-receita">' + 'Total de Receitas:' + '<br>' + formatar( total ) + '</div>'; } /* * Total de despesas. */ if ( tipo === "despesa" ) { html += '<div class="total-despesa">' + 'Total de Despesas:' + '<br>' + formatar( total ) + '</div>'; } elemento.innerHTML = html; } /* ===================================================== CONVERTER NÚMERO ===================================================== */ function converterNumero( valor ) { if ( valor === null || valor === undefined || valor === "" ) { return 0; } if ( typeof valor === "number" ) { return isFinite(valor) ? valor : 0; } let texto = String(valor) .trim() .replace( /R\$/gi, "" ) .replace( /\s/g, "" ); /* * Formato brasileiro: * 1.234,56 */ if ( texto.indexOf(",") !== -1 ) { texto = texto .replace( /\./g, "" ) .replace( ",", "." ); } const numero = Number( texto ); return isFinite(numero) ? numero : 0; } /* ===================================================== NORMALIZAR TEXTO ===================================================== */ function normalizarTexto( texto ) { if ( texto === null || texto === undefined ) { return ""; } return String(texto) .toLowerCase() .normalize("NFD") .replace( /[\u0300-\u036f]/g, "" ) .trim(); } /* ===================================================== STATUS ===================================================== */ function ehBaixado( valor ) { const texto = normalizarTexto( valor ); return ( texto === "sim" || texto === "s" || texto === "true" || texto === "1" || texto === "pago" || texto === "baixado" ); } /* ===================================================== FORMATAR COMPETÊNCIA ===================================================== */ function formatarCompetencia( comp ) { const competencia = converterCompetencia( comp ); if ( !/^\d{4}-\d{2}$/.test( competencia ) ) { return comp || "-"; } const partes = competencia.split("-"); return ( partes[1] + "/" + partes[0] ); } /* ===================================================== FORMATAR MOEDA ===================================================== */ function formatar( valor ) { return Number( converterNumero( valor ) ).toLocaleString( "pt-BR", { style: "currency", currency: "BRL" } ); } /* ===================================================== FORMATAR DATA ===================================================== */ function formatarData( data ) { if ( data === null || data === undefined || data === "" ) { return ""; } const texto = String(data).trim(); /* * DD/MM/AAAA */ if ( /^\d{2}\/\d{2}\/\d{4}$/.test( texto ) ) { return texto; } /* * D/M/AAAA */ if ( /^\d{1,2}\/\d{1,2}\/\d{4}$/.test( texto ) ) { const partes = texto.split("/"); return ( String( partes[0] ).padStart( 2, "0" ) + "/" + String( partes[1] ).padStart( 2, "0" ) + "/" + partes[2] ); } /* * AAAA-MM-DD */ if ( /^\d{4}-\d{2}-\d{2}$/.test( texto ) ) { const partes = texto.split("-"); return ( partes[2] + "/" + partes[1] + "/" + partes[0] ); } /* * Data com horário. */ const objeto = new Date( data ); if ( !isNaN( objeto.getTime() ) ) { return objeto.toLocaleDateString( "pt-BR" ); } return texto; } /* ===================================================== ESCAPAR HTML ===================================================== */ function escaparHTML( valor ) { if ( valor === null || valor === undefined ) { return ""; } return String(valor) .replace( /&/g, "&amp;" ) .replace( /</g, "&lt;" ) .replace( />/g, "&gt;" ) .replace( /"/g, "&quot;" ) .replace( /'/g, "&#039;" ); } /* ===================================================== VOLTAR ===================================================== */ function voltar() { /* * Se existe uma página anterior * do mesmo sistema, volta. */ const origem = document.referrer; if ( origem && origem !== window.location.href ) { try { const origemURL = new URL( origem ); /* * Se a origem pertence * ao mesmo domínio, * utiliza o histórico. */ if ( origemURL.origin === window.location.origin ) { window.history.back(); return; } } catch (erro) { console.warn( "Erro ao analisar página anterior:", erro ); } } /* * Se não houver histórico, * tenta index.html. */ window.location.href = "index.html"; } /* ===================================================== INICIALIZAÇÃO ===================================================== */ document.addEventListener( "DOMContentLoaded", async function() { console.log( "Relatorio.html iniciado." ); try { /* * Primeiro carrega o * combobox. */ await carregarCompetencias(); /* * Depois carrega o * relatório inicial. */ await carregarRelatorio(); } catch (erro) { console.error( "Erro na inicialização:", erro ); } } ); </script> </body> </html>
+      }
+    }
+  } catch (erro) {
+    console.warn("Erro ao voltar:", erro);
+  }
+
+  location.href = "index.html";
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log("Relatório Financeiro iniciado.");
+
+  await carregarCompetencias();
+  await carregarRelatorio();
+});
+</script>
+</body>
+</html>
