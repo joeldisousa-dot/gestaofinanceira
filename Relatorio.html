@@ -17,7 +17,6 @@
       --muted: #64748b;
       --verde: #16803c;
       --vermelho: #b42318;
-      --branco: #fff;
       --destaque: #e0ecff;
       --destaque-hover: #cbdcf7;
     }
@@ -202,7 +201,7 @@
       overflow-wrap: anywhere;
     }
 
-    /* DESTAQUE DAS COLUNAS TIPO E BAIXADO */
+    /* Colunas Tipo e Baixado */
     th.coluna-destaque {
       background: var(--azul);
       color: white;
@@ -216,14 +215,12 @@
       font-weight: bold;
     }
 
-    /* Centraliza os valores da coluna Baixado */
     th.coluna-baixado,
     td.coluna-baixado {
       text-align: center;
       min-width: 95px;
     }
 
-    /* Diferencia visualmente Sim e Não */
     td.coluna-baixado.valor-sim {
       color: #166534;
       background: #dcfce7;
@@ -232,6 +229,13 @@
     td.coluna-baixado.valor-nao {
       color: #991b1b;
       background: #fee2e2;
+    }
+
+    /* Alinhamento dos valores monetários */
+    th.coluna-valor,
+    td.coluna-valor {
+      text-align: right;
+      white-space: nowrap;
     }
 
     tbody tr:hover td {
@@ -385,7 +389,6 @@
 
   function montarCompetencias() {
     const parametros = new URLSearchParams(location.search);
-
     const informada = parametros.get('competencia') ||
                       parametros.get('mes');
 
@@ -488,7 +491,6 @@
       script.src = montarUrlApi(competencia, callback);
 
       console.log('URL enviada para a API:', script.src);
-
       document.body.appendChild(script);
     });
   }
@@ -531,13 +533,6 @@
     );
   }
 
-  function normalizarNome(nome) {
-    return String(nome)
-      .replace(/([a-z])([A-Z])/g, '$1 $2')
-      .replace(/[_-]+/g, ' ')
-      .replace(/^./, letra => letra.toUpperCase());
-  }
-
   function normalizarChave(chave) {
     return String(chave)
       .normalize('NFD')
@@ -546,7 +541,13 @@
       .replace(/[^a-z0-9]/g, '');
   }
 
-  // Remove QR Code e campos relacionados ao PIX da tabela.
+  function normalizarNome(nome) {
+    return String(nome)
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .replace(/[_-]+/g, ' ')
+      .replace(/^./, letra => letra.toUpperCase());
+  }
+
   function ehCampoQRCode(chave) {
     const nome = normalizarChave(chave);
 
@@ -572,10 +573,9 @@
   }
 
   function localizarCampo(objeto, nomes) {
-    const chaves = Object.keys(objeto || {});
     const procurados = nomes.map(normalizarChave);
 
-    const chave = chaves.find(k =>
+    const chave = Object.keys(objeto || {}).find(k =>
       procurados.includes(normalizarChave(k))
     );
 
@@ -599,6 +599,14 @@
 
     const numero = Number(texto);
     return Number.isFinite(numero) ? numero : 0;
+  }
+
+  function formatarValorMoeda(valor) {
+    if (valor === null || valor === undefined || valor === '') {
+      return '—';
+    }
+
+    return moeda.format(converterNumero(valor));
   }
 
   function atualizarResumo(lista) {
@@ -669,7 +677,23 @@
       return { lancamento: item };
     });
 
-    // Monta as colunas sem exibir os campos de QR Code e PIX.
+    // Ordena por Tipo, em ordem alfabética, sem alterar a lista original.
+    objetos.sort((a, b) => {
+      const tipoA = String(
+        localizarCampo(a, ['tipo']) ?? ''
+      ).trim();
+
+      const tipoB = String(
+        localizarCampo(b, ['tipo']) ?? ''
+      ).trim();
+
+      return tipoA.localeCompare(tipoB, 'pt-BR', {
+        sensitivity: 'base',
+        numeric: true
+      });
+    });
+
+    // Identifica as colunas, omitindo QR Code e campos relacionados.
     const colunas = [];
 
     objetos.forEach(objeto => {
@@ -698,6 +722,10 @@
         th.classList.add('coluna-baixado');
       }
 
+      if (nome === 'valor') {
+        th.classList.add('coluna-valor');
+      }
+
       cabecalho.appendChild(th);
     });
 
@@ -714,14 +742,17 @@
         const nome = normalizarChave(coluna);
         const valor = objeto[coluna];
 
-        td.textContent = formatarCelula(valor);
+        // Formata a coluna Valor como moeda brasileira.
+        td.textContent = nome === 'valor'
+          ? formatarValorMoeda(valor)
+          : formatarCelula(valor);
 
         // Destaca a coluna Tipo.
         if (nome === 'tipo') {
           td.classList.add('coluna-destaque');
         }
 
-        // Destaca e centraliza a coluna Baixado.
+        // Destaca a coluna Baixado e diferencia Sim e Não.
         if (nome === 'baixado') {
           td.classList.add(
             'coluna-destaque',
@@ -745,6 +776,10 @@
           ) {
             td.classList.add('valor-nao');
           }
+        }
+
+        if (nome === 'valor') {
+          td.classList.add('coluna-valor');
         }
 
         tr.appendChild(td);
@@ -799,7 +834,6 @@
 
       const pagina = new URL(window.location.href);
       pagina.searchParams.set('competencia', competencia);
-
       window.history.replaceState({}, '', pagina);
 
     } catch (erro) {
@@ -831,7 +865,6 @@
   seletor.addEventListener('change', () => {
     const pagina = new URL(window.location.href);
     pagina.searchParams.set('competencia', seletor.value);
-
     window.history.replaceState({}, '', pagina);
   });
 
