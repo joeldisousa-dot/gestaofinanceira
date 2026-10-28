@@ -18,9 +18,13 @@
       --verde: #16803c;
       --vermelho: #b42318;
       --branco: #fff;
+      --destaque: #e0ecff;
+      --destaque-hover: #cbdcf7;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -45,9 +49,14 @@
       font-size: clamp(22px, 3vw, 30px);
     }
 
-    header p { margin: 0; opacity: .9; }
+    header p {
+      margin: 0;
+      opacity: .9;
+    }
 
-    main { padding: 22px 0 40px; }
+    main {
+      padding: 22px 0 40px;
+    }
 
     .painel {
       background: white;
@@ -102,6 +111,10 @@
       background: var(--azul);
     }
 
+    .primario:hover {
+      background: var(--azul2);
+    }
+
     .secundario {
       color: var(--azul);
       background: #e8eef6;
@@ -152,8 +165,13 @@
       overflow-wrap: anywhere;
     }
 
-    .positivo { color: var(--verde); }
-    .negativo { color: var(--vermelho); }
+    .positivo {
+      color: var(--verde);
+    }
+
+    .negativo {
+      color: var(--vermelho);
+    }
 
     .tabela-wrap {
       overflow-x: auto;
@@ -177,9 +195,60 @@
       background: #f8fafc;
       color: #334155;
       font-size: 13px;
+      white-space: nowrap;
     }
 
-    td { overflow-wrap: anywhere; }
+    td {
+      overflow-wrap: anywhere;
+    }
+
+    /* DESTAQUE DAS COLUNAS TIPO E BAIXADO */
+    th.coluna-destaque {
+      background: var(--azul);
+      color: white;
+      font-weight: bold;
+      border-bottom: 3px solid #0f2744;
+    }
+
+    td.coluna-destaque {
+      background: var(--destaque);
+      color: var(--azul);
+      font-weight: bold;
+    }
+
+    /* Centraliza os valores da coluna Baixado */
+    th.coluna-baixado,
+    td.coluna-baixado {
+      text-align: center;
+      min-width: 95px;
+    }
+
+    /* Diferencia visualmente Sim e Não */
+    td.coluna-baixado.valor-sim {
+      color: #166534;
+      background: #dcfce7;
+    }
+
+    td.coluna-baixado.valor-nao {
+      color: #991b1b;
+      background: #fee2e2;
+    }
+
+    tbody tr:hover td {
+      background-color: #f1f5f9;
+    }
+
+    tbody tr:hover td.coluna-destaque {
+      background-color: var(--destaque-hover);
+    }
+
+    tbody tr:hover td.coluna-baixado.valor-sim {
+      background: #bbf7d0;
+    }
+
+    tbody tr:hover td.coluna-baixado.valor-nao {
+      background: #fecaca;
+    }
 
     .vazio {
       text-align: center;
@@ -193,12 +262,22 @@
       margin-top: 12px;
     }
 
-    .oculto { display: none !important; }
+    .oculto {
+      display: none !important;
+    }
 
     @media (max-width: 680px) {
-      .filtros { grid-template-columns: 1fr; }
-      .resumo { grid-template-columns: 1fr; }
-      .painel { padding: 14px; }
+      .filtros {
+        grid-template-columns: 1fr;
+      }
+
+      .resumo {
+        grid-template-columns: 1fr;
+      }
+
+      .painel {
+        padding: 14px;
+      }
     }
   </style>
 </head>
@@ -271,10 +350,6 @@
 (() => {
   'use strict';
 
-  /*
-   * URL publicada do Google Apps Script.
-   * Confirme se esta é a versão atual do seu Web App.
-   */
   const API_URL =
     'https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec';
 
@@ -311,7 +386,6 @@
   function montarCompetencias() {
     const parametros = new URLSearchParams(location.search);
 
-    // A competência que vem na URL da página deve ser copiada para o seletor.
     const informada = parametros.get('competencia') ||
                       parametros.get('mes');
 
@@ -324,7 +398,6 @@
 
     seletor.replaceChildren();
 
-    // Exibe 60 competências, começando pelo mês solicitado.
     for (let i = 0; i < 60; i++) {
       const data = new Date(
         dataBase.getFullYear(),
@@ -354,19 +427,12 @@
     btnConsultar.disabled = bloquear;
     btnAtualizar.disabled = bloquear;
     seletor.disabled = bloquear;
+
     btnConsultar.textContent = bloquear
       ? 'Consultando...'
       : 'Consultar relatório';
   }
 
-  /*
-   * IMPORTANTE:
-   * A competência da página NÃO é automaticamente enviada à API.
-   * Por isso, esta função adiciona explicitamente:
-   * action=listarLancamentos
-   * competencia=AAAA-MM
-   * callback=...
-   */
   function montarUrlApi(competencia, callback) {
     const url = new URL(API_URL);
 
@@ -405,6 +471,7 @@
 
       function finalizar(erro, dados) {
         if (concluido) return;
+
         concluido = true;
         limpar();
 
@@ -420,7 +487,6 @@
 
       script.src = montarUrlApi(competencia, callback);
 
-      // Exibe no console a URL exata enviada para facilitar o diagnóstico.
       console.log('URL enviada para a API:', script.src);
 
       document.body.appendChild(script);
@@ -472,6 +538,23 @@
       .replace(/^./, letra => letra.toUpperCase());
   }
 
+  function normalizarChave(chave) {
+    return String(chave)
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, '');
+  }
+
+  // Remove QR Code e campos relacionados ao PIX da tabela.
+  function ehCampoQRCode(chave) {
+    const nome = normalizarChave(chave);
+
+    return nome.includes('qrcode') ||
+           nome.includes('codigopix') ||
+           nome.includes('pixcopiaecola');
+  }
+
   function formatarCelula(valor) {
     if (valor === null || valor === undefined || valor === '') {
       return '—';
@@ -489,12 +572,11 @@
   }
 
   function localizarCampo(objeto, nomes) {
-    const normalizar = texto =>
-      String(texto).toLowerCase().replace(/[\s_-]/g, '');
-
     const chaves = Object.keys(objeto || {});
+    const procurados = nomes.map(normalizarChave);
+
     const chave = chaves.find(k =>
-      nomes.map(normalizar).includes(normalizar(k))
+      procurados.includes(normalizarChave(k))
     );
 
     return chave === undefined ? undefined : objeto[chave];
@@ -529,7 +611,6 @@
       const valor = converterNumero(localizarCampo(item, [
         'valor',
         'valorLancamento',
-        'valor lançamento',
         'valorTotal'
       ]));
 
@@ -566,82 +647,116 @@
     resumo.classList.remove('oculto');
   }
 
-  
-function renderizarTabela(lista) {
-  areaTabela.replaceChildren();
+  function renderizarTabela(lista) {
+    areaTabela.replaceChildren();
 
-  if (lista.length === 0) {
-    const vazio = document.createElement('div');
-    vazio.className = 'vazio';
-    vazio.textContent =
-      'A consulta foi concluída, mas a API não encontrou lançamentos para ' +
-      formatarCompetencia(seletor.value) + '.';
+    if (lista.length === 0) {
+      const vazio = document.createElement('div');
+      vazio.className = 'vazio';
+      vazio.textContent =
+        'A consulta foi concluída, mas a API não encontrou lançamentos para ' +
+        formatarCompetencia(seletor.value) + '.';
 
-    areaTabela.appendChild(vazio);
-    return;
-  }
-
-  const objetos = lista.map(item => {
-    if (item && typeof item === 'object' && !Array.isArray(item)) {
-      return item;
+      areaTabela.appendChild(vazio);
+      return;
     }
 
-    return { lancamento: item };
-  });
-
-  // Identifica e remove os campos relacionados ao QR Code.
-  const ehCampoQRCode = chave => {
-    const nome = String(chave)
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, '');
-
-    return nome.includes('qrcode') ||
-           nome.includes('codigopix') ||
-           nome.includes('pixcopiaecola');
-  };
-
-  const colunas = [];
-
-  objetos.forEach(objeto => {
-    Object.keys(objeto).forEach(chave => {
-      if (!ehCampoQRCode(chave) && !colunas.includes(chave)) {
-        colunas.push(chave);
+    const objetos = lista.map(item => {
+      if (item && typeof item === 'object' && !Array.isArray(item)) {
+        return item;
       }
+
+      return { lancamento: item };
     });
-  });
 
-  const tabela = document.createElement('table');
-  const thead = document.createElement('thead');
-  const cabecalho = document.createElement('tr');
+    // Monta as colunas sem exibir os campos de QR Code e PIX.
+    const colunas = [];
 
-  colunas.forEach(coluna => {
-    const th = document.createElement('th');
-    th.textContent = normalizarNome(coluna);
-    cabecalho.appendChild(th);
-  });
+    objetos.forEach(objeto => {
+      Object.keys(objeto).forEach(chave => {
+        if (!ehCampoQRCode(chave) && !colunas.includes(chave)) {
+          colunas.push(chave);
+        }
+      });
+    });
 
-  thead.appendChild(cabecalho);
-  tabela.appendChild(thead);
-
-  const tbody = document.createElement('tbody');
-
-  objetos.forEach(objeto => {
-    const tr = document.createElement('tr');
+    const tabela = document.createElement('table');
+    const thead = document.createElement('thead');
+    const cabecalho = document.createElement('tr');
 
     colunas.forEach(coluna => {
-      const td = document.createElement('td');
-      td.textContent = formatarCelula(objeto[coluna]);
-      tr.appendChild(td);
+      const th = document.createElement('th');
+      const nome = normalizarChave(coluna);
+
+      th.textContent = normalizarNome(coluna);
+
+      if (nome === 'tipo' || nome === 'baixado') {
+        th.classList.add('coluna-destaque');
+      }
+
+      if (nome === 'baixado') {
+        th.classList.add('coluna-baixado');
+      }
+
+      cabecalho.appendChild(th);
     });
 
-    tbody.appendChild(tr);
-  });
+    thead.appendChild(cabecalho);
+    tabela.appendChild(thead);
 
-  tabela.appendChild(tbody);
-  areaTabela.appendChild(tabela);
-}
+    const tbody = document.createElement('tbody');
+
+    objetos.forEach(objeto => {
+      const tr = document.createElement('tr');
+
+      colunas.forEach(coluna => {
+        const td = document.createElement('td');
+        const nome = normalizarChave(coluna);
+        const valor = objeto[coluna];
+
+        td.textContent = formatarCelula(valor);
+
+        // Destaca a coluna Tipo.
+        if (nome === 'tipo') {
+          td.classList.add('coluna-destaque');
+        }
+
+        // Destaca e centraliza a coluna Baixado.
+        if (nome === 'baixado') {
+          td.classList.add(
+            'coluna-destaque',
+            'coluna-baixado'
+          );
+
+          const texto = String(valor ?? '')
+            .trim()
+            .toLowerCase();
+
+          if (
+            valor === true ||
+            ['sim', 'true', '1', 'baixado', 'pago', 'yes']
+              .includes(texto)
+          ) {
+            td.classList.add('valor-sim');
+          } else if (
+            valor === false ||
+            ['não', 'nao', 'false', '0', 'pendente', 'no']
+              .includes(texto)
+          ) {
+            td.classList.add('valor-nao');
+          }
+        }
+
+        tr.appendChild(td);
+      });
+
+      tbody.appendChild(tr);
+    });
+
+    tabela.appendChild(tbody);
+    areaTabela.appendChild(tabela);
+  }
+
   async function carregarRelatorio() {
     const competencia = seletor.value;
 
@@ -682,19 +797,21 @@ function renderizarTabela(lista) {
         );
       }
 
-      // Mantém a competência selecionada na URL da página.
       const pagina = new URL(window.location.href);
       pagina.searchParams.set('competencia', competencia);
+
       window.history.replaceState({}, '', pagina);
 
     } catch (erro) {
       console.error('Erro ao carregar relatório:', erro);
 
       areaTabela.replaceChildren();
+
       const aviso = document.createElement('div');
       aviso.className = 'vazio';
       aviso.textContent =
         'Não foi possível carregar os lançamentos. Leia a mensagem de erro acima.';
+
       areaTabela.appendChild(aviso);
 
       mostrarStatus(
@@ -714,6 +831,7 @@ function renderizarTabela(lista) {
   seletor.addEventListener('change', () => {
     const pagina = new URL(window.location.href);
     pagina.searchParams.set('competencia', seletor.value);
+
     window.history.replaceState({}, '', pagina);
   });
 
