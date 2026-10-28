@@ -566,66 +566,82 @@
     resumo.classList.remove('oculto');
   }
 
-  function renderizarTabela(lista) {
-    areaTabela.replaceChildren();
+  
+function renderizarTabela(lista) {
+  areaTabela.replaceChildren();
 
-    if (lista.length === 0) {
-      const vazio = document.createElement('div');
-      vazio.className = 'vazio';
-      vazio.textContent =
-        'A consulta foi concluída, mas a API não encontrou lançamentos para ' +
-        formatarCompetencia(seletor.value) + '.';
-      areaTabela.appendChild(vazio);
-      return;
-    }
+  if (lista.length === 0) {
+    const vazio = document.createElement('div');
+    vazio.className = 'vazio';
+    vazio.textContent =
+      'A consulta foi concluída, mas a API não encontrou lançamentos para ' +
+      formatarCompetencia(seletor.value) + '.';
 
-    const objetos = lista.map(item => {
-      if (item && typeof item === 'object' && !Array.isArray(item)) {
-        return item;
-      }
-
-      return { lancamento: item };
-    });
-
-    const colunas = [];
-
-    objetos.forEach(objeto => {
-      Object.keys(objeto).forEach(chave => {
-        if (!colunas.includes(chave)) colunas.push(chave);
-      });
-    });
-
-    const tabela = document.createElement('table');
-    const thead = document.createElement('thead');
-    const cabecalho = document.createElement('tr');
-
-    colunas.forEach(coluna => {
-      const th = document.createElement('th');
-      th.textContent = normalizarNome(coluna);
-      cabecalho.appendChild(th);
-    });
-
-    thead.appendChild(cabecalho);
-    tabela.appendChild(thead);
-
-    const tbody = document.createElement('tbody');
-
-    objetos.forEach(objeto => {
-      const tr = document.createElement('tr');
-
-      colunas.forEach(coluna => {
-        const td = document.createElement('td');
-        td.textContent = formatarCelula(objeto[coluna]);
-        tr.appendChild(td);
-      });
-
-      tbody.appendChild(tr);
-    });
-
-    tabela.appendChild(tbody);
-    areaTabela.appendChild(tabela);
+    areaTabela.appendChild(vazio);
+    return;
   }
 
+  const objetos = lista.map(item => {
+    if (item && typeof item === 'object' && !Array.isArray(item)) {
+      return item;
+    }
+
+    return { lancamento: item };
+  });
+
+  // Identifica e remove os campos relacionados ao QR Code.
+  const ehCampoQRCode = chave => {
+    const nome = String(chave)
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, '');
+
+    return nome.includes('qrcode') ||
+           nome.includes('codigopix') ||
+           nome.includes('pixcopiaecola');
+  };
+
+  const colunas = [];
+
+  objetos.forEach(objeto => {
+    Object.keys(objeto).forEach(chave => {
+      if (!ehCampoQRCode(chave) && !colunas.includes(chave)) {
+        colunas.push(chave);
+      }
+    });
+  });
+
+  const tabela = document.createElement('table');
+  const thead = document.createElement('thead');
+  const cabecalho = document.createElement('tr');
+
+  colunas.forEach(coluna => {
+    const th = document.createElement('th');
+    th.textContent = normalizarNome(coluna);
+    cabecalho.appendChild(th);
+  });
+
+  thead.appendChild(cabecalho);
+  tabela.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+
+  objetos.forEach(objeto => {
+    const tr = document.createElement('tr');
+
+    colunas.forEach(coluna => {
+      const td = document.createElement('td');
+      td.textContent = formatarCelula(objeto[coluna]);
+      tr.appendChild(td);
+    });
+
+    tbody.appendChild(tr);
+  });
+
+  tabela.appendChild(tbody);
+  areaTabela.appendChild(tabela);
+}
   async function carregarRelatorio() {
     const competencia = seletor.value;
 
