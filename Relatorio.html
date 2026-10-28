@@ -2,295 +2,293 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#17365d">
-  <title>Relatório Financeiro</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17365d">
+<title>Relatório Financeiro</title>
 
-  <style>
-    :root {
-      --azul: #17365d;
-      --azul2: #24558b;
-      --fundo: #f3f6fa;
-      --borda: #dce3ec;
-      --texto: #1e293b;
-      --muted: #64748b;
-      --verde: #16803c;
-      --vermelho: #b42318;
-      --destaque: #e0ecff;
-      --destaque-hover: #cbdcf7;
-    }
+<style>
+:root {
+  --azul:#17365d;
+  --azul2:#24558b;
+  --fundo:#f3f6fa;
+  --borda:#dce3ec;
+  --texto:#1e293b;
+  --muted:#64748b;
+  --verde:#16803c;
+  --vermelho:#b42318;
+  --branco:#fff;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+* { box-sizing:border-box; }
 
-    body {
-      margin: 0;
-      background: var(--fundo);
-      color: var(--texto);
-      font: 15px/1.5 Arial, Helvetica, sans-serif;
-    }
+body {
+  margin:0;
+  background:var(--fundo);
+  color:var(--texto);
+  font:15px/1.5 Arial,Helvetica,sans-serif;
+}
 
-    header {
-      background: linear-gradient(120deg, var(--azul), var(--azul2));
-      color: white;
-      padding: 25px 18px;
-    }
+header {
+  background:linear-gradient(120deg,var(--azul),var(--azul2));
+  color:white;
+  padding:25px 18px;
+}
 
-    .container {
-      width: min(1180px, calc(100% - 28px));
-      margin: auto;
-    }
+.container {
+  width:min(1180px,calc(100% - 28px));
+  margin:auto;
+}
 
-    header h1 {
-      margin: 0 0 5px;
-      font-size: clamp(22px, 3vw, 30px);
-    }
+header h1 {
+  margin:0 0 5px;
+  font-size:clamp(22px,3vw,30px);
+}
 
-    header p {
-      margin: 0;
-      opacity: .9;
-    }
+header p { margin:0; opacity:.9; }
 
-    main {
-      padding: 22px 0 40px;
-    }
+main { padding:22px 0 40px; }
 
-    .painel {
-      background: white;
-      border: 1px solid var(--borda);
-      border-radius: 14px;
-      padding: 18px;
-      margin-bottom: 16px;
-      box-shadow: 0 8px 24px rgba(23,54,93,.08);
-    }
+.painel {
+  background:white;
+  border:1px solid var(--borda);
+  border-radius:14px;
+  padding:18px;
+  margin-bottom:16px;
+  box-shadow:0 8px 24px rgba(23,54,93,.08);
+}
 
-    .filtros {
-      display: grid;
-      grid-template-columns: minmax(190px, 1fr) auto auto;
-      gap: 12px;
-      align-items: end;
-    }
+.filtros {
+  display:grid;
+  grid-template-columns:minmax(190px,1fr) auto auto;
+  gap:12px;
+  align-items:end;
+}
 
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
+label {
+  display:block;
+  font-weight:bold;
+  margin-bottom:6px;
+}
 
-    select, button {
-      font: inherit;
-      min-height: 43px;
-      border-radius: 9px;
-    }
+select,button {
+  font:inherit;
+  min-height:43px;
+  border-radius:9px;
+}
 
-    select {
-      width: 100%;
-      border: 1px solid #cbd5e1;
-      padding: 9px 11px;
-      background: white;
-      color: var(--texto);
-    }
+select {
+  width:100%;
+  border:1px solid #cbd5e1;
+  padding:9px 11px;
+  background:white;
+  color:var(--texto);
+}
 
-    button {
-      border: 0;
-      padding: 10px 17px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+button {
+  border:0;
+  padding:10px 17px;
+  cursor:pointer;
+  font-weight:bold;
+}
 
-    button:disabled {
-      opacity: .6;
-      cursor: wait;
-    }
+button:disabled { opacity:.6; cursor:wait; }
 
-    .primario {
-      color: white;
-      background: var(--azul);
-    }
+.primario { color:white; background:var(--azul); }
+.primario:hover { background:var(--azul2); }
+.secundario { color:var(--azul); background:#e8eef6; }
 
-    .primario:hover {
-      background: var(--azul2);
-    }
+.status {
+  margin-top:14px;
+  padding:11px 13px;
+  border-radius:9px;
+  background:#eff6ff;
+  color:#1d4e89;
+  overflow-wrap:anywhere;
+}
 
-    .secundario {
-      color: var(--azul);
-      background: #e8eef6;
-    }
+.status.erro { background:#fef2f2; color:var(--vermelho); }
+.status.ok { background:#f0fdf4; color:var(--verde); }
 
-    .status {
-      margin-top: 14px;
-      padding: 11px 13px;
-      border-radius: 9px;
-      background: #eff6ff;
-      color: #1d4e89;
-      overflow-wrap: anywhere;
-    }
+.resumo {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin-bottom:16px;
+}
 
-    .status.erro {
-      background: #fef2f2;
-      color: var(--vermelho);
-    }
+.indicador {
+  background:white;
+  border:1px solid var(--borda);
+  border-radius:12px;
+  padding:16px;
+}
 
-    .status.ok {
-      background: #f0fdf4;
-      color: var(--verde);
-    }
+.indicador .nome { color:var(--muted); font-size:13px; }
+.indicador .valor {
+  margin-top:5px;
+  font-weight:bold;
+  font-size:clamp(19px,2.5vw,26px);
+  overflow-wrap:anywhere;
+}
 
-    .resumo {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-bottom: 16px;
-    }
+.positivo { color:var(--verde); }
+.negativo { color:var(--vermelho); }
 
-    .indicador {
-      background: white;
-      border: 1px solid var(--borda);
-      border-radius: 12px;
-      padding: 15px;
-    }
+.secao-tabela {
+  background:white;
+  border:1px solid var(--borda);
+  border-radius:14px;
+  margin-bottom:18px;
+  overflow:hidden;
+  box-shadow:0 5px 18px rgba(23,54,93,.05);
+}
 
-    .indicador .nome {
-      color: var(--muted);
-      font-size: 13px;
-    }
+.secao-tabela h2 {
+  margin:0;
+  padding:16px 18px;
+  font-size:19px;
+}
 
-    .indicador .valor {
-      margin-top: 5px;
-      font-weight: bold;
-      font-size: clamp(18px, 2.5vw, 25px);
-      overflow-wrap: anywhere;
-    }
+.titulo-pagar {
+  background:#fee2e2;
+  color:#991b1b;
+}
 
-    .positivo {
-      color: var(--verde);
-    }
+.titulo-receber {
+  background:#dcfce7;
+  color:#166534;
+}
 
-    .negativo {
-      color: var(--vermelho);
-    }
+.tabela-wrap { overflow-x:auto; width:100%; }
 
-    .tabela-wrap {
-      overflow-x: auto;
-      width: 100%;
-    }
+table {
+  width:100%;
+  border-collapse:collapse;
+  min-width:650px;
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 650px;
-    }
+th,td {
+  padding:11px 12px;
+  border-bottom:1px solid #e5eaf1;
+  text-align:left;
+  vertical-align:top;
+}
 
-    th, td {
-      padding: 11px 12px;
-      border-bottom: 1px solid #e5eaf1;
-      text-align: left;
-      vertical-align: top;
-    }
+th {
+  background:#f8fafc;
+  color:#334155;
+  font-size:13px;
+  white-space:nowrap;
+}
 
-    th {
-      background: #f8fafc;
-      color: #334155;
-      font-size: 13px;
-      white-space: nowrap;
-    }
+td { overflow-wrap:anywhere; }
 
-    td {
-      overflow-wrap: anywhere;
-    }
+th.coluna-destaque {
+  background:var(--azul);
+  color:white;
+  border-bottom:3px solid #0f2744;
+}
 
-    /* Colunas Tipo e Baixado */
-    th.coluna-destaque {
-      background: var(--azul);
-      color: white;
-      font-weight: bold;
-      border-bottom: 3px solid #0f2744;
-    }
+td.coluna-destaque {
+  background:#e0ecff;
+  color:var(--azul);
+  font-weight:bold;
+}
 
-    td.coluna-destaque {
-      background: var(--destaque);
-      color: var(--azul);
-      font-weight: bold;
-    }
+th.coluna-baixado,td.coluna-baixado {
+  text-align:center;
+  min-width:95px;
+}
 
-    th.coluna-baixado,
-    td.coluna-baixado {
-      text-align: center;
-      min-width: 95px;
-    }
+td.valor-sim { color:#166534; background:#dcfce7; }
+td.valor-nao { color:#991b1b; background:#fee2e2; }
 
-    td.coluna-baixado.valor-sim {
-      color: #166534;
-      background: #dcfce7;
-    }
+th.coluna-valor,td.coluna-valor {
+  text-align:right;
+  white-space:nowrap;
+}
 
-    td.coluna-baixado.valor-nao {
-      color: #991b1b;
-      background: #fee2e2;
-    }
+tbody tr:hover td { background-color:#f1f5f9; }
 
-    /* Alinhamento dos valores monetários */
-    th.coluna-valor,
-    td.coluna-valor {
-      text-align: right;
-      white-space: nowrap;
-    }
+tbody tr:hover td.coluna-destaque {
+  background-color:#cbdcf7;
+}
 
-    tbody tr:hover td {
-      background-color: #f1f5f9;
-    }
+tbody tr:hover td.valor-sim { background:#bbf7d0; }
+tbody tr:hover td.valor-nao { background:#fecaca; }
 
-    tbody tr:hover td.coluna-destaque {
-      background-color: var(--destaque-hover);
-    }
+.total-secao {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:15px 18px;
+  border-top:2px solid var(--borda);
+  font-size:17px;
+  font-weight:bold;
+}
 
-    tbody tr:hover td.coluna-baixado.valor-sim {
-      background: #bbf7d0;
-    }
+.total-pagar { color:var(--vermelho); }
+.total-receber { color:var(--verde); }
 
-    tbody tr:hover td.coluna-baixado.valor-nao {
-      background: #fecaca;
-    }
+.saldo-painel {
+  background:white;
+  border:2px solid var(--azul);
+  border-radius:14px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 8px 24px rgba(23,54,93,.08);
+}
 
-    .vazio {
-      text-align: center;
-      padding: 28px 12px;
-      color: var(--muted);
-    }
+.saldo-linha {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+}
 
-    .rodape {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 12px;
-    }
+.saldo-titulo {
+  font-size:20px;
+  font-weight:bold;
+  color:var(--azul);
+}
 
-    .oculto {
-      display: none !important;
-    }
+.saldo-valor {
+  font-size:clamp(25px,4vw,34px);
+  font-weight:bold;
+}
 
-    @media (max-width: 680px) {
-      .filtros {
-        grid-template-columns: 1fr;
-      }
+.vazio {
+  text-align:center;
+  padding:25px 12px;
+  color:var(--muted);
+}
 
-      .resumo {
-        grid-template-columns: 1fr;
-      }
+.rodape {
+  color:var(--muted);
+  font-size:12px;
+  margin-top:12px;
+}
 
-      .painel {
-        padding: 14px;
-      }
-    }
-  </style>
+.oculto { display:none !important; }
+
+@media(max-width:680px) {
+  .filtros { grid-template-columns:1fr; }
+  .resumo { grid-template-columns:1fr; }
+  .painel { padding:14px; }
+  .secao-tabela h2 { padding:14px; }
+  .total-secao { padding:14px; }
+}
+</style>
 </head>
 
 <body>
 <header>
   <div class="container">
     <h1>Relatório Financeiro</h1>
-    <p>Consulte os lançamentos por competência.</p>
+    <p>Contas a pagar, contas a receber e saldo por competência.</p>
   </div>
 </header>
 
@@ -323,28 +321,50 @@
 
   <section id="resumo" class="resumo oculto">
     <div class="indicador">
+      <div class="nome">Total a pagar</div>
+      <div id="totalPagarResumo" class="valor negativo">R$ 0,00</div>
+    </div>
+
+    <div class="indicador">
+      <div class="nome">Total a receber</div>
+      <div id="totalReceberResumo" class="valor positivo">R$ 0,00</div>
+    </div>
+
+    <div class="indicador">
       <div class="nome">Quantidade de lançamentos</div>
       <div id="totalRegistros" class="valor">0</div>
     </div>
+  </section>
 
-    <div class="indicador">
-      <div class="nome">Total de receitas</div>
-      <div id="totalReceitas" class="valor positivo">R$ 0,00</div>
+  <section class="secao-tabela">
+    <h2 class="titulo-pagar">1. Contas a pagar</h2>
+    <div id="tabelaPagar" class="tabela-wrap">
+      <div class="vazio">Aguardando consulta...</div>
     </div>
-
-    <div class="indicador">
-      <div class="nome">Total de despesas</div>
-      <div id="totalDespesas" class="valor negativo">R$ 0,00</div>
+    <div class="total-secao total-pagar">
+      <span>Total a pagar</span>
+      <span id="totalPagar">R$ 0,00</span>
     </div>
   </section>
 
-  <section class="painel">
-    <h2 style="font-size:19px;margin:0 0 14px">
-      Lançamentos da competência
-    </h2>
+  <section class="secao-tabela">
+    <h2 class="titulo-receber">2. Contas a receber</h2>
+    <div id="tabelaReceber" class="tabela-wrap">
+      <div class="vazio">Aguardando consulta...</div>
+    </div>
+    <div class="total-secao total-receber">
+      <span>Total a receber</span>
+      <span id="totalReceber">R$ 0,00</span>
+    </div>
+  </section>
 
-    <div id="areaTabela" class="tabela-wrap">
-      <div class="vazio">Carregando relatório...</div>
+  <section class="saldo-painel">
+    <div class="saldo-linha">
+      <div>
+        <div class="saldo-titulo">3. Saldo da competência</div>
+        <div class="rodape">Total a receber menos total a pagar.</div>
+      </div>
+      <div id="saldoFinal" class="saldo-valor">R$ 0,00</div>
     </div>
   </section>
 
@@ -359,15 +379,21 @@
 
   const seletor = document.getElementById('competencia');
   const status = document.getElementById('status');
-  const areaTabela = document.getElementById('areaTabela');
-  const resumo = document.getElementById('resumo');
   const btnConsultar = document.getElementById('btnConsultar');
   const btnAtualizar = document.getElementById('btnAtualizar');
 
   const moeda = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
+    style:'currency',
+    currency:'BRL'
   });
+
+  function normalizarChave(valor) {
+    return String(valor ?? '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g,'')
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g,'');
+  }
 
   function competenciaValida(valor) {
     return /^\d{4}-(0[1-9]|1[0-2])$/.test(String(valor || ''));
@@ -375,16 +401,8 @@
 
   function formatarCompetencia(valor) {
     if (!competenciaValida(valor)) return valor;
-
-    const partes = valor.split('-');
-    return partes[1] + '/' + partes[0];
-  }
-
-  function competenciaDoMesAtual() {
-    const agora = new Date();
-
-    return agora.getFullYear() + '-' +
-      String(agora.getMonth() + 1).padStart(2, '0');
+    const [ano,mes] = valor.split('-');
+    return mes + '/' + ano;
   }
 
   function montarCompetencias() {
@@ -394,22 +412,26 @@
 
     const inicial = competenciaValida(informada)
       ? informada
-      : competenciaDoMesAtual();
+      : (() => {
+          const agora = new Date();
+          return agora.getFullYear() + '-' +
+            String(agora.getMonth()+1).padStart(2,'0');
+        })();
 
-    const partes = inicial.split('-').map(Number);
-    const dataBase = new Date(partes[0], partes[1] - 1, 1);
+    const [ano,mes] = inicial.split('-').map(Number);
+    const base = new Date(ano,mes-1,1);
 
     seletor.replaceChildren();
 
-    for (let i = 0; i < 60; i++) {
+    for (let i=0;i<60;i++) {
       const data = new Date(
-        dataBase.getFullYear(),
-        dataBase.getMonth() - i,
+        base.getFullYear(),
+        base.getMonth()-i,
         1
       );
 
       const valor = data.getFullYear() + '-' +
-        String(data.getMonth() + 1).padStart(2, '0');
+        String(data.getMonth()+1).padStart(2,'0');
 
       const opcao = document.createElement('option');
       opcao.value = valor;
@@ -418,142 +440,54 @@
     }
 
     seletor.value = inicial;
-    return inicial;
   }
 
-  function mostrarStatus(mensagem, tipo = '') {
+  function mostrarStatus(mensagem,tipo='') {
     status.textContent = mensagem;
-    status.className = 'status' + (tipo ? ' ' + tipo : '');
+    status.className = 'status' + (tipo ? ' '+tipo : '');
   }
 
   function bloquearInterface(bloquear) {
     btnConsultar.disabled = bloquear;
     btnAtualizar.disabled = bloquear;
     seletor.disabled = bloquear;
-
     btnConsultar.textContent = bloquear
       ? 'Consultando...'
       : 'Consultar relatório';
   }
 
-  function montarUrlApi(competencia, callback) {
-    const url = new URL(API_URL);
+  function localizarCampo(objeto, nomes) {
+    const chaves = Object.keys(objeto || {});
+    const procurados = nomes.map(normalizarChave);
 
-    url.searchParams.set('action', 'listarLancamentos');
-    url.searchParams.set('competencia', competencia);
-    url.searchParams.set('callback', callback);
-    url.searchParams.set('_cache', Date.now());
-
-    return url.toString();
-  }
-
-  function consultarApi(competencia) {
-    return new Promise((resolve, reject) => {
-      const callback = '__relatorio_' + Date.now() + '_' +
-        Math.random().toString(36).slice(2);
-
-      const script = document.createElement('script');
-      let concluido = false;
-
-      const temporizador = setTimeout(() => {
-        finalizar(new Error(
-          'Tempo esgotado ao consultar a API. Verifique a publicação do Apps Script e a URL do Web App.'
-        ));
-      }, 25000);
-
-      function limpar() {
-        clearTimeout(temporizador);
-        script.remove();
-
-        try {
-          delete window[callback];
-        } catch (e) {
-          window[callback] = undefined;
-        }
-      }
-
-      function finalizar(erro, dados) {
-        if (concluido) return;
-
-        concluido = true;
-        limpar();
-
-        if (erro) reject(erro);
-        else resolve(dados);
-      }
-
-      window[callback] = dados => finalizar(null, dados);
-
-      script.onerror = () => finalizar(new Error(
-        'Não foi possível acessar a API. Confirme a URL do Apps Script e se o Web App está publicado para acesso pela web.'
-      ));
-
-      script.src = montarUrlApi(competencia, callback);
-
-      console.log('URL enviada para a API:', script.src);
-      document.body.appendChild(script);
-    });
-  }
-
-  function extrairLista(resposta) {
-    console.log('Resposta bruta da API:', resposta);
-
-    if (Array.isArray(resposta)) return resposta;
-
-    if (!resposta || typeof resposta !== 'object') {
-      throw new Error('A API retornou uma resposta vazia ou inválida.');
-    }
-
-    if (resposta.sucesso === false) {
-      throw new Error(
-        resposta.mensagem ||
-        resposta.erro ||
-        'O Apps Script informou que não foi possível consultar os dados.'
-      );
-    }
-
-    const propriedades = [
-      'lista',
-      'lancamentos',
-      'dados',
-      'registros',
-      'resultado'
-    ];
-
-    for (const propriedade of propriedades) {
-      if (Array.isArray(resposta[propriedade])) {
-        return resposta[propriedade];
-      }
-    }
-
-    if (resposta.sucesso === true) return [];
-
-    throw new Error(
-      'A API respondeu, mas não retornou uma lista reconhecida. Confira o formato do JSON do Apps Script.'
+    const chave = chaves.find(k =>
+      procurados.includes(normalizarChave(k))
     );
+
+    return chave === undefined ? undefined : objeto[chave];
   }
 
-  function normalizarChave(chave) {
-    return String(chave)
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, '');
+  function converterNumero(valor) {
+    if (typeof valor === 'number') {
+      return Number.isFinite(valor) ? valor : 0;
+    }
+
+    if (valor === null || valor === undefined || valor === '') {
+      return 0;
+    }
+
+    let texto = String(valor).trim().replace(/[R$\s]/g,'');
+
+    if (texto.includes(',')) {
+      texto = texto.replace(/\./g,'').replace(',','.');
+    }
+
+    const numero = Number(texto);
+    return Number.isFinite(numero) ? numero : 0;
   }
 
-  function normalizarNome(nome) {
-    return String(nome)
-      .replace(/([a-z])([A-Z])/g, '$1 $2')
-      .replace(/[_-]+/g, ' ')
-      .replace(/^./, letra => letra.toUpperCase());
-  }
-
-  function ehCampoQRCode(chave) {
-    const nome = normalizarChave(chave);
-
-    return nome.includes('qrcode') ||
-           nome.includes('codigopix') ||
-           nome.includes('pixcopiaecola');
+  function formatarMoeda(valor) {
+    return moeda.format(valor);
   }
 
   function formatarCelula(valor) {
@@ -572,132 +506,180 @@
     return String(valor);
   }
 
-  function localizarCampo(objeto, nomes) {
-    const procurados = nomes.map(normalizarChave);
+  function ehCampoQRCode(chave) {
+    const nome = normalizarChave(chave);
 
-    const chave = Object.keys(objeto || {}).find(k =>
-      procurados.includes(normalizarChave(k))
-    );
-
-    return chave === undefined ? undefined : objeto[chave];
+    return nome.includes('qrcode') ||
+           nome.includes('codigopix') ||
+           nome.includes('pixcopiaecola');
   }
 
-  function converterNumero(valor) {
-    if (typeof valor === 'number') {
-      return Number.isFinite(valor) ? valor : 0;
+  function extrairLista(resposta) {
+    if (Array.isArray(resposta)) return resposta;
+
+    if (!resposta || typeof resposta !== 'object') {
+      throw new Error('A API retornou uma resposta inválida.');
     }
 
-    if (valor === null || valor === undefined || valor === '') {
-      return 0;
+    if (resposta.sucesso === false) {
+      throw new Error(
+        resposta.mensagem ||
+        resposta.erro ||
+        'O Apps Script não conseguiu consultar os dados.'
+      );
     }
 
-    let texto = String(valor).trim().replace(/[R$\s]/g, '');
-
-    if (texto.includes(',')) {
-      texto = texto.replace(/\./g, '').replace(',', '.');
-    }
-
-    const numero = Number(texto);
-    return Number.isFinite(numero) ? numero : 0;
-  }
-
-  function formatarValorMoeda(valor) {
-    if (valor === null || valor === undefined || valor === '') {
-      return '—';
-    }
-
-    return moeda.format(converterNumero(valor));
-  }
-
-  function atualizarResumo(lista) {
-    let receitas = 0;
-    let despesas = 0;
-
-    lista.forEach(item => {
-      if (!item || typeof item !== 'object') return;
-
-      const valor = converterNumero(localizarCampo(item, [
-        'valor',
-        'valorLancamento',
-        'valorTotal'
-      ]));
-
-      const tipo = String(localizarCampo(item, [
-        'tipo',
-        'natureza',
-        'classificacao',
-        'categoria'
-      ]) || '').toLowerCase();
-
-      if (tipo.includes('despesa') ||
-          tipo.includes('saída') ||
-          tipo.includes('saida')) {
-        despesas += Math.abs(valor);
-      } else if (tipo.includes('receita') ||
-                 tipo.includes('entrada')) {
-        receitas += Math.abs(valor);
-      } else if (valor < 0) {
-        despesas += Math.abs(valor);
-      } else {
-        receitas += valor;
+    for (const propriedade of [
+      'lista','lancamentos','dados','registros','resultado'
+    ]) {
+      if (Array.isArray(resposta[propriedade])) {
+        return resposta[propriedade];
       }
-    });
+    }
 
-    document.getElementById('totalRegistros').textContent =
-      String(lista.length);
+    if (resposta.sucesso === true) return [];
 
-    document.getElementById('totalReceitas').textContent =
-      moeda.format(receitas);
-
-    document.getElementById('totalDespesas').textContent =
-      moeda.format(despesas);
-
-    resumo.classList.remove('oculto');
+    throw new Error(
+      'A resposta da API não contém uma lista de lançamentos reconhecida.'
+    );
   }
 
-  function renderizarTabela(lista) {
-    areaTabela.replaceChildren();
+  function consultarApi(competencia) {
+    return new Promise((resolve,reject) => {
+      const callback = '__relatorio_' + Date.now() + '_' +
+        Math.random().toString(36).slice(2);
+
+      const script = document.createElement('script');
+      let concluido = false;
+
+      const temporizador = setTimeout(() => {
+        finalizar(new Error(
+          'Tempo esgotado ao consultar a API. Verifique a publicação do Apps Script.'
+        ));
+      },25000);
+
+      function limpar() {
+        clearTimeout(temporizador);
+        script.remove();
+
+        try {
+          delete window[callback];
+        } catch(e) {
+          window[callback] = undefined;
+        }
+      }
+
+      function finalizar(erro,dados) {
+        if (concluido) return;
+        concluido = true;
+        limpar();
+
+        if (erro) reject(erro);
+        else resolve(dados);
+      }
+
+      window[callback] = dados => finalizar(null,dados);
+
+      script.onerror = () => finalizar(new Error(
+        'Não foi possível acessar a API. Confira a URL e a publicação do Web App.'
+      ));
+
+      const url = new URL(API_URL);
+      url.searchParams.set('action','listarLancamentos');
+      url.searchParams.set('competencia',competencia);
+      url.searchParams.set('callback',callback);
+      url.searchParams.set('_cache',Date.now());
+
+      script.src = url.toString();
+      document.body.appendChild(script);
+    });
+  }
+
+  /*
+   * Classificação:
+   * Pagar: despesas, saídas e tipos contendo "pagar".
+   * Receber: receitas, entradas e tipos contendo "receber".
+   *
+   * Se sua planilha usa outros nomes para os tipos,
+   * ajuste as palavras abaixo.
+   */
+  function classificarLancamento(item) {
+    const tipoOriginal = localizarCampo(item, [
+      'tipo','natureza','classificacao','categoria'
+    ]);
+
+    const tipo = normalizarChave(tipoOriginal);
+
+    if (
+      tipo.includes('pagar') ||
+      tipo.includes('despesa') ||
+      tipo.includes('saida') ||
+      tipo.includes('pagamento')
+    ) {
+      return 'pagar';
+    }
+
+    if (
+      tipo.includes('receber') ||
+      tipo.includes('receita') ||
+      tipo.includes('entrada') ||
+      tipo.includes('recebimento')
+    ) {
+      return 'receber';
+    }
+
+    // Campos alternativos podem indicar explicitamente a natureza.
+    const natureza = normalizarChave(localizarCampo(item, [
+      'naturezaFinanceira','tipoLancamento','operacao'
+    ]));
+
+    if (
+      natureza.includes('pagar') ||
+      natureza.includes('despesa') ||
+      natureza.includes('saida')
+    ) {
+      return 'pagar';
+    }
+
+    if (
+      natureza.includes('receber') ||
+      natureza.includes('receita') ||
+      natureza.includes('entrada')
+    ) {
+      return 'receber';
+    }
+
+    // Não presume a categoria de registros não reconhecidos.
+    return 'outro';
+  }
+
+  function obterValor(item) {
+    return converterNumero(localizarCampo(item, [
+      'valor','valorLancamento','valorTotal'
+    ]));
+  }
+
+  function somarValores(lista) {
+    return lista.reduce((total,item) => {
+      return total + Math.abs(obterValor(item));
+    },0);
+  }
+
+  function renderizarTabela(elemento,lista) {
+    elemento.replaceChildren();
 
     if (lista.length === 0) {
       const vazio = document.createElement('div');
       vazio.className = 'vazio';
-      vazio.textContent =
-        'A consulta foi concluída, mas a API não encontrou lançamentos para ' +
-        formatarCompetencia(seletor.value) + '.';
-
-      areaTabela.appendChild(vazio);
+      vazio.textContent = 'Nenhum lançamento nesta seção.';
+      elemento.appendChild(vazio);
       return;
     }
 
-    const objetos = lista.map(item => {
-      if (item && typeof item === 'object' && !Array.isArray(item)) {
-        return item;
-      }
-
-      return { lancamento: item };
-    });
-
-    // Ordena por Tipo, em ordem alfabética, sem alterar a lista original.
-    objetos.sort((a, b) => {
-      const tipoA = String(
-        localizarCampo(a, ['tipo']) ?? ''
-      ).trim();
-
-      const tipoB = String(
-        localizarCampo(b, ['tipo']) ?? ''
-      ).trim();
-
-      return tipoA.localeCompare(tipoB, 'pt-BR', {
-        sensitivity: 'base',
-        numeric: true
-      });
-    });
-
-    // Identifica as colunas, omitindo QR Code e campos relacionados.
     const colunas = [];
 
-    objetos.forEach(objeto => {
-      Object.keys(objeto).forEach(chave => {
+    lista.forEach(item => {
+      Object.keys(item).forEach(chave => {
         if (!ehCampoQRCode(chave) && !colunas.includes(chave)) {
           colunas.push(chave);
         }
@@ -706,13 +688,16 @@
 
     const tabela = document.createElement('table');
     const thead = document.createElement('thead');
-    const cabecalho = document.createElement('tr');
+    const trCabecalho = document.createElement('tr');
 
     colunas.forEach(coluna => {
-      const th = document.createElement('th');
       const nome = normalizarChave(coluna);
+      const th = document.createElement('th');
 
-      th.textContent = normalizarNome(coluna);
+      th.textContent = String(coluna)
+        .replace(/([a-z])([A-Z])/g,'$1 $2')
+        .replace(/[_-]+/g,' ')
+        .replace(/^./,c => c.toUpperCase());
 
       if (nome === 'tipo' || nome === 'baixado') {
         th.classList.add('coluna-destaque');
@@ -726,53 +711,43 @@
         th.classList.add('coluna-valor');
       }
 
-      cabecalho.appendChild(th);
+      trCabecalho.appendChild(th);
     });
 
-    thead.appendChild(cabecalho);
+    thead.appendChild(trCabecalho);
     tabela.appendChild(thead);
 
     const tbody = document.createElement('tbody');
 
-    objetos.forEach(objeto => {
+    lista.forEach(item => {
       const tr = document.createElement('tr');
 
       colunas.forEach(coluna => {
-        const td = document.createElement('td');
         const nome = normalizarChave(coluna);
-        const valor = objeto[coluna];
+        const td = document.createElement('td');
+        const valor = item[coluna];
 
-        // Formata a coluna Valor como moeda brasileira.
         td.textContent = nome === 'valor'
-          ? formatarValorMoeda(valor)
+          ? formatarMoeda(converterNumero(valor))
           : formatarCelula(valor);
 
-        // Destaca a coluna Tipo.
         if (nome === 'tipo') {
           td.classList.add('coluna-destaque');
         }
 
-        // Destaca a coluna Baixado e diferencia Sim e Não.
         if (nome === 'baixado') {
-          td.classList.add(
-            'coluna-destaque',
-            'coluna-baixado'
-          );
+          td.classList.add('coluna-destaque','coluna-baixado');
 
-          const texto = String(valor ?? '')
-            .trim()
-            .toLowerCase();
+          const texto = normalizarChave(valor);
 
           if (
             valor === true ||
-            ['sim', 'true', '1', 'baixado', 'pago', 'yes']
-              .includes(texto)
+            ['sim','true','1','baixado','pago','yes'].includes(texto)
           ) {
             td.classList.add('valor-sim');
           } else if (
             valor === false ||
-            ['não', 'nao', 'false', '0', 'pendente', 'no']
-              .includes(texto)
+            ['nao','false','0','pendente','no'].includes(texto)
           ) {
             td.classList.add('valor-nao');
           }
@@ -789,83 +764,139 @@
     });
 
     tabela.appendChild(tbody);
-    areaTabela.appendChild(tabela);
+    elemento.appendChild(tabela);
+  }
+
+  function atualizarURL(competencia) {
+    const pagina = new URL(window.location.href);
+    pagina.searchParams.set('competencia',competencia);
+    window.history.replaceState({},'',pagina);
   }
 
   async function carregarRelatorio() {
     const competencia = seletor.value;
 
     if (!competenciaValida(competencia)) {
-      mostrarStatus(
-        'Competência inválida. Selecione um mês válido.',
-        'erro'
-      );
+      mostrarStatus('Selecione uma competência válida.','erro');
       return;
     }
 
     bloquearInterface(true);
-    resumo.classList.add('oculto');
+    document.getElementById('resumo').classList.add('oculto');
 
     mostrarStatus(
-      'Consultando a API para ' +
+      'Consultando os lançamentos de ' +
       formatarCompetencia(competencia) + '...'
     );
 
     try {
       const resposta = await consultarApi(competencia);
-      const lista = extrairLista(resposta);
+      const listaOriginal = extrairLista(resposta);
 
-      renderizarTabela(lista);
-      atualizarResumo(lista);
+      const lista = listaOriginal.filter(item =>
+        item && typeof item === 'object' && !Array.isArray(item)
+      );
 
-      if (lista.length) {
-        mostrarStatus(
-          'Relatório carregado: ' + lista.length +
-          ' lançamento(s) em ' + formatarCompetencia(competencia) + '.',
-          'ok'
-        );
-      } else {
-        mostrarStatus(
-          'A API respondeu corretamente, mas não retornou lançamentos para ' +
-          formatarCompetencia(competencia) + '.',
-          'ok'
-        );
+      const pagar = [];
+      const receber = [];
+      const outros = [];
+
+      lista.forEach(item => {
+        const categoria = classificarLancamento(item);
+
+        if (categoria === 'pagar') {
+          pagar.push(item);
+        } else if (categoria === 'receber') {
+          receber.push(item);
+        } else {
+          outros.push(item);
+        }
+      });
+
+      const ordenarPorTipo = (a,b) => {
+        const tipoA = String(localizarCampo(a,['tipo']) ?? '');
+        const tipoB = String(localizarCampo(b,['tipo']) ?? '');
+
+        return tipoA.localeCompare(tipoB,'pt-BR',{
+          sensitivity:'base',
+          numeric:true
+        });
+      };
+
+      pagar.sort(ordenarPorTipo);
+      receber.sort(ordenarPorTipo);
+
+      renderizarTabela(document.getElementById('tabelaPagar'),pagar);
+      renderizarTabela(document.getElementById('tabelaReceber'),receber);
+
+      const totalPagar = somarValores(pagar);
+      const totalReceber = somarValores(receber);
+      const saldo = totalReceber - totalPagar;
+
+      document.getElementById('totalPagar').textContent =
+        formatarMoeda(totalPagar);
+
+      document.getElementById('totalReceber').textContent =
+        formatarMoeda(totalReceber);
+
+      document.getElementById('totalPagarResumo').textContent =
+        formatarMoeda(totalPagar);
+
+      document.getElementById('totalReceberResumo').textContent =
+        formatarMoeda(totalReceber);
+
+      document.getElementById('totalRegistros').textContent =
+        String(listaOriginal.length);
+
+      const saldoFinal = document.getElementById('saldoFinal');
+      saldoFinal.textContent = formatarMoeda(saldo);
+      saldoFinal.style.color =
+        saldo > 0 ? 'var(--verde)' :
+        saldo < 0 ? 'var(--vermelho)' :
+        'var(--azul)';
+
+      document.getElementById('resumo').classList.remove('oculto');
+
+      atualizarURL(competencia);
+
+      let mensagem =
+        'Relatório carregado para ' +
+        formatarCompetencia(competencia) + '. ' +
+        pagar.length + ' lançamento(s) a pagar e ' +
+        receber.length + ' a receber.';
+
+      if (outros.length > 0) {
+        mensagem += ' Atenção: ' + outros.length +
+          ' lançamento(s) não foram classificados por tipo e não entraram nos totais.';
       }
 
-      const pagina = new URL(window.location.href);
-      pagina.searchParams.set('competencia', competencia);
-      window.history.replaceState({}, '', pagina);
+      mostrarStatus(mensagem,outros.length ? '' : 'ok');
 
-    } catch (erro) {
-      console.error('Erro ao carregar relatório:', erro);
-
-      areaTabela.replaceChildren();
-
-      const aviso = document.createElement('div');
-      aviso.className = 'vazio';
-      aviso.textContent =
-        'Não foi possível carregar os lançamentos. Leia a mensagem de erro acima.';
-
-      areaTabela.appendChild(aviso);
+    } catch(erro) {
+      console.error('Erro ao carregar relatório:',erro);
 
       mostrarStatus(
         erro && erro.message
           ? erro.message
-          : 'Erro desconhecido ao consultar a API.',
+          : 'Erro ao consultar a API.',
         'erro'
       );
+
+      document.getElementById('tabelaPagar').innerHTML =
+        '<div class="vazio">Não foi possível carregar os dados.</div>';
+
+      document.getElementById('tabelaReceber').innerHTML =
+        '<div class="vazio">Não foi possível carregar os dados.</div>';
     } finally {
       bloquearInterface(false);
     }
   }
 
-  btnConsultar.addEventListener('click', carregarRelatorio);
-  btnAtualizar.addEventListener('click', carregarRelatorio);
+  btnConsultar.addEventListener('click',carregarRelatorio);
+  btnAtualizar.addEventListener('click',carregarRelatorio);
 
-  seletor.addEventListener('change', () => {
-    const pagina = new URL(window.location.href);
-    pagina.searchParams.set('competencia', seletor.value);
-    window.history.replaceState({}, '', pagina);
+  seletor.addEventListener('change',() => {
+    atualizarURL(seletor.value);
   });
 
   montarCompetencias();
