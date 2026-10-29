@@ -60,7 +60,7 @@ main { padding:22px 0 40px; }
 
 .filtros {
   display:grid;
-  grid-template-columns:minmax(190px,1fr) auto auto;
+  grid-template-columns:minmax(190px,1fr) minmax(170px,220px) auto auto;
   gap:12px;
   align-items:end;
 }
@@ -97,14 +97,6 @@ button:disabled { opacity:.6; cursor:wait; }
 .primario { color:white; background:var(--azul); }
 .primario:hover { background:var(--azul2); }
 .secundario { color:var(--azul); background:#e8eef6; }
-.btn-voltar {
-  display:inline-block;
-  margin-top:14px;
-  color:var(--azul);
-  background:#fff;
-  border:1px solid rgba(255,255,255,.7);
-}
-.btn-voltar:hover { background:#e8eef6; }
 
 .status {
   margin-top:14px;
@@ -282,6 +274,10 @@ tbody tr:hover td.valor-nao { background:#fecaca; }
 
 .oculto { display:none !important; }
 
+@media(max-width:900px) {
+  .filtros { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+
 @media(max-width:680px) {
   .filtros { grid-template-columns:1fr; }
   .resumo { grid-template-columns:1fr; }
@@ -297,10 +293,6 @@ tbody tr:hover td.valor-nao { background:#fecaca; }
   <div class="container">
     <h1>Relatório Financeiro</h1>
     <p>Contas a pagar, contas a receber e saldo por competência.</p>
-    <button type="button" class="btn-voltar"
-      onclick="window.location.href='https://joeldisousa-dot.github.io/gestaofinanceira/index.html'">
-      ← Voltar para o index
-    </button>
   </div>
 </header>
 
@@ -311,6 +303,15 @@ tbody tr:hover td.valor-nao { background:#fecaca; }
       <div>
         <label for="competencia">Competência</label>
         <select id="competencia"></select>
+      </div>
+
+      <div>
+        <label for="filtroBaixado">Baixado</label>
+        <select id="filtroBaixado">
+          <option value="todos">Todos</option>
+          <option value="baixados">Baixados</option>
+          <option value="pendentes">Pendentes</option>
+        </select>
       </div>
 
       <button id="btnConsultar" class="primario" type="button">
@@ -390,9 +391,16 @@ tbody tr:hover td.valor-nao { background:#fecaca; }
     'https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec';
 
   const seletor = document.getElementById('competencia');
+  const filtroBaixado = document.getElementById('filtroBaixado');
   const status = document.getElementById('status');
   const btnConsultar = document.getElementById('btnConsultar');
   const btnAtualizar = document.getElementById('btnAtualizar');
+
+  // Mantém os dados completos em memória para filtrar sem consultar a API novamente.
+  let dadosPagar = [];
+  let dadosReceber = [];
+  let dadosOutros = [];
+  let competenciaCarregada = '';
 
   const moeda = new Intl.NumberFormat('pt-BR', {
     style:'currency',
@@ -677,6 +685,78 @@ tbody tr:hover td.valor-nao { background:#fecaca; }
     },0);
   }
 
+  function lancamentoBaixado(item) {
+    const valor = localizarCampo(item, ['baixado','pago','quitado','status']);
+    const texto = normalizarChave(valor);
+
+    return valor === true ||
+      ['sim','true','1','baixado','pago','yes','quitado'].includes(texto);
+  }
+
+  function aplicarFiltroBaixado(lista) {
+    const filtro = filtroBaixado.value;
+
+    if (filtro === 'baixados') {
+      return lista.filter(lancamentoBaixado);
+    }
+
+    if (filtro === 'pendentes') {
+      // Valores vazios ou diferentes de "Sim" também ficam como pendentes.
+      return lista.filter(item => !lancamentoBaixado(item));
+    }
+
+    return lista.slice();
+  }
+
+  function renderizarDadosFiltrados() {
+    const pagar = aplicarFiltroBaixado(dadosPagar);
+    const receber = aplicarFiltroBaixado(dadosReceber);
+    const outros = aplicarFiltroBaixado(dadosOutros);
+
+    renderizarTabela(document.getElementById('tabelaPagar'), pagar);
+    renderizarTabela(document.getElementById('tabelaReceber'), receber);
+
+    const totalPagar = somarValores(pagar);
+    const totalReceber = somarValores(receber);
+    const saldo = totalReceber - totalPagar;
+
+    document.getElementById('totalPagar').textContent =
+      formatarMoeda(totalPagar);
+
+    document.getElementById('totalReceber').textContent =
+      formatarMoeda(totalReceber);
+
+    document.getElementById('totalPagarResumo').textContent =
+      formatarMoeda(totalPagar);
+
+    document.getElementById('totalReceberResumo').textContent =
+      formatarMoeda(totalReceber);
+
+    document.getElementById('totalRegistros').textContent =
+      String(pagar.length + receber.length + outros.length);
+
+    const saldoFinal = document.getElementById('saldoFinal');
+    saldoFinal.textContent = formatarMoeda(saldo);
+    saldoFinal.style.color =
+      saldo > 0 ? 'var(--verde)' :
+      saldo < 0 ? 'var(--vermelho)' :
+      'var(--azul)';
+
+    const filtroTexto = filtroBaixado.options[filtroBaixado.selectedIndex].text;
+    let mensagem = 'Relatório carregado para ' +
+      formatarCompetencia(competenciaCarregada) +
+      '. Filtro: ' + filtroTexto + '. ' +
+      pagar.length + ' lançamento(s) a pagar e ' +
+      receber.length + ' a receber.';
+
+    if (outros.length > 0) {
+      mensagem += ' Atenção: ' + outros.length +
+        ' lançamento(s) não foram classificados por tipo e não entraram nos totais.';
+    }
+
+    mostrarStatus(mensagem, outros.length ? '' : 'ok');
+  }
+
   function renderizarTabela(elemento,lista) {
     elemento.replaceChildren();
 
@@ -809,19 +889,20 @@ tbody tr:hover td.valor-nao { background:#fecaca; }
         item && typeof item === 'object' && !Array.isArray(item)
       );
 
-      const pagar = [];
-      const receber = [];
-      const outros = [];
+      dadosPagar = [];
+      dadosReceber = [];
+      dadosOutros = [];
+      competenciaCarregada = competencia;
 
       lista.forEach(item => {
         const categoria = classificarLancamento(item);
 
         if (categoria === 'pagar') {
-          pagar.push(item);
+          dadosPagar.push(item);
         } else if (categoria === 'receber') {
-          receber.push(item);
+          dadosReceber.push(item);
         } else {
-          outros.push(item);
+          dadosOutros.push(item);
         }
       });
 
@@ -835,54 +916,14 @@ tbody tr:hover td.valor-nao { background:#fecaca; }
         });
       };
 
-      pagar.sort(ordenarPorTipo);
-      receber.sort(ordenarPorTipo);
-
-      renderizarTabela(document.getElementById('tabelaPagar'),pagar);
-      renderizarTabela(document.getElementById('tabelaReceber'),receber);
-
-      const totalPagar = somarValores(pagar);
-      const totalReceber = somarValores(receber);
-      const saldo = totalReceber - totalPagar;
-
-      document.getElementById('totalPagar').textContent =
-        formatarMoeda(totalPagar);
-
-      document.getElementById('totalReceber').textContent =
-        formatarMoeda(totalReceber);
-
-      document.getElementById('totalPagarResumo').textContent =
-        formatarMoeda(totalPagar);
-
-      document.getElementById('totalReceberResumo').textContent =
-        formatarMoeda(totalReceber);
-
-      document.getElementById('totalRegistros').textContent =
-        String(listaOriginal.length);
-
-      const saldoFinal = document.getElementById('saldoFinal');
-      saldoFinal.textContent = formatarMoeda(saldo);
-      saldoFinal.style.color =
-        saldo > 0 ? 'var(--verde)' :
-        saldo < 0 ? 'var(--vermelho)' :
-        'var(--azul)';
+      dadosPagar.sort(ordenarPorTipo);
+      dadosReceber.sort(ordenarPorTipo);
+      dadosOutros.sort(ordenarPorTipo);
 
       document.getElementById('resumo').classList.remove('oculto');
 
       atualizarURL(competencia);
-
-      let mensagem =
-        'Relatório carregado para ' +
-        formatarCompetencia(competencia) + '. ' +
-        pagar.length + ' lançamento(s) a pagar e ' +
-        receber.length + ' a receber.';
-
-      if (outros.length > 0) {
-        mensagem += ' Atenção: ' + outros.length +
-          ' lançamento(s) não foram classificados por tipo e não entraram nos totais.';
-      }
-
-      mostrarStatus(mensagem,outros.length ? '' : 'ok');
+      renderizarDadosFiltrados();
 
     } catch(erro) {
       console.error('Erro ao carregar relatório:',erro);
@@ -906,6 +947,9 @@ tbody tr:hover td.valor-nao { background:#fecaca; }
 
   btnConsultar.addEventListener('click',carregarRelatorio);
   btnAtualizar.addEventListener('click',carregarRelatorio);
+  filtroBaixado.addEventListener('change',() => {
+    if (competenciaCarregada) renderizarDadosFiltrados();
+  });
 
   seletor.addEventListener('change',() => {
     atualizarURL(seletor.value);
