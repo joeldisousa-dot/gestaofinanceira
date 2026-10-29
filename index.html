@@ -54,6 +54,8 @@ button{min-height:40px;padding:0 15px;border:1px solid #d5dde8;border-radius:9px
 </div>
 <div class="resumo-fechamento"><div class="resumo-formula" id="resumoFormula">Saldo anterior + contas recebidas − contas pagas = saldo final, que será o saldo inicial do próximo mês.</div><button type="button" id="btnFecharMes" class="btn-fechar-mes" onclick="fecharCompetencia()">🔒 Fechar mês / competência</button></div>
 </section>
+<!-- Formulário de lançamento movido para Lancamentos.html; elementos mantidos ocultos para compatibilidade com o JavaScript. -->
+<div id="formularioLancamento" hidden>
 <div class="grid">
 <div class="campo"><label for="tipo">Tipo</label><select id="tipo"><option value="pagar">Despesa</option><option value="receber">Receita</option></select></div>
 <div class="campo"><label for="descricao">Descrição</label><input id="descricao" list="listaDescricoes" type="text" placeholder="Ex.: Aluguel, Energia, Salário..."><datalist id="listaDescricoes"></datalist></div>
@@ -66,6 +68,7 @@ button{min-height:40px;padding:0 15px;border:1px solid #d5dde8;border-radius:9px
 <p class="qr-ajuda">O QR Code é gerado a partir do conteúdo informado e será salvo junto ao lançamento se a API/planilha aceitar o campo <code>qrcode</code>. Para Pix, cole o código Pix copia e cola fornecido pelo recebedor.</p><p class="ajuda">A competência define o mês em que o lançamento será contabilizado. O vencimento pode ocorrer em outro mês. Exemplo: competência 09/2026 com vencimento em 20/10/2026. O botão de despesas fixas copia as despesas fixas ativas para a competência selecionada.</p>
 <div class="acoes"><button type="button" onclick="voltar()">← Voltar</button><button type="button" id="btnFixos" class="btn-fixos" onclick="inserirFixos()">🔁 Inserir despesas fixas do mês</button><button type="button" id="btnCancelarEdicao" class="btn-cancelar" onclick="cancelarEdicao()" hidden>Cancelar edição</button><button type="button" id="btnInserir" class="btn-inserir" onclick="inserir()">➕ Inserir despesa/receita</button></div>
 <div id="mensagem" class="mensagem" role="alert" aria-live="polite"></div><div id="resumoFixos" class="resumo-fixos"></div>
+</div>
 <div class="titulo-lista"><h2 id="tituloLista">Despesas e receitas da competência</h2><div class="linha"></div></div>
 <div class="selecao-acoes"><span id="quantidadeSelecionada">Nenhum lançamento selecionado</span><button type="button" id="btnExcluirSelecionados" class="btn-excluir-selecionados" disabled>🗑 Excluir selecionados</button></div>
 <div class="tabela-wrap"><table><thead><tr><th><input type="checkbox" id="selecionarTodos" class="checkbox-todos" aria-label="Selecionar todos os lançamentos" title="Selecionar todos"></th><th>ID</th><th>Tipo</th><th>Descrição</th><th>Vencimento</th><th>Fixa</th><th>Baixado</th><th>Valor</th><th>QR Code</th><th>Ações</th></tr></thead><tbody id="lista"><tr><td colspan="10">Carregando despesas e receitas...</td></tr></tbody></table></div>
