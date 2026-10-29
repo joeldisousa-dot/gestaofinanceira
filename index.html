@@ -1,15 +1,16 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#17365d">
-<title>Despesas e Receitas — Controle Financeiro</title>
+<title>Controle Financeiro</title>
 
 <style>
 :root {
   --azul: #17365d;
-  --azul-claro: #214c7d;
+  --azul2: #214c7d;
   --verde: #16844a;
   --vermelho: #b42318;
   --fundo: #f4f7fb;
@@ -28,61 +29,52 @@ body {
 }
 
 .container {
-  max-width: 1180px;
+  max-width: 1400px;
   margin: auto;
-  padding: 24px 16px 36px;
+  padding: 16px;
 }
 
 .card {
   overflow: visible;
   background: #fff;
   border: 1px solid var(--borda);
-  border-radius: 18px;
-  box-shadow: 0 12px 40px rgba(15,23,42,.07);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(15,23,42,.07);
 }
 
 .topo-fixo {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: #fff;
-  box-shadow: 0 5px 14px rgba(15,23,42,.10);
-  border-radius: 18px 18px 0 0;
-  overflow: hidden;
-}
-
-.topo-fixo .barra {
-  padding: 10px 30px;
-  margin: 0;
-  background: #fff;
-  border-bottom: 1px solid var(--borda);
+  z-index: 1000;
+  background: white;
+  box-shadow: 0 4px 12px rgba(15,23,42,.10);
+  border-radius: 16px 16px 0 0;
 }
 
 .header {
-  padding: 25px 30px;
-  color: #fff;
-  background: linear-gradient(135deg,var(--azul),var(--azul-claro));
+  padding: 20px 25px;
+  color: white;
+  background: linear-gradient(135deg,var(--azul),var(--azul2));
+  border-radius: 16px 16px 0 0;
 }
 
 .header h1 {
   margin: 0;
-  font-size: 26px;
+  font-size: 24px;
 }
 
 .header p {
-  margin: 7px 0 0;
+  margin: 6px 0 0;
   color: #dbe8f7;
   font-size: 13px;
 }
 
-.conteudo { padding: 25px 30px; }
-
-/* Abas de navegação */
+/* ABAS PERMANENTES */
 .menu-sistema {
   display: flex;
-  gap: 8px;
   flex-wrap: wrap;
-  padding: 12px 30px;
+  gap: 7px;
+  padding: 12px 20px;
   background: #f8fafc;
   border-bottom: 1px solid var(--borda);
 }
@@ -92,37 +84,38 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 38px;
-  padding: 0 13px;
+  padding: 8px 12px;
   border: 1px solid #d5dde8;
-  border-radius: 8px 8px 0 0;
-  color: #17365d;
+  border-radius: 8px;
+  background: white;
+  color: var(--azul);
   text-decoration: none;
   font-size: 11px;
   font-weight: 750;
-  background: #fff;
   white-space: nowrap;
-  border-bottom: 3px solid transparent;
-  transition: background .15s,border-color .15s;
+  transition: .15s;
 }
 
 .menu-sistema a:hover {
   background: #edf4fb;
-  border-bottom-color: #9ab6d5;
+  border-color: #9ab6d5;
 }
 
 .menu-sistema a.ativo {
-  background: #17365d;
-  color: #fff;
-  border-color: #17365d;
+  background: var(--azul);
+  color: white;
+  border-color: var(--azul);
 }
 
 .barra {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: 22px;
+  gap: 12px;
+  padding: 12px 20px;
+  background: white;
+  border-bottom: 1px solid var(--borda);
 }
 
 .competencia {
@@ -131,32 +124,23 @@ body {
   gap: 10px;
 }
 
-.competencia label,
-.campo label {
+.competencia label {
   color: #66758a;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 750;
 }
 
-input, select {
-  width: 100%;
-  height: 41px;
-  padding: 0 11px;
+input[type="month"] {
+  width: 160px;
+  height: 38px;
+  padding: 0 10px;
   border: 1px solid #d5dde8;
-  border-radius: 9px;
-  outline: none;
-  background: #fff;
-  color: #24344b;
+  border-radius: 8px;
+  background: white;
+  color: var(--texto);
   font: inherit;
   font-size: 12px;
 }
-
-input:focus, select:focus {
-  border-color: #356da5;
-  box-shadow: 0 0 0 3px rgba(53,109,165,.1);
-}
-
-#competencia { width: 160px; }
 
 .status {
   color: #52647a;
@@ -164,311 +148,66 @@ input:focus, select:focus {
   font-weight: 700;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr 1fr;
-  gap: 13px;
+/* CONTEÚDO PRINCIPAL */
+.conteudo {
+  padding: 24px;
 }
 
-.campo {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
+#areaConteudoAbas {
+  min-height: 70vh;
+  background: white;
 }
 
-.campo label {
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  font-size: 10px;
-}
-
-.checkbox-fixa {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 43px;
-  margin-top: 18px;
-  padding: 0 12px;
-  border: 1px solid #d7e2dc;
-  border-radius: 9px;
-  background: #f5fbf7;
-  color: #17613c;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.checkbox-fixa input {
-  width: 17px;
-  height: 17px;
-  margin: 0;
-  accent-color: var(--verde);
-}
-
-.ajuda {
-  margin: 9px 0 0;
-  color: #718096;
-  font-size: 11px;
-  line-height: 1.7;
-}
-
-.acoes {
-  display: flex;
-  justify-content: flex-end;
-  gap: 9px;
-  flex-wrap: wrap;
-  margin-top: 19px;
-}
-
-button {
-  min-height: 40px;
-  padding: 0 15px;
-  border: 1px solid #d5dde8;
-  border-radius: 9px;
-  background: #fff;
-  color: #41536b;
-  font: inherit;
-  font-size: 11px;
-  font-weight: 750;
-  cursor: pointer;
-  transition: .15s;
-}
-
-button:hover { transform: translateY(-1px); }
-
-button:disabled {
-  opacity: .55;
-  cursor: wait;
-  transform: none;
-}
-
-.btn-inserir {
-  border-color: var(--verde);
-  background: linear-gradient(135deg,#148345,#1ba457);
-  color: #fff;
-}
-
-.btn-cancelar {
-  border-color: #cbd5e1;
-  background: #f8fafc;
-  color: #475569;
-}
-
-.btn-editar {
-  min-height: 31px;
-  padding: 0 10px;
-  margin-right: 5px;
-  border-color: #bfdbfe;
-  background: #eff6ff;
-  color: #1d4ed8;
-  white-space: nowrap;
-}
-
-.btn-editar:hover {
-  background: #dbeafe;
-  border-color: #93c5fd;
-}
-
-.btn-fixos {
-  border-color: #1f7a4d;
-  background: #effaf3;
-  color: #17613c;
-}
-
-.btn-excluir {
-  min-height: 31px;
-  padding: 0 10px;
-  border-color: #fecaca;
-  background: #fff1f2;
-  color: var(--vermelho);
-  white-space: nowrap;
-}
-
-.btn-excluir:hover {
-  background: #fee2e2;
-  border-color: #fca5a5;
-}
-
-.btn-excluir-selecionados {
-  border-color: var(--vermelho);
-  background: var(--vermelho);
-  color: #fff;
-}
-
-.btn-excluir-selecionados:hover { background: #8f1d14; }
-
-.btn-excluir-selecionados:disabled {
-  opacity: .45;
-  cursor: not-allowed;
-}
-
-.mensagem {
+#paginaInterna {
   display: none;
-  margin-top: 16px;
-  padding: 12px 14px;
-  border-radius: 9px;
-  font-size: 12px;
-  line-height: 1.6;
-  white-space: pre-line;
-}
-
-.mensagem.sucesso {
-  display: block;
-  border: 1px solid #bbf7d0;
-  background: #f0fdf4;
-  color: #166534;
-}
-
-.mensagem.erro {
-  display: block;
-  border: 1px solid #fecaca;
-  background: #fef2f2;
-  color: #991b1b;
-}
-
-.mensagem.info {
-  display: block;
-  border: 1px solid #bfdbfe;
-  background: #eff6ff;
-  color: #1e40af;
-}
-
-.titulo-lista {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 29px 0 13px;
-}
-
-.titulo-lista h2 {
-  margin: 0;
-  color: #24364f;
-  font-size: 14px;
-}
-
-.linha {
-  flex: 1;
-  height: 1px;
-  background: #e6ebf1;
-}
-
-.selecao-acoes {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 0 0 12px;
-}
-
-#quantidadeSelecionada {
-  color: #52647a;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.tabela-wrap {
-  overflow-x: auto;
-  border: 1px solid #e5eaf1;
-  border-radius: 12px;
-}
-
-table {
   width: 100%;
-  min-width: 900px;
-  border-collapse: collapse;
+  height: 85vh;
+  min-height: 600px;
+  border: 0;
+  background: white;
 }
 
-th {
-  padding: 12px;
-  background: #f7f9fc;
-  color: #7b8798;
-  font-size: 9px;
-  text-align: left;
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  white-space: nowrap;
+#paginaInterna.visivel {
+  display: block;
 }
 
-td {
-  padding: 12px;
-  border-top: 1px solid #edf1f5;
-  color: #33445a;
-  font-size: 11px;
+#homeContent.oculto {
+  display: none;
 }
 
-tbody tr:hover { background: #fafcff; }
-
-.valor {
-  font-weight: 750;
-  text-align: right;
-  white-space: nowrap;
-}
-
-.badge {
-  display: inline-block;
-  padding: 4px 8px;
-  border-radius: 20px;
-  font-size: 9px;
-  font-weight: 750;
-  white-space: nowrap;
-}
-
-.badge.fixa { background: #eaf7ef; color: #17613c; }
-.badge.normal { background: #f1f4f8; color: #66758a; }
-.badge.pagar { background: #fff0f0; color: #a52b2b; }
-.badge.receber { background: #edf9f2; color: #19713f; }
-
-.checkbox-linha, .checkbox-todos {
-  width: 17px;
-  height: 17px;
-  margin: 0;
-  cursor: pointer;
-  accent-color: var(--azul);
-  vertical-align: middle;
-}
-
-.checkbox-linha:disabled { cursor: not-allowed; }
-
-.resumo-fixos {
-  margin-top: 10px;
-  color: #52647a;
-  font-size: 11px;
-}
-
-/* Resumo financeiro */
 .painel-resumo {
-  margin: 0 0 22px;
-  padding: 16px;
+  margin-bottom: 22px;
+  padding: 18px;
   border: 1px solid #dbe5f0;
   border-radius: 13px;
   background: linear-gradient(135deg,#f8fbff,#f1f6fc);
 }
 
 .painel-resumo h2 {
-  margin: 0 0 5px;
-  color: #17365d;
-  font-size: 15px;
+  margin: 0 0 7px;
+  color: var(--azul);
+  font-size: 17px;
 }
 
 .resumo-legenda {
-  margin: 0 0 13px;
+  margin: 0 0 16px;
   color: #64748b;
-  font-size: 11px;
+  font-size: 12px;
+  line-height: 1.6;
 }
 
 .resumo-cards {
   display: grid;
-  grid-template-columns: repeat(4,minmax(0,1fr));
-  gap: 10px;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 12px;
 }
 
 .resumo-item {
-  padding: 12px;
+  min-width: 0;
+  padding: 15px;
   border: 1px solid #e1e8f0;
   border-radius: 10px;
-  background: #fff;
-  min-width: 0;
+  background: white;
 }
 
 .resumo-item span {
@@ -482,143 +221,150 @@ tbody tr:hover { background: #fafcff; }
 
 .resumo-item strong {
   display: block;
-  margin-top: 7px;
-  color: #17365d;
-  font-size: 16px;
+  margin-top: 8px;
+  color: var(--azul);
+  font-size: 19px;
   overflow-wrap: anywhere;
 }
 
-.resumo-item.pago strong { color: #b42318; }
-.resumo-item.recebido strong { color: #16844a; }
+.resumo-item.pago strong { color: var(--vermelho); }
+.resumo-item.recebido strong { color: var(--verde); }
 
 .resumo-fechamento {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
   flex-wrap: wrap;
-  margin-top: 13px;
-  padding-top: 12px;
+  gap: 14px;
+  margin-top: 16px;
+  padding-top: 15px;
   border-top: 1px solid #dbe5f0;
 }
 
 .resumo-formula {
-  color: #52647a;
-  font-size: 11px;
-  line-height: 1.7;
-}
-
-.btn-fechar-mes {
-  border-color: #17365d;
-  background: #17365d;
-  color: #fff;
-}
-
-.btn-fechar-mes:hover { background: #214c7d; }
-
-.qr-celula {
-  min-width: 100px;
-  text-align: center;
-}
-
-.qr-mini {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 76px;
-  height: 76px;
-  margin: auto;
-  padding: 2px;
-  background: #fff;
-}
-
-.qr-mini canvas, .qr-mini img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-.qr-vazio {
-  color: #94a3b8;
-  font-size: 10px;
-}
-
-.qr-previa-container {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  flex-wrap: wrap;
-  margin-top: 14px;
-  padding: 15px;
-  border: 1px solid var(--borda);
-  border-radius: 12px;
-  background: #f8fafc;
-}
-
-.qr-previa {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 150px;
-  min-width: 150px;
-  height: 150px;
-  padding: 8px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  background: #fff;
-}
-
-.qr-previa canvas, .qr-previa img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-.qr-previa-texto {
   flex: 1;
-  min-width: 180px;
+  min-width: 220px;
   color: #52647a;
   font-size: 12px;
   line-height: 1.7;
 }
 
-.qr-previa-texto strong {
+button {
+  min-height: 39px;
+  padding: 0 14px;
+  border: 1px solid #d5dde8;
+  border-radius: 8px;
+  background: white;
+  color: #41536b;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+button:hover { filter: brightness(.96); }
+
+button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+.btn-fechar {
+  background: var(--azul);
+  border-color: var(--azul);
+  color: white;
+}
+
+.mensagem {
+  display: none;
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.mensagem.sucesso {
   display: block;
-  margin-bottom: 5px;
-  color: var(--azul);
-  font-size: 13px;
+  color: #166534;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
 }
 
-@media(max-width:850px) {
-  .grid { grid-template-columns: 1fr 1fr; }
+.mensagem.erro {
+  display: block;
+  color: #991b1b;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
 }
 
-@media(max-width:700px) {
-  .resumo-cards { grid-template-columns: 1fr 1fr; }
+.mensagem.info {
+  display: block;
+  color: #1e40af;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
 }
 
-@media(max-width:420px) {
-  .resumo-cards { grid-template-columns: 1fr; }
+.rodape {
+  padding: 14px 20px;
+  border-top: 1px solid var(--borda);
+  color: #718096;
+  font-size: 10px;
+  text-align: center;
+}
+
+@media(max-width:800px) {
+  .resumo-cards {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
 }
 
 @media(max-width:600px) {
-  .container { padding: 9px 7px 20px; }
-  .header { padding: 16px 14px; }
-  .header h1 { font-size: 21px; }
-  .header p { font-size: 12px; }
-  .menu-sistema { padding: 9px 10px; gap: 6px; }
-  .menu-sistema a { min-height: 32px; padding: 0 8px; font-size: 10px; }
-  .topo-fixo .barra { padding: 9px 12px; }
-  .conteudo { padding: 18px 14px; }
-  .grid { grid-template-columns: 1fr; }
-  .competencia { width: 100%; align-items: stretch; flex-direction: column; }
-  #competencia { width: 100%; }
-  .acoes button { width: 100%; }
-}
+  .container { padding: 6px; }
+  .header { padding: 16px; }
+  .header h1 { font-size: 20px; }
 
-/* Oculta a listagem de lançamentos no index. */
-.titulo-lista, .selecao-acoes, .tabela-wrap {
-  display: none !important;
+  .menu-sistema {
+    gap: 6px;
+    padding: 9px;
+  }
+
+  .menu-sistema a {
+    min-height: 34px;
+    padding: 7px 9px;
+    font-size: 10px;
+  }
+
+  .barra {
+    padding: 10px;
+    align-items: stretch;
+  }
+
+  .competencia {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  input[type="month"] { width: 100%; }
+
+  .competencia,
+  .status { width: 100%; }
+
+  .conteudo { padding: 12px; }
+
+  .resumo-cards { grid-template-columns: 1fr; }
+
+  .resumo-item strong { font-size: 17px; }
+
+  .resumo-fechamento { align-items: stretch; }
+
+  .btn-fechar { width: 100%; }
+
+  #paginaInterna {
+    min-height: 500px;
+    height: 80vh;
+  }
 }
 </style>
 </head>
@@ -627,335 +373,282 @@ tbody tr:hover { background: #fafcff; }
 <div class="container">
 <div class="card">
 
-<div class="topo-fixo">
-<header class="header">
-  <h1>📋 Despesas e Receitas</h1>
-  <p>Cadastro e gerenciamento de despesas e receitas por competência.</p>
-</header>
+  <div class="topo-fixo">
+    <header class="header">
+      <h1>📋 Controle Financeiro</h1>
+      <p>Gerenciamento de despesas, receitas, relatórios e contas bancárias.</p>
+    </header>
 
-<nav class="menu-sistema" aria-label="Abas do sistema">
-  <a class="ativo" href="https://joeldisousa-dot.github.io/gestaofinanceira/index.html">📋 Despesas e Receitas</a>
-  <a href="https://joeldisousa-dot.github.io/gestaofinanceira/Lancamentos.html">Lançamentos</a>
-  <a href="https://joeldisousa-dot.github.io/gestaofinanceira/Relatorio.html">📑 Relatórios</a>
-  <a href="https://joeldisousa-dot.github.io/gestaofinanceira/Graficos.html">📊 Gráficos</a>
-  <a href="https://joeldisousa-dot.github.io/gestaofinanceira/BaixasPendentes.html">⏳ Baixas pendentes</a>
-  <a href="https://joeldisousa-dot.github.io/gestaofinanceira/Atendimento.html">🎧 Atendimento</a>
-  <a href="https://joeldisousa-dot.github.io/gestaofinanceira/contas_bancarias.html">🏦 Contas bancárias e Pix</a>
-</nav>
+    <nav class="menu-sistema" id="menuSistema" aria-label="Navegação do sistema">
+      <a href="index.html" data-pagina="index.html" class="ativo">
+        📋 Despesas e Receitas
+      </a>
 
-<div class="barra">
-  <div class="competencia">
-    <label for="competencia">Competência</label>
-    <input id="competencia" type="month" required>
-  </div>
-  <div id="status" class="status" role="status" aria-live="polite">Conectando à API...</div>
-</div>
-</div>
+      <a href="Lancamentos.html" data-pagina="Lancamentos.html">
+        Lançamentos
+      </a>
 
-<main class="conteudo">
+      <a href="Relatorio.html" data-pagina="Relatorio.html">
+        📑 Relatórios
+      </a>
 
-<section class="painel-resumo" aria-labelledby="tituloResumo">
-  <h2 id="tituloResumo">📊 Resumo financeiro da competência</h2>
-  <p class="resumo-legenda">Totais das despesas e receitas pendentes e baixadas na competência selecionada.</p>
+      <a href="Graficos.html" data-pagina="Graficos.html">
+        📊 Gráficos
+      </a>
 
-  <div class="resumo-cards">
-    <div class="resumo-item">
-      <span>Saldo anterior / inicial</span>
-      <strong id="resumoSaldoInicial">R$ 0,00</strong>
-    </div>
-    <div class="resumo-item">
-      <span>Contas a pagar (sem baixa)</span>
-      <strong id="resumoPagarPendente">R$ 0,00</strong>
-    </div>
-    <div class="resumo-item pago">
-      <span>Pagos (baixados)</span>
-      <strong id="resumoPago">R$ 0,00</strong>
-    </div>
-    <div class="resumo-item">
-      <span>Contas a receber</span>
-      <strong id="resumoReceberPendente">R$ 0,00</strong>
-    </div>
-    <div class="resumo-item recebido">
-      <span>Recebido</span>
-      <strong id="resumoRecebido">R$ 0,00</strong>
-    </div>
-    <div class="resumo-item">
-      <span>Saldo final calculado</span>
-      <strong id="resumoSaldoFinal">R$ 0,00</strong>
+      <a href="BaixasPendentes.html" data-pagina="BaixasPendentes.html">
+        ⏳ Baixas pendentes
+      </a>
+
+      <a href="Atendimento.html" data-pagina="Atendimento.html">
+        🎧 Atendimento
+      </a>
+
+      <a href="contas_bancarias.html" data-pagina="contas_bancarias.html">
+        🏦 Contas bancárias e Pix
+      </a>
+    </nav>
+
+    <div class="barra">
+      <div class="competencia">
+        <label for="competencia">Competência</label>
+        <input type="month" id="competencia">
+      </div>
+
+      <div id="status" class="status" role="status" aria-live="polite">
+        Conectando à API...
+      </div>
     </div>
   </div>
 
-  <div class="resumo-fechamento">
-    <div class="resumo-formula" id="resumoFormula">
-      Saldo anterior + valores recebidos − valores pagos = saldo final, que será o saldo inicial do próximo mês.
-    </div>
-    <button type="button" id="btnFecharMes" class="btn-fechar-mes" onclick="fecharCompetencia()">
-      🔒 Fechar mês / competência
-    </button>
+  <div id="areaConteudoAbas">
+
+    <!-- CONTEÚDO DA PÁGINA INICIAL -->
+    <main id="homeContent" class="conteudo">
+
+      <section class="painel-resumo">
+        <h2>📊 Resumo financeiro da competência</h2>
+
+        <p class="resumo-legenda">
+          Totais de despesas e receitas pendentes e baixadas na competência selecionada.
+        </p>
+
+        <div class="resumo-cards">
+          <div class="resumo-item">
+            <span>Saldo anterior / inicial</span>
+            <strong id="resumoSaldoInicial">R$ 0,00</strong>
+          </div>
+
+          <div class="resumo-item">
+            <span>Contas a pagar (sem baixa)</span>
+            <strong id="resumoPagarPendente">R$ 0,00</strong>
+          </div>
+
+          <div class="resumo-item pago">
+            <span>Pagos (baixados)</span>
+            <strong id="resumoPago">R$ 0,00</strong>
+          </div>
+
+          <div class="resumo-item">
+            <span>Contas a receber</span>
+            <strong id="resumoReceberPendente">R$ 0,00</strong>
+          </div>
+
+          <div class="resumo-item recebido">
+            <span>Recebido</span>
+            <strong id="resumoRecebido">R$ 0,00</strong>
+          </div>
+
+          <div class="resumo-item">
+            <span>Saldo final calculado</span>
+            <strong id="resumoSaldoFinal">R$ 0,00</strong>
+          </div>
+        </div>
+
+        <div class="resumo-fechamento">
+          <div class="resumo-formula" id="resumoFormula">
+            Saldo anterior + valores recebidos − valores pagos = saldo final.
+          </div>
+
+          <button
+            type="button"
+            id="btnFecharMes"
+            class="btn-fechar"
+            onclick="fecharCompetencia()">
+            🔒 Fechar mês / competência
+          </button>
+        </div>
+
+        <div id="mensagem" class="mensagem" role="alert" aria-live="polite"></div>
+      </section>
+
+    </main>
+
+    <!-- AS OUTRAS PÁGINAS SÃO ABERTAS AQUI -->
+    <iframe
+      id="paginaInterna"
+      title="Conteúdo da página selecionada"
+      src="about:blank"
+      loading="eager">
+    </iframe>
+
   </div>
-</section>
 
-<!-- Formulário mantido oculto para compatibilidade com o JavaScript. -->
-<div id="formularioLancamento" hidden>
-  <div class="grid">
-    <div class="campo">
-      <label for="tipo">Tipo</label>
-      <select id="tipo">
-        <option value="pagar">Despesa</option>
-        <option value="receber">Receita</option>
-      </select>
-    </div>
+  <footer class="rodape">
+    Sistema de Controle Financeiro
+  </footer>
 
-    <div class="campo">
-      <label for="descricao">Descrição</label>
-      <input id="descricao" list="listaDescricoes" type="text" placeholder="Ex.: Aluguel, Energia, Salário...">
-      <datalist id="listaDescricoes"></datalist>
-    </div>
-
-    <div class="campo">
-      <label for="valor">Valor</label>
-      <input id="valor" type="text" inputmode="decimal" placeholder="R$ 0,00">
-    </div>
-
-    <div class="campo">
-      <label for="vencimento">Vencimento</label>
-      <input id="vencimento" type="date">
-    </div>
-
-    <div class="campo">
-      <label for="qrcode">Dados do QR Code (Pix copia e cola ou link)</label>
-      <input id="qrcode" type="text" placeholder="Cole o código Pix ou um link">
-    </div>
-  </div>
-
-  <div class="qr-previa-container">
-    <div id="qrPrevia" class="qr-previa">
-      <span class="qr-vazio">QR Code</span>
-    </div>
-    <div class="qr-previa-texto">
-      <strong>Pré-visualização do QR Code</strong>
-      <span id="qrPreviaMensagem">Cole o código Pix ou um link para gerar o desenho.</span>
-    </div>
-  </div>
-
-  <label class="checkbox-fixa">
-    <input id="fixa" type="checkbox">
-    <span>🔁 Marcar este lançamento como fixo</span>
-  </label>
-
-  <p class="ajuda">
-    O QR Code é gerado a partir do conteúdo informado e será salvo junto ao lançamento se a API/planilha aceitar o campo qrcode. Para Pix, cole o código Pix copia e cola fornecido pelo recebedor.
-  </p>
-
-  <p class="ajuda">
-    A competência define o mês em que o lançamento será contabilizado. O vencimento pode ocorrer em outro mês. Exemplo: competência 09/2026 com vencimento em 20/10/2026. O botão de despesas fixas copia as despesas fixas ativas para a competência selecionada.
-  </p>
-
-  <div class="acoes">
-    <button type="button" onclick="voltar()">← Voltar</button>
-    <button type="button" id="btnFixos" class="btn-fixos" onclick="inserirFixos()">🔁 Inserir despesas fixas do mês</button>
-    <button type="button" id="btnCancelarEdicao" class="btn-cancelar" onclick="cancelarEdicao()" hidden>Cancelar edição</button>
-    <button type="button" id="btnInserir" class="btn-inserir" onclick="inserir()">➕ Inserir despesa/receita</button>
-  </div>
-
-  <div id="mensagem" class="mensagem" role="alert" aria-live="polite"></div>
-  <div id="resumoFixos" class="resumo-fixos"></div>
-</div>
-
-<div class="titulo-lista">
-  <h2 id="tituloLista">Despesas e receitas da competência</h2>
-  <div class="linha"></div>
-</div>
-
-<div class="selecao-acoes">
-  <span id="quantidadeSelecionada">Nenhum lançamento selecionado</span>
-  <button type="button" id="btnExcluirSelecionados" class="btn-excluir-selecionados" disabled>🗑 Excluir selecionados</button>
-</div>
-
-<div class="tabela-wrap">
-  <table>
-    <thead>
-      <tr>
-        <th><input type="checkbox" id="selecionarTodos" class="checkbox-todos" aria-label="Selecionar todos os lançamentos" title="Selecionar todos"></th>
-        <th>ID</th>
-        <th>Tipo</th>
-        <th>Descrição</th>
-        <th>Vencimento</th>
-        <th>Fixa</th>
-        <th>Baixado</th>
-        <th>Valor</th>
-        <th>QR Code</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody id="lista">
-      <tr><td colspan="10">Carregando despesas e receitas...</td></tr>
-    </tbody>
-  </table>
-</div>
-
-</main>
 </div>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
 "use strict";
 
-const URL_API = "https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec";
-
-let lancamentosAtuais = [];
-let idEmEdicao = null;
+const URL_API =
+  "https://script.google.com/macros/s/AKfycbxyXfBbooxSug3QbCvbpOl1MFJpqP5AhJIqLMB166p2opvvZBUX0UfIviuObQ6_nEvc/exec";
 
 const competenciaEl = document.getElementById("competencia");
-const tipoEl = document.getElementById("tipo");
-const descricaoEl = document.getElementById("descricao");
-const valorEl = document.getElementById("valor");
-const vencimentoEl = document.getElementById("vencimento");
-const qrcodeEl = document.getElementById("qrcode");
-const fixaEl = document.getElementById("fixa");
-const listaEl = document.getElementById("lista");
-const mensagemEl = document.getElementById("mensagem");
 const statusEl = document.getElementById("status");
-const btnInserir = document.getElementById("btnInserir");
-const btnFixos = document.getElementById("btnFixos");
-const selecionarTodosEl = document.getElementById("selecionarTodos");
-const btnExcluirSelecionados = document.getElementById("btnExcluirSelecionados");
-const quantidadeSelecionadaEl = document.getElementById("quantidadeSelecionada");
+const homeContent = document.getElementById("homeContent");
+const paginaInterna = document.getElementById("paginaInterna");
+const menuSistema = document.getElementById("menuSistema");
+
+let navegacaoAtual = "index.html";
+let resumoAtual = null;
 
 function competenciaAtual() {
-  const d = new Date();
-  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0");
+  const data = new Date();
+
+  return data.getFullYear() + "-" +
+    String(data.getMonth() + 1).padStart(2, "0");
 }
 
-function validarCompetencia(v) {
-  if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(v)) {
+function validarCompetencia(valor) {
+  if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(valor)) {
     throw new Error("Selecione uma competência válida.");
   }
 }
 
-function esc(v) {
-  return String(v ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+function moeda(valor) {
+  let numero;
+
+  if (typeof valor === "number") {
+    numero = valor;
+  } else {
+    let texto = String(valor ?? "0")
+      .replace(/R\$/gi, "")
+      .replace(/\s/g, "");
+
+    if (texto.includes(",")) {
+      texto = texto.replace(/\./g, "").replace(",", ".");
+    }
+
+    numero = Number(texto);
+  }
+
+  return (Number.isFinite(numero) ? numero : 0)
+    .toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    });
 }
 
-function mostrarMensagem(texto, tipo = "info") {
-  mensagemEl.textContent = texto || "";
-  mensagemEl.className = "mensagem " + tipo;
+function numero(valor) {
+  if (typeof valor === "number") {
+    return Number.isFinite(valor) ? valor : 0;
+  }
+
+  let texto = String(valor ?? "0")
+    .replace(/R\$/gi, "")
+    .replace(/\s/g, "");
+
+  if (texto.includes(",")) {
+    texto = texto.replace(/\./g, "").replace(",", ".");
+  }
+
+  const resultado = Number(texto);
+
+  return Number.isFinite(resultado) ? resultado : 0;
 }
 
-function normalizarTexto(v) {
-  return String(v ?? "").trim().toLocaleLowerCase("pt-BR");
-}
-
-function obterCampo(obj, names, padrao = "") {
-  for (const n of names) {
-    if (obj && obj[n] !== undefined && obj[n] !== null && obj[n] !== "") {
-      return obj[n];
+function campo(objeto, nomes, padrao = "") {
+  for (const nome of nomes) {
+    if (
+      objeto &&
+      objeto[nome] !== undefined &&
+      objeto[nome] !== null &&
+      objeto[nome] !== ""
+    ) {
+      return objeto[nome];
     }
   }
+
   return padrao;
 }
 
-function normalizarTipo(v) {
-  const t = normalizarTexto(v);
-
-  if (["pagar", "despesa", "despesas", "saída", "saida"].includes(t)) return "pagar";
-  if (["receber", "receita", "receitas", "entrada"].includes(t)) return "receber";
-
-  return t || "outro";
+function textoNormalizado(valor) {
+  return String(valor ?? "").trim().toLocaleLowerCase("pt-BR");
 }
 
-function rotuloTipo(v) {
-  const t = normalizarTipo(v);
+function tipoLancamento(valor) {
+  const tipo = textoNormalizado(valor);
 
-  if (t === "pagar") return "Despesa";
-  if (t === "receber") return "Receita";
-
-  return String(v || "Outro");
-}
-
-function normalizarValor(texto) {
-  let v = String(texto || "")
-    .replace(/R\$/gi, "")
-    .replace(/\s/g, "")
-    .trim();
-
-  if (!v) return NaN;
-
-  if (v.includes(",")) {
-    v = v.replace(/\./g, "").replace(",", ".");
+  if (["pagar", "despesa", "despesas", "saída", "saida"].includes(tipo)) {
+    return "pagar";
   }
 
-  const n = Number(v);
-  return Number.isFinite(n) ? n : NaN;
-}
-
-function moeda(valor) {
-  let n;
-
-  if (typeof valor === "number") {
-    n = valor;
-  } else {
-    let t = String(valor ?? "0").replace(/R\$/gi, "").replace(/\s/g, "");
-
-    if (t.includes(",")) {
-      t = t.replace(/\./g, "").replace(",", ".");
-    }
-
-    n = Number(t);
+  if (["receber", "receita", "receitas", "entrada"].includes(tipo)) {
+    return "receber";
   }
 
-  return (Number.isFinite(n) ? n : 0).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL"
-  });
+  return tipo;
 }
 
-function formatarData(data) {
-  if (!data) return "";
+function estaBaixado(item) {
+  const valor = campo(item, [
+    "baixado", "Baixado", "BAIXADO",
+    "pago", "Pago", "PAGO",
+    "quitado", "Quitado",
+    "statusBaixa", "status_baixa", "status", "Status"
+  ], false);
 
-  const t = String(data).trim();
+  if (valor === true || valor === 1) return true;
 
-  if (/^\d{4}-\d{2}-\d{2}$/.test(t)) {
-    const [a, m, d] = t.split("-");
-    return `${d}/${m}/${a}`;
-  }
-
-  if (/^\d{2}\/\d{2}\/\d{4}$/.test(t)) return t;
-
-  const iso = t.match(/^(\d{4})-(\d{2})-(\d{2})T/);
-
-  if (iso) return `${iso[3]}/${iso[2]}/${iso[1]}`;
-
-  return t;
+  return [
+    "sim", "true", "1", "baixado",
+    "pago", "quitado", "recebido", "liquidado"
+  ].includes(textoNormalizado(valor));
 }
 
-function valorBooleano(v) {
-  if (typeof v === "boolean") return v;
+function mostrarMensagem(texto, tipo = "info") {
+  const elemento = document.getElementById("mensagem");
 
-  return ["sim", "true", "1", "baixado", "pago", "ativo"]
-    .includes(normalizarTexto(v));
+  elemento.textContent = texto || "";
+  elemento.className = "mensagem " + tipo;
 }
 
+function proximaCompetencia(competencia) {
+  const [ano, mes] = competencia.split("-").map(Number);
+  const data = new Date(ano, mes, 1);
+
+  return data.getFullYear() + "-" +
+    String(data.getMonth() + 1).padStart(2, "0");
+}
+
+/* Consulta a API usando JSONP, como no sistema original. */
 function chamarAPI(action, parametros = {}) {
   return new Promise((resolve, reject) => {
     const url = new URL(URL_API);
 
     url.searchParams.set("action", action);
 
-    Object.entries(parametros).forEach(([k, v]) => {
-      if (v !== undefined && v !== null) {
-        url.searchParams.set(k, String(v));
+    Object.entries(parametros).forEach(([chave, valor]) => {
+      if (valor !== undefined && valor !== null) {
+        url.searchParams.set(chave, String(valor));
       }
     });
 
-    const callback = "__controleFinanceiroJsonp_" +
+    const callback = "__financeiro_" +
       Date.now() + "_" + Math.random().toString(36).slice(2);
 
     url.searchParams.set("callback", callback);
@@ -965,7 +658,7 @@ function chamarAPI(action, parametros = {}) {
 
     const timer = setTimeout(() => {
       finalizar(new Error(
-        "Tempo esgotado ao consultar a API. Confira a implantação e as permissões do Apps Script."
+        "Tempo esgotado ao consultar a API. Verifique a implantação do Apps Script."
       ));
     }, 20000);
 
@@ -989,7 +682,9 @@ function chamarAPI(action, parametros = {}) {
 
       if (!dados || dados.sucesso === false || dados.erro) {
         reject(new Error(
-          dados?.mensagem || dados?.erro || "A API retornou uma resposta inválida."
+          dados?.mensagem ||
+          dados?.erro ||
+          "A API retornou uma resposta inválida."
         ));
         return;
       }
@@ -1002,7 +697,7 @@ function chamarAPI(action, parametros = {}) {
     script.async = true;
 
     script.onerror = () => finalizar(new Error(
-      "Não foi possível carregar a resposta da API. Confira a URL, a implantação e se o acesso está definido como qualquer pessoa."
+      "Não foi possível acessar a API. Confira a URL e as permissões do Apps Script."
     ));
 
     script.src = url.href;
@@ -1013,829 +708,313 @@ function chamarAPI(action, parametros = {}) {
 function extrairLista(resposta) {
   if (Array.isArray(resposta)) return resposta;
 
-  for (const v of [
+  for (const valor of [
     resposta?.lista,
     resposta?.lancamentos,
     resposta?.dados,
-    resposta?.registros,
-    resposta?.descricoes
+    resposta?.registros
   ]) {
-    if (Array.isArray(v)) return v;
+    if (Array.isArray(valor)) return valor;
   }
 
   return [];
 }
 
-async function carregarDescricoes() {
-  try {
-    const resposta = await chamarAPI("listarDescricoes");
-    const descricoes = extrairLista(resposta);
-
-    document.getElementById("listaDescricoes").innerHTML =
-      descricoes.map(item => {
-        const d = typeof item === "string"
-          ? item
-          : obterCampo(item, [
-              "descricao", "Descrição", "Descricao", "DESCRICAO", "nome", "Nome"
-            ]);
-
-        return d ? `<option value="${esc(d)}"></option>` : "";
-      }).join("");
-  } catch (e) {
-    console.warn("Não foi possível carregar as descrições:", e);
-  }
-}
-
-function classificarLancamentos(lancamentos) {
-  const ordem = t => normalizarTipo(t) === "pagar" ? 1 :
-    normalizarTipo(t) === "receber" ? 2 : 3;
-
-  return [...lancamentos].sort((a, b) => {
-    const ta = obterCampo(a, ["tipo", "Tipo", "TIPO"]);
-    const tb = obterCampo(b, ["tipo", "Tipo", "TIPO"]);
-    const dif = ordem(ta) - ordem(tb);
-
-    if (dif) return dif;
-
-    return String(obterCampo(a, [
-      "descricao", "Descrição", "Descricao", "DESCRICAO"
-    ])).localeCompare(
-      String(obterCampo(b, [
-        "descricao", "Descrição", "Descricao", "DESCRICAO"
-      ])),
-      "pt-BR",
-      { sensitivity: "base" }
-    );
-  });
-}
-
-function atualizarPreviaQr() {
-  const conteudo = qrcodeEl.value.trim();
-  const area = document.getElementById("qrPrevia");
-  const mensagem = document.getElementById("qrPreviaMensagem");
-
-  area.replaceChildren();
-
-  if (!conteudo) {
-    area.innerHTML = '<span class="qr-vazio">QR Code</span>';
-    mensagem.textContent = "Cole o código Pix ou um link para gerar o desenho.";
-    return;
-  }
-
-  if (typeof QRCode === "undefined") {
-    area.innerHTML = '<span class="qr-vazio">Biblioteca indisponível</span>';
-    mensagem.textContent = "Não foi possível carregar a biblioteca QR Code. Verifique sua conexão.";
-    return;
-  }
-
-  try {
-    new QRCode(area, {
-      text: conteudo,
-      width: 132,
-      height: 132,
-      colorDark: "#000000",
-      colorLight: "#ffffff",
-      correctLevel: QRCode.CorrectLevel.M
-    });
-
-    mensagem.textContent = "QR Code gerado. Teste com a câmera do celular antes de salvar.";
-  } catch (e) {
-    console.error(e);
-    area.innerHTML = '<span class="qr-vazio">QR inválido</span>';
-    mensagem.textContent = "Não foi possível gerar o QR Code. Verifique se o conteúdo é válido ou muito extenso.";
-  }
-}
-
-qrcodeEl.addEventListener("input", atualizarPreviaQr);
-qrcodeEl.addEventListener("change", atualizarPreviaQr);
-
-function atualizarSelecao() {
-  const c = Array.from(
-    listaEl.querySelectorAll('input.checkbox-linha:not(:disabled)')
-  );
-
-  const n = c.filter(x => x.checked).length;
-
-  selecionarTodosEl.checked = c.length > 0 && n === c.length;
-  selecionarTodosEl.indeterminate = n > 0 && n < c.length;
-  btnExcluirSelecionados.disabled = n === 0;
-
-  quantidadeSelecionadaEl.textContent = n === 0
-    ? "Nenhum lançamento selecionado"
-    : `${n} lançamento(s) selecionado(s)`;
-}
-
-function obterIdsSelecionados() {
-  return Array.from(
-    listaEl.querySelectorAll('input.checkbox-linha:checked:not(:disabled)')
-  )
-    .map(c => c.dataset.selecionarId)
-    .filter(id => id !== undefined && id !== "");
-}
-
-function renderizarLancamentos(lancamentos) {
-  lancamentosAtuais = [...lancamentos];
-
-  selecionarTodosEl.checked = false;
-  selecionarTodosEl.indeterminate = false;
-
-  if (!lancamentos.length) {
-    listaEl.innerHTML =
-      '<tr><td colspan="10">Nenhuma despesa ou receita encontrada nesta competência.</td></tr>';
-
-    atualizarSelecao();
-    return;
-  }
-
-  listaEl.innerHTML = lancamentos.map(item => {
-    const id = obterCampo(item, ["id", "ID", "Id", "codigo", "Código"]);
-    const tipoOriginal = obterCampo(item, ["tipo", "Tipo", "TIPO"]);
-    const tipo = normalizarTipo(tipoOriginal);
-
-    const descricao = obterCampo(item, [
-      "descricao", "Descrição", "Descricao", "DESCRICAO"
-    ]);
-
-    const vencimento = obterCampo(item, [
-      "vencimento", "Vencimento", "dataVencimento", "DATA_VENCIMENTO"
-    ]);
-
-    const fixa = valorBooleano(obterCampo(item, [
-      "fixa", "Fixa", "FIXA", "contaFixa"
-    ]));
-
-    const baixado = valorBooleano(obterCampo(item, [
-      "baixado", "Baixado", "BAIXADO", "pago", "Pago", "statusBaixa"
-    ]));
-
-    const valor = obterCampo(item, ["valor", "Valor", "VALOR"], 0);
-
-    const qr = obterCampo(item, [
-      "qrcode", "qrCode", "QR Code", "QR_CODE", "pix", "Pix", "PIX"
-    ], "");
-
-    const classe = tipo === "pagar" ? "pagar" :
-      tipo === "receber" ? "receber" : "normal";
-
-    const idValido = id !== "" && id !== null && id !== undefined;
-
-    return `
-      <tr>
-        <td>
-          <input type="checkbox" class="checkbox-linha"
-            data-selecionar-id="${esc(id)}"
-            aria-label="Selecionar lançamento ${esc(id)}"
-            ${idValido ? "" : "disabled"}>
-        </td>
-        <td>${esc(id)}</td>
-        <td><span class="badge ${classe}">${esc(rotuloTipo(tipoOriginal))}</span></td>
-        <td>${esc(descricao)}</td>
-        <td>${esc(formatarData(vencimento))}</td>
-        <td><span class="badge ${fixa ? "fixa" : "normal"}">${fixa ? "Sim" : "Não"}</span></td>
-        <td><span class="badge ${baixado ? "fixa" : "normal"}">${baixado ? "Sim" : "Não"}</span></td>
-        <td class="valor">${esc(moeda(valor))}</td>
-        <td class="qr-celula">
-          ${qr
-            ? `<div class="qr-mini" data-qr="${esc(qr)}"></div>`
-            : '<span class="qr-vazio">Não informado</span>'}
-        </td>
-        <td>
-          <button type="button" class="btn-editar"
-            data-editar-id="${esc(id)}" ${idValido ? "" : "disabled"}>✏️ Editar</button>
-          <button type="button" class="btn-excluir"
-            data-excluir-id="${esc(id)}" ${idValido ? "" : "disabled"}>🗑 Excluir</button>
-        </td>
-      </tr>`;
-  }).join("");
-
-  listaEl.querySelectorAll(".qr-mini").forEach(el => {
-    try {
-      if (typeof QRCode === "undefined") {
-        el.textContent = "QR indisponível";
-        return;
-      }
-
-      new QRCode(el, {
-        text: el.dataset.qr,
-        width: 72,
-        height: 72,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.M
-      });
-    } catch (e) {
-      console.error(e);
-      el.textContent = "QR inválido";
-    }
-  });
-
-  atualizarSelecao();
-}
-
-function valorNumericoLancamento(valor) {
-  if (typeof valor === "number") {
-    return Number.isFinite(valor) ? valor : 0;
-  }
-
-  let texto = String(valor ?? "0")
-    .replace(/R\$/gi, "")
-    .replace(/\s/g, "")
-    .trim();
-
-  if (!texto) return 0;
-
-  if (texto.includes(",")) {
-    texto = texto.replace(/\./g, "").replace(",", ".");
-  }
-
-  const n = Number(texto);
-  return Number.isFinite(n) ? n : 0;
-}
-
-function lancamentoEstaBaixado(item) {
-  const valor = obterCampo(item, [
-    "baixado", "Baixado", "BAIXADO", "pago", "Pago", "PAGO",
-    "quitado", "Quitado", "statusBaixa", "status_baixa", "status", "Status"
-  ], false);
-
-  return valorBooleano(valor) ||
-    ["baixado", "pago", "quitado", "recebido", "liquidado"]
-      .includes(normalizarTexto(valor));
-}
-
-function somarLancamentos(itens) {
-  return itens.reduce((total, item) => {
-    return total + valorNumericoLancamento(obterCampo(item, [
-      "valor", "Valor", "VALOR", "valorTotal", "Valor Total"
-    ], 0));
-  }, 0);
-}
-
-function zerarResumo() {
-  for (const id of [
-    "resumoSaldoInicial",
-    "resumoPagarPendente",
-    "resumoPago",
-    "resumoReceberPendente",
-    "resumoRecebido",
-    "resumoSaldoFinal"
-  ]) {
-    document.getElementById(id).textContent = moeda(0);
-  }
-}
-
 async function carregarResumo() {
   const competencia = competenciaEl.value;
+  validarCompetencia(competencia);
+
+  statusEl.textContent = "Consultando resumo financeiro...";
 
   try {
-    const r = await chamarAPI("obterResumo", { competencia });
+    const [respostaResumo, respostaLista] = await Promise.all([
+      chamarAPI("obterResumo", { competencia }),
+      chamarAPI("listarLancamentos", { competencia })
+    ]);
 
-    const saldoInicial = valorNumericoLancamento(r.saldoInicial);
-    const pagoApi = valorNumericoLancamento(r.pago);
-    const recebidoApi = valorNumericoLancamento(r.recebido);
+    const lancamentos = extrairLista(respostaLista);
 
-    const saldo = valorNumericoLancamento(
-      r.saldo ?? (saldoInicial + recebidoApi - pagoApi)
+    const saldoInicial = numero(
+      campo(respostaResumo, ["saldoInicial", "saldo_inicial"], 0)
     );
 
-    const pagar = lancamentosAtuais.filter(item =>
-      normalizarTipo(obterCampo(item, ["tipo", "Tipo", "TIPO"])) === "pagar"
+    const pagoAPI = numero(
+      campo(respostaResumo, ["pago", "totalPago"], 0)
     );
 
-    const receber = lancamentosAtuais.filter(item =>
-      normalizarTipo(obterCampo(item, ["tipo", "Tipo", "TIPO"])) === "receber"
+    const recebidoAPI = numero(
+      campo(respostaResumo, ["recebido", "totalRecebido"], 0)
     );
 
-    const pagarPendente = somarLancamentos(
-      pagar.filter(item => !lancamentoEstaBaixado(item))
+    const saldoFinal = numero(
+      campo(
+        respostaResumo,
+        ["saldo", "saldoFinal", "saldoFinalCalculado"],
+        saldoInicial + recebidoAPI - pagoAPI
+      )
     );
 
-    const pagarBaixado = somarLancamentos(
-      pagar.filter(lancamentoEstaBaixado)
+    const despesas = lancamentos.filter(item =>
+      tipoLancamento(campo(item, ["tipo", "Tipo", "TIPO"])) === "pagar"
     );
 
-    const receberPendente = somarLancamentos(
-      receber.filter(item => !lancamentoEstaBaixado(item))
+    const receitas = lancamentos.filter(item =>
+      tipoLancamento(campo(item, ["tipo", "Tipo", "TIPO"])) === "receber"
     );
 
-    const recebidos = somarLancamentos(
-      receber.filter(lancamentoEstaBaixado)
+    const somar = lista => lista.reduce((total, item) => {
+      return total + numero(campo(item, [
+        "valor", "Valor", "VALOR", "valorTotal"
+      ], 0));
+    }, 0);
+
+    const pagarPendente = somar(
+      despesas.filter(item => !estaBaixado(item))
     );
 
-    document.getElementById("resumoSaldoInicial").textContent = moeda(saldoInicial);
-    document.getElementById("resumoPagarPendente").textContent = moeda(pagarPendente);
-    document.getElementById("resumoPago").textContent = moeda(pagarBaixado);
-    document.getElementById("resumoReceberPendente").textContent = moeda(receberPendente);
-    document.getElementById("resumoRecebido").textContent = moeda(recebidos);
-    document.getElementById("resumoSaldoFinal").textContent = moeda(saldo);
+    const pagarBaixado = somar(
+      despesas.filter(estaBaixado)
+    );
+
+    const receberPendente = somar(
+      receitas.filter(item => !estaBaixado(item))
+    );
+
+    const recebidos = somar(
+      receitas.filter(estaBaixado)
+    );
+
+    document.getElementById("resumoSaldoInicial").textContent =
+      moeda(saldoInicial);
+
+    document.getElementById("resumoPagarPendente").textContent =
+      moeda(pagarPendente);
+
+    document.getElementById("resumoPago").textContent =
+      moeda(pagarBaixado);
+
+    document.getElementById("resumoReceberPendente").textContent =
+      moeda(receberPendente);
+
+    document.getElementById("resumoRecebido").textContent =
+      moeda(recebidos);
+
+    document.getElementById("resumoSaldoFinal").textContent =
+      moeda(saldoFinal);
 
     document.getElementById("resumoFormula").textContent =
-      `${moeda(saldoInicial)} + ${moeda(recebidoApi)} − ${moeda(pagoApi)} = ${moeda(saldo)}. ` +
-      `Ao fechar, esse saldo será gravado como saldo inicial de ${proximaCompetencia(competencia)}.`;
+      `${moeda(saldoInicial)} + ${moeda(recebidoAPI)} − ` +
+      `${moeda(pagoAPI)} = ${moeda(saldoFinal)}. ` +
+      `Próxima competência: ${proximaCompetencia(competencia)}.`;
 
-    return r;
-  } catch (e) {
-    zerarResumo();
+    resumoAtual = {
+      saldoInicial,
+      pago: pagoAPI,
+      recebido: recebidoAPI,
+      saldo: saldoFinal
+    };
 
-    document.getElementById("resumoFormula").textContent =
-      "Não foi possível carregar o resumo financeiro: " + e.message;
+    statusEl.textContent =
+      "Sistema online · " + lancamentos.length + " lançamento(s)";
+  } catch (erro) {
+    console.error("Erro ao carregar resumo:", erro);
+    statusEl.textContent = "Erro ao carregar resumo";
 
-    throw e;
+    mostrarMensagem(
+      "Não foi possível carregar os dados financeiros: " + erro.message,
+      "erro"
+    );
   }
 }
 
-function proximaCompetencia(competencia) {
-  const [ano, mes] = competencia.split("-").map(Number);
-  const data = new Date(ano, mes, 1);
-
-  return data.getFullYear() + "-" +
-    String(data.getMonth() + 1).padStart(2, "0");
-}
-
+/* FECHAMENTO DA COMPETÊNCIA */
 async function fecharCompetencia() {
   const competencia = competenciaEl.value;
+  const botao = document.getElementById("btnFecharMes");
 
   try {
     validarCompetencia(competencia);
 
-    const resumo = await carregarResumo();
+    await carregarResumo();
+
+    if (!resumoAtual) {
+      throw new Error("Não foi possível obter o resumo financeiro.");
+    }
+
     const proxima = proximaCompetencia(competencia);
 
-    const texto =
+    const confirmacao =
       `Fechar a competência ${competencia}?\n\n` +
-      `Saldo anterior/inicial: ${moeda(resumo.saldoInicial)}\n` +
-      `Contas recebidas: ${moeda(resumo.recebido)}\n` +
-      `Contas pagas: ${moeda(resumo.pago)}\n` +
-      `Saldo final a gravar como saldo inicial de ${proxima}: ${moeda(resumo.saldo)}\n\n` +
-      `O saldo inicial da próxima competência será atualizado.`;
+      `Saldo inicial: ${moeda(resumoAtual.saldoInicial)}\n` +
+      `Recebido: ${moeda(resumoAtual.recebido)}\n` +
+      `Pago: ${moeda(resumoAtual.pago)}\n` +
+      `Saldo final: ${moeda(resumoAtual.saldo)}\n\n` +
+      `O saldo será gravado como saldo inicial de ${proxima}.`;
 
-    if (!window.confirm(texto)) return;
+    if (!confirm(confirmacao)) return;
 
-    const botao = document.getElementById("btnFecharMes");
     botao.disabled = true;
-    botao.textContent = "⏳ Fechando mês...";
+    botao.textContent = "⏳ Fechando...";
     statusEl.textContent = "Fechando competência...";
 
     const resposta = await chamarAPI("fecharMes", { competencia });
 
     if (resposta.sucesso !== true) {
-      throw new Error(resposta.mensagem || "A API não confirmou o fechamento.");
+      throw new Error(
+        resposta.mensagem || "A API não confirmou o fechamento."
+      );
     }
 
     mostrarMensagem(
       resposta.mensagem ||
-      `Competência ${competencia} fechada. Saldo ${
-        moeda(resposta.saldoFinal ?? resumo.saldo)
-      } gravado como saldo inicial de ${
-        resposta.proximaCompetencia || proxima
-      }.`,
+      `Competência ${competencia} fechada com sucesso.`,
       "sucesso"
     );
 
     statusEl.textContent = "Competência fechada";
-
-    await carregarResumo();
-  } catch (e) {
-    console.error("Erro ao fechar competência:", e);
-    mostrarMensagem(e.message || "Não foi possível fechar a competência.", "erro");
+  } catch (erro) {
+    console.error(erro);
+    mostrarMensagem(erro.message, "erro");
     statusEl.textContent = "Falha ao fechar competência";
   } finally {
-    const botao = document.getElementById("btnFecharMes");
     botao.disabled = false;
     botao.textContent = "🔒 Fechar mês / competência";
   }
 }
 
-async function carregarLancamentos() {
-  const competencia = competenciaEl.value;
-  validarCompetencia(competencia);
+/* NAVEGAÇÃO ENTRE AS ABAS */
+function ativarAba(pagina, atualizarHistorico = true) {
+  const paginasPermitidas = [
+    "index.html",
+    "Lancamentos.html",
+    "Relatorio.html",
+    "Graficos.html",
+    "BaixasPendentes.html",
+    "Atendimento.html",
+    "contas_bancarias.html"
+  ];
 
-  listaEl.innerHTML =
-    '<tr><td colspan="10">Carregando despesas e receitas...</td></tr>';
-
-  statusEl.textContent = "Consultando despesas e receitas...";
-
-  try {
-    const resposta = await chamarAPI("listarLancamentos", { competencia });
-    const lancamentos = classificarLancamentos(extrairLista(resposta));
-
-    renderizarLancamentos(lancamentos);
-
-    document.getElementById("tituloLista").textContent =
-      "Despesas e receitas da competência " + competencia;
-
-    statusEl.textContent =
-      "Sistema online · " + lancamentos.length + " lançamento(s)";
-
-    try {
-      await carregarResumo();
-    } catch (e) {
-      console.warn("Resumo financeiro indisponível:", e);
-    }
-  } catch (e) {
-    console.error("Erro ao carregar despesas e receitas:", e);
-
-    listaEl.innerHTML = `<tr><td colspan="10">${esc(e.message)}</td></tr>`;
-    statusEl.textContent = "Erro ao carregar";
-
-    atualizarSelecao();
-    throw e;
-  }
-}
-
-async function inserir() {
-  const competencia = competenciaEl.value;
-  const tipo = tipoEl.value;
-  const descricao = descricaoEl.value.trim();
-  const valor = normalizarValor(valorEl.value);
-  const vencimento = vencimentoEl.value;
-  const qrcode = qrcodeEl.value.trim();
-  const fixa = fixaEl.checked ? "Sim" : "Não";
-
-  try {
-    validarCompetencia(competencia);
-
-    if (!descricao) {
-      throw new Error("Informe a descrição da despesa ou receita.");
-    }
-
-    if (!Number.isFinite(valor) || valor <= 0) {
-      throw new Error("Informe um valor maior que zero.");
-    }
-
-    if (!vencimento) {
-      throw new Error("Informe a data de vencimento.");
-    }
-
-    btnInserir.disabled = true;
-    btnInserir.textContent = idEmEdicao !== null
-      ? "⏳ Salvando..."
-      : "⏳ Inserindo...";
-
-    statusEl.textContent = idEmEdicao !== null
-      ? "Salvando alterações..."
-      : "Inserindo despesa/receita...";
-
-    const parametros = {
-      competencia,
-      tipo,
-      descricao,
-      valor,
-      vencimento,
-      qrcode,
-      fixa
-    };
-
-    const resposta = idEmEdicao !== null
-      ? await chamarAPI("editarLancamento", {
-          ...parametros,
-          id: String(idEmEdicao)
-        })
-      : await chamarAPI("incluirLancamento", parametros);
-
-    if (resposta.sucesso === false) {
-      throw new Error(resposta.mensagem || "A API não confirmou a operação.");
-    }
-
-    mostrarMensagem(
-      resposta.mensagem ||
-      (idEmEdicao !== null
-        ? "Lançamento alterado com sucesso."
-        : "Despesa/receita inserida com sucesso."),
-      "sucesso"
-    );
-
-    limparFormulario();
-    await carregarLancamentos();
-  } catch (e) {
-    console.error(e);
-    mostrarMensagem(e.message, "erro");
-    statusEl.textContent = "Verifique a operação";
-  } finally {
-    btnInserir.disabled = false;
-    btnInserir.textContent = idEmEdicao !== null
-      ? "💾 Salvar alterações"
-      : "➕ Inserir despesa/receita";
-  }
-}
-
-function dataParaInput(data) {
-  if (!data) return "";
-
-  const t = String(data).trim();
-
-  if (/^\d{4}-\d{2}-\d{2}$/.test(t)) return t;
-
-  let m = t.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
-  if (m) return `${m[3]}-${m[2]}-${m[1]}`;
-
-  m = t.match(/^(\d{4})-(\d{2})-(\d{2})T/);
-  if (m) return `${m[1]}-${m[2]}-${m[3]}`;
-
-  const d = new Date(t);
-
-  if (!Number.isNaN(d.getTime())) {
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  if (!paginasPermitidas.includes(pagina)) {
+    pagina = "index.html";
   }
 
-  return "";
-}
+  navegacaoAtual = pagina;
 
-function editarLancamento(id) {
-  const item = lancamentosAtuais.find(x =>
-    String(obterCampo(x, ["id", "ID", "Id", "codigo", "Código"])) === String(id)
-  );
+  menuSistema.querySelectorAll("a[data-pagina]").forEach(aba => {
+    const ativa = aba.dataset.pagina === pagina;
 
-  if (!item) {
-    mostrarMensagem(
-      "Não foi possível localizar os dados deste lançamento. Atualize a lista e tente novamente.",
-      "erro"
-    );
-    return;
-  }
+    aba.classList.toggle("ativo", ativa);
 
-  idEmEdicao = String(id);
-
-  competenciaEl.value = String(obterCampo(item, [
-    "competencia", "Competência", "Competencia", "COMPETENCIA"
-  ], competenciaEl.value)).slice(0, 7) || competenciaEl.value;
-
-  tipoEl.value = normalizarTipo(obterCampo(item, ["tipo", "Tipo", "TIPO"], "pagar"));
-
-  descricaoEl.value = String(obterCampo(item, [
-    "descricao", "Descrição", "Descricao", "DESCRICAO"
-  ]));
-
-  valorEl.value = String(obterCampo(item, ["valor", "Valor", "VALOR"], ""))
-    .replace(".", ",");
-
-  vencimentoEl.value = dataParaInput(obterCampo(item, [
-    "vencimento", "Vencimento", "dataVencimento", "DATA_VENCIMENTO"
-  ]));
-
-  qrcodeEl.value = String(obterCampo(item, [
-    "qrcode", "qrCode", "QR Code", "QR_CODE", "pix", "Pix", "PIX"
-  ], ""));
-
-  atualizarPreviaQr();
-
-  fixaEl.checked = valorBooleano(obterCampo(item, [
-    "fixa", "Fixa", "FIXA", "contaFixa"
-  ]));
-
-  btnInserir.textContent = "💾 Salvar alterações";
-  document.getElementById("btnCancelarEdicao").hidden = false;
-  btnFixos.disabled = true;
-
-  mostrarMensagem(
-    `Editando lançamento #${id}. Altere os campos e clique em “Salvar alterações”.`,
-    "info"
-  );
-
-  statusEl.textContent = `Editando lançamento #${id}`;
-
-  document.querySelector(".conteudo").scrollIntoView({
-    behavior: "smooth",
-    block: "start"
+    if (ativa) {
+      aba.setAttribute("aria-current", "page");
+    } else {
+      aba.removeAttribute("aria-current");
+    }
   });
 
-  descricaoEl.focus();
-}
+  if (pagina === "index.html") {
+    homeContent.classList.remove("oculto");
+    paginaInterna.classList.remove("visivel");
 
-function limparFormulario() {
-  idEmEdicao = null;
-  descricaoEl.value = "";
-  valorEl.value = "";
-  qrcodeEl.value = "";
+    if (atualizarHistorico) {
+      history.replaceState(
+        { pagina },
+        "",
+        window.location.pathname + window.location.search
+      );
+    }
 
-  atualizarPreviaQr();
-
-  fixaEl.checked = false;
-  btnInserir.textContent = "➕ Inserir despesa/receita";
-  document.getElementById("btnCancelarEdicao").hidden = true;
-  btnFixos.disabled = false;
-}
-
-function cancelarEdicao() {
-  limparFormulario();
-  mensagemEl.className = "mensagem";
-  mensagemEl.textContent = "";
-  statusEl.textContent = "Edição cancelada";
-}
-
-async function inserirFixos() {
-  const competencia = competenciaEl.value;
-
-  try {
-    validarCompetencia(competencia);
-
-    btnFixos.disabled = true;
-    btnFixos.textContent = "⏳ Processando...";
-    statusEl.textContent = "Inserindo despesas fixas...";
-
-    const resposta = await chamarAPI("inserirFixosCompetencia", { competencia });
-    const inseridos = Number(resposta.inseridos ?? 0);
-    const ignorados = Number(resposta.ignorados ?? 0);
-
-    document.getElementById("resumoFixos").textContent =
-      `Competência ${competencia} · Inseridos: ${inseridos} · Ignorados: ${ignorados}`;
-
-    mostrarMensagem(
-      resposta.mensagem ||
-      `Operação concluída. Inseridos: ${inseridos}; ignorados: ${ignorados}.`,
-      "sucesso"
-    );
-
-    await carregarLancamentos();
-  } catch (e) {
-    console.error(e);
-    mostrarMensagem(e.message, "erro");
-    statusEl.textContent = "Falha na operação";
-  } finally {
-    btnFixos.disabled = false;
-    btnFixos.textContent = "🔁 Inserir despesas fixas do mês";
-  }
-}
-
-async function excluirLancamento(id, botao) {
-  if (id === undefined || id === null || String(id).trim() === "") {
-    mostrarMensagem("Não foi possível identificar o lançamento.", "erro");
+    carregarResumo();
     return;
   }
 
-  if (!window.confirm(
-    "Deseja realmente excluir esta despesa/receita?\n\nID: " +
-    id + "\n\nEsta operação não poderá ser desfeita."
-  )) return;
+  homeContent.classList.add("oculto");
+  paginaInterna.classList.add("visivel");
 
-  const textoOriginal = botao.textContent;
+  const urlPagina = new URL(pagina, window.location.href);
 
-  try {
-    validarCompetencia(competenciaEl.value);
-
-    botao.disabled = true;
-    botao.textContent = "Excluindo...";
-    statusEl.textContent = "Excluindo despesa/receita...";
-
-    const resposta = await chamarAPI("excluirLancamento", {
-      id: String(id),
-      competencia: competenciaEl.value
-    });
-
-    if (resposta.sucesso !== true) {
-      throw new Error(resposta.mensagem || "A API não confirmou a exclusão.");
-    }
-
-    mostrarMensagem(
-      resposta.mensagem || "Despesa/receita excluída com sucesso.",
-      "sucesso"
-    );
-
-    await carregarLancamentos();
-  } catch (e) {
-    console.error(e);
-    mostrarMensagem(e.message || "Não foi possível excluir o lançamento.", "erro");
-    statusEl.textContent = "Falha na exclusão";
-  } finally {
-    if (botao.isConnected) {
-      botao.disabled = false;
-      botao.textContent = textoOriginal;
-    }
-  }
-}
-
-async function excluirSelecionados() {
-  const ids = obterIdsSelecionados();
-
-  if (!ids.length) {
-    mostrarMensagem("Selecione pelo menos uma despesa ou receita.", "info");
-    return;
-  }
-
-  if (!window.confirm(
-    `Deseja realmente excluir ${ids.length} lançamento(s)?\n\nEsta operação não poderá ser desfeita.`
-  )) return;
-
-  const textoOriginal = btnExcluirSelecionados.textContent;
-
-  try {
-    validarCompetencia(competenciaEl.value);
-
-    btnExcluirSelecionados.disabled = true;
-    btnExcluirSelecionados.textContent = "⏳ Excluindo...";
-    statusEl.textContent = "Excluindo despesas/receitas selecionadas...";
-
-    const resposta = await chamarAPI("excluirLancamentos", {
-      ids: ids.join(","),
-      competencia: competenciaEl.value
-    });
-
-    const excluidos = Number(resposta.excluidos ?? 0);
-
-    if (resposta.sucesso !== true && excluidos === 0) {
-      throw new Error(resposta.mensagem || "A API não confirmou a exclusão em lote.");
-    }
-
-    const falhas = Array.isArray(resposta.falhas) ? resposta.falhas : [];
-
-    let msg = resposta.mensagem || `${excluidos} lançamento(s) excluído(s).`;
-
-    if (falhas.length) {
-      msg += "\nFalhas: " + falhas.map(f =>
-        typeof f === "object"
-          ? `ID ${f.id ?? "?"}: ${f.mensagem ?? f.erro ?? "erro"}`
-          : String(f)
-      ).join("; ");
-    }
-
-    mostrarMensagem(msg, falhas.length ? "info" : "sucesso");
-
-    await carregarLancamentos();
-  } catch (e) {
-    console.error("Erro na exclusão em lote:", e);
-    mostrarMensagem(e.message || "Não foi possível excluir os lançamentos.", "erro");
-    statusEl.textContent = "Falha na exclusão";
-  } finally {
-    btnExcluirSelecionados.textContent = textoOriginal;
-    atualizarSelecao();
-  }
-}
-
-selecionarTodosEl.addEventListener("change", () => {
-  listaEl.querySelectorAll('input.checkbox-linha:not(:disabled)').forEach(c => {
-    c.checked = selecionarTodosEl.checked;
-  });
-
-  atualizarSelecao();
-});
-
-listaEl.addEventListener("change", e => {
-  if (e.target.matches(".checkbox-linha")) atualizarSelecao();
-});
-
-listaEl.addEventListener("click", e => {
-  const editar = e.target.closest("button[data-editar-id]");
-
-  if (editar && !editar.disabled) {
-    editarLancamento(editar.dataset.editarId);
-    return;
-  }
-
-  const botao = e.target.closest("button[data-excluir-id]");
-
-  if (botao && !botao.disabled) {
-    excluirLancamento(botao.dataset.excluirId, botao);
-  }
-});
-
-btnExcluirSelecionados.addEventListener("click", excluirSelecionados);
-
-function voltar() {
-  const url = new URL("index.html", window.location.href);
-
+  // Preserva a competência selecionada nas páginas internas.
   if (competenciaEl.value) {
-    url.searchParams.set("competencia", competenciaEl.value);
+    urlPagina.searchParams.set("competencia", competenciaEl.value);
   }
 
-  window.location.href = url.href;
+  // Evita recarregar o iframe quando a mesma aba for clicada.
+  if (paginaInterna.dataset.paginaCarregada !== pagina) {
+    paginaInterna.dataset.paginaCarregada = pagina;
+    paginaInterna.src = urlPagina.href;
+  } else {
+    const urlAtual = new URL(paginaInterna.src);
+
+    if (
+      urlAtual.searchParams.get("competencia") !== competenciaEl.value
+    ) {
+      urlAtual.searchParams.set("competencia", competenciaEl.value);
+      paginaInterna.src = urlAtual.href;
+    }
+  }
+
+  statusEl.textContent = "Página selecionada: " + pagina;
+
+  if (atualizarHistorico) {
+    history.replaceState(
+      { pagina },
+      "",
+      window.location.pathname +
+      window.location.search +
+      "#" + encodeURIComponent(pagina)
+    );
+  }
 }
 
-competenciaEl.addEventListener("change", async () => {
-  document.getElementById("resumoFixos").textContent = "";
-  mensagemEl.className = "mensagem";
-  mensagemEl.textContent = "";
+/* Captura o clique nas abas sem sair do index. */
+menuSistema.addEventListener("click", evento => {
+  const aba = evento.target.closest("a[data-pagina]");
 
-  try {
-    await carregarLancamentos();
-  } catch (e) {
-    console.error(e);
+  if (!aba) return;
+
+  evento.preventDefault();
+  ativarAba(aba.dataset.pagina);
+});
+
+/* Atualiza a competência e os dados quando o mês muda. */
+competenciaEl.addEventListener("change", () => {
+  if (navegacaoAtual === "index.html") {
+    carregarResumo();
+    return;
+  }
+
+  const pagina = navegacaoAtual;
+  const url = new URL(pagina, window.location.href);
+
+  url.searchParams.set("competencia", competenciaEl.value);
+
+  paginaInterna.dataset.paginaCarregada = pagina;
+  paginaInterna.src = url.href;
+});
+
+/* Mensagens de carregamento das páginas internas. */
+paginaInterna.addEventListener("load", () => {
+  if (navegacaoAtual !== "index.html") {
+    statusEl.textContent = "Página carregada: " + navegacaoAtual;
   }
 });
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const p = new URLSearchParams(window.location.search);
-  const competenciaUrl = p.get("competencia");
+/* Inicialização */
+document.addEventListener("DOMContentLoaded", () => {
+  const parametros = new URLSearchParams(window.location.search);
+  const competenciaURL = parametros.get("competencia");
 
   competenciaEl.value =
-    competenciaUrl && /^\d{4}-(0[1-9]|1[0-2])$/.test(competenciaUrl)
-      ? competenciaUrl
+    competenciaURL &&
+    /^\d{4}-(0[1-9]|1[0-2])$/.test(competenciaURL)
+      ? competenciaURL
       : competenciaAtual();
 
-  const hoje = new Date();
+  const hash = decodeURIComponent(
+    window.location.hash.replace(/^#/, "")
+  );
 
-  vencimentoEl.value =
-    hoje.getFullYear() + "-" +
-    String(hoje.getMonth() + 1).padStart(2, "0") + "-" +
-    String(hoje.getDate()).padStart(2, "0");
-
-  atualizarPreviaQr();
-  await carregarDescricoes();
-
-  try {
-    await carregarLancamentos();
-  } catch (e) {
-    mostrarMensagem(e.message, "erro");
-  }
+  ativarAba(hash || "index.html", false);
 });
 </script>
 </body>
