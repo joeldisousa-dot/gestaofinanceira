@@ -97,6 +97,14 @@ button:disabled { opacity:.6; cursor:wait; }
 .primario { color:white; background:var(--azul); }
 .primario:hover { background:var(--azul2); }
 .secundario { color:var(--azul); background:#e8eef6; }
+.btn-voltar {
+  display:inline-block;
+  margin-top:14px;
+  color:var(--azul);
+  background:#fff;
+  border:1px solid rgba(255,255,255,.7);
+}
+.btn-voltar:hover { background:#e8eef6; }
 
 .status {
   margin-top:14px;
@@ -289,6 +297,10 @@ tbody tr:hover td.valor-nao { background:#fecaca; }
   <div class="container">
     <h1>Relatório Financeiro</h1>
     <p>Contas a pagar, contas a receber e saldo por competência.</p>
+    <button type="button" class="btn-voltar"
+      onclick="window.location.href='https://joeldisousa-dot.github.io/gestaofinanceira/index.html'">
+      ← Voltar para o index
+    </button>
   </div>
 </header>
 
