@@ -631,9 +631,13 @@ async function carregarCategorias(){
 
   const numeroRequisicao = ++requisicaoCategorias;
 
-  const ano = document.getElementById("selecionaAno").value;
+ const tipo = document.getElementById("tipoGrafico").value;
+const ano = document.getElementById("selecionaAno").value;
 
-  const tipo = document.getElementById("tipoGrafico").value;
+apiRequest("listarTiposFinanceiros", {
+  ano: ano,
+  tipo: tipo
+});
 
   const combo = document.getElementById("categoriaSelecionada");
 
