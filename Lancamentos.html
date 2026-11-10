@@ -191,6 +191,10 @@ display:block;margin-bottom:5px;color:var(--azul);font-size:13px
 #competencia{width:100%}
 .acoes button{width:100%}
 }
+  #btnFixos,
+#btnInserir {
+    display: none !important;
+}
 </style>
 </head>
 
@@ -273,17 +277,17 @@ com vencimento em 20/10/2026.
 </p>
 
 <div class="acoes">
-<button type="button" onclick="voltar()">← Voltar</button>
+    <button type="button" onclick="voltar()">← Voltar</button>
 
-<button type="button" id="btnCancelarEdicao"
-class="btn-cancelar" onclick="cancelarEdicao()" hidden>
-Cancelar edição
-</button>
+    <button type="button" id="btnCancelarEdicao"
+        class="btn-cancelar" onclick="cancelarEdicao()" hidden>
+        Cancelar edição
+    </button>
 
-<button type="button" id="btnSalvarEdicao"
-class="btn-salvar" onclick="salvarEdicao()" hidden>
-💾 Salvar alterações
-</button>
+    <button type="button" id="btnSalvarEdicao"
+        class="btn-salvar" onclick="salvarEdicao()" hidden>
+        💾 Salvar alterações
+    </button>
 </div>
 
 <div id="mensagem" class="mensagem" role="alert" aria-live="polite"></div>
