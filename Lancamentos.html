@@ -279,6 +279,11 @@ com vencimento em 20/10/2026.
 <div class="acoes">
     <button type="button" onclick="voltar()">← Voltar</button>
 
+    <button type="button" id="btnSalvarNovo" class="btn-salvar"
+        onclick="salvarNovoLancamento()">
+        💾 Salvar lançamento
+    </button>
+
     <button type="button" id="btnCancelarEdicao"
         class="btn-cancelar" onclick="cancelarEdicao()" hidden>
         Cancelar edição
@@ -355,7 +360,7 @@ const fixaEl=document.getElementById("fixa");
 const listaEl=document.getElementById("lista");
 const mensagemEl=document.getElementById("mensagem");
 const statusEl=document.getElementById("status");
-const btnSalvarEdicao=document.getElementById("btnSalvarEdicao");
+const btnSalvarEdicao=document.getElementById("btnSalvarEdicao");\nconst btnSalvarNovo=document.getElementById("btnSalvarNovo");
 const btnCancelarEdicao=document.getElementById("btnCancelarEdicao");
 const selecionarTodosEl=document.getElementById("selecionarTodos");
 const btnExcluirSelecionados=document.getElementById("btnExcluirSelecionados");
@@ -774,6 +779,7 @@ obterCampo(item,["fixa","Fixa","FIXA","contaFixa"])
 
 btnSalvarEdicao.hidden=false;
 btnCancelarEdicao.hidden=false;
+btnSalvarNovo.hidden=true;
 
 mostrarMensagem(
 `Editando lançamento #${id}. Altere os campos e clique em “Salvar alterações”.`,
@@ -787,6 +793,68 @@ behavior:"smooth",block:"start"
 });
 
 descricaoEl.focus();
+}
+
+async function salvarNovoLancamento(){
+    if(idEmEdicao!==null){
+        mostrarMensagem("Cancele a edição antes de incluir um novo lançamento.","info");
+        return;
+    }
+
+    const competencia=competenciaEl.value;
+    const tipo=tipoEl.value;
+    const descricao=descricaoEl.value.trim();
+    const valor=normalizarValor(valorEl.value);
+    const vencimento=vencimentoEl.value;
+    const qrcode=qrcodeEl.value.trim();
+    const fixa=fixaEl.checked?"Sim":"Não";
+
+    try{
+        validarCompetencia(competencia);
+
+        if(!descricao)
+            throw new Error("Informe a descrição da despesa ou receita.");
+
+        if(!Number.isFinite(valor)||valor<=0)
+            throw new Error("Informe um valor maior que zero.");
+
+        if(!vencimento)
+            throw new Error("Informe a data de vencimento.");
+
+        btnSalvarNovo.disabled=true;
+        btnSalvarNovo.textContent="⏳ Salvando...";
+        statusEl.textContent="Salvando novo lançamento...";
+
+        const resposta=await chamarAPI("incluirLancamento",{
+            competencia,
+            tipo,
+            descricao,
+            valor,
+            vencimento,
+            qrcode,
+            fixa
+        });
+
+        if(resposta.sucesso===false||resposta.erro)
+            throw new Error(resposta.mensagem||resposta.erro||"A API não confirmou a inclusão.");
+
+        mostrarMensagem(
+            resposta.mensagem||"Lançamento salvo com sucesso.",
+            "sucesso"
+        );
+
+        limparFormulario();
+        await carregarLancamentos();
+
+    }catch(e){
+        console.error("Erro ao salvar novo lançamento:",e);
+        mostrarMensagem(e.message||"Não foi possível salvar o lançamento.","erro");
+        statusEl.textContent="Falha ao salvar";
+
+    }finally{
+        btnSalvarNovo.disabled=false;
+        btnSalvarNovo.textContent="💾 Salvar lançamento";
+    }
 }
 
 async function salvarEdicao(){
@@ -862,6 +930,7 @@ fixaEl.checked=false;
 
 btnSalvarEdicao.hidden=true;
 btnCancelarEdicao.hidden=true;
+btnSalvarNovo.hidden=false;
 }
 
 function cancelarEdicao(){
